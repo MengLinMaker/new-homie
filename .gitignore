@@ -1,0 +1,20 @@
+# Output
+dist
+bin
+obj
+.aws-sam
+
+# Dependencies
+node_modules
+
+# Nx
+.nx/installation
+.nx/cache
+.nx/workspace-data
+
+# Env
+.env
+
+# System Files
+.DS_Store
+Thumbs.db
