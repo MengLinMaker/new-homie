@@ -23,7 +23,6 @@
           "Amazon.Lambda.Core": "2.2.0"
         }
       }
-    },
-    "net8.0/linux-arm64": {}
+    }
   }
 }
