@@ -2,4 +2,8 @@
   "sdk": {
     "version": "8.0.104"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> afedbb3 (chore: dotnet format config)
