@@ -19,7 +19,7 @@ public static class Utils
     /// </returns>
     public static JObject? ExtractNextJson(string html)
     {
-        var activity = Log.ForContext<JObject>().StartActivity("Scrape.Utils.ExtractNextJson");
+        var activity = Log.Logger.StartActivity("Scrape.Utils.ExtractNextJson");
         try
         {
             var htmlDocument = new HtmlDocument();
