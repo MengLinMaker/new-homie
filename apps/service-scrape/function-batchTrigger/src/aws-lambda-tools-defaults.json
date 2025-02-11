@@ -1,9 +1,0 @@
-﻿{
-  "Information": [
-    "Lambda commands with dotnet",
-    "dotnet lambda help"
-  ],
-  "profile": "",
-  "configuration": "Release",
-  "template": "template.yaml"
-}
