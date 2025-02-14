@@ -7,20 +7,20 @@ using Serilog.Events;
 
 using SerilogTracing;
 
-// Used across multiple homes
-public class Suburb
+// Locality is a unique combo of suburb name, postcode and state
+public class Locality
 {
     [MaxLength(128)] // Longest suburb name in the world is 85 characters: "taumatawhakatangihangakoauauotamateapokaiwhenuakitanatahu".
-    public required string SuburbName { get; init; }
+    public required string SuburbName { get; init; } // Hash index
     [MaxLength(16)] // String to allow for "0000" postcodes. Longest Postcode is 10 digits from Iran.
-    public required string Postcode { get; init; }
+    public required string Postcode { get; init; } // Hash index
     [MaxLength(16)]
-    public required string State { get; init; }
-    // Set later on as info is not readily available
+    public required string State { get; init; } // Hash index
+    // Use pgsql GIST index
     [Range(-90, 90)]
-    public required double? Latitude { get; set; }
+    public required double? Latitude { get; set; } // Range index
     [Range(-180, 180)]
-    public required double? Longitude { get; set; }
+    public required double? Longitude { get; set; } // Range index
 };
 
 public enum HomeType
@@ -39,7 +39,7 @@ public class Home
     public required string SourceUrl { get; init; }
     [MaxLength(64)]
     public required string StreetAddress { get; init; } // Max street length appears to be 40 characters.
-    public required Suburb SuburbAddress { get; init; }
+    // Use pgsql GIST index
     [Range(-90, 90)]
     public required double Latitude { get; init; }
     [Range(-180, 180)]

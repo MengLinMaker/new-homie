@@ -9,7 +9,7 @@ using Serilog.Events;
 
 using SerilogTracing;
 
-public static class Utils
+public class Utils
 {
     /// <summary>
     /// Extracts JSON data from Next.js sites.
@@ -17,9 +17,9 @@ public static class Utils
     /// <returns>
     /// The JSON JObject or null.
     /// </returns>
-    public static JObject? ExtractNextJson(string html)
+    public JObject? ExtractNextJson(string html)
     {
-        var activity = Log.Logger.StartActivity("Scrape.Utils.ExtractNextJson");
+        var activity = Log.ForContext<Utils>().StartActivity("ExtractNextJson");
         try
         {
             var htmlDocument = new HtmlDocument();
