@@ -10,10 +10,14 @@ using Serilog.Events;
 using SerilogTracing;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Utils
 =======
 public static class Utils
 >>>>>>> 3afe09c (feat: better error handling with with SerilogTracing)
+=======
+public class Utils
+>>>>>>> 7d06888 (init: setup scrape service)
 {
     /// <summary>
     /// Extracts JSON data from Next.js sites.
@@ -21,6 +25,7 @@ public static class Utils
     /// <returns>
     /// The JSON JObject or null.
     /// </returns>
+<<<<<<< HEAD
 <<<<<<< HEAD
     public JObject? ExtractNextJson(string html)
     {
@@ -34,6 +39,11 @@ public static class Utils
 =======
         var activity = Log.Logger.StartActivity("Scrape.Utils.ExtractNextJson");
 >>>>>>> 544851d (chore: just use Log.Logger)
+=======
+    public JObject? ExtractNextJson(string html)
+    {
+        var activity = Log.ForContext<Utils>().StartActivity("ExtractNextJson");
+>>>>>>> 7d06888 (init: setup scrape service)
         try
         {
             var htmlDocument = new HtmlDocument();

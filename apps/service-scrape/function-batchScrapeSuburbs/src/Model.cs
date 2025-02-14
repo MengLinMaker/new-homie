@@ -8,6 +8,7 @@ using Serilog.Events;
 using SerilogTracing;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Locality is a unique combo of suburb name, postcode and state
 public class Locality
 {
@@ -25,19 +26,27 @@ public class Locality
 =======
 // Used across multiple homes
 public class Suburb
+=======
+// Locality is a unique combo of suburb name, postcode and state
+public class Locality
+>>>>>>> 7d06888 (init: setup scrape service)
 {
     [MaxLength(128)] // Longest suburb name in the world is 85 characters: "taumatawhakatangihangakoauauotamateapokaiwhenuakitanatahu".
-    public required string SuburbName { get; init; }
+    public required string SuburbName { get; init; } // Hash index
     [MaxLength(16)] // String to allow for "0000" postcodes. Longest Postcode is 10 digits from Iran.
-    public required string Postcode { get; init; }
+    public required string Postcode { get; init; } // Hash index
     [MaxLength(16)]
-    public required string State { get; init; }
-    // Set later on as info is not readily available
+    public required string State { get; init; } // Hash index
+    // Use pgsql GIST index
     [Range(-90, 90)]
-    public required double? Latitude { get; set; }
+    public required double? Latitude { get; set; } // Range index
     [Range(-180, 180)]
+<<<<<<< HEAD
     public required double? Longitude { get; set; }
 >>>>>>> d789194 (feat: init models)
+=======
+    public required double? Longitude { get; set; } // Range index
+>>>>>>> 7d06888 (init: setup scrape service)
 };
 
 public enum HomeType
@@ -57,10 +66,14 @@ public class Home
     [MaxLength(64)]
     public required string StreetAddress { get; init; } // Max street length appears to be 40 characters.
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Use pgsql GIST index
 =======
     public required Suburb SuburbAddress { get; init; }
 >>>>>>> d789194 (feat: init models)
+=======
+    // Use pgsql GIST index
+>>>>>>> 7d06888 (init: setup scrape service)
     [Range(-90, 90)]
     public required double Latitude { get; init; }
     [Range(-180, 180)]
