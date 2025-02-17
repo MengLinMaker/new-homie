@@ -12,14 +12,15 @@ using Serilog.Events;
 
 using SerilogTracing;
 
-public class Domain
+/// <summary>
+/// Extract data from www.domain.com.au
+/// </summary>
+public partial class Domain
 {
     /// <summary>
-    /// Extract array of raw listing data from www.domain.com.au Next.js JSON.
+    /// Extract array of raw listings from Next.js JSON.
+    /// Detects isLastPage for looping.
     /// </summary>
-    /// <returns>
-    /// Array of listings and isLastPage, ortherwise return null.
-    /// </returns>
     public (ImmutableList<JToken> listings, bool isLastPage)? ExtractAllListings(JObject inputJson)
     {
         var activity = Log.ForContext<Domain>().StartActivity("ExtractAllListings");
@@ -54,14 +55,18 @@ public class Domain
         }
     }
 
+    /// <summary>
+    /// Convert raw listing to relevant home info.
+    /// </summary>
     public Home? ExtractHomeInfo(JToken listing)
     {
-        var activity = Log.ForContext<Domain>().StartActivity("ExtractListingInfo");
+        var activity = Log.ForContext<Domain>().StartActivity("ExtractHomeInfo");
         try
         {
             var listingModel = listing.SelectToken("listingModel");
             if (listingModel == null)
             {
+                activity.AddProperty("input", listing);
                 activity.Complete(LogEventLevel.Warning, new ArgumentException("listingModel' key not found"));
                 return null;
             }
@@ -72,7 +77,7 @@ public class Domain
             var parseLandSize = int.TryParse(listingModel.SelectToken("features.landSize")?.ToString(), out var landSizeRaw);
             if (parseLandSize && landSizeRaw > 0) landSize = landSizeRaw;
 
-            var listingInfo = new Home
+            var home = new Home
             {
                 SourceUrl = "https://domain.com.au" + listingModel.SelectToken("url")?.ToString(),
                 StreetAddress = listingModel.SelectToken("address.street")?.ToString()!,
@@ -88,17 +93,20 @@ public class Domain
                 OpenInspectionTime = DateTime.TryParse(openInspectionTimeString, out var openInspectionTime) ? openInspectionTime.ToUniversalTime() : null,
                 AuctionTime = DateTime.TryParse(auctionTimeString, out var auctionTime) ? auctionTime.ToUniversalTime() : null
             };
-            if (!new Validation().Validate(listingInfo))
+            if (!new Validation().Validate(home))
             {
-                activity.Complete(LogEventLevel.Warning, new ArgumentException("Parsed 'Home' record is invalid"));
+                activity.AddProperty("input", listing);
+                activity.AddProperty("output", home);
+                activity.Complete(LogEventLevel.Warning, new ArgumentException($"Parsed 'Home' record is invalid"));
                 return null;
             }
 
             activity.Complete();
-            return listingInfo;
+            return home;
         }
         catch (Exception ex)
         {
+            activity.AddProperty("input", listing);
             activity.Complete(LogEventLevel.Warning, ex);
             return null;
         }
