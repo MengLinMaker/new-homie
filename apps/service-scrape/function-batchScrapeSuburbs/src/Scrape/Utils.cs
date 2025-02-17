@@ -27,6 +27,7 @@ public class Utils
             var nextDataScriptNode = htmlDocument.DocumentNode.SelectSingleNode("//script[@id='__NEXT_DATA__']");
             if (nextDataScriptNode == null)
             {
+                activity.AddProperty("input", html);
                 activity.Complete(LogEventLevel.Warning, new ArgumentException("Next.js JSON not found"));
                 return null;
             }
@@ -36,6 +37,7 @@ public class Utils
         }
         catch (Exception ex)
         {
+            activity.AddProperty("input", html);
             activity.Complete(LogEventLevel.Warning, ex);
             return null;
         }
