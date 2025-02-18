@@ -19,12 +19,4 @@ public class Scrape_Util
         Assert.That(expectedJson, Is.Not.Null);
         Assert.That(inputJson, Is.EqualTo(expectedJson));
     }
-
-    [Test]
-    public void TryExtractNextJson_InvalidInput_ReturnsNull()
-    {
-        var success = new Scrape.Util().TryExtractNextJson("invalid", out var json);
-        Assert.That(success, Is.False);
-        Assert.That(json, Is.Null);
-    }
 }

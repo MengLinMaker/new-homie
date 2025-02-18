@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: service-scrape - A scraper for real estate data
 
@@ -6,7 +6,7 @@ Globals:
   Function:
     Runtime: dotnet8
     Architectures:
-      - arm64 # Faster execution and cheaper
+      - x86_64 # Better CI compatibility
     LoggingConfig: NoLogging # Expensive cloudwatch
     ReservedConcurrentExecutions: 1 # Smallest default
     Timeout: 1 # Smallest default
@@ -53,6 +53,7 @@ Resources:
       Timeout: 900 # Jobs may come in various sizes
       MemorySize: 256 # Limit CPU to throttle scraping
       CodeUri: ./function-batchScrapeSuburbs/src/
+      Handler: Program
       Events:
         SQS:
           Type: SQS
@@ -72,7 +73,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /{proxy+}
             Method: get # Cacheable
 
 Outputs:
