@@ -21,10 +21,13 @@ public class ScrapeDomainTest
 
     [TestCase("domain.rent.dandenong-vic-3175")]
     [TestCase("domain.sale.dandenong-vic-3175")]
-    public void ExtractNextJson_FromValidHtmlInput_ReturnsJson(string fileName)
+    public void TryExtractNextJson_FromValidHtmlInput_ReturnsJson(string fileName)
     {
         var inputContent = File.ReadAllText($"./resources/{fileName}.html");
-        var inputJson = new Scrape.Utils().ExtractNextJson(inputContent);
+        var success = new Scrape.Domain().TryExtractNextJson(inputContent, out var nextJson);
+        Assert.That(success, Is.True);
+        Assert.That(nextJson, Is.Not.Null);
+        var inputJson = JObject.Parse(nextJson);
 
         var expectedContent = File.ReadAllText($"./resources/__NEXT_DATA__.{fileName}.json");
         var expectedJson = JObject.Parse(expectedContent);
@@ -33,50 +36,102 @@ public class ScrapeDomainTest
     }
 
     [Test]
-    public void ExtractNextJson_InvalidInput_ReturnsNull()
+    public void TryExtractNextJson_InvalidInput_ReturnsNull()
     {
-        var json = new Scrape.Utils().ExtractNextJson("invalid");
+        var success = new Scrape.Domain().TryExtractNextJson("invalid", out var json);
+        Assert.That(success, Is.False);
         Assert.That(json, Is.Null);
     }
 
     [TestCase("domain.rent.dandenong-vic-3175")]
     [TestCase("domain.sale.dandenong-vic-3175")]
-    public void ExtractAllListings_FromValidJsonInput_ReturnsJson(string fileName)
+    public void TryExtractListings_FromValidJsonInput_ReturnsJson(string fileName)
     {
         var inputContent = File.ReadAllText($"./resources/__NEXT_DATA__.{fileName}.json");
-        var inputJson = JObject.Parse(inputContent);
-        var result = new Scrape.Domain().ExtractAllListings(inputJson);
-        var (listings, isLastPage) = result!.Value;
+        var success = new Scrape.Domain().TryExtractListings(inputContent, out var listings, out var isLastPage);
+        Assert.That(success, Is.True);
+        Assert.That(listings, Is.Not.Null);
+        Assert.That(isLastPage, Is.Not.Null);
+        var inputListings = JToken.Parse(JsonSerializer.Serialize(listings));
 
         var expectedContent = File.ReadAllText($"./resources/listings.{fileName}.json");
-        var expectedJson = JToken.Parse(expectedContent).ToImmutableList();
+        var expectedJson = JToken.Parse(expectedContent);
         Assert.That(expectedJson, Is.Not.Null);
-        Assert.That(listings, Is.EqualTo(expectedJson));
+        Assert.That(inputListings, Is.EqualTo(expectedJson));
     }
 
     [Test]
-    public void ExtractAllListings_InvalidInput_ReturnsNull()
+    public void TryExtractListings_InvalidInput_ReturnsNull()
     {
-        var json = JObject.Parse("{}");
-        var result = new Scrape.Domain().ExtractAllListings(json);
-        Assert.That(result, Is.Null);
+        var success = new Scrape.Domain().TryExtractListings("{}", out var listings, out var isLastPage);
+        Assert.That(success, Is.False);
+        Assert.That(listings, Is.Null);
+        Assert.That(isLastPage, Is.Null);
     }
 
     [TestCase("domain.rent.dandenong-vic-3175")]
     [TestCase("domain.sale.dandenong-vic-3175")]
-    public void ExtractHomeInfo_FromValidJsonInput_ReturnsJson(string fileName)
+    public void TryExtractHome_FromValidJsonInput_ReturnsJson(string fileName)
     {
         var inputContent = File.ReadAllText($"./resources/listings.{fileName}.json");
-        var inputJson = JToken.Parse(inputContent).ToImmutableList();
+        var listingsMap = JsonSerializer.Deserialize<ImmutableList<Scrape.DomainRawListingJson.ListingsMap>>(inputContent);
+        Assert.That(listingsMap, Is.Not.Null);
 
         var resultContent = File.ReadAllText($"./resources/homes.{fileName}.json");
         var resultJson = JToken.Parse(resultContent).ToImmutableList();
 
-        for (var i = 0; i < inputJson.Count; i++)
+        for (var i = 0; i < listingsMap.Count; i++)
         {
+            var success = new Scrape.Domain().TryExtractHome(listingsMap[i], out var homeInfo);
+            Assert.That(success, Is.True);
+            Assert.That(homeInfo, Is.Not.Null);
+            var actual = JToken.Parse(JsonSerializer.Serialize(homeInfo));
+
             var expected = resultJson[i];
-            var json = new Scrape.Domain().ExtractHomeInfo(inputJson[i]);
+            Assert.That(expected, Is.Not.Null);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+    }
+
+    [TestCase("domain.rent.dandenong-vic-3175")]
+    public void TryExtractRentalPrice_FromValidJsonInput_ReturnsJson(string fileName)
+    {
+        var inputContent = File.ReadAllText($"./resources/listings.{fileName}.json");
+        var listingsMap = JsonSerializer.Deserialize<ImmutableList<Scrape.DomainRawListingJson.ListingsMap>>(inputContent);
+        Assert.That(listingsMap, Is.Not.Null);
+
+        var resultContent = File.ReadAllText($"./resources/prices.{fileName}.json");
+        var resultJson = JToken.Parse(resultContent).ToImmutableList();
+        var scrapeDate = DateOnly.FromDateTime(DateTime.FromBinary(0));
+
+        for (var i = 0; i < listingsMap.Count; i++)
+        {
+            new Scrape.Domain().TryExtractRentalPrice(listingsMap[i], scrapeDate, out var json);
             var actual = JToken.Parse(JsonSerializer.Serialize(json));
+
+            var expected = resultJson[i];
+            Assert.That(expected, Is.Not.Null);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+    }
+
+    [TestCase("domain.sale.dandenong-vic-3175")]
+    public void TryExtractSalePrice_FromValidJsonInput_ReturnsJson(string fileName)
+    {
+        var inputContent = File.ReadAllText($"./resources/listings.{fileName}.json");
+        var listingsMap = JsonSerializer.Deserialize<ImmutableList<Scrape.DomainRawListingJson.ListingsMap>>(inputContent);
+        Assert.That(listingsMap, Is.Not.Null);
+
+        var resultContent = File.ReadAllText($"./resources/prices.{fileName}.json");
+        var resultJson = JToken.Parse(resultContent).ToImmutableList();
+        var scrapeDate = DateOnly.FromDateTime(DateTime.FromBinary(0));
+
+        for (var i = 0; i < listingsMap.Count; i++)
+        {
+            new Scrape.Domain().TryExtractSalePrice(listingsMap[i], scrapeDate, out var json);
+            var actual = JToken.Parse(JsonSerializer.Serialize(json));
+
+            var expected = resultJson[i];
             Assert.That(expected, Is.Not.Null);
             Assert.That(actual, Is.EqualTo(expected));
         }

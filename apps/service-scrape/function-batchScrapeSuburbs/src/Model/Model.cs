@@ -47,11 +47,11 @@ public record Home
     // Features
     public required HomeType HomeType { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfBedrooms { get; init; }
+    public required int? NumberOfBedrooms { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfBathrooms { get; init; }
+    public required int? NumberOfBathrooms { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfParkingSpots { get; init; }
+    public required int? NumberOfParkingSpots { get; init; }
     [Range(1, 2147483647)]
     public int? LandSizeSquareMeters { get; init; } // Round to nearest meter square.
     public bool IsRetirement { get; init; }
@@ -62,12 +62,12 @@ public record Home
 };
 
 // Expect lots of listing records in database. Kepp small to reduce storage.
-public record RentalListingInfo
+public record RentalPriceInfo
 {
     public required DateOnly ScrapeDate { get; init; } // 4 bytes compared to timestamp's 8 bytes.
     [Range(0, 32767)] public required short WeeklyRent { get; init; }
 };
-public record SaleListingInfo
+public record SalePriceInfo
 {
     public required DateOnly ScrapeDate { get; init; }
     [Range(0, 2147483647)] public required int LowerPrice { get; init; }

@@ -2,10 +2,10 @@ namespace Scrape;
 
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
-using Model;
-
-using Newtonsoft.Json.Linq;
+using HtmlAgilityPack;
 
 using Serilog;
 using Serilog.Events;
@@ -18,97 +18,156 @@ using SerilogTracing;
 public partial class Domain
 {
     /// <summary>
-    /// Extract array of raw listings from Next.js JSON.
-    /// Detects isLastPage for looping.
+    /// Extracts JSON data from Next.js sites.
     /// </summary>
-    public (ImmutableList<JToken> listings, bool isLastPage)? ExtractAllListings(JObject inputJson)
+    public bool TryExtractNextJson(string html, out string? nextJson)
     {
-        var activity = Log.ForContext<Domain>().StartActivity("ExtractAllListings");
+        var activity = Log.ForContext<Domain>().StartActivity("ExtractNextJson");
+        nextJson = null;
         try
         {
-            var componentProps = inputJson.SelectToken("props.pageProps.componentProps");
-            if (componentProps == null)
-            {
-                activity.Complete(LogEventLevel.Warning, new ArgumentException("props.pageProps.componentProps' key not found"));
-                return null;
-            }
-            if (int.TryParse(componentProps.SelectToken("totalPages")?.ToString(), out var lastPageNumber) == false ||
-                int.TryParse(componentProps.SelectToken("currentPage")?.ToString(), out var currentPageNumber) == false)
-            {
-                activity.Complete(LogEventLevel.Warning, new ArgumentException("cannot determine if page is last page"));
-                return null;
-            }
-            var listings = componentProps.SelectToken("listingsMap")?.Select(listing => listing.Children().First()).ToImmutableList();
-            if (listings == null)
-            {
-                activity.Complete(LogEventLevel.Warning, new ArgumentException("'props.pageProps.componentProps.listingsMap' key not found"));
-                return null;
-            }
-            var isLastPage = lastPageNumber == currentPageNumber;
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(html);
+            var nextDataScriptNode = htmlDocument.DocumentNode.SelectSingleNode("//script[@id='__NEXT_DATA__']");
+            nextJson = nextDataScriptNode.InnerText;
             activity.Complete();
-            return (listings, isLastPage);
+            return true;
         }
         catch (Exception ex)
         {
+            activity.AddProperty("input", html);
             activity.Complete(LogEventLevel.Warning, ex);
-            return null;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Extract array of raw listings from Next.js JSON.
+    /// Detects isLastPage for looping.
+    /// </summary>
+    public bool TryExtractListings(string nextJson, out ImmutableList<DomainRawListingJson.ListingsMap>? listings, out bool? isLastPage)
+    {
+        var activity = Log.ForContext<Domain>().StartActivity("ExtractAllListings");
+        listings = null;
+        isLastPage = null;
+        try
+        {
+            var rootJson = JsonSerializer.Deserialize<DomainRawListingJson.Root>(nextJson)!;
+            var currentPageNumber = rootJson.props.pageProps.componentProps.currentPage;
+            var lastPageNumber = rootJson.props.pageProps.componentProps.totalPages;
+            listings = rootJson.props.pageProps.componentProps.listingsMap.Select(listing => listing.Value).ToImmutableList();
+            isLastPage = lastPageNumber == currentPageNumber;
+            activity.Complete();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            activity.AddProperty("input", nextJson);
+            activity.Complete(LogEventLevel.Warning, ex);
+            return false;
         }
     }
 
     /// <summary>
     /// Convert raw listing to relevant home info.
     /// </summary>
-    public Home? ExtractHomeInfo(JToken listing)
+    public bool TryExtractHome(DomainRawListingJson.ListingsMap listingMap, out Model.Home? homeInfo)
     {
         var activity = Log.ForContext<Domain>().StartActivity("ExtractHomeInfo");
+        homeInfo = null;
         try
         {
-            var listingModel = listing.SelectToken("listingModel");
-            if (listingModel == null)
+            var listingModel = listingMap.listingModel;
+            var home = new Model.Home
             {
-                activity.AddProperty("input", listing);
-                activity.Complete(LogEventLevel.Warning, new ArgumentException("listingModel' key not found"));
-                return null;
-            }
-            var openInspectionTimeString = listingModel.SelectToken("inspection.openTime")?.ToString();
-            var auctionTimeString = listingModel.SelectToken("auction")?.ToString();
-
-            int? landSize = null;
-            var parseLandSize = int.TryParse(listingModel.SelectToken("features.landSize")?.ToString(), out var landSizeRaw);
-            if (parseLandSize && landSizeRaw > 0) landSize = landSizeRaw;
-
-            var home = new Home
-            {
-                SourceUrl = "https://domain.com.au" + listingModel.SelectToken("url")?.ToString(),
-                StreetAddress = listingModel.SelectToken("address.street")?.ToString()!,
-                Latitude = double.Parse(listingModel.SelectToken("address.lat")?.ToString()!, CultureInfo.InvariantCulture),
-                Longitude = double.Parse(listingModel.SelectToken("address.lng")?.ToString()!, CultureInfo.InvariantCulture),
-                HomeType = Enum.Parse<HomeType>(listingModel.SelectToken("features.propertyType")?.ToString()!),
-                NumberOfBedrooms = short.TryParse(listingModel.SelectToken("features.beds")?.ToString()!, out var numberOfBedrooms) ? numberOfBedrooms : (short)0,
-                NumberOfBathrooms = short.TryParse(listingModel.SelectToken("features.baths")?.ToString()!, out var numberOfBathrooms) ? numberOfBathrooms : (short)0,
-                NumberOfParkingSpots = short.TryParse(listingModel.SelectToken("features.parking")?.ToString()!, out var numberOfParkingSpots) ? numberOfParkingSpots : (short)0,
-                LandSizeSquareMeters = landSize,
-                IsRetirement = listingModel.SelectToken("features.isRetirement")?.ToString() == "True",
-                IsRural = listingModel.SelectToken("features.isRural")?.ToString() == "True",
-                OpenInspectionTime = DateTime.TryParse(openInspectionTimeString, out var openInspectionTime) ? openInspectionTime.ToUniversalTime() : null,
-                AuctionTime = DateTime.TryParse(auctionTimeString, out var auctionTime) ? auctionTime.ToUniversalTime() : null
+                SourceUrl = "https://domain.com.au" + listingModel.url,
+                StreetAddress = listingModel.address.street,
+                Latitude = listingModel.address.lat,
+                Longitude = listingModel.address.lng,
+                HomeType = Enum.Parse<Model.HomeType>(listingModel.features.propertyType),
+                NumberOfBedrooms = listingModel.features.beds,
+                NumberOfBathrooms = listingModel.features.baths,
+                NumberOfParkingSpots = listingModel.features.parking,
+                LandSizeSquareMeters = listingModel.features.landSize == 0 ? null : listingModel.features.landSize,
+                IsRetirement = listingModel.features.isRetirement,
+                IsRural = listingModel.features.isRural,
+                OpenInspectionTime = listingModel.inspection.openTime?.ToUniversalTime(),
+                AuctionTime = listingModel.auction?.ToUniversalTime()
             };
-            if (!new Validation().Validate(home))
-            {
-                activity.AddProperty("input", listing);
-                activity.AddProperty("output", home);
-                activity.Complete(LogEventLevel.Warning, new ArgumentException($"Parsed 'Home' record is invalid"));
-                return null;
-            }
-
+            if (!new Model.Validation().Validate(home)) throw new ArgumentException($"Parsed 'Home' record is invalid");
+            homeInfo = home;
             activity.Complete();
-            return home;
+            return true;
         }
         catch (Exception ex)
         {
-            activity.AddProperty("input", listing);
+            activity.AddProperty("input", listingMap);
             activity.Complete(LogEventLevel.Warning, ex);
-            return null;
+            return false;
+        }
+    }
+
+    public bool TryExtractRentalPrice(DomainRawListingJson.ListingsMap listingMap, DateOnly scrapeDate, out Model.RentalPriceInfo? rentalPriceInfo)
+    {
+        var activity = Log.ForContext<Domain>().StartActivity("ExtractRentalPriceInfo");
+        rentalPriceInfo = null;
+        try
+        {
+            var price = listingMap.listingModel.price;
+            var formattedPrice = Regex.Replace(price.ToString(), @"[^0-9^ ^-^.]+", "");
+            var weeklyRentString = Regex.Match(formattedPrice, @"\d+").Value;
+            var info = new Model.RentalPriceInfo
+            {
+                ScrapeDate = scrapeDate,
+                WeeklyRent = short.Parse(weeklyRentString, CultureInfo.InvariantCulture)
+            };
+            if (!new Model.Validation().Validate(info)) throw new ArgumentException("Parsed 'RentalPriceInfo' record is invalid");
+            rentalPriceInfo = info;
+            activity.Complete();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            activity.AddProperty("input", listingMap);
+            activity.Complete(LogEventLevel.Warning, ex);
+            return false;
+        }
+    }
+
+    public bool TryExtractSalePrice(DomainRawListingJson.ListingsMap listingMap, DateOnly scrapeDate, out Model.SalePriceInfo? salePriceInfo)
+    {
+        var activity = Log.ForContext<Domain>().StartActivity("SalePriceInfo");
+        salePriceInfo = null;
+        try
+        {
+            var price = listingMap.listingModel.price;
+            // Expect numbers to only be separated by '-' or ' '
+            var formattedPrice = Regex.Replace(price.ToString(), @"[^0-9^ ^-]+", "");
+            var prices = Regex.Matches(formattedPrice, @"\d+");
+            if (prices.Count != 2)
+            {
+                activity.AddProperty("input", listingMap);
+                activity.Complete(LogEventLevel.Warning, new ArgumentException("'listingModel.price' does not have exactly 2 numbers"));
+                return false;
+            }
+            var lowerPrice = prices[0];
+            var higherPrice = prices[1];
+            var info = new Model.SalePriceInfo
+            {
+                ScrapeDate = scrapeDate,
+                LowerPrice = int.Parse(lowerPrice.Value, CultureInfo.InvariantCulture),
+                HigherPrice = int.Parse(higherPrice.Value, CultureInfo.InvariantCulture)
+            };
+            if (!new Model.Validation().Validate(info)) throw new ArgumentException("Parsed 'SalePriceInfo' record is invalid");
+            salePriceInfo = info;
+            activity.Complete();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            activity.AddProperty("input", listingMap);
+            activity.Complete(LogEventLevel.Warning, ex);
+            return false;
         }
     }
 }
