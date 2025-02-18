@@ -22,6 +22,8 @@ Localities as unit of progress. Scrapes Australian localities, then sendMesageBa
 ### 2. BatchScrapeSuburbs function
 Single concurrency scraper worker that processes raw data and writes to database.
 
+Hono.js TypeScript is chosen due to the flexibility of `fetch` without compromising type safety.
+
 ### 3. Postgres database
 We require complex spatial and time series queries. SQL is prefered for complex queries:
   - Postgres has postgis extension for spatial queries.
@@ -36,4 +38,7 @@ Postgres extensions to consider:
 Lower level ORM is prefered to ensure good SQL queries are used: Dapper with DbUp.
 
 ### 4. ReadOLTP function
-Dotnet Minimal API less overhead for queries, inbuilt validation
+Hono is used due to simplicity and edge focused.
+
+### Misc
+  - Drizzle orm: keep low level control, prefer to process where the data is (postgres db)
