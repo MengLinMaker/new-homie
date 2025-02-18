@@ -28,6 +28,11 @@ We require complex spatial and time series queries. SQL is prefered for complex 
   - MySQL does have spatial data types. But not as featureful. Side note: [5.5 has issues - does not follow SQL standard closely](https://vimeo.com/43536445#t=293s).
   - SQL Server is licenced.
 
+Postgres extensions to consider:
+  - postgis: well maintained geography features
+  - pg_partman: partition tables (especially time series)
+  - pg_stat_statements: track query performance
+
 Lower level ORM is prefered to ensure good SQL queries are used: Dapper with DbUp.
 
 ### 4. ReadOLTP function
