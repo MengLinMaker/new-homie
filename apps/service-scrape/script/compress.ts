@@ -42,8 +42,9 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
 
     childcare: ['childcare', 'education'],
     kindergarten: ['childcare', 'education'],
-    school: ['school', 'education'],
-    college: ['college', 'education'],
+    // Info incomplete
+    // school: ['school', 'education'],
+    // college: ['college', 'education'],
     university: ['university', 'education'],
     // Info not detailed
     // marketplace: ['market', 'shop'],

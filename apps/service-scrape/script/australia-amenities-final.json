@@ -27,15 +27,6 @@
     ]
   },
   {
-    "name": "Charles Darwin Uni",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.3716195,
-      130.8675993
-    ]
-  },
-  {
     "name": "Casuarina Post Office",
     "type": "post",
     "category": "misc",
@@ -216,15 +207,6 @@
     ]
   },
   {
-    "name": "Stuart Park Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.4407323,
-      130.8448625
-    ]
-  },
-  {
     "name": "United",
     "type": "petrol station",
     "category": "fuel",
@@ -333,15 +315,6 @@
     ]
   },
   {
-    "name": "Durack Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.4756269,
-      130.9737521
-    ]
-  },
-  {
     "name": "Fuel Express",
     "type": "petrol station",
     "category": "fuel",
@@ -357,24 +330,6 @@
     "gps": [
       -12.481674,
       130.9847783
-    ]
-  },
-  {
-    "name": "Bakewell Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.4934874,
-      130.9939526
-    ]
-  },
-  {
-    "name": "Good Shepherd Lutheran College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -12.4953908,
-      131.0243922
     ]
   },
   {
@@ -468,30 +423,12 @@
     ]
   },
   {
-    "name": "Bees Creek Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.5409504,
-      131.0531986
-    ]
-  },
-  {
     "name": "United Humpty Doo",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -12.5726962,
       131.1041078
-    ]
-  },
-  {
-    "name": "Dundee Beach School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.7513515,
-      130.3783215
     ]
   },
   {
@@ -549,15 +486,6 @@
     ]
   },
   {
-    "name": "Batchelor Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -13.0468444,
-      131.0305345
-    ]
-  },
-  {
     "name": "Adelaide River Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -591,15 +519,6 @@
     "gps": [
       -13.5826404,
       131.4582913
-    ]
-  },
-  {
-    "name": "St Francis Xavier's School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -13.7502458,
-      130.6881465
     ]
   },
   {
@@ -654,15 +573,6 @@
     "gps": [
       -12.1840329,
       136.7868197
-    ]
-  },
-  {
-    "name": "Ramingining School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.3266277,
-      134.9264859
     ]
   },
   {
@@ -792,15 +702,6 @@
     ]
   },
   {
-    "name": "Peppimenarti School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.1498676,
-      130.0768265
-    ]
-  },
-  {
     "name": "Peppimenarti Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -810,39 +711,12 @@
     ]
   },
   {
-    "name": "Our Lady of the Sacred Heart Thamarrurr Catholic School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.2429891,
-      129.5218974
-    ]
-  },
-  {
-    "name": "Nganmarriyanga School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.3526019,
-      129.8817456
-    ]
-  },
-  {
     "name": "Kimberley Motors",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -15.4843082,
       128.1165472
-    ]
-  },
-  {
-    "name": "Timber Creek School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -15.6482321,
-      130.4649174
     ]
   },
   {
@@ -936,24 +810,6 @@
     ]
   },
   {
-    "name": "Bulla Camp School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -15.7691319,
-      130.0398038
-    ]
-  },
-  {
-    "name": "Clyde Fenton Pre School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.4515249,
-      132.2713292
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -996,15 +852,6 @@
     "gps": [
       -14.4615504,
       132.2628695
-    ]
-  },
-  {
-    "name": "Kintore Street School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.4636178,
-      132.2592485
     ]
   },
   {
@@ -1098,39 +945,12 @@
     ]
   },
   {
-    "name": "MacFarlane Pre School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.4673058,
-      132.2822941
-    ]
-  },
-  {
-    "name": "Casuarina Street Pre School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.4655916,
-      132.297014
-    ]
-  },
-  {
     "name": "Fire Station",
     "type": "fire station",
     "category": "misc",
     "gps": [
       -14.4715383,
       132.2847759
-    ]
-  },
-  {
-    "name": "Katherine South Pre School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.4802392,
-      132.2545171
     ]
   },
   {
@@ -1170,15 +990,6 @@
     ]
   },
   {
-    "name": "Barunga School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.5242929,
-      132.865829
-    ]
-  },
-  {
     "name": "Barunga Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -1194,15 +1005,6 @@
     "gps": [
       -14.5546614,
       133.1132627
-    ]
-  },
-  {
-    "name": "Wugularr School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -14.5615835,
-      133.1187968
     ]
   },
   {
@@ -1230,15 +1032,6 @@
     "gps": [
       -14.781141,
       143.5037629
-    ]
-  },
-  {
-    "name": "Minyerri School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -15.2212272,
-      134.0830016
     ]
   },
   {
@@ -1350,30 +1143,12 @@
     ]
   },
   {
-    "name": "Amanbidji School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -16.4275241,
-      129.6179634
-    ]
-  },
-  {
     "name": "Amanbidji Health Centre",
     "type": "clinic",
     "category": "medical",
     "gps": [
       -16.4274295,
       129.6198914
-    ]
-  },
-  {
-    "name": "Yarralin School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -16.4469637,
-      130.8818985
     ]
   },
   {
@@ -1404,15 +1179,6 @@
     ]
   },
   {
-    "name": "Holy Rosary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.3050571,
-      123.6337145
-    ]
-  },
-  {
     "name": "Colac Roadhouse",
     "type": "petrol station",
     "category": "fuel",
@@ -1428,15 +1194,6 @@
     "gps": [
       -17.0166657,
       128.2169307
-    ]
-  },
-  {
-    "name": "Ngalangangpum Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.029702,
-      128.2119544
     ]
   },
   {
@@ -1503,15 +1260,6 @@
     ]
   },
   {
-    "name": "Kalkaringi School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.4454945,
-      130.8320808
-    ]
-  },
-  {
     "name": "Kalkaringi Pre School",
     "type": "childcare",
     "category": "education",
@@ -1557,24 +1305,6 @@
     ]
   },
   {
-    "name": "Kimberley TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -18.2266681,
-      127.6701089
-    ]
-  },
-  {
-    "name": "Lajamanu School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -18.3353257,
-      130.6344574
-    ]
-  },
-  {
     "name": "Lajamanu Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -1590,24 +1320,6 @@
     "gps": [
       -16.6795662,
       133.4124379
-    ]
-  },
-  {
-    "name": "Robinson River School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -16.7601901,
-      136.981158
-    ]
-  },
-  {
-    "name": "Kiana School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.2425173,
-      136.1833763
     ]
   },
   {
@@ -1917,15 +1629,6 @@
     ]
   },
   {
-    "name": "Cairns State High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -16.9157112,
-      145.7677504
-    ]
-  },
-  {
     "name": "Coles Express",
     "type": "petrol station",
     "category": "fuel",
@@ -2196,15 +1899,6 @@
     ]
   },
   {
-    "name": "Chillagoe State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.1553176,
-      144.5209895
-    ]
-  },
-  {
     "name": "BP Tourist Village",
     "type": "petrol station",
     "category": "fuel",
@@ -2367,15 +2061,6 @@
     ]
   },
   {
-    "name": "Elliott School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.5548038,
-      133.5395336
-    ]
-  },
-  {
     "name": "Puma",
     "type": "petrol station",
     "category": "fuel",
@@ -2472,15 +2157,6 @@
     "gps": [
       -18.3186007,
       133.7955836
-    ]
-  },
-  {
-    "name": "Irvinebank State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -17.4266345,
-      145.2045235
     ]
   },
   {
@@ -2925,15 +2601,6 @@
     ]
   },
   {
-    "name": "Pannawonica Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -21.636811,
-      116.3247087
-    ]
-  },
-  {
     "name": "Pannawonica",
     "type": "post",
     "category": "misc",
@@ -3030,15 +2697,6 @@
     "gps": [
       -22.7219861,
       117.7791132
-    ]
-  },
-  {
-    "name": "Yuendumu School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -22.2539519,
-      131.7960924
     ]
   },
   {
@@ -3156,15 +2814,6 @@
     "gps": [
       -19.6521394,
       134.1958117
-    ]
-  },
-  {
-    "name": "Tennant Creek Training Centre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -19.6524472,
-      134.1956833
     ]
   },
   {
@@ -4032,15 +3681,6 @@
     ]
   },
   {
-    "name": "Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.5228483,
-      145.3977815
-    ]
-  },
-  {
     "name": "Pentland LPO",
     "type": "post",
     "category": "misc",
@@ -4113,39 +3753,12 @@
     ]
   },
   {
-    "name": "Columbia Catholic Colledge",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.0603231,
-      146.2723026
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -20.0625359,
       146.2715294
-    ]
-  },
-  {
-    "name": "Blackheath and Thonborugh",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.0705317,
-      146.258044
-    ]
-  },
-  {
-    "name": "All Souls and St Gabriels",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.0631247,
-      146.2761865
     ]
   },
   {
@@ -4419,15 +4032,6 @@
     ]
   },
   {
-    "name": "Hamilton Island State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.3452084,
-      148.953049
-    ]
-  },
-  {
     "name": "Hamilton Island Fire Station",
     "type": "fire station",
     "category": "misc",
@@ -4473,15 +4077,6 @@
     ]
   },
   {
-    "name": "Stirling School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -21.7398816,
-      133.7323646
-    ]
-  },
-  {
     "name": "Wilora Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -4506,15 +4101,6 @@
     "gps": [
       -20.9854011,
       137.8488185
-    ]
-  },
-  {
-    "name": "Alpurrurulam School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -20.9878139,
-      137.8480877
     ]
   },
   {
@@ -4599,15 +4185,6 @@
     ]
   },
   {
-    "name": "Laramba School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -22.5336508,
-      132.7566941
-    ]
-  },
-  {
     "name": "Tilmouth Well Roadhouse",
     "type": "petrol station",
     "category": "fuel",
@@ -4623,15 +4200,6 @@
     "gps": [
       -22.6443207,
       133.3456916
-    ]
-  },
-  {
-    "name": "Bonya (Orrtipa-Thurra) Community School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -22.7788005,
-      136.1667746
     ]
   },
   {
@@ -4911,24 +4479,6 @@
     "gps": [
       -21.1210481,
       149.1587757
-    ]
-  },
-  {
-    "name": "Trade Training Centre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -21.114539,
-      149.182212
-    ]
-  },
-  {
-    "name": "MCC Agricultural Department",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -21.1144785,
-      149.1830752
     ]
   },
   {
@@ -5823,30 +5373,12 @@
     ]
   },
   {
-    "name": "Walungurru School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.2772219,
-      129.3879609
-    ]
-  },
-  {
     "name": "Mount Liebig Health Centre",
     "type": "clinic",
     "category": "medical",
     "gps": [
       -23.2662974,
       131.2739396
-    ]
-  },
-  {
-    "name": "Watiyawanu School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.2663129,
-      131.2748234
     ]
   },
   {
@@ -6012,39 +5544,12 @@
     ]
   },
   {
-    "name": "Papunya School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.2030265,
-      131.9101534
-    ]
-  },
-  {
-    "name": "Mbunghara School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.2902271,
-      132.3565152
-    ]
-  },
-  {
     "name": "Gemtree Outback Wilderness Retreat",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -22.9682153,
       134.2412109
-    ]
-  },
-  {
-    "name": "Harts Range School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -22.983998,
-      134.9331183
     ]
   },
   {
@@ -6228,15 +5733,6 @@
     ]
   },
   {
-    "name": "Wallace Rockhole School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.1233612,
-      133.0855098
-    ]
-  },
-  {
     "name": "Wallace Rockhole Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -6252,15 +5748,6 @@
     "gps": [
       -24.3402143,
       133.4587954
-    ]
-  },
-  {
-    "name": "Ltyentye Apurte Catholic School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.1295767,
-      134.3744231
     ]
   },
   {
@@ -6282,15 +5769,6 @@
     ]
   },
   {
-    "name": "Titjikala School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.6725236,
-      134.073136
-    ]
-  },
-  {
     "name": "Titjikala Health Centre",
     "type": "clinic",
     "category": "medical",
@@ -6306,15 +5784,6 @@
     "gps": [
       -24.3563034,
       139.4707972
-    ]
-  },
-  {
-    "name": "Evesham State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.0299366,
-      143.7112534
     ]
   },
   {
@@ -6342,15 +5811,6 @@
     "gps": [
       -23.4396474,
       144.2479841
-    ]
-  },
-  {
-    "name": "Longreach High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.4380637,
-      144.2621756
     ]
   },
   {
@@ -6486,15 +5946,6 @@
     "gps": [
       -23.2370662,
       150.5148902
-    ]
-  },
-  {
-    "name": "Glenmore PreSchool",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.3373564,
-      150.5138724
     ]
   },
   {
@@ -7191,15 +6642,6 @@
     ]
   },
   {
-    "name": "Blackall State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.4247367,
-      145.4694418
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -7251,15 +6693,6 @@
     "gps": [
       -24.8830594,
       144.0779683
-    ]
-  },
-  {
-    "name": "Yaraka State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.8861726,
-      144.075283
     ]
   },
   {
@@ -7695,15 +7128,6 @@
     ]
   },
   {
-    "name": "Croxdale Outback College of Rural Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -26.4466568,
-      146.1914189
-    ]
-  },
-  {
     "name": "Morven Community Clinic",
     "type": "clinic",
     "category": "medical",
@@ -7881,15 +7305,6 @@
     "gps": [
       -26.6438224,
       149.7604375
-    ]
-  },
-  {
-    "name": "Yuleba Creek State School - closed 1999",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -26.8883362,
-      149.4428631
     ]
   },
   {
@@ -8712,15 +8127,6 @@
     ]
   },
   {
-    "name": "Mintabie School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.3140214,
-      133.298498
-    ]
-  },
-  {
     "name": "Pink Roadhouse",
     "type": "petrol station",
     "category": "fuel",
@@ -9207,15 +8613,6 @@
     ]
   },
   {
-    "name": "St Josephs Catholic School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.979709,
-      148.987836
-    ]
-  },
-  {
     "name": "North Star LPO",
     "type": "post",
     "category": "misc",
@@ -9339,15 +8736,6 @@
     "gps": [
       -31.1267274,
       138.5615407
-    ]
-  },
-  {
-    "name": "Parachilna Rural School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.1311861,
-      138.3954202
     ]
   },
   {
@@ -10008,15 +9396,6 @@
     ]
   },
   {
-    "name": "Community College Northern Inland - Barraba Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -30.3803792,
-      150.6073416
-    ]
-  },
-  {
     "name": "Inland Petroleum",
     "type": "petrol station",
     "category": "fuel",
@@ -10134,15 +9513,6 @@
     ]
   },
   {
-    "name": "Community College Northern Inland Inc.",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -30.9774481,
-      150.2508958
-    ]
-  },
-  {
     "name": "Pet Vet",
     "type": "vet",
     "category": "misc",
@@ -10239,15 +9609,6 @@
     "gps": [
       -30.9858242,
       150.4459269
-    ]
-  },
-  {
-    "name": "Warrumbungle National Park Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.2754448,
-      148.9960399
     ]
   },
   {
@@ -10536,15 +9897,6 @@
     "gps": [
       -31.6918113,
       115.7159849
-    ]
-  },
-  {
-    "name": "Balett",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.6919032,
-      115.7197745
     ]
   },
   {
@@ -11061,15 +10413,6 @@
     ]
   },
   {
-    "name": "Whitfords Occasional Day Care Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.7996928,
-      115.7452366
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -11232,15 +10575,6 @@
     ]
   },
   {
-    "name": "Warwick Child Care",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8452294,
-      115.7982959
-    ]
-  },
-  {
     "name": "Caltex",
     "type": "petrol station",
     "category": "fuel",
@@ -11283,15 +10617,6 @@
     "gps": [
       -31.8389245,
       115.8396379
-    ]
-  },
-  {
-    "name": "Kindergarten",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8398881,
-      115.8622068
     ]
   },
   {
@@ -11574,15 +10899,6 @@
     ]
   },
   {
-    "name": "Our Lady's Assumption Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8968797,
-      115.8728604
-    ]
-  },
-  {
     "name": "ANZ",
     "type": "bank",
     "category": "misc",
@@ -11799,15 +11115,6 @@
     ]
   },
   {
-    "name": "Moorditj Noongar Community College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8782885,
-      116.0259784
-    ]
-  },
-  {
     "name": "Mount Helena VBFB",
     "type": "fire station",
     "category": "misc",
@@ -11853,15 +11160,6 @@
     ]
   },
   {
-    "name": "Guildford Grammar Preparatory School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8917809,
-      115.9856415
-    ]
-  },
-  {
     "name": "GP Superclinic",
     "type": "clinic",
     "category": "medical",
@@ -11895,15 +11193,6 @@
     "gps": [
       -31.9035622,
       116.1970558
-    ]
-  },
-  {
-    "name": "Sawyers Valley Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.9016738,
-      116.2032761
     ]
   },
   {
@@ -12411,39 +11700,12 @@
     ]
   },
   {
-    "name": "Education and Training International",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -31.9522559,
-      115.8590511
-    ]
-  },
-  {
     "name": "LifeCare Dental",
     "type": "dentist",
     "category": "medical",
     "gps": [
       -31.9522181,
       115.8604213
-    ]
-  },
-  {
-    "name": "The Actors’ Hub",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.9502898,
-      115.8749411
-    ]
-  },
-  {
-    "name": "Perth College of Business and Technology",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -31.9507561,
-      115.8746435
     ]
   },
   {
@@ -12879,15 +12141,6 @@
     ]
   },
   {
-    "name": "Seaview Kindergarten",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.9986276,
-      115.7557363
-    ]
-  },
-  {
     "name": "Shell Express",
     "type": "petrol station",
     "category": "fuel",
@@ -13032,24 +12285,6 @@
     ]
   },
   {
-    "name": "CITS (Curtin IT Services)",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.0062523,
-      115.8926272
-    ]
-  },
-  {
-    "name": "Curtin People and Culture",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.0063067,
-      115.8926254
-    ]
-  },
-  {
     "name": "Peak Truckstop Kewdale",
     "type": "petrol station",
     "category": "fuel",
@@ -13173,15 +12408,6 @@
     "gps": [
       -32.0120646,
       115.8645078
-    ]
-  },
-  {
-    "name": "Curtin College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.0077667,
-      115.8945336
     ]
   },
   {
@@ -13482,39 +12708,12 @@
     ]
   },
   {
-    "name": "Helena Valley Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.92458,
-      116.0489789
-    ]
-  },
-  {
     "name": "Darlington Fire Station",
     "type": "fire station",
     "category": "misc",
     "gps": [
       -31.9169382,
       116.0733327
-    ]
-  },
-  {
-    "name": "Treetops Montessori School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.9201817,
-      116.0745333
-    ]
-  },
-  {
-    "name": "Darlington Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.9202059,
-      116.0785262
     ]
   },
   {
@@ -14301,15 +13500,6 @@
     ]
   },
   {
-    "name": "Perth Waldorf School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.0915491,
-      115.8181372
-    ]
-  },
-  {
     "name": "Outpatient Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -14841,15 +14031,6 @@
     ]
   },
   {
-    "name": "Kelmscott John Calvin School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.1176442,
-      115.9889079
-    ]
-  },
-  {
     "name": "7-Eleven",
     "type": "petrol station",
     "category": "fuel",
@@ -15030,15 +14211,6 @@
     ]
   },
   {
-    "name": "South Coast Baptist College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.3150324,
-      115.7573934
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -15135,15 +14307,6 @@
     "gps": [
       -32.337847,
       116.0631218
-    ]
-  },
-  {
-    "name": "Jarrahdale Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.3386173,
-      116.0620701
     ]
   },
   {
@@ -15795,15 +14958,6 @@
     ]
   },
   {
-    "name": "Bunbury Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3331637,
-      115.6372511
-    ]
-  },
-  {
     "name": "Good Start Early Learning",
     "type": "childcare",
     "category": "education",
@@ -16065,15 +15219,6 @@
     ]
   },
   {
-    "name": "South West Institute Of Technology",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3655507,
-      115.6571398
-    ]
-  },
-  {
     "name": "Australia Post Halifax",
     "type": "post",
     "category": "misc",
@@ -16143,15 +15288,6 @@
     "gps": [
       -33.4005484,
       115.6211893
-    ]
-  },
-  {
-    "name": "Dalyellup College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.4045431,
-      115.6255244
     ]
   },
   {
@@ -16287,15 +15423,6 @@
     "gps": [
       -33.5756727,
       115.8251182
-    ]
-  },
-  {
-    "name": "Donnybrook District High",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.580987,
-      115.8137076
     ]
   },
   {
@@ -16731,15 +15858,6 @@
     ]
   },
   {
-    "name": "Orchid Valley School (former)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.927137,
-      116.8737224
-    ]
-  },
-  {
     "name": "LPG",
     "type": "petrol station",
     "category": "fuel",
@@ -17028,15 +16146,6 @@
     ]
   },
   {
-    "name": "Castletown Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8318493,
-      121.9088715
-    ]
-  },
-  {
     "name": "Swans Veterinary Services",
     "type": "vet",
     "category": "misc",
@@ -17208,24 +16317,6 @@
     ]
   },
   {
-    "name": "Golden Hill Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9424188,
-      117.3583838
-    ]
-  },
-  {
-    "name": "Western Australian College of Agriculture (Denmark)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9538583,
-      117.374835
-    ]
-  },
-  {
     "name": "Mitre 10 Hardware Store",
     "type": "petrol station",
     "category": "fuel",
@@ -17268,15 +16359,6 @@
     "gps": [
       -34.3626188,
       118.7483044
-    ]
-  },
-  {
-    "name": "Wellstead Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.4949143,
-      118.6038725
     ]
   },
   {
@@ -18099,15 +17181,6 @@
     ]
   },
   {
-    "name": "Yunta Rural School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.5820333,
-      139.5603067
-    ]
-  },
-  {
     "name": "Hunts Fuel",
     "type": "petrol station",
     "category": "fuel",
@@ -18195,15 +17268,6 @@
     "gps": [
       -33.0249523,
       137.5507309
-    ]
-  },
-  {
-    "name": "TAFE",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.0290961,
-      137.540882
     ]
   },
   {
@@ -18531,15 +17595,6 @@
     ]
   },
   {
-    "name": "Western Institute of TAFE, Wilcannia College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -31.5574904,
-      143.3795242
-    ]
-  },
-  {
     "name": "Wilcannia Roadhouse",
     "type": "petrol station",
     "category": "fuel",
@@ -18789,15 +17844,6 @@
     "gps": [
       -31.7000869,
       147.8376654
-    ]
-  },
-  {
-    "name": "Warren TAFE College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -31.6993992,
-      147.8380338
     ]
   },
   {
@@ -19179,15 +18225,6 @@
     ]
   },
   {
-    "name": "Lincoln School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.2295599,
-      148.5773145
-    ]
-  },
-  {
     "name": "Ampol Diesel Stop",
     "type": "petrol station",
     "category": "fuel",
@@ -19257,15 +18294,6 @@
     "gps": [
       -32.2474172,
       148.6015065
-    ]
-  },
-  {
-    "name": "Dubbo School of Distance Education",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.243368,
-      148.6407265
     ]
   },
   {
@@ -19503,24 +18531,6 @@
     ]
   },
   {
-    "name": "Wambangalang Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.48798,
-      148.554792
-    ]
-  },
-  {
-    "name": "Red Hill Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.364632,
-      149.536274
-    ]
-  },
-  {
     "name": "Sandy Hollow Post Office",
     "type": "post",
     "category": "misc",
@@ -19599,15 +18609,6 @@
     "gps": [
       -32.5540395,
       148.9454601
-    ]
-  },
-  {
-    "name": "TAFE, Wellington Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.5563391,
-      148.9457415
     ]
   },
   {
@@ -19914,15 +18915,6 @@
     "gps": [
       -32.8552455,
       149.9703503
-    ]
-  },
-  {
-    "name": "Kandos High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.855738,
-      149.974588
     ]
   },
   {
@@ -20382,15 +19374,6 @@
     "gps": [
       -33.8362785,
       138.6141668
-    ]
-  },
-  {
-    "name": "Vineyard Lutheran School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.848823,
-      138.6197854
     ]
   },
   {
@@ -20916,15 +19899,6 @@
     ]
   },
   {
-    "name": "Smithfield Plains Kindergardern",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.6760579,
-      138.6787374
-    ]
-  },
-  {
     "name": "Playford Vet Clinic",
     "type": "vet",
     "category": "misc",
@@ -21084,15 +20058,6 @@
     "gps": [
       -34.2573363,
       140.4664282
-    ]
-  },
-  {
-    "name": "Rivergum Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.2640629,
-      140.5405618
     ]
   },
   {
@@ -21258,15 +20223,6 @@
     ]
   },
   {
-    "name": "Keyneton Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.5539099,
-      139.1338149
-    ]
-  },
-  {
     "name": "CFS Sedan",
     "type": "fire station",
     "category": "misc",
@@ -21282,15 +20238,6 @@
     "gps": [
       -34.6767786,
       139.6514056
-    ]
-  },
-  {
-    "name": "East Murray Area School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.7391442,
-      140.1362801
     ]
   },
   {
@@ -21327,15 +20274,6 @@
     "gps": [
       -34.7674839,
       138.624266
-    ]
-  },
-  {
-    "name": "Adelaide West Special Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8014376,
-      138.494371
     ]
   },
   {
@@ -21438,48 +20376,12 @@
     ]
   },
   {
-    "name": "Golden Grove High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.7936032,
-      138.6960085
-    ]
-  },
-  {
     "name": "McIntyre Dental",
     "type": "dentist",
     "category": "medical",
     "gps": [
       -34.7946375,
       138.6510507
-    ]
-  },
-  {
-    "name": "Kiethcott Farm Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.7999596,
-      138.6769813
-    ]
-  },
-  {
-    "name": "Pedare Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.7951557,
-      138.6930833
-    ]
-  },
-  {
-    "name": "Gleeson College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.795057,
-      138.6962981
     ]
   },
   {
@@ -21669,15 +20571,6 @@
     "gps": [
       -34.8442282,
       138.5031946
-    ]
-  },
-  {
-    "name": "Ocean View College Bridge Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8444938,
-      138.5017358
     ]
   },
   {
@@ -21987,33 +20880,6 @@
     ]
   },
   {
-    "name": "Ardtornish School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8342041,
-      138.7052724
-    ]
-  },
-  {
-    "name": "Modbury High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8372511,
-      138.6988351
-    ]
-  },
-  {
-    "name": "St Paul's College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8463804,
-      138.6547203
-    ]
-  },
-  {
     "name": "Shell Windsor Gardens",
     "type": "petrol station",
     "category": "fuel",
@@ -22182,15 +21048,6 @@
     "gps": [
       -34.8718992,
       138.5484022
-    ]
-  },
-  {
-    "name": "The Grove Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8732305,
-      138.5446512
     ]
   },
   {
@@ -22365,15 +21222,6 @@
     ]
   },
   {
-    "name": "St Margaret Mary's Catholic Church and School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8836789,
-      138.5630709
-    ]
-  },
-  {
     "name": "Tapleys Hill Denture Clinic",
     "type": "dentist",
     "category": "medical",
@@ -22461,15 +21309,6 @@
     "gps": [
       -34.8866324,
       138.6164949
-    ]
-  },
-  {
-    "name": "Vale Park Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8852972,
-      138.6265882
     ]
   },
   {
@@ -22608,15 +21447,6 @@
     ]
   },
   {
-    "name": "North Adelaide Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9054156,
-      138.5977792
-    ]
-  },
-  {
     "name": "NAB",
     "type": "bank",
     "category": "misc",
@@ -22668,15 +21498,6 @@
     "gps": [
       -34.9123239,
       138.5132615
-    ]
-  },
-  {
-    "name": "St Michael's Collage (Private)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9148718,
-      138.5039691
     ]
   },
   {
@@ -22752,15 +21573,6 @@
     ]
   },
   {
-    "name": "AHMS Building",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9216576,
-      138.5913696
-    ]
-  },
-  {
     "name": "Westpac",
     "type": "bank",
     "category": "misc",
@@ -22785,15 +21597,6 @@
     "gps": [
       -34.922418,
       138.5996616
-    ]
-  },
-  {
-    "name": "University Senior College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9218118,
-      138.6062776
     ]
   },
   {
@@ -22968,15 +21771,6 @@
     ]
   },
   {
-    "name": "East Marden Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8828244,
-      138.6535038
-    ]
-  },
-  {
     "name": "Woolworths Petrol Campbelltown",
     "type": "petrol station",
     "category": "fuel",
@@ -23139,15 +21933,6 @@
     ]
   },
   {
-    "name": "Pembroke School (Boarding house)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9199022,
-      138.6510414
-    ]
-  },
-  {
     "name": "Vascular Ultrasound Partners",
     "type": "clinic",
     "category": "medical",
@@ -23199,15 +21984,6 @@
     "gps": [
       -34.9029738,
       138.8752448
-    ]
-  },
-  {
-    "name": "Henley High School (Public)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9225274,
-      138.5010806
     ]
   },
   {
@@ -23553,15 +22329,6 @@
     ]
   },
   {
-    "name": "CBC Junior",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9277166,
-      138.6132839
-    ]
-  },
-  {
     "name": "Headspace",
     "type": "clinic",
     "category": "medical",
@@ -23757,15 +22524,6 @@
     "gps": [
       -34.9418779,
       138.6420029
-    ]
-  },
-  {
-    "name": "Alliance Francaise",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9456214,
-      138.5903721
     ]
   },
   {
@@ -24039,15 +22797,6 @@
     ]
   },
   {
-    "name": "Immanuel Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9725356,
-      138.5370002
-    ]
-  },
-  {
     "name": "Caltex Glenelg North",
     "type": "petrol station",
     "category": "fuel",
@@ -24117,15 +22866,6 @@
     "gps": [
       -34.9741825,
       138.5918118
-    ]
-  },
-  {
-    "name": "School of Agriculture Food & Wine building",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9692425,
-      138.6365512
     ]
   },
   {
@@ -24363,15 +23103,6 @@
     ]
   },
   {
-    "name": "Seymour College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9563656,
-      138.6464391
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -24423,15 +23154,6 @@
     "gps": [
       -34.9950985,
       138.5742086
-    ]
-  },
-  {
-    "name": "St Johns",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9977792,
-      138.6317989
     ]
   },
   {
@@ -24540,15 +23262,6 @@
     "gps": [
       -35.0195516,
       138.6164077
-    ]
-  },
-  {
-    "name": "Eden Hills Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0206838,
-      138.5956719
     ]
   },
   {
@@ -24669,15 +23382,6 @@
     ]
   },
   {
-    "name": "St Catherines School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0035884,
-      138.7078705
-    ]
-  },
-  {
     "name": "Chemmart Stirling",
     "type": "pharmacy",
     "category": "medical",
@@ -24750,33 +23454,6 @@
     ]
   },
   {
-    "name": "Stirling East Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0017342,
-      138.7346229
-    ]
-  },
-  {
-    "name": "Arbury Park Outdoor School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0032288,
-      138.7501408
-    ]
-  },
-  {
-    "name": "Bridgewater Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0045238,
-      138.7619594
-    ]
-  },
-  {
     "name": "Adelaide Vet Stirling",
     "type": "vet",
     "category": "misc",
@@ -24801,15 +23478,6 @@
     "gps": [
       -35.0103468,
       138.7485882
-    ]
-  },
-  {
-    "name": "The Hills Montessori School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0126006,
-      138.7486093
     ]
   },
   {
@@ -24876,15 +23544,6 @@
     ]
   },
   {
-    "name": "Heathfield High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0213799,
-      138.7122058
-    ]
-  },
-  {
     "name": "Hills Medical Service",
     "type": "clinic",
     "category": "medical",
@@ -24927,15 +23586,6 @@
     "gps": [
       -35.0188728,
       138.7498258
-    ]
-  },
-  {
-    "name": "Heathfield Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0305311,
-      138.7275695
     ]
   },
   {
@@ -25008,15 +23658,6 @@
     "gps": [
       -35.0833378,
       138.5618101
-    ]
-  },
-  {
-    "name": "Aberfoyle Park High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0739491,
-      138.5934815
     ]
   },
   {
@@ -25098,24 +23739,6 @@
     "gps": [
       -35.1005402,
       138.536385
-    ]
-  },
-  {
-    "name": "Reynella Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1004546,
-      138.5369348
-    ]
-  },
-  {
-    "name": "Scott Creek Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.0565518,
-      138.7068631
     ]
   },
   {
@@ -25299,15 +23922,6 @@
     ]
   },
   {
-    "name": "Clarendon Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1101978,
-      138.6321993
-    ]
-  },
-  {
     "name": "TerryWhite Chemmart",
     "type": "pharmacy",
     "category": "medical",
@@ -25407,15 +24021,6 @@
     ]
   },
   {
-    "name": "Hackham East Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1398835,
-      138.5339913
-    ]
-  },
-  {
     "name": "Hackham Medical Centre - Bulk Billing",
     "type": "clinic",
     "category": "medical",
@@ -25440,15 +24045,6 @@
     "gps": [
       -35.1482181,
       138.6571575
-    ]
-  },
-  {
-    "name": "Seaford Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1759034,
-      138.4731384
     ]
   },
   {
@@ -26037,15 +24633,6 @@
     ]
   },
   {
-    "name": "Orange College Forest Road Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.3079227,
-      149.0940401
-    ]
-  },
-  {
     "name": "Tesla Destination Charger",
     "type": "charge station",
     "category": "fuel",
@@ -26559,15 +25146,6 @@
     ]
   },
   {
-    "name": "Western Institute of TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.4817949,
-      150.1577139
-    ]
-  },
-  {
     "name": "Lithgow Veterinary Hospital",
     "type": "vet",
     "category": "misc",
@@ -26709,15 +25287,6 @@
     "gps": [
       -33.5321411,
       149.2555647
-    ]
-  },
-  {
-    "name": "Newbridge Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.5811485,
-      149.3659372
     ]
   },
   {
@@ -27099,15 +25668,6 @@
     ]
   },
   {
-    "name": "St Thomas Aquinas Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.6806354,
-      150.5891642
-    ]
-  },
-  {
     "name": "Barratt & Smith Pathology",
     "type": "clinic",
     "category": "medical",
@@ -27483,15 +26043,6 @@
     "gps": [
       -33.7224563,
       150.6032265
-    ]
-  },
-  {
-    "name": "Penrith Lakes Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7257556,
-      150.6701951
     ]
   },
   {
@@ -28449,24 +27000,6 @@
     ]
   },
   {
-    "name": "Camden Park Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.120004,
-      150.709685
-    ]
-  },
-  {
-    "name": "Wooglemai Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.134567,
-      150.499162
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -28662,15 +27195,6 @@
     "gps": [
       -34.5072904,
       144.8436923
-    ]
-  },
-  {
-    "name": "TAFE Riverina Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.5074363,
-      144.8436655
     ]
   },
   {
@@ -29058,15 +27582,6 @@
     "gps": [
       -34.314188,
       148.298025
-    ]
-  },
-  {
-    "name": "Young Regional School of Music",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.3180271,
-      148.2925898
     ]
   },
   {
@@ -29781,15 +28296,6 @@
     ]
   },
   {
-    "name": "Riverina Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1295872,
-      147.3110703
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -29979,15 +28485,6 @@
     ]
   },
   {
-    "name": "Wollondilly Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.7423034,
-      149.7102822
-    ]
-  },
-  {
     "name": "Goldsmith Street Surgery",
     "type": "clinic",
     "category": "medical",
@@ -30159,15 +28656,6 @@
     ]
   },
   {
-    "name": "Havenlee School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.8551248,
-      150.5768507
-    ]
-  },
-  {
     "name": "North Nowra Post Office",
     "type": "post",
     "category": "misc",
@@ -30183,15 +28671,6 @@
     "gps": [
       -34.855171,
       150.608347
-    ]
-  },
-  {
-    "name": "Holy Cross Seminary",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.9571612,
-      149.6684831
     ]
   },
   {
@@ -30537,15 +29016,6 @@
     ]
   },
   {
-    "name": "Kumon Gungahlin Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1970288,
-      149.118422
-    ]
-  },
-  {
     "name": "Palmerston Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -30624,15 +29094,6 @@
     "gps": [
       -35.2205927,
       149.1027183
-    ]
-  },
-  {
-    "name": "Global Energy Training Solutions (GETS)",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -35.2190206,
-      149.1435002
     ]
   },
   {
@@ -30780,15 +29241,6 @@
     ]
   },
   {
-    "name": "Jervis Bay School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1314453,
-      150.7047927
-    ]
-  },
-  {
     "name": "NAB",
     "type": "bank",
     "category": "misc",
@@ -30813,15 +29265,6 @@
     "gps": [
       -35.156941,
       150.602358
-    ]
-  },
-  {
-    "name": "Kingscote Area School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.6508417,
-      137.6335647
     ]
   },
   {
@@ -30876,15 +29319,6 @@
     "gps": [
       -35.45706,
       138.3478067
-    ]
-  },
-  {
-    "name": "Galilee Catholic Learning Centre (R-7 School)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.2683194,
-      138.4714805
     ]
   },
   {
@@ -30948,15 +29382,6 @@
     "gps": [
       -35.4572618,
       138.3496193
-    ]
-  },
-  {
-    "name": "Rapid Bay Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.5265486,
-      138.193801
     ]
   },
   {
@@ -31092,15 +29517,6 @@
     "gps": [
       -35.5030219,
       138.7844823
-    ]
-  },
-  {
-    "name": "Port Elliot Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.524542,
-      138.6774515
     ]
   },
   {
@@ -31509,15 +29925,6 @@
     ]
   },
   {
-    "name": "Mil Lel Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7810281,
-      140.8258138
-    ]
-  },
-  {
     "name": "Ampol",
     "type": "petrol station",
     "category": "fuel",
@@ -31533,15 +29940,6 @@
     "gps": [
       -37.8164851,
       140.7620266
-    ]
-  },
-  {
-    "name": "Mount Gambier North Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8169383,
-      140.7757697
     ]
   },
   {
@@ -31587,24 +29985,6 @@
     "gps": [
       -37.8111404,
       140.7899653
-    ]
-  },
-  {
-    "name": "St Martin's Lutheran College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8205365,
-      140.7969923
-    ]
-  },
-  {
-    "name": "Kongorong School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9032541,
-      140.5630774
     ]
   },
   {
@@ -31698,15 +30078,6 @@
     ]
   },
   {
-    "name": "MacDonald Park Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8259895,
-      140.7930861
-    ]
-  },
-  {
     "name": "Commonwealth Bank",
     "type": "bank",
     "category": "misc",
@@ -31776,15 +30147,6 @@
     "gps": [
       -37.9460367,
       140.7293259
-    ]
-  },
-  {
-    "name": "Allendale East Area School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.003072,
-      140.7100044
     ]
   },
   {
@@ -32010,15 +30372,6 @@
     "gps": [
       -35.9395312,
       142.4211226
-    ]
-  },
-  {
-    "name": "Former Netherby Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.109174,
-      141.6500332
     ]
   },
   {
@@ -33183,15 +31536,6 @@
     ]
   },
   {
-    "name": "Zeerust Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.2765028,
-      145.4046512
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -33279,15 +31623,6 @@
     "gps": [
       -36.383352,
       145.3049031
-    ]
-  },
-  {
-    "name": "Ardmona Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.3856525,
-      145.31285
     ]
   },
   {
@@ -33513,15 +31848,6 @@
     "gps": [
       -36.7430517,
       144.2096169
-    ]
-  },
-  {
-    "name": "Dunolly Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.8515063,
-      143.7336295
     ]
   },
   {
@@ -33759,15 +32085,6 @@
     ]
   },
   {
-    "name": "Catherine McAuley College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -36.7535289,
-      144.2736092
-    ]
-  },
-  {
     "name": "UFS pharmacies",
     "type": "pharmacy",
     "category": "medical",
@@ -33936,15 +32253,6 @@
     "gps": [
       -37.0476165,
       143.7367693
-    ]
-  },
-  {
-    "name": "Highview College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.0532539,
-      143.7364519
     ]
   },
   {
@@ -34218,15 +32526,6 @@
     ]
   },
   {
-    "name": "Puckapunyal Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.0023133,
-      145.0336437
-    ]
-  },
-  {
     "name": "Ampol",
     "type": "petrol station",
     "category": "fuel",
@@ -34272,15 +32571,6 @@
     ]
   },
   {
-    "name": "St Marys Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.01996,
-      145.1405914
-    ]
-  },
-  {
     "name": "NAB",
     "type": "bank",
     "category": "misc",
@@ -34314,24 +32604,6 @@
     "gps": [
       -37.0244124,
       145.136734
-    ]
-  },
-  {
-    "name": "Seymour Technical High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.0294521,
-      145.1413029
-    ]
-  },
-  {
-    "name": "Seymour Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.0308989,
-      145.1426295
     ]
   },
   {
@@ -36180,15 +34452,6 @@
     ]
   },
   {
-    "name": "Blue Gum Community School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.2558117,
-      149.1375568
-    ]
-  },
-  {
     "name": "North Ainslie Preschool",
     "type": "childcare",
     "category": "education",
@@ -36810,15 +35073,6 @@
     ]
   },
   {
-    "name": "Music Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.3162862,
-      149.1149176
-    ]
-  },
-  {
     "name": "Manuka Vet Hospital",
     "type": "vet",
     "category": "misc",
@@ -37260,15 +35514,6 @@
     ]
   },
   {
-    "name": "The Galilee School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.3862143,
-      149.0303139
-    ]
-  },
-  {
     "name": "Kambah Village Medical Practice",
     "type": "clinic",
     "category": "medical",
@@ -37320,15 +35565,6 @@
     "gps": [
       -35.3955119,
       149.0691909
-    ]
-  },
-  {
-    "name": "Mackillop Catholic School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.3929977,
-      149.0912299
     ]
   },
   {
@@ -37431,15 +35667,6 @@
     ]
   },
   {
-    "name": "Finigan School of Distance Education",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.354009,
-      149.221512
-    ]
-  },
-  {
     "name": "Woolworths Petrol",
     "type": "petrol station",
     "category": "fuel",
@@ -37518,15 +35745,6 @@
     "gps": [
       -35.3714206,
       149.2325999
-    ]
-  },
-  {
-    "name": "Erindale College and Theatre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -35.4030531,
-      149.0965196
     ]
   },
   {
@@ -38556,15 +36774,6 @@
     ]
   },
   {
-    "name": "Tallangatta Valley Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.2854365,
-      147.3851463
-    ]
-  },
-  {
     "name": "Corryong BP Garage",
     "type": "petrol station",
     "category": "fuel",
@@ -38682,30 +36891,12 @@
     ]
   },
   {
-    "name": "Outdoor School 15 Mile Creek Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.6733239,
-      146.2618933
-    ]
-  },
-  {
     "name": "Myrrhee CFA shed",
     "type": "fire station",
     "category": "misc",
     "gps": [
       -36.7280226,
       146.3034857
-    ]
-  },
-  {
-    "name": "Myrrhee Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.7382388,
-      146.3183959
     ]
   },
   {
@@ -38814,15 +37005,6 @@
     "gps": [
       -36.7377527,
       147.1606499
-    ]
-  },
-  {
-    "name": "Harrietville Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.8877742,
-      147.065172
     ]
   },
   {
@@ -39510,15 +37692,6 @@
     ]
   },
   {
-    "name": "Bournda Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.7908,
-      149.92712
-    ]
-  },
-  {
     "name": "Discount Chemist",
     "type": "pharmacy",
     "category": "medical",
@@ -39618,15 +37791,6 @@
     ]
   },
   {
-    "name": "Wyndham Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.92962,
-      149.64656
-    ]
-  },
-  {
     "name": "Orthodontist",
     "type": "dentist",
     "category": "medical",
@@ -39651,24 +37815,6 @@
     "gps": [
       -36.932662,
       149.8818033
-    ]
-  },
-  {
-    "name": "Pambula Beach Flexible Learning Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.93384,
-      149.8900257
-    ]
-  },
-  {
-    "name": "Towamba Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.084209,
-      149.695158
     ]
   },
   {
@@ -40086,15 +38232,6 @@
     ]
   },
   {
-    "name": "Tarrington Lutheran School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7667095,
-      142.0951969
-    ]
-  },
-  {
     "name": "Drik Drik CFA",
     "type": "fire station",
     "category": "misc",
@@ -40164,15 +38301,6 @@
     "gps": [
       -37.1945487,
       143.8286147
-    ]
-  },
-  {
-    "name": "Yandoit Primay School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.2157005,
-      144.0882419
     ]
   },
   {
@@ -40320,30 +38448,12 @@
     ]
   },
   {
-    "name": "St Auguststine's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.4284089,
-      143.8918827
-    ]
-  },
-  {
     "name": "Newlyn Fire Station CFA",
     "type": "fire station",
     "category": "misc",
     "gps": [
       -37.4131251,
       143.9868103
-    ]
-  },
-  {
-    "name": "Bullarto South Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.4053509,
-      144.2183627
     ]
   },
   {
@@ -40362,15 +38472,6 @@
     "gps": [
       -37.5197605,
       143.8041326
-    ]
-  },
-  {
-    "name": "Invermay Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.5202017,
-      143.874827
     ]
   },
   {
@@ -40497,15 +38598,6 @@
     "gps": [
       -37.5600576,
       143.8442795
-    ]
-  },
-  {
-    "name": "Arts Academy",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.5611479,
-      143.858787
     ]
   },
   {
@@ -40653,24 +38745,6 @@
     ]
   },
   {
-    "name": "Mt Macedon Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.4048502,
-      144.5840146
-    ]
-  },
-  {
-    "name": "Candlebark School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.3720541,
-      144.6851863
-    ]
-  },
-  {
     "name": "Macedon Chiropractic Dr Anna Kennedy",
     "type": "clinic",
     "category": "medical",
@@ -40812,15 +38886,6 @@
     "gps": [
       -37.4933648,
       144.5958646
-    ]
-  },
-  {
-    "name": "Salesian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.5722087,
-      144.7394922
     ]
   },
   {
@@ -41139,15 +39204,6 @@
     ]
   },
   {
-    "name": "NMIT Eden Park Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.5051521,
-      145.0428011
-    ]
-  },
-  {
     "name": "Amcal",
     "type": "pharmacy",
     "category": "medical",
@@ -41307,15 +39363,6 @@
     "gps": [
       -37.4202817,
       145.7089555
-    ]
-  },
-  {
-    "name": "Toolangi Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.5354089,
-      145.4716962
     ]
   },
   {
@@ -41481,15 +39528,6 @@
     ]
   },
   {
-    "name": "Pentland Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6551942,
-      144.4228276
-    ]
-  },
-  {
     "name": "Bacchus Marsh Vet Clinic",
     "type": "vet",
     "category": "misc",
@@ -41586,15 +39624,6 @@
     "gps": [
       -37.676702,
       144.4424168
-    ]
-  },
-  {
-    "name": "The Laurels",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.6768169,
-      144.4432328
     ]
   },
   {
@@ -42030,15 +40059,6 @@
     ]
   },
   {
-    "name": "Ames",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7425509,
-      144.7996112
-    ]
-  },
-  {
     "name": "Dr Anh",
     "type": "dentist",
     "category": "medical",
@@ -42228,15 +40248,6 @@
     ]
   },
   {
-    "name": "Kumon",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7713244,
-      144.7741065
-    ]
-  },
-  {
     "name": "Goodstart Early Learning Centre",
     "type": "childcare",
     "category": "education",
@@ -42261,15 +40272,6 @@
     "gps": [
       -37.7927107,
       144.7614946
-    ]
-  },
-  {
-    "name": "St Theresa's Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7819116,
-      144.819863
     ]
   },
   {
@@ -43002,15 +41004,6 @@
     ]
   },
   {
-    "name": "Wollert Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.598703,
-      145.032523
-    ]
-  },
-  {
     "name": "Chemist Warehouse",
     "type": "pharmacy",
     "category": "medical",
@@ -43170,15 +41163,6 @@
     "gps": [
       -37.6625595,
       144.9232305
-    ]
-  },
-  {
-    "name": "Coolaroo South Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6616672,
-      144.9307869
     ]
   },
   {
@@ -43524,30 +41508,12 @@
     ]
   },
   {
-    "name": "Lalor North Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6637247,
-      145.0288893
-    ]
-  },
-  {
     "name": "7-Eleven Thomastown",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -37.6784622,
       144.9990422
-    ]
-  },
-  {
-    "name": "Peter Lalor Vocational College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.666815,
-      145.0115013
     ]
   },
   {
@@ -43983,15 +41949,6 @@
     ]
   },
   {
-    "name": "Yering Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7051674,
-      145.38245
-    ]
-  },
-  {
     "name": "Australia Post - Tullmarine Business Centre",
     "type": "post",
     "category": "misc",
@@ -44025,15 +41982,6 @@
     "gps": [
       -37.7190916,
       144.8349419
-    ]
-  },
-  {
-    "name": "Fly Amber",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7217466,
-      144.8925207
     ]
   },
   {
@@ -45036,15 +42984,6 @@
     ]
   },
   {
-    "name": "St. Gabriel primary school",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7188318,
-      145.0045761
-    ]
-  },
-  {
     "name": "Kingsbury Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -45180,15 +43119,6 @@
     ]
   },
   {
-    "name": "Australia Asia Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7371292,
-      145.004433
-    ]
-  },
-  {
     "name": "Chinese Shipping",
     "type": "post",
     "category": "misc",
@@ -45213,15 +43143,6 @@
     "gps": [
       -37.7378189,
       145.0038305
-    ]
-  },
-  {
-    "name": "James An College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7371387,
-      145.0044896
     ]
   },
   {
@@ -45321,15 +43242,6 @@
     "gps": [
       -37.7116634,
       145.082225
-    ]
-  },
-  {
-    "name": "LaTrobe Business School",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7203765,
-      145.0495478
     ]
   },
   {
@@ -45666,15 +43578,6 @@
     ]
   },
   {
-    "name": "St John’s College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7471696,
-      145.0041313
-    ]
-  },
-  {
     "name": "Khatri Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -45915,15 +43818,6 @@
     "gps": [
       -37.7604197,
       145.0001523
-    ]
-  },
-  {
-    "name": "Bright Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7664138,
-      144.999049
     ]
   },
   {
@@ -47160,15 +45054,6 @@
     ]
   },
   {
-    "name": "Australian College of Optometry",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.795561,
-      144.966742
-    ]
-  },
-  {
     "name": "West Footscray Veterinary Clinic",
     "type": "vet",
     "category": "misc",
@@ -47220,15 +45105,6 @@
     "gps": [
       -37.799176,
       144.8935233
-    ]
-  },
-  {
-    "name": "AMES Australia",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7993041,
-      144.8945279
     ]
   },
   {
@@ -47553,15 +45429,6 @@
     "gps": [
       -37.8028099,
       144.9489662
-    ]
-  },
-  {
-    "name": "Bastow Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8029982,
-      144.9470675
     ]
   },
   {
@@ -47970,15 +45837,6 @@
     ]
   },
   {
-    "name": "William Angliss Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.812867,
-      144.9537495
-    ]
-  },
-  {
     "name": "Spencer Street Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -48012,15 +45870,6 @@
     "gps": [
       -37.8124101,
       144.9625534
-    ]
-  },
-  {
-    "name": "Ozford College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8127971,
-      144.9544042
     ]
   },
   {
@@ -48561,15 +46410,6 @@
     "gps": [
       -37.8165586,
       144.9634544
-    ]
-  },
-  {
-    "name": "Australian College of Hair Design And Beauty",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8165633,
-      144.9663088
     ]
   },
   {
@@ -49257,15 +47097,6 @@
     ]
   },
   {
-    "name": "Fitzroy Community School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.78916,
-      144.97984
-    ]
-  },
-  {
     "name": "North Fitzroy Specialist Centre",
     "type": "clinic",
     "category": "medical",
@@ -49398,15 +47229,6 @@
     "gps": [
       -37.7670458,
       145.1046748
-    ]
-  },
-  {
-    "name": "Bullen Heights 2nd campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7715685,
-      145.1048763
     ]
   },
   {
@@ -49545,15 +47367,6 @@
     ]
   },
   {
-    "name": "Australian College of Complementary Medicine",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7983178,
-      144.9767802
-    ]
-  },
-  {
     "name": "Smile In The City",
     "type": "dentist",
     "category": "medical",
@@ -49668,15 +47481,6 @@
     "gps": [
       -37.8017259,
       144.9839273
-    ]
-  },
-  {
-    "name": "Collingwood Alternative School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8023876,
-      144.9856479
     ]
   },
   {
@@ -49956,15 +47760,6 @@
     "gps": [
       -37.8071039,
       145.0303517
-    ]
-  },
-  {
-    "name": "Trinity Grammar School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8100162,
-      145.0356444
     ]
   },
   {
@@ -50931,15 +48726,6 @@
     ]
   },
   {
-    "name": "Donvale Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7740365,
-      145.1935338
-    ]
-  },
-  {
     "name": "Pharmasave",
     "type": "pharmacy",
     "category": "medical",
@@ -51219,15 +49005,6 @@
     ]
   },
   {
-    "name": "Good Shepherd Lutheran Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7821057,
-      145.2684748
-    ]
-  },
-  {
     "name": "My Body Dental",
     "type": "dentist",
     "category": "medical",
@@ -51261,15 +49038,6 @@
     "gps": [
       -37.7889321,
       145.3287004
-    ]
-  },
-  {
-    "name": "Glenvale School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.773035,
-      145.3620111
     ]
   },
   {
@@ -51489,15 +49257,6 @@
     ]
   },
   {
-    "name": "Chum Creek Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6059064,
-      145.4889873
-    ]
-  },
-  {
     "name": "Healesville Post Office",
     "type": "post",
     "category": "misc",
@@ -51552,15 +49311,6 @@
     ]
   },
   {
-    "name": "Worawa Aboriginal College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6845932,
-      145.509491
-    ]
-  },
-  {
     "name": "CFA",
     "type": "fire station",
     "category": "misc",
@@ -51570,30 +49320,12 @@
     ]
   },
   {
-    "name": "Don Valley Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7607754,
-      145.5872047
-    ]
-  },
-  {
     "name": "Shell",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -37.7533056,
       145.6961877
-    ]
-  },
-  {
-    "name": "Warburton Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.755893,
-      145.7012306
     ]
   },
   {
@@ -51669,15 +49401,6 @@
     ]
   },
   {
-    "name": "Silvan Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8242632,
-      145.4210497
-    ]
-  },
-  {
     "name": "Caltex",
     "type": "petrol station",
     "category": "fuel",
@@ -51750,24 +49473,6 @@
     ]
   },
   {
-    "name": "Upper Yarra Secondary College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7916982,
-      145.624856
-    ]
-  },
-  {
-    "name": "Little Yarra Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7950167,
-      145.6290364
-    ]
-  },
-  {
     "name": "Local Fuel",
     "type": "petrol station",
     "category": "fuel",
@@ -51777,30 +49482,12 @@
     ]
   },
   {
-    "name": "Gladysdale Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8207029,
-      145.6512973
-    ]
-  },
-  {
     "name": "CFA",
     "type": "fire station",
     "category": "misc",
     "gps": [
       -37.8245283,
       145.6543651
-    ]
-  },
-  {
-    "name": "Milwara Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7422232,
-      145.7354503
     ]
   },
   {
@@ -51993,24 +49680,6 @@
     ]
   },
   {
-    "name": "Evolve College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8308177,
-      144.9587777
-    ]
-  },
-  {
-    "name": "Holmesglen (City Campus)",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.829856,
-      144.97068
-    ]
-  },
-  {
     "name": "Play Central",
     "type": "childcare",
     "category": "education",
@@ -52110,15 +49779,6 @@
     ]
   },
   {
-    "name": "Afi",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8330519,
-      144.9595971
-    ]
-  },
-  {
     "name": "Commonwealth Bank",
     "type": "bank",
     "category": "misc",
@@ -52188,15 +49848,6 @@
     "gps": [
       -37.832932,
       144.968814
-    ]
-  },
-  {
-    "name": "Royal Australian College of General Practitioners",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8333125,
-      144.970472
     ]
   },
   {
@@ -52956,15 +50607,6 @@
     ]
   },
   {
-    "name": "Our Lady of Perpetual Succour School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8301873,
-      145.1109003
-    ]
-  },
-  {
     "name": "Surrey Hills Preschool Centre",
     "type": "childcare",
     "category": "education",
@@ -53061,15 +50703,6 @@
     "gps": [
       -37.8501547,
       145.0947899
-    ]
-  },
-  {
-    "name": "St. Benedict's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.849442,
-      145.0972921
     ]
   },
   {
@@ -53214,15 +50847,6 @@
     "gps": [
       -37.855298,
       145.02013
-    ]
-  },
-  {
-    "name": "The King David School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8585007,
-      145.0107238
     ]
   },
   {
@@ -53865,15 +51489,6 @@
     ]
   },
   {
-    "name": "Glenthuntly School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.893647,
-      145.045741
-    ]
-  },
-  {
     "name": "Australia Post agency",
     "type": "post",
     "category": "misc",
@@ -54027,15 +51642,6 @@
     ]
   },
   {
-    "name": "De La Salle College Holy Eucharist Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8840475,
-      145.0695091
-    ]
-  },
-  {
     "name": "Australian Hair and Scalp Clinic",
     "type": "clinic",
     "category": "medical",
@@ -54051,15 +51657,6 @@
     "gps": [
       -37.8892552,
       145.0664662
-    ]
-  },
-  {
-    "name": "Scope",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8903046,
-      145.0644264
     ]
   },
   {
@@ -54231,15 +51828,6 @@
     "gps": [
       -37.8986295,
       145.0883937
-    ]
-  },
-  {
-    "name": "Edu Kingdom College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8980611,
-      145.0900832
     ]
   },
   {
@@ -54735,15 +52323,6 @@
     "gps": [
       -37.9357719,
       145.0612447
-    ]
-  },
-  {
-    "name": "East Bentleigh Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9344978,
-      145.0695942
     ]
   },
   {
@@ -55392,15 +52971,6 @@
     "gps": [
       -37.877043,
       145.1292239
-    ]
-  },
-  {
-    "name": "Huanya Cultural Training Centre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8768613,
-      145.1490967
     ]
   },
   {
@@ -56058,15 +53628,6 @@
     "gps": [
       -37.8348442,
       145.2703043
-    ]
-  },
-  {
-    "name": "Billanook Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8254858,
-      145.3385882
     ]
   },
   {
@@ -56826,15 +54387,6 @@
     ]
   },
   {
-    "name": "John Monash Science School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9140244,
-      145.1291121
-    ]
-  },
-  {
     "name": "United",
     "type": "petrol station",
     "category": "fuel",
@@ -56877,15 +54429,6 @@
     "gps": [
       -37.9223016,
       145.1199521
-    ]
-  },
-  {
-    "name": "Study Hub",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9246578,
-      145.119577
     ]
   },
   {
@@ -57699,15 +55242,6 @@
     ]
   },
   {
-    "name": "Our Lady of Assumption",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9655546,
-      145.0590566
-    ]
-  },
-  {
     "name": "Chemist Warehouse",
     "type": "pharmacy",
     "category": "medical",
@@ -57771,15 +55305,6 @@
     ]
   },
   {
-    "name": "Floral Arts School Of Australia",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.968916,
-      145.055176
-    ]
-  },
-  {
     "name": "Farm Road Pre-School",
     "type": "childcare",
     "category": "education",
@@ -57807,15 +55332,6 @@
     ]
   },
   {
-    "name": "Heatherton Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9579192,
-      145.1113726
-    ]
-  },
-  {
     "name": "Commonwealth Bank",
     "type": "bank",
     "category": "misc",
@@ -57840,15 +55356,6 @@
     "gps": [
       -37.9752214,
       145.0163952
-    ]
-  },
-  {
-    "name": "Beaumaris Secondary College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9778321,
-      145.0334936
     ]
   },
   {
@@ -58239,15 +55746,6 @@
     ]
   },
   {
-    "name": "Aspendale Gardens Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.0229774,
-      145.1163789
-    ]
-  },
-  {
     "name": "Aspendale Gardens Kindergarten",
     "type": "childcare",
     "category": "education",
@@ -58362,51 +55860,6 @@
     "gps": [
       -38.0561801,
       145.1183797
-    ]
-  },
-  {
-    "name": "Chisholm",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9449071,
-      145.1523109
-    ]
-  },
-  {
-    "name": "James An",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9448483,
-      145.1528618
-    ]
-  },
-  {
-    "name": "Skills Plus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9448776,
-      145.1532171
-    ]
-  },
-  {
-    "name": "ECCS Training Centre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9450738,
-      145.1510151
-    ]
-  },
-  {
-    "name": "Edu Kingdom College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.945272,
-      145.1522911
     ]
   },
   {
@@ -58572,15 +56025,6 @@
     ]
   },
   {
-    "name": "James And Coaching College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9513504,
-      145.1526614
-    ]
-  },
-  {
     "name": "Surgery Dr Sang Chung",
     "type": "clinic",
     "category": "medical",
@@ -58671,15 +56115,6 @@
     ]
   },
   {
-    "name": "Maths Tuition",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9574909,
-      145.1521092
-    ]
-  },
-  {
     "name": "Dr. Jessica Ho",
     "type": "clinic",
     "category": "medical",
@@ -58752,15 +56187,6 @@
     ]
   },
   {
-    "name": "Maths Tuition Dạy Kèm Toán",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9632099,
-      145.1603866
-    ]
-  },
-  {
     "name": "BP",
     "type": "petrol station",
     "category": "fuel",
@@ -58794,15 +56220,6 @@
     "gps": [
       -37.9669698,
       145.1620232
-    ]
-  },
-  {
-    "name": "Emerge Training & Consulting",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9667692,
-      145.1745496
     ]
   },
   {
@@ -58947,15 +56364,6 @@
     "gps": [
       -37.9680822,
       145.2026146
-    ]
-  },
-  {
-    "name": "Roshchem",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9681308,
-      145.2026438
     ]
   },
   {
@@ -59373,24 +56781,6 @@
     ]
   },
   {
-    "name": "Angel Institute of Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9833926,
-      145.2118639
-    ]
-  },
-  {
-    "name": "Bri Training",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9835099,
-      145.2118835
-    ]
-  },
-  {
     "name": "Delphi",
     "type": "bank",
     "category": "misc",
@@ -59571,15 +56961,6 @@
     ]
   },
   {
-    "name": "Complex Institute Of Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.9880586,
-      145.2131648
-    ]
-  },
-  {
     "name": "Afroz Family Day Care",
     "type": "childcare",
     "category": "education",
@@ -59667,15 +57048,6 @@
     "gps": [
       -37.9884441,
       145.2163697
-    ]
-  },
-  {
-    "name": "Health Arts College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.990729,
-      145.212594
     ]
   },
   {
@@ -60165,15 +57537,6 @@
     ]
   },
   {
-    "name": "Nossal Select Entry High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.0391663,
-      145.3358171
-    ]
-  },
-  {
     "name": "Amberley Park Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -60615,15 +57978,6 @@
     ]
   },
   {
-    "name": "Beaconsfield Upper Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9949625,
-      145.4148689
-    ]
-  },
-  {
     "name": "Upper Beaconsfield Kindergarten",
     "type": "childcare",
     "category": "education",
@@ -60666,15 +58020,6 @@
     "gps": [
       -38.2536977,
       141.7054711
-    ]
-  },
-  {
-    "name": "Bolwarra Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.2683429,
-      141.6198739
     ]
   },
   {
@@ -61515,15 +58860,6 @@
     ]
   },
   {
-    "name": "Avalon College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.0829216,
-      144.4133792
-    ]
-  },
-  {
     "name": "Caltex Woolworths",
     "type": "petrol station",
     "category": "fuel",
@@ -61866,24 +59202,6 @@
     ]
   },
   {
-    "name": "Drysdale Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.1689912,
-      144.5727606
-    ]
-  },
-  {
-    "name": "Christian College Geelong",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.1710341,
-      144.573548
-    ]
-  },
-  {
     "name": "St Leonards Scoops News & Post",
     "type": "post",
     "category": "misc",
@@ -62052,15 +59370,6 @@
     "gps": [
       -38.1860833,
       144.454179
-    ]
-  },
-  {
-    "name": "Wallington Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.2177253,
-      144.5069088
     ]
   },
   {
@@ -62469,15 +59778,6 @@
     ]
   },
   {
-    "name": "Carrum Downs Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.0951555,
-      145.1871478
-    ]
-  },
-  {
     "name": "Pharmasave",
     "type": "pharmacy",
     "category": "medical",
@@ -62748,15 +60048,6 @@
     ]
   },
   {
-    "name": "Hillcrest Christian College (Ayr Hill Campus)",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -38.084432,
-      145.3643874
-    ]
-  },
-  {
     "name": "BP - AA Officer South Inbound",
     "type": "petrol station",
     "category": "fuel",
@@ -62889,15 +60180,6 @@
     "gps": [
       -38.1130772,
       145.2857519
-    ]
-  },
-  {
-    "name": "Ramleigh Park Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.1149583,
-      145.3385163
     ]
   },
   {
@@ -63513,15 +60795,6 @@
     ]
   },
   {
-    "name": "Somerville Rise Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.2298598,
-      145.1680465
-    ]
-  },
-  {
     "name": "Bendigo Bank",
     "type": "bank",
     "category": "misc",
@@ -63765,15 +61038,6 @@
     ]
   },
   {
-    "name": "St James Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.0726262,
-      145.5733761
-    ]
-  },
-  {
     "name": "Nar Nar Goon Post Office",
     "type": "post",
     "category": "misc",
@@ -63960,15 +61224,6 @@
     "gps": [
       -38.163984,
       145.935801
-    ]
-  },
-  {
-    "name": "Tafe Gippsland",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -38.1644448,
-      145.9330868
     ]
   },
   {
@@ -64176,15 +61431,6 @@
     "gps": [
       -38.3790476,
       144.8848897
-    ]
-  },
-  {
-    "name": "Red Hill Consolidated School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.3666391,
-      144.9958025
     ]
   },
   {
@@ -64491,42 +61737,6 @@
     "gps": [
       -38.4765535,
       145.9455436
-    ]
-  },
-  {
-    "name": "South Gippsland Specialist School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.4783202,
-      145.957128
-    ]
-  },
-  {
-    "name": "Leongatha Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.4786842,
-      145.959441
-    ]
-  },
-  {
-    "name": "Leongatha Secondary College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.4786029,
-      145.9611845
-    ]
-  },
-  {
-    "name": "TAFE Gippsland Leongatha Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -38.4786785,
-      145.9642761
     ]
   },
   {
@@ -64887,15 +62097,6 @@
     "gps": [
       -37.8012471,
       147.4569875
-    ]
-  },
-  {
-    "name": "Bairnsdale Secondary College (Junior Campus)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8249889,
-      147.6051593
     ]
   },
   {
@@ -65502,15 +62703,6 @@
     ]
   },
   {
-    "name": "Newborough Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.188962,
-      146.2928972
-    ]
-  },
-  {
     "name": "Guardian Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -65778,15 +62970,6 @@
     "gps": [
       -38.2232088,
       146.466796
-    ]
-  },
-  {
-    "name": "Morwell Central Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.2314589,
-      146.4067475
     ]
   },
   {
@@ -66096,24 +63279,6 @@
     ]
   },
   {
-    "name": "Churchill North Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.3043418,
-      146.4169133
-    ]
-  },
-  {
-    "name": "Churchill Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.3105296,
-      146.4154971
-    ]
-  },
-  {
     "name": "Freedom Fuels",
     "type": "petrol station",
     "category": "fuel",
@@ -66138,15 +63303,6 @@
     "gps": [
       -38.3139127,
       146.4206088
-    ]
-  },
-  {
-    "name": "Lumen Christi Catholic School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.3164392,
-      146.4154971
     ]
   },
   {
@@ -66282,15 +63438,6 @@
     "gps": [
       -38.8124376,
       146.2076374
-    ]
-  },
-  {
-    "name": "Reekara Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -39.7534561,
-      143.9156448
     ]
   },
   {
@@ -67527,15 +64674,6 @@
     ]
   },
   {
-    "name": "Australian Maritime College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -41.4008515,
-      147.1208049
-    ]
-  },
-  {
     "name": "Mowbray Capital Chemist",
     "type": "pharmacy",
     "category": "medical",
@@ -68301,15 +65439,6 @@
     ]
   },
   {
-    "name": "Kempton Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.5314844,
-      147.1996146
-    ]
-  },
-  {
     "name": "Westpac",
     "type": "bank",
     "category": "misc",
@@ -68535,24 +65664,6 @@
     ]
   },
   {
-    "name": "TasTAFE - Clarence Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.8499781,
-      147.3802839
-    ]
-  },
-  {
-    "name": "Eastside Lutheran College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.8517597,
-      147.3843878
-    ]
-  },
-  {
     "name": "Chemist Warehouse",
     "type": "pharmacy",
     "category": "medical",
@@ -68640,15 +65751,6 @@
     "gps": [
       -42.804058,
       147.5326134
-    ]
-  },
-  {
-    "name": "The Friends School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.869011,
-      147.313112
     ]
   },
   {
@@ -68928,15 +66030,6 @@
     "gps": [
       -42.8747202,
       147.3676037
-    ]
-  },
-  {
-    "name": "Cottage School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.8755152,
-      147.3672829
     ]
   },
   {
@@ -69297,15 +66390,6 @@
     "gps": [
       -42.9853773,
       147.1951056
-    ]
-  },
-  {
-    "name": "Calvin Christian School - Junior",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.9791368,
-      147.3043764
     ]
   },
   {
@@ -69849,15 +66933,6 @@
     ]
   },
   {
-    "name": "Monto State Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.8682351,
-      151.1180214
-    ]
-  },
-  {
     "name": "NAB",
     "type": "bank",
     "category": "misc",
@@ -69999,15 +67074,6 @@
     "gps": [
       -24.8529757,
       152.3805665
-    ]
-  },
-  {
-    "name": "St Luke's Anglican School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -24.8537537,
-      152.3855266
     ]
   },
   {
@@ -70440,15 +67506,6 @@
     "gps": [
       -24.8890795,
       152.358666
-    ]
-  },
-  {
-    "name": "Shalom College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -24.8952826,
-      152.3380959
     ]
   },
   {
@@ -71487,15 +68544,6 @@
     ]
   },
   {
-    "name": "Kandanga Creek State School (Closed)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -26.4022342,
-      152.63532
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -72432,15 +69480,6 @@
     ]
   },
   {
-    "name": "Sunday Creek Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -26.707728,
-      152.5354806
-    ]
-  },
-  {
     "name": "Montville Post Office",
     "type": "post",
     "category": "misc",
@@ -73224,51 +70263,6 @@
     ]
   },
   {
-    "name": "Tullawong State High",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.0703039,
-      152.9290054
-    ]
-  },
-  {
-    "name": "Tullawong State Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.0708461,
-      152.9324732
-    ]
-  },
-  {
-    "name": "St Pauls Lutheran Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.0725752,
-      152.9344366
-    ]
-  },
-  {
-    "name": "Grace Caboolture Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.0741133,
-      152.9380201
-    ]
-  },
-  {
-    "name": "TAFE Queensland - Caboolture",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.0739533,
-      152.9602861
-    ]
-  },
-  {
     "name": "The Dental Club",
     "type": "dentist",
     "category": "medical",
@@ -73716,15 +70710,6 @@
     "gps": [
       -27.18037,
       151.2636387
-    ]
-  },
-  {
-    "name": "Southern Queensland Institute of TAFE",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.1806398,
-      151.2641438
     ]
   },
   {
@@ -74376,30 +71361,12 @@
     ]
   },
   {
-    "name": "Living Faith Lutheran Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.2558676,
-      153.0149241
-    ]
-  },
-  {
     "name": "Petrie Kids' Korner",
     "type": "childcare",
     "category": "education",
     "gps": [
       -27.2626482,
       152.9657731
-    ]
-  },
-  {
-    "name": "Murrumba State Secondary College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.2598555,
-      153.0071443
     ]
   },
   {
@@ -74952,15 +71919,6 @@
     ]
   },
   {
-    "name": "Amaroo Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.424538,
-      151.9454579
-    ]
-  },
-  {
     "name": "Coominya Post Office",
     "type": "post",
     "category": "misc",
@@ -74976,15 +71934,6 @@
     "gps": [
       -27.3748413,
       153.0248269
-    ]
-  },
-  {
-    "name": "Kingfisher Adult Learning Programs",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.3781137,
-      153.0416308
     ]
   },
   {
@@ -75375,33 +72324,6 @@
     ]
   },
   {
-    "name": "Mount Alvernia College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4059587,
-      153.0273169
-    ]
-  },
-  {
-    "name": "Mary MacKillop College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4036788,
-      153.0588135
-    ]
-  },
-  {
-    "name": "St Andrews School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4088438,
-      152.925806
-    ]
-  },
-  {
     "name": "ANZ",
     "type": "bank",
     "category": "misc",
@@ -75687,15 +72609,6 @@
     "gps": [
       -27.4222452,
       153.0340791
-    ]
-  },
-  {
-    "name": "Fruition College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4215727,
-      153.0518799
     ]
   },
   {
@@ -75987,15 +72900,6 @@
     ]
   },
   {
-    "name": "Curlew Park",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.3250159,
-      153.0722046
-    ]
-  },
-  {
     "name": "Banyo Discount Drug Store",
     "type": "pharmacy",
     "category": "medical",
@@ -76074,15 +72978,6 @@
     "gps": [
       -27.4369669,
       153.1584188
-    ]
-  },
-  {
-    "name": "Oakey State High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4444556,
-      151.7188236
     ]
   },
   {
@@ -76401,15 +73296,6 @@
     ]
   },
   {
-    "name": "Red Hill Special State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4507659,
-      153.0004722
-    ]
-  },
-  {
     "name": "Kelvin Grove News",
     "type": "post",
     "category": "misc",
@@ -76572,15 +73458,6 @@
     ]
   },
   {
-    "name": "Queensland Academy of Creative Industries",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4529587,
-      153.0145238
-    ]
-  },
-  {
     "name": "Urban Dental",
     "type": "dentist",
     "category": "medical",
@@ -76641,15 +73518,6 @@
     "gps": [
       -27.4554594,
       153.0066713
-    ]
-  },
-  {
-    "name": "Fortitude Valley State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4526378,
-      153.0362174
     ]
   },
   {
@@ -76806,15 +73674,6 @@
     ]
   },
   {
-    "name": "IES foundation",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4620566,
-      153.0229654
-    ]
-  },
-  {
     "name": "Central Brunswick Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -76875,15 +73734,6 @@
     "gps": [
       -27.4654189,
       153.0139689
-    ]
-  },
-  {
-    "name": "St Francis Theological College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4664817,
-      153.0035421
     ]
   },
   {
@@ -77310,15 +74160,6 @@
     ]
   },
   {
-    "name": "Shafston House International College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4760553,
-      153.0396982
-    ]
-  },
-  {
     "name": "SAE",
     "type": "university",
     "category": "education",
@@ -77343,15 +74184,6 @@
     "gps": [
       -27.4769201,
       153.0117988
-    ]
-  },
-  {
-    "name": "Arethusa College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4779646,
-      153.0072296
     ]
   },
   {
@@ -77451,15 +74283,6 @@
     "gps": [
       -27.485182,
       152.9908239
-    ]
-  },
-  {
-    "name": "Queensland Academy for Science, Mathematics and Technology",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4869125,
-      152.9788739
     ]
   },
   {
@@ -77586,15 +74409,6 @@
     "gps": [
       -27.4808584,
       153.0355782
-    ]
-  },
-  {
-    "name": "Anglican Church Grammar School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.4815794,
-      153.0510406
     ]
   },
   {
@@ -78273,30 +75087,12 @@
     ]
   },
   {
-    "name": "Fairholme Early Childhood Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.555144,
-      151.9772348
-    ]
-  },
-  {
     "name": "Freedom Fuels Withcott",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -27.5538286,
       152.0224406
-    ]
-  },
-  {
-    "name": "miyamiya children",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5582001,
-      151.9743185
     ]
   },
   {
@@ -79227,15 +76023,6 @@
     ]
   },
   {
-    "name": "Karalee State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5623242,
-      152.8247775
-    ]
-  },
-  {
     "name": "Bellbowrie Dental",
     "type": "dentist",
     "category": "medical",
@@ -79389,15 +76176,6 @@
     ]
   },
   {
-    "name": "St Thomas More's School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.58079,
-      151.9629383
-    ]
-  },
-  {
     "name": "Coles Express",
     "type": "petrol station",
     "category": "fuel",
@@ -79449,15 +76227,6 @@
     "gps": [
       -27.6031991,
       151.9306963
-    ]
-  },
-  {
-    "name": "Ma Ma Creek State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6291678,
-      152.1902385
     ]
   },
   {
@@ -79548,15 +76317,6 @@
     "gps": [
       -27.5777967,
       152.9735132
-    ]
-  },
-  {
-    "name": "Sunnybank Primary",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5758884,
-      153.0519936
     ]
   },
   {
@@ -80244,15 +77004,6 @@
     ]
   },
   {
-    "name": "St Brigid's Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6409897,
-      152.5946864
-    ]
-  },
-  {
     "name": "United",
     "type": "petrol station",
     "category": "fuel",
@@ -80277,15 +77028,6 @@
     "gps": [
       -27.6615392,
       152.7404639
-    ]
-  },
-  {
-    "name": "Raceview State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6406185,
-      152.7827882
     ]
   },
   {
@@ -80370,15 +77112,6 @@
     ]
   },
   {
-    "name": "The Springfield Anglican College - Primary Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6563816,
-      152.9076464
-    ]
-  },
-  {
     "name": "Chemist Warehouse",
     "type": "pharmacy",
     "category": "medical",
@@ -80421,15 +77154,6 @@
     "gps": [
       -27.6697438,
       152.9158284
-    ]
-  },
-  {
-    "name": "The Springfield Anglican College - Secondary Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6706707,
-      152.9074556
     ]
   },
   {
@@ -80835,15 +77559,6 @@
     "gps": [
       -27.4869653,
       153.2392033
-    ]
-  },
-  {
-    "name": "Carina Kindergarten and Pre-school",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.488913,
-      153.085571
     ]
   },
   {
@@ -81576,15 +78291,6 @@
     ]
   },
   {
-    "name": "Woodridge North State prepatory Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.6265313,
-      153.1042656
-    ]
-  },
-  {
     "name": "Puma",
     "type": "petrol station",
     "category": "fuel",
@@ -82206,24 +78912,6 @@
     ]
   },
   {
-    "name": "Flagstone State Community College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.80758,
-      152.9554388
-    ]
-  },
-  {
-    "name": "Flagstone State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.8071909,
-      152.9576918
-    ]
-  },
-  {
     "name": "Millmerran Post Office",
     "type": "post",
     "category": "misc",
@@ -82239,15 +78927,6 @@
     "gps": [
       -27.8756339,
       151.2697077
-    ]
-  },
-  {
-    "name": "Rosevale State School (Closed)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.8466418,
-      152.4824661
     ]
   },
   {
@@ -83466,15 +80145,6 @@
     ]
   },
   {
-    "name": "Yangan State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.1980336,
-      152.2154951
-    ]
-  },
-  {
     "name": "Rathdowney LPO",
     "type": "post",
     "category": "misc",
@@ -83544,24 +80214,6 @@
     "gps": [
       -27.9625187,
       153.4129916
-    ]
-  },
-  {
-    "name": "BROWNS English Language School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.96481,
-      153.41424
-    ]
-  },
-  {
-    "name": "Shafston International College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.9668525,
-      153.4150492
     ]
   },
   {
@@ -84321,15 +80973,6 @@
     ]
   },
   {
-    "name": "Australian School of Meditation and Yoga",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.0582685,
-      153.4384865
-    ]
-  },
-  {
     "name": "VetLove Nobby Beach",
     "type": "vet",
     "category": "misc",
@@ -84816,15 +81459,6 @@
     ]
   },
   {
-    "name": "Massage Schools of Queensland",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.1011617,
-      153.4396412
-    ]
-  },
-  {
     "name": "Oasis Dental",
     "type": "dentist",
     "category": "medical",
@@ -84906,15 +81540,6 @@
     ]
   },
   {
-    "name": "Ignite Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -28.138917,
-      153.4748808
-    ]
-  },
-  {
     "name": "Currumbin Wildlife Hospital",
     "type": "vet",
     "category": "misc",
@@ -84978,15 +81603,6 @@
     ]
   },
   {
-    "name": "Begin Bright",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.1475088,
-      153.4928005
-    ]
-  },
-  {
     "name": "Freedom Fuels",
     "type": "petrol station",
     "category": "fuel",
@@ -85011,15 +81627,6 @@
     "gps": [
       -28.1684384,
       153.5367208
-    ]
-  },
-  {
-    "name": "The Village School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.1685487,
-      153.539827
     ]
   },
   {
@@ -85056,33 +81663,6 @@
     "gps": [
       -28.1889749,
       153.5125114
-    ]
-  },
-  {
-    "name": "Tweed Heads South Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.195346,
-      153.539048
-    ]
-  },
-  {
-    "name": "Fingal Head Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.196814,
-      153.565122
-    ]
-  },
-  {
-    "name": "Currumbin Community Farm School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.2059944,
-      153.3936538
     ]
   },
   {
@@ -85257,33 +81837,6 @@
     ]
   },
   {
-    "name": "Urbenville Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.47348,
-      152.545565
-    ]
-  },
-  {
-    "name": "Bilambil Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.223742,
-      153.468431
-    ]
-  },
-  {
-    "name": "Banora Point Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.222422,
-      153.543702
-    ]
-  },
-  {
     "name": "Shell",
     "type": "petrol station",
     "category": "fuel",
@@ -85308,87 +81861,6 @@
     "gps": [
       -28.2576525,
       153.5278037
-    ]
-  },
-  {
-    "name": "Cudgen Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.262592,
-      153.555416
-    ]
-  },
-  {
-    "name": "Tumbulgum Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.273997,
-      153.463358
-    ]
-  },
-  {
-    "name": "Chillingham Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.311937,
-      153.275569
-    ]
-  },
-  {
-    "name": "Crystal Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.31214,
-      153.32596
-    ]
-  },
-  {
-    "name": "Dungay Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.289681,
-      153.382374
-    ]
-  },
-  {
-    "name": "Duranbah Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.289121,
-      153.516888
-    ]
-  },
-  {
-    "name": "Condong Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.309674,
-      153.434424
-    ]
-  },
-  {
-    "name": "Murwillumbah East Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.320856,
-      153.405267
-    ]
-  },
-  {
-    "name": "Tweed Valley Adventist College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.3288306,
-      153.37238
     ]
   },
   {
@@ -85437,24 +81909,6 @@
     ]
   },
   {
-    "name": "Murwillumbah Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.3299448,
-      153.3913367
-    ]
-  },
-  {
-    "name": "Wollumbin High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.333658,
-      153.362515
-    ]
-  },
-  {
     "name": "Liberty",
     "type": "petrol station",
     "category": "fuel",
@@ -85482,15 +81936,6 @@
     ]
   },
   {
-    "name": "Pottsville Beach Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.377625,
-      153.567798
-    ]
-  },
-  {
     "name": "Uki Service Station",
     "type": "petrol station",
     "category": "fuel",
@@ -85500,30 +81945,12 @@
     ]
   },
   {
-    "name": "Stokers Siding Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.3937086,
-      153.4040409
-    ]
-  },
-  {
     "name": "Pottsville General Practice",
     "type": "clinic",
     "category": "medical",
     "gps": [
       -28.391147,
       153.5638007
-    ]
-  },
-  {
-    "name": "Uki Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.415027,
-      153.334263
     ]
   },
   {
@@ -85545,15 +81972,6 @@
     ]
   },
   {
-    "name": "Crabbes Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.456004,
-      153.496575
-    ]
-  },
-  {
     "name": "Yelarbon Rural Traders",
     "type": "petrol station",
     "category": "fuel",
@@ -85563,39 +81981,12 @@
     ]
   },
   {
-    "name": "Collins Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.4894882,
-      153.0229046
-    ]
-  },
-  {
     "name": "Wiangaree Post Office",
     "type": "post",
     "category": "misc",
     "gps": [
       -28.506408,
       152.966791
-    ]
-  },
-  {
-    "name": "Wiangaree Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5110138,
-      152.9649327
-    ]
-  },
-  {
-    "name": "Afterlee Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.582276,
-      152.817857
     ]
   },
   {
@@ -85779,15 +82170,6 @@
     ]
   },
   {
-    "name": "Doubtful Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.724771,
-      152.875958
-    ]
-  },
-  {
     "name": "Closed",
     "type": "petrol station",
     "category": "fuel",
@@ -85797,39 +82179,12 @@
     ]
   },
   {
-    "name": "Ocean Shores Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.4912278,
-      153.5408305
-    ]
-  },
-  {
-    "name": "Main Arm Upper Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.498479,
-      153.41241
-    ]
-  },
-  {
     "name": "Main Arm Post Office and Box",
     "type": "post",
     "category": "misc",
     "gps": [
       -28.5033689,
       153.4319593
-    ]
-  },
-  {
-    "name": "The Pocket Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.505414,
-      153.479112
     ]
   },
   {
@@ -85851,183 +82206,12 @@
     ]
   },
   {
-    "name": "Durrumbul Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.523263,
-      153.444576
-    ]
-  },
-  {
-    "name": "Hinterland Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5430698,
-      153.4837605
-    ]
-  },
-  {
-    "name": "Brunswick Heads Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5410295,
-      153.5507793
-    ]
-  },
-  {
-    "name": "Barkers Vale Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5500471,
-      153.1484591
-    ]
-  },
-  {
-    "name": "Mullumbimby High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5587309,
-      153.4945126
-    ]
-  },
-  {
-    "name": "Wilsons Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.570833,
-      153.426178
-    ]
-  },
-  {
     "name": "Cawongla CPA",
     "type": "post",
     "category": "misc",
     "gps": [
       -28.6007485,
       153.0982478
-    ]
-  },
-  {
-    "name": "Upper Coopers Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.607149,
-      153.401937
-    ]
-  },
-  {
-    "name": "Tuntable Creek Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.63176,
-      153.266152
-    ]
-  },
-  {
-    "name": "Whian Whian Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.638212,
-      153.314317
-    ]
-  },
-  {
-    "name": "Goonengerry Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.609512,
-      153.439753
-    ]
-  },
-  {
-    "name": "Coorabell Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.625696,
-      153.487492
-    ]
-  },
-  {
-    "name": "Larnook Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.648612,
-      153.114765
-    ]
-  },
-  {
-    "name": "Dorroughby Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.656556,
-      153.35174
-    ]
-  },
-  {
-    "name": "Coffee Camp Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.6627843,
-      153.220708
-    ]
-  },
-  {
-    "name": "Cape Byron Rudolf Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.6553212,
-      153.5676863
-    ]
-  },
-  {
-    "name": "The Channon Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.675099,
-      153.280288
-    ]
-  },
-  {
-    "name": "Dunoon Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.6865035,
-      153.3155046
-    ]
-  },
-  {
-    "name": "Rosebank Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.678336,
-      153.388262
-    ]
-  },
-  {
-    "name": "Eureka Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.687657,
-      153.439223
     ]
   },
   {
@@ -86055,51 +82239,6 @@
     "gps": [
       -28.6866566,
       153.5243112
-    ]
-  },
-  {
-    "name": "Goolmangar Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.7095709,
-      153.2316101
-    ]
-  },
-  {
-    "name": "Modanville Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.7299729,
-      153.2971356
-    ]
-  },
-  {
-    "name": "Corndale Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.71315,
-      153.362489
-    ]
-  },
-  {
-    "name": "Newrybar Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.717114,
-      153.533055
-    ]
-  },
-  {
-    "name": "Clunes Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.7254198,
-      153.4083218
     ]
   },
   {
@@ -86175,33 +82314,6 @@
     ]
   },
   {
-    "name": "Stratheden Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.755713,
-      152.937222
-    ]
-  },
-  {
-    "name": "Casino High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.8470841,
-      153.0438588
-    ]
-  },
-  {
-    "name": "Casino West Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.85478,
-      153.036779
-    ]
-  },
-  {
     "name": "Casino West Post Office",
     "type": "post",
     "category": "misc",
@@ -86274,15 +82386,6 @@
     ]
   },
   {
-    "name": "Yetman Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.902219,
-      150.776261
-    ]
-  },
-  {
     "name": "Yetman Store",
     "type": "post",
     "category": "misc",
@@ -86328,15 +82431,6 @@
     ]
   },
   {
-    "name": "Drake Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.928798,
-      152.374099
-    ]
-  },
-  {
     "name": "Tabulam Rural Agents",
     "type": "petrol station",
     "category": "fuel",
@@ -86352,15 +82446,6 @@
     "gps": [
       -28.8912731,
       152.5664736
-    ]
-  },
-  {
-    "name": "Casino Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.867384,
-      153.048053
     ]
   },
   {
@@ -86388,42 +82473,6 @@
     "gps": [
       -28.9064153,
       152.7218512
-    ]
-  },
-  {
-    "name": "Manifold Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.749066,
-      153.077066
-    ]
-  },
-  {
-    "name": "Bexhill Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.766026,
-      153.345835
-    ]
-  },
-  {
-    "name": "Eltham Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.763663,
-      153.408541
-    ]
-  },
-  {
-    "name": "St Johns College Woodlawn",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -28.7839479,
-      153.3011793
     ]
   },
   {
@@ -86463,15 +82512,6 @@
     ]
   },
   {
-    "name": "Lismore Heights Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.806982,
-      153.300641
-    ]
-  },
-  {
     "name": "Lismore Post Office",
     "type": "post",
     "category": "misc",
@@ -86499,15 +82539,6 @@
     ]
   },
   {
-    "name": "Lismore Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.814289,
-      153.2909
-    ]
-  },
-  {
     "name": "Goonellabah Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -86523,15 +82554,6 @@
     "gps": [
       -28.8194132,
       153.2852009
-    ]
-  },
-  {
-    "name": "Albert Park Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.821563,
-      153.272498
     ]
   },
   {
@@ -86553,48 +82575,12 @@
     ]
   },
   {
-    "name": "Caniaba Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.830799,
-      153.231317
-    ]
-  },
-  {
-    "name": "Wilson Park School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.831923,
-      153.293313
-    ]
-  },
-  {
     "name": "Shell",
     "type": "petrol station",
     "category": "fuel",
     "gps": [
       -28.81538,
       153.4033139
-    ]
-  },
-  {
-    "name": "Wollongbar Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.82699,
-      153.420113
-    ]
-  },
-  {
-    "name": "Tregeagle Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.854095,
-      153.354412
     ]
   },
   {
@@ -86634,57 +82620,12 @@
     ]
   },
   {
-    "name": "Wyrallah Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.890407,
-      153.305718
-    ]
-  },
-  {
     "name": "Empire Vale Post Office",
     "type": "post",
     "category": "misc",
     "gps": [
       -28.914415,
       153.5054253
-    ]
-  },
-  {
-    "name": "Wardell Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.950252,
-      153.468779
-    ]
-  },
-  {
-    "name": "Coraki Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.992589,
-      153.282641
-    ]
-  },
-  {
-    "name": "Cabbage Tree Island Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.98367,
-      153.457788
-    ]
-  },
-  {
-    "name": "Bonshaw Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -29.046366,
-      151.278092
     ]
   },
   {
@@ -86712,15 +82653,6 @@
     "gps": [
       -29.0563641,
       152.0184453
-    ]
-  },
-  {
-    "name": "St Josephs Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -29.0585849,
-      152.0156239
     ]
   },
   {
@@ -86766,15 +82698,6 @@
     "gps": [
       -29.0887057,
       152.9516481
-    ]
-  },
-  {
-    "name": "Broadwater Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -29.002773,
-      153.437279
     ]
   },
   {
@@ -87075,15 +82998,6 @@
     ]
   },
   {
-    "name": "Maclean TAFE Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -29.4665685,
-      153.202597
-    ]
-  },
-  {
     "name": "Pacific Valley Christian School",
     "type": "childcare",
     "category": "education",
@@ -87126,15 +83040,6 @@
     "gps": [
       -29.5865712,
       152.7765333
-    ]
-  },
-  {
-    "name": "Trenayr Campus of TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -29.620017,
-      152.9465919
     ]
   },
   {
@@ -87306,15 +83211,6 @@
     "gps": [
       -29.7143603,
       152.9403166
-    ]
-  },
-  {
-    "name": "Induna School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -29.729656,
-      152.9473315
     ]
   },
   {
@@ -87702,15 +83598,6 @@
     "gps": [
       -30.3717345,
       153.0354166
-    ]
-  },
-  {
-    "name": "Thalgarrah Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -30.447933,
-      151.82475
     ]
   },
   {
@@ -88137,15 +84024,6 @@
     ]
   },
   {
-    "name": "Coffs Harbour Campus of TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -30.3010599,
-      153.124173
-    ]
-  },
-  {
     "name": "Ampol",
     "type": "petrol station",
     "category": "fuel",
@@ -88179,15 +84057,6 @@
     "gps": [
       -30.3183409,
       153.0892385
-    ]
-  },
-  {
-    "name": "Coffs Harbour TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -30.3236442,
-      153.1014766
     ]
   },
   {
@@ -89469,15 +85338,6 @@
     ]
   },
   {
-    "name": "TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.0311469,
-      150.830309
-    ]
-  },
-  {
     "name": "Biripi Aboriginal Corporation Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -89721,33 +85581,6 @@
     ]
   },
   {
-    "name": "Great Lakes TAFE College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.1610532,
-      152.4943234
-    ]
-  },
-  {
-    "name": "Great Lakes College Senior Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.1614528,
-      152.4953201
-    ]
-  },
-  {
-    "name": "Great Lakes College Tuncurry Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.1620907,
-      152.495847
-    ]
-  },
-  {
     "name": "Aberdeen Post Office",
     "type": "post",
     "category": "misc",
@@ -89946,15 +85779,6 @@
     ]
   },
   {
-    "name": "Stroud Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.4025481,
-      151.9653926
-    ]
-  },
-  {
     "name": "Stroud Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -90105,15 +85929,6 @@
     "gps": [
       -32.5674775,
       151.165232
-    ]
-  },
-  {
-    "name": "Singleton TAFE College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.5687736,
-      151.1789131
     ]
   },
   {
@@ -90630,15 +86445,6 @@
     ]
   },
   {
-    "name": "Hunter Institue of Technology Metford Campus - TAFE",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.7750866,
-      151.6145035
-    ]
-  },
-  {
     "name": "Thornton Post Office",
     "type": "post",
     "category": "misc",
@@ -90771,15 +86577,6 @@
     "gps": [
       -32.736411,
       152.10703
-    ]
-  },
-  {
-    "name": "Tomaree Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.7349825,
-      152.1119806
     ]
   },
   {
@@ -91044,15 +86841,6 @@
     ]
   },
   {
-    "name": "Wetlands Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.876107,
-      151.696132
-    ]
-  },
-  {
     "name": "metro",
     "type": "petrol station",
     "category": "fuel",
@@ -91239,15 +87027,6 @@
     "gps": [
       -32.9011595,
       151.6694972
-    ]
-  },
-  {
-    "name": "Callaghan College Jesmond Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.9010284,
-      151.6961956
     ]
   },
   {
@@ -91473,15 +87252,6 @@
     "gps": [
       -32.916835,
       151.67469
-    ]
-  },
-  {
-    "name": "John Hunter Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.9222046,
-      151.6934199
     ]
   },
   {
@@ -91944,30 +87714,12 @@
     ]
   },
   {
-    "name": "Newcastle Art School",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.9270408,
-      151.7661778
-    ]
-  },
-  {
     "name": "ANZ",
     "type": "bank",
     "category": "misc",
     "gps": [
       -32.9272177,
       151.7614078
-    ]
-  },
-  {
-    "name": "Newcastle Media And Film School",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -32.9271434,
-      151.7665507
     ]
   },
   {
@@ -92484,15 +88236,6 @@
     ]
   },
   {
-    "name": "Awabakal Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.9905665,
-      151.7167429
-    ]
-  },
-  {
     "name": "Windale Post Office",
     "type": "post",
     "category": "misc",
@@ -92589,15 +88332,6 @@
     "gps": [
       -33.0566873,
       151.6534108
-    ]
-  },
-  {
-    "name": "Heritage College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.0769702,
-      151.4321463
     ]
   },
   {
@@ -93312,15 +89046,6 @@
     ]
   },
   {
-    "name": "Girrakool School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.4237,
-      151.296
-    ]
-  },
-  {
     "name": "Karlong Post Office",
     "type": "post",
     "category": "misc",
@@ -93390,15 +89115,6 @@
     "gps": [
       -33.4059259,
       151.4661515
-    ]
-  },
-  {
-    "name": "Henry Kendall High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.4213838,
-      151.3343243
     ]
   },
   {
@@ -93519,15 +89235,6 @@
     ]
   },
   {
-    "name": "Rumbalara Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.428082,
-      151.347464
-    ]
-  },
-  {
     "name": "VC Dental",
     "type": "dentist",
     "category": "medical",
@@ -93579,15 +89286,6 @@
     "gps": [
       -33.4485263,
       151.4448282
-    ]
-  },
-  {
-    "name": "Brewongle Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.48167,
-      150.891511
     ]
   },
   {
@@ -93897,15 +89595,6 @@
     ]
   },
   {
-    "name": "Longneck Lagoon Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.576219,
-      150.892806
-    ]
-  },
-  {
     "name": "Pitt Town Post Office",
     "type": "post",
     "category": "misc",
@@ -93921,15 +89610,6 @@
     "gps": [
       -33.5973142,
       150.7522804
-    ]
-  },
-  {
-    "name": "Richmond School of the Arts",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.5979829,
-      150.749719
     ]
   },
   {
@@ -94434,24 +90114,6 @@
     "gps": [
       -33.6826356,
       150.9171897
-    ]
-  },
-  {
-    "name": "St Madeleine's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.6823014,
-      151.0026705
-    ]
-  },
-  {
-    "name": "Marian Catholic College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.6834386,
-      151.0031855
     ]
   },
   {
@@ -95076,33 +90738,6 @@
     ]
   },
   {
-    "name": "Bidwill Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.733185,
-      150.8261447
-    ]
-  },
-  {
-    "name": "Wyndham College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7254808,
-      150.8792882
-    ]
-  },
-  {
-    "name": "St John Paul II Catholic College (Nirimba)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7254959,
-      150.8805734
-    ]
-  },
-  {
     "name": "Quakers Hill Post Office",
     "type": "post",
     "category": "misc",
@@ -95163,15 +90798,6 @@
     "gps": [
       -33.7304047,
       150.9068108
-    ]
-  },
-  {
-    "name": "The Swot Shop",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7311479,
-      150.9674455
     ]
   },
   {
@@ -95247,33 +90873,6 @@
     ]
   },
   {
-    "name": "Hillsong Leadership college",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7351167,
-      150.9613544
-    ]
-  },
-  {
-    "name": "CS education Castle Hill",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7340578,
-      151.00593
-    ]
-  },
-  {
-    "name": "CS education university Castle Hill",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7341362,
-      151.0058515
-    ]
-  },
-  {
     "name": "7-Eleven",
     "type": "petrol station",
     "category": "fuel",
@@ -95289,15 +90888,6 @@
     "gps": [
       -33.7352947,
       151.0030033
-    ]
-  },
-  {
-    "name": "Smart College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7353843,
-      151.0035739
     ]
   },
   {
@@ -95622,24 +91212,6 @@
     "gps": [
       -33.7333593,
       151.1280377
-    ]
-  },
-  {
-    "name": "Avondale College of Higher Education Faculty of Nursing and Health",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.7349663,
-      151.0984283
-    ]
-  },
-  {
-    "name": "Sydney Adventist Hospital Clinical School of The University of Sydney (SAHCS)",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.7350871,
-      151.0979897
     ]
   },
   {
@@ -95976,15 +91548,6 @@
     ]
   },
   {
-    "name": "Putland School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.764297,
-      150.750385
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -96081,24 +91644,6 @@
     "gps": [
       -33.76254,
       150.869809
-    ]
-  },
-  {
-    "name": "Blacktown Boys High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7618229,
-      150.9119663
-    ]
-  },
-  {
-    "name": "Blacktown Girls High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.761976,
-      150.910792
     ]
   },
   {
@@ -96957,24 +92502,6 @@
     ]
   },
   {
-    "name": "Nagle College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7896192,
-      150.9003856
-    ]
-  },
-  {
-    "name": "St Michael's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7901408,
-      150.8996614
-    ]
-  },
-  {
     "name": "Blacktown Road Childrens Centre",
     "type": "childcare",
     "category": "education",
@@ -97308,60 +92835,6 @@
     ]
   },
   {
-    "name": "Faculty of Arts",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7749024,
-      151.110895
-    ]
-  },
-  {
-    "name": "Department of International Studies",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7749019,
-      151.1111454
-    ]
-  },
-  {
-    "name": "Innovation Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7748675,
-      151.1127753
-    ]
-  },
-  {
-    "name": "Department of Linguistics",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7750937,
-      151.112979
-    ]
-  },
-  {
-    "name": "Macquarie English Language Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.775219,
-      151.114643
-    ]
-  },
-  {
-    "name": "Macquarie University International College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7754459,
-      151.1148966
-    ]
-  },
-  {
     "name": "Carlingford Post Office",
     "type": "post",
     "category": "misc",
@@ -97404,15 +92877,6 @@
     "gps": [
       -33.7831446,
       151.0478616
-    ]
-  },
-  {
-    "name": "Faculty of Business & Economics",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.775814,
-      151.1159441
     ]
   },
   {
@@ -98343,39 +93807,12 @@
     ]
   },
   {
-    "name": "The Childrens Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.802243,
-      150.991834
-    ]
-  },
-  {
     "name": "Westmead Post Office",
     "type": "post",
     "category": "misc",
     "gps": [
       -33.8040223,
       150.9881549
-    ]
-  },
-  {
-    "name": "Parramatta Marist High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8054975,
-      150.9848728
-    ]
-  },
-  {
-    "name": "Mother Teresa Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8057945,
-      150.9837266
     ]
   },
   {
@@ -98394,15 +93831,6 @@
     "gps": [
       -33.8052271,
       151.0014003
-    ]
-  },
-  {
-    "name": "Catholic Education Office, Diocese of Parramatta - The Bethany Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8048443,
-      151.0061711
     ]
   },
   {
@@ -98484,15 +93912,6 @@
     "gps": [
       -33.8067699,
       151.0053969
-    ]
-  },
-  {
-    "name": "The Parramatta College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8075423,
-      151.0059436
     ]
   },
   {
@@ -98856,30 +94275,12 @@
     ]
   },
   {
-    "name": "Arndell School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8039095,
-      151.1256101
-    ]
-  },
-  {
     "name": "Possum's Corner Childcare",
     "type": "childcare",
     "category": "education",
     "gps": [
       -33.8035493,
       151.1471853
-    ]
-  },
-  {
-    "name": "EDU-Kingdom School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8074588,
-      151.0070904
     ]
   },
   {
@@ -98988,15 +94389,6 @@
     "gps": [
       -33.8081335,
       151.0926677
-    ]
-  },
-  {
-    "name": "Ryde Swim School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8069752,
-      151.106759
     ]
   },
   {
@@ -99261,15 +94653,6 @@
     ]
   },
   {
-    "name": "Pre-Uni New College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8150945,
-      151.0069888
-    ]
-  },
-  {
     "name": "Ermington Post Office",
     "type": "post",
     "category": "misc",
@@ -99303,15 +94686,6 @@
     "gps": [
       -33.8147273,
       151.0560903
-    ]
-  },
-  {
-    "name": "Choice Academic College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.818449,
-      151.0078822
     ]
   },
   {
@@ -99474,24 +94848,6 @@
     "gps": [
       -33.8146646,
       151.1899676
-    ]
-  },
-  {
-    "name": "Bradfield College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8211651,
-      151.1864224
-    ]
-  },
-  {
-    "name": "Royal North Shore Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.820685,
-      151.19079
     ]
   },
   {
@@ -100023,15 +95379,6 @@
     "gps": [
       -33.8367669,
       151.0493731
-    ]
-  },
-  {
-    "name": "Rivendell School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8322439,
-      151.0981013
     ]
   },
   {
@@ -101250,15 +96597,6 @@
     ]
   },
   {
-    "name": "Sydney Community College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8664815,
-      151.1732672
-    ]
-  },
-  {
     "name": "Guardian Childcare",
     "type": "childcare",
     "category": "education",
@@ -101628,15 +96966,6 @@
     ]
   },
   {
-    "name": "Langports",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8708069,
-      151.1974402
-    ]
-  },
-  {
     "name": "Priceline Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -101760,15 +97089,6 @@
     "gps": [
       -33.8735424,
       151.204308
-    ]
-  },
-  {
-    "name": "St Andrews Cathedral School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8738021,
-      151.205592
     ]
   },
   {
@@ -102015,24 +97335,6 @@
     ]
   },
   {
-    "name": "Karningul School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8848898,
-      151.0237638
-    ]
-  },
-  {
-    "name": "Regents Park Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.885518,
-      151.024693
-    ]
-  },
-  {
     "name": "Coles Express",
     "type": "petrol station",
     "category": "fuel",
@@ -102147,15 +97449,6 @@
     "gps": [
       -33.8759108,
       151.2065041
-    ]
-  },
-  {
-    "name": "Australasia Academy",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8759545,
-      151.2086255
     ]
   },
   {
@@ -102519,30 +97812,12 @@
     ]
   },
   {
-    "name": "ABILITY Education",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.881834,
-      151.2035623
-    ]
-  },
-  {
     "name": "Serafim Pharmacy",
     "type": "pharmacy",
     "category": "medical",
     "gps": [
       -33.881286,
       151.2165016
-    ]
-  },
-  {
-    "name": "Lindamood-Bell Learning Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8763475,
-      151.2442514
     ]
   },
   {
@@ -102843,30 +98118,12 @@
     ]
   },
   {
-    "name": "La Fiesta Dance Factory",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8880349,
-      151.1700187
-    ]
-  },
-  {
     "name": "Dr Joseph Rizk",
     "type": "clinic",
     "category": "medical",
     "gps": [
       -33.8883634,
       151.1712989
-    ]
-  },
-  {
-    "name": "Royal Prince Alfred Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8893229,
-      151.180068
     ]
   },
   {
@@ -103176,15 +98433,6 @@
     ]
   },
   {
-    "name": "Les Powell School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.90434,
-      150.91237
-    ]
-  },
-  {
     "name": "Bass Hill Post Office",
     "type": "post",
     "category": "misc",
@@ -103236,15 +98484,6 @@
     "gps": [
       -33.9122542,
       150.9195247
-    ]
-  },
-  {
-    "name": "Georges River Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.910278,
-      150.961511
     ]
   },
   {
@@ -103311,48 +98550,12 @@
     ]
   },
   {
-    "name": "All Saints Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9187416,
-      150.9260456
-    ]
-  },
-  {
-    "name": "All Saits Boys College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9187776,
-      150.9269678
-    ]
-  },
-  {
     "name": "Liverpool Westfield Post Office",
     "type": "post",
     "category": "misc",
     "gps": [
       -33.9190875,
       150.9248024
-    ]
-  },
-  {
-    "name": "All Saints Girls College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9200327,
-      150.9267323
-    ]
-  },
-  {
-    "name": "Liverpool Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.919912,
-      150.931084
     ]
   },
   {
@@ -104175,15 +99378,6 @@
     ]
   },
   {
-    "name": "Taylors College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9026781,
-      151.2074894
-    ]
-  },
-  {
     "name": "Greenwood Early Learning Centres",
     "type": "childcare",
     "category": "education",
@@ -104985,15 +100179,6 @@
     ]
   },
   {
-    "name": "School of Mathematics & Statistics",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9179315,
-      151.2306409
-    ]
-  },
-  {
     "name": "Australia Post",
     "type": "post",
     "category": "misc",
@@ -105009,15 +100194,6 @@
     "gps": [
       -33.9170526,
       151.2409662
-    ]
-  },
-  {
-    "name": "Sydney Childrens Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9176183,
-      151.2386635
     ]
   },
   {
@@ -105378,15 +100554,6 @@
     "gps": [
       -33.926385,
       151.127156
-    ]
-  },
-  {
-    "name": "Bankstown Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.933446,
-      151.021069
     ]
   },
   {
@@ -106038,33 +101205,6 @@
     ]
   },
   {
-    "name": "Glenfield Park School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.967931,
-      150.878601
-    ]
-  },
-  {
-    "name": "Campbell House School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.968196,
-      150.882009
-    ]
-  },
-  {
-    "name": "Ajuga School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.969521,
-      150.878033
-    ]
-  },
-  {
     "name": "Glenfield LPO (Local Post Office)",
     "type": "post",
     "category": "misc",
@@ -106515,15 +101655,6 @@
     ]
   },
   {
-    "name": "TAFE NSW St George College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9645053,
-      151.1344626
-    ]
-  },
-  {
     "name": "PharmaSave",
     "type": "pharmacy",
     "category": "medical",
@@ -106731,15 +101862,6 @@
     ]
   },
   {
-    "name": "St George Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.96671,
-      151.13399
-    ]
-  },
-  {
     "name": "Carlton Post Office",
     "type": "post",
     "category": "misc",
@@ -106755,24 +101877,6 @@
     "gps": [
       -33.9702281,
       151.1348144
-    ]
-  },
-  {
-    "name": "Moorefield Girls High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.968535,
-      151.1366902
-    ]
-  },
-  {
-    "name": "St George School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9691306,
-      151.1381865
     ]
   },
   {
@@ -106881,15 +101985,6 @@
     "gps": [
       -33.9883462,
       150.8592247
-    ]
-  },
-  {
-    "name": "Macarthur Building Industry Skills Centre",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.989256,
-      150.8691554
     ]
   },
   {
@@ -107109,15 +102204,6 @@
     ]
   },
   {
-    "name": "Botany Bay Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.0047758,
-      151.221703
-    ]
-  },
-  {
     "name": "Kurnell Post Office",
     "type": "post",
     "category": "misc",
@@ -107136,15 +102222,6 @@
     ]
   },
   {
-    "name": "Sarah Redfern High School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.026782,
-      150.85088
-    ]
-  },
-  {
     "name": "Harrington Park Medical Practice & Skin Cancer Clinic",
     "type": "clinic",
     "category": "medical",
@@ -107160,15 +102237,6 @@
     "gps": [
       -34.0311497,
       150.8162209
-    ]
-  },
-  {
-    "name": "Sarah Redfern Public School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.0277761,
-      150.8514568
     ]
   },
   {
@@ -107541,15 +102609,6 @@
     ]
   },
   {
-    "name": "Sutherland Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.038034,
-      151.114597
-    ]
-  },
-  {
     "name": "Caringbah Uniting Church Pre-school",
     "type": "childcare",
     "category": "education",
@@ -107703,15 +102762,6 @@
     ]
   },
   {
-    "name": "Lomandra School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.06173,
-      150.824344
-    ]
-  },
-  {
     "name": "Woolworths Petrol",
     "type": "petrol station",
     "category": "fuel",
@@ -107727,15 +102777,6 @@
     "gps": [
       -34.0640359,
       150.8169714
-    ]
-  },
-  {
-    "name": "Beverley Park School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.062208,
-      150.824219
     ]
   },
   {
@@ -108054,15 +103095,6 @@
     ]
   },
   {
-    "name": "Royal National Park Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.0640732,
-      151.0579851
-    ]
-  },
-  {
     "name": "St, George Surgery",
     "type": "clinic",
     "category": "medical",
@@ -108123,15 +103155,6 @@
     "gps": [
       -34.084316,
       150.828649
-    ]
-  },
-  {
-    "name": "Dorchester School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.0886198,
-      150.8267606
     ]
   },
   {
@@ -108486,15 +103509,6 @@
     ]
   },
   {
-    "name": "Illawarra Hospital School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.424793,
-      150.883935
-    ]
-  },
-  {
     "name": "Hospital Hill Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -108657,15 +103671,6 @@
     ]
   },
   {
-    "name": "Peterborough School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.5559633,
-      150.8547645
-    ]
-  },
-  {
     "name": "Barrack Heights Post Office",
     "type": "post",
     "category": "misc",
@@ -108771,15 +103776,6 @@
     "gps": [
       -34.579229,
       150.866926
-    ]
-  },
-  {
-    "name": "Illawarra Environmental Education Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.610625,
-      150.854786
     ]
   },
   {
@@ -109014,15 +104010,6 @@
     "gps": [
       -36.4146819,
       148.6165569
-    ]
-  },
-  {
-    "name": "Redlands High Country Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -36.4515163,
-      148.5917488
     ]
   },
   {
@@ -109431,15 +104418,6 @@
     ]
   },
   {
-    "name": "Ready Health Nursing College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8127078,
-      151.0050347
-    ]
-  },
-  {
     "name": "Parramatta Doctors Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -109455,15 +104433,6 @@
     "gps": [
       -33.8154447,
       150.9992508
-    ]
-  },
-  {
-    "name": "Apsley College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.815059,
-      150.999444
     ]
   },
   {
@@ -109989,15 +104958,6 @@
     ]
   },
   {
-    "name": "Meadows Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.1796701,
-      138.7619755
-    ]
-  },
-  {
     "name": "Little Peoples Place Scarborough",
     "type": "childcare",
     "category": "education",
@@ -110130,15 +105090,6 @@
     "gps": [
       -28.903518,
       150.780694
-    ]
-  },
-  {
-    "name": "Catherine McAuley Catholic College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.7638253,
-      151.864212
     ]
   },
   {
@@ -111231,15 +106182,6 @@
     ]
   },
   {
-    "name": "South Creek School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.6792707,
-      150.8711216
-    ]
-  },
-  {
     "name": "Suncorp",
     "type": "bank",
     "category": "misc",
@@ -111372,60 +106314,6 @@
     "gps": [
       -33.6954133,
       151.280332
-    ]
-  },
-  {
-    "name": "School Hall",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3478469,
-      116.1587922
-    ]
-  },
-  {
-    "name": "Year 1 & 2 Classrooms",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3475175,
-      116.1583215
-    ]
-  },
-  {
-    "name": "Library and Computer room",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3474581,
-      116.1587519
-    ]
-  },
-  {
-    "name": "Upper Primary and School Office",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3476553,
-      116.1590148
-    ]
-  },
-  {
-    "name": "Year 3 Classroom",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3474279,
-      116.1585374
-    ]
-  },
-  {
-    "name": "Basketball courts",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.3473304,
-      116.1590698
     ]
   },
   {
@@ -111771,15 +106659,6 @@
     ]
   },
   {
-    "name": "Rail Academy Newport",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8472165,
-      144.8827332
-    ]
-  },
-  {
     "name": "Wilmington Kindergarten",
     "type": "childcare",
     "category": "education",
@@ -111813,15 +106692,6 @@
     "gps": [
       -27.6116077,
       153.0517885
-    ]
-  },
-  {
-    "name": "Kaplan Business School",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.9240537,
-      138.6022
     ]
   },
   {
@@ -112032,15 +106902,6 @@
     ]
   },
   {
-    "name": "Concordia Lutheran College - Stephen Street Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5726135,
-      151.9294642
-    ]
-  },
-  {
     "name": "Pack Send",
     "type": "post",
     "category": "misc",
@@ -112110,15 +106971,6 @@
     "gps": [
       -37.809695,
       145.3441733
-    ]
-  },
-  {
-    "name": "St Narsai Assyrian Christian College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8428966,
-      150.829898
     ]
   },
   {
@@ -112407,15 +107259,6 @@
     "gps": [
       -31.9807221,
       115.8170527
-    ]
-  },
-  {
-    "name": "Montessori Preschool of Sydney",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9068976,
-      151.2071097
     ]
   },
   {
@@ -113211,15 +108054,6 @@
     ]
   },
   {
-    "name": "Nawarddeken Academy",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -12.764579,
-      133.8446233
-    ]
-  },
-  {
     "name": "Priceline Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -113496,15 +108330,6 @@
     "gps": [
       -34.3872682,
       135.4675288
-    ]
-  },
-  {
-    "name": "Queensland School of Film and Television",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5102009,
-      153.031808
     ]
   },
   {
@@ -115029,15 +109854,6 @@
     ]
   },
   {
-    "name": "Metro Academy",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7991253,
-      144.9295311
-    ]
-  },
-  {
     "name": "Capestone Village Family Practice",
     "type": "clinic",
     "category": "medical",
@@ -115443,15 +110259,6 @@
     ]
   },
   {
-    "name": "Burnside Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7459236,
-      144.7533805
-    ]
-  },
-  {
     "name": "7-Eleven",
     "type": "petrol station",
     "category": "fuel",
@@ -115794,15 +110601,6 @@
     ]
   },
   {
-    "name": "Richmond Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9435616,
-      138.5720215
-    ]
-  },
-  {
     "name": "Chemist King Discount Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -116025,15 +110823,6 @@
     "gps": [
       -33.7683425,
       150.7739554
-    ]
-  },
-  {
-    "name": "CS Education",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7685101,
-      150.7739277
     ]
   },
   {
@@ -117558,15 +112347,6 @@
     ]
   },
   {
-    "name": "Williams Business College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8762169,
-      151.2042993
-    ]
-  },
-  {
     "name": "Myobrace Robina",
     "type": "dentist",
     "category": "medical",
@@ -118260,15 +113040,6 @@
     ]
   },
   {
-    "name": "Aurukun State School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -13.3530821,
-      141.7295526
-    ]
-  },
-  {
     "name": "Ampol",
     "type": "petrol station",
     "category": "fuel",
@@ -118944,15 +113715,6 @@
     ]
   },
   {
-    "name": "Building 51 RMIT",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8070847,
-      144.9645028
-    ]
-  },
-  {
     "name": "Trundle Fuel",
     "type": "petrol station",
     "category": "fuel",
@@ -119112,15 +113874,6 @@
     "gps": [
       -41.4275843,
       147.1373998
-    ]
-  },
-  {
-    "name": "St Joseph's School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.1667662,
-      140.7497354
     ]
   },
   {
@@ -119439,15 +114192,6 @@
     ]
   },
   {
-    "name": "Signet College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.9071681,
-      138.5959802
-    ]
-  },
-  {
     "name": "The Inner West Cat Hospital",
     "type": "vet",
     "category": "misc",
@@ -119616,15 +114360,6 @@
     "gps": [
       -37.7572784,
       145.3525307
-    ]
-  },
-  {
-    "name": "GP Synergy",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -30.5131842,
-      151.661469
     ]
   },
   {
@@ -120681,30 +115416,12 @@
     ]
   },
   {
-    "name": "Australian Careers Business College (ACBC) Liverpool Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9248499,
-      150.9218581
-    ]
-  },
-  {
     "name": "C&K Logan Village Community Kindergarten",
     "type": "childcare",
     "category": "education",
     "gps": [
       -27.7640061,
       153.1053621
-    ]
-  },
-  {
-    "name": "Navitas Skilled Futures",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9252603,
-      150.924837
     ]
   },
   {
@@ -120984,15 +115701,6 @@
     "gps": [
       -33.9173688,
       150.9226072
-    ]
-  },
-  {
-    "name": "CBD College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.9170678,
-      150.9232701
     ]
   },
   {
@@ -121680,15 +116388,6 @@
     ]
   },
   {
-    "name": "Pinkawillinie School Site - Abandoned",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.9759461,
-      136.2135976
-    ]
-  },
-  {
     "name": "Liberty",
     "type": "petrol station",
     "category": "fuel",
@@ -121893,33 +116592,6 @@
     "gps": [
       -28.8192339,
       153.3186062
-    ]
-  },
-  {
-    "name": "Fit College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.9071812,
-      138.5958808
-    ]
-  },
-  {
-    "name": "St Mary MacKillop College - Padua Campus",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -35.4052434,
-      149.0910134
-    ]
-  },
-  {
-    "name": "Chrysalis Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -30.4346242,
-      152.7234744
     ]
   },
   {
@@ -122454,15 +117126,6 @@
     ]
   },
   {
-    "name": "Good Shepherd Lutheran School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.50932,
-      139.0475903
-    ]
-  },
-  {
     "name": "Brisbane Diagnostics",
     "type": "clinic",
     "category": "medical",
@@ -122739,15 +117402,6 @@
     "gps": [
       -42.9815851,
       147.3234846
-    ]
-  },
-  {
-    "name": "Hobart City High School -Ogilvie Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -42.8550606,
-      147.3004769
     ]
   },
   {
@@ -123162,15 +117816,6 @@
     "gps": [
       -38.5399764,
       143.9736415
-    ]
-  },
-  {
-    "name": "Lorne P-12 College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.5393024,
-      143.9732092
     ]
   },
   {
@@ -123633,24 +118278,6 @@
     ]
   },
   {
-    "name": "Our Lady of Fatima Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9418847,
-      151.10312
-    ]
-  },
-  {
-    "name": "St Ursula's College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9410501,
-      151.1031959
-    ]
-  },
-  {
     "name": "Victoria Park Dental Centre",
     "type": "dentist",
     "category": "medical",
@@ -123747,15 +118374,6 @@
     "gps": [
       -21.1404177,
       149.178776
-    ]
-  },
-  {
-    "name": "Warakirri College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8737269,
-      150.9539568
     ]
   },
   {
@@ -124101,15 +118719,6 @@
     ]
   },
   {
-    "name": "The Austin School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7556368,
-      145.0572452
-    ]
-  },
-  {
     "name": "Roadrunner Roadhouse",
     "type": "petrol station",
     "category": "fuel",
@@ -124344,15 +118953,6 @@
     ]
   },
   {
-    "name": "IEC Настя",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.7389484,
-      151.1661785
-    ]
-  },
-  {
     "name": "Castlecrag Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -124386,15 +118986,6 @@
     "gps": [
       -42.8879324,
       147.4278242
-    ]
-  },
-  {
-    "name": "Ausinet - Electro Technology Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4811921,
-      153.0015375
     ]
   },
   {
@@ -124458,15 +119049,6 @@
     "gps": [
       -37.9878224,
       145.2382159
-    ]
-  },
-  {
-    "name": "Lysterfield Lake College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9754134,
-      145.3170877
     ]
   },
   {
@@ -124812,15 +119394,6 @@
     ]
   },
   {
-    "name": "Cire Community School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7586469,
-      145.3470871
-    ]
-  },
-  {
     "name": "Headland Montessori Grange Road",
     "type": "childcare",
     "category": "education",
@@ -124926,15 +119499,6 @@
     "gps": [
       -21.3452931,
       148.1080823
-    ]
-  },
-  {
-    "name": "ECIS Launceston",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -41.46302,
-      147.1547627
     ]
   },
   {
@@ -125514,15 +120078,6 @@
     ]
   },
   {
-    "name": "Caulfield Grammar School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8998493,
-      145.1906678
-    ]
-  },
-  {
     "name": "Vets By The Bay",
     "type": "vet",
     "category": "misc",
@@ -125802,15 +120357,6 @@
     ]
   },
   {
-    "name": "Lockleys North Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9215432,
-      138.5384811
-    ]
-  },
-  {
     "name": "Liberty Preschool",
     "type": "childcare",
     "category": "education",
@@ -125871,15 +120417,6 @@
     "gps": [
       -26.4140819,
       153.04778
-    ]
-  },
-  {
-    "name": "Trinity Grammar School - Field Studies Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.005996,
-      150.6277928
     ]
   },
   {
@@ -125982,15 +120519,6 @@
     ]
   },
   {
-    "name": "Avenues Education",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.9344486,
-      145.036292
-    ]
-  },
-  {
     "name": "Jubilee Childcare Centre",
     "type": "childcare",
     "category": "education",
@@ -126036,15 +120564,6 @@
     ]
   },
   {
-    "name": "Kurnai College University Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.3120128,
-      146.4276025
-    ]
-  },
-  {
     "name": "Grant Davis Dental Ceramics",
     "type": "clinic",
     "category": "medical",
@@ -126078,15 +120597,6 @@
     "gps": [
       -37.9706279,
       145.0936995
-    ]
-  },
-  {
-    "name": "Parkville College Malmsbury Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.1869803,
-      144.3954402
     ]
   },
   {
@@ -126195,24 +120705,6 @@
     "gps": [
       -33.8921994,
       151.2490577
-    ]
-  },
-  {
-    "name": "Mansfield Secondary College Mount Buller Annexe",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.1451083,
-      146.4489502
-    ]
-  },
-  {
-    "name": "Mansfield Primary School Mount Buller Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.1451104,
-      146.4489018
     ]
   },
   {
@@ -126387,51 +120879,6 @@
     ]
   },
   {
-    "name": "Travancore School Parkville Campus",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7804607,
-      144.9477902
-    ]
-  },
-  {
-    "name": "Parkville College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7781711,
-      144.9453118
-    ]
-  },
-  {
-    "name": "River Nile School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8050784,
-      144.9549517
-    ]
-  },
-  {
-    "name": "Holmes Grammar School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8103211,
-      144.9721869
-    ]
-  },
-  {
-    "name": "St Michael's School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.5309866,
-      144.9618733
-    ]
-  },
-  {
     "name": "St Paul’s Lutheran Church Kindergarten",
     "type": "childcare",
     "category": "education",
@@ -126492,15 +120939,6 @@
     "gps": [
       -31.4905802,
       115.6006639
-    ]
-  },
-  {
-    "name": "Mini Masterminds",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.9037146,
-      151.1902594
     ]
   },
   {
@@ -126807,15 +121245,6 @@
     "gps": [
       -29.9180241,
       153.0685238
-    ]
-  },
-  {
-    "name": "Saint Marys Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -29.6734352,
-      152.9342468
     ]
   },
   {
@@ -127185,15 +121614,6 @@
     "gps": [
       -30.5353367,
       151.6133563
-    ]
-  },
-  {
-    "name": "Travancore School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.781705,
-      144.9350685
     ]
   },
   {
@@ -127710,15 +122130,6 @@
     ]
   },
   {
-    "name": "Australian National College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8075506,
-      144.9608596
-    ]
-  },
-  {
     "name": "Main Beach Pharmacy",
     "type": "pharmacy",
     "category": "medical",
@@ -127926,15 +122337,6 @@
     ]
   },
   {
-    "name": "Saint Josephs Parish School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.5640448,
-      147.1906771
-    ]
-  },
-  {
     "name": "Hume Medical Centre",
     "type": "clinic",
     "category": "medical",
@@ -127950,15 +122352,6 @@
     "gps": [
       -37.790555,
       144.8172744
-    ]
-  },
-  {
-    "name": "Academy Of Design Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -28.0223238,
-      153.4289674
     ]
   },
   {
@@ -128088,15 +122481,6 @@
     ]
   },
   {
-    "name": "St Augustine's College Design & Technology",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -16.9286536,
-      145.767905
-    ]
-  },
-  {
     "name": "QLD X-ray",
     "type": "clinic",
     "category": "medical",
@@ -128211,24 +122595,6 @@
     "gps": [
       -37.8115512,
       145.2702456
-    ]
-  },
-  {
-    "name": "Gold Coast Training College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.9682602,
-      153.4123935
-    ]
-  },
-  {
-    "name": "Academique",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.9680365,
-      153.4127643
     ]
   },
   {
@@ -128943,15 +123309,6 @@
     ]
   },
   {
-    "name": "L:ongreach Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -23.4412103,
-      144.245339
-    ]
-  },
-  {
     "name": "Coastal Dental Care",
     "type": "dentist",
     "category": "medical",
@@ -129327,24 +123684,6 @@
     "gps": [
       -30.9131608,
       118.2082943
-    ]
-  },
-  {
-    "name": "Qantas Group Pilot Academy",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5512846,
-      151.7925057
-    ]
-  },
-  {
-    "name": "Barkly International College",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.7975704,
-      144.9391231
     ]
   },
   {
@@ -129879,15 +124218,6 @@
     ]
   },
   {
-    "name": "Wubin Primary School - Inactive",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -30.1051295,
-      116.6343651
-    ]
-  },
-  {
     "name": "Westpac",
     "type": "bank",
     "category": "misc",
@@ -130164,15 +124494,6 @@
     "gps": [
       -27.3200031,
       153.0697628
-    ]
-  },
-  {
-    "name": "U3A Croydon",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -37.8011259,
-      145.2831034
     ]
   },
   {
@@ -131913,15 +126234,6 @@
     ]
   },
   {
-    "name": "Sophia Mundi Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.8035366,
-      145.0049159
-    ]
-  },
-  {
     "name": "Coondle-Nunile Volunteer Bush Fire Brigade",
     "type": "fire station",
     "category": "misc",
@@ -133281,15 +127593,6 @@
     ]
   },
   {
-    "name": "Apex Australia Vocational Education",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8108676,
-      151.0067183
-    ]
-  },
-  {
     "name": "Pacific Smiles Dentist",
     "type": "dentist",
     "category": "medical",
@@ -133881,15 +128184,6 @@
     "gps": [
       -32.0346169,
       116.0009457
-    ]
-  },
-  {
-    "name": "Maddington Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -32.0543484,
-      115.9868632
     ]
   },
   {
@@ -134748,15 +129042,6 @@
     ]
   },
   {
-    "name": "Sydney Road Community School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.7718061,
-      144.9625082
-    ]
-  },
-  {
     "name": "Cincotta Chemist",
     "type": "pharmacy",
     "category": "medical",
@@ -135069,15 +129354,6 @@
     "gps": [
       -33.7705655,
       150.8435145
-    ]
-  },
-  {
-    "name": "Alsiraat College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -37.6239331,
-      145.0360731
     ]
   },
   {
@@ -135639,15 +129915,6 @@
     ]
   },
   {
-    "name": "Tabor",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.9562073,
-      138.5909105
-    ]
-  },
-  {
     "name": "ChargePoint",
     "type": "charge station",
     "category": "fuel",
@@ -135747,15 +130014,6 @@
     ]
   },
   {
-    "name": "Djidi Djidi Aboriginal School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.347936,
-      115.6815855
-    ]
-  },
-  {
     "name": "NAB",
     "type": "bank",
     "category": "misc",
@@ -135819,15 +130077,6 @@
     ]
   },
   {
-    "name": "Terry Simpson Studios",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.9237299,
-      138.6044227
-    ]
-  },
-  {
     "name": "Simply Pharmacy West Wallsend",
     "type": "pharmacy",
     "category": "medical",
@@ -135852,15 +130101,6 @@
     "gps": [
       -32.0152757,
       115.7685194
-    ]
-  },
-  {
-    "name": "Clare Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8409698,
-      138.617001
     ]
   },
   {
@@ -136131,15 +130371,6 @@
     "gps": [
       -28.7196691,
       114.6273591
-    ]
-  },
-  {
-    "name": "UQ Clinical School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5391696,
-      153.2515357
     ]
   },
   {
@@ -136500,33 +130731,6 @@
     "gps": [
       -37.9414092,
       145.1671892
-    ]
-  },
-  {
-    "name": "St John's Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.493016,
-      150.799868
-    ]
-  },
-  {
-    "name": "St Patrick's Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.4845748,
-      150.902269
-    ]
-  },
-  {
-    "name": "St Pius X Catholic Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.451963,
-      150.841517
     ]
   },
   {
@@ -137142,42 +131346,6 @@
     ]
   },
   {
-    "name": "Arts and Wood Tech",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.2989914,
-      142.1962506
-    ]
-  },
-  {
-    "name": "Locker Bay",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.2991595,
-      142.1953021
-    ]
-  },
-  {
-    "name": "Wood Storage Shed",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.2990265,
-      142.1966255
-    ]
-  },
-  {
-    "name": "Helena River Steiner School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8979884,
-      116.0012403
-    ]
-  },
-  {
     "name": "Wilin Centre",
     "type": "university",
     "category": "education",
@@ -137355,15 +131523,6 @@
     "gps": [
       -31.8308689,
       115.9687881
-    ]
-  },
-  {
-    "name": "Nido Early School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -31.8302597,
-      115.9680655
     ]
   },
   {
@@ -138447,15 +132606,6 @@
     ]
   },
   {
-    "name": "North Metropolitan TAFE - Perth",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -31.9480717,
-      115.8610178
-    ]
-  },
-  {
     "name": "Tulip Street Early Learning Centre",
     "type": "childcare",
     "category": "education",
@@ -138561,15 +132711,6 @@
     "gps": [
       -41.1515247,
       146.1635757
-    ]
-  },
-  {
-    "name": "Frankston High school",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -38.1625603,
-      145.1289064
     ]
   },
   {
@@ -138705,15 +132846,6 @@
     "gps": [
       -33.88825,
       151.123631
-    ]
-  },
-  {
-    "name": "PLC Sydney Preschools",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8884436,
-      151.1228602
     ]
   },
   {
@@ -139554,15 +133686,6 @@
     ]
   },
   {
-    "name": "Duffy Preschool",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -35.3343414,
-      149.0328904
-    ]
-  },
-  {
     "name": "Singhs Tyre & Petroleum",
     "type": "petrol station",
     "category": "fuel",
@@ -139596,15 +133719,6 @@
     "gps": [
       -28.016949,
       153.1650977
-    ]
-  },
-  {
-    "name": "North Coast TAFE Casino",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.8649187,
-      153.0497074
     ]
   },
   {
@@ -139797,15 +133911,6 @@
     ]
   },
   {
-    "name": "St. Brigid's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.623282,
-      153.0046283
-    ]
-  },
-  {
     "name": "Babies by the Bay",
     "type": "childcare",
     "category": "education",
@@ -139821,15 +133926,6 @@
     "gps": [
       -28.6244739,
       153.0067803
-    ]
-  },
-  {
-    "name": "Western Technical College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -34.856766,
-      138.5206247
     ]
   },
   {
@@ -142209,24 +136305,6 @@
     ]
   },
   {
-    "name": "Alta-1 College (King St - Caboolture)",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.0853713,
-      152.9510514
-    ]
-  },
-  {
-    "name": "Rivers Youth Versatile Education and Training Centre",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.2860985,
-      152.97484
-    ]
-  },
-  {
     "name": "Western Diagnostic Pathology",
     "type": "clinic",
     "category": "medical",
@@ -142530,15 +136608,6 @@
     "gps": [
       -34.9519952,
       138.5895564
-    ]
-  },
-  {
-    "name": "S Block",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -27.5746696,
-      151.9329466
     ]
   },
   {
@@ -143010,15 +137079,6 @@
     ]
   },
   {
-    "name": "St John's Primary School",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -28.5488869,
-      153.4962091
-    ]
-  },
-  {
     "name": "Cobbers Childcare",
     "type": "childcare",
     "category": "education",
@@ -143133,24 +137193,6 @@
     "gps": [
       -28.7322592,
       153.4056942
-    ]
-  },
-  {
-    "name": "Alpha Omega Senior College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8507349,
-      151.0314811
-    ]
-  },
-  {
-    "name": "Alpha Omega Senior College",
-    "type": "school",
-    "category": "education",
-    "gps": [
-      -33.8503723,
-      151.0319902
     ]
   },
   {
@@ -143898,15 +137940,6 @@
     "gps": [
       -34.7531204,
       149.719889
-    ]
-  },
-  {
-    "name": "College of Transformation Education and Training CTET",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -34.7568126,
-      149.7168048
     ]
   },
   {
@@ -145890,15 +139923,6 @@
     ]
   },
   {
-    "name": "Tunnelling and Infrastructure Academy",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -33.8280843,
-      151.0269601
-    ]
-  },
-  {
     "name": "Whitehills Dental",
     "type": "dentist",
     "category": "medical",
@@ -146346,15 +140370,6 @@
     "gps": [
       -32.1119305,
       149.0378625
-    ]
-  },
-  {
-    "name": "Australian Skin Institute",
-    "type": "college",
-    "category": "education",
-    "gps": [
-      -27.4300429,
-      153.0413896
     ]
   },
   {
