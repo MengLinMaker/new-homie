@@ -24,7 +24,7 @@ public class ScrapeDomainTest
     public void TryExtractNextJson_FromValidHtmlInput_ReturnsJson(string fileName)
     {
         var inputContent = File.ReadAllText($"./resources/{fileName}.html");
-        var success = new Scrape.Domain().TryExtractNextJson(inputContent, out var nextJson);
+        var success = new Scrape.Util().TryExtractNextJson(inputContent, out var nextJson);
         Assert.That(success, Is.True);
         Assert.That(nextJson, Is.Not.Null);
         var inputJson = JObject.Parse(nextJson);
@@ -38,7 +38,7 @@ public class ScrapeDomainTest
     [Test]
     public void TryExtractNextJson_InvalidInput_ReturnsNull()
     {
-        var success = new Scrape.Domain().TryExtractNextJson("invalid", out var json);
+        var success = new Scrape.Util().TryExtractNextJson("invalid", out var json);
         Assert.That(success, Is.False);
         Assert.That(json, Is.Null);
     }

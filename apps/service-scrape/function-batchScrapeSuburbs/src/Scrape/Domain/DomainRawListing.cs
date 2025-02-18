@@ -5,42 +5,13 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-using HtmlAgilityPack;
-
 using Serilog;
 using Serilog.Events;
 
 using SerilogTracing;
 
-/// <summary>
-/// Extract data from www.domain.com.au
-/// </summary>
 public partial class Domain
 {
-    /// <summary>
-    /// Extracts JSON data from Next.js sites.
-    /// </summary>
-    public bool TryExtractNextJson(string html, out string? nextJson)
-    {
-        var activity = Log.ForContext<Domain>().StartActivity("ExtractNextJson");
-        nextJson = null;
-        try
-        {
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(html);
-            var nextDataScriptNode = htmlDocument.DocumentNode.SelectSingleNode("//script[@id='__NEXT_DATA__']");
-            nextJson = nextDataScriptNode.InnerText;
-            activity.Complete();
-            return true;
-        }
-        catch (Exception ex)
-        {
-            activity.AddProperty("input", html);
-            activity.Complete(LogEventLevel.Warning, ex);
-            return false;
-        }
-    }
-
     /// <summary>
     /// Extract array of raw listings from Next.js JSON.
     /// Detects isLastPage for looping.
