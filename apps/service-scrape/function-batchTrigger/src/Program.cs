@@ -1,25 +1,30 @@
-using System.Text.Json;
+using Serilog;
 
-using Amazon.Lambda.APIGatewayEvents;
-using Amazon.Lambda.Core;
+using SerilogTracing;
 
-// Enable conversion from Lambda JSON input to .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
-namespace Program;
-
-public class LambdaFunction
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+builder.Host.UseSerilog((context, config) =>
 {
-    public static APIGatewayProxyResponse LambdaFunctionHandler(APIGatewayProxyRequest apigProxyEvent, ILambdaContext context)
-    {
-        var body = new Dictionary<string, string>
+    config.ReadFrom.Configuration(context.Configuration);
+    // Enable SerilogTracing
+    new ActivityListenerConfiguration()
+        .Sample.AllTraces()
+        .Instrument.AspNetCoreRequests(opts =>
         {
-            { "message", "hello world" },
-        };
-        return new APIGatewayProxyResponse
-        {
-            Body = JsonSerializer.Serialize(body),
-            StatusCode = 200,
-            Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
-        };
-    }
-}
+            opts.IncomingTraceParent = IncomingTraceParent.Trust;
+        })
+        .Instrument.HttpClientRequests()
+        .TraceToSharedLogger();
+});
+
+var app = builder.Build();
+app.MapGet("/", (HttpContext context) =>
+{
+    var activity1 = Log.ForContext<HttpContext>().StartActivity("Activity 1");
+    var activity2 = Log.Logger.StartActivity("Activity 2");
+    activity2.Complete();
+    activity1.Complete();
+    return Results.Ok("Hello");
+});
+app.Run();
