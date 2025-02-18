@@ -5,11 +5,6 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-using Serilog;
-using Serilog.Events;
-
-using SerilogTracing;
-
 public partial class Domain
 {
     /// <summary>

@@ -1,21 +1,18 @@
-using Serilog;
-
-using SerilogTracing;
+// Enable SerilogTracing
+new ActivityListenerConfiguration()
+    .Sample.AllTraces()
+    .Instrument.AspNetCoreRequests(opts =>
+    {
+        opts.IncomingTraceParent = IncomingTraceParent.Trust;
+    })
+    .Instrument.HttpClientRequests()
+    .TraceToSharedLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Host.UseSerilog((context, config) =>
 {
     config.ReadFrom.Configuration(context.Configuration);
-    // Enable SerilogTracing
-    new ActivityListenerConfiguration()
-        .Sample.AllTraces()
-        .Instrument.AspNetCoreRequests(opts =>
-        {
-            opts.IncomingTraceParent = IncomingTraceParent.Trust;
-        })
-        .Instrument.HttpClientRequests()
-        .TraceToSharedLogger();
 });
 
 var app = builder.Build();
