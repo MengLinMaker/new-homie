@@ -101,11 +101,11 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
    * old type: [new type, category]
    */
   const shopCategoryFilter = {
-    'convenience': 'convenience',
-    'supermarket': 'supermarket',
-    'greengrocer': 'grocer'
+    convenience: 'convenience',
+    supermarket: 'supermarket',
+    greengrocer: 'grocer',
   }
-  const shopsData = readBrotliJson("./script/australia-shops.json.br")
+  const shopsData = readBrotliJson('./script/australia-shops.json.br')
   for (const shop of shopsData.features) {
     try {
       if (!shop.properties.name) continue
@@ -127,4 +127,4 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
 }
 
 writeFileSync(finalAmenitiesFilePath, JSON.stringify(newAmenitiesData, null, 2))
-console.info("Completed writing final amenities file")
+console.info('Completed writing final amenities file')
