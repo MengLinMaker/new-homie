@@ -1,6 +1,6 @@
 import { z } from 'zod'
-
-require('dotenv').config()
+import { config } from 'dotenv'
+config()
 
 /**
  * @description Type safe env keys
@@ -8,13 +8,24 @@ require('dotenv').config()
  */
 export const ENV = {
   /**
-   * @description Changes log level for next serverless execution
-   * @default 'info'
+   * @description Send Open Telemetry data to this URL
+   * @description Sends to Seq by default
+   * @default 'http://localhost:5341/ingest/otlp/v1/logs'
    */
-  LOG_LEVEL: z
-    .enum(['silent', 'trace', 'debug', 'info', 'warn', 'error', 'fatal'])
-    .default('info')
-    .parse(process.env['LOG_LEVEL']),
+  OLTP_URL: z
+    .string()
+    .regex(/https?:\/\/.+/)
+    .default('http://localhost:5341/ingest/otlp/v1/logs')
+    .parse(process.env['OLTP_URL']),
+
+  /**
+   * @description Headers for Open Telemetry provider
+   */
+  OLTP_HEADERS: z
+    .string()
+    .regex(/([\w-]+: [\w-_. ]+(, )?)+/)
+    .default('X-Seq-ApiKey: abcd1234, Useless-Header: Useless')
+    .parse(process.env['OLTP_HEADERS']),
 
   /**
    * @description Postgres connection url with password
