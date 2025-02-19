@@ -1,39 +1,38 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: service-scrape - A scraper for real estate data
 
 Globals:
   Function:
-    Runtime: dotnet8
+    Runtime: nodejs22.x
     Architectures:
-      - arm64 # Faster execution and cheaper
-    LoggingConfig: NoLogging # Expensive cloudwatch
+      - arm64
     ReservedConcurrentExecutions: 1 # Smallest default
     Timeout: 1 # Smallest default
     MemorySize: 1769 # Also allocates 1vCPU
     Handler: Program::Program.LambdaFunction::LambdaFunctionHandler
 
 Resources:
-  BatchTrigger:
-    Type: AWS::Serverless::Function
-    Properties:
-      Timeout: 60 # Jobs may come in various sizes
-      MemorySize: 256 # Limit CPU to throttle scraping
-      CodeUri: ./function-batchTrigger/src/
-      Events:
-        Cron:
-          Type: Schedule
-          Properties:
-            Schedule: cron(0 3 * * Sat) # 3am Sat UTC => 1pm Sat AEST
-            Name: BatchTriggerEvent
-      Environment:
-        Variables:
-          BATCHSCRAPESUBURBSQUEUE_QUEUE_NAME: !GetAtt BatchScrapeSuburbsQueue.QueueName
-          BATCHSCRAPESUBURBSQUEUE_QUEUE_ARN: !GetAtt BatchScrapeSuburbsQueue.Arn
-          BATCHSCRAPESUBURBSQUEUE_QUEUE_URL: !Ref BatchScrapeSuburbsQueue
-      Policies:
-        - SQSSendMessagePolicy:
-            QueueName: !GetAtt BatchScrapeSuburbsQueue.QueueName
+  # BatchTrigger:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Timeout: 60 # Jobs may come in various sizes
+  #     MemorySize: 256 # Limit CPU to throttle scraping
+  #     CodeUri: ./function-batchTrigger/src/
+  #     Events:
+  #       Cron:
+  #         Type: Schedule
+  #         Properties:
+  #           Schedule: cron(0 3 * * Sat) # 3am Sat UTC => 1pm Sat AEST
+  #           Name: BatchTriggerEvent
+  #     Environment:
+  #       Variables:
+  #         BATCHSCRAPESUBURBSQUEUE_QUEUE_NAME: !GetAtt BatchScrapeSuburbsQueue.QueueName
+  #         BATCHSCRAPESUBURBSQUEUE_QUEUE_ARN: !GetAtt BatchScrapeSuburbsQueue.Arn
+  #         BATCHSCRAPESUBURBSQUEUE_QUEUE_URL: !Ref BatchScrapeSuburbsQueue
+  #     Policies:
+  #       - SQSSendMessagePolicy:
+  #           QueueName: !GetAtt BatchScrapeSuburbsQueue.QueueName
   BatchScrapeSuburbsQueue:
     Type: AWS::SQS::Queue
     Properties:
@@ -53,6 +52,7 @@ Resources:
       Timeout: 900 # Jobs may come in various sizes
       MemorySize: 256 # Limit CPU to throttle scraping
       CodeUri: ./function-batchScrapeSuburbs/src/
+      Handler: index.handler
       Events:
         SQS:
           Type: SQS
@@ -61,19 +61,29 @@ Resources:
             BatchSize: 10
             Enabled: false
             ScalingConfig:
-              MaximumConcurrency: 1
-  ReadOLTP:
-    Type: AWS::Serverless::Function
-    Properties:
-      ReservedConcurrentExecutions: 10 # Prevent database overload
-      Timeout: 3
-      CodeUri: ./function-readOLTP/src/
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /
-            Method: get # Cacheable
+              MaximumConcurrency: 2
+
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+          - index.mts
+        External:
+          - "@aws-sdk/*"
+          - aws-sdk
+        Minify: false
+  # ReadOLTP:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     ReservedConcurrentExecutions: 10 # Prevent database overload
+  #     Timeout: 3
+  #     CodeUri: ./function-readOLTP/src/
+  #     Events:
+  #       Api:
+  #         Type: Api
+  #         Properties:
+  #           Path: /{proxy+}
+  #           Method: get # Cacheable
 
 Outputs:
   EnspointUrl:

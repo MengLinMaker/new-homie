@@ -8,7 +8,7 @@ using Serilog.Events;
 using SerilogTracing;
 
 // Locality is a unique combo of suburb name, postcode and state
-public class Locality
+public record Locality
 {
     [MaxLength(128)] // Longest suburb name in the world is 85 characters: "taumatawhakatangihangakoauauotamateapokaiwhenuakitanatahu".
     public required string SuburbName { get; init; } // Hash index
@@ -32,7 +32,7 @@ public enum HomeType
 }
 
 // Home details should rarely change over time
-public class Home
+public record Home
 {
     // Metadata
     [MaxLength(256)]
@@ -47,11 +47,11 @@ public class Home
     // Features
     public required HomeType HomeType { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfBedrooms { get; init; }
+    public required int? NumberOfBedrooms { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfBathrooms { get; init; }
+    public required int? NumberOfBathrooms { get; init; }
     [Range(0, 32767)]
-    public required short NumberOfParkingSpots { get; init; }
+    public required int? NumberOfParkingSpots { get; init; }
     [Range(1, 2147483647)]
     public int? LandSizeSquareMeters { get; init; } // Round to nearest meter square.
     public bool IsRetirement { get; init; }
@@ -61,13 +61,13 @@ public class Home
     public DateTime? AuctionTime { get; init; }
 };
 
-// Expect lots of listing class in database. Kepp small to reduce storage.
-public class RentalListingInfo
+// Expect lots of listing records in database. Kepp small to reduce storage.
+public record RentalPriceInfo
 {
     public required DateOnly ScrapeDate { get; init; } // 4 bytes compared to timestamp's 8 bytes.
     [Range(0, 32767)] public required short WeeklyRent { get; init; }
 };
-public class SaleListingInfo
+public record SalePriceInfo
 {
     public required DateOnly ScrapeDate { get; init; }
     [Range(0, 2147483647)] public required int LowerPrice { get; init; }
@@ -84,7 +84,12 @@ public class Validation
         var validationContext = new ValidationContext(entity);
         var validationStatus = Validator.TryValidateObject(entity, validationContext, validationResults, true);
 
-        if (!validationStatus) activity.Complete(LogEventLevel.Error, new ArgumentException($"Validation.Validate error: {entity.GetType()} {validationResults}"));
+        if (!validationStatus)
+        {
+            activity.AddProperty("input", entity);
+            activity.AddProperty("validationResults", validationResults);
+            activity.Complete(LogEventLevel.Error, new ArgumentException($"Validation error"));
+        }
         activity.Complete();
         return validationStatus;
     }

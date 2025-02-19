@@ -6,7 +6,7 @@ import { brotliDecompressSync } from 'node:zlib'
  * @param brotliFilePath
  */
 export const readBrotliJson = (brotliFilePath: string) => {
-  const brotliBuffer = readFileSync(brotliFilePath).buffer
+  const brotliBuffer = readFileSync(brotliFilePath)
   const rawBuffer = brotliDecompressSync(brotliBuffer, undefined)
   return JSON.parse(rawBuffer.toString())
 }
@@ -22,4 +22,5 @@ export const notInAustralia = ([longitude, latitude]: [number, number]) =>
  * @param {number} input
  * @param {number} decimal
  */
-export const roundPlaces = (input: number, decimal: number) => Math.round(input * 10 ** decimal) / 10 ** decimal
+export const roundPlaces = (input: number, decimal: number) =>
+  Math.round(input * 10 ** decimal) / 10 ** decimal

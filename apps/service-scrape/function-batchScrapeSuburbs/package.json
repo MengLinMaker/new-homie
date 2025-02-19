@@ -1,0 +1,27 @@
+{
+  "name": "function-batch_scrape_suburbs",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "biome format --write",
+    "test:lint": "biome lint --write",
+    "test:unit": "vitest run",
+    "test:unit:dev": "vitest",
+    "test:type": "tsc",
+    "dev": "nodemon src/index.mts"
+  },
+  "devDependencies": {
+    "@hono/node-server": "1.13.8",
+    "@types/aws-lambda": "8.10.147",
+    "aws-lambda": "1.0.7",
+    "dotenv": "16.4.7"
+  },
+  "dependencies": {
+    "@opentelemetry/instrumentation-pino": "0.46.0",
+    "@opentelemetry/sdk-node": "0.57.2",
+    "cheerio": "1.0.0",
+    "hono": "4.7.1",
+    "pino": "9.6.0",
+    "pino-pretty": "13.0.0",
+    "zod": "3.24.2"
+  }
+}

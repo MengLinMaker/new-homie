@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    /* Strictest Check */
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    /* Check Config */
+    "checkJs": true,
+    "skipLibCheck": true,
+    "pretty": true,
+    /* Module Config */
+    "target": "ESNext",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true
+  },
+  "exclude": ["**/dist"]
+}

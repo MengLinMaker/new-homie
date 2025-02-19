@@ -2,7 +2,8 @@
   "name": "service-scrape",
   "version": "1.0.0",
   "scripts": {
-    "compress:data": "node ./script/compress.ts"
-  },
-  "type": "module"
+    "test:lint": "sam validate --lint",
+    "compress:data": "node ./script/compress.ts",
+    "build:sam": "sam build"
+  }
 }
