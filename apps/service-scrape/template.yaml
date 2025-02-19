@@ -10,7 +10,7 @@ Globals:
     ReservedConcurrentExecutions: 1 # Smallest default
     Timeout: 1 # Smallest default
     MemorySize: 1769 # Also allocates 1vCPU
-    Handler: Program::Program.LambdaFunction::LambdaFunctionHandler
+    Handler: index.handler
 
 Resources:
   # BatchTrigger:
@@ -52,7 +52,6 @@ Resources:
       Timeout: 900 # Jobs may come in various sizes
       MemorySize: 256 # Limit CPU to throttle scraping
       CodeUri: ./function-batchScrapeSuburbs/src/
-      Handler: index.handler
       Events:
         SQS:
           Type: SQS
