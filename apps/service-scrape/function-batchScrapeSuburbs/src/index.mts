@@ -7,7 +7,7 @@ import './instrumentation'
 import { traceTryFunction } from './instrumentation'
 
 // Middlewares
-export const app = new Hono().use(requestId())
+const app = new Hono().use(requestId())
 
 function addition(a: number, b: number) {
   return traceTryFunction('addition', arguments, 'ERROR', async () => {
@@ -30,4 +30,6 @@ app.get('/', async (c) => {
 
 // Enable AWS Lambda
 export const handler = handle(app)
+
+// Export for testing and Vite dev
 export default app
