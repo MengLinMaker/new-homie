@@ -20,9 +20,11 @@
     "target": "ESNext",
     "isolatedModules": true,
     "esModuleInterop": true,
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "Preserve",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true
   },
-  "exclude": ["**/dist"]
+  "exclude": [
+    "**/dist"
+  ]
 }
