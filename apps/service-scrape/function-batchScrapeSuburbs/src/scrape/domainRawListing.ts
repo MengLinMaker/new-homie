@@ -50,11 +50,11 @@ export const domainRawListing = {
   /**
    * Extract array of raw listings from Next.js JSON.
    * Detects isLastPage for looping.
-   * @param nextJson
+   * @param nextDataJson
    */
-  tryExtractListings(nextJson: object) {
+  tryExtractListings(nextDataJson: object) {
     return traceTryFunction('domainRawListing.tryExtractListings', arguments, 'ERROR', async () => {
-      const validNextjson = domainRawListing.nextDataJsonSchema.parse(nextJson)
+      const validNextjson = domainRawListing.nextDataJsonSchema.parse(nextDataJson)
       const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
       const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
       const listings = Object.values(validNextjson.props.pageProps.componentProps.listingsMap)
