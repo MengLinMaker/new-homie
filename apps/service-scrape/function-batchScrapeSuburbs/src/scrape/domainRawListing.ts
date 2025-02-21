@@ -1,11 +1,14 @@
 import { traceTryFunction } from '../instrumentation'
 import { z } from 'zod'
 
+/**
+ * Functions for extracting data from
+ */
 export const domainRawListing = {
   /**
    * Next.js json schema parser to reduce app logic
    */
-  schema: z.object({
+  nextDataJsonSchema: z.object({
     props: z.object({
       pageProps: z.object({
         componentProps: z.object({
@@ -44,9 +47,14 @@ export const domainRawListing = {
     }),
   }),
 
+  /**
+   * Extract array of raw listings from Next.js JSON.
+   * Detects isLastPage for looping.
+   * @param nextJson
+   */
   tryExtractListings(nextJson: object) {
     return traceTryFunction('domainRawListing.tryExtractListings', arguments, 'ERROR', async () => {
-      const validNextjson = domainRawListing.schema.parse(nextJson)
+      const validNextjson = domainRawListing.nextDataJsonSchema.parse(nextJson)
       const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
       const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
       const listings = Object.values(validNextjson.props.pageProps.componentProps.listingsMap)
