@@ -58,7 +58,7 @@ export const traceTryFunction = async <T>(
   _arguments: IArguments,
   errorLogLevel: 'WARN' | 'ERROR' | 'FATAL',
   callback: () => Promise<T>,
-): Promise<[value: T, success: true] | [value: null, success: false]> => {
+): Promise<[value: T, success: true] | [value: Error, success: false]> => {
   return await new Promise((resolve, _reject) => {
     // Only tracer.startActiveSpan callback creates child span
     trace.getTracer('traceTryFunction').startActiveSpan(functionName, async (span) => {
@@ -86,7 +86,7 @@ export const traceTryFunction = async <T>(
         })
         span.setStatus({ code: SpanStatusCode.ERROR })
         span.end()
-        resolve([null, false])
+        resolve([error, false])
       }
     })
   })
