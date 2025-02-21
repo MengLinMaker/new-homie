@@ -18,7 +18,7 @@ Resources:
   #   Properties:
   #     Timeout: 60 # Jobs may come in various sizes
   #     MemorySize: 256 # Limit CPU to throttle scraping
-  #     CodeUri: ./function-batchTrigger/src/
+  #     CodeUri: ./function-batch_trigger/src/
   #     Events:
   #       Cron:
   #         Type: Schedule
@@ -51,7 +51,7 @@ Resources:
     Properties:
       Timeout: 900 # Jobs may come in various sizes
       MemorySize: 256 # Limit CPU to throttle scraping
-      CodeUri: ./function-batchScrapeSuburbs/src/
+      CodeUri: ./function-batch_scrape_suburbs/src/
       Events:
         SQS:
           Type: SQS
@@ -71,12 +71,12 @@ Resources:
           - "@aws-sdk/*"
           - aws-sdk
         Minify: false
-  # ReadOLTP:
+  # ReadPublic:
   #   Type: AWS::Serverless::Function
   #   Properties:
   #     ReservedConcurrentExecutions: 10 # Prevent database overload
   #     Timeout: 3
-  #     CodeUri: ./function-readOLTP/src/
+  #     CodeUri: ./function-read_public/src/
   #     Events:
   #       Api:
   #         Type: Api
