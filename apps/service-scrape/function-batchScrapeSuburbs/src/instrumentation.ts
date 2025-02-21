@@ -1,11 +1,17 @@
-import { NodeSDK } from '@opentelemetry/sdk-node'
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
 import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
+import { LoggerProvider, SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs'
 import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
 import { HostMetrics } from '@opentelemetry/host-metrics'
-import { ENV } from './env'
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+
+import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions'
+import { Resource } from '@opentelemetry/resources'
+import { NodeSDK } from '@opentelemetry/sdk-node'
 import { SpanStatusCode, trace } from '@opentelemetry/api'
+
+import { ENV } from './env'
 
 const SERVICE_NAME = 'function-batchScrapeSuburbs'
 
@@ -31,6 +37,7 @@ const hostMetrics = new HostMetrics({
 })
 hostMetrics.start()
 
+// Auto detect trace spans
 const sdk = new NodeSDK({
   autoDetectResources: false, // Disable useless process info
   serviceName: SERVICE_NAME,
@@ -42,6 +49,22 @@ const sdk = new NodeSDK({
   ),
 })
 sdk.start()
+
+// Separate log setup for log levels
+const logProvider = new LoggerProvider({
+  resource: new Resource({
+    [ATTR_SERVICE_NAME]: SERVICE_NAME,
+  }),
+})
+logProvider.addLogRecordProcessor(
+  new SimpleLogRecordProcessor(
+    new OTLPLogExporter({
+      url: `${ENV.OLTP_BASE_URL}logs`,
+      headers: OLTP_HEADERS,
+    }),
+  ),
+)
+export const logger = logProvider.getLogger(SERVICE_NAME)
 
 const tracer = trace.getTracer(SERVICE_NAME)
 
@@ -57,27 +80,31 @@ export const traceTryFunction = async <T>(
   _arguments: IArguments,
   errorLogLevel: 'WARN' | 'ERROR' | 'FATAL',
   callback: () => Promise<T>,
-): Promise<[value: T | null, success: boolean]> => {
+): Promise<[value: T, success: true] | [value: null, success: false]> => {
   return await new Promise((resolve, _reject) => {
     // Only tracer.startActiveSpan callback creates child span
     tracer.startActiveSpan(functionName, async (span) => {
+      // Catch errors to ensure trace logs are always sent
       try {
         const value = await callback()
         span.setStatus({ code: SpanStatusCode.OK })
         span.end()
         resolve([value, true])
       } catch (e) {
-        span.recordException(
-          e instanceof Error // Not all exceptions are Error type
+        const error =
+          e instanceof Error
             ? e
             : Error(
                 'Non-error exception: "https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript"',
-              ),
-        )
-        span.setAttributes({
-          'log.level': errorLogLevel,
-          'code.function.name': functionName,
-          'code.function.arguments': JSON.stringify(Object.values(_arguments)),
+              )
+        logger.emit({
+          severityText: errorLogLevel,
+          body: error.stack,
+          attributes: {
+            'code.function.name': functionName,
+            'code.function.arguments': JSON.stringify(Object.values(_arguments)),
+            'error.message': error.message,
+          },
         })
         span.setStatus({ code: SpanStatusCode.ERROR })
         span.end()

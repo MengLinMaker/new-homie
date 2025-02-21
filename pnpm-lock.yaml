@@ -49,6 +49,9 @@ importers:
       '@opentelemetry/api':
         specifier: 1.9.0
         version: 1.9.0
+      '@opentelemetry/exporter-logs-otlp-proto':
+        specifier: 0.57.2
+        version: 0.57.2(@opentelemetry/api@1.9.0)
       '@opentelemetry/exporter-metrics-otlp-proto':
         specifier: 0.57.2
         version: 0.57.2(@opentelemetry/api@1.9.0)
@@ -58,6 +61,12 @@ importers:
       '@opentelemetry/host-metrics':
         specifier: 0.35.5
         version: 0.35.5(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources':
+        specifier: 1.30.1
+        version: 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-logs':
+        specifier: 0.57.2
+        version: 0.57.2(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-metrics':
         specifier: 1.30.1
         version: 1.30.1(@opentelemetry/api@1.9.0)
@@ -67,6 +76,9 @@ importers:
       '@opentelemetry/sdk-trace-base':
         specifier: 1.30.1
         version: 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions':
+        specifier: 1.30.0
+        version: 1.30.0
       cheerio:
         specifier: 1.0.0
         version: 1.0.0
@@ -742,6 +754,10 @@ packages:
 
   '@opentelemetry/semantic-conventions@1.28.0':
     resolution: {integrity: sha512-lp4qAiMTD4sNWW4DbKLBkfiMZ4jbAboJIGOQr5DvciMRI494OapieI9qiODpOt0XBr1LjIDy1xAGAnVs5supTA==}
+    engines: {node: '>=14'}
+
+  '@opentelemetry/semantic-conventions@1.30.0':
+    resolution: {integrity: sha512-4VlGgo32k2EQ2wcCY3vEU28A0O13aOtHz3Xt2/2U5FAh9EfhD6t6DqL5Z6yAnRCntbTFDU4YfbpyzSlHNWycPw==}
     engines: {node: '>=14'}
 
   '@protobufjs/aspromise@1.1.2':
@@ -2640,6 +2656,8 @@ snapshots:
       semver: 7.7.1
 
   '@opentelemetry/semantic-conventions@1.28.0': {}
+
+  '@opentelemetry/semantic-conventions@1.30.0': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
