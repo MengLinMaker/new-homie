@@ -32,7 +32,7 @@ const sdk = new NodeSDK({
 sdk.start()
 
 // Separate log setup for log levels
-const logProvider = new LoggerProvider({
+export const logProvider = new LoggerProvider({
   resource: new Resource({
     [ATTR_SERVICE_NAME]: SERVICE_NAME,
   }),
@@ -45,9 +45,6 @@ logProvider.addLogRecordProcessor(
     }),
   ),
 )
-export const logger = logProvider.getLogger(SERVICE_NAME)
-
-const tracer = trace.getTracer(SERVICE_NAME)
 
 /**
  * @description Adds tracing to lambda function with success indicator
@@ -64,7 +61,7 @@ export const traceTryFunction = async <T>(
 ): Promise<[value: T, success: true] | [value: null, success: false]> => {
   return await new Promise((resolve, _reject) => {
     // Only tracer.startActiveSpan callback creates child span
-    tracer.startActiveSpan(functionName, async (span) => {
+    trace.getTracer('traceTryFunction').startActiveSpan(functionName, async (span) => {
       // Catch errors to ensure trace logs are always sent
       try {
         const value = await callback()
@@ -78,7 +75,7 @@ export const traceTryFunction = async <T>(
             : Error(
                 'Non-error exception: "https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript"',
               )
-        logger.emit({
+        logProvider.getLogger('traceTryFunction').emit({
           severityText: errorLogLevel,
           body: error.stack,
           attributes: {
