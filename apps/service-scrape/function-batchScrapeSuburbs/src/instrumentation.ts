@@ -1,9 +1,6 @@
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
-import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 import { LoggerProvider, SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs'
-import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
-import { HostMetrics } from '@opentelemetry/host-metrics'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions'
@@ -20,22 +17,6 @@ ENV.OLTP_HEADERS.split(', ').map((header) => {
   const [key, val] = header.split(': ')
   if (key && val) OLTP_HEADERS[key] = val
 })
-
-// Collect CPU and RAM load for system and process
-const hostMetrics = new HostMetrics({
-  meterProvider: new MeterProvider({
-    readers: [
-      new PeriodicExportingMetricReader({
-        exportIntervalMillis: 5000,
-        exporter: new OTLPMetricExporter({
-          url: `${ENV.OLTP_BASE_URL}metrics`,
-          headers: OLTP_HEADERS,
-        }),
-      }),
-    ],
-  }),
-})
-hostMetrics.start()
 
 // Auto detect trace spans
 const sdk = new NodeSDK({
