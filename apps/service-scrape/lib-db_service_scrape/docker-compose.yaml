@@ -1,0 +1,22 @@
+services:
+  db:
+    build:
+      context: docker
+      dockerfile: dockerfile
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    volumes:
+      - tmp:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+    restart: unless-stopped
+
+volumes:
+   tmp:
