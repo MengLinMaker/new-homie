@@ -1,0 +1,23 @@
+{
+  "name": "lib-db_service_scrape",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "biome format --write",
+    "docker:down": "docker-compose down -v",
+    "docker:up": "docker-compose up --build -d && drizzle-kit push --config ./test/drizzle.config.ts --force true",
+    "generate": "drizzle-kit generate",
+    "test:lint": "biome lint --write",
+    "test:unit": "docker:up & vitest run && docker:down",
+    "test:type": "tsc"
+  },
+  "dependencies": {
+    "dotenv": "16.4.7",
+    "drizzle-orm": "0.39.3",
+    "drizzle-zod": "0.7.0",
+    "postgres": "3.4.5"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.30.4"
+  },
+  "type": "module"
+}
