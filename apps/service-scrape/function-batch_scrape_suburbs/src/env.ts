@@ -26,22 +26,4 @@ export const ENV = {
     .regex(/(([\w-]+: [\w-_. ]+(, )?)+)?/)
     .default('')
     .parse(process.env['OLTP_HEADERS']),
-
-  /**
-   * @description Postgres connection url with password
-   */
-  POSTGRES_URL: (() => {
-    try {
-      z.string()
-        .regex(/postgresql:\/\/\w+:\w+@[\w-.]+\/\w+((\?)(\w+=\w+)+)?/)
-        .default('postgresql:')
-        .parse(process.env['POSTGRES_URL'])
-    } catch {
-      // Crash fatal error
-      console.error(
-        'POSTGRES_URL env variable does not match regex: /postgresql:\\/\\/\\w+:\\w+@[\\w-.]+\\/\\w+((\\?)(\\w+=\\w+)+)?/',
-      )
-      process.kill(process.pid, 'SIGTERM')
-    }
-  })(),
 }
