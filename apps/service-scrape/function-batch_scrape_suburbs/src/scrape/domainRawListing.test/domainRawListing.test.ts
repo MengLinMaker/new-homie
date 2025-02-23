@@ -12,9 +12,12 @@ describe('domainRawListing', () => {
         readFileSync(`${import.meta.dirname}/${expectedFile}`).toString(),
       )
 
-      const [[resultObject, _isLastpage], success] =
-        await domainRawListing.tryExtractListings(inputObject)
-      expect(success).toBe(true)
+      const [value, success] = await domainRawListing.tryExtractListings(inputObject)
+      if (!success) {
+        expect(success).toBe(true)
+        return
+      }
+      const [resultObject, _isLastpage] = value
       expect(resultObject).toStrictEqual(expectedObject)
     })
 
