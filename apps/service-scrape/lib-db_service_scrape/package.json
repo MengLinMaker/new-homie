@@ -6,6 +6,7 @@
     "docker:down": "docker-compose down -v",
     "docker:up": "docker-compose up --build -d && drizzle-kit push --config ./test/drizzle.config.ts --force true",
     "generate": "drizzle-kit generate --name",
+    "migrate": "drizzle-kit generate migrate --config ./src/drizzle.config.ts",
     "test:lint": "biome lint --write",
     "test:unit": "pnpm docker:up && vitest run && docker:down",
     "test:type": "tsc"

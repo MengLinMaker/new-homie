@@ -1,12 +1,11 @@
 import { defineConfig } from 'drizzle-kit'
+import { ENV } from './env'
 
-export const TEST_POSTGRES_URL = 'postgresql://user:password@localhost:54320/db'
-
-// Only used for testing
+// Only used for database migration
 export default defineConfig({
   schema: './src/schema.ts',
   dialect: 'postgresql',
   dbCredentials: {
-    url: TEST_POSTGRES_URL,
+    url: ENV.POSTGRES_URL,
   },
 })
