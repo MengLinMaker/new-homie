@@ -1,8 +1,6 @@
 services:
   db:
-    build:
-      context: docker
-      dockerfile: dockerfile
+    image: postgres:15.8-bookworm
     ports:
       - "54320:5432"
     environment:
