@@ -4,9 +4,7 @@
   "private": "true",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "format": "biome format --write",
     "docker:down": "docker-compose down -v",
