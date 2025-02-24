@@ -11,6 +11,15 @@ import {
   text,
   time,
 } from 'drizzle-orm/pg-core'
+import type { Kyselify } from 'drizzle-orm/kysely'
+
+export interface Database {
+  localities_table: Kyselify<typeof localities_table>
+  common_features_table: Kyselify<typeof common_features_table>
+  home_table: Kyselify<typeof home_table>
+  rental_price_table: Kyselify<typeof rental_price_table>
+  sale_price_table: Kyselify<typeof sale_price_table>
+}
 
 export const localities_table = pgTable(
   'localities_table',
@@ -44,6 +53,7 @@ export const localities_table = pgTable(
     ]
   },
 )
+
 export const common_features_table = pgTable(
   'common_features_table',
   {
