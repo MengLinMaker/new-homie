@@ -7,14 +7,15 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
+      PGDATA: /var/lib/postgresql/data
     volumes:
-      - tmp:/tmp
+      - db:/var/lib/postgresql/data
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: 128M
+          cpus: '0.5'
+          memory: 256m
     restart: unless-stopped
 
 volumes:
-   tmp:
+   db: {}
