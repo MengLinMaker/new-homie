@@ -3,7 +3,11 @@
     "listingModel": {
       "url": "/3-5-8-36-38-power-street-dandenong-vic-3175-2018546703",
       "price": "$550,000 - $575,000",
-      "address": { "street": "3, 5 & 8/36-38 Power Street", "lat": -37.98964, "lng": 145.2252 },
+      "address": {
+        "street": "3, 5 & 8/36-38 Power Street",
+        "lat": -37.98964,
+        "lng": 145.2252
+      },
       "features": {
         "beds": 2,
         "baths": 2,
@@ -13,7 +17,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -21,7 +28,11 @@
     "listingModel": {
       "url": "/1-6-36-38-power-street-dandenong-vic-3175-2018762688",
       "price": "$640,000 - $680,000",
-      "address": { "street": "1 & 6/36-38 Power Street", "lat": -37.98964, "lng": 145.2252 },
+      "address": {
+        "street": "1 & 6/36-38 Power Street",
+        "lat": -37.98964,
+        "lng": 145.2252
+      },
       "features": {
         "beds": 3,
         "baths": 3,
@@ -31,7 +42,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -39,7 +53,11 @@
     "listingModel": {
       "url": "/4-glenys-court-dandenong-vic-3175-2019314383",
       "price": "$760,000 - $820,000",
-      "address": { "street": "4 Glenys Court", "lat": -37.997932, "lng": 145.21036 },
+      "address": {
+        "street": "4 Glenys Court",
+        "lat": -37.997932,
+        "lng": 145.21036
+      },
       "features": {
         "beds": 3,
         "baths": 2,
@@ -49,7 +67,10 @@
         "landSize": 537,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -57,17 +78,23 @@
     "listingModel": {
       "url": "/98-keneally-street-dandenong-vic-3175-2019553636",
       "price": "$340,000 - $360,000",
-      "address": { "street": "98 Keneally Street", "lat": -37.992256, "lng": 145.20573 },
+      "address": {
+        "street": "98 Keneally Street",
+        "lat": -37.992256,
+        "lng": 145.20573
+      },
       "features": {
         "beds": 1,
         "baths": 1,
-        "parking": null,
         "propertyType": "ApartmentUnitFlat",
         "isRural": false,
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -75,7 +102,11 @@
     "listingModel": {
       "url": "/10a-gooding-court-dandenong-vic-3175-2019592676",
       "price": "$700,000 - $770,000",
-      "address": { "street": "10A Gooding Court", "lat": -37.975513, "lng": 145.2246 },
+      "address": {
+        "street": "10A Gooding Court",
+        "lat": -37.975513,
+        "lng": 145.2246
+      },
       "features": {
         "beds": 4,
         "baths": 3,
@@ -85,7 +116,10 @@
         "landSize": 356,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T12:00:00", "closeTime": "2025-02-01T12:20:00" },
+      "inspection": {
+        "openTime": "2025-02-01T12:00:00",
+        "closeTime": "2025-02-01T12:20:00"
+      },
       "auction": null
     }
   },
@@ -93,7 +127,11 @@
     "listingModel": {
       "url": "/216-80-cheltenham-road-dandenong-vic-3175-2019665514",
       "price": "$360,000 - $390,000",
-      "address": { "street": "216/80 Cheltenham Road", "lat": -37.990078, "lng": 145.20435 },
+      "address": {
+        "street": "216/80 Cheltenham Road",
+        "lat": -37.990078,
+        "lng": 145.20435
+      },
       "features": {
         "beds": 2,
         "baths": 1,
@@ -103,7 +141,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:20:00", "closeTime": "2025-02-01T13:40:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:20:00",
+        "closeTime": "2025-02-01T13:40:00"
+      },
       "auction": null
     }
   },
@@ -111,7 +152,11 @@
     "listingModel": {
       "url": "/1-67-hammond-road-dandenong-vic-3175-2019677800",
       "price": "$460,000 - $506,000",
-      "address": { "street": "1/67 Hammond Road", "lat": -37.997467, "lng": 145.20929 },
+      "address": {
+        "street": "1/67 Hammond Road",
+        "lat": -37.997467,
+        "lng": 145.20929
+      },
       "features": {
         "beds": 2,
         "baths": 1,
@@ -121,7 +166,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -129,7 +177,11 @@
     "listingModel": {
       "url": "/2-13-grandview-avenue-dandenong-vic-3175-2019686412",
       "price": "$480,000 - $525,000",
-      "address": { "street": "2/13 Grandview Avenue", "lat": -37.98289, "lng": 145.22481 },
+      "address": {
+        "street": "2/13 Grandview Avenue",
+        "lat": -37.98289,
+        "lng": 145.22481
+      },
       "features": {
         "beds": 2,
         "baths": 2,
@@ -139,7 +191,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T10:00:00", "closeTime": "2025-02-01T10:20:00" },
+      "inspection": {
+        "openTime": "2025-02-01T10:00:00",
+        "closeTime": "2025-02-01T10:20:00"
+      },
       "auction": null
     }
   },
@@ -147,7 +202,11 @@
     "listingModel": {
       "url": "/5-69-71-potter-street-dandenong-vic-3175-2019700219",
       "price": "$480,000-$520,000",
-      "address": { "street": "5/69-71 Potter Street", "lat": -37.979576, "lng": 145.20639 },
+      "address": {
+        "street": "5/69-71 Potter Street",
+        "lat": -37.979576,
+        "lng": 145.20639
+      },
       "features": {
         "beds": 2,
         "baths": 2,
@@ -157,7 +216,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:00:00", "closeTime": "2025-02-01T13:30:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:00:00",
+        "closeTime": "2025-02-01T13:30:00"
+      },
       "auction": null
     }
   },
@@ -165,7 +227,11 @@
     "listingModel": {
       "url": "/1-15-wilma-avenue-dandenong-vic-3175-2019714490",
       "price": "$370,000 to $399,000",
-      "address": { "street": "1/15 Wilma Avenue", "lat": -37.983047, "lng": 145.20195 },
+      "address": {
+        "street": "1/15 Wilma Avenue",
+        "lat": -37.983047,
+        "lng": 145.20195
+      },
       "features": {
         "beds": 2,
         "baths": 1,
@@ -175,7 +241,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-08T12:40:00", "closeTime": "2025-02-08T13:00:00" },
+      "inspection": {
+        "openTime": "2025-02-08T12:40:00",
+        "closeTime": "2025-02-08T13:00:00"
+      },
       "auction": null
     }
   },
@@ -183,7 +252,11 @@
     "listingModel": {
       "url": "/2-79-hammond-road-dandenong-vic-3175-2019715855",
       "price": "$400,000 - $440,000",
-      "address": { "street": "2/79 Hammond Road", "lat": -37.99849, "lng": 145.20924 },
+      "address": {
+        "street": "2/79 Hammond Road",
+        "lat": -37.99849,
+        "lng": 145.20924
+      },
       "features": {
         "beds": 2,
         "baths": 1,
@@ -193,7 +266,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:40:00", "closeTime": "2025-02-01T14:00:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:40:00",
+        "closeTime": "2025-02-01T14:00:00"
+      },
       "auction": null
     }
   },
@@ -201,7 +277,11 @@
     "listingModel": {
       "url": "/16-rodwell-street-dandenong-vic-3175-2019717175",
       "price": "AUCTION THIS SATURDAY @3:00PM ONSITE !!",
-      "address": { "street": "16 Rodwell Street", "lat": -37.991478, "lng": 145.20213 },
+      "address": {
+        "street": "16 Rodwell Street",
+        "lat": -37.991478,
+        "lng": 145.20213
+      },
       "features": {
         "beds": 4,
         "baths": 2,
@@ -211,7 +291,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T14:30:00", "closeTime": "2025-02-01T15:00:00" },
+      "inspection": {
+        "openTime": "2025-02-01T14:30:00",
+        "closeTime": "2025-02-01T15:00:00"
+      },
       "auction": "2025-02-01T15:00:00"
     }
   },
@@ -219,7 +302,11 @@
     "listingModel": {
       "url": "/20-57-clow-street-dandenong-vic-3175-2019734468",
       "price": "$350,000 - $385,000",
-      "address": { "street": "20/57 Clow Street", "lat": -37.984055, "lng": 145.21962 },
+      "address": {
+        "street": "20/57 Clow Street",
+        "lat": -37.984055,
+        "lng": 145.21962
+      },
       "features": {
         "beds": 3,
         "baths": 1,
@@ -229,7 +316,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T12:50:00", "closeTime": "2025-02-01T13:10:00" },
+      "inspection": {
+        "openTime": "2025-02-01T12:50:00",
+        "closeTime": "2025-02-01T13:10:00"
+      },
       "auction": null
     }
   },
@@ -237,7 +327,11 @@
     "listingModel": {
       "url": "/113-keneally-street-dandenong-vic-3175-2019734561",
       "price": "$450,000 - $495,000",
-      "address": { "street": "113 Keneally Street", "lat": -37.99162, "lng": 145.20573 },
+      "address": {
+        "street": "113 Keneally Street",
+        "lat": -37.99162,
+        "lng": 145.20573
+      },
       "features": {
         "beds": 2,
         "baths": 1,
@@ -247,7 +341,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T10:00:00", "closeTime": "2025-02-01T10:20:00" },
+      "inspection": {
+        "openTime": "2025-02-01T10:00:00",
+        "closeTime": "2025-02-01T10:20:00"
+      },
       "auction": null
     }
   },
@@ -255,7 +352,11 @@
     "listingModel": {
       "url": "/2-19-orgill-street-dandenong-vic-3175-2019739832",
       "price": "$560,000 - $615,000",
-      "address": { "street": "2/19 Orgill Street", "lat": -37.993183, "lng": 145.22523 },
+      "address": {
+        "street": "2/19 Orgill Street",
+        "lat": -37.993183,
+        "lng": 145.22523
+      },
       "features": {
         "beds": 3,
         "baths": 1,
@@ -265,7 +366,10 @@
         "landSize": 220,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T11:00:00", "closeTime": "2025-02-01T11:30:00" },
+      "inspection": {
+        "openTime": "2025-02-01T11:00:00",
+        "closeTime": "2025-02-01T11:30:00"
+      },
       "auction": null
     }
   },
@@ -273,7 +377,11 @@
     "listingModel": {
       "url": "/23-desa-terrace-dandenong-vic-3175-2019742612",
       "price": "$840,000 - $880,000",
-      "address": { "street": "23 Desa Terrace", "lat": -38.000427, "lng": 145.19896 },
+      "address": {
+        "street": "23 Desa Terrace",
+        "lat": -38.000427,
+        "lng": 145.19896
+      },
       "features": {
         "beds": 4,
         "baths": 2,
@@ -283,7 +391,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:30:00", "closeTime": "2025-02-01T14:00:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:30:00",
+        "closeTime": "2025-02-01T14:00:00"
+      },
       "auction": "2025-02-15T15:30:00"
     }
   },
@@ -291,7 +402,11 @@
     "listingModel": {
       "url": "/21-purdy-avenue-dandenong-vic-3175-2019749788",
       "price": "$600,000 - $660,000",
-      "address": { "street": "21 Purdy Avenue", "lat": -37.980503, "lng": 145.2041 },
+      "address": {
+        "street": "21 Purdy Avenue",
+        "lat": -37.980503,
+        "lng": 145.2041
+      },
       "features": {
         "beds": 3,
         "baths": 1,
@@ -301,7 +416,10 @@
         "landSize": 213,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T12:30:00", "closeTime": "2025-02-01T13:00:00" },
+      "inspection": {
+        "openTime": "2025-02-01T12:30:00",
+        "closeTime": "2025-02-01T13:00:00"
+      },
       "auction": null
     }
   },
@@ -309,7 +427,11 @@
     "listingModel": {
       "url": "/69-king-george-parade-dandenong-vic-3175-2019750160",
       "price": "$700,000 - $750,000",
-      "address": { "street": "69 King George Parade", "lat": -37.978634, "lng": 145.19737 },
+      "address": {
+        "street": "69 King George Parade",
+        "lat": -37.978634,
+        "lng": 145.19737
+      },
       "features": {
         "beds": 3,
         "baths": 1,
@@ -319,7 +441,10 @@
         "landSize": 682,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T10:30:00", "closeTime": "2025-02-01T11:00:00" },
+      "inspection": {
+        "openTime": "2025-02-01T10:30:00",
+        "closeTime": "2025-02-01T11:00:00"
+      },
       "auction": null
     }
   },
@@ -327,7 +452,11 @@
     "listingModel": {
       "url": "/1-2-64-potter-street-dandenong-vic-3175-2019750959",
       "price": "$620,000 - $660,000",
-      "address": { "street": "1 & 2/64 Potter Street", "lat": -37.979507, "lng": 145.20688 },
+      "address": {
+        "street": "1 & 2/64 Potter Street",
+        "lat": -37.979507,
+        "lng": 145.20688
+      },
       "features": {
         "beds": 4,
         "baths": 2,
@@ -337,7 +466,10 @@
         "landSize": 634,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T14:20:00", "closeTime": "2025-02-01T14:40:00" },
+      "inspection": {
+        "openTime": "2025-02-01T14:20:00",
+        "closeTime": "2025-02-01T14:40:00"
+      },
       "auction": "2025-02-22T10:30:00"
     }
   },
@@ -345,7 +477,11 @@
     "listingModel": {
       "url": "/6-80-cheltenham-road-dandenong-vic-3175-2019753113",
       "price": "$285,000 - $313,500",
-      "address": { "street": "6/80 Cheltenham Road", "lat": -37.989986, "lng": 145.20407 },
+      "address": {
+        "street": "6/80 Cheltenham Road",
+        "lat": -37.989986,
+        "lng": 145.20407
+      },
       "features": {
         "beds": 1,
         "baths": 1,
@@ -355,7 +491,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": null, "closeTime": null },
+      "inspection": {
+        "openTime": null,
+        "closeTime": null
+      },
       "auction": null
     }
   },
@@ -363,7 +502,11 @@
     "listingModel": {
       "url": "/39-35-david-street-dandenong-vic-3175-2019753130",
       "price": "$650,000 - $715,000",
-      "address": { "street": "39/35 David Street", "lat": -37.974426, "lng": 145.20837 },
+      "address": {
+        "street": "39/35 David Street",
+        "lat": -37.974426,
+        "lng": 145.20837
+      },
       "features": {
         "beds": 3,
         "baths": 2,
@@ -373,7 +516,10 @@
         "landSize": 0,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:00:00", "closeTime": "2025-02-01T13:30:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:00:00",
+        "closeTime": "2025-02-01T13:30:00"
+      },
       "auction": null
     }
   },
@@ -381,7 +527,11 @@
     "listingModel": {
       "url": "/22-bassett-street-dandenong-vic-3175-2019760323",
       "price": "$860,000 - $946,000",
-      "address": { "street": "22 Bassett Street", "lat": -37.99115, "lng": 145.20299 },
+      "address": {
+        "street": "22 Bassett Street",
+        "lat": -37.99115,
+        "lng": 145.20299
+      },
       "features": {
         "beds": 4,
         "baths": 2,
@@ -391,7 +541,10 @@
         "landSize": 338,
         "isRetirement": false
       },
-      "inspection": { "openTime": "2025-02-01T13:00:00", "closeTime": "2025-02-01T13:30:00" },
+      "inspection": {
+        "openTime": "2025-02-01T13:00:00",
+        "closeTime": "2025-02-01T13:30:00"
+      },
       "auction": null
     }
   }
