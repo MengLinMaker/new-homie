@@ -74,8 +74,8 @@ importers:
         specifier: 1.30.0
         version: 1.30.0
       '@service-scrape/lib-db_service_scrape':
-        specifier: workspace:.
-        version: 'link:'
+        specifier: workspace:*
+        version: link:../lib-db_service_scrape
       cheerio:
         specifier: 1.0.0
         version: 1.0.0

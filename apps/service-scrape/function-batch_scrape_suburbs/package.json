@@ -25,7 +25,7 @@
     "cheerio": "1.0.0",
     "hono": "4.7.1",
     "zod": "3.24.2",
-    "@service-scrape/lib-db_service_scrape": "workspace:."
+    "@service-scrape/lib-db_service_scrape": "workspace:*"
   },
   "type": "module"
 }
