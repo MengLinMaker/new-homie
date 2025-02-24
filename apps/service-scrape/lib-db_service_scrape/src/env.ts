@@ -12,7 +12,6 @@ export const ENV = {
    */
   POSTGRES_URL: z
     .string()
-    .regex(/postgresql:\/\/\w+:\w+@[\w-.]+\/\w+((\?)(\w+=\w+)+)?/)
-    .default('postgresql:')
+    .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/)
     .parse(process.env['POSTGRES_URL']),
 }
