@@ -12,6 +12,8 @@ export const ENV = {
    */
   POSTGRES_URL: z
     .string()
-    .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/)
+    .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
+      message: 'POSTGRES_URL is invalid',
+    })
     .parse(process.env['POSTGRES_URL']),
 }
