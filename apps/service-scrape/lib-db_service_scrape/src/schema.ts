@@ -21,6 +21,17 @@ export interface Database {
   sale_price_table: Kyselify<typeof sale_price_table>
 }
 
+export const state_abbreviation_enum = pgEnum('state_abbreviation_enum', [
+  'ACT',
+  'NSW',
+  'NT',
+  'QLD',
+  'SA',
+  'TAS',
+  'VIC',
+  'WA',
+])
+
 export const localities_table = pgTable(
   'localities_table',
   {
@@ -28,31 +39,29 @@ export const localities_table = pgTable(
     id: smallint().generatedByDefaultAsIdentity().primaryKey(),
     suburb_name: text().notNull(),
     postcode: text().notNull(),
-    state_abbreviation: pgEnum('state_abbreviation_enum', [
-      'ACT',
-      'NSW',
-      'NT',
-      'QLD',
-      'SA',
-      'TAS',
-      'VIC',
-      'WA',
-    ])().notNull(),
+    state_abbreviation: state_abbreviation_enum().notNull(),
     gps: point().notNull(),
   },
   (t) => {
     const c = conventionalConstraintFactory('localities_table')
     return [
-      c.textSearchIndex(t.suburb_name),
-      c.index('hash', t.postcode),
-      c.index('hash', t.state_abbreviation),
-      c.index('gist', t.gps),
+      // c.textSearchIndex(t.suburb_name),
+      // c.index('hash', t.postcode),
+      // c.index('hash', t.state_abbreviation),
+      // c.index('gist', t.gps),
 
       c.check(t.suburb_name, sql`LENGTH(${t.suburb_name}) < 64`),
       c.check(t.postcode, sql`LENGTH(${t.postcode}) = 4`),
     ]
   },
 )
+
+export const home_type_enum = pgEnum('home_type_enum', [
+  'ApartmentUnitFlat',
+  'House',
+  'Townhouse',
+  'BlockOfUnits',
+])
 
 export const common_features_table = pgTable(
   'common_features_table',
@@ -63,23 +72,19 @@ export const common_features_table = pgTable(
     bed_quantity: smallint().notNull(), // 10 beds is beyond budget
     bath_quantity: smallint().notNull(), // 5 baths is beyond budget
     car_quantity: smallint().notNull(), // 20 cars is beyond budget
-    home_type: pgEnum('home_type_enum', [
-      'ApartmentUnitFlat',
-      'House',
-      'Townhouse',
-      'BlockOfUnits',
-    ])().notNull(),
+    home_type: home_type_enum().notNull(),
     is_retirement: boolean().notNull(),
     is_rural: boolean().notNull(),
   },
   (t) => {
     const c = conventionalConstraintFactory('common_features_table')
     return [
-      c.index('btree', t.bed_quantity),
-      c.index('btree', t.bath_quantity),
-      c.index('btree', t.car_quantity),
-      c.index('hash', t.is_retirement),
-      c.index('hash', t.is_rural),
+      // Indexes on this small table don't seem to improve query speed.
+      // c.index('btree', t.bed_quantity),
+      // c.index('btree', t.bath_quantity),
+      // c.index('btree', t.car_quantity),
+      // c.index('hash', t.is_retirement),
+      // c.index('hash', t.is_rural),
 
       c.check(t.bed_quantity, sql`${t.bed_quantity} >= 0 AND ${t.bed_quantity} <= 10`),
       c.check(t.bath_quantity, sql`${t.bath_quantity} >= 0  AND ${t.bath_quantity} <= 5`),
@@ -105,11 +110,11 @@ export const home_table = pgTable(
   (t) => {
     const c = conventionalConstraintFactory('home_table')
     return [
-      c.textSearchIndex(t.street_address),
-      c.index('gist', t.gps),
-      c.index('btree', t.land_m2),
-      c.index('btree', t.inspection_time),
-      c.index('btree', t.auction_time),
+      // c.textSearchIndex(t.street_address),
+      // c.index('gist', t.gps),
+      // c.index('btree', t.land_m2),
+      // c.index('btree', t.inspection_time),
+      // c.index('btree', t.auction_time),
 
       c.check(t.street_address, sql`LENGTH(${t.street_address}) < 64`),
     ]
@@ -126,12 +131,12 @@ export const rental_price_table = pgTable(
     last_scrape_date: date().notNull().defaultNow(),
     weekly_rent_aud: smallint().notNull(),
   },
-  (t) => {
-    const c = conventionalConstraintFactory('rental_price_table')
+  (_t) => {
+    conventionalConstraintFactory('rental_price_table')
     return [
-      c.index('btree', t.first_scrape_date),
-      c.index('btree', t.last_scrape_date),
-      c.index('btree', t.weekly_rent_aud),
+      // c.index('btree', t.first_scrape_date),
+      // c.index('btree', t.last_scrape_date),
+      // c.index('btree', t.weekly_rent_aud),
     ]
   },
 )
@@ -147,13 +152,13 @@ export const sale_price_table = pgTable(
     lower_price_aud: integer().notNull(),
     higher_price_aud: integer().notNull(),
   },
-  (t) => {
-    const c = conventionalConstraintFactory('sale_price_table')
+  (_t) => {
+    conventionalConstraintFactory('sale_price_table')
     return [
-      c.index('btree', t.first_scrape_date),
-      c.index('btree', t.last_scrape_date),
-      c.index('btree', t.lower_price_aud),
-      c.index('btree', t.higher_price_aud),
+      // c.index('btree', t.first_scrape_date),
+      // c.index('btree', t.last_scrape_date),
+      // c.index('btree', t.lower_price_aud),
+      // c.index('btree', t.higher_price_aud),
     ]
   },
 )
