@@ -12,12 +12,6 @@ import {
   time,
 } from 'drizzle-orm/pg-core'
 
-/**
- * Design guide: https://wiki.postgresql.org/wiki/Don't_Do_This
- * Use int() instead of serial() for SQL standard compliance: https://www.enterprisedb.com/blog/postgresql-10-identity-columns-explained
- * Use text() and prefer text constraint: https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
- */
-
 export const state_abbreviation_enum = pgEnum('state_abbreviation_enum', [
   'ACT',
   'NSW',
