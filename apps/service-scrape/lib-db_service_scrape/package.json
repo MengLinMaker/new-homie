@@ -1,5 +1,5 @@
 {
-  "name": "lib-db_service_scrape",
+  "name": "@service-scrape/lib-db_service_scrape",
   "version": "1.0.0",
   "private": "true",
   "main": "./dist/index.js",

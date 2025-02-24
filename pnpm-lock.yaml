@@ -73,6 +73,9 @@ importers:
       '@opentelemetry/semantic-conventions':
         specifier: 1.30.0
         version: 1.30.0
+      '@service-scrape/lib-db_service_scrape':
+        specifier: workspace:.
+        version: 'link:'
       cheerio:
         specifier: 1.0.0
         version: 1.0.0

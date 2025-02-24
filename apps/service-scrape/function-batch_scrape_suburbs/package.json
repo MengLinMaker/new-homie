@@ -1,5 +1,5 @@
 {
-  "name": "function-batch_scrape_suburbs",
+  "name": "@service-scrape/function-batch_scrape_suburbs",
   "version": "1.0.0",
   "scripts": {
     "format": "biome format --write",
@@ -24,7 +24,8 @@
     "@opentelemetry/semantic-conventions": "1.30.0",
     "cheerio": "1.0.0",
     "hono": "4.7.1",
-    "zod": "3.24.2"
+    "zod": "3.24.2",
+    "@service-scrape/lib-db_service_scrape": "workspace:."
   },
   "type": "module"
 }
