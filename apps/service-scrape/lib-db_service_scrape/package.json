@@ -1,15 +1,24 @@
 {
   "name": "lib-db_service_scrape",
   "version": "1.0.0",
+  "private": "true",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "format": "biome format --write",
     "docker:down": "docker-compose down -v",
-    "docker:up": "docker-compose up --build -d && drizzle-kit push --config ./test/drizzle.config.ts --force true",
+    "docker:up": "docker-compose up --build -d && sleep 1 && drizzle-kit push --config ./test/drizzle.config.ts --force true",
+    "studio": "drizzle-kit studio --config ./test/drizzle.config.ts",
     "generate": "drizzle-kit generate --name",
     "migrate": "drizzle-kit generate migrate --config ./src/drizzle.config.ts",
     "test:lint": "biome lint --write",
-    "test:unit": "pnpm docker:up && vitest run && docker:down",
-    "test:type": "tsc"
+    "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
+    "test:type": "tsc",
+    "test:build": "attw -P .",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap"
   },
   "dependencies": {
     "dotenv": "16.4.7",
@@ -19,6 +28,7 @@
     "postgres": "3.4.5"
   },
   "devDependencies": {
+    "@faker-js/faker": "9.5.0",
     "@types/pg": "8.11.11",
     "drizzle-kit": "0.30.4"
   },
