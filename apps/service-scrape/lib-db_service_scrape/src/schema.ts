@@ -12,17 +12,6 @@ import {
   time,
 } from 'drizzle-orm/pg-core'
 
-export const state_abbreviation_enum = pgEnum('state_abbreviation_enum', [
-  'ACT',
-  'NSW',
-  'NT',
-  'QLD',
-  'SA',
-  'TAS',
-  'VIC',
-  'WA',
-])
-
 export const localities_table = pgTable(
   'localities_table',
   {
@@ -30,7 +19,16 @@ export const localities_table = pgTable(
     id: smallint().generatedByDefaultAsIdentity().primaryKey(),
     suburb_name: text().notNull(),
     postcode: text().notNull(),
-    state_abbreviation: state_abbreviation_enum().notNull(),
+    state_abbreviation: pgEnum('state_abbreviation_enum', [
+      'ACT',
+      'NSW',
+      'NT',
+      'QLD',
+      'SA',
+      'TAS',
+      'VIC',
+      'WA',
+    ])().notNull(),
     gps: point().notNull(),
   },
   (t) => {
@@ -46,14 +44,6 @@ export const localities_table = pgTable(
     ]
   },
 )
-
-export const home_type_enum = pgEnum('home_type_enum', [
-  'ApartmentUnitFlat',
-  'House',
-  'Townhouse',
-  'BlockOfUnits',
-])
-
 export const common_features_table = pgTable(
   'common_features_table',
   {
@@ -63,7 +53,12 @@ export const common_features_table = pgTable(
     bed_quantity: smallint().notNull(), // 10 beds is beyond budget
     bath_quantity: smallint().notNull(), // 5 baths is beyond budget
     car_quantity: smallint().notNull(), // 20 cars is beyond budget
-    home_type: home_type_enum().notNull(),
+    home_type: pgEnum('home_type_enum', [
+      'ApartmentUnitFlat',
+      'House',
+      'Townhouse',
+      'BlockOfUnits',
+    ])().notNull(),
     is_retirement: boolean().notNull(),
     is_rural: boolean().notNull(),
   },
