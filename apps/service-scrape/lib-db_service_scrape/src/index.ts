@@ -2,6 +2,7 @@ import { Kysely, PostgresDialect } from 'kysely'
 import type { Database } from './schema'
 import { Pool } from 'pg'
 import { ENV } from './env'
+import { db_schema } from './schema'
 
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
@@ -10,3 +11,5 @@ export const db = new Kysely<Database>({
     }),
   }),
 })
+
+export { db_schema }

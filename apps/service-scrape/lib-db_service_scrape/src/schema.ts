@@ -12,14 +12,7 @@ import {
   time,
 } from 'drizzle-orm/pg-core'
 import type { Kyselify } from 'drizzle-orm/kysely'
-
-export interface Database {
-  localities_table: Kyselify<typeof localities_table>
-  common_features_table: Kyselify<typeof common_features_table>
-  home_table: Kyselify<typeof home_table>
-  rental_price_table: Kyselify<typeof rental_price_table>
-  sale_price_table: Kyselify<typeof sale_price_table>
-}
+import { createSelectSchema } from 'drizzle-zod'
 
 export const state_abbreviation_enum = pgEnum('state_abbreviation_enum', [
   'ACT',
@@ -162,3 +155,18 @@ export const sale_price_table = pgTable(
     ]
   },
 )
+
+export const db_schema = {
+  localities_table: createSelectSchema(localities_table),
+  common_features_table: createSelectSchema(common_features_table),
+  home_table: createSelectSchema(home_table),
+  rental_price_table: createSelectSchema(rental_price_table),
+  sale_price_table: createSelectSchema(sale_price_table),
+}
+export interface Database {
+  localities_table: Kyselify<typeof localities_table>
+  common_features_table: Kyselify<typeof common_features_table>
+  home_table: Kyselify<typeof home_table>
+  rental_price_table: Kyselify<typeof rental_price_table>
+  sale_price_table: Kyselify<typeof sale_price_table>
+}
