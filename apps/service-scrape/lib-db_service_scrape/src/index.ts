@@ -16,7 +16,6 @@ export const db = new Kysely<Database>({
   }),
 })
 
-
 export { db_schema }
 
 /**
