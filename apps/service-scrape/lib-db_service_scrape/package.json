@@ -2,6 +2,7 @@
   "name": "@service-scrape/lib-db_service_scrape",
   "version": "1.0.0",
   "private": "true",
+  "source": "./src/index.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,7 +28,7 @@
     "test:lint": "biome lint --write",
     "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
     "test:type": "tsc",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap && attw -P ."
+    "build": "parcel build && attw -P ."
   },
   "dependencies": {
     "consola": "3.4.0",
