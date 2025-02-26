@@ -5,7 +5,7 @@
   "scripts": {
     "compress": "node ./compress.ts",
     "format": "biome format --write",
-    "test": "pnpm /test:.*/",
+    "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
     "test:type": "tsc"
   },

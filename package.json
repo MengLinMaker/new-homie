@@ -3,10 +3,8 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "format": "pnpm -r format",
-    "test:lint": "pnpm -r test:lint",
-    "test:type": "pnpm -r test:type",
-    "test:unit": "pnpm -r test:unit",
-    "test:perf": "pnpm -r test:perf",
+    "test": "pnpm -r test",
+    "build": "pnpm -r build",
     "knip": "knip"
   },
   "devDependencies": {

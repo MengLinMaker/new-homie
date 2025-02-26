@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "format": "biome format --write",
+    "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
-    "test:unit": "vitest run",
-    "test:unit:dev": "vitest",
     "test:type": "tsc",
+    "test:unit": "vitest run",
+    "dev:test:unit": "vitest",
     "dev": "vite dev"
   },
   "devDependencies": {

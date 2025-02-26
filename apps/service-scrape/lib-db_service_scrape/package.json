@@ -15,7 +15,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "format": "biome format --write",
     "docker:down": "docker-compose down -v",
@@ -23,6 +25,7 @@
     "studio": "drizzle-kit studio --config ./test/drizzle.config.ts",
     "generate": "drizzle-kit generate --name",
     "migrate": "drizzle-kit generate migrate --config ./src/drizzle.config.ts",
+    "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
     "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
     "test:type": "tsc",
