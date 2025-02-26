@@ -3,7 +3,7 @@ import { traceTryFunction } from '../instrumentation'
 
 export const scrapeUtil = {
   /**
-   * Extract nicely formatted hydration JSON from <script id="__NEXT_DATA__">
+   * @description Extract nicely formatted hydration JSON from <script id="__NEXT_DATA__">
    * @param html
    */
   tryExtractNextJson(html: string) {

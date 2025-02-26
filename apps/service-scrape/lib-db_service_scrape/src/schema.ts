@@ -154,7 +154,10 @@ export const sale_price_table = pgTable(
   },
 )
 
-export const db_schema = {
+/**
+ * @description Zod validator for schema table inserts
+ */
+export const dbSchema = {
   localities_table: createInsertSchema(localities_table),
   common_features_table: createInsertSchema(common_features_table),
   home_table: createInsertSchema(home_table),

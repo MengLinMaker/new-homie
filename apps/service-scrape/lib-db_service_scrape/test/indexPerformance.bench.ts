@@ -3,7 +3,8 @@ import { db } from './kysely'
 import { faker } from '@faker-js/faker'
 import { home_type_enum } from '../src/schema'
 import { sql } from 'kysely'
-import { toPgPoint } from '../src'
+import { toPgPoint, toPgDatetime } from '../src/util'
+import consola from 'consola'
 
 const tables = {
   localities_table: {
@@ -25,22 +26,17 @@ const tables = {
     count: 0,
     target: 16000,
     insert: async () => {
-      try {
-        await db
-          .insertInto('common_features_table')
-          .values({
-            bed_quantity: faker.number.int({ min: 0, max: 5 }),
-            bath_quantity: faker.number.int({ min: 0, max: 5 }),
-            car_quantity: faker.number.int({ min: 0, max: 5 }),
-            home_type:
-              home_type_enum.enumValues[Math.floor(Math.random() * home_type_enum.length)]!,
-            is_retirement: Math.random() < 0.5,
-            is_rural: Math.random() < 0.5,
-          })
-          .execute()
-      } catch (e) {
-        console.log(e)
-      }
+      await db
+        .insertInto('common_features_table')
+        .values({
+          bed_quantity: faker.number.int({ min: 0, max: 5 }),
+          bath_quantity: faker.number.int({ min: 0, max: 5 }),
+          car_quantity: faker.number.int({ min: 0, max: 5 }),
+          home_type: home_type_enum.enumValues[Math.floor(Math.random() * home_type_enum.length)]!,
+          is_retirement: Math.random() < 0.5,
+          is_rural: Math.random() < 0.5,
+        })
+        .execute()
       tables.common_features_table.count++
     },
   },
@@ -59,7 +55,7 @@ const tables = {
           street_address: faker.location.streetAddress(),
           gps: toPgPoint([faker.number.float(), faker.number.float()]),
           land_m2: faker.number.int({ min: 0, max: 10000 }),
-          inspection_time: faker.date.soon().toISOString().replaceAll('T', ' ').replaceAll('Z', ''),
+          inspection_time: toPgDatetime(faker.date.soon().toISOString()),
           auction_time: null,
         })
         .execute()
@@ -90,15 +86,15 @@ const objectKeys = <T extends object>(obj: T) => Object.keys(obj) as (keyof T)[]
 const startDbSeedTime = performance.now()
 for (const table of objectKeys(tables)) {
   // while (tables[table].count < tables[table].target) await tables[table].insert()
-  // console.info(`Created ${tables[table].count} rows for '${table}'`)
+  // consola.info(`Created ${tables[table].count} rows for '${table}'`)
 
   bench(`${table} insert`, async () => await tables[table].insert())
 }
 const endDbSeedTime = performance.now()
 
-console.info(`Database seeded in ${0.001 * Math.floor(endDbSeedTime - startDbSeedTime)}s`)
+consola.info(`Database seeded in ${0.001 * Math.floor(endDbSeedTime - startDbSeedTime)}s`)
 
 const databaseSize = await sql<{
   pg_size_pretty: number
 }>`SELECT pg_size_pretty( pg_database_size('db') );`.execute(db)
-console.info(`Database size: ${databaseSize.rows[0]?.pg_size_pretty} / 32 MB docker`)
+consola.info(`Database size: ${databaseSize.rows[0]?.pg_size_pretty} / 32 MB docker`)

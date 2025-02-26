@@ -5,5 +5,9 @@ export default defineConfig({
     pool: 'threads',
     reporters: ['verbose', 'github-actions'],
     logHeapUsage: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text'],
+    },
   },
 })

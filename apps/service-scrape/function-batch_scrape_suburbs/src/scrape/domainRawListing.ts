@@ -1,6 +1,6 @@
 import { traceTryFunction } from '../instrumentation'
 import { z } from 'zod'
-import { db_schema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
+import { dbSchema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
 
 const _listingSchema = z.object({
   listingModel: z.object({
@@ -65,6 +65,11 @@ export const domainRawListing = {
     })
   },
 
+  /**
+   * @description Transform listing json data for database table inserts
+   * @param listing
+   * @returns Object containing tables for database inserts
+   */
   tryTransformListing(listing: z.infer<typeof _listingSchema>) {
     return traceTryFunction(
       'domainRawListing.tryTransformListing',
@@ -75,7 +80,7 @@ export const domainRawListing = {
         const address = listingModel.address
         const features = listingModel.features
         return {
-          common_features_table: db_schema.common_features_table.parse({
+          common_features_table: dbSchema.common_features_table.parse({
             bed_quantity: features.beds ?? 0,
             bath_quantity: features.baths ?? 0,
             car_quantity: features.parking ?? 0,
@@ -83,7 +88,7 @@ export const domainRawListing = {
             is_retirement: features.isRetirement,
             is_rural: features.isRural,
           }),
-          home_table: db_schema.home_table.parse({
+          home_table: dbSchema.home_table.parse({
             street_address: address.street,
             gps: [address.lat, address.lng],
             land_m2: features.landSize === 0 ? null : features.landSize,
