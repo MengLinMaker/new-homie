@@ -22,13 +22,13 @@ export const conventionalConstraintFactory = (tableName: string) => ({
 })
 
 /**
- * @param inputDatetime - JavaScript compatible timestamp string.
+ * @param inputDatetime - ISO timestamp string.
  * @returns Postgres compatible timestamp string.
  * @link Postgres timestamp spec: https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-INPUT-TIME-STAMPS
  */
 export const toPgDatetime = (inputDatetime: string | null | undefined) =>
   inputDatetime
-    ? new Date(inputDatetime).toISOString().replaceAll('T', ' ').replaceAll('Z', '')
+    ? inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '')
     : null
 
 /**

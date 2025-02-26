@@ -12,7 +12,7 @@
       "street_address": "2/27 Benga Avenue",
       "gps": [-37.98033, 145.20033],
       "land_m2": null,
-      "inspection_time": "2025-02-01 01:05:00.000",
+      "inspection_time": "2025-02-01 12:05:00",
       "auction_time": null
     }
   },
@@ -29,7 +29,7 @@
       "street_address": "4/28 Olive Street",
       "gps": [-37.980778, 145.21875],
       "land_m2": null,
-      "inspection_time": "2025-01-31 23:45:00.000",
+      "inspection_time": "2025-02-01 10:45:00",
       "auction_time": null
     }
   },
@@ -46,7 +46,7 @@
       "street_address": "66 Langhorne Street",
       "gps": [-37.991848, 145.21875],
       "land_m2": null,
-      "inspection_time": "2025-02-01 00:25:00.000",
+      "inspection_time": "2025-02-01 11:25:00",
       "auction_time": null
     }
   },
@@ -63,7 +63,7 @@
       "street_address": "31B Wilma Avenue",
       "gps": [-37.98103, 145.20241],
       "land_m2": null,
-      "inspection_time": "2025-02-01 01:15:00.000",
+      "inspection_time": "2025-02-01 12:15:00",
       "auction_time": null
     }
   },
@@ -80,7 +80,7 @@
       "street_address": "2/49 Loch Road",
       "gps": [-37.960266, 145.2227],
       "land_m2": null,
-      "inspection_time": "2025-02-13 06:15:00.000",
+      "inspection_time": "2025-02-13 17:15:00",
       "auction_time": null
     }
   },
@@ -148,7 +148,7 @@
       "street_address": "1/30-32 Close Avenue",
       "gps": [-37.981995, 145.20773],
       "land_m2": null,
-      "inspection_time": "2025-02-03 00:30:00.000",
+      "inspection_time": "2025-02-03 11:30:00",
       "auction_time": null
     }
   },
@@ -199,7 +199,7 @@
       "street_address": "REAR 18 Lexton Avenue",
       "gps": [-37.97732, 145.1994],
       "land_m2": null,
-      "inspection_time": "2025-02-01 00:00:00.000",
+      "inspection_time": "2025-02-01 11:00:00",
       "auction_time": null
     }
   },
@@ -216,7 +216,7 @@
       "street_address": "1/42-44 Bryants Road",
       "gps": [-37.997078, 145.21364],
       "land_m2": null,
-      "inspection_time": "2025-02-01 05:15:00.000",
+      "inspection_time": "2025-02-01 16:15:00",
       "auction_time": null
     }
   },
@@ -233,7 +233,7 @@
       "street_address": "2/60 Potter Street",
       "gps": [-37.979904, 145.2069],
       "land_m2": null,
-      "inspection_time": "2025-01-31 22:30:00.000",
+      "inspection_time": "2025-02-01 09:30:00",
       "auction_time": null
     }
   },
@@ -250,7 +250,7 @@
       "street_address": "3/19 Edward Avenue",
       "gps": [-37.975025, 145.21243],
       "land_m2": null,
-      "inspection_time": "2025-01-31 23:05:00.000",
+      "inspection_time": "2025-02-01 10:05:00",
       "auction_time": null
     }
   },
@@ -267,7 +267,7 @@
       "street_address": "27 Kyla Avenue",
       "gps": [-37.999958, 145.19551],
       "land_m2": null,
-      "inspection_time": "2025-02-01 01:25:00.000",
+      "inspection_time": "2025-02-01 12:25:00",
       "auction_time": null
     }
   },
@@ -284,7 +284,7 @@
       "street_address": "7/81-83 Potter Street",
       "gps": [-37.978664, 145.20653],
       "land_m2": null,
-      "inspection_time": "2025-01-31 00:00:00.000",
+      "inspection_time": "2025-01-31 11:00:00",
       "auction_time": null
     }
   },
@@ -318,7 +318,7 @@
       "street_address": "75 Ann Street",
       "gps": [-37.979153, 145.21973],
       "land_m2": null,
-      "inspection_time": "2025-02-01 00:00:00.000",
+      "inspection_time": "2025-02-01 11:00:00",
       "auction_time": null
     }
   },
