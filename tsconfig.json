@@ -22,7 +22,10 @@
     "esModuleInterop": true,
     "module": "Preserve",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    /* do not output */
+    "noEmit": true
   },
   "exclude": [
     "**/dist"

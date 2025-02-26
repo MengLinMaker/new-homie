@@ -56,6 +56,7 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
       const coordinate = amenities.geometry.coordinates
       if (notInAustralia(coordinate)) continue
 
+      // @ts-expect-error
       const amenityType = amenitiesCategoryFilter[amenities.properties.amenity]
       if (!amenityType) continue
 
@@ -112,10 +113,12 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
       const coordinate = shop.geometry.coordinates
       if (notInAustralia(coordinate)) continue
 
+      // @ts-expect-error
       if (!shopCategoryFilter[shop.properties.shop]) continue
 
       newAmenitiesData.push({
         name: shop.properties.name,
+        // @ts-expect-error
         type: shopCategoryFilter[shop.properties.shop],
         category: 'shop',
         gps: [roundPlaces(coordinate[1], 7), roundPlaces(coordinate[0], 7)],
