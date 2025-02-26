@@ -13,6 +13,15 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v4
 
+      - name: Nx select BASE + HEAD SHAs
+        id: setSHAs
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Output Nx select BASE + HEAD SHAs
+        run: |
+          echo "BASE: ${{ steps.setSHAs.outputs.base }}"
+          echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
