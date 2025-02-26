@@ -12,7 +12,7 @@ import {
   time,
 } from 'drizzle-orm/pg-core'
 import type { Kyselify } from 'drizzle-orm/kysely'
-import { createSelectSchema } from 'drizzle-zod'
+import { createInsertSchema } from 'drizzle-zod'
 
 export const state_abbreviation_enum = pgEnum('state_abbreviation_enum', [
   'ACT',
@@ -33,7 +33,6 @@ export const localities_table = pgTable(
     suburb_name: text().notNull(),
     postcode: text().notNull(),
     state_abbreviation: state_abbreviation_enum().notNull(),
-    gps: point().notNull(),
   },
   (t) => {
     const c = conventionalConstraintFactory('localities_table')
@@ -41,7 +40,6 @@ export const localities_table = pgTable(
       // c.textSearchIndex(t.suburb_name),
       // c.index('hash', t.postcode),
       // c.index('hash', t.state_abbreviation),
-      // c.index('gist', t.gps),
 
       c.check(t.suburb_name, sql`LENGTH(${t.suburb_name}) < 64`),
       c.check(t.postcode, sql`LENGTH(${t.postcode}) = 4`),
@@ -157,11 +155,11 @@ export const sale_price_table = pgTable(
 )
 
 export const db_schema = {
-  localities_table: createSelectSchema(localities_table),
-  common_features_table: createSelectSchema(common_features_table),
-  home_table: createSelectSchema(home_table),
-  rental_price_table: createSelectSchema(rental_price_table),
-  sale_price_table: createSelectSchema(sale_price_table),
+  localities_table: createInsertSchema(localities_table),
+  common_features_table: createInsertSchema(common_features_table),
+  home_table: createInsertSchema(home_table),
+  rental_price_table: createInsertSchema(rental_price_table),
+  sale_price_table: createInsertSchema(sale_price_table),
 }
 export interface Database {
   localities_table: Kyselify<typeof localities_table>
