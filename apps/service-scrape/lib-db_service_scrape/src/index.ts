@@ -2,7 +2,7 @@ import { Kysely, PostgresDialect, sql, type RawBuilder } from 'kysely'
 import type { Database } from './schema'
 import { Pool } from 'pg'
 import { ENV } from './env'
-import { db_schema } from './schema'
+import { dbSchema } from './schema'
 
 /**
  * @description Kysely database query builder
@@ -16,7 +16,7 @@ export const db = new Kysely<Database>({
   }),
 })
 
-export { db_schema }
+export { dbSchema }
 
 /**
  * @param inputDatetime - JavaScript compatible timestamp string.
