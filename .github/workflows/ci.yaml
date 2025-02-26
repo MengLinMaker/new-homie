@@ -36,6 +36,9 @@ jobs:
           node-version:
           cache: 'pnpm'
 
+      - name: Setup docker
+        uses: docker/setup-docker-action@v4
+
       - name: Install dependencies
         run: pnpm i
 
