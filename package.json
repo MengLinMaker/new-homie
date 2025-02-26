@@ -2,10 +2,12 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
-    "format": "pnpm -r format",
-    "test": "pnpm -r test",
-    "build": "pnpm -r build",
-    "knip": "knip"
+    "format": "nx run-many -t format",
+    "test": "nx run-many -t test:lint test:type test:unit test:perf",
+    "build": "nx run-many -t build",
+    "knip": "knip",
+    "build:ci": "nx affected -t build",
+    "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.3",
