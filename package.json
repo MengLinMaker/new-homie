@@ -10,7 +10,6 @@
     "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.17.3",
     "@biomejs/biome": "1.9.4",
     "@parcel/packager-ts": "2.13.3",
     "@parcel/transformer-typescript-types": "2.13.3",

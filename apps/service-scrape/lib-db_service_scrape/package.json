@@ -5,7 +5,6 @@
   "source": "./src/index.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     "import": {
       "types": "./dist/index.d.ts",
@@ -28,7 +27,7 @@
     "test:lint": "biome lint --write",
     "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
     "test:type": "tsc",
-    "build": "parcel build && attw -P ."
+    "build": "parcel build"
   },
   "dependencies": {
     "consola": "3.4.0",
