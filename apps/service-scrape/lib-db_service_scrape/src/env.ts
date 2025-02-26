@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { consola } from 'consola'
 import { config } from 'dotenv'
 config()
 
@@ -15,5 +16,10 @@ export const ENV = {
     .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
       message: 'POSTGRES_URL is invalid',
     })
+    .default('postgresql://user:password@localhost:54320/db')
     .parse(process.env['POSTGRES_URL']),
 }
+if (!process.env['POSTGRES_URL'])
+  consola.warn(
+    'Undefined env POSTGRES_URL, defaulting to  postgresql://user:password@localhost:54320/db',
+  )

@@ -89,6 +89,9 @@ importers:
 
   apps/service-scrape/lib-db_service_scrape:
     dependencies:
+      consola:
+        specifier: 3.4.0
+        version: 3.4.0
       dotenv:
         specifier: 16.4.7
         version: 16.4.7

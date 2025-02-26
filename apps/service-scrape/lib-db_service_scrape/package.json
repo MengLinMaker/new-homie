@@ -19,10 +19,10 @@
   "scripts": {
     "format": "biome format --write",
     "docker:down": "docker-compose down -v",
-    "docker:up": "docker-compose up --build -d && sleep 1 && drizzle-kit push --config ./test/drizzle.config.ts --force true",
-    "studio": "drizzle-kit studio --config ./test/drizzle.config.ts",
+    "docker:up": "docker-compose up --build -d && sleep 1 && drizzle-kit push",
+    "studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate --name",
-    "migrate": "drizzle-kit generate migrate --config ./src/drizzle.config.ts",
+    "migrate": "drizzle-kit generate migrate",
     "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
     "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
@@ -30,6 +30,7 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap && attw -P ."
   },
   "dependencies": {
+    "consola": "3.4.0",
     "dotenv": "16.4.7",
     "drizzle-orm": "0.39.3",
     "drizzle-zod": "0.7.0",
