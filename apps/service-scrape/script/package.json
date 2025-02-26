@@ -9,5 +9,8 @@
     "test:lint": "biome lint --write",
     "test:type": "tsc"
   },
+  "dependencies": {
+    "@service-scrape/lib-db_service_scrape": "workspace:*"
+  },
   "type": "module"
 }

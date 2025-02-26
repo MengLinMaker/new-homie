@@ -1,5 +1,6 @@
 {
   "name": "@service-scrape/function-batch_scrape_suburbs",
+  "private": "true",
   "version": "1.0.0",
   "scripts": {
     "format": "biome format --write",
