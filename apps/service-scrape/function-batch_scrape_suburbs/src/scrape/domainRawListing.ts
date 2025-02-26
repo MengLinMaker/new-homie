@@ -65,6 +65,11 @@ export const domainRawListing = {
     })
   },
 
+  /**
+   * @description Transform listing json data for database table inserts
+   * @param listing
+   * @returns Object containing tables for database inserts
+   */
   tryTransformListing(listing: z.infer<typeof _listingSchema>) {
     return traceTryFunction(
       'domainRawListing.tryTransformListing',
