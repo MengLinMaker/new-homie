@@ -3,7 +3,7 @@ import { db } from './kysely'
 import { faker } from '@faker-js/faker'
 import { home_type_enum } from '../src/schema'
 import { sql } from 'kysely'
-import { toPgPoint } from '../src'
+import { toPgPoint, toPgDatetime } from '../src/util'
 
 const tables = {
   localities_table: {
@@ -59,7 +59,7 @@ const tables = {
           street_address: faker.location.streetAddress(),
           gps: toPgPoint([faker.number.float(), faker.number.float()]),
           land_m2: faker.number.int({ min: 0, max: 10000 }),
-          inspection_time: faker.date.soon().toISOString().replaceAll('T', ' ').replaceAll('Z', ''),
+          inspection_time: toPgDatetime(faker.date.soon().toISOString()),
           auction_time: null,
         })
         .execute()
