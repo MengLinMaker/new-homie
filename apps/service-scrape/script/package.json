@@ -1,0 +1,13 @@
+{
+  "name": "@service-scrape/script",
+  "version": "1.0.0",
+  "private": "true",
+  "scripts": {
+    "compress": "node ./compress.ts",
+    "format": "biome format --write",
+    "test": "pnpm /test:.*/",
+    "test:lint": "biome lint --write",
+    "test:type": "tsc"
+  },
+  "type": "module"
+}

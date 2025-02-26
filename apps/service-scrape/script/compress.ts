@@ -10,7 +10,7 @@ const newAmenitiesData: {
   category: string
   gps: [number, number]
 }[] = []
-const finalAmenitiesFilePath = './script/australia-amenities-final.json'
+const finalAmenitiesFilePath = './australia-amenities-final.json'
 
 /**
  * SPECIFY BROTLI COMPRESSED DATA URL SOURCE
@@ -19,7 +19,7 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
 
 // From raw amenity data -https://hub.arcgis.com/datasets/b4e6461dacd946ea854115570ee4ea68_0/about
 {
-  const amenitiesData = readBrotliJson('./script/australia-amenities.json.br')
+  const amenitiesData = readBrotliJson('./australia-amenities.json.br')
   /**
    * Filter low quality and irrelevant data
    * old type: [new type, category]
@@ -75,7 +75,7 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
 // From raw hospital data - https://hub.arcgis.com/datasets/16fc2fab6beb4331b3d6b6844cb35bcc_0/about
 // Ignore the low clinic data
 {
-  const hospitalsData = readBrotliJson('./script/australia-hospitals.json.br')
+  const hospitalsData = readBrotliJson('./australia-hospitals.json.br')
   for (const hospital of hospitalsData.features) {
     try {
       if (!hospital.properties.name) continue
@@ -106,7 +106,7 @@ const finalAmenitiesFilePath = './script/australia-amenities-final.json'
     supermarket: 'supermarket',
     greengrocer: 'grocer',
   }
-  const shopsData = readBrotliJson('./script/australia-shops.json.br')
+  const shopsData = readBrotliJson('./australia-shops.json.br')
   for (const shop of shopsData.features) {
     try {
       if (!shop.properties.name) continue
