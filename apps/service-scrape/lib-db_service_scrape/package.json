@@ -18,8 +18,8 @@
   "files": ["dist"],
   "scripts": {
     "format": "biome format --write",
-    "docker:down": "docker-compose down -v",
-    "docker:up": "docker-compose up --build -d && sleep 1 && drizzle-kit push",
+    "docker:down": "docker compose down -v",
+    "docker:up": "docker compose up --build -d && sleep 1 && drizzle-kit push",
     "studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate --name",
     "migrate": "drizzle-kit generate migrate",
