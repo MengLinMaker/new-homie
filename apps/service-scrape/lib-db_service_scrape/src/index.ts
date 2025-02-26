@@ -1,4 +1,4 @@
-import { Kysely, PostgresDialect } from 'kysely'
+import { Kysely, PostgresDialect, sql, type RawBuilder } from 'kysely'
 import type { Database } from './schema'
 import { Pool } from 'pg'
 import { ENV } from './env'
@@ -13,3 +13,13 @@ export const db = new Kysely<Database>({
 })
 
 export { db_schema }
+
+export const toPgDatetime = (inputDatetime: string | null | undefined) =>
+  inputDatetime
+    ? new Date(inputDatetime).toISOString().replaceAll('T', ' ').replaceAll('Z', '')
+    : null
+
+export const toPgPoint = (pt: [number, number]): RawBuilder<[number, number]> => {
+  const point = `(${pt[0]},${pt[1]})`
+  return sql<[number, number]>`${point}`
+}

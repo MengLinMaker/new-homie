@@ -2,12 +2,8 @@ import { bench } from 'vitest'
 import { db } from './kysely'
 import { faker } from '@faker-js/faker'
 import { home_type_enum } from '../src/schema'
-import { sql, type RawBuilder } from 'kysely'
-
-const point = (pt: [number, number]): RawBuilder<[number, number]> => {
-  const point = `(${pt[0]},${pt[1]})`
-  return sql<[number, number]>`${point}`
-}
+import { sql } from 'kysely'
+import { toPgPoint } from '../src'
 
 const tables = {
   localities_table: {
@@ -20,7 +16,6 @@ const tables = {
           suburb_name: faker.location.city(),
           postcode: faker.location.zipCode('####'),
           state_abbreviation: 'VIC',
-          gps: point([faker.number.float(), faker.number.float()]),
         })
         .execute()
       tables.localities_table.count++
@@ -62,9 +57,9 @@ const tables = {
             max: tables.common_features_table.count,
           }),
           street_address: faker.location.streetAddress(),
-          gps: point([faker.number.float(), faker.number.float()]),
+          gps: toPgPoint([faker.number.float(), faker.number.float()]),
           land_m2: faker.number.int({ min: 0, max: 10000 }),
-          inspection_time: faker.date.soon().toISOString().replaceAll(/[TZ]/g, ' '),
+          inspection_time: faker.date.soon().toISOString().replaceAll('T', ' ').replaceAll('Z', ''),
           auction_time: null,
         })
         .execute()
