@@ -4,7 +4,9 @@
     "postinstall": "simple-git-hooks",
     "format": "pnpm -r format",
     "test:lint": "pnpm -r test:lint",
+    "test:type": "pnpm -r test:type",
     "test:unit": "pnpm -r test:unit",
+    "test:perf": "pnpm -r test:perf",
     "knip": "knip"
   },
   "devDependencies": {
