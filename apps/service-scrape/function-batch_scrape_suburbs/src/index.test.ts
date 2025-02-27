@@ -1,4 +1,4 @@
-import app from '../src/index.mjs'
+import app from './index.mjs'
 import { describe, it, expect } from 'vitest'
 
 describe('Unit test for app handler', () => {
