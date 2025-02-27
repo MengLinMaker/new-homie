@@ -26,10 +26,10 @@ export const conventionalConstraintFactory = (tableName: string) => ({
  * @returns Postgres compatible timestamp string.
  * @link Postgres timestamp spec: https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-INPUT-TIME-STAMPS
  */
-export const toPgDatetime = (inputDatetime: string | null | undefined) =>
-  inputDatetime
-    ? inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '')
-    : null
+export const toPgDatetime = <T>(inputDatetime: T) =>
+  typeof inputDatetime === 'string'
+    ? (inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '') as T)
+    : (null as T)
 
 /**
  *
