@@ -83,4 +83,28 @@ describe(testSuiteName, () => {
       expect(resultObject).toBeInstanceOf(Error)
     })
   })
+
+  describe('tryTransformRentPrice', () => {
+    it.for(['rent.dandenong-vic-3175'])('should transform listings from %s', async (fileSuffix) => {
+      const inputListings = parseJsonFile(
+        `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+      ) as z.infer<typeof domainRawListing.listingSchema>[]
+      const expectedObject = parseJsonFile(
+        `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
+      ) as any[]
+      for (let i = 0; i < inputListings.length; i++) {
+        const [databaseInserts, success] = await domainRawListing.tryTransformRentPrice(
+          inputListings[i]!,
+        )
+        if (success) expect(databaseInserts).toStrictEqual(expectedObject[i])
+      }
+    })
+
+    it('should not transform invalid input', async () => {
+      // @ts-expect-error
+      const [resultObject, success] = await domainRawListing.tryTransformListing({})
+      expect(success).toBe(false)
+      expect(resultObject).toBeInstanceOf(Error)
+    })
+  })
 })

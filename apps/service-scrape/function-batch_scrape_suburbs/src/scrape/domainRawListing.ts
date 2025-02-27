@@ -117,10 +117,7 @@ export const domainRawListing = {
         const priceString = listing.listingModel.price
         const price = scrapeUtil.highestPriceFromString(priceString)
 
-        // Abnormal price range requires investigation
         if (!price) throw Error('no price in listing.listingModel.price')
-        if (price < 10000) throw Error('massively underpriced home in listing.listingModel.price')
-
         return {
           sale_price_table: dbSchema.sale_price_table.parse({
             first_scrape_date: scrapeUtil.currentDate(),
@@ -129,6 +126,34 @@ export const domainRawListing = {
             aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
             aud_per_land_m2: land > 0 ? Math.round(price / land) : null,
           } satisfies z.infer<typeof dbSchema.sale_price_table>),
+        }
+      },
+    )
+  },
+
+  /**
+   * @description Get rent price info
+   * @param listing
+   * @returns Object containing tables for database inserts
+   */
+  tryTransformRentPrice(listing: z.infer<typeof _listingSchema>) {
+    return traceTryFunction(
+      'domainRawListing.tryTransformRentPrice',
+      arguments,
+      'WARN',
+      async () => {
+        const beds = listing.listingModel.features.beds ?? 0
+        const priceString = listing.listingModel.price
+        const price = scrapeUtil.highestPriceFromString(priceString)
+
+        if (!price) throw Error('no price in listing.listingModel.price')
+        return {
+          rental_price_table: dbSchema.rental_price_table.parse({
+            first_scrape_date: scrapeUtil.currentDate(),
+            last_scrape_date: scrapeUtil.currentDate(),
+            weekly_rent_aud: price,
+            aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
+          } satisfies z.infer<typeof dbSchema.rental_price_table>),
         }
       },
     )
