@@ -1,6 +1,7 @@
 import { traceTryFunction } from '../instrumentation'
 import { z } from 'zod'
 import { dbSchema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
+import { scrapeUtil } from './scrapeUtil'
 
 const _listingSchema = z.object({
   listingModel: z.object({
@@ -84,17 +85,50 @@ export const domainRawListing = {
             bed_quantity: features.beds ?? 0,
             bath_quantity: features.baths ?? 0,
             car_quantity: features.parking ?? 0,
-            home_type: features.propertyType,
+            home_type: features.propertyType as any,
             is_retirement: features.isRetirement,
             is_rural: features.isRural,
-          }),
+          } satisfies z.infer<typeof dbSchema.common_features_table>),
           home_table: dbSchema.home_table.parse({
             street_address: address.street,
             gps: [address.lat, address.lng],
             land_m2: features.landSize === 0 ? null : features.landSize,
             inspection_time: toPgDatetime(listingModel.inspection.openTime),
             auction_time: toPgDatetime(listingModel.auction),
-          }),
+          } satisfies z.infer<typeof dbSchema.home_table>),
+        }
+      },
+    )
+  },
+
+  /**
+   * @description Get sale price info
+   * @param listing
+   * @returns Object containing tables for database inserts
+   */
+  tryTransformSalePrice(listing: z.infer<typeof _listingSchema>) {
+    return traceTryFunction(
+      'domainRawListing.tryTransformSalePrice',
+      arguments,
+      'WARN',
+      async () => {
+        const beds = listing.listingModel.features.beds ?? 0
+        const land = listing.listingModel.features.landSize
+        const priceString = listing.listingModel.price
+        const price = scrapeUtil.highestPriceFromString(priceString)
+
+        // Abnormal price range requires investigation
+        if (!price) throw Error('no price in listing.listingModel.price')
+        if (price < 10000) throw Error('massively underpriced home in listing.listingModel.price')
+
+        return {
+          sale_price_table: dbSchema.sale_price_table.parse({
+            first_scrape_date: scrapeUtil.currentDate(),
+            last_scrape_date: scrapeUtil.currentDate(),
+            higher_price_aud: price,
+            aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
+            aud_per_land_m2: land > 0 ? Math.round(price / land) : null,
+          } satisfies z.infer<typeof dbSchema.sale_price_table>),
         }
       },
     )

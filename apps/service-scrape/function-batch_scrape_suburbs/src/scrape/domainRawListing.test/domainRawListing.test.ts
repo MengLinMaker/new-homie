@@ -61,4 +61,31 @@ describe('domainRawListing', () => {
       expect(resultObject).toBeInstanceOf(Error)
     })
   })
+
+  describe('tryTransformSalePrice', () => {
+    it.for(['sale.dandenong-vic-3175'])('should transform listings from %s', async (fileSuffix) => {
+      const inputFile = `tryExtractListings.${fileSuffix}.json`
+      const expectedFile = `tryTransformSalePrice.${fileSuffix}.json`
+      const inputListings = z
+        .array(domainRawListing.listingSchema)
+        .parse(JSON.parse(readFileSync(`${import.meta.dirname}/${inputFile}`).toString()))
+      const expectedObject: any[] = JSON.parse(
+        readFileSync(`${import.meta.dirname}/${expectedFile}`).toString(),
+      )
+
+      for (let i = 0; i < inputListings.length; i++) {
+        const [databaseInserts, success] = await domainRawListing.tryTransformSalePrice(
+          inputListings[i]!,
+        )
+        if (success) expect(databaseInserts).toStrictEqual(expectedObject[i])
+      }
+    })
+
+    it('should not transform invalid input', async () => {
+      // @ts-expect-error
+      const [resultObject, success] = await domainRawListing.tryTransformListing({})
+      expect(success).toBe(false)
+      expect(resultObject).toBeInstanceOf(Error)
+    })
+  })
 })
