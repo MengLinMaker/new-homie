@@ -1,20 +1,19 @@
 import { describe, expect, it } from 'vitest'
-import { domainRawListing } from '../domainRawListing'
-import { readFileSync } from 'node:fs'
-import { z } from 'zod'
+import { domainRawListing } from '../../src/scrape/domainRawListing'
+import type { z } from 'zod'
+import { parseJsonFile } from '../util'
 
-describe('domainRawListing', () => {
+const testSuiteName = 'domainRawListing'
+const resourcePath = `${import.meta.dirname}/${testSuiteName}`
+
+describe(testSuiteName, () => {
   describe('tryExtractListing', () => {
     it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
       'should extract listings from %s',
       async (fileSuffix) => {
-        const inputFile = `raw.${fileSuffix}.json`
-        const expectedFile = `tryExtractListings.${fileSuffix}.json`
-        const inputObject = JSON.parse(
-          readFileSync(`${import.meta.dirname}/${inputFile}`).toString(),
-        )
-        const expectedObject = JSON.parse(
-          readFileSync(`${import.meta.dirname}/${expectedFile}`).toString(),
+        const inputObject = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`)
+        const expectedObject = parseJsonFile(
+          `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
         )
 
         const [value, success] = await domainRawListing.tryExtractListings(inputObject)
@@ -35,14 +34,12 @@ describe('domainRawListing', () => {
     it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
       'should transform listings from %s',
       async (fileSuffix) => {
-        const inputFile = `tryExtractListings.${fileSuffix}.json`
-        const expectedFile = `tryTransformListing.${fileSuffix}.json`
-        const inputListings = z
-          .array(domainRawListing.listingSchema)
-          .parse(JSON.parse(readFileSync(`${import.meta.dirname}/${inputFile}`).toString()))
-        const expectedObject: any[] = JSON.parse(
-          readFileSync(`${import.meta.dirname}/${expectedFile}`).toString(),
-        )
+        const inputListings = parseJsonFile(
+          `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+        ) as z.infer<typeof domainRawListing.listingSchema>[]
+        const expectedObject = parseJsonFile(
+          `${resourcePath}/tryTransformListing.${fileSuffix}.json`,
+        ) as any[]
 
         for (let i = 0; i < inputListings.length; i++) {
           const [databaseInserts, success] = await domainRawListing.tryTransformListing(
@@ -64,14 +61,12 @@ describe('domainRawListing', () => {
 
   describe('tryTransformSalePrice', () => {
     it.for(['sale.dandenong-vic-3175'])('should transform listings from %s', async (fileSuffix) => {
-      const inputFile = `tryExtractListings.${fileSuffix}.json`
-      const expectedFile = `tryTransformSalePrice.${fileSuffix}.json`
-      const inputListings = z
-        .array(domainRawListing.listingSchema)
-        .parse(JSON.parse(readFileSync(`${import.meta.dirname}/${inputFile}`).toString()))
-      const expectedObject: any[] = JSON.parse(
-        readFileSync(`${import.meta.dirname}/${expectedFile}`).toString(),
-      )
+      const inputListings = parseJsonFile(
+        `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+      ) as z.infer<typeof domainRawListing.listingSchema>[]
+      const expectedObject = parseJsonFile(
+        `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
+      ) as any[]
 
       for (let i = 0; i < inputListings.length; i++) {
         const [databaseInserts, success] = await domainRawListing.tryTransformSalePrice(

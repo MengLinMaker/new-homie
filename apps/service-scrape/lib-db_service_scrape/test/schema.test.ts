@@ -1,8 +1,8 @@
 import { describe, test } from 'vitest'
-import { db } from './kysely'
-import { home_type_enum, type Database } from './schema'
+import { db } from '../src/kysely'
+import { home_type_enum, type Database } from '../src/schema'
 import { faker } from '@faker-js/faker'
-import { toPgDatetime, toPgPoint } from './util'
+import { toPgDatetime, toPgPoint } from '../src/util'
 
 describe('schema test', () => {
   const insertIds = new Map<keyof Database, any>()
