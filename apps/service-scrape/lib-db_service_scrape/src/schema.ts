@@ -121,6 +121,8 @@ export const rental_price_table = pgTable(
     first_scrape_date: date().notNull().defaultNow(),
     last_scrape_date: date().notNull().defaultNow(),
     weekly_rent_aud: smallint().notNull(),
+    aud_per_bed: smallint(), // Could have no beds
+    aud_per_land_m2: smallint(),
   },
   (_t) => {
     conventionalConstraintFactory('rental_price_table')
@@ -140,8 +142,9 @@ export const sale_price_table = pgTable(
     home_table_id: integer().references(() => home_table.id),
     first_scrape_date: date().notNull().defaultNow(),
     last_scrape_date: date().notNull().defaultNow(),
-    lower_price_aud: integer().notNull(),
     higher_price_aud: integer().notNull(),
+    aud_per_bed: integer(), // Could have no beds
+    aud_per_land_m2: integer(),
   },
   (_t) => {
     conventionalConstraintFactory('sale_price_table')

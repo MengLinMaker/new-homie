@@ -16,8 +16,9 @@
     "migrate": "drizzle-kit generate migrate",
     "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
-    "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
     "test:type": "tsc",
+    "test:unit": "vitest run --coverage",
+    "dev:test:unit": "vitest --coverage",
     "build": "parcel build"
   },
   "dependencies": {
