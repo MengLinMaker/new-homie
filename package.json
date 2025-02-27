@@ -3,7 +3,8 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "format": "nx run-many -t format",
-    "test": "nx run-many -t test:lint test:type test:unit test:perf",
+    "test": "nx run-many -t test:lint test:type test:unit test:perf test:arch",
+    "test:arch": "pnpm depcruise -v -T dot . | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise .",
     "build": "nx run-many -t build",
     "knip": "knip",
     "build:ci": "nx affected -t build",
@@ -17,6 +18,7 @@
     "@parcel/transformer-typescript-types": "2.13.3",
     "@types/node": "22.13.4",
     "@vitest/coverage-v8": "3.0.7",
+    "dependency-cruiser": "16.10.0",
     "knip": "5.43.6",
     "nx": "20.4.6",
     "parcel": "2.13.3",
@@ -26,7 +28,8 @@
     "vitest": "3.0.7"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format"
+    "pre-commit": "pnpm format",
+    "pre-push": "pnpm test:arch"
   },
   "packageManager": "pnpm@9.12.3",
   "type": "module"
