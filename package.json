@@ -7,7 +7,9 @@
     "build": "nx run-many -t build",
     "knip": "knip",
     "build:ci": "nx affected -t build",
-    "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
+    "docker:up:ci": "nx affected -t docker:up",
+    "test:ci": "nx affected -t test:lint test:type test:unit test:perf",
+    "docker:down:ci": "nx affected -t docker:down"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
