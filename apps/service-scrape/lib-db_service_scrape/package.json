@@ -1,11 +1,9 @@
 {
   "name": "@service-scrape/lib-db_service_scrape",
   "version": "1.0.0",
-  "private": "true",
-  "source": "src/index.ts",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.cts",
   "files": ["dist"],
   "scripts": {
     "format": "biome format --write",
@@ -16,14 +14,16 @@
     "migrate": "drizzle-kit generate migrate",
     "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
-    "test:perf": "pnpm docker:up && vitest bench --run && pnpm docker:down",
     "test:type": "tsc",
-    "build": "parcel build"
+    "test:unit": "vitest run --coverage",
+    "dev:test:unit": "vitest --coverage",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap"
   },
   "dependencies": {
     "consola": "3.4.0",
     "dotenv": "16.4.7",
-    "drizzle-orm": "0.39.3",
+    "drizzle-kit": "0.30.4",
+    "drizzle-orm": "0.40.0",
     "drizzle-zod": "0.7.0",
     "kysely": "0.27.5",
     "pg": "8.13.3",
@@ -32,8 +32,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "9.5.0",
-    "@types/pg": "8.11.11",
-    "drizzle-kit": "0.30.4"
+    "@types/pg": "8.11.11"
   },
   "type": "module"
 }

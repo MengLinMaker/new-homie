@@ -1,6 +1,5 @@
 {
   "name": "@service-scrape/function-batch_scrape_suburbs",
-  "private": "true",
   "version": "1.0.0",
   "scripts": {
     "format": "biome format --write",
@@ -12,8 +11,7 @@
     "dev": "vite dev"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "0.18.1",
-    "dotenv": "16.4.7"
+    "@hono/vite-dev-server": "0.18.1"
   },
   "dependencies": {
     "@opentelemetry/api": "1.9.0",
@@ -26,6 +24,7 @@
     "@opentelemetry/semantic-conventions": "1.30.0",
     "@service-scrape/lib-db_service_scrape": "workspace:*",
     "cheerio": "1.0.0",
+    "dotenv": "16.4.7",
     "hono": "4.7.1",
     "zod": "3.24.2"
   },

@@ -3,28 +3,32 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "format": "nx run-many -t format",
-    "test": "nx run-many -t test:lint test:type test:unit test:perf",
+    "test": "nx run-many -t test:lint test:type test:unit test:perf test:arch",
+    "test:arch": "pnpm depcruise -v -T dot . | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise .",
     "build": "nx run-many -t build",
     "knip": "knip",
+    "docker:up": "nx affected -t docker:up",
+    "docker:down": "nx affected -t docker:down",
     "build:ci": "nx affected -t build",
     "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@parcel/packager-ts": "2.13.3",
-    "@parcel/transformer-typescript-types": "2.13.3",
     "@types/node": "22.13.4",
     "@vitest/coverage-v8": "3.0.7",
+    "dependency-cruiser": "16.10.0",
     "knip": "5.43.6",
     "nx": "20.4.6",
     "parcel": "2.13.3",
     "simple-git-hooks": "2.11.1",
+    "tsup": "8.4.0",
     "typescript": "5.7.3",
     "vite": "6.1.1",
     "vitest": "3.0.7"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format"
+    "pre-commit": "pnpm format",
+    "pre-push": "pnpm test:arch"
   },
   "packageManager": "pnpm@9.12.3",
   "type": "module"

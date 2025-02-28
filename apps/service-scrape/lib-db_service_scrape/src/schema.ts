@@ -112,8 +112,8 @@ export const home_table = pgTable(
   },
 )
 
-export const rental_price_table = pgTable(
-  'rental_price_table',
+export const rent_price_table = pgTable(
+  'rent_price_table',
   {
     // Rentals listed around 50k per week ~ 3 million data points per year
     id: integer().generatedByDefaultAsIdentity().primaryKey(),
@@ -121,13 +121,15 @@ export const rental_price_table = pgTable(
     first_scrape_date: date().notNull().defaultNow(),
     last_scrape_date: date().notNull().defaultNow(),
     weekly_rent_aud: smallint().notNull(),
+    aud_per_bed: smallint(),
   },
   (_t) => {
-    conventionalConstraintFactory('rental_price_table')
+    conventionalConstraintFactory('rent_price_table')
     return [
       // c.index('btree', t.first_scrape_date),
       // c.index('btree', t.last_scrape_date),
       // c.index('btree', t.weekly_rent_aud),
+      // c.index('btree', t.aud_per_bed),
     ]
   },
 )
@@ -140,8 +142,9 @@ export const sale_price_table = pgTable(
     home_table_id: integer().references(() => home_table.id),
     first_scrape_date: date().notNull().defaultNow(),
     last_scrape_date: date().notNull().defaultNow(),
-    lower_price_aud: integer().notNull(),
     higher_price_aud: integer().notNull(),
+    aud_per_bed: integer(), // Could have no beds
+    aud_per_land_m2: integer(),
   },
   (_t) => {
     conventionalConstraintFactory('sale_price_table')
@@ -150,6 +153,8 @@ export const sale_price_table = pgTable(
       // c.index('btree', t.last_scrape_date),
       // c.index('btree', t.lower_price_aud),
       // c.index('btree', t.higher_price_aud),
+      // c.index('btree', t.aud_per_bed),
+      // c.index('btree', t.aud_per_land_m2),
     ]
   },
 )
@@ -161,13 +166,13 @@ export const dbSchema = {
   localities_table: createInsertSchema(localities_table),
   common_features_table: createInsertSchema(common_features_table),
   home_table: createInsertSchema(home_table),
-  rental_price_table: createInsertSchema(rental_price_table),
+  rent_price_table: createInsertSchema(rent_price_table),
   sale_price_table: createInsertSchema(sale_price_table),
 }
 export interface Database {
   localities_table: Kyselify<typeof localities_table>
   common_features_table: Kyselify<typeof common_features_table>
   home_table: Kyselify<typeof home_table>
-  rental_price_table: Kyselify<typeof rental_price_table>
+  rent_price_table: Kyselify<typeof rent_price_table>
   sale_price_table: Kyselify<typeof sale_price_table>
 }

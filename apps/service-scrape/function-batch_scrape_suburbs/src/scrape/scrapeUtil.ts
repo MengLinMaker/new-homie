@@ -14,4 +14,23 @@ export const scrapeUtil = {
       return JSON.parse(nextJson) as object
     })
   },
+
+  /**
+   * @returns ISO standard date
+   */
+  currentDate: () => new Date().toISOString().slice(0, 10),
+
+  /**
+   * @description Homes tend to sell at higher price.
+   * @returns Integer price
+   */
+  highestPriceFromString(priceString: string) {
+    const prices = priceString
+      .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
+      .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
+      .toArray()
+    if (prices.length === 0) return null
+    const priceList = prices.map((match) => Number.parseFloat(match.toString().replaceAll('$', '')))
+    return Math.max(...priceList)
+  },
 }

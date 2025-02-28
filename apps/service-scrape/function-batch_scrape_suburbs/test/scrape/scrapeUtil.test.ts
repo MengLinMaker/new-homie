@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { scrapeUtil } from './scrapeUtil'
+import { scrapeUtil } from '../../src/scrape/scrapeUtil'
 
 describe('scrapeUtil', () => {
   describe('tryExtractNextJson', () => {

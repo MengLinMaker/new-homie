@@ -42,5 +42,11 @@ jobs:
       - name: Build
         run: pnpm build:ci
 
+      - name: Docker compose up
+        run: pnpm docker:up
+
       - name: Test
         run: pnpm test:ci
+
+      - name: Docker compose down
+        run: pnpm docker:down

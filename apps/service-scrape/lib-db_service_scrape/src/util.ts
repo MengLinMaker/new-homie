@@ -14,10 +14,12 @@ export const conventionalConstraintFactory = (tableName: string) => ({
   textSearchIndex: (column: ExtraConfigColumn) =>
     index(`${tableName}_${column.name}_idx`).using(
       'gist',
+      // @ts-ignore
       drizzleSql`to_tsvector('english', ${column})`,
     ),
 
-  check: (column: ExtraConfigColumn, sqlQuery: SQL) =>
+  check: (column: ExtraConfigColumn, sqlQuery: SQL<unknown>) =>
+    // @ts-ignore
     check(`${tableName}_${column.name}_check`, sqlQuery),
 })
 
@@ -26,10 +28,10 @@ export const conventionalConstraintFactory = (tableName: string) => ({
  * @returns Postgres compatible timestamp string.
  * @link Postgres timestamp spec: https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-INPUT-TIME-STAMPS
  */
-export const toPgDatetime = (inputDatetime: string | null | undefined) =>
-  inputDatetime
-    ? inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '')
-    : null
+export const toPgDatetime = <T>(inputDatetime: T) =>
+  typeof inputDatetime === 'string'
+    ? (inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '') as T)
+    : (null as T)
 
 /**
  *
