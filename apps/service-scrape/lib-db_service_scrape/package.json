@@ -1,10 +1,9 @@
 {
   "name": "@service-scrape/lib-db_service_scrape",
   "version": "1.0.0",
-  "source": "src/index.ts",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.cts",
   "files": ["dist"],
   "scripts": {
     "format": "biome format --write",
@@ -18,7 +17,7 @@
     "test:type": "tsc",
     "test:unit": "vitest run --coverage",
     "dev:test:unit": "vitest --coverage",
-    "build": "parcel build"
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap && attw -P ."
   },
   "dependencies": {
     "consola": "3.4.0",
