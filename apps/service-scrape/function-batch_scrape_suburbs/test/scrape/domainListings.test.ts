@@ -92,6 +92,7 @@ describe(testSuiteName, () => {
       const expectedObject = parseJsonFile(
         `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
       ) as any[]
+
       for (let i = 0; i < inputListings.length; i++) {
         const [databaseInserts, success] = await domainListings.tryTransformRentPrice(
           inputListings[i]!,
