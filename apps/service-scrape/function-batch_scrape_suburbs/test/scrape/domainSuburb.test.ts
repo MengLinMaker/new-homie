@@ -25,4 +25,24 @@ describe(testSuiteName, () => {
       expect(resultObject).toBeInstanceOf(Error)
     })
   })
+
+  describe('tryExtractProfile', () => {
+    it.for(['suburb-profile.dandenong-vic-3175'])(
+      'should extract suburb info from %s',
+      async (fileSuffix) => {
+        const inputObject = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`)
+        const expectedObject = parseJsonFile(`${resourcePath}/tryExtractProfile.${fileSuffix}.json`)
+
+        const [value, success] = await domainSuburb.tryExtractProfile(inputObject)
+        if (!success) return expect(success).toBe(true)
+        expect(value).toStrictEqual(expectedObject)
+      },
+    )
+
+    it('should not extract invalid input', async () => {
+      const [resultObject, success] = await domainSuburb.tryExtractProfile({})
+      expect(success).toBe(false)
+      expect(resultObject).toBeInstanceOf(Error)
+    })
+  })
 })

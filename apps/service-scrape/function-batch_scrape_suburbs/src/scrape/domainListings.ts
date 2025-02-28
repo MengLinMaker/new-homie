@@ -48,8 +48,8 @@ export const domainListings = {
   }),
 
   /**
-   * Extract array of raw listings from Next.js JSON.
-   * Detects isLastPage for looping.
+   * @description Extract array of raw listings from Next.js JSON.
+   * @description Detects isLastPage for looping.
    * @param nextDataJson
    */
   tryExtractListings(nextDataJson: object) {

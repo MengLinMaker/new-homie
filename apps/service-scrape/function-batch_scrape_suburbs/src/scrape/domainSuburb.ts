@@ -51,8 +51,8 @@ const _rawSuburbSchema = z.object({
   }),
 })
 
-type rawSuburb = {
-  rawSuburbSchema: z.infer<typeof _rawSuburbSchema>
+export type rawSuburb = {
+  rawSuburbData: z.infer<typeof _rawSuburbSchema>
   boundaryGeoJson: z.infer<typeof _boundaryGeoJsonSchema>
 }
 
@@ -69,9 +69,9 @@ export const domainSuburb = {
   }),
 
   /**
-   *
+   * @description Extract raw objects from Next.js JSON.
    * @param nextDataJson
-   * @returns
+   * @returns object containing rawSuburbSchema
    */
   tryExtractProfile(nextDataJson: object) {
     return traceTryFunction('domainSuburb.tryExtractProfile', arguments, 'ERROR', async () => {
@@ -81,7 +81,7 @@ export const domainSuburb = {
         2,
       )
       return {
-        rawSuburbSchema: _rawSuburbSchema.parse({
+        rawSuburbData: _rawSuburbSchema.parse({
           suburb: intestingObjects[0],
           location: intestingObjects[1],
         }),
