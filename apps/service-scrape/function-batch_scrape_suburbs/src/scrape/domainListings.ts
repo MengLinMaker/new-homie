@@ -111,8 +111,8 @@ export const domainListings = {
       if (!price) throw Error('no price in listing.listingModel.price')
       return {
         sale_price_table: dbSchema.sale_price_table.parse({
-          first_scrape_date: scrapeUtil.currentDate(),
-          last_scrape_date: scrapeUtil.currentDate(),
+          first_scrape_date: '',
+          last_scrape_date: '',
           higher_price_aud: price,
           aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
           aud_per_land_m2: land > 0 ? Math.round(price / land) : null,
@@ -135,8 +135,8 @@ export const domainListings = {
       if (!price) throw Error('no price in listing.listingModel.price')
       return {
         rental_price_table: dbSchema.rental_price_table.parse({
-          first_scrape_date: scrapeUtil.currentDate(),
-          last_scrape_date: scrapeUtil.currentDate(),
+          first_scrape_date: '',
+          last_scrape_date: '',
           weekly_rent_aud: price,
           aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
         } satisfies z.infer<typeof dbSchema.rental_price_table>),
