@@ -65,7 +65,6 @@ export const common_features_table = pgTable(
     car_quantity: smallint().notNull(), // 20 cars is beyond budget
     home_type: home_type_enum().notNull(),
     is_retirement: boolean().notNull(),
-    is_rural: boolean().notNull(),
   },
   (t) => {
     const c = conventionalConstraintFactory('common_features_table')
@@ -75,7 +74,6 @@ export const common_features_table = pgTable(
       // c.index('btree', t.bath_quantity),
       // c.index('btree', t.car_quantity),
       // c.index('hash', t.is_retirement),
-      // c.index('hash', t.is_rural),
 
       c.check(t.bed_quantity, sql`${t.bed_quantity} >= 0 AND ${t.bed_quantity} <= 10`),
       c.check(t.bath_quantity, sql`${t.bath_quantity} >= 0  AND ${t.bath_quantity} <= 5`),

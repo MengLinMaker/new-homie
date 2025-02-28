@@ -5,8 +5,7 @@
       "bath_quantity": 2,
       "car_quantity": 1,
       "home_type": "Townhouse",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "3, 5 & 8/36-38 Power Street",
@@ -22,8 +21,7 @@
       "bath_quantity": 3,
       "car_quantity": 2,
       "home_type": "Townhouse",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1 & 6/36-38 Power Street",
@@ -39,8 +37,7 @@
       "bath_quantity": 2,
       "car_quantity": 4,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "4 Glenys Court",
@@ -56,8 +53,7 @@
       "bath_quantity": 1,
       "car_quantity": 0,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "98 Keneally Street",
@@ -73,8 +69,7 @@
       "bath_quantity": 3,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "10A Gooding Court",
@@ -90,8 +85,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "216/80 Cheltenham Road",
@@ -107,8 +101,7 @@
       "bath_quantity": 1,
       "car_quantity": 2,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1/67 Hammond Road",
@@ -124,8 +117,7 @@
       "bath_quantity": 2,
       "car_quantity": 1,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/13 Grandview Avenue",
@@ -141,8 +133,7 @@
       "bath_quantity": 2,
       "car_quantity": 1,
       "home_type": "Townhouse",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "5/69-71 Potter Street",
@@ -158,8 +149,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1/15 Wilma Avenue",
@@ -175,8 +165,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/79 Hammond Road",
@@ -192,8 +181,7 @@
       "bath_quantity": 2,
       "car_quantity": 4,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "16 Rodwell Street",
@@ -209,8 +197,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "20/57 Clow Street",
@@ -226,8 +213,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "113 Keneally Street",
@@ -243,8 +229,7 @@
       "bath_quantity": 1,
       "car_quantity": 4,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/19 Orgill Street",
@@ -260,8 +245,7 @@
       "bath_quantity": 2,
       "car_quantity": 4,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "23 Desa Terrace",
@@ -277,8 +261,7 @@
       "bath_quantity": 1,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "21 Purdy Avenue",
@@ -294,8 +277,7 @@
       "bath_quantity": 1,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "69 King George Parade",
@@ -311,8 +293,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "BlockOfUnits",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1 & 2/64 Potter Street",
@@ -328,8 +309,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "6/80 Cheltenham Road",
@@ -345,8 +325,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "Townhouse",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "39/35 David Street",
@@ -362,8 +341,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "22 Bassett Street",
