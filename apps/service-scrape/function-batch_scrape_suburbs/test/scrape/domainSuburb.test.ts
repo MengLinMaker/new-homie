@@ -11,9 +11,7 @@ describe(testSuiteName, () => {
       'should extract suburb info from %s',
       async (fileSuffix) => {
         const inputObject = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`)
-        const expectedObject = parseJsonFile(
-          `${resourcePath}/tryExtractProfile.${fileSuffix}.json`,
-        )
+        const expectedObject = parseJsonFile(`${resourcePath}/tryExtractProfile.${fileSuffix}.json`)
 
         const [value, success] = await domainSuburb.tryExtractProfile(inputObject)
         if (!success) return expect(success).toBe(true)

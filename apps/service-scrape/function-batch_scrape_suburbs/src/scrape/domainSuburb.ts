@@ -86,8 +86,10 @@ export const domainSuburb = {
           location: intestingObjects[1],
         }),
         boundaryGeoJson: _boundaryGeoJsonSchema.parse(
-          JSON.parse(intestingObjects[0]['suburbShape({"geometryPrecision":"high"})'].boundaryGeoJson),
-        )
+          JSON.parse(
+            intestingObjects[0]['suburbShape({"geometryPrecision":"high"})'].boundaryGeoJson,
+          ),
+        ),
       } satisfies rawSuburb
     })
   },
