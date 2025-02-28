@@ -20,7 +20,7 @@
     "target": "ESNext",
     "isolatedModules": true,
     "esModuleInterop": true,
-    "module": "Preserve",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
