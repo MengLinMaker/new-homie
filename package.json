@@ -7,10 +7,10 @@
     "test:arch": "pnpm depcruise -v -T dot . | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise .",
     "build": "nx run-many -t build",
     "knip": "knip",
+    "docker:up": "nx affected -t docker:up",
+    "docker:down": "nx affected -t docker:down",
     "build:ci": "nx affected -t build",
-    "docker:up:ci": "nx affected -t docker:up",
-    "test:ci": "nx affected -t test:lint test:type test:unit test:perf",
-    "docker:down:ci": "nx affected -t docker:down"
+    "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
