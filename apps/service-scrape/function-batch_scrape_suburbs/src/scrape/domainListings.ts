@@ -29,9 +29,6 @@ const _listingsSchema = z.object({
   }),
 })
 
-/**
- * Functions for extracting data from
- */
 export const domainListings = {
   listingsSchema: _listingsSchema,
 
@@ -134,12 +131,12 @@ export const domainListings = {
 
       if (!price) throw Error('no price in listing.listingModel.price')
       return {
-        rental_price_table: dbSchema.rental_price_table.parse({
+        rent_price_table: dbSchema.rent_price_table.parse({
           first_scrape_date: '',
           last_scrape_date: '',
           weekly_rent_aud: price,
           aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
-        } satisfies z.infer<typeof dbSchema.rental_price_table>),
+        } satisfies z.infer<typeof dbSchema.rent_price_table>),
       }
     })
   },

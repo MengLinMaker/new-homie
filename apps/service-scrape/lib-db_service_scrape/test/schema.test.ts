@@ -79,10 +79,10 @@ describe('schema test', () => {
       )
 
       insertIds.set(
-        'rental_price_table',
+        'rent_price_table',
         (
           await t
-            .insertInto('rental_price_table')
+            .insertInto('rent_price_table')
             .values({
               home_table_id: insertIds.get('home_table'),
               first_scrape_date: toPgDatetime(faker.date.past().toISOString()),

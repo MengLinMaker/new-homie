@@ -36,7 +36,7 @@ describe(testSuiteName, () => {
       async (fileSuffix) => {
         const inputListings = parseJsonFile(
           `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
-        ) as z.infer<typeof domainListings.listingSchema>[]
+        ) as z.infer<typeof domainListings.listingsSchema>[]
         const expectedObject = parseJsonFile(
           `${resourcePath}/tryTransformListing.${fileSuffix}.json`,
         ) as any[]
@@ -63,7 +63,7 @@ describe(testSuiteName, () => {
     it.for(['sale.dandenong-vic-3175'])('should transform listings from %s', async (fileSuffix) => {
       const inputListings = parseJsonFile(
         `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
-      ) as z.infer<typeof domainListings.listingSchema>[]
+      ) as z.infer<typeof domainListings.listingsSchema>[]
       const expectedObject = parseJsonFile(
         `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
       ) as any[]
@@ -88,7 +88,7 @@ describe(testSuiteName, () => {
     it.for(['rent.dandenong-vic-3175'])('should transform listings from %s', async (fileSuffix) => {
       const inputListings = parseJsonFile(
         `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
-      ) as z.infer<typeof domainListings.listingSchema>[]
+      ) as z.infer<typeof domainListings.listingsSchema>[]
       const expectedObject = parseJsonFile(
         `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
       ) as any[]

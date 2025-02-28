@@ -112,8 +112,8 @@ export const home_table = pgTable(
   },
 )
 
-export const rental_price_table = pgTable(
-  'rental_price_table',
+export const rent_price_table = pgTable(
+  'rent_price_table',
   {
     // Rentals listed around 50k per week ~ 3 million data points per year
     id: integer().generatedByDefaultAsIdentity().primaryKey(),
@@ -124,7 +124,7 @@ export const rental_price_table = pgTable(
     aud_per_bed: smallint(),
   },
   (_t) => {
-    conventionalConstraintFactory('rental_price_table')
+    conventionalConstraintFactory('rent_price_table')
     return [
       // c.index('btree', t.first_scrape_date),
       // c.index('btree', t.last_scrape_date),
@@ -166,13 +166,13 @@ export const dbSchema = {
   localities_table: createInsertSchema(localities_table),
   common_features_table: createInsertSchema(common_features_table),
   home_table: createInsertSchema(home_table),
-  rental_price_table: createInsertSchema(rental_price_table),
+  rent_price_table: createInsertSchema(rent_price_table),
   sale_price_table: createInsertSchema(sale_price_table),
 }
 export interface Database {
   localities_table: Kyselify<typeof localities_table>
   common_features_table: Kyselify<typeof common_features_table>
   home_table: Kyselify<typeof home_table>
-  rental_price_table: Kyselify<typeof rental_price_table>
+  rent_price_table: Kyselify<typeof rent_price_table>
   sale_price_table: Kyselify<typeof sale_price_table>
 }
