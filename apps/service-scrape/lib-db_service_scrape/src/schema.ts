@@ -121,8 +121,7 @@ export const rental_price_table = pgTable(
     first_scrape_date: date().notNull().defaultNow(),
     last_scrape_date: date().notNull().defaultNow(),
     weekly_rent_aud: smallint().notNull(),
-    aud_per_bed: smallint(), // Could have no beds
-    aud_per_land_m2: smallint(),
+    aud_per_bed: smallint(),
   },
   (_t) => {
     conventionalConstraintFactory('rental_price_table')
@@ -130,6 +129,7 @@ export const rental_price_table = pgTable(
       // c.index('btree', t.first_scrape_date),
       // c.index('btree', t.last_scrape_date),
       // c.index('btree', t.weekly_rent_aud),
+      // c.index('btree', t.aud_per_bed),
     ]
   },
 )
@@ -153,6 +153,8 @@ export const sale_price_table = pgTable(
       // c.index('btree', t.last_scrape_date),
       // c.index('btree', t.lower_price_aud),
       // c.index('btree', t.higher_price_aud),
+      // c.index('btree', t.aud_per_bed),
+      // c.index('btree', t.aud_per_land_m2),
     ]
   },
 )
