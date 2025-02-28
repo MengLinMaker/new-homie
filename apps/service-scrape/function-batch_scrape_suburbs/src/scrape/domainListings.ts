@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { dbSchema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
 import { scrapeUtil } from './scrapeUtil'
 
-const _listingSchema = z.object({
+const _listingsSchema = z.object({
   listingModel: z.object({
     url: z.string(),
     price: z.string(),
@@ -33,7 +33,7 @@ const _listingSchema = z.object({
  * Functions for extracting data from
  */
 export const domainListings = {
-  listingSchema: _listingSchema,
+  listingsSchema: _listingsSchema,
 
   /**
    * Next.js json schema parser to reduce app logic
@@ -44,7 +44,7 @@ export const domainListings = {
         componentProps: z.object({
           currentPage: z.number().min(1),
           totalPages: z.number().min(1),
-          listingsMap: z.record(z.string(), _listingSchema),
+          listingsMap: z.record(z.string(), _listingsSchema),
         }),
       }),
     }),
@@ -71,7 +71,7 @@ export const domainListings = {
    * @param listing
    * @returns Object containing tables for database inserts
    */
-  tryTransformListing(listing: z.infer<typeof _listingSchema>) {
+  tryTransformListing(listing: z.infer<typeof _listingsSchema>) {
     return traceTryFunction('domainListings.tryTransformListing', arguments, 'ERROR', async () => {
       const listingModel = listing.listingModel
       const address = listingModel.address
@@ -101,7 +101,7 @@ export const domainListings = {
    * @param listing
    * @returns Object containing tables for database inserts
    */
-  tryTransformSalePrice(listing: z.infer<typeof _listingSchema>) {
+  tryTransformSalePrice(listing: z.infer<typeof _listingsSchema>) {
     return traceTryFunction('domainListings.tryTransformSalePrice', arguments, 'WARN', async () => {
       const beds = listing.listingModel.features.beds ?? 0
       const land = listing.listingModel.features.landSize
@@ -126,7 +126,7 @@ export const domainListings = {
    * @param listing
    * @returns Object containing tables for database inserts
    */
-  tryTransformRentPrice(listing: z.infer<typeof _listingSchema>) {
+  tryTransformRentPrice(listing: z.infer<typeof _listingsSchema>) {
     return traceTryFunction('domainListings.tryTransformRentPrice', arguments, 'WARN', async () => {
       const beds = listing.listingModel.features.beds ?? 0
       const priceString = listing.listingModel.price
