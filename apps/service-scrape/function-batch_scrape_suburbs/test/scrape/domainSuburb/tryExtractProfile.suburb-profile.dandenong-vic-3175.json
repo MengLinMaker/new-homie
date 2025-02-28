@@ -1,238 +1,236 @@
 {
-  "rawSuburbData": {
-    "suburb": {
-      "name": "Dandenong",
-      "state": "VIC",
-      "postcode": "3175",
-      "statistics": {
-        "marriedPercentage": 0.5095739389920424,
-        "ownerOccupierPercentage": 0.41930361801066124,
-        "population": 29911,
-        "mostCommonAgeBracket": "20 to 39"
+  "suburb": {
+    "name": "Dandenong",
+    "state": "VIC",
+    "postcode": "3175",
+    "statistics": {
+      "marriedPercentage": 0.5095739389920424,
+      "ownerOccupierPercentage": 0.41930361801066124,
+      "population": 29911,
+      "mostCommonAgeBracket": "20 to 39"
+    },
+    "schools": [
+      {
+        "acaraId": "44271",
+        "schoolType": "Primary",
+        "name": "Dandenong Primary School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
       },
-      "schools": [
+      {
+        "acaraId": "44725",
+        "schoolType": "Primary",
+        "name": "Dandenong West Primary School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
+      },
+      {
+        "acaraId": "44811",
+        "schoolType": "Primary",
+        "name": "Dandenong North Primary School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
+      },
+      {
+        "acaraId": "44852",
+        "schoolType": "Primary",
+        "name": "Dandenong South Primary School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
+      },
+      {
+        "acaraId": "44909",
+        "schoolType": "Combined",
+        "name": "Emerson School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "U"
+        }
+      },
+      {
+        "acaraId": "44953",
+        "schoolType": "Primary",
+        "name": "Wooranna Park Primary School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
+      },
+      {
+        "acaraId": "45588",
+        "schoolType": "Secondary",
+        "name": "Dandenong High School",
+        "gender": "CoEd",
+        "schoolSector": "Government",
+        "profile": {
+          "yearRange": "7-12"
+        }
+      },
+      {
+        "acaraId": "45766",
+        "schoolType": "Primary",
+        "name": "St Mary's School",
+        "gender": "CoEd",
+        "schoolSector": "Catholic",
+        "profile": {
+          "yearRange": "Prep-6"
+        }
+      },
+      {
+        "acaraId": "45932",
+        "schoolType": "Secondary",
+        "name": "St John's Regional College",
+        "gender": "CoEd",
+        "schoolSector": "Catholic",
+        "profile": {
+          "yearRange": "7-12"
+        }
+      },
+      {
+        "acaraId": "45991",
+        "schoolType": "Secondary",
+        "name": "St Mary's College for the Deaf - Dandenong Campus",
+        "gender": null,
+        "schoolSector": "Catholic",
+        "profile": null
+      },
+      {
+        "acaraId": "50177",
+        "schoolType": "Secondary",
+        "name": "Dandenong High School-Cleeland Campus",
+        "gender": null,
+        "schoolSector": "Government",
+        "profile": null
+      },
+      {
+        "acaraId": "52539",
+        "schoolType": "Secondary",
+        "name": "SEDA College (Victoria) - Basketball - Dandenong",
+        "gender": null,
+        "schoolSector": "Independent",
+        "profile": null
+      },
+      {
+        "acaraId": "52545",
+        "schoolType": "Secondary",
+        "name": "SEDA College (Victoria) - Building and Construction - Dandenong",
+        "gender": null,
+        "schoolSector": "Independent",
+        "profile": null
+      },
+      {
+        "acaraId": "52815",
+        "schoolType": "Secondary",
+        "name": "SEDA College (Victoria) - AFL Dandenong Campus - Dandenong Oasis",
+        "gender": null,
+        "schoolSector": "Independent",
+        "profile": null
+      },
+      {
+        "acaraId": "53318",
+        "schoolType": "Special",
+        "name": "Community College Gippsland Ltd | ECG Secondary College - ECG Secondary College - Dandenong Campus",
+        "gender": null,
+        "schoolSector": "Independent",
+        "profile": null
+      }
+    ]
+  },
+  "location": {
+    "data": {
+      "propertyCategories": [
         {
-          "acaraId": "44271",
-          "schoolType": "Primary",
-          "name": "Dandenong Primary School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
+          "bedrooms": 2,
+          "propertyCategory": "House",
+          "medianSoldPrice": 509000,
+          "daysOnMarket": 108,
+          "auctionClearanceRate": 0,
+          "numberSold": 50,
+          "medianRentPrice": 480,
+          "entryLevelPrice": 320000,
+          "luxuryLevelPrice": 705000
         },
         {
-          "acaraId": "44725",
-          "schoolType": "Primary",
-          "name": "Dandenong West Primary School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
+          "bedrooms": 3,
+          "propertyCategory": "House",
+          "medianSoldPrice": 660000,
+          "daysOnMarket": 75,
+          "auctionClearanceRate": 0.40425531914893614,
+          "numberSold": 128,
+          "medianRentPrice": 550,
+          "entryLevelPrice": 528000,
+          "luxuryLevelPrice": 925000
         },
         {
-          "acaraId": "44811",
-          "schoolType": "Primary",
-          "name": "Dandenong North Primary School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
+          "bedrooms": 4,
+          "propertyCategory": "House",
+          "medianSoldPrice": 831000,
+          "daysOnMarket": 65,
+          "auctionClearanceRate": 0.5217391304347826,
+          "numberSold": 40,
+          "medianRentPrice": 650,
+          "entryLevelPrice": 600000,
+          "luxuryLevelPrice": 1300000
         },
         {
-          "acaraId": "44852",
-          "schoolType": "Primary",
-          "name": "Dandenong South Primary School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
+          "bedrooms": 5,
+          "propertyCategory": "House",
+          "medianSoldPrice": 0,
+          "daysOnMarket": 0,
+          "auctionClearanceRate": 0,
+          "numberSold": 9,
+          "medianRentPrice": 0,
+          "entryLevelPrice": 0,
+          "luxuryLevelPrice": 0
         },
         {
-          "acaraId": "44909",
-          "schoolType": "Combined",
-          "name": "Emerson School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "U"
-          }
+          "bedrooms": 1,
+          "propertyCategory": "Unit",
+          "medianSoldPrice": 270000,
+          "daysOnMarket": 94,
+          "auctionClearanceRate": 0,
+          "numberSold": 44,
+          "medianRentPrice": 350,
+          "entryLevelPrice": 220000,
+          "luxuryLevelPrice": 320000
         },
         {
-          "acaraId": "44953",
-          "schoolType": "Primary",
-          "name": "Wooranna Park Primary School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
+          "bedrooms": 2,
+          "propertyCategory": "Unit",
+          "medianSoldPrice": 345000,
+          "daysOnMarket": 106,
+          "auctionClearanceRate": 0.375,
+          "numberSold": 261,
+          "medianRentPrice": 420,
+          "entryLevelPrice": 270000,
+          "luxuryLevelPrice": 535000
         },
         {
-          "acaraId": "45588",
-          "schoolType": "Secondary",
-          "name": "Dandenong High School",
-          "gender": "CoEd",
-          "schoolSector": "Government",
-          "profile": {
-            "yearRange": "7-12"
-          }
-        },
-        {
-          "acaraId": "45766",
-          "schoolType": "Primary",
-          "name": "St Mary's School",
-          "gender": "CoEd",
-          "schoolSector": "Catholic",
-          "profile": {
-            "yearRange": "Prep-6"
-          }
-        },
-        {
-          "acaraId": "45932",
-          "schoolType": "Secondary",
-          "name": "St John's Regional College",
-          "gender": "CoEd",
-          "schoolSector": "Catholic",
-          "profile": {
-            "yearRange": "7-12"
-          }
-        },
-        {
-          "acaraId": "45991",
-          "schoolType": "Secondary",
-          "name": "St Mary's College for the Deaf - Dandenong Campus",
-          "gender": null,
-          "schoolSector": "Catholic",
-          "profile": null
-        },
-        {
-          "acaraId": "50177",
-          "schoolType": "Secondary",
-          "name": "Dandenong High School-Cleeland Campus",
-          "gender": null,
-          "schoolSector": "Government",
-          "profile": null
-        },
-        {
-          "acaraId": "52539",
-          "schoolType": "Secondary",
-          "name": "SEDA College (Victoria) - Basketball - Dandenong",
-          "gender": null,
-          "schoolSector": "Independent",
-          "profile": null
-        },
-        {
-          "acaraId": "52545",
-          "schoolType": "Secondary",
-          "name": "SEDA College (Victoria) - Building and Construction - Dandenong",
-          "gender": null,
-          "schoolSector": "Independent",
-          "profile": null
-        },
-        {
-          "acaraId": "52815",
-          "schoolType": "Secondary",
-          "name": "SEDA College (Victoria) - AFL Dandenong Campus - Dandenong Oasis",
-          "gender": null,
-          "schoolSector": "Independent",
-          "profile": null
-        },
-        {
-          "acaraId": "53318",
-          "schoolType": "Special",
-          "name": "Community College Gippsland Ltd | ECG Secondary College - ECG Secondary College - Dandenong Campus",
-          "gender": null,
-          "schoolSector": "Independent",
-          "profile": null
+          "bedrooms": 3,
+          "propertyCategory": "Unit",
+          "medianSoldPrice": 578000,
+          "daysOnMarket": 105,
+          "auctionClearanceRate": 0.6363636363636364,
+          "numberSold": 56,
+          "medianRentPrice": 540,
+          "entryLevelPrice": 408000,
+          "luxuryLevelPrice": 700000
         }
       ]
-    },
-    "location": {
-      "data": {
-        "propertyCategories": [
-          {
-            "bedrooms": 2,
-            "propertyCategory": "House",
-            "medianSoldPrice": 509000,
-            "daysOnMarket": 108,
-            "auctionClearanceRate": 0,
-            "numberSold": 50,
-            "medianRentPrice": 480,
-            "entryLevelPrice": 320000,
-            "luxuryLevelPrice": 705000
-          },
-          {
-            "bedrooms": 3,
-            "propertyCategory": "House",
-            "medianSoldPrice": 660000,
-            "daysOnMarket": 75,
-            "auctionClearanceRate": 0.40425531914893614,
-            "numberSold": 128,
-            "medianRentPrice": 550,
-            "entryLevelPrice": 528000,
-            "luxuryLevelPrice": 925000
-          },
-          {
-            "bedrooms": 4,
-            "propertyCategory": "House",
-            "medianSoldPrice": 831000,
-            "daysOnMarket": 65,
-            "auctionClearanceRate": 0.5217391304347826,
-            "numberSold": 40,
-            "medianRentPrice": 650,
-            "entryLevelPrice": 600000,
-            "luxuryLevelPrice": 1300000
-          },
-          {
-            "bedrooms": 5,
-            "propertyCategory": "House",
-            "medianSoldPrice": 0,
-            "daysOnMarket": 0,
-            "auctionClearanceRate": 0,
-            "numberSold": 9,
-            "medianRentPrice": 0,
-            "entryLevelPrice": 0,
-            "luxuryLevelPrice": 0
-          },
-          {
-            "bedrooms": 1,
-            "propertyCategory": "Unit",
-            "medianSoldPrice": 270000,
-            "daysOnMarket": 94,
-            "auctionClearanceRate": 0,
-            "numberSold": 44,
-            "medianRentPrice": 350,
-            "entryLevelPrice": 220000,
-            "luxuryLevelPrice": 320000
-          },
-          {
-            "bedrooms": 2,
-            "propertyCategory": "Unit",
-            "medianSoldPrice": 345000,
-            "daysOnMarket": 106,
-            "auctionClearanceRate": 0.375,
-            "numberSold": 261,
-            "medianRentPrice": 420,
-            "entryLevelPrice": 270000,
-            "luxuryLevelPrice": 535000
-          },
-          {
-            "bedrooms": 3,
-            "propertyCategory": "Unit",
-            "medianSoldPrice": 578000,
-            "daysOnMarket": 105,
-            "auctionClearanceRate": 0.6363636363636364,
-            "numberSold": 56,
-            "medianRentPrice": 540,
-            "entryLevelPrice": 408000,
-            "luxuryLevelPrice": 700000
-          }
-        ]
-      }
     }
   },
   "boundaryGeoJson": {
