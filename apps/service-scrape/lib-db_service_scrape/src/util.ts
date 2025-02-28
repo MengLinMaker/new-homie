@@ -14,12 +14,12 @@ export const conventionalConstraintFactory = (tableName: string) => ({
   textSearchIndex: (column: ExtraConfigColumn) =>
     index(`${tableName}_${column.name}_idx`).using(
       'gist',
-      // @ts-expect-error
+      // @ts-ignore
       drizzleSql`to_tsvector('english', ${column})`,
     ),
 
   check: (column: ExtraConfigColumn, sqlQuery: SQL<unknown>) =>
-    // @ts-expect-error
+    // @ts-ignore
     check(`${tableName}_${column.name}_check`, sqlQuery),
 })
 
