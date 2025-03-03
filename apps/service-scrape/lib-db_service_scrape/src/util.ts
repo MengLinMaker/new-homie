@@ -1,7 +1,7 @@
 import { sql as drizzleSql, type SQL } from 'drizzle-orm'
 import type { ExtraConfigColumn, PgIndexMethod } from 'drizzle-orm/pg-core'
 import { check, index } from 'drizzle-orm/pg-core'
-import { sql as kyselySql, type RawBuilder } from 'kysely'
+import { sql as kyselySql } from 'kysely'
 
 /**
  * @param tableName
@@ -39,7 +39,5 @@ export const toPgDatetime = <T>(inputDatetime: T) =>
  * @returns Kysely sql for creating Postgres point.
  * @lint Postgres points doc: https://www.postgresql.org/docs/current/datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS
  */
-export const toPgPoint = (pt: [number, number]): RawBuilder<[number, number]> => {
-  const point = `(${pt[0]},${pt[1]})`
-  return kyselySql<[number, number]>`${point}`
-}
+export const toPostgisPoint = (pt: [number, number]): [number, number] =>
+  kyselySql<[number, number]>`${`POINT(${pt[0]} ${pt[1]})`}` as never

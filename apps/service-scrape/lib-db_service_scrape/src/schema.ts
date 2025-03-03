@@ -3,10 +3,10 @@ import { sql } from 'drizzle-orm'
 import {
   boolean,
   date,
+  geometry,
   integer,
   pgEnum,
   pgTable,
-  point,
   smallint,
   text,
   time,
@@ -91,7 +91,7 @@ export const home_table = pgTable(
     common_features_table_id: smallint().references(() => common_features_table.id), // 500x smaller
     // Very unique data - not worth normalising
     street_address: text().notNull(),
-    gps: point().notNull(),
+    gps: geometry({ type: 'point', mode: 'tuple', srid: 4326 }).notNull(),
     land_m2: smallint(),
     inspection_time: time(),
     auction_time: time(),

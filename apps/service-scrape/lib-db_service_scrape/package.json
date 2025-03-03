@@ -1,17 +1,27 @@
 {
   "name": "@service-scrape/lib-db_service_scrape",
   "version": "1.0.0",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.cts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": ["dist"],
   "scripts": {
     "format": "biome format --write",
     "docker:down": "docker compose down -v",
-    "docker:up": "docker compose up --build -d && sleep 1 && drizzle-kit push",
+    "docker:up": "docker compose up --build -d && sleep 1 && drizzle-kit migrate",
     "studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate --name",
-    "migrate": "drizzle-kit generate migrate",
+    "migrate": "drizzle-kit migrate",
     "test": "pnpm run /^test:/",
     "test:lint": "biome lint --write",
     "test:type": "tsc",
