@@ -1,6 +1,6 @@
 import { traceTryFunction } from '../instrumentation'
 import { z } from 'zod'
-import { dbSchema, toPgDatetime, toPostgisPoint } from '@service-scrape/lib-db_service_scrape'
+import { dbSchema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
 import { scrapeUtil } from './scrapeUtil'
 
 const _listingsSchema = z.object({
@@ -83,7 +83,7 @@ export const domainListings = {
         } satisfies z.infer<typeof dbSchema.common_features_table>),
         home_table: dbSchema.home_table.parse({
           street_address: address.street,
-          gps: toPostgisPoint([address.lat, address.lng]),
+          gps: [address.lat, address.lng],
           land_m2: features.landSize === 0 ? null : features.landSize,
           inspection_time: toPgDatetime(listingModel.inspection.openTime),
           auction_time: toPgDatetime(listingModel.auction),
