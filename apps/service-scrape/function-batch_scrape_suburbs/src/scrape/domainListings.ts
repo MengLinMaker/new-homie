@@ -48,8 +48,8 @@ export const domainListings = {
   }),
 
   /**
-   * Extract array of raw listings from Next.js JSON.
-   * Detects isLastPage for looping.
+   * @description Extract array of raw listings from Next.js JSON.
+   * @description Detects isLastPage for looping.
    * @param nextDataJson
    */
   tryExtractListings(nextDataJson: object) {
@@ -80,7 +80,6 @@ export const domainListings = {
           car_quantity: features.parking ?? 0,
           home_type: features.propertyType as any,
           is_retirement: features.isRetirement,
-          is_rural: features.isRural,
         } satisfies z.infer<typeof dbSchema.common_features_table>),
         home_table: dbSchema.home_table.parse({
           street_address: address.street,

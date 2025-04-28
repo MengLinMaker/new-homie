@@ -5,8 +5,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/27 Benga Avenue",
@@ -22,8 +21,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "4/28 Olive Street",
@@ -39,8 +37,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "66 Langhorne Street",
@@ -56,8 +53,7 @@
       "bath_quantity": 1,
       "car_quantity": 3,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "31B Wilma Avenue",
@@ -73,8 +69,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/49 Loch Road",
@@ -90,8 +85,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "18/2-4 Hutton Street",
@@ -107,8 +101,7 @@
       "bath_quantity": 1,
       "car_quantity": 6,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "22 Leonard Street",
@@ -124,8 +117,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "4/30-32 Close Avenue Avenue",
@@ -141,8 +133,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1/30-32 Close Avenue",
@@ -158,8 +149,7 @@
       "bath_quantity": 1,
       "car_quantity": 0,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "98 Keneally Street",
@@ -175,8 +165,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "8/79 Cleeland Street",
@@ -192,8 +181,7 @@
       "bath_quantity": 1,
       "car_quantity": 0,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "REAR 18 Lexton Avenue",
@@ -209,8 +197,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1/42-44 Bryants Road",
@@ -226,8 +213,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "2/60 Potter Street",
@@ -243,8 +229,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "3/19 Edward Avenue",
@@ -260,8 +245,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "27 Kyla Avenue",
@@ -277,8 +261,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "7/81-83 Potter Street",
@@ -294,8 +277,7 @@
       "bath_quantity": 2,
       "car_quantity": 2,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "83 Ross Street",
@@ -311,8 +293,7 @@
       "bath_quantity": 1,
       "car_quantity": 4,
       "home_type": "House",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "75 Ann Street",
@@ -328,8 +309,7 @@
       "bath_quantity": 1,
       "car_quantity": 1,
       "home_type": "ApartmentUnitFlat",
-      "is_retirement": false,
-      "is_rural": false
+      "is_retirement": false
     },
     "home_table": {
       "street_address": "1/15 Janice Grove",

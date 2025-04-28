@@ -1,5 +1,5 @@
 import { dbSchema } from './schema'
-import { toPgDatetime, toPgPoint } from './util'
+import { toPgDatetime, toPostgisPoint } from './util'
 import { db } from './kysely'
 
-export { toPgDatetime, toPgPoint, dbSchema, db }
+export { toPgDatetime, toPostgisPoint, dbSchema, db }
