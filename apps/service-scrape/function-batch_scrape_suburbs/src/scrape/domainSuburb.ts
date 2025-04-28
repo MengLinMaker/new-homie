@@ -1,5 +1,7 @@
 import { z } from 'zod'
 import { traceTryFunction } from '../instrumentation'
+// import { simplify, polygon } from '@turf/turf'
+import { dbSchema } from '@service-scrape/lib-db_service_scrape'
 
 const _boundaryGeoJsonSchema = z.object({
   type: z.literal('Polygon'),
@@ -90,6 +92,35 @@ export const domainSuburb = {
           ),
         ),
       } satisfies RawSuburbData
+    })
+  },
+
+  /**
+   * @description Transforms raw suburb data for database insertion
+   * @param rawSuburbData
+   * @returns Object containing tables for database inserts
+   */
+  tryTransformProfile(rawSuburbData: RawSuburbData) {
+    return traceTryFunction('domainSuburb.tryTransformProfile', arguments, 'ERROR', async () => {
+      // Simplify geo boundary to reduce storage size.
+      // const coordinates = simplify(polygon(rawSuburbData.boundaryGeoJson.coordinates), {
+      //   tolerance: 0.00025,
+      //   highQuality: true,
+      // }).geometry.coordinates
+
+      rawSuburbData.suburb.statistics.population
+      rawSuburbData.suburb.statistics.ownerOccupierPercentage
+      rawSuburbData.suburb.statistics.marriedPercentage
+
+      rawSuburbData.suburb.schools
+      rawSuburbData.location.data.propertyCategories
+      return {
+        localities_table: dbSchema.localities_table.parse({
+          postcode: rawSuburbData.suburb.postcode,
+          suburb_name: rawSuburbData.suburb.name,
+          state_abbreviation: rawSuburbData.suburb.state as any,
+        } satisfies z.infer<typeof dbSchema.localities_table>),
+      }
     })
   },
 }
