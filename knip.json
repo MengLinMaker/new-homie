@@ -3,7 +3,6 @@
   "ignoreBinaries": [
     "sam",
     "only-allow",
-    "sleep",
-    "docker-compose"
+    "sleep"
   ]
 }

@@ -2,7 +2,13 @@
 dist
 bin
 obj
+build
+
+# AWS
 .aws-sam
+
+# Gradle
+.gradle
 
 # Dependencies
 node_modules

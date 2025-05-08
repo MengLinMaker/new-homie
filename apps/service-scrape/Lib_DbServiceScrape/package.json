@@ -1,0 +1,17 @@
+{
+  "name": "@service-scrape/Lib_DbServiceScrape",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "biome format --write",
+    "docker:down": "docker compose down -v",
+    "docker:up": "docker compose up --build -d",
+    "studio": "drizzle-kit studio",
+    "generate": "drizzle-kit generate --name",
+    "migrate": "drizzle-kit migrate",
+    "test": "pnpm run /^test:/",
+    "test:lint": "biome lint --write",
+    "test:type": "tsc",
+    "test:unit": "vitest run --coverage",
+    "dev:test:unit": "vitest --coverage"
+  }
+}
