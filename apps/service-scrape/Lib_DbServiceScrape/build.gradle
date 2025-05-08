@@ -1,0 +1,19 @@
+plugins {
+  id 'java-library'
+  id "org.flywaydb.flyway" version "10.0.0"
+  id 'nu.studer.jooq' version '10.1'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testImplementation(platform('org.junit:junit-bom:5.12.2'))
+  testImplementation('org.junit.jupiter:junit-jupiter')
+  testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+}
+
+test {
+  useJUnitPlatform()
+}
