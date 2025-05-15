@@ -4,15 +4,19 @@ Database for home info.
 ### Why a separate library?
 Database logic will be shared between separate serverless functions. This package also acts as an abstraction layer for testing purposes.
 
-### Choosing an ORM
-As performance an storage size are top priority, a lower level query builder is prefered.
+### Why JOOQ as ORM
+We will prioritise performance and typesafety. ORM options include:
+  - JOOQ: compile time validation for SQL.
+  - Hibernate: no compile time validation. Hides SQL and N+1 queries. Handles mapping and caching.
 
-Ideally the query builder should provide linting capabilities through eslint plugins or type checking.
+All tools provides codegen from database connection. Since we do not intend to persist entities and prefer a more script based access to database, JOOQ is chosen.
 
-  - Drizzle: Restrictive codegen migrations with  limited type safety (despite the claims). [Rollback has yet to be implemented](https://github.com/drizzle-team/drizzle-orm/discussions/1339)
-  - Kysely: Sparse documentation, [better type safety](https://github.com/thetutlage/meta/discussions/8) with more manual work for migrations. State of database schema is more difficult to grasp. Not declarative.
+### Why Flyway as migrator
+We will prioritise ease of use and ability to track changes. Tools include:
+  - Flyway: linear database versioning for smaller teams. Cannot change execution order. Needs different config file for migration.
+  - Liquibase: like flyway with more options for versioning, execution order and simple config file. Offers snapshotting.
 
-[Drizzle to Kysely converter](https://github.com/drizzle-team/drizzle-kysely) by the Drizzle team could solve the issue.
+For simplicity, Flyway is chosen.
 
 ### Design guide
 The database design follows to these guidelines:
