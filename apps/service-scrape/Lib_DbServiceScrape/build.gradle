@@ -1,7 +1,12 @@
+buildscript {
+  dependencies {
+    classpath 'org.flywaydb:flyway-database-postgresql:11.9.1'
+  }
+}
+
 plugins {
   id 'java-library'
-  id "org.flywaydb.flyway" version "10.0.0"
-  id 'nu.studer.jooq' version '10.1'
+  id 'org.flywaydb.flyway' version '11.9.1'
 }
 
 repositories {
@@ -9,9 +14,19 @@ repositories {
 }
 
 dependencies {
-  testImplementation(platform('org.junit:junit-bom:5.12.2'))
-  testImplementation('org.junit.jupiter:junit-jupiter')
-  testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+  implementation 'org.postgresql:postgresql:42.7.6'
+  testImplementation platform('org.junit:junit-bom:5.12.2')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+flyway {
+  validateMigrationNaming = true
+  cleanDisabled = false
+  // By default connects to test database
+  url = 'jdbc:postgresql://localhost:54321/db'
+  user = 'user'
+  password = 'password'
 }
 
 test {
