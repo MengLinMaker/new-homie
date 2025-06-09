@@ -3,18 +3,16 @@
  */
 package org.jooq.generated;
 
-
 import org.jooq.generated.tables.CommonFeaturesTable;
 import org.jooq.generated.tables.HomeTable;
 import org.jooq.generated.tables.LocalitiesTable;
 import org.jooq.generated.tables.RentPriceTable;
 import org.jooq.generated.tables.SalePriceTable;
 
-
 /**
  * Convenience access to all tables in public.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Tables {
 
     /**
