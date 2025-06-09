@@ -1,12 +1,15 @@
 buildscript {
   dependencies {
     classpath 'org.flywaydb:flyway-database-postgresql:11.9.1'
+    classpath 'nu.studer:gradle-jooq-plugin:1.0.5'
+    classpath 'org.postgresql:postgresql:42.7.6'
   }
 }
 
 plugins {
   id 'java-library'
   id 'org.flywaydb.flyway' version '11.9.1'
+  id 'org.jooq.jooq-codegen-gradle' version '3.19.23'
 }
 
 repositories {
@@ -23,12 +26,40 @@ dependencies {
 flyway {
   validateMigrationNaming = true
   cleanDisabled = false
+  driver = 'org.postgresql.Driver'
   // By default connects to test database
   url = 'jdbc:postgresql://localhost:54321/db'
   user = 'user'
   password = 'password'
 }
 
+jooq {
+  configuration {
+    jdbc {
+      driver = flyway.driver
+      url = flyway.url
+      user = flyway.user
+      password = flyway.password
+    }
+    generator {
+      name = "org.jooq.codegen.KotlinGenerator"
+      database {
+        includes = '.*_table' +
+          '|.*_enum'
+        inputSchema = "public"
+      }
+      target {
+        directory = "./src/main/kotlin"
+        clean = true
+      }
+    }
+  }
+}
+
 test {
   useJUnitPlatform()
+}
+
+tasks.named('jooqCodegen').configure {
+  dependsOn tasks.named('flywayMigrate')
 }
