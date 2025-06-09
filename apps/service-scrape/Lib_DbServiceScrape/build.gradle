@@ -42,14 +42,13 @@ jooq {
       password = flyway.password
     }
     generator {
-      name = "org.jooq.codegen.KotlinGenerator"
       database {
         includes = '.*_table' +
           '|.*_enum'
         inputSchema = "public"
       }
       target {
-        directory = "./src/main/kotlin"
+        directory = "./src/main/java"
         clean = true
       }
     }
