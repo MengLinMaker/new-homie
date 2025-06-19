@@ -34,29 +34,29 @@ public class HomeTableRecord extends UpdatableRecordImpl<HomeTableRecord> {
     /**
      * Setter for <code>public.home_table.localities_table_id</code>.
      */
-    public void setLocalitiesTableId(Short value) {
+    public void setLocalitiesTableId(Integer value) {
         set(1, value);
     }
 
     /**
      * Getter for <code>public.home_table.localities_table_id</code>.
      */
-    public Short getLocalitiesTableId() {
-        return (Short) get(1);
+    public Integer getLocalitiesTableId() {
+        return (Integer) get(1);
     }
 
     /**
      * Setter for <code>public.home_table.common_features_table_id</code>.
      */
-    public void setCommonFeaturesTableId(Short value) {
+    public void setCommonFeaturesTableId(Integer value) {
         set(2, value);
     }
 
     /**
      * Getter for <code>public.home_table.common_features_table_id</code>.
      */
-    public Short getCommonFeaturesTableId() {
-        return (Short) get(2);
+    public Integer getCommonFeaturesTableId() {
+        return (Integer) get(2);
     }
 
     /**
@@ -90,15 +90,15 @@ public class HomeTableRecord extends UpdatableRecordImpl<HomeTableRecord> {
     /**
      * Setter for <code>public.home_table.land_m2</code>.
      */
-    public void setLandM2(Short value) {
+    public void setLandM2(Integer value) {
         set(5, value);
     }
 
     /**
      * Getter for <code>public.home_table.land_m2</code>.
      */
-    public Short getLandM2() {
-        return (Short) get(5);
+    public Integer getLandM2() {
+        return (Integer) get(5);
     }
 
     /**
@@ -154,11 +154,11 @@ public class HomeTableRecord extends UpdatableRecordImpl<HomeTableRecord> {
      */
     public HomeTableRecord(
             Integer id,
-            Short localitiesTableId,
-            Short commonFeaturesTableId,
+            Integer localitiesTableId,
+            Integer commonFeaturesTableId,
             String streetAddress,
             Geometry gps,
-            Short landM2,
+            Integer landM2,
             LocalTime inspectionTime,
             LocalTime auctionTime) {
         super(HomeTable.HOME_TABLE);

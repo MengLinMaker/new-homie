@@ -69,14 +69,14 @@ public class HomeTable extends TableImpl<HomeTableRecord> {
     /**
      * The column <code>public.home_table.localities_table_id</code>.
      */
-    public final TableField<HomeTableRecord, Short> LOCALITIES_TABLE_ID =
-            createField(DSL.name("localities_table_id"), SQLDataType.SMALLINT, this, "");
+    public final TableField<HomeTableRecord, Integer> LOCALITIES_TABLE_ID =
+            createField(DSL.name("localities_table_id"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.home_table.common_features_table_id</code>.
      */
-    public final TableField<HomeTableRecord, Short> COMMON_FEATURES_TABLE_ID =
-            createField(DSL.name("common_features_table_id"), SQLDataType.SMALLINT, this, "");
+    public final TableField<HomeTableRecord, Integer> COMMON_FEATURES_TABLE_ID =
+            createField(DSL.name("common_features_table_id"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.home_table.street_address</code>.
@@ -93,8 +93,8 @@ public class HomeTable extends TableImpl<HomeTableRecord> {
     /**
      * The column <code>public.home_table.land_m2</code>.
      */
-    public final TableField<HomeTableRecord, Short> LAND_M2 =
-            createField(DSL.name("land_m2"), SQLDataType.SMALLINT, this, "");
+    public final TableField<HomeTableRecord, Integer> LAND_M2 =
+            createField(DSL.name("land_m2"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.home_table.inspection_time</code>.

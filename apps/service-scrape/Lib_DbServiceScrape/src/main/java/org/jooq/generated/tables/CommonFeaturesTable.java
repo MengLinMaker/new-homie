@@ -59,26 +59,26 @@ public class CommonFeaturesTable extends TableImpl<CommonFeaturesTableRecord> {
     /**
      * The column <code>public.common_features_table.id</code>.
      */
-    public final TableField<CommonFeaturesTableRecord, Short> ID =
-            createField(DSL.name("id"), SQLDataType.SMALLINT.nullable(false).identity(true), this, "");
+    public final TableField<CommonFeaturesTableRecord, Integer> ID =
+            createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.common_features_table.bed_quantity</code>.
      */
-    public final TableField<CommonFeaturesTableRecord, Short> BED_QUANTITY =
-            createField(DSL.name("bed_quantity"), SQLDataType.SMALLINT.nullable(false), this, "");
+    public final TableField<CommonFeaturesTableRecord, Integer> BED_QUANTITY =
+            createField(DSL.name("bed_quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.common_features_table.bath_quantity</code>.
      */
-    public final TableField<CommonFeaturesTableRecord, Short> BATH_QUANTITY =
-            createField(DSL.name("bath_quantity"), SQLDataType.SMALLINT.nullable(false), this, "");
+    public final TableField<CommonFeaturesTableRecord, Integer> BATH_QUANTITY =
+            createField(DSL.name("bath_quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.common_features_table.car_quantity</code>.
      */
-    public final TableField<CommonFeaturesTableRecord, Short> CAR_QUANTITY =
-            createField(DSL.name("car_quantity"), SQLDataType.SMALLINT.nullable(false), this, "");
+    public final TableField<CommonFeaturesTableRecord, Integer> CAR_QUANTITY =
+            createField(DSL.name("car_quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.common_features_table.home_type</code>.
@@ -171,8 +171,8 @@ public class CommonFeaturesTable extends TableImpl<CommonFeaturesTableRecord> {
     }
 
     @Override
-    public Identity<CommonFeaturesTableRecord, Short> getIdentity() {
-        return (Identity<CommonFeaturesTableRecord, Short>) super.getIdentity();
+    public Identity<CommonFeaturesTableRecord, Integer> getIdentity() {
+        return (Identity<CommonFeaturesTableRecord, Integer>) super.getIdentity();
     }
 
     @Override

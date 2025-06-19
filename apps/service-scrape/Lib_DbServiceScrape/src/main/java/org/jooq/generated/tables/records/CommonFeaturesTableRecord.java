@@ -19,57 +19,57 @@ public class CommonFeaturesTableRecord extends UpdatableRecordImpl<CommonFeature
     /**
      * Setter for <code>public.common_features_table.id</code>.
      */
-    public void setId(Short value) {
+    public void setId(Integer value) {
         set(0, value);
     }
 
     /**
      * Getter for <code>public.common_features_table.id</code>.
      */
-    public Short getId() {
-        return (Short) get(0);
+    public Integer getId() {
+        return (Integer) get(0);
     }
 
     /**
      * Setter for <code>public.common_features_table.bed_quantity</code>.
      */
-    public void setBedQuantity(Short value) {
+    public void setBedQuantity(Integer value) {
         set(1, value);
     }
 
     /**
      * Getter for <code>public.common_features_table.bed_quantity</code>.
      */
-    public Short getBedQuantity() {
-        return (Short) get(1);
+    public Integer getBedQuantity() {
+        return (Integer) get(1);
     }
 
     /**
      * Setter for <code>public.common_features_table.bath_quantity</code>.
      */
-    public void setBathQuantity(Short value) {
+    public void setBathQuantity(Integer value) {
         set(2, value);
     }
 
     /**
      * Getter for <code>public.common_features_table.bath_quantity</code>.
      */
-    public Short getBathQuantity() {
-        return (Short) get(2);
+    public Integer getBathQuantity() {
+        return (Integer) get(2);
     }
 
     /**
      * Setter for <code>public.common_features_table.car_quantity</code>.
      */
-    public void setCarQuantity(Short value) {
+    public void setCarQuantity(Integer value) {
         set(3, value);
     }
 
     /**
      * Getter for <code>public.common_features_table.car_quantity</code>.
      */
-    public Short getCarQuantity() {
-        return (Short) get(3);
+    public Integer getCarQuantity() {
+        return (Integer) get(3);
     }
 
     /**
@@ -105,7 +105,7 @@ public class CommonFeaturesTableRecord extends UpdatableRecordImpl<CommonFeature
     // -------------------------------------------------------------------------
 
     @Override
-    public Record1<Short> key() {
+    public Record1<Integer> key() {
         return (Record1) super.key();
     }
 
@@ -124,10 +124,10 @@ public class CommonFeaturesTableRecord extends UpdatableRecordImpl<CommonFeature
      * Create a detached, initialised CommonFeaturesTableRecord
      */
     public CommonFeaturesTableRecord(
-            Short id,
-            Short bedQuantity,
-            Short bathQuantity,
-            Short carQuantity,
+            Integer id,
+            Integer bedQuantity,
+            Integer bathQuantity,
+            Integer carQuantity,
             HomeTypeEnum homeType,
             Boolean isRetirement) {
         super(CommonFeaturesTable.COMMON_FEATURES_TABLE);

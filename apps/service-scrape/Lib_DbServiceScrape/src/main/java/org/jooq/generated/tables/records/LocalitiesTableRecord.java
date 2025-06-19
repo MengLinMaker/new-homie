@@ -19,15 +19,15 @@ public class LocalitiesTableRecord extends UpdatableRecordImpl<LocalitiesTableRe
     /**
      * Setter for <code>public.localities_table.id</code>.
      */
-    public void setId(Short value) {
+    public void setId(Integer value) {
         set(0, value);
     }
 
     /**
      * Getter for <code>public.localities_table.id</code>.
      */
-    public Short getId() {
-        return (Short) get(0);
+    public Integer getId() {
+        return (Integer) get(0);
     }
 
     /**
@@ -77,7 +77,7 @@ public class LocalitiesTableRecord extends UpdatableRecordImpl<LocalitiesTableRe
     // -------------------------------------------------------------------------
 
     @Override
-    public Record1<Short> key() {
+    public Record1<Integer> key() {
         return (Record1) super.key();
     }
 
@@ -96,7 +96,7 @@ public class LocalitiesTableRecord extends UpdatableRecordImpl<LocalitiesTableRe
      * Create a detached, initialised LocalitiesTableRecord
      */
     public LocalitiesTableRecord(
-            Short id, String suburbName, String postcode, StateAbbreviationEnum stateAbbreviation) {
+            Integer id, String suburbName, String postcode, StateAbbreviationEnum stateAbbreviation) {
         super(LocalitiesTable.LOCALITIES_TABLE);
 
         setId(id);

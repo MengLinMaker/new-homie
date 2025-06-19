@@ -59,8 +59,8 @@ public class LocalitiesTable extends TableImpl<LocalitiesTableRecord> {
     /**
      * The column <code>public.localities_table.id</code>.
      */
-    public final TableField<LocalitiesTableRecord, Short> ID =
-            createField(DSL.name("id"), SQLDataType.SMALLINT.nullable(false).identity(true), this, "");
+    public final TableField<LocalitiesTableRecord, Integer> ID =
+            createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.localities_table.suburb_name</code>.
@@ -159,8 +159,8 @@ public class LocalitiesTable extends TableImpl<LocalitiesTableRecord> {
     }
 
     @Override
-    public Identity<LocalitiesTableRecord, Short> getIdentity() {
-        return (Identity<LocalitiesTableRecord, Short>) super.getIdentity();
+    public Identity<LocalitiesTableRecord, Integer> getIdentity() {
+        return (Identity<LocalitiesTableRecord, Integer>) super.getIdentity();
     }
 
     @Override
