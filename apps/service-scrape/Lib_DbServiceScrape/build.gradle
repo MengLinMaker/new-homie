@@ -14,6 +14,7 @@ plugins {
 
 repositories {
   mavenCentral()
+  mavenLocal()
 }
 
 dependencies {
@@ -71,5 +72,9 @@ spotless {
     importOrder()
     removeUnusedImports()
     palantirJavaFormat()
+  }
+  sql {
+    target 'src/main/resources/**/*.sql'
+    dbeaver()
   }
 }
