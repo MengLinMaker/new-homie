@@ -6,7 +6,8 @@
     "docker:down": "docker compose down -v",
     "docker:up": "docker compose up --build -d",
     "migrate": "gradle flywayMigrate && gradle jooqCodegen",
-    "erd": "pg_dump -s --file=schema.sql postgres://user:password@localhost:54321/db && pnpm dlx @liam-hq/cli erd build --format postgres --input schema.sql && npx http-server dist/",
+    "erd": "pg_dump -s --file=schema.sql postgres://user:password@localhost:54321/db && pnpm dlx @liam-hq/cli erd build --format postgres --input schema.sql",
+    "erd:dev": "npx http-server dist/",
     "build": "gradle build",
     "test:unit": "gradle test",
     "test:check": "gradle check"
