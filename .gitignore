@@ -10,6 +10,9 @@ build
 # Gradle
 .gradle
 
+# Quarkus
+.quarkus
+
 # Dependencies
 node_modules
 
