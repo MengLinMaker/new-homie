@@ -1,80 +1,84 @@
 buildscript {
-  dependencies {
-    classpath 'org.flywaydb:flyway-database-postgresql:11.9.1'
-    classpath 'org.postgresql:postgresql:42.7.6'
-  }
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.7.6'
+        classpath 'org.flywaydb:flyway-database-postgresql:11.9.1'
+    }
 }
 
 plugins {
-  id 'java-library'
-  id 'com.diffplug.spotless' version '7.0.4'
-  id 'org.flywaydb.flyway' version '11.9.1'
-  id 'org.jooq.jooq-codegen-gradle' version '3.19.23'
+    id 'java-library'
+    id 'com.diffplug.spotless' version '7.0.4'
+    id 'org.flywaydb.flyway' version '11.9.1'
+    id 'org.jooq.jooq-codegen-gradle' version '3.19.23'
 }
 
 repositories {
-  mavenCentral()
-  mavenLocal()
+    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-  implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
-  implementation 'org.jooq:jooq:3.19.23'
-  implementation 'org.postgresql:postgresql:42.7.6'
-  testImplementation platform('org.junit:junit-bom:5.12.2')
-  testImplementation 'org.junit.jupiter:junit-jupiter'
-  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.flywaydb:flyway-database-postgresql:11.9.1'
+
+    implementation 'org.jooq:jooq:3.19.23'
+    implementation 'org.postgresql:postgresql:42.7.6'
+
+    testImplementation platform('org.junit:junit-bom:5.12.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    compileOnly 'com.google.googlejavaformat:google-java-format:1.24.0'
 }
 
 flyway {
-  validateMigrationNaming = true
-  cleanDisabled = false
-  driver = 'org.postgresql.Driver'
-  // By default connects to test database
-  url = 'jdbc:postgresql://localhost:54321/db'
-  user = 'user'
-  password = 'password'
+    validateMigrationNaming = true
+    cleanDisabled = false
+    driver = 'org.postgresql.Driver'
+    // By default connects to test database
+    url = 'jdbc:postgresql://localhost:54321/db'
+    user = 'user'
+    password = 'password'
 }
 
 jooq {
-  configuration {
-    jdbc {
-      driver = flyway.driver
-      url = flyway.url
-      user = flyway.user
-      password = flyway.password
+    configuration {
+        jdbc {
+            driver = flyway.driver
+            url = flyway.url
+            user = flyway.user
+            password = flyway.password
+        }
+        generator {
+            database {
+                // Limited inclusions to exclude PostGis stuff
+                includes = '.*_table' +
+                '|.*_enum'
+                inputSchema = "public"
+            }
+            target {
+                directory = "./src/main/java"
+                clean = true
+            }
+        }
     }
-    generator {
-      database {
-        // Limited inclusions to exclude PostGis stuff
-        includes = '.*_table' +
-          '|.*_enum'
-        inputSchema = "public"
-      }
-      target {
-        directory = "./src/main/java"
-        clean = true
-      }
-    }
-  }
 }
 
 test {
-  useJUnitPlatform()
-  testLogging {
-    // Log stack trace for failed tests
-    exceptionFormat = 'full'
-  }
+    useJUnitPlatform()
+    testLogging {
+        // Log stack trace for failed tests
+        exceptionFormat = 'full'
+    }
 }
 
 spotless {
-  java {
-    importOrder()
-    removeUnusedImports()
-    palantirJavaFormat()
-  }
-  sql {
-    target 'src/main/resources/**/*.sql'
-    dbeaver()
-  }
+    java {
+        importOrder()
+        removeUnusedImports()
+        palantirJavaFormat()
+    }
+    sql {
+        target 'src/main/resources/**/*.sql'
+        dbeaver()
+    }
 }

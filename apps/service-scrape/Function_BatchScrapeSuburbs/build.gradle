@@ -10,18 +10,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.quarkus:quarkus-jdbc-postgresql'
     implementation project(':Lib_DbServiceScrape')
-    implementation 'io.quarkiverse.jooq:quarkus-jooq:2.1.0'
-    implementation 'org.postgresql:postgresql:42.7.6'
 
-    implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
+    implementation 'io.quarkiverse.jooq:quarkus-jooq:2.1.0'
+    implementation("io.quarkus:quarkus-rest-jackson")
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
     implementation 'io.quarkus:quarkus-opentelemetry'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-rest'
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+
+    compileOnly 'com.google.googlejavaformat:google-java-format:1.24.0'
 }
 
 test {
@@ -29,9 +31,9 @@ test {
 }
 
 spotless {
-  java {
-    importOrder()
-    removeUnusedImports()
-    palantirJavaFormat()
-  }
+    java {
+        importOrder()
+        removeUnusedImports()
+        palantirJavaFormat()
+    }
 }
