@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'com.diffplug.spotless' version '7.0.4'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation project(':Lib_DbServiceScrape')
+    implementation 'io.quarkiverse.jooq:quarkus-jooq:2.1.0'
+    implementation 'org.postgresql:postgresql:42.7.6'
+
+    implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
+    implementation 'io.quarkus:quarkus-opentelemetry'
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-rest'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+
+spotless {
+  java {
+    importOrder()
+    removeUnusedImports()
+    palantirJavaFormat()
+  }
+}
