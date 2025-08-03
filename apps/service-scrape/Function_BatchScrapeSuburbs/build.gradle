@@ -17,6 +17,7 @@ dependencies {
     implementation 'io.quarkiverse.jooq:quarkus-jooq:2.1.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.18.3'
+    implementation 'io.quarkus:quarkus-hibernate-validator:3.23.4'
     implementation 'io.quarkus:quarkus-rest-jackson'
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
     implementation 'io.quarkus:quarkus-opentelemetry'
