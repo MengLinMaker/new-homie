@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs'
 import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
-import consola from 'consola';
+import consola from 'consola'
 
 /**
  * GENERATE AUSTRALIAN AMENITIES JSON IN THIS FORMAT

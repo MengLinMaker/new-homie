@@ -1,162 +1,162 @@
 [
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 495,
-      "aud_per_bed": 248
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 495,
+            "aud_per_bed": 248
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 430,
+            "aud_per_bed": 215
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 490,
+            "aud_per_bed": 163
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 530,
+            "aud_per_bed": 265
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 500,
+            "aud_per_bed": 250
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 450,
+            "aud_per_bed": 225
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 550,
+            "aud_per_bed": 183
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 450,
+            "aud_per_bed": 225
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 450,
+            "aud_per_bed": 225
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 420,
+            "aud_per_bed": 420
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 465,
+            "aud_per_bed": 233
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 400,
+            "aud_per_bed": 200
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 530,
+            "aud_per_bed": 265
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 360,
+            "aud_per_bed": 180
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 480,
+            "aud_per_bed": 160
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 680,
+            "aud_per_bed": 170
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 420,
+            "aud_per_bed": 210
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 650,
+            "aud_per_bed": 217
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 550,
+            "aud_per_bed": 183
+        }
+    },
+    {
+        "rent_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "weekly_rent_aud": 550,
+            "aud_per_bed": 275
+        }
     }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 430,
-      "aud_per_bed": 215
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 490,
-      "aud_per_bed": 163
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 530,
-      "aud_per_bed": 265
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 500,
-      "aud_per_bed": 250
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 450,
-      "aud_per_bed": 225
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 550,
-      "aud_per_bed": 183
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 450,
-      "aud_per_bed": 225
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 450,
-      "aud_per_bed": 225
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 420,
-      "aud_per_bed": 420
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 465,
-      "aud_per_bed": 233
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 400,
-      "aud_per_bed": 200
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 530,
-      "aud_per_bed": 265
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 360,
-      "aud_per_bed": 180
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 480,
-      "aud_per_bed": 160
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 680,
-      "aud_per_bed": 170
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 420,
-      "aud_per_bed": 210
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 650,
-      "aud_per_bed": 217
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 550,
-      "aud_per_bed": 183
-    }
-  },
-  {
-    "rent_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "weekly_rent_aud": 550,
-      "aud_per_bed": 275
-    }
-  }
 ]

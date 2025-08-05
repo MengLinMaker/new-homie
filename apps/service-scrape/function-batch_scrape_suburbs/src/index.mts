@@ -10,22 +10,22 @@ import { traceTryFunction } from './instrumentation'
 const app = new Hono().use(requestId())
 
 function addition(a: number, b: number) {
-  return traceTryFunction('addition', arguments, 'ERROR', async () => {
-    if (Math.random() < 0.5) throw Error('wrong')
-    return a + b
-  })
+    return traceTryFunction('addition', arguments, 'ERROR', async () => {
+        if (Math.random() < 0.5) throw Error('wrong')
+        return a + b
+    })
 }
 
 // Routes
 app.get('/', async (c) => {
-  await (function helloWrapper() {
-    return traceTryFunction('helloWrapper', arguments, 'ERROR', async () => {
-      await addition(1, 2)
-      return 'hello'
-    })
-  })()
+    await (function helloWrapper() {
+        return traceTryFunction('helloWrapper', arguments, 'ERROR', async () => {
+            await addition(1, 2)
+            return 'hello'
+        })
+    })()
 
-  return c.json({ message: 'hello world' })
+    return c.json({ message: 'hello world' })
 })
 
 // Enable AWS Lambda

@@ -1,192 +1,192 @@
 [
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 575000,
-      "aud_per_bed": 287500,
-      "aud_per_land_m2": null
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 575000,
+            "aud_per_bed": 287500,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 680000,
+            "aud_per_bed": 226667,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 820000,
+            "aud_per_bed": 273333,
+            "aud_per_land_m2": 1527
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 360000,
+            "aud_per_bed": 360000,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 770000,
+            "aud_per_bed": 192500,
+            "aud_per_land_m2": 2163
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 390000,
+            "aud_per_bed": 195000,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 506000,
+            "aud_per_bed": 253000,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 525000,
+            "aud_per_bed": 262500,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 520000,
+            "aud_per_bed": 260000,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 399000,
+            "aud_per_bed": 199500,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 440000,
+            "aud_per_bed": 220000,
+            "aud_per_land_m2": null
+        }
+    },
+    {},
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 385000,
+            "aud_per_bed": 128333,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 495000,
+            "aud_per_bed": 247500,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 615000,
+            "aud_per_bed": 205000,
+            "aud_per_land_m2": 2795
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 880000,
+            "aud_per_bed": 220000,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 660000,
+            "aud_per_bed": 220000,
+            "aud_per_land_m2": 3099
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 750000,
+            "aud_per_bed": 250000,
+            "aud_per_land_m2": 1100
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 660000,
+            "aud_per_bed": 165000,
+            "aud_per_land_m2": 1041
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 313500,
+            "aud_per_bed": 313500,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 715000,
+            "aud_per_bed": 238333,
+            "aud_per_land_m2": null
+        }
+    },
+    {
+        "sale_price_table": {
+            "first_scrape_date": "",
+            "last_scrape_date": "",
+            "higher_price_aud": 946000,
+            "aud_per_bed": 236500,
+            "aud_per_land_m2": 2799
+        }
     }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 680000,
-      "aud_per_bed": 226667,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 820000,
-      "aud_per_bed": 273333,
-      "aud_per_land_m2": 1527
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 360000,
-      "aud_per_bed": 360000,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 770000,
-      "aud_per_bed": 192500,
-      "aud_per_land_m2": 2163
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 390000,
-      "aud_per_bed": 195000,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 506000,
-      "aud_per_bed": 253000,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 525000,
-      "aud_per_bed": 262500,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 520000,
-      "aud_per_bed": 260000,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 399000,
-      "aud_per_bed": 199500,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 440000,
-      "aud_per_bed": 220000,
-      "aud_per_land_m2": null
-    }
-  },
-  {},
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 385000,
-      "aud_per_bed": 128333,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 495000,
-      "aud_per_bed": 247500,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 615000,
-      "aud_per_bed": 205000,
-      "aud_per_land_m2": 2795
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 880000,
-      "aud_per_bed": 220000,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 660000,
-      "aud_per_bed": 220000,
-      "aud_per_land_m2": 3099
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 750000,
-      "aud_per_bed": 250000,
-      "aud_per_land_m2": 1100
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 660000,
-      "aud_per_bed": 165000,
-      "aud_per_land_m2": 1041
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 313500,
-      "aud_per_bed": 313500,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 715000,
-      "aud_per_bed": 238333,
-      "aud_per_land_m2": null
-    }
-  },
-  {
-    "sale_price_table": {
-      "first_scrape_date": "",
-      "last_scrape_date": "",
-      "higher_price_aud": 946000,
-      "aud_per_bed": 236500,
-      "aud_per_land_m2": 2799
-    }
-  }
 ]

@@ -1,322 +1,322 @@
 [
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 2,
-      "car_quantity": 2,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 2,
+            "car_quantity": 2,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "2/27 Benga Avenue",
+            "gps": [-37.98033, 145.20033],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 12:05:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "2/27 Benga Avenue",
-      "gps": [-37.98033, 145.20033],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 12:05:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "4/28 Olive Street",
+            "gps": [-37.980778, 145.21875],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 10:45:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "4/28 Olive Street",
-      "gps": [-37.980778, 145.21875],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 10:45:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 3,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 3,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "66 Langhorne Street",
+            "gps": [-37.991848, 145.21875],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 11:25:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "66 Langhorne Street",
-      "gps": [-37.991848, 145.21875],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 11:25:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 3,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 3,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "31B Wilma Avenue",
+            "gps": [-37.98103, 145.20241],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 12:15:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "31B Wilma Avenue",
-      "gps": [-37.98103, 145.20241],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 12:15:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "2/49 Loch Road",
+            "gps": [-37.960266, 145.2227],
+            "land_m2": null,
+            "inspection_time": "2025-02-13 17:15:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "2/49 Loch Road",
-      "gps": [-37.960266, 145.2227],
-      "land_m2": null,
-      "inspection_time": "2025-02-13 17:15:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "18/2-4 Hutton Street",
+            "gps": [-37.9869, 145.21017],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "18/2-4 Hutton Street",
-      "gps": [-37.9869, 145.21017],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 3,
-      "bath_quantity": 1,
-      "car_quantity": 6,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 3,
+            "bath_quantity": 1,
+            "car_quantity": 6,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "22 Leonard Street",
+            "gps": [-37.974174, 145.22557],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "22 Leonard Street",
-      "gps": [-37.974174, 145.22557],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "4/30-32 Close Avenue Avenue",
+            "gps": [-37.981995, 145.20773],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "4/30-32 Close Avenue Avenue",
-      "gps": [-37.981995, 145.20773],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "1/30-32 Close Avenue",
+            "gps": [-37.981995, 145.20773],
+            "land_m2": null,
+            "inspection_time": "2025-02-03 11:30:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "1/30-32 Close Avenue",
-      "gps": [-37.981995, 145.20773],
-      "land_m2": null,
-      "inspection_time": "2025-02-03 11:30:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 1,
-      "bath_quantity": 1,
-      "car_quantity": 0,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 1,
+            "bath_quantity": 1,
+            "car_quantity": 0,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "98 Keneally Street",
+            "gps": [-37.992256, 145.20573],
+            "land_m2": 555,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "98 Keneally Street",
-      "gps": [-37.992256, 145.20573],
-      "land_m2": 555,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "8/79 Cleeland Street",
+            "gps": [-37.979908, 145.21439],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "8/79 Cleeland Street",
-      "gps": [-37.979908, 145.21439],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 0,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 0,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "REAR 18 Lexton Avenue",
+            "gps": [-37.97732, 145.1994],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 11:00:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "REAR 18 Lexton Avenue",
-      "gps": [-37.97732, 145.1994],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 11:00:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "1/42-44 Bryants Road",
+            "gps": [-37.997078, 145.21364],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 16:15:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "1/42-44 Bryants Road",
-      "gps": [-37.997078, 145.21364],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 16:15:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "2/60 Potter Street",
+            "gps": [-37.979904, 145.2069],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 09:30:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "2/60 Potter Street",
-      "gps": [-37.979904, 145.2069],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 09:30:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 3,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 3,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "3/19 Edward Avenue",
+            "gps": [-37.975025, 145.21243],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 10:05:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "3/19 Edward Avenue",
-      "gps": [-37.975025, 145.21243],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 10:05:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 4,
-      "bath_quantity": 2,
-      "car_quantity": 2,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 4,
+            "bath_quantity": 2,
+            "car_quantity": 2,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "27 Kyla Avenue",
+            "gps": [-37.999958, 145.19551],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 12:25:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "27 Kyla Avenue",
-      "gps": [-37.999958, 145.19551],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 12:25:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "7/81-83 Potter Street",
+            "gps": [-37.978664, 145.20653],
+            "land_m2": null,
+            "inspection_time": "2025-01-31 11:00:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "7/81-83 Potter Street",
-      "gps": [-37.978664, 145.20653],
-      "land_m2": null,
-      "inspection_time": "2025-01-31 11:00:00",
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 3,
-      "bath_quantity": 2,
-      "car_quantity": 2,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 3,
+            "bath_quantity": 2,
+            "car_quantity": 2,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "83 Ross Street",
+            "gps": [-37.975876, 145.22708],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "83 Ross Street",
-      "gps": [-37.975876, 145.22708],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 3,
-      "bath_quantity": 1,
-      "car_quantity": 4,
-      "home_type": "House",
-      "is_retirement": false
+    {
+        "common_features_table": {
+            "bed_quantity": 3,
+            "bath_quantity": 1,
+            "car_quantity": 4,
+            "home_type": "House",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "75 Ann Street",
+            "gps": [-37.979153, 145.21973],
+            "land_m2": null,
+            "inspection_time": "2025-02-01 11:00:00",
+            "auction_time": null
+        }
     },
-    "home_table": {
-      "street_address": "75 Ann Street",
-      "gps": [-37.979153, 145.21973],
-      "land_m2": null,
-      "inspection_time": "2025-02-01 11:00:00",
-      "auction_time": null
+    {
+        "common_features_table": {
+            "bed_quantity": 2,
+            "bath_quantity": 1,
+            "car_quantity": 1,
+            "home_type": "ApartmentUnitFlat",
+            "is_retirement": false
+        },
+        "home_table": {
+            "street_address": "1/15 Janice Grove",
+            "gps": [-37.97074, 145.20276],
+            "land_m2": null,
+            "inspection_time": null,
+            "auction_time": null
+        }
     }
-  },
-  {
-    "common_features_table": {
-      "bed_quantity": 2,
-      "bath_quantity": 1,
-      "car_quantity": 1,
-      "home_type": "ApartmentUnitFlat",
-      "is_retirement": false
-    },
-    "home_table": {
-      "street_address": "1/15 Janice Grove",
-      "gps": [-37.97074, 145.20276],
-      "land_m2": null,
-      "inspection_time": null,
-      "auction_time": null
-    }
-  }
 ]

@@ -1,16 +1,19 @@
 {
-  "name": "@service-scrape/script",
-  "version": "1.0.0",
-  "private": "true",
-  "scripts": {
-    "compress": "node ./compress.ts",
-    "format": "biome format --write",
-    "test": "pnpm run /^test:/",
-    "test:lint": "biome lint --write",
-    "test:type": "tsc"
-  },
-  "dependencies": {
-    "@service-scrape/lib-db_service_scrape": "workspace:*"
-  },
-  "type": "module"
+    "name": "@service-scrape/script",
+    "version": "1.0.0",
+    "private": "true",
+    "scripts": {
+        "compress": "node ./compress.ts",
+        "format": "biome format --write",
+        "test": "pnpm run /^test:/",
+        "test:lint": "biome lint --write",
+        "test:type": "tsc"
+    },
+    "dependencies": {
+        "@service-scrape/lib-db_service_scrape": "workspace:*"
+    },
+    "type": "module",
+    "devDependencies": {
+        "consola": "3.4.0"
+    }
 }

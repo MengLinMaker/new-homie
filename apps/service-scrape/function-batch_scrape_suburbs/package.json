@@ -1,33 +1,33 @@
 {
-  "name": "@service-scrape/function-batch_scrape_suburbs",
-  "version": "1.0.0",
-  "scripts": {
-    "format": "biome format --write",
-    "test": "pnpm run /^test:/",
-    "test:lint": "biome lint --write",
-    "test:type": "tsc",
-    "test:unit": "vitest run --coverage",
-    "dev:test:unit": "vitest --coverage",
-    "dev": "vite dev"
-  },
-  "devDependencies": {
-    "@hono/vite-dev-server": "0.18.1"
-  },
-  "dependencies": {
-    "@opentelemetry/api": "1.9.0",
-    "@opentelemetry/exporter-logs-otlp-proto": "0.57.2",
-    "@opentelemetry/exporter-trace-otlp-proto": "0.57.2",
-    "@opentelemetry/resources": "1.30.1",
-    "@opentelemetry/sdk-logs": "0.57.2",
-    "@opentelemetry/sdk-node": "0.57.2",
-    "@opentelemetry/sdk-trace-base": "1.30.1",
-    "@opentelemetry/semantic-conventions": "1.30.0",
-    "@service-scrape/lib-db_service_scrape": "workspace:*",
-    "@turf/turf": "7.2.0",
-    "cheerio": "1.0.0",
-    "dotenv": "16.4.7",
-    "hono": "4.7.1",
-    "zod": "3.24.2"
-  },
-  "type": "module"
+    "name": "@service-scrape/function-batch_scrape_suburbs",
+    "version": "1.0.0",
+    "scripts": {
+        "format": "biome format --write",
+        "test": "pnpm run /^test:/",
+        "test:lint": "biome lint --write",
+        "test:type": "tsc",
+        "test:unit": "vitest run --coverage",
+        "dev:test:unit": "vitest --coverage",
+        "dev": "vite dev"
+    },
+    "devDependencies": {
+        "@hono/vite-dev-server": "0.18.1"
+    },
+    "dependencies": {
+        "@opentelemetry/api": "1.9.0",
+        "@opentelemetry/exporter-logs-otlp-proto": "0.57.2",
+        "@opentelemetry/exporter-trace-otlp-proto": "0.57.2",
+        "@opentelemetry/resources": "1.30.1",
+        "@opentelemetry/sdk-logs": "0.57.2",
+        "@opentelemetry/sdk-node": "0.57.2",
+        "@opentelemetry/sdk-trace-base": "1.30.1",
+        "@opentelemetry/semantic-conventions": "1.30.0",
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
+        "@turf/turf": "7.2.0",
+        "cheerio": "1.0.0",
+        "dotenv": "16.4.7",
+        "hono": "4.7.1",
+        "zod": "3.24.2"
+    },
+    "type": "module"
 }

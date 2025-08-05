@@ -8,18 +8,18 @@ config()
  * @todo Use SSM Parameter Store
  */
 export const ENV = {
-  /**
-   * @description Postgres connection url with password
-   */
-  POSTGRES_URL: z
-    .string()
-    .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
-      message: 'POSTGRES_URL is invalid',
-    })
-    .default('postgresql://user:password@localhost:54320/db')
-    .parse(process.env['POSTGRES_URL']),
+    /**
+     * @description Postgres connection url with password
+     */
+    POSTGRES_URL: z
+        .string()
+        .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
+            message: 'POSTGRES_URL is invalid',
+        })
+        .default('postgresql://user:password@localhost:54320/db')
+        .parse(process.env['POSTGRES_URL']),
 }
 if (!process.env['POSTGRES_URL'])
-  consola.warn(
-    'Undefined env POSTGRES_URL, defaulting to  postgresql://user:password@localhost:54320/db',
-  )
+    consola.warn(
+        'Undefined env POSTGRES_URL, defaulting to  postgresql://user:password@localhost:54320/db',
+    )
