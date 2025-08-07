@@ -12,9 +12,7 @@
     "files": ["dist"],
     "scripts": {
         "format": "biome format --write",
-        "docker:down": "docker compose down -v",
-        "docker:up": "docker compose up --build -d",
-        "migrate": "node ./src/migrate.ts | pnpm dlx pino-pretty",
+        "migrate": "node ./migrate.ts | pnpm dlx pino-pretty",
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
         "test:type": "tsc",
@@ -32,9 +30,9 @@
         "zod": "3.24.2"
     },
     "devDependencies": {
-        "pino-pretty": "^13.1.1",
         "@faker-js/faker": "9.5.0",
-        "@types/pg": "8.11.11"
+        "@types/pg": "8.11.11",
+        "pino-pretty": "^13.1.1"
     },
     "type": "module"
 }
