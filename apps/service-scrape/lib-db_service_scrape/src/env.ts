@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { consola } from 'consola'
 import { config } from 'dotenv'
+import { LOG } from './logger.ts'
 config()
 
 /**
@@ -20,6 +20,6 @@ export const ENV = {
         .parse(process.env['POSTGRES_URL']),
 }
 if (!process.env['POSTGRES_URL'])
-    consola.warn(
-        'Undefined env POSTGRES_URL, defaulting to  postgresql://user:password@localhost:54320/db',
+    LOG.warn(
+        'POSTGRES_URL undefined - defaulting to "postgresql://user:password@localhost:54320/db"',
     )
