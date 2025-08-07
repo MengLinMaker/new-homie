@@ -8,8 +8,8 @@ export async function up(db: Kysely<any>): Promise<void> {
         .addColumn('first_scrape_date', 'date', (col) => col.defaultTo(sql`now()`).notNull())
         .addColumn('last_scrape_date', 'date', (col) => col.defaultTo(sql`now()`).notNull())
         .addColumn('higher_price_aud', 'integer', (col) => col.notNull())
-        .addColumn('aud_per_bed', 'timestamptz')
-        .addColumn('aud_per_land_m2', 'timestamptz')
+        .addColumn('aud_per_bed', 'real')
+        .addColumn('aud_per_land_m2', 'real')
         .execute()
 }
 
