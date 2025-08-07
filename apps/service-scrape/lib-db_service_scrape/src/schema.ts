@@ -25,11 +25,11 @@ export interface CommonFeaturesTable {
 }
 
 export interface HomeTable {
-    auction_time: string | null
+    auction_time: Timestamp | null
     common_features_table_id: number | null
     gps: string
     id: Generated<number>
-    inspection_time: string | null
+    inspection_time: Timestamp | null
     land_m2: number | null
     localities_table_id: number | null
     street_address: string
@@ -46,20 +46,20 @@ export interface RentPriceTable {
     aud_per_bed: number | null
     aud_per_land_m2: number | null
     first_scrape_date: Generated<Timestamp>
-    home_table_id: number
+    home_table_id: number | null
     id: Generated<number>
     last_scrape_date: Generated<Timestamp>
     weekly_rent_aud: number
 }
 
 export interface SalePriceTable {
-    aud_per_bed: number | null
-    aud_per_land_m2: number | null
-    first_scrape_date: Generated<Timestamp>
+    aud_per_bed: Timestamp | null
+    aud_per_land_m2: Timestamp | null
+    first_scrape_date: Generated<string>
     higher_price_aud: number
-    home_table_id: number
+    home_table_id: number | null
     id: Generated<number>
-    last_scrape_date: Generated<Timestamp>
+    last_scrape_date: Generated<string>
 }
 
 export interface DB {

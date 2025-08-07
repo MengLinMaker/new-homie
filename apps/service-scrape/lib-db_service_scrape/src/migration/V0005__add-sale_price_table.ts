@@ -4,18 +4,12 @@ export async function up(db: Kysely<any>): Promise<void> {
     await db.schema
         .createTable('sale_price_table')
         .addColumn('id', 'integer', (col) => col.primaryKey().generatedAlwaysAsIdentity())
-        .addColumn('home_table_id', 'integer', (col) => col.notNull())
-        .addForeignKeyConstraint(
-            'sale_price_table_home_table_id_fk',
-            ['home_table_id'],
-            'home_table',
-            ['id'],
-        )
+        .addColumn('home_table_id', 'integer', (col) => col.references('home_table.id'))
         .addColumn('first_scrape_date', 'date', (col) => col.defaultTo(sql`now()`).notNull())
         .addColumn('last_scrape_date', 'date', (col) => col.defaultTo(sql`now()`).notNull())
         .addColumn('higher_price_aud', 'integer', (col) => col.notNull())
-        .addColumn('aud_per_bed', 'real')
-        .addColumn('aud_per_land_m2', 'real')
+        .addColumn('aud_per_bed', 'timestamptz')
+        .addColumn('aud_per_land_m2', 'timestamptz')
         .execute()
 }
 

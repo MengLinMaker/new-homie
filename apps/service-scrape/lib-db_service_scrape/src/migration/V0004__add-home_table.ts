@@ -15,8 +15,8 @@ export async function up(db: Kysely<any>): Promise<void> {
         )
         .addColumn('gps', sql`geometry(point)`, (col) => col.notNull())
         .addColumn('land_m2', 'integer')
-        .addColumn('inspection_time', 'time')
-        .addColumn('auction_time', 'time')
+        .addColumn('inspection_time', 'timestamptz')
+        .addColumn('auction_time', 'timestamptz')
         .execute()
 }
 
