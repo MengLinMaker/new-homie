@@ -1,18 +1,21 @@
 # lib-db_service_scrape
-Database for home info.
+Australian property database for mostly OLTP and some OLAP workloads.
+Database logic will be shared between separate serverless functions.
 
-### Why a separate library?
-Database logic will be shared between separate serverless functions. This package also acts as an abstraction layer for testing purposes.
+### Choosing an SQL query builder - Kysely
+As performance and flexibility are top priority, a query builder is prefered over ORM.
 
-### Choosing an ORM
-As performance an storage size are top priority, a lower level query builder is prefered.
-
-Ideally the query builder should provide linting capabilities through eslint plugins or type checking.
+Ideally the query builder should provide linting capabilities through eslint plugins or type checking. Libraries considered:
 
   - Drizzle: Restrictive codegen migrations with  limited type safety (despite the claims). [Rollback has yet to be implemented](https://github.com/drizzle-team/drizzle-orm/discussions/1339)
-  - Kysely: Sparse documentation, [better type safety](https://github.com/thetutlage/meta/discussions/8) with more manual work for migrations. State of database schema is more difficult to grasp. Not declarative.
+  - Kysely: Sparse documentation, [better type safety](https://github.com/thetutlage/meta/discussions/8) with more traditional migration scripts. Not declarative.
 
-[Drizzle to Kysely converter](https://github.com/drizzle-team/drizzle-kysely) by the Drizzle team could solve the issue.
+### Database uri dependency injection
+Allow different uris for unit testing and integration testing.
+Docker-compose is used to spin up a PostGis container - Testcontainer does not support PostGis for Arm64.
+
+### Export DB_SERVICE_SCRAPE env variable
+This export standardises the database uri shared among multiple services.
 
 ### Design guide
 The database design follows to these guidelines:
