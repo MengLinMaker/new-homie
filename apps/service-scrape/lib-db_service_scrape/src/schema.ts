@@ -5,13 +5,27 @@
 
 import type { ColumnType } from 'kysely'
 
+export enum HomeTypeEnum {
+    APARTMENT_UNIT_FLAT = 'ApartmentUnitFlat',
+    BLOCK_OF_UNITS = 'BlockOfUnits',
+    HOUSE = 'House',
+    TOWNHOUSE = 'Townhouse',
+}
+
+export enum StateAbbreviationEnum {
+    ACT = 'ACT',
+    NSW = 'NSW',
+    NT = 'NT',
+    QLD = 'QLD',
+    SA = 'SA',
+    TAS = 'TAS',
+    VIC = 'VIC',
+    WA = 'WA',
+}
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
     ? ColumnType<S, I | undefined, U>
     : ColumnType<T, T | undefined, T>
-
-export type HomeTypeEnum = 'ApartmentUnitFlat' | 'BlockOfUnits' | 'House' | 'Townhouse'
-
-export type StateAbbreviationEnum = 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 

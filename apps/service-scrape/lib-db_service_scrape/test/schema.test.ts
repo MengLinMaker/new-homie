@@ -1,6 +1,7 @@
+import { createPostgisPointString } from '../src/util'
 import { describe, expect, test } from 'vitest'
-import type { DB } from '../src/schema'
 import { faker } from '@faker-js/faker'
+import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
 
 describe('schema validation', async () => {
     const insertIds = new Map<keyof DB, number>()
@@ -23,20 +24,20 @@ describe('schema validation', async () => {
         await insertIntoTable('localities_table', {
             suburb_name: faker.location.city(),
             postcode: faker.location.zipCode('####'),
-            state_abbreviation: 'VIC',
+            state_abbreviation: StateAbbreviationEnum.VIC,
         })
         await insertIntoTable('common_features_table', {
             bed_quantity: faker.number.int({ min: 1, max: 5 }),
             bath_quantity: faker.number.int({ min: 1, max: 5 }),
             car_quantity: faker.number.int({ min: 1, max: 5 }),
-            home_type: 'ApartmentUnitFlat',
+            home_type: HomeTypeEnum.APARTMENT_UNIT_FLAT,
             is_retirement: Math.random() < 0.5,
         })
         await insertIntoTable('home_table', {
             localities_table_id: insertIds.get('localities_table'),
             common_features_table_id: insertIds.get('common_features_table'),
             street_address: faker.location.streetAddress(),
-            gps: `POINT(${faker.location.longitude()} ${faker.location.latitude()})`,
+            gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
             land_m2: faker.number.int({ min: 0, max: 10000 }),
             // @ts-expect-error - Don't know how to unwrap 'Generated' type
             inspection_time: faker.date.anytime(),

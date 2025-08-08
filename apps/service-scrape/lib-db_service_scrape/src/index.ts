@@ -1,6 +1,7 @@
 import { getKyselyPostgresDb } from './kysely.ts'
 import * as Schema from './schema.ts'
 import { config } from 'dotenv'
+import { enumToArray, createPostgisPointString } from './util'
 
 config()
 
@@ -9,4 +10,4 @@ config()
  * TODO: Replace env variable with SSM parameter store for better security
  */
 export const DB_SERVICE_SCRAPE = process.env['DB_SERVICE_SCRAPE'] as string
-export { getKyselyPostgresDb, Schema }
+export { getKyselyPostgresDb, Schema, enumToArray, createPostgisPointString }
