@@ -26,10 +26,11 @@
         }
     },
     "files": {
-        "experimentalScannerIgnores": [
-            "coverage",
-            "dist",
-            "node_modules"
+        "includes": [
+            "**/*",
+            "!**/coverage/**",
+            "!**/dist/**",
+            "!**/node_modules/**"
         ],
         "ignoreUnknown": true
     },
