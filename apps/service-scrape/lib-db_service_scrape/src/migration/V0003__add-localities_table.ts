@@ -7,7 +7,9 @@ export async function up(db: Kysely<any>): Promise<void> {
         .execute()
     await db.schema
         .createTable('localities_table')
-        .addColumn('id', 'integer', (col) => col.primaryKey().generatedByDefaultAsIdentity())
+        .addColumn('id', 'integer', (col) =>
+            col.notNull().primaryKey().generatedByDefaultAsIdentity(),
+        )
         .addColumn('suburb_name', 'text', (col) => col.notNull())
         .addCheckConstraint(
             'localities_table_suburb_name_check',

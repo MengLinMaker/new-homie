@@ -3,10 +3,14 @@ import { type Kysely, sql } from 'kysely'
 export async function up(db: Kysely<any>): Promise<void> {
     await db.schema
         .createTable('home_table')
-        .addColumn('id', 'integer', (col) => col.primaryKey().generatedByDefaultAsIdentity())
-        .addColumn('localities_table_id', 'integer', (col) => col.references('localities_table.id'))
+        .addColumn('id', 'integer', (col) =>
+            col.notNull().primaryKey().generatedByDefaultAsIdentity(),
+        )
+        .addColumn('localities_table_id', 'integer', (col) =>
+            col.notNull().references('localities_table.id'),
+        )
         .addColumn('common_features_table_id', 'integer', (col) =>
-            col.references('common_features_table.id'),
+            col.notNull().references('common_features_table.id'),
         )
         .addColumn('street_address', 'text', (col) => col.notNull())
         .addCheckConstraint(

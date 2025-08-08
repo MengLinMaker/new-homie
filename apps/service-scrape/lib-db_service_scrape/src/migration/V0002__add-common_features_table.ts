@@ -7,7 +7,9 @@ export async function up(db: Kysely<any>): Promise<void> {
         .execute()
     await db.schema
         .createTable('common_features_table')
-        .addColumn('id', 'integer', (col) => col.primaryKey().generatedByDefaultAsIdentity())
+        .addColumn('id', 'integer', (col) =>
+            col.notNull().primaryKey().generatedByDefaultAsIdentity(),
+        )
         .addColumn('bed_quantity', 'integer', (col) => col.notNull())
         .addCheckConstraint(
             'common_features_table_bed_quantity_check',
