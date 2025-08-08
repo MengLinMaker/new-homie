@@ -45,7 +45,6 @@ export const kyselyPostgresMigrate = async (connectionString: string) => {
             dialect: 'postgres',
             url: connectionString,
             includePattern: '*_(table)',
-            dateParser: 'string',
             runtimeEnums: true,
         })
         LOG.info('Kysely code generated')

@@ -1,7 +1,9 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <test is controlled> */
 import { createPostgisPointString } from '../src/util'
 import { describe, expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
+import type { Insertable } from 'kysely'
 
 describe('schema validation', async () => {
     const insertIds = new Map<keyof DB, number>()
@@ -9,12 +11,12 @@ describe('schema validation', async () => {
     test.sequential('insert into all tables', async () => {
         const insertIntoTable = async <K extends keyof DB>(
             tableName: K,
-            values: Partial<DB[K]>,
+            values: Insertable<DB[K]>,
         ) => {
             const id = (
                 await global.db
                     .insertInto(tableName)
-                    .values(values as any)
+                    .values(values)
                     .returning('id')
                     .executeTakeFirstOrThrow()
             ).id
@@ -34,28 +36,23 @@ describe('schema validation', async () => {
             is_retirement: Math.random() < 0.5,
         })
         await insertIntoTable('home_table', {
-            localities_table_id: insertIds.get('localities_table'),
-            common_features_table_id: insertIds.get('common_features_table'),
+            localities_table_id: insertIds.get('localities_table')!,
+            common_features_table_id: insertIds.get('common_features_table')!,
             street_address: faker.location.streetAddress(),
             gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
             land_m2: faker.number.int({ min: 0, max: 10000 }),
-            // @ts-expect-error - Don't know how to unwrap 'Generated' type
             inspection_time: faker.date.anytime(),
             auction_time: null,
         })
         await insertIntoTable('sale_price_table', {
-            home_table_id: insertIds.get('home_table'),
-            // @ts-expect-error - Don't know how to unwrap 'Generated' type
+            home_table_id: insertIds.get('home_table')!,
             first_scrape_date: faker.date.past(),
-            // @ts-expect-error - Don't know how to unwrap 'Generated' type
             last_scrape_date: faker.date.recent(),
             higher_price_aud: faker.number.int({ min: 200000, max: 2000000 }),
         })
         await insertIntoTable('rent_price_table', {
-            home_table_id: insertIds.get('home_table'),
-            // @ts-expect-error - Don't know how to unwrap 'Generated' type
+            home_table_id: insertIds.get('home_table')!,
             first_scrape_date: faker.date.past(),
-            // @ts-expect-error - Don't know how to unwrap 'Generated' type
             last_scrape_date: faker.date.recent(),
             weekly_rent_aud: faker.number.int({ min: 100, max: 2000 }),
         })

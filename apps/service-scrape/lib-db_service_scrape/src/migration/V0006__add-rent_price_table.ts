@@ -1,6 +1,6 @@
 import { type Kysely, sql } from 'kysely'
 
-export async function up(db: Kysely<any>): Promise<void> {
+export async function up(db: Kysely<unknown>): Promise<void> {
     await db.schema
         .createTable('rent_price_table')
         .addColumn('id', 'integer', (col) => col.notNull().primaryKey().generatedAlwaysAsIdentity())
@@ -13,6 +13,6 @@ export async function up(db: Kysely<any>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<any>): Promise<void> {
+export async function down(db: Kysely<unknown>): Promise<void> {
     await db.schema.dropTable('rent_price_table').execute()
 }

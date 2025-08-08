@@ -1,6 +1,6 @@
 import { type Kysely, sql } from 'kysely'
 
-export async function up(db: Kysely<any>): Promise<void> {
+export async function up(db: Kysely<unknown>): Promise<void> {
     await db.schema
         .createType('state_abbreviation_enum')
         .asEnum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'])
@@ -24,7 +24,7 @@ export async function up(db: Kysely<any>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<any>): Promise<void> {
+export async function down(db: Kysely<unknown>): Promise<void> {
     await db.schema.dropType('state_abbreviation_enum').execute()
     await db.schema.dropTable('common_features_table').execute()
 }

@@ -59,21 +59,21 @@ export interface LocalitiesTable {
 export interface RentPriceTable {
     aud_per_bed: number | null
     aud_per_land_m2: number | null
-    first_scrape_date: Generated<string>
+    first_scrape_date: Generated<Timestamp>
     home_table_id: number
     id: Generated<number>
-    last_scrape_date: Generated<string>
+    last_scrape_date: Generated<Timestamp>
     weekly_rent_aud: number
 }
 
 export interface SalePriceTable {
     aud_per_bed: number | null
     aud_per_land_m2: number | null
-    first_scrape_date: Generated<string>
+    first_scrape_date: Generated<Timestamp>
     higher_price_aud: number
     home_table_id: number
     id: Generated<number>
-    last_scrape_date: Generated<string>
+    last_scrape_date: Generated<Timestamp>
 }
 
 export interface DB {

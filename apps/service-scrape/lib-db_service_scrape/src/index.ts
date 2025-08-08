@@ -7,7 +7,8 @@ config()
 
 /**
  * Uri to database from env variable
- * TODO: Replace env variable with SSM parameter store for better security
+ * @todo: Replace env variable with SSM parameter store for better security
  */
-export const DB_SERVICE_SCRAPE = process.env['DB_SERVICE_SCRAPE'] as string
+// biome-ignore lint/complexity/useLiteralKeys: <untyped>
+export const DB_SERVICE_SCRAPE = process.env['DB_SERVICE_SCRAPE']
 export { getKyselyPostgresDb, Schema, enumToArray, createPostgisPointString }

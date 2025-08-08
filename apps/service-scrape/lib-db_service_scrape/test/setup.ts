@@ -22,8 +22,11 @@ beforeAll(async () => {
         db = await getKyselyPostgresDb(connectionString)
     }
     db.destroy()
-
-    global.db = (await kyselyPostgresMigrate(connectionString))!
+    db = await kyselyPostgresMigrate(connectionString)
+    if (!db) {
+        throw new Error('Test database migration failed')
+    }
+    global.db = db
 }, 60000)
 
 afterAll(async () => {

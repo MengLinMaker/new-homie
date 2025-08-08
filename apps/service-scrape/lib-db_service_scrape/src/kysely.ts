@@ -27,7 +27,7 @@ export const getKyselyPostgresDb = async (postgresUri: string) => {
         })
         await db.executeQuery(sql`SELECT 1`.compile(db))
         return db
-    } catch (e) {
+    } catch {
         return null
     }
 }
