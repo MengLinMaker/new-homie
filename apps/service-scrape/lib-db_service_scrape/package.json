@@ -12,6 +12,7 @@
     "files": ["dist"],
     "scripts": {
         "format": "biome format --write",
+        "docker:down": "docker compose down -v",
         "migrate": "node ./migrate.ts | pnpm dlx pino-pretty",
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
