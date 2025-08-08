@@ -1,6 +1,5 @@
 import { writeFileSync } from 'node:fs'
-import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
-import consola from 'consola'
+import { LOG, notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
 
 /**
  * GENERATE AUSTRALIAN AMENITIES JSON IN THIS FORMAT
@@ -11,7 +10,7 @@ const newAmenitiesData: {
     category: string
     gps: [number, number]
 }[] = []
-const finalAmenitiesFilePath = './australia-amenities-final.json'
+const finalAmenitiesFilePath = './resource/australia-amenities-final.json'
 
 /**
  * SPECIFY BROTLI COMPRESSED DATA URL SOURCE
@@ -20,7 +19,7 @@ const finalAmenitiesFilePath = './australia-amenities-final.json'
 
 // From raw amenity data -https://hub.arcgis.com/datasets/b4e6461dacd946ea854115570ee4ea68_0/about
 {
-    const amenitiesData = readBrotliJson('./australia-amenities.json.br')
+    const amenitiesData = readBrotliJson('./resource/australia-amenities.json.br')
     /**
      * Filter low quality and irrelevant data
      * {'oldType': ['newType', 'category']}
@@ -74,7 +73,7 @@ const finalAmenitiesFilePath = './australia-amenities-final.json'
 // From raw hospital data - https://hub.arcgis.com/datasets/16fc2fab6beb4331b3d6b6844cb35bcc_0/about
 // Ignore the low clinic data
 {
-    const hospitalsData = readBrotliJson('./australia-hospitals.json.br')
+    const hospitalsData = readBrotliJson('./resource/australia-hospitals.json.br')
     for (const hospital of hospitalsData.features) {
         tryCatchError(() => {
             if (!hospital.properties.name) return
@@ -103,7 +102,7 @@ const finalAmenitiesFilePath = './australia-amenities-final.json'
         supermarket: 'supermarket',
         greengrocer: 'grocer',
     }
-    const shopsData = readBrotliJson('./australia-shops.json.br')
+    const shopsData = readBrotliJson('./resource/australia-shops.json.br')
     for (const shop of shopsData.features) {
         tryCatchError(() => {
             if (!shop.properties.name) return
@@ -125,4 +124,4 @@ const finalAmenitiesFilePath = './australia-amenities-final.json'
 }
 
 writeFileSync(finalAmenitiesFilePath, JSON.stringify(newAmenitiesData, null, 2))
-consola.info('Completed writing final amenities file')
+LOG.info('Completed writing final amenities file')

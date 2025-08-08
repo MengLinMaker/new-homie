@@ -1,6 +1,12 @@
-import consola from 'consola'
 import { readFileSync } from 'node:fs'
 import { brotliDecompressSync } from 'node:zlib'
+import pino from 'pino'
+
+export const LOG = pino({
+    transport: {
+        target: 'pino-pretty',
+    },
+})
 
 /**
  * Extracts json from brotli file
@@ -37,6 +43,6 @@ export const tryCatchError = (fn: () => void) => {
     try {
         return fn()
     } catch (err) {
-        consola.error('Error occurred:', err)
+        LOG.error(err)
     }
 }
