@@ -3,10 +3,11 @@ import {
     enumToArray,
     Schema,
 } from '@service-scrape/lib-db_service_scrape'
-import { traceTryFunction } from '../instrumentation'
+import { traceTryFunction } from '../../instrumentation'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
+import { IService } from '../IService'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
@@ -58,30 +59,30 @@ const _rawSuburbSchema = z.object({
     }),
 })
 
-export type RawSuburbData = z.infer<typeof _rawSuburbSchema> & {
+export type DomainListingsDTO = z.infer<typeof _rawSuburbSchema> & {
     boundaryGeoJson: z.infer<typeof _boundaryGeoJsonSchema>
 }
 
-export const domainSuburb = {
-    /**
-     * Next.js json schema parser to reduce app logic
-     */
-    nextDataJsonSchema: z.object({
-        props: z.object({
-            pageProps: z.object({
-                __APOLLO_STATE__: z.record(z.string(), z.any()),
-            }),
+/**
+ * Next.js json schema parser to reduce app logic
+ */
+const nextDataJsonSchema = z.object({
+    props: z.object({
+        pageProps: z.object({
+            __APOLLO_STATE__: z.record(z.string(), z.any()),
         }),
     }),
+})
 
+export class DomainSuburbService extends IService {
     /**
      * @description Extract raw objects from Next.js JSON
      * @param nextDataJson
      * @returns object containing rawSuburbSchema
      */
     tryExtractProfile(nextDataJson: object) {
-        return traceTryFunction('domainSuburb.tryExtractProfile', arguments, 'ERROR', async () => {
-            const validNextjson = domainSuburb.nextDataJsonSchema.parse(nextDataJson)
+        return traceTryFunction('DomainSuburb.tryExtractProfile', arguments, 'ERROR', async () => {
+            const validNextjson = nextDataJsonSchema.parse(nextDataJson)
             const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
             return {
                 ..._rawSuburbSchema.parse({
@@ -94,18 +95,18 @@ export const domainSuburb = {
                             .boundaryGeoJson,
                     ),
                 ),
-            } satisfies RawSuburbData
+            } satisfies DomainListingsDTO
         })
-    },
+    }
 
     /**
      * @description Transforms raw suburb data for database insertion
      * @param rawSuburbData
      * @returns Object containing tables for database inserts
      */
-    tryTransformProfile(rawSuburbData: RawSuburbData) {
+    tryTransformProfile(rawSuburbData: DomainListingsDTO) {
         return traceTryFunction(
-            'domainSuburb.tryTransformProfile',
+            'DomainSuburb.tryTransformProfile',
             arguments,
             'ERROR',
             async () => {
@@ -137,5 +138,5 @@ export const domainSuburb = {
                 }
             },
         )
-    },
+    }
 }

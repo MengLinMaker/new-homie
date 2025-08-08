@@ -1,14 +1,15 @@
-import { traceTryFunction } from '../instrumentation'
+import { traceTryFunction } from '../../instrumentation'
 import { z } from 'zod'
 import {
     enumToArray,
     Schema,
     createPostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
-import { scrapeUtil } from './scrapeUtil'
+import { scrapeUtil } from '../scrapeUtil'
 import type { Updateable } from 'kysely'
+import { IService } from '../IService'
 
-const _listingsSchema = z.object({
+const listingsSchema = z.object({
     listingModel: z.object({
         url: z.string(),
         price: z.string(),
@@ -34,24 +35,24 @@ const _listingsSchema = z.object({
     }),
 })
 
-export const domainListings = {
-    listingsSchema: _listingsSchema,
+export type ListingsSchemaDTO = z.infer<typeof listingsSchema>
 
-    /**
-     * Next.js json schema parser to reduce app logic
-     */
-    nextDataJsonSchema: z.object({
-        props: z.object({
-            pageProps: z.object({
-                componentProps: z.object({
-                    currentPage: z.number().min(1),
-                    totalPages: z.number().min(1),
-                    listingsMap: z.record(z.string(), _listingsSchema),
-                }),
+/**
+ * Next.js json schema parser to reduce app logic
+ */
+const nextDataJsonSchema = z.object({
+    props: z.object({
+        pageProps: z.object({
+            componentProps: z.object({
+                currentPage: z.number().min(1),
+                totalPages: z.number().min(1),
+                listingsMap: z.record(z.string(), listingsSchema),
             }),
         }),
     }),
+})
 
+export class DomainListingsService extends IService {
     /**
      * @description Extract array of raw listings from Next.js JSON.
      * @description Detects isLastPage for looping.
@@ -59,11 +60,11 @@ export const domainListings = {
      */
     tryExtractListings(nextDataJson: object) {
         return traceTryFunction(
-            'domainListings.tryExtractListings',
+            'DomainListings.tryExtractListings',
             arguments,
             'ERROR',
             async () => {
-                const validNextjson = domainListings.nextDataJsonSchema.parse(nextDataJson)
+                const validNextjson = nextDataJsonSchema.parse(nextDataJson)
                 const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
                 const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
                 const listings = Object.values(
@@ -73,16 +74,16 @@ export const domainListings = {
                 return [listings, isLastPage]
             },
         )
-    },
+    }
 
     /**
      * @description Transform listing json data for database table inserts
      * @param listing
      * @returns Object containing tables for database inserts
      */
-    tryTransformListing(listing: z.infer<typeof _listingsSchema>) {
+    tryTransformListing(listing: ListingsSchemaDTO) {
         return traceTryFunction(
-            'domainListings.tryTransformListing',
+            'DomainListings.tryTransformListing',
             arguments,
             'ERROR',
             async () => {
@@ -108,16 +109,16 @@ export const domainListings = {
                 }
             },
         )
-    },
+    }
 
     /**
      * @description Get sale price info
      * @param listing
      * @returns Object containing tables for database inserts
      */
-    tryTransformSalePrice(listing: z.infer<typeof _listingsSchema>) {
+    tryTransformSalePrice(listing: ListingsSchemaDTO) {
         return traceTryFunction(
-            'domainListings.tryTransformSalePrice',
+            'DomainListings.tryTransformSalePrice',
             arguments,
             'WARN',
             async () => {
@@ -137,16 +138,16 @@ export const domainListings = {
                 }
             },
         )
-    },
+    }
 
     /**
      * @description Get rent price info
      * @param listing
      * @returns Object containing tables for database inserts
      */
-    tryTransformRentPrice(listing: z.infer<typeof _listingsSchema>) {
+    tryTransformRentPrice(listing: ListingsSchemaDTO) {
         return traceTryFunction(
-            'domainListings.tryTransformRentPrice',
+            'DomainListings.tryTransformRentPrice',
             arguments,
             'WARN',
             async () => {
@@ -164,5 +165,5 @@ export const domainListings = {
                 }
             },
         )
-    },
+    }
 }
