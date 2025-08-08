@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { domainListings } from '../../src/scrape/domainListings'
 import type { z } from 'zod'
 import { parseJsonFile } from '../util'
+import { writeFileSync } from 'fs'
 
 const testSuiteName = 'domainListings'
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`

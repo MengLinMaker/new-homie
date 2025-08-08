@@ -1,5 +1,6 @@
 import { load } from 'cheerio'
 import { traceTryFunction } from '../instrumentation'
+import z from 'zod'
 
 export const scrapeUtil = {
     /**
@@ -16,9 +17,22 @@ export const scrapeUtil = {
     },
 
     /**
+     * Parse raw datetime to ISO format
+     * @param datetime
+     * @returns
+     */
+    parseDatetime: (datetime: string | null | undefined) => {
+        if (datetime) {
+            return z.iso.datetime().parse(`${datetime}Z`)
+        } else {
+            return null
+        }
+    },
+
+    /**
      * @returns ISO standard date
      */
-    currentDate: () => new Date().toISOString().slice(0, 10),
+    currentDatetime: () => new Date().toISOString(),
 
     /**
      * @description Homes tend to sell at higher price.

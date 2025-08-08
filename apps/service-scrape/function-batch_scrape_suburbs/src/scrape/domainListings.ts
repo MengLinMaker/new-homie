@@ -1,7 +1,12 @@
 import { traceTryFunction } from '../instrumentation'
-import { z } from 'zod'
-import { dbSchema, toPgDatetime } from '@service-scrape/lib-db_service_scrape'
+import { date, z } from 'zod'
+import {
+    enumToArray,
+    Schema,
+    createPostgisPointString,
+} from '@service-scrape/lib-db_service_scrape'
 import { scrapeUtil } from './scrapeUtil'
+import type { Updateable } from 'kysely'
 
 const _listingsSchema = z.object({
     listingModel: z.object({
@@ -16,7 +21,7 @@ const _listingsSchema = z.object({
             beds: z.number().nullish(),
             baths: z.number().nullish(),
             parking: z.number().nullish(),
-            propertyType: z.string(),
+            propertyType: z.enum(enumToArray(Schema.HomeTypeEnum)),
             isRural: z.boolean(),
             landSize: z.number(),
             isRetirement: z.boolean(),
@@ -84,21 +89,22 @@ export const domainListings = {
                 const listingModel = listing.listingModel
                 const address = listingModel.address
                 const features = listingModel.features
+
                 return {
-                    common_features_table: dbSchema.common_features_table.parse({
+                    common_features_table: {
                         bed_quantity: features.beds ?? 0,
                         bath_quantity: features.baths ?? 0,
                         car_quantity: features.parking ?? 0,
-                        home_type: features.propertyType as any,
+                        home_type: features.propertyType,
                         is_retirement: features.isRetirement,
-                    } satisfies z.infer<typeof dbSchema.common_features_table>),
-                    home_table: dbSchema.home_table.parse({
+                    } satisfies Updateable<Schema.CommonFeaturesTable>,
+                    home_table: {
                         street_address: address.street,
-                        gps: [address.lat, address.lng],
+                        gps: createPostgisPointString(address.lng, address.lat),
                         land_m2: features.landSize === 0 ? null : features.landSize,
-                        inspection_time: toPgDatetime(listingModel.inspection.openTime),
-                        auction_time: toPgDatetime(listingModel.auction),
-                    } satisfies z.infer<typeof dbSchema.home_table>),
+                        inspection_time: scrapeUtil.parseDatetime(listingModel.inspection.openTime),
+                        auction_time: scrapeUtil.parseDatetime(listingModel.auction),
+                    } satisfies Updateable<Schema.HomeTable>,
                 }
             },
         )
@@ -122,13 +128,12 @@ export const domainListings = {
 
                 if (!price) throw Error('no price in listing.listingModel.price')
                 return {
-                    sale_price_table: dbSchema.sale_price_table.parse({
-                        first_scrape_date: '',
+                    sale_price_table: {
                         last_scrape_date: '',
                         higher_price_aud: price,
                         aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
                         aud_per_land_m2: land > 0 ? Math.round(price / land) : null,
-                    } satisfies z.infer<typeof dbSchema.sale_price_table>),
+                    } satisfies Updateable<Schema.SalePriceTable>,
                 }
             },
         )
@@ -151,12 +156,11 @@ export const domainListings = {
 
                 if (!price) throw Error('no price in listing.listingModel.price')
                 return {
-                    rent_price_table: dbSchema.rent_price_table.parse({
-                        first_scrape_date: '',
+                    rent_price_table: {
                         last_scrape_date: '',
                         weekly_rent_aud: price,
                         aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
-                    } satisfies z.infer<typeof dbSchema.rent_price_table>),
+                    } satisfies Updateable<Schema.RentPriceTable>,
                 }
             },
         )
