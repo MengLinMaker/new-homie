@@ -11,10 +11,11 @@
         "rules": {
             "recommended": true,
             "complexity": {
-                "useLiteralKeys": "off"
+                "useLiteralKeys": "warn",
+                "noArguments": "warn"
             },
             "suspicious": {
-                "noExplicitAny": "off"
+                "noExplicitAny": "warn"
             }
         }
     },
@@ -31,5 +32,8 @@
             "node_modules"
         ],
         "ignoreUnknown": true
+    },
+    "assist": {
+        "enabled": false
     }
 }
