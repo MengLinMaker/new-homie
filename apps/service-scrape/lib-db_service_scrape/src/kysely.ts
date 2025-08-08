@@ -1,9 +1,7 @@
-import { Kysely, PostgresDialect } from 'kysely'
+import { Kysely, PostgresDialect, sql } from 'kysely'
 import { z } from 'zod'
-import { exit } from 'node:process'
 
 import type { DB } from './schema.ts'
-import { LOG } from './log.ts'
 
 // CommonJS import only - no ESM support available
 import pgImport from 'pg'
@@ -14,7 +12,7 @@ const { Pool } = pgImport
  * @link Kysely docs: https://kysely.dev/
  */
 
-export const getKyselyPostgresDb = (postgresUri: string) => {
+export const getKyselyPostgresDb = async (postgresUri: string) => {
     try {
         const validUri = z
             .string()
@@ -22,13 +20,14 @@ export const getKyselyPostgresDb = (postgresUri: string) => {
                 message: 'Invalid postgres uri',
             })
             .parse(postgresUri)
-        return new Kysely<DB>({
+        const db = new Kysely<DB>({
             dialect: new PostgresDialect({
                 pool: new Pool({ connectionString: validUri }),
             }),
         })
+        await db.executeQuery(sql`SELECT 1`.compile(db))
+        return db
     } catch (e) {
-        LOG.fatal('Invalid postgres uri')
-        exit(1)
+        return null
     }
 }

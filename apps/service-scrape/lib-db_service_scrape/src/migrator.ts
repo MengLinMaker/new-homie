@@ -8,7 +8,11 @@ import { getKyselyPostgresDb } from './kysely.ts'
 
 export const kyselyPostgresMigrate = async (connectionString: string) => {
     LOG.info('DATABASE MIGRATION')
-    const db = getKyselyPostgresDb(connectionString)
+    const db = await getKyselyPostgresDb(connectionString)
+    if (db === null) {
+        LOG.fatal('Invalid uri or database is not running')
+        return db
+    }
 
     const migrator = new Migrator({
         db,
