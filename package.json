@@ -7,7 +7,7 @@
         "test:arch": "pnpm depcruise -v -T dot . | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise .",
         "build": "nx run-many -t build",
         "knip": "knip",
-        "bump": "npx npm-check-updates -u && pnpm install",
+        "bump": "npx npm-check-updates -u && pnpm install && pnpm -r bump",
         "docker:up": "nx affected -t docker:up",
         "docker:down": "nx affected -t docker:down",
         "build:ci": "nx affected -t build",

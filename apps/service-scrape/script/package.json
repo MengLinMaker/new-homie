@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "private": "true",
     "scripts": {
-        "compress": "node ./compress.ts",
+        "compress": "node ./src/compress.ts",
         "format": "biome format --write",
-        "test": "pnpm run /^test:/",
+        "bump": "npx npm-check-updates -u && pnpm install",
         "test:lint": "biome lint --write",
         "test:type": "tsc"
     },
@@ -14,6 +14,6 @@
     },
     "type": "module",
     "devDependencies": {
-        "consola": "3.4.0"
+        "consola": "3.4.2"
     }
 }

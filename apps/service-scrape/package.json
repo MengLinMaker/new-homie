@@ -1,9 +1,10 @@
 {
-  "name": "@service-scrape/root",
-  "version": "1.0.0",
-  "scripts": {
-    "test": "pnpm /test:.*/",
-    "test:lint": "sam validate --lint",
-    "build:sam": "sam build"
-  }
+    "name": "@service-scrape/root",
+    "version": "1.0.0",
+    "scripts": {
+        "bump": "npx npm-check-updates -u && pnpm install",
+        "test": "pnpm /test:.*/",
+        "test:lint": "sam validate --lint",
+        "build:sam": "sam build"
+    }
 }
