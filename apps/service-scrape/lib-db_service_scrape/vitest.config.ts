@@ -10,12 +10,7 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text'],
             include: ['src/**/*.ts'],
-            exclude: [
-                'src/index.ts',
-                'src/migrator.ts',
-                'src/schema.ts',
-                'src/migration/V0001__enable-postgis.ts',
-            ],
+            exclude: ['src/index.ts', 'src/migrator.ts', 'src/schema.ts', 'src/migration/*.ts'],
         },
     },
 })
