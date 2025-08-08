@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: <test is controlled> */
-import { createPostgisPointString } from '../src/util'
+import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
 import { describe, expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
@@ -27,6 +27,12 @@ describe('schema validation', async () => {
             suburb_name: faker.location.city(),
             postcode: faker.location.zipCode('####'),
             state_abbreviation: StateAbbreviationEnum.VIC,
+            boundary_coordinates: createPostgisPolygonString([
+                [1, 2],
+                [3, 4],
+                [5, 6],
+                [1, 2],
+            ])!,
         })
         await insertIntoTable('common_features_table', {
             bed_quantity: faker.number.int({ min: 1, max: 5 }),

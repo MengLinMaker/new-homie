@@ -21,6 +21,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
             sql`LENGTH("localities_table"."postcode") = 4`,
         )
         .addColumn('state_abbreviation', sql`state_abbreviation_enum`, (col) => col.notNull())
+        .addColumn('boundary_coordinates', sql`geometry(polygon)`, (col) => col.notNull())
         .execute()
 }
 

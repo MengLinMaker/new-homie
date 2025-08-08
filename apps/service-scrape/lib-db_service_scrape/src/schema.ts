@@ -50,6 +50,7 @@ export interface HomeTable {
 }
 
 export interface LocalitiesTable {
+    boundary_coordinates: string
     id: Generated<number>
     postcode: string
     state_abbreviation: StateAbbreviationEnum

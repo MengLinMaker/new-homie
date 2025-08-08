@@ -1,7 +1,12 @@
-import { z } from 'zod'
+import {
+    createPostgisPolygonString,
+    enumToArray,
+    Schema,
+} from '@service-scrape/lib-db_service_scrape'
 import { traceTryFunction } from '../instrumentation'
-// import { simplify, polygon } from '@turf/turf'
-import { dbSchema } from '@service-scrape/lib-db_service_scrape'
+import { z } from 'zod'
+import type { Updateable } from 'kysely'
+import { simplify, polygon } from '@turf/turf'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
@@ -11,7 +16,7 @@ const _boundaryGeoJsonSchema = z.object({
 const _rawSuburbSchema = z.object({
     suburb: z.object({
         name: z.string(),
-        state: z.string(),
+        state: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
         postcode: z.string(),
         statistics: z.object({
             marriedPercentage: z.number(),
@@ -77,9 +82,7 @@ export const domainSuburb = {
     tryExtractProfile(nextDataJson: object) {
         return traceTryFunction('domainSuburb.tryExtractProfile', arguments, 'ERROR', async () => {
             const validNextjson = domainSuburb.nextDataJsonSchema.parse(nextDataJson)
-            const intestingObjects = Object.values(
-                validNextjson.props.pageProps.__APOLLO_STATE__,
-            ).slice(0, 2)
+            const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
             return {
                 ..._rawSuburbSchema.parse({
                     suburb: intestingObjects[0],
@@ -107,23 +110,30 @@ export const domainSuburb = {
             'ERROR',
             async () => {
                 // Simplify geo boundary to reduce storage size.
-                // const coordinates = simplify(polygon(rawSuburbData.boundaryGeoJson.coordinates), {
-                //   tolerance: 0.00025,
-                //   highQuality: true,
-                // }).geometry.coordinates
+                const compressedCoordinates = simplify(
+                    polygon(rawSuburbData.boundaryGeoJson.coordinates),
+                    {
+                        tolerance: 0.00025,
+                        highQuality: true,
+                    },
+                ).geometry.coordinates
 
-                rawSuburbData.suburb.statistics.population
-                rawSuburbData.suburb.statistics.ownerOccupierPercentage
-                rawSuburbData.suburb.statistics.marriedPercentage
+                const boundaryCoord = createPostgisPolygonString(compressedCoordinates[0])
+                if (!boundaryCoord) throw new Error('invalid locality boundary coordinate')
 
-                rawSuburbData.suburb.schools
-                rawSuburbData.location.data.propertyCategories
+                // rawSuburbData.suburb.statistics.population
+                // rawSuburbData.suburb.statistics.ownerOccupierPercentage
+                // rawSuburbData.suburb.statistics.marriedPercentage
+
+                // rawSuburbData.location.data.propertyCategories
+                // rawSuburbData.suburb.schools
                 return {
-                    localities_table: dbSchema.localities_table.parse({
+                    localities_table: {
                         postcode: rawSuburbData.suburb.postcode,
                         suburb_name: rawSuburbData.suburb.name,
-                        state_abbreviation: rawSuburbData.suburb.state as any,
-                    } satisfies z.infer<typeof dbSchema.localities_table>),
+                        state_abbreviation: rawSuburbData.suburb.state,
+                        boundary_coordinates: boundaryCoord,
+                    } satisfies Updateable<Schema.LocalitiesTable>,
                 }
             },
         )

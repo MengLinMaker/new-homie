@@ -29,21 +29,24 @@ describe(testSuiteName, () => {
     })
 
     describe('tryTransformProfile', () => {
-        // it.for(['suburb-profile.dandenong-vic-3175'])(
-        //   'should extract suburb info from %s',
-        //   async (fileSuffix) => {
-        //     const inputObject = parseJsonFile(`${resourcePath}/tryExtractProfile.${fileSuffix}.json`)
-        //     const expectedObject = parseJsonFile(
-        //       `${resourcePath}/tryTransformProfile.${fileSuffix}.json`,
-        //     )
+        it.for(['suburb-profile.dandenong-vic-3175'])(
+            'should extract suburb info from %s',
+            async (fileSuffix) => {
+                const inputObject = parseJsonFile(
+                    `${resourcePath}/tryExtractProfile.${fileSuffix}.json`,
+                )
+                const expectedObject = parseJsonFile(
+                    `${resourcePath}/tryTransformProfile.${fileSuffix}.json`,
+                )
 
-        //     const [value, success] = await domainSuburb.tryTransformProfile(inputObject)
-        //     if (!success) return expect(success).toBe(true)
-        //     expect(value).toStrictEqual(expectedObject)
-        //   },
-        // )
+                const [value, success] = await domainSuburb.tryTransformProfile(inputObject)
+                if (!success) return expect(success).toBe(true)
+                expect(value).toStrictEqual(expectedObject)
+            },
+        )
 
         it('should not extract invalid input', async () => {
+            // biome-ignore lint/suspicious/noExplicitAny: <deliberate error>
             const [resultObject, success] = await domainSuburb.tryTransformProfile({} as any)
             expect(success).toBe(false)
             expect(resultObject).toBeInstanceOf(Error)
