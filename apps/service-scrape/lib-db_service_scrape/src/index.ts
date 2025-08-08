@@ -1,4 +1,4 @@
-import { getKyselyPostgresDb } from './kysely.ts'
+import { getKyselyPostgresDb } from './connection.ts'
 import * as Schema from './schema.ts'
 import { config } from 'dotenv'
 import { enumToArray, createPostgisPointString, createPostgisPolygonString } from './util'

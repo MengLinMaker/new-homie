@@ -2,9 +2,15 @@ import path from 'node:path'
 import { promises as fs } from 'node:fs'
 import { Migrator, FileMigrationProvider } from 'kysely'
 import { Cli } from 'kysely-codegen'
+import pino from 'pino'
 
-import { LOG } from './log.ts'
-import { getKyselyPostgresDb } from './kysely.ts'
+import { getKyselyPostgresDb } from './connection.ts'
+
+export const LOG = pino({
+    transport: {
+        target: 'pino-pretty',
+    },
+})
 
 export const kyselyPostgresMigrate = async (connectionString: string) => {
     LOG.info('DATABASE MIGRATION')

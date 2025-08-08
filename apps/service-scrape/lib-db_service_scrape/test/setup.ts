@@ -3,7 +3,7 @@ import { exec } from 'node:child_process'
 import type { Kysely } from 'kysely'
 
 import { kyselyPostgresMigrate } from '../src/migrator'
-import { getKyselyPostgresDb } from '../src/kysely'
+import { getKyselyPostgresDb } from '../src/connection'
 import type { DB } from '../src/schema'
 
 declare global {

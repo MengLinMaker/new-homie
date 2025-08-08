@@ -1,14 +1,14 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: <test is controlled> */
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
 import type { Insertable } from 'kysely'
 
-describe('schema validation', async () => {
+describe('schema.ts', async () => {
     const insertIds = new Map<keyof DB, number>()
 
-    test.sequential('insert into all tables', async () => {
+    it.sequential('should insert into all tables', async () => {
         const insertIntoTable = async <K extends keyof DB>(
             tableName: K,
             values: Insertable<DB[K]>,
@@ -64,7 +64,7 @@ describe('schema validation', async () => {
         })
     })
 
-    test.sequential('select from all tables', async () => {
+    it.sequential('should select from all tables', async () => {
         const reverseTableNameIds = Array.from(insertIds.entries()).reverse()
         for (const [tableName, id] of reverseTableNameIds) {
             const data = await global.db
@@ -76,7 +76,7 @@ describe('schema validation', async () => {
         }
     })
 
-    test.sequential('delete from all tables', async () => {
+    it.sequential('should delete from all tables', async () => {
         for (const [tableName, id] of Array.from(insertIds.entries()).reverse()) {
             const data = await global.db
                 .deleteFrom(tableName)
