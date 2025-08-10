@@ -1,6 +1,5 @@
 import { DB_SERVICE_SCRAPE } from './src/index.ts'
-import { LOG } from './src/log.ts'
-import { kyselyPostgresMigrate } from './src/migrator.ts'
+import { kyselyPostgresMigrate, LOG } from './src/migrator.ts'
 
 if (!DB_SERVICE_SCRAPE) {
     LOG.fatal('DB_SERVICE_SCRAPE is not defined')
