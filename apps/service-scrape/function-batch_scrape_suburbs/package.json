@@ -13,13 +13,13 @@
     },
     "devDependencies": {
         "@hono/vite-dev-server": "0.20.1",
-        "pino-pretty": "^13.1.1"
+        "pino-pretty": "13.1.1"
     },
     "dependencies": {
         "@opentelemetry/api": "1.9.0",
         "@opentelemetry/exporter-logs-otlp-proto": "0.203.0",
         "@opentelemetry/exporter-trace-otlp-proto": "0.203.0",
-        "@opentelemetry/instrumentation-pino": "^0.50.0",
+        "@opentelemetry/instrumentation-pino": "0.50.0",
         "@opentelemetry/resources": "2.0.1",
         "@opentelemetry/sdk-logs": "0.203.0",
         "@opentelemetry/sdk-node": "0.203.0",
@@ -29,10 +29,11 @@
         "@turf/turf": "7.2.0",
         "cheerio": "1.1.2",
         "dotenv": "17.2.1",
+        "effect": "3.17.7",
         "hono": "4.9.0",
         "kysely": "0.28.4",
-        "pino": "^9.8.0",
-        "zod": "4.0.15"
+        "pino": "9.8.0",
+        "zod": "4.0.17"
     },
     "type": "module"
 }

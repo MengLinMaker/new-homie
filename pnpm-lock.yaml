@@ -12,7 +12,7 @@ importers:
         specifier: 2.1.4
         version: 2.1.4
       '@types/node':
-        specifier: 24.2.0
+        specifier: '*'
         version: 24.2.0
       '@vitest/coverage-v8':
         specifier: 3.2.4
@@ -33,7 +33,7 @@ importers:
         specifier: 8.5.0
         version: 8.5.0(@swc/core@1.11.4(@swc/helpers@0.5.15))(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.7.0)
       typescript:
-        specifier: 5.9.2
+        specifier: ~5.9.2
         version: 5.9.2
       vite:
         specifier: 7.1.1
@@ -58,7 +58,7 @@ importers:
         specifier: 0.203.0
         version: 0.203.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/instrumentation-pino':
-        specifier: ^0.50.0
+        specifier: 0.50.0
         version: 0.50.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/resources':
         specifier: 2.0.1
@@ -87,6 +87,9 @@ importers:
       dotenv:
         specifier: 17.2.1
         version: 17.2.1
+      effect:
+        specifier: 3.17.7
+        version: 3.17.7
       hono:
         specifier: 4.9.0
         version: 4.9.0
@@ -94,17 +97,17 @@ importers:
         specifier: 0.28.4
         version: 0.28.4
       pino:
-        specifier: ^9.8.0
+        specifier: 9.8.0
         version: 9.8.0
       zod:
-        specifier: 4.0.15
-        version: 4.0.15
+        specifier: 4.0.17
+        version: 4.0.17
     devDependencies:
       '@hono/vite-dev-server':
         specifier: 0.20.1
         version: 0.20.1(hono@4.9.0)
       pino-pretty:
-        specifier: ^13.1.1
+        specifier: 13.1.1
         version: 13.1.1
 
   apps/service-scrape/lib-db_service_scrape:
@@ -119,11 +122,11 @@ importers:
         specifier: 8.16.3
         version: 8.16.3
       pino:
-        specifier: ^9.8.0
+        specifier: 9.8.0
         version: 9.8.0
       zod:
-        specifier: 4.0.15
-        version: 4.0.15
+        specifier: 4.0.17
+        version: 4.0.17
     devDependencies:
       '@faker-js/faker':
         specifier: 9.9.0
@@ -132,10 +135,10 @@ importers:
         specifier: 8.15.5
         version: 8.15.5
       kysely-codegen:
-        specifier: ^0.18.5
+        specifier: 0.18.5
         version: 0.18.5(kysely@0.28.4)(pg@8.16.3)(tarn@3.0.2)(typescript@5.9.2)
       pino-pretty:
-        specifier: ^13.1.1
+        specifier: 13.1.1
         version: 13.1.1
 
   apps/service-scrape/script:
@@ -145,10 +148,10 @@ importers:
         version: link:../lib-db_service_scrape
     devDependencies:
       pino:
-        specifier: ^9.8.0
+        specifier: 9.8.0
         version: 9.8.0
       pino-pretty:
-        specifier: ^13.1.1
+        specifier: 13.1.1
         version: 13.1.1
 
 packages:
@@ -1048,6 +1051,9 @@ packages:
   '@sinclair/typebox@0.34.38':
     resolution: {integrity: sha512-HpkxMmc2XmZKhvaKIZZThlHmx1L0I/V1hWK1NubtlFnr6ZqdiOpV72TKudZUNQjZNsyDBay72qFEhEvb+bcwcA==}
 
+  '@standard-schema/spec@1.0.0':
+    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
+
   '@swc/core-darwin-arm64@1.11.4':
     resolution: {integrity: sha512-Oi4lt4wqjpp80pcCh+vzvpsESJ8XXozYCE5EM/dDpr+9m2oRpkseds7Gq4ulzgdbUDPo1jJ1PonjjrKpfKY+sQ==}
     engines: {node: '>=10'}
@@ -1891,6 +1897,9 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
+  effect@3.17.7:
+    resolution: {integrity: sha512-dpt0ONUn3zzAuul6k4nC/coTTw27AL5nhkORXgTi6NfMPzqWYa1M05oKmOMTxpVSTKepqXVcW9vIwkuaaqx9zA==}
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -1969,6 +1978,10 @@ packages:
   expect-type@1.2.2:
     resolution: {integrity: sha512-JhFGDVJ7tmDJItKhYgJCGLOWjuK9vPxiXoUFLwLDc99NlmklilbiQJwoctZtt13+xMw91MCk/REan6MWHqDjyA==}
     engines: {node: '>=12.0.0'}
+
+  fast-check@3.23.2:
+    resolution: {integrity: sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==}
+    engines: {node: '>=8.0.0'}
 
   fast-copy@3.0.2:
     resolution: {integrity: sha512-dl0O9Vhju8IrcLndv2eU4ldt1ftXMqqfgN4H1cpmGV7P6jeB9FwpN9a2c8DPGE1Ys88rNUJVYDHq73CGAGOPfQ==}
@@ -2778,6 +2791,9 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -3309,8 +3325,8 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.0.15:
-    resolution: {integrity: sha512-2IVHb9h4Mt6+UXkyMs0XbfICUh1eUrlJJAOupBHUhLRnKkruawyDddYRCs0Eizt900ntIMk9/4RksYl+FgSpcQ==}
+  zod@4.0.17:
+    resolution: {integrity: sha512-1PHjlYRevNxxdy2JZ8JcNAw7rX8V9P1AKkP+x/xZfxB0K5FYfuV+Ug6P/6NVSR2jHQ+FzDDoDHS04nYUsOIyLQ==}
 
 snapshots:
 
@@ -4043,6 +4059,8 @@ snapshots:
     optional: true
 
   '@sinclair/typebox@0.34.38': {}
+
+  '@standard-schema/spec@1.0.0': {}
 
   '@swc/core-darwin-arm64@1.11.4':
     optional: true
@@ -5663,6 +5681,11 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
+  effect@3.17.7:
+    dependencies:
+      '@standard-schema/spec': 1.0.0
+      fast-check: 3.23.2
+
   emoji-regex@8.0.0: {}
 
   emoji-regex@9.2.2: {}
@@ -5752,6 +5775,10 @@ snapshots:
       '@types/estree': 1.0.6
 
   expect-type@1.2.2: {}
+
+  fast-check@3.23.2:
+    dependencies:
+      pure-rand: 6.1.0
 
   fast-copy@3.0.2: {}
 
@@ -6571,6 +6598,8 @@ snapshots:
 
   punycode@2.3.1: {}
 
+  pure-rand@6.1.0: {}
+
   queue-microtask@1.2.3: {}
 
   quick-format-unescaped@4.0.4: {}
@@ -7106,4 +7135,4 @@ snapshots:
 
   zod@3.25.76: {}
 
-  zod@4.0.15: {}
+  zod@4.0.17: {}
