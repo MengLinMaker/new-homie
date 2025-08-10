@@ -5,45 +5,29 @@
     },
     "targetDefaults": {
         "test:lint": {
-            "dependsOn": [
-                "^test:lint"
-            ],
+            "dependsOn": ["^test:lint"],
             "cache": true
         },
         "test:type": {
-            "dependsOn": [
-                "^test:type"
-            ],
+            "dependsOn": ["^test:type"],
             "cache": true
         },
         "test:unit": {
-            "dependsOn": [
-                "^test:unit"
-            ],
+            "dependsOn": ["^test:unit"],
             "cache": true
         },
         "test:perf": {
-            "dependsOn": [
-                "^test:perf"
-            ],
+            "dependsOn": ["^test:perf"],
             "cache": true
         },
         "build": {
-            "dependsOn": [
-                "^build"
-            ],
-            "outputs": [
-                "{projectRoot}/dist"
-            ],
+            "dependsOn": ["^build"],
+            "outputs": ["{projectRoot}/dist"],
             "cache": true
         },
         "build:sam": {
-            "dependsOn": [
-                "^build:sam"
-            ],
-            "outputs": [
-                "{projectRoot}/.aws-sam"
-            ],
+            "dependsOn": ["^build:sam"],
+            "outputs": ["{projectRoot}/.aws-sam"],
             "cache": true
         },
         "format": {

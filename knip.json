@@ -1,10 +1,5 @@
 {
     "$schema": "https://unpkg.com/knip@5/schema.json",
-    "ignoreBinaries": [
-        "sam",
-        "only-allow"
-    ],
-    "ignore": [
-        "**/src/migration/*.ts"
-    ]
+    "ignoreBinaries": ["sam", "only-allow"],
+    "ignore": ["**/src/migration/*.ts"]
 }

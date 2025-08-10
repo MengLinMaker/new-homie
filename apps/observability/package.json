@@ -2,7 +2,6 @@
     "name": "@observability/observability",
     "version": "1.0.0",
     "scripts": {
-        "format": "biome format --write",
         "docker:down": "docker compose down -v",
         "docker:up": "docker compose up --build -d"
     }

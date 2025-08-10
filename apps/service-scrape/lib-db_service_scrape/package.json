@@ -13,8 +13,6 @@
         "dist"
     ],
     "scripts": {
-        "format": "biome format --write",
-        "bump": "npx npm-check-updates -u && pnpm install",
         "docker:down": "docker compose down -v",
         "migrate": "node ./migrate.ts | pnpm dlx pino-pretty",
         "test": "pnpm run /^test:/",

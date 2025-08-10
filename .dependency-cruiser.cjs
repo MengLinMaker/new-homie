@@ -13,11 +13,11 @@ module.exports = {
             from: {
                 orphan: true,
                 pathNot: [
-                    '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$',                  // dot files
-                    '[.]d[.]ts$',                                                       // TypeScript declaration files
-                    '(^|/)tsconfig[.]json$',                                            // TypeScript config
-                    '(^|/)(?:babel|webpack|vite|vitest)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$' // other configs
-                ]
+                    '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$', // dot files
+                    '[.]d[.]ts$', // TypeScript declaration files
+                    '(^|/)tsconfig[.]json$', // TypeScript config
+                    '(^|/)(?:babel|webpack|vite|vitest)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$', // other configs
+                ],
             },
             to: {},
         },
@@ -29,10 +29,8 @@ module.exports = {
             severity: 'error',
             from: {},
             to: {
-                dependencyTypes: [
-                    'deprecated'
-                ]
-            }
+                dependencyTypes: ['deprecated'],
+            },
         },
         {
             name: 'no-non-package-json',
@@ -40,22 +38,19 @@ module.exports = {
             comment:
                 "This module depends on an npm package that isn't in the 'dependencies' section of your package.json. " +
                 "That's problematic as the package either (1) won't be available on live (2 - worse) will be " +
-                "available on live with an non-guaranteed version. Fix it by adding the package to the dependencies " +
-                "in your package.json.",
+                'available on live with an non-guaranteed version. Fix it by adding the package to the dependencies ' +
+                'in your package.json.',
             from: {},
             to: {
-                dependencyTypes: [
-                    'npm-no-pkg',
-                    'npm-unknown'
-                ]
-            }
+                dependencyTypes: ['npm-no-pkg', 'npm-unknown'],
+            },
         },
         {
             name: 'no-duplicate-dep-types',
             comment:
                 "Likely this module depends on an external ('npm') package that occurs more than once " +
-                "in your package.json i.e. bot as a devDependencies and in dependencies. This will cause " +
-                "maintenance problems later on.",
+                'in your package.json i.e. bot as a devDependencies and in dependencies. This will cause ' +
+                'maintenance problems later on.',
             severity: 'warn',
             from: {},
             to: {
@@ -63,8 +58,8 @@ module.exports = {
                 // as it's pretty common to have a type import be a type only import
                 // _and_ (e.g.) a devDependency - don't consider type-only dependency
                 // types for this rule
-                dependencyTypesNot: ["type-only"]
-            }
+                dependencyTypesNot: ['type-only'],
+            },
         },
         {
             name: 'not-to-spec',
@@ -75,8 +70,8 @@ module.exports = {
             severity: 'error',
             from: {},
             to: {
-                path: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$'
-            }
+                path: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$',
+            },
         },
         {
             name: 'not-to-dev-dep',
@@ -89,56 +84,46 @@ module.exports = {
                 'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
             from: {
                 path: '^(apps)',
-                pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$'
+                pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$',
             },
             to: {
-                dependencyTypes: [
-                    'npm-dev',
-                ],
+                dependencyTypes: ['npm-dev'],
                 // type only dependencies are not a problem as they don't end up in the
                 // production code or are ignored by the runtime.
-                dependencyTypesNot: [
-                    'type-only'
-                ],
-                pathNot: [
-                    'node_modules/@types/'
-                ]
-            }
+                dependencyTypesNot: ['type-only'],
+                pathNot: ['node_modules/@types/'],
+            },
         },
         {
             name: 'optional-deps-used',
             severity: 'info',
             comment:
-                "This module depends on an npm package that is declared as an optional dependency " +
+                'This module depends on an npm package that is declared as an optional dependency ' +
                 "in your package.json. As this makes sense in limited situations only, it's flagged here. " +
                 "If you're using an optional dependency here by design - add an exception to your" +
-                "dependency-cruiser configuration.",
+                'dependency-cruiser configuration.',
             from: {},
             to: {
-                dependencyTypes: [
-                    'npm-optional'
-                ]
-            }
+                dependencyTypes: ['npm-optional'],
+            },
         },
         {
             name: 'peer-deps-used',
             comment:
-                "This module depends on an npm package that is declared as a peer dependency " +
-                "in your package.json. This makes sense if your package is e.g. a plugin, but in " +
-                "other cases - maybe not so much. If the use of a peer dependency is intentional " +
-                "add an exception to your dependency-cruiser configuration.",
+                'This module depends on an npm package that is declared as a peer dependency ' +
+                'in your package.json. This makes sense if your package is e.g. a plugin, but in ' +
+                'other cases - maybe not so much. If the use of a peer dependency is intentional ' +
+                'add an exception to your dependency-cruiser configuration.',
             severity: 'warn',
             from: {},
             to: {
-                dependencyTypes: [
-                    'npm-peer'
-                ]
-            }
-        }
+                dependencyTypes: ['npm-peer'],
+            },
+        },
     ],
     options: {
         doNotFollow: {
-            path: ['dist', '.aws-sam', 'test']
+            path: ['dist', '.aws-sam', 'test'],
         },
         exclude: {
             path: ['node_modules', 'dist'],
@@ -149,12 +134,12 @@ module.exports = {
         // extraExtensionsToScan: [".json"],
         combinedDependencies: false,
         tsConfig: {
-            fileName: 'tsconfig.json'
+            fileName: 'tsconfig.json',
         },
         enhancedResolveOptions: {
-            exportsFields: ["exports"],
-            conditionNames: ["import", "require", "node", "default", "types"],
-            mainFields: ["module", "main", "types", "typings"],
+            exportsFields: ['exports'],
+            conditionNames: ['import', 'require', 'node', 'default', 'types'],
+            mainFields: ['module', 'main', 'types', 'typings'],
         },
         /* skipAnalysisNotInRules will make dependency-cruiser execute
            analysis strictly necessary for checking the rule set only.
@@ -180,16 +165,16 @@ module.exports = {
                 */
                 theme: {
                     graph: {
-                        splines: "true",
-                        color: "lightgrey",
+                        splines: 'true',
+                        color: 'lightgrey',
                     },
                     edge: {
-                        arrowsize: "0.6",
-                        penwidth: "0.6",
-                        color: "black",
+                        arrowsize: '0.6',
+                        penwidth: '0.6',
+                        color: 'black',
                     },
-                }
+                },
             },
-        }
-    }
+        },
+    },
 }
