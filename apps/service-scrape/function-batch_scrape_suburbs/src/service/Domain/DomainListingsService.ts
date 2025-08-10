@@ -1,4 +1,4 @@
-import { traceTryFunction } from '../../instrumentation'
+import { traceTryFunction } from '../../global/instrumentation'
 import { z } from 'zod'
 import {
     enumToArray,
@@ -19,9 +19,9 @@ const listingsSchema = z.object({
             lng: z.number(),
         }),
         features: z.object({
-            beds: z.number().nullish(),
-            baths: z.number().nullish(),
-            parking: z.number().nullish(),
+            beds: z.number().catch(0),
+            baths: z.number().catch(0),
+            parking: z.number().catch(0),
             propertyType: z.enum(enumToArray(Schema.HomeTypeEnum)),
             isRural: z.boolean(),
             landSize: z.number(),
@@ -69,9 +69,9 @@ export class DomainListingsService extends IService {
                 const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
                 const listings = Object.values(
                     validNextjson.props.pageProps.componentProps.listingsMap,
-                )
+                ) as ListingsSchemaDTO[]
                 const isLastPage = lastPageNumber === currentPageNumber
-                return [listings, isLastPage]
+                return { listings, isLastPage }
             },
         )
     }
@@ -93,9 +93,9 @@ export class DomainListingsService extends IService {
 
                 return {
                     common_features_table: {
-                        bed_quantity: features.beds ?? 0,
-                        bath_quantity: features.baths ?? 0,
-                        car_quantity: features.parking ?? 0,
+                        bed_quantity: features.beds,
+                        bath_quantity: features.baths,
+                        car_quantity: features.parking,
                         home_type: features.propertyType,
                         is_retirement: features.isRetirement,
                     } satisfies Updateable<Schema.CommonFeaturesTable>,

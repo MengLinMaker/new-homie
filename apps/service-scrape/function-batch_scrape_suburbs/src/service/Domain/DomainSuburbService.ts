@@ -3,7 +3,7 @@ import {
     enumToArray,
     Schema,
 } from '@service-scrape/lib-db_service_scrape'
-import { traceTryFunction } from '../../instrumentation'
+import { traceTryFunction } from '../../global/instrumentation'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'

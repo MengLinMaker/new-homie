@@ -3,7 +3,7 @@ import { LOGGER, parseJsonFile } from '../../util'
 import {
     type DomainListingsDTO,
     DomainSuburbService,
-} from '../../../src/service/scrapeDomain/DomainSuburbService'
+} from '../../../src/service/Domain/DomainSuburbService'
 
 const testSuiteName = 'DomainSuburbService'
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`

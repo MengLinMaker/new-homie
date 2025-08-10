@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
     DomainListingsService,
     type ListingsSchemaDTO,
-} from '../../../src/service/scrapeDomain/DomainListingsService'
+} from '../../../src/service/Domain/DomainListingsService'
 import { LOGGER, parseJsonFile } from '../../util'
 
 const testSuiteName = 'DomainListingsService'
@@ -24,8 +24,8 @@ describe(testSuiteName, () => {
 
                 const [value, success] = await domainListingsService.tryExtractListings(inputObject)
                 if (!success) return expect(success).toBe(true)
-                const [resultObject, _isLastpage] = value
-                expect(resultObject).toStrictEqual(expectedObject)
+                const { listings, isLastPage } = value
+                expect(listings).toStrictEqual(expectedObject)
             },
         )
 
