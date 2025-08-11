@@ -55,12 +55,16 @@ describe('schema.ts', async () => {
             first_scrape_date: faker.date.past(),
             last_scrape_date: faker.date.recent(),
             higher_price_aud: faker.number.int({ min: 200000, max: 2000000 }),
+            aud_per_bed: 0,
+            aud_per_land_m2: 0,
         })
         await insertIntoTable('rent_price_table', {
             home_table_id: insertIds.get('home_table')!,
             first_scrape_date: faker.date.past(),
             last_scrape_date: faker.date.recent(),
             weekly_rent_aud: faker.number.int({ min: 100, max: 2000 }),
+            aud_per_bed: 0,
+            aud_per_land_m2: 0,
         })
     })
 

@@ -44,7 +44,7 @@ export interface HomeTable {
     gps: string
     id: Generated<number>
     inspection_time: Timestamp | null
-    land_m2: number | null
+    land_m2: number
     localities_table_id: number
     street_address: string
 }
@@ -58,8 +58,8 @@ export interface LocalitiesTable {
 }
 
 export interface RentPriceTable {
-    aud_per_bed: number | null
-    aud_per_land_m2: number | null
+    aud_per_bed: number
+    aud_per_land_m2: number
     first_scrape_date: Generated<Timestamp>
     home_table_id: number
     id: Generated<number>
@@ -68,8 +68,8 @@ export interface RentPriceTable {
 }
 
 export interface SalePriceTable {
-    aud_per_bed: number | null
-    aud_per_land_m2: number | null
+    aud_per_bed: number
+    aud_per_land_m2: number
     first_scrape_date: Generated<Timestamp>
     higher_price_aud: number
     home_table_id: number

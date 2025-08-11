@@ -13,13 +13,10 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addColumn('suburb_name', 'text', (col) => col.notNull())
         .addCheckConstraint(
             'localities_table_suburb_name_check',
-            sql`LENGTH("localities_table"."suburb_name") < 64`,
+            sql`LENGTH(suburb_name) > 0 AND LENGTH(suburb_name) < 64`,
         )
         .addColumn('postcode', 'text', (col) => col.notNull())
-        .addCheckConstraint(
-            'localities_table_postcode_check',
-            sql`LENGTH("localities_table"."postcode") = 4`,
-        )
+        .addCheckConstraint('localities_table_postcode_check', sql`LENGTH(postcode) = 4`)
         .addColumn('state_abbreviation', sql`state_abbreviation_enum`, (col) => col.notNull())
         .addColumn('boundary_coordinates', sql`geometry(polygon)`, (col) => col.notNull())
         .execute()

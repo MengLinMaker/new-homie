@@ -11,20 +11,11 @@ export async function up(db: Kysely<unknown>): Promise<void> {
             col.notNull().primaryKey().generatedByDefaultAsIdentity(),
         )
         .addColumn('bed_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint(
-            'common_features_table_bed_quantity_check',
-            sql`"bed_quantity" >= 1 AND "bed_quantity" <= 5`,
-        )
+        .addCheckConstraint('common_features_table_bed_quantity_check', sql`bed_quantity >= 0`)
         .addColumn('bath_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint(
-            'common_features_table_bath_quantity_check',
-            sql`"bath_quantity" >= 1 AND "bath_quantity" <= 5`,
-        )
+        .addCheckConstraint('common_features_table_bath_quantity_check', sql`bath_quantity >= 0`)
         .addColumn('car_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint(
-            'common_features_table_car_quantity_check',
-            sql`"car_quantity" >= 0 AND "car_quantity" <= 5`,
-        )
+        .addCheckConstraint('common_features_table_car_quantity_check', sql`car_quantity >= 0`)
         .addColumn('home_type', sql`home_type_enum`, (col) => col.notNull())
         .addColumn('is_retirement', 'boolean', (col) => col.notNull())
         .execute()

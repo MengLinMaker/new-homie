@@ -15,10 +15,11 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addColumn('street_address', 'text', (col) => col.notNull())
         .addCheckConstraint(
             'home_table_street_address_check',
-            sql`LENGTH("home_table"."street_address") < 64`,
+            sql`LENGTH(street_address) > 0 AND LENGTH(street_address) < 64`,
         )
         .addColumn('gps', sql`geometry(point)`, (col) => col.notNull())
-        .addColumn('land_m2', 'integer')
+        .addColumn('land_m2', 'integer', (col) => col.notNull())
+        .addCheckConstraint('home_table_land_m2_check', sql`land_m2 >= 0`)
         .addColumn('inspection_time', 'timestamptz')
         .addColumn('auction_time', 'timestamptz')
         .execute()
