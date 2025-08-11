@@ -1,11 +1,32 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: <test is controlled> */
-import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it, afterAll } from 'vitest'
 import { faker } from '@faker-js/faker'
+import type { Insertable, Kysely } from 'kysely'
+
+import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
-import type { Insertable } from 'kysely'
+import { postgisTestContainer } from '../src/dev/postgisTestContainer'
+import { kyselyPostgisMigrate } from '../src/dev/migrator'
+import { kyselyPostgisGenerateSchema } from '../src/dev/generator'
 
 describe('schema.ts', async () => {
+    let db: Kysely<DB>
+    let container: Awaited<ReturnType<typeof postgisTestContainer>>
+
+    beforeAll(async () => {
+        container = await postgisTestContainer()
+        const _db = await kyselyPostgisMigrate(container.getConnectionUri())
+        if (!_db) throw new Error('Test database migration failed')
+        const generateSuccess = await kyselyPostgisGenerateSchema(container.getConnectionUri())
+        if (!generateSuccess) throw new Error('Test database code generation failed')
+        db = _db
+    }, 300000)
+
+    afterAll(async () => {
+        await db.destroy()
+        await container.stop()
+    })
+
     const insertIds = new Map<keyof DB, number>()
 
     it.sequential('should insert into all tables', async () => {
@@ -14,7 +35,7 @@ describe('schema.ts', async () => {
             values: Insertable<DB[K]>,
         ) => {
             const id = (
-                await global.db
+                await db
                     .insertInto(tableName)
                     .values(values)
                     .returning('id')
@@ -71,7 +92,7 @@ describe('schema.ts', async () => {
     it.sequential('should select from all tables', async () => {
         const reverseTableNameIds = Array.from(insertIds.entries()).reverse()
         for (const [tableName, id] of reverseTableNameIds) {
-            const data = await global.db
+            const data = await db
                 .selectFrom(tableName)
                 .selectAll()
                 .where('id', '=', id)
@@ -82,13 +103,13 @@ describe('schema.ts', async () => {
 
     it.sequential('should delete from all tables', async () => {
         for (const [tableName, id] of Array.from(insertIds.entries()).reverse()) {
-            const data = await global.db
+            const data = await db
                 .deleteFrom(tableName)
                 .where('id', '=', id)
                 .executeTakeFirstOrThrow()
             expect(data.numDeletedRows).toBe(1n)
 
-            const noData = await global.db
+            const noData = await db
                 .selectFrom(tableName)
                 .selectAll()
                 .where('id', '=', id)
