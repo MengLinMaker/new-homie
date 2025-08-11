@@ -24,14 +24,14 @@ const listingsSchema = z.object({
             parking: z.number().catch(0),
             propertyType: z.enum(enumToArray(Schema.HomeTypeEnum)),
             isRural: z.boolean(),
-            landSize: z.number(),
+            landSize: z.number().catch(0),
             isRetirement: z.boolean(),
         }),
         inspection: z.object({
-            openTime: z.string().nullish(),
-            closeTime: z.string().nullish(),
+            openTime: z.string().nullable(),
+            closeTime: z.string().nullable(),
         }),
-        auction: z.string().nullish(),
+        auction: z.string().nullable(),
     }),
 })
 
@@ -102,7 +102,7 @@ export class DomainListingsService extends IService {
                     home_table: {
                         street_address: address.street,
                         gps: createPostgisPointString(address.lng, address.lat),
-                        land_m2: features.landSize === 0 ? null : features.landSize,
+                        land_m2: features.landSize,
                         inspection_time: scrapeUtil.parseDatetime(listingModel.inspection.openTime),
                         auction_time: scrapeUtil.parseDatetime(listingModel.auction),
                     } satisfies Updateable<Schema.HomeTable>,
@@ -122,18 +122,21 @@ export class DomainListingsService extends IService {
             arguments,
             'WARN',
             async () => {
-                const beds = listing.listingModel.features.beds ?? 0
+                const beds = listing.listingModel.features.beds
                 const land = listing.listingModel.features.landSize
                 const priceString = listing.listingModel.price
                 const price = scrapeUtil.highestPriceFromString(priceString)
 
-                if (!price) throw Error('no price in listing.listingModel.price')
+                if (!price)
+                    throw Error(
+                        `no price in listing.listingModel.price - "${listing.listingModel.price}"`,
+                    )
                 return {
                     sale_price_table: {
                         last_scrape_date: '',
                         higher_price_aud: price,
-                        aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
-                        aud_per_land_m2: land > 0 ? Math.round(price / land) : null,
+                        aud_per_bed: beds > 0 ? price / beds : 0,
+                        aud_per_land_m2: land > 0 ? price / land : 0,
                     } satisfies Updateable<Schema.SalePriceTable>,
                 }
             },
@@ -151,7 +154,8 @@ export class DomainListingsService extends IService {
             arguments,
             'WARN',
             async () => {
-                const beds = listing.listingModel.features.beds ?? 0
+                const beds = listing.listingModel.features.beds
+                const land = listing.listingModel.features.landSize
                 const priceString = listing.listingModel.price
                 const price = scrapeUtil.highestPriceFromString(priceString)
 
@@ -160,7 +164,8 @@ export class DomainListingsService extends IService {
                     rent_price_table: {
                         last_scrape_date: '',
                         weekly_rent_aud: price,
-                        aud_per_bed: beds > 0 ? Math.round(price / beds) : null,
+                        aud_per_bed: beds > 0 ? price / beds : 0,
+                        aud_per_land_m2: land > 0 ? price / land : 0,
                     } satisfies Updateable<Schema.RentPriceTable>,
                 }
             },

@@ -10,7 +10,7 @@
         "home_table": {
             "street_address": "2/27 Benga Avenue",
             "gps": "POINT(145.20033 -37.98033)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T12:05:00Z",
             "auction_time": null
         }
@@ -26,7 +26,7 @@
         "home_table": {
             "street_address": "4/28 Olive Street",
             "gps": "POINT(145.21875 -37.980778)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T10:45:00Z",
             "auction_time": null
         }
@@ -42,7 +42,7 @@
         "home_table": {
             "street_address": "66 Langhorne Street",
             "gps": "POINT(145.21875 -37.991848)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T11:25:00Z",
             "auction_time": null
         }
@@ -58,7 +58,7 @@
         "home_table": {
             "street_address": "31B Wilma Avenue",
             "gps": "POINT(145.20241 -37.98103)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T12:15:00Z",
             "auction_time": null
         }
@@ -74,7 +74,7 @@
         "home_table": {
             "street_address": "2/49 Loch Road",
             "gps": "POINT(145.2227 -37.960266)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-13T17:15:00Z",
             "auction_time": null
         }
@@ -90,7 +90,7 @@
         "home_table": {
             "street_address": "18/2-4 Hutton Street",
             "gps": "POINT(145.21017 -37.9869)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -106,7 +106,7 @@
         "home_table": {
             "street_address": "22 Leonard Street",
             "gps": "POINT(145.22557 -37.974174)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -122,7 +122,7 @@
         "home_table": {
             "street_address": "4/30-32 Close Avenue Avenue",
             "gps": "POINT(145.20773 -37.981995)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -138,7 +138,7 @@
         "home_table": {
             "street_address": "1/30-32 Close Avenue",
             "gps": "POINT(145.20773 -37.981995)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-03T11:30:00Z",
             "auction_time": null
         }
@@ -170,7 +170,7 @@
         "home_table": {
             "street_address": "8/79 Cleeland Street",
             "gps": "POINT(145.21439 -37.979908)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -186,7 +186,7 @@
         "home_table": {
             "street_address": "REAR 18 Lexton Avenue",
             "gps": "POINT(145.1994 -37.97732)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T11:00:00Z",
             "auction_time": null
         }
@@ -202,7 +202,7 @@
         "home_table": {
             "street_address": "1/42-44 Bryants Road",
             "gps": "POINT(145.21364 -37.997078)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T16:15:00Z",
             "auction_time": null
         }
@@ -218,7 +218,7 @@
         "home_table": {
             "street_address": "2/60 Potter Street",
             "gps": "POINT(145.2069 -37.979904)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T09:30:00Z",
             "auction_time": null
         }
@@ -234,7 +234,7 @@
         "home_table": {
             "street_address": "3/19 Edward Avenue",
             "gps": "POINT(145.21243 -37.975025)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T10:05:00Z",
             "auction_time": null
         }
@@ -250,7 +250,7 @@
         "home_table": {
             "street_address": "27 Kyla Avenue",
             "gps": "POINT(145.19551 -37.999958)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T12:25:00Z",
             "auction_time": null
         }
@@ -266,7 +266,7 @@
         "home_table": {
             "street_address": "7/81-83 Potter Street",
             "gps": "POINT(145.20653 -37.978664)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-01-31T11:00:00Z",
             "auction_time": null
         }
@@ -282,7 +282,7 @@
         "home_table": {
             "street_address": "83 Ross Street",
             "gps": "POINT(145.22708 -37.975876)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -298,7 +298,7 @@
         "home_table": {
             "street_address": "75 Ann Street",
             "gps": "POINT(145.21973 -37.979153)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T11:00:00Z",
             "auction_time": null
         }
@@ -314,7 +314,7 @@
         "home_table": {
             "street_address": "1/15 Janice Grove",
             "gps": "POINT(145.20276 -37.97074)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }

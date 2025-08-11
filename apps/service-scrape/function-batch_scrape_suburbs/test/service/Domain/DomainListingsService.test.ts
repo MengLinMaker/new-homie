@@ -25,6 +25,7 @@ describe(testSuiteName, () => {
                 const [value, success] = await domainListingsService.tryExtractListings(inputObject)
                 if (!success) return expect(success).toBe(true)
                 const { listings, isLastPage } = value
+                expect(isLastPage).toBeDefined()
                 expect(listings).toStrictEqual(expectedObject)
             },
         )

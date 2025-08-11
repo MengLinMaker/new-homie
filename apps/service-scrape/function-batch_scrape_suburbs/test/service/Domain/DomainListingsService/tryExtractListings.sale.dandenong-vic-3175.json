@@ -86,6 +86,7 @@
             "features": {
                 "beds": 1,
                 "baths": 1,
+                "parking": 0,
                 "propertyType": "ApartmentUnitFlat",
                 "isRural": false,
                 "landSize": 0,

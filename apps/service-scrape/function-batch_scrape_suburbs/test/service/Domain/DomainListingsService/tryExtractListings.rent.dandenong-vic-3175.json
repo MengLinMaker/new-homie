@@ -236,6 +236,7 @@
             "features": {
                 "beds": 1,
                 "baths": 1,
+                "parking": 0,
                 "propertyType": "ApartmentUnitFlat",
                 "isRural": false,
                 "landSize": 555,
@@ -285,6 +286,7 @@
             "features": {
                 "beds": 2,
                 "baths": 1,
+                "parking": 0,
                 "propertyType": "House",
                 "isRural": false,
                 "landSize": 0,

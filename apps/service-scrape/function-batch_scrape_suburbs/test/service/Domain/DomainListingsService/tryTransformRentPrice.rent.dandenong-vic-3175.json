@@ -3,140 +3,160 @@
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 495,
-            "aud_per_bed": 248
+            "aud_per_bed": 247.5,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 430,
-            "aud_per_bed": 215
+            "aud_per_bed": 215,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 490,
-            "aud_per_bed": 163
+            "aud_per_bed": 163.33333333333334,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 530,
-            "aud_per_bed": 265
+            "aud_per_bed": 265,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 500,
-            "aud_per_bed": 250
+            "aud_per_bed": 250,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 450,
-            "aud_per_bed": 225
+            "aud_per_bed": 225,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 550,
-            "aud_per_bed": 183
+            "aud_per_bed": 183.33333333333334,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 450,
-            "aud_per_bed": 225
+            "aud_per_bed": 225,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 450,
-            "aud_per_bed": 225
+            "aud_per_bed": 225,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 420,
-            "aud_per_bed": 420
+            "aud_per_bed": 420,
+            "aud_per_land_m2": 0.7567567567567568
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 465,
-            "aud_per_bed": 233
+            "aud_per_bed": 232.5,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 400,
-            "aud_per_bed": 200
+            "aud_per_bed": 200,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 530,
-            "aud_per_bed": 265
+            "aud_per_bed": 265,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 360,
-            "aud_per_bed": 180
+            "aud_per_bed": 180,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 480,
-            "aud_per_bed": 160
+            "aud_per_bed": 160,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 680,
-            "aud_per_bed": 170
+            "aud_per_bed": 170,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 420,
-            "aud_per_bed": 210
+            "aud_per_bed": 210,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 650,
-            "aud_per_bed": 217
+            "aud_per_bed": 216.66666666666666,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 550,
-            "aud_per_bed": 183
+            "aud_per_bed": 183.33333333333334,
+            "aud_per_land_m2": 0
         }
     },
     {
         "rent_price_table": {
             "last_scrape_date": "",
             "weekly_rent_aud": 550,
-            "aud_per_bed": 275
+            "aud_per_bed": 275,
+            "aud_per_land_m2": 0
         }
     }
 ]

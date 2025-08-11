@@ -10,7 +10,7 @@
         "home_table": {
             "street_address": "3, 5 & 8/36-38 Power Street",
             "gps": "POINT(145.2252 -37.98964)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -26,7 +26,7 @@
         "home_table": {
             "street_address": "1 & 6/36-38 Power Street",
             "gps": "POINT(145.2252 -37.98964)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -58,7 +58,7 @@
         "home_table": {
             "street_address": "98 Keneally Street",
             "gps": "POINT(145.20573 -37.992256)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -90,7 +90,7 @@
         "home_table": {
             "street_address": "216/80 Cheltenham Road",
             "gps": "POINT(145.20435 -37.990078)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T13:20:00Z",
             "auction_time": null
         }
@@ -106,7 +106,7 @@
         "home_table": {
             "street_address": "1/67 Hammond Road",
             "gps": "POINT(145.20929 -37.997467)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -122,7 +122,7 @@
         "home_table": {
             "street_address": "2/13 Grandview Avenue",
             "gps": "POINT(145.22481 -37.98289)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T10:00:00Z",
             "auction_time": null
         }
@@ -138,7 +138,7 @@
         "home_table": {
             "street_address": "5/69-71 Potter Street",
             "gps": "POINT(145.20639 -37.979576)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T13:00:00Z",
             "auction_time": null
         }
@@ -154,7 +154,7 @@
         "home_table": {
             "street_address": "1/15 Wilma Avenue",
             "gps": "POINT(145.20195 -37.983047)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-08T12:40:00Z",
             "auction_time": null
         }
@@ -170,7 +170,7 @@
         "home_table": {
             "street_address": "2/79 Hammond Road",
             "gps": "POINT(145.20924 -37.99849)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T13:40:00Z",
             "auction_time": null
         }
@@ -186,7 +186,7 @@
         "home_table": {
             "street_address": "16 Rodwell Street",
             "gps": "POINT(145.20213 -37.991478)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T14:30:00Z",
             "auction_time": "2025-02-01T15:00:00Z"
         }
@@ -202,7 +202,7 @@
         "home_table": {
             "street_address": "20/57 Clow Street",
             "gps": "POINT(145.21962 -37.984055)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T12:50:00Z",
             "auction_time": null
         }
@@ -218,7 +218,7 @@
         "home_table": {
             "street_address": "113 Keneally Street",
             "gps": "POINT(145.20573 -37.99162)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T10:00:00Z",
             "auction_time": null
         }
@@ -250,7 +250,7 @@
         "home_table": {
             "street_address": "23 Desa Terrace",
             "gps": "POINT(145.19896 -38.000427)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T13:30:00Z",
             "auction_time": "2025-02-15T15:30:00Z"
         }
@@ -314,7 +314,7 @@
         "home_table": {
             "street_address": "6/80 Cheltenham Road",
             "gps": "POINT(145.20407 -37.989986)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": null,
             "auction_time": null
         }
@@ -330,7 +330,7 @@
         "home_table": {
             "street_address": "39/35 David Street",
             "gps": "POINT(145.20837 -37.974426)",
-            "land_m2": null,
+            "land_m2": 0,
             "inspection_time": "2025-02-01T13:00:00Z",
             "auction_time": null
         }
