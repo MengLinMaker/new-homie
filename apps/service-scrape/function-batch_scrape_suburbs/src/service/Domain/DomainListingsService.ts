@@ -56,6 +56,7 @@ export class DomainListingsService extends IService {
      * @returns Integer price
      */
     highestPriceFromString(priceString: string) {
+        this.log('debug', this.highestPriceFromString)
         const prices = priceString
             .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
             .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
@@ -73,6 +74,7 @@ export class DomainListingsService extends IService {
      * @returns
      */
     parseDatetime(datetime: string | null | undefined) {
+        this.log('debug', this.parseDatetime)
         if (datetime) {
             return z.iso.datetime().parse(`${datetime}Z`)
         } else {
@@ -86,10 +88,9 @@ export class DomainListingsService extends IService {
      * @param nextDataJson
      */
     tryExtractListings(args: { nextDataJson: object }) {
+        this.log('debug', this.tryExtractListings)
         try {
-            this.log('debug', this.tryExtractListings, 'Parsing Nextjs json')
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
-            this.log('debug', this.tryExtractListings, 'Unpacking raw Nextjs json')
             const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
             const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
             const listings = Object.values(
@@ -109,8 +110,8 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformListing(args: { listing: ListingsSchemaDTO }) {
+        this.log('debug', this.tryTransformListing)
         try {
-            this.log('debug', this.tryTransformListing, 'Parsing Nextjs json')
             const listingModel = args.listing.listingModel
             const address = listingModel.address
             const features = listingModel.features
@@ -142,6 +143,7 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformSalePrice(args: { listing: ListingsSchemaDTO }) {
+        this.log('debug', this.tryTransformSalePrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
@@ -172,6 +174,7 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformRentPrice(args: { listing: ListingsSchemaDTO }) {
+        this.log('debug', this.tryTransformRentPrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize

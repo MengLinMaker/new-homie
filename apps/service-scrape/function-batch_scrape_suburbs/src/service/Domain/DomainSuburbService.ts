@@ -80,6 +80,7 @@ export class DomainSuburbService extends IService {
      * @returns object containing rawSuburbSchema
      */
     tryExtractProfile(args: { nextDataJson: object }) {
+        this.log('debug', this.tryExtractProfile)
         try {
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
             const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
@@ -107,6 +108,7 @@ export class DomainSuburbService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformProfile(args: { rawSuburbData: DomainListingsDTO }) {
+        this.log('debug', this.tryTransformProfile)
         try {
             // Simplify geo boundary to reduce storage size.
             const compressedCoordinates = simplify(

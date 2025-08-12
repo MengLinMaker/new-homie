@@ -44,7 +44,7 @@ export class IService {
      * @param func the method itself
      * @param msg message
      */
-    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string) {
+    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string | undefined = undefined) {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as IService
         const logInfo = {

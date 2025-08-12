@@ -7,6 +7,7 @@ export class ScrapeUtilService extends IService {
      * @param html
      */
     tryExtractNextJson(args: { html: string }) {
+        this.log('debug', this.tryExtractNextJson)
         try {
             const $ = load(args.html)
             const nextJson = $('script[id="__NEXT_DATA__"]').text()
