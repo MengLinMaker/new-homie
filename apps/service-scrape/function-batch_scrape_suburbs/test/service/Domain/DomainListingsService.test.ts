@@ -14,7 +14,7 @@ describe(testSuiteName, () => {
     describe('tryExtractListing', () => {
         it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
             'should extract listings from %s',
-            async (fileSuffix) => {
+            (fileSuffix) => {
                 const inputObject = parseJsonFile(
                     `${resourcePath}/raw.${fileSuffix}.json`,
                 ) as object
@@ -22,103 +22,91 @@ describe(testSuiteName, () => {
                     `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
                 ) as unknown
 
-                const [value, success] = await domainListingsService.tryExtractListings(inputObject)
-                if (!success) return expect(success).toBe(true)
-                const { listings, isLastPage } = value
-                expect(isLastPage).toBeDefined()
-                expect(listings).toStrictEqual(expectedObject)
+                const result = domainListingsService.tryExtractListings({
+                    nextDataJson: inputObject,
+                })
+                if (!result) return expect(result).toBeNull()
+                expect(result.isLastPage).toBeDefined()
+                expect(result.listings).toStrictEqual(expectedObject)
             },
         )
 
-        it('should not extract invalid input', async () => {
-            const [resultObject, success] = await domainListingsService.tryExtractListings({})
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractListings({ nextDataJson: {} })
+            expect(result).toBeNull()
         })
     })
 
     describe('tryTransformListing', () => {
         it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
             'should transform listings from %s',
-            async (fileSuffix) => {
+            (fileSuffix) => {
                 const inputListings = parseJsonFile(
                     `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
                 ) as ListingsSchemaDTO[]
                 const expectedObject = parseJsonFile(
                     `${resourcePath}/tryTransformListing.${fileSuffix}.json`,
-                ) as unknown[]
+                ) as never[]
 
-                inputListings.map(async (input, i) => {
-                    const [databaseInserts, success] =
-                        await domainListingsService.tryTransformListing(input)
-                    if (!success) return expect(success).toBe(true)
+                inputListings.map((input, i) => {
+                    const databaseInserts = domainListingsService.tryTransformListing({
+                        listing: input,
+                    })
+                    if (!databaseInserts) return expect(databaseInserts).toBe(true)
                     expect(databaseInserts).toStrictEqual(expectedObject[i])
                 })
             },
         )
 
-        it('should not transform invalid input', async () => {
-            const [resultObject, success] = await domainListingsService.tryTransformListing(
-                {} as ListingsSchemaDTO,
-            )
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformListing({} as never)
+            expect(databaseInserts).toBeNull()
         })
     })
 
     describe('tryTransformSalePrice', () => {
-        it.for(['sale.dandenong-vic-3175'])(
-            'should transform listings from %s',
-            async (fileSuffix) => {
-                const inputListings = parseJsonFile(
-                    `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
-                ) as ListingsSchemaDTO[]
-                const expectedObject = parseJsonFile(
-                    `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
-                ) as unknown[]
+        it.for(['sale.dandenong-vic-3175'])('should transform listings from %s', (fileSuffix) => {
+            const inputListings = parseJsonFile(
+                `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+            ) as ListingsSchemaDTO[]
+            const expectedObject = parseJsonFile(
+                `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
+            ) as unknown[]
 
-                inputListings.map(async (input, i) => {
-                    const [databaseInserts, success] =
-                        await domainListingsService.tryTransformSalePrice(input)
-                    if (success) expect(databaseInserts).toStrictEqual(expectedObject[i])
+            inputListings.map((input, i) => {
+                const databaseInserts = domainListingsService.tryTransformSalePrice({
+                    listing: input,
                 })
-            },
-        )
+                if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+            })
+        })
 
-        it('should not transform invalid input', async () => {
-            const [resultObject, success] = await domainListingsService.tryTransformListing(
-                {} as ListingsSchemaDTO,
-            )
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformSalePrice({} as never)
+            expect(databaseInserts).toBeNull()
         })
     })
 
     describe('tryTransformRentPrice', () => {
-        it.for(['rent.dandenong-vic-3175'])(
-            'should transform listings from %s',
-            async (fileSuffix) => {
-                const inputListings = parseJsonFile(
-                    `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
-                ) as ListingsSchemaDTO[]
-                const expectedObject = parseJsonFile(
-                    `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
-                ) as unknown[]
+        it.for(['rent.dandenong-vic-3175'])('should transform listings from %s', (fileSuffix) => {
+            const inputListings = parseJsonFile(
+                `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+            ) as ListingsSchemaDTO[]
+            const expectedObject = parseJsonFile(
+                `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
+            ) as unknown[]
 
-                inputListings.map(async (input, i) => {
-                    const [databaseInserts, success] =
-                        await domainListingsService.tryTransformRentPrice(input)
-                    if (success) expect(databaseInserts).toStrictEqual(expectedObject[i])
+            inputListings.map((input, i) => {
+                const databaseInserts = domainListingsService.tryTransformRentPrice({
+                    listing: input,
                 })
-            },
-        )
+                if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+            })
+        })
 
-        it('should not transform invalid input', async () => {
-            const [resultObject, success] = await domainListingsService.tryTransformListing(
-                {} as ListingsSchemaDTO,
-            )
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformRentPrice({} as never)
+            expect(databaseInserts).toBeNull()
         })
     })
 })

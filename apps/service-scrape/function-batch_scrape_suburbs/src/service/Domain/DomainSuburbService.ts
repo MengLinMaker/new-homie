@@ -7,7 +7,7 @@ import { traceTryFunction } from '../../global/instrumentation'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
-import { IService } from '../IService'
+import { IService } from '../../global/IService'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
@@ -80,9 +80,9 @@ export class DomainSuburbService extends IService {
      * @param nextDataJson
      * @returns object containing rawSuburbSchema
      */
-    tryExtractProfile(nextDataJson: object) {
-        return traceTryFunction('DomainSuburb.tryExtractProfile', arguments, 'ERROR', async () => {
-            const validNextjson = nextDataJsonSchema.parse(nextDataJson)
+    tryExtractProfile(args: { nextDataJson: object }) {
+        try {
+            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
             const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
             return {
                 ..._rawSuburbSchema.parse({
@@ -96,7 +96,10 @@ export class DomainSuburbService extends IService {
                     ),
                 ),
             } satisfies DomainListingsDTO
-        })
+        } catch (e) {
+            this.log('error', e, args)
+            return null
+        }
     }
 
     /**
@@ -104,39 +107,37 @@ export class DomainSuburbService extends IService {
      * @param rawSuburbData
      * @returns Object containing tables for database inserts
      */
-    tryTransformProfile(rawSuburbData: DomainListingsDTO) {
-        return traceTryFunction(
-            'DomainSuburb.tryTransformProfile',
-            arguments,
-            'ERROR',
-            async () => {
-                // Simplify geo boundary to reduce storage size.
-                const compressedCoordinates = simplify(
-                    polygon(rawSuburbData.boundaryGeoJson.coordinates),
-                    {
-                        tolerance: 0.00025,
-                        highQuality: true,
-                    },
-                ).geometry.coordinates
+    tryTransformProfile(args: { rawSuburbData: DomainListingsDTO }) {
+        try {
+            // Simplify geo boundary to reduce storage size.
+            const compressedCoordinates = simplify(
+                polygon(args.rawSuburbData.boundaryGeoJson.coordinates),
+                {
+                    tolerance: 0.00025,
+                    highQuality: true,
+                },
+            ).geometry.coordinates
 
-                const boundaryCoord = createPostgisPolygonString(compressedCoordinates[0])
-                if (!boundaryCoord) throw new Error('invalid locality boundary coordinate')
+            const boundaryCoord = createPostgisPolygonString(compressedCoordinates[0])
+            if (!boundaryCoord) throw new Error('invalid locality boundary coordinate')
 
-                // rawSuburbData.suburb.statistics.population
-                // rawSuburbData.suburb.statistics.ownerOccupierPercentage
-                // rawSuburbData.suburb.statistics.marriedPercentage
+            // rawSuburbData.suburb.statistics.population
+            // rawSuburbData.suburb.statistics.ownerOccupierPercentage
+            // rawSuburbData.suburb.statistics.marriedPercentage
 
-                // rawSuburbData.location.data.propertyCategories
-                // rawSuburbData.suburb.schools
-                return {
-                    localities_table: {
-                        postcode: rawSuburbData.suburb.postcode,
-                        suburb_name: rawSuburbData.suburb.name,
-                        state_abbreviation: rawSuburbData.suburb.state,
-                        boundary_coordinates: boundaryCoord,
-                    } satisfies Updateable<Schema.LocalitiesTable>,
-                }
-            },
-        )
+            // rawSuburbData.location.data.propertyCategories
+            // rawSuburbData.suburb.schools
+            return {
+                localities_table: {
+                    postcode: args.rawSuburbData.suburb.postcode,
+                    suburb_name: args.rawSuburbData.suburb.name,
+                    state_abbreviation: args.rawSuburbData.suburb.state,
+                    boundary_coordinates: boundaryCoord,
+                } satisfies Updateable<Schema.LocalitiesTable>,
+            }
+        } catch (e) {
+            this.log('error', e, args)
+            return null
+        }
     }
 }

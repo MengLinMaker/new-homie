@@ -14,7 +14,7 @@ describe(testSuiteName, () => {
     describe('tryExtractProfile', () => {
         it.for(['suburb-profile.dandenong-vic-3175'])(
             'should extract suburb info from %s',
-            async (fileSuffix) => {
+            (fileSuffix) => {
                 const inputObject = parseJsonFile(
                     `${resourcePath}/raw.${fileSuffix}.json`,
                 ) as object
@@ -22,23 +22,22 @@ describe(testSuiteName, () => {
                     `${resourcePath}/tryExtractProfile.${fileSuffix}.json`,
                 ) as unknown
 
-                const [value, success] = await domainSuburbService.tryExtractProfile(inputObject)
-                if (!success) return expect(success).toBe(true)
+                const value = domainSuburbService.tryExtractProfile({ nextDataJson: inputObject })
+                if (!value) return expect(value).toBeNull()
                 expect(value).toStrictEqual(expectedObject)
             },
         )
 
-        it('should not extract invalid input', async () => {
-            const [resultObject, success] = await domainSuburbService.tryExtractProfile({})
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not extract invalid input', () => {
+            const value = domainSuburbService.tryExtractProfile({} as never)
+            expect(value).toBeNull()
         })
     })
 
     describe('tryTransformProfile', () => {
         it.for(['suburb-profile.dandenong-vic-3175'])(
             'should transform suburb info from %s',
-            async (fileSuffix) => {
+            (fileSuffix) => {
                 const inputObject = parseJsonFile(
                     `${resourcePath}/tryExtractProfile.${fileSuffix}.json`,
                 ) as DomainListingsDTO
@@ -46,18 +45,17 @@ describe(testSuiteName, () => {
                     `${resourcePath}/tryTransformProfile.${fileSuffix}.json`,
                 ) as unknown
 
-                const [value, success] = await domainSuburbService.tryTransformProfile(inputObject)
-                if (!success) return expect(success).toBe(true)
+                const value = domainSuburbService.tryTransformProfile({
+                    rawSuburbData: inputObject,
+                })
+                if (!value) return expect(value).toBeNull()
                 expect(value).toStrictEqual(expectedObject)
             },
         )
 
-        it('should not extract invalid input', async () => {
-            const [resultObject, success] = await domainSuburbService.tryTransformProfile(
-                {} as DomainListingsDTO,
-            )
-            expect(success).toBe(false)
-            expect(resultObject).toBeInstanceOf(Error)
+        it('should not extract invalid input', () => {
+            const value = domainSuburbService.tryTransformProfile({} as never)
+            expect(value).toBeNull()
         })
     })
 })
