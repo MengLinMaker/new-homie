@@ -58,19 +58,22 @@ export class DomainListingsService extends IService {
      * @param nextDataJson
      */
     tryExtractListings(args: { nextDataJson: object }) {
-        try {
-            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
-            const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
-            const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
-            const listings = Object.values(
-                validNextjson.props.pageProps.componentProps.listingsMap,
-            ) as ListingsSchemaDTO[]
-            const isLastPage = lastPageNumber === currentPageNumber
-            return { listings, isLastPage }
-        } catch (e) {
-            this.log('error', e, args)
-            return null
-        }
+        return this.tryCatchLogException(
+            args,
+            () => {
+                this.log('debug', this.tryExtractListings, 'Parsing Nextjs json')
+                const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
+                this.log('debug', this.tryExtractListings, 'Unpacking raw Nextjs json')
+                const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
+                const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
+                const listings = Object.values(
+                    validNextjson.props.pageProps.componentProps.listingsMap,
+                ) as ListingsSchemaDTO[]
+                const isLastPage = lastPageNumber === currentPageNumber
+                return { listings, isLastPage }
+            },
+            null,
+        )
     }
 
     /**
@@ -79,30 +82,32 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformListing(args: { listing: ListingsSchemaDTO }) {
-        try {
-            const listingModel = args.listing.listingModel
-            const address = listingModel.address
-            const features = listingModel.features
-            return {
-                common_features_table: {
-                    bed_quantity: features.beds,
-                    bath_quantity: features.baths,
-                    car_quantity: features.parking,
-                    home_type: features.propertyType,
-                    is_retirement: features.isRetirement,
-                } satisfies Updateable<Schema.CommonFeaturesTable>,
-                home_table: {
-                    street_address: address.street,
-                    gps: createPostgisPointString(address.lng, address.lat),
-                    land_m2: features.landSize,
-                    inspection_time: scrapeUtil.parseDatetime(listingModel.inspection.openTime),
-                    auction_time: scrapeUtil.parseDatetime(listingModel.auction),
-                } satisfies Updateable<Schema.HomeTable>,
-            }
-        } catch (e) {
-            this.log('error', e, args)
-            return null
-        }
+        return this.tryCatchLogException(
+            args,
+            () => {
+                this.log('debug', this.tryTransformListing, 'Parsing Nextjs json')
+                const listingModel = args.listing.listingModel
+                const address = listingModel.address
+                const features = listingModel.features
+                return {
+                    common_features_table: {
+                        bed_quantity: features.beds,
+                        bath_quantity: features.baths,
+                        car_quantity: features.parking,
+                        home_type: features.propertyType,
+                        is_retirement: features.isRetirement,
+                    } satisfies Updateable<Schema.CommonFeaturesTable>,
+                    home_table: {
+                        street_address: address.street,
+                        gps: createPostgisPointString(address.lng, address.lat),
+                        land_m2: features.landSize,
+                        inspection_time: scrapeUtil.parseDatetime(listingModel.inspection.openTime),
+                        auction_time: scrapeUtil.parseDatetime(listingModel.auction),
+                    } satisfies Updateable<Schema.HomeTable>,
+                }
+            },
+            null,
+        )
     }
 
     /**
@@ -111,28 +116,29 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformSalePrice(args: { listing: ListingsSchemaDTO }) {
-        try {
-            const beds = args.listing.listingModel.features.beds
-            const land = args.listing.listingModel.features.landSize
-            const priceString = args.listing.listingModel.price
-            const price = scrapeUtil.highestPriceFromString(priceString)
+        return this.tryCatchLogException(
+            args,
+            () => {
+                const beds = args.listing.listingModel.features.beds
+                const land = args.listing.listingModel.features.landSize
+                const priceString = args.listing.listingModel.price
+                const price = scrapeUtil.highestPriceFromString(priceString)
 
-            if (!price)
-                throw Error(
-                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                )
-            return {
-                sale_price_table: {
-                    last_scrape_date: '',
-                    higher_price_aud: price,
-                    aud_per_bed: beds > 0 ? price / beds : 0,
-                    aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<Schema.SalePriceTable>,
-            }
-        } catch (e) {
-            this.log('error', e, args)
-            return null
-        }
+                if (!price)
+                    throw Error(
+                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+                    )
+                return {
+                    sale_price_table: {
+                        last_scrape_date: '',
+                        higher_price_aud: price,
+                        aud_per_bed: beds > 0 ? price / beds : 0,
+                        aud_per_land_m2: land > 0 ? price / land : 0,
+                    } satisfies Updateable<Schema.SalePriceTable>,
+                }
+            },
+            null,
+        )
     }
 
     /**
@@ -141,24 +147,25 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformRentPrice(args: { listing: ListingsSchemaDTO }) {
-        try {
-            const beds = args.listing.listingModel.features.beds
-            const land = args.listing.listingModel.features.landSize
-            const priceString = args.listing.listingModel.price
-            const price = scrapeUtil.highestPriceFromString(priceString)
+        return this.tryCatchLogException(
+            args,
+            () => {
+                const beds = args.listing.listingModel.features.beds
+                const land = args.listing.listingModel.features.landSize
+                const priceString = args.listing.listingModel.price
+                const price = scrapeUtil.highestPriceFromString(priceString)
 
-            if (!price) throw Error('no price in listing.listingModel.price')
-            return {
-                rent_price_table: {
-                    last_scrape_date: '',
-                    weekly_rent_aud: price,
-                    aud_per_bed: beds > 0 ? price / beds : 0,
-                    aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<Schema.RentPriceTable>,
-            }
-        } catch (e) {
-            this.log('error', e, args)
-            return null
-        }
+                if (!price) throw Error('no price in listing.listingModel.price')
+                return {
+                    rent_price_table: {
+                        last_scrape_date: '',
+                        weekly_rent_aud: price,
+                        aud_per_bed: beds > 0 ? price / beds : 0,
+                        aud_per_land_m2: land > 0 ? price / land : 0,
+                    } satisfies Updateable<Schema.RentPriceTable>,
+                }
+            },
+            null,
+        )
     }
 }

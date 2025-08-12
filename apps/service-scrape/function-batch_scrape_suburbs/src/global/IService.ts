@@ -41,11 +41,51 @@ export class IService {
     /**
      * Enforce structured logging for error
      * @param logLevel pino logging level
+     * @param func the method itself
+     * @param msg message
+     */
+    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string) {
+        // This class is the extended class
+        const thisClass = Object.getPrototypeOf(this) as IService
+        const logInfo = {
+            // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
+            'code.function.name': `${thisClass.constructor.name}.${func.name}`,
+        }
+        switch (logLevel) {
+            case 'fatal':
+                this.LOGGER.fatal(logInfo, msg)
+                break
+            case 'error':
+                this.LOGGER.error(logInfo, msg)
+                break
+            case 'warn':
+                this.LOGGER.warn(logInfo, msg)
+                break
+            case 'info':
+                this.LOGGER.info(logInfo, msg)
+                break
+            case 'debug':
+                this.LOGGER.debug(logInfo, msg)
+                break
+            case 'trace':
+                this.LOGGER.trace(logInfo, msg)
+                break
+        }
+    }
+
+    /**
+     * Enforce structured logging for error
+     * @param logLevel pino logging level
      * @param error error from try catch
      * @param args method arguments
-     * @param func the method itself
+     * @param msg optional message
      */
-    public log<I, E>(logLevel: Level, maybeError: E, args: I, msg: string | undefined = undefined) {
+    public logException<I, E>(
+        logLevel: Level,
+        maybeError: E,
+        args: I,
+        msg: string | undefined = undefined,
+    ) {
         // This class is the extended class
         const validError = enforceErrorType(maybeError)
         const logInfo = {
@@ -75,6 +115,22 @@ export class IService {
             case 'trace':
                 this.LOGGER.trace(logInfo, msg)
                 break
+        }
+    }
+
+    /**
+     * Logs OTEL conventioned exception log on error
+     * @param args argument of function to keep track of errors
+     * @param func write your unsafe code here
+     * @param returnOnFailure returns this value on failure
+     * @returns
+     */
+    public tryCatchLogException<I, O, R>(args: I, func: () => O, returnOnFailure: R) {
+        try {
+            return func()
+        } catch (e) {
+            this.logException('error', e, args)
+            return returnOnFailure
         }
     }
 }
