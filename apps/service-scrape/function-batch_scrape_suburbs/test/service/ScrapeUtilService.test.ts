@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { scrapeUtil } from '../../src/service/scrapeUtil'
+import { ScrapeUtilService } from '../../src/service/ScrapeUtilService'
+import { LOGGER } from '../util'
 
-describe('scrapeUtil', () => {
+describe('ScrapeUtilService', () => {
+    const scrapeUtilService = new ScrapeUtilService(LOGGER)
+
     describe('tryExtractNextJson', () => {
         it('should parse next.js html successfully', async () => {
             const expectedObject = {
@@ -16,19 +19,17 @@ describe('scrapeUtil', () => {
                 isFallback: false,
                 scriptLoader: [],
             }
-            const [resultObject, success] = await scrapeUtil.tryExtractNextJson(
-                `<html><script id="__NEXT_DATA__">${JSON.stringify(expectedObject)}</script></html>`,
-            )
-            expect(success).toBe(true)
+            const resultObject = scrapeUtilService.tryExtractNextJson({
+                html: `<html><script id="__NEXT_DATA__">${JSON.stringify(expectedObject)}</script></html>`,
+            })
             expect(resultObject).toStrictEqual(expectedObject)
         })
 
         it('should not parse invalid html', async () => {
-            const [result, success] = await scrapeUtil.tryExtractNextJson(
-                '<html><script></script></html>',
-            )
-            expect(success).toBe(false)
-            expect(result).toBeInstanceOf(Error)
+            const result = scrapeUtilService.tryExtractNextJson({
+                html: '<html><script></script></html>',
+            })
+            expect(result).toBeNull()
         })
     })
 })

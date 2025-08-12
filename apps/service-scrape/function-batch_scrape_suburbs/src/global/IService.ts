@@ -117,20 +117,4 @@ export class IService {
                 break
         }
     }
-
-    /**
-     * Logs OTEL conventioned exception log on error
-     * @param args argument of function to keep track of errors
-     * @param func write your unsafe code here
-     * @param returnOnFailure returns this value on failure
-     * @returns
-     */
-    public tryCatchLogException<I, O, R>(args: I, func: () => O, returnOnFailure: R) {
-        try {
-            return func()
-        } catch (e) {
-            this.logException('error', e, args)
-            return returnOnFailure
-        }
-    }
 }

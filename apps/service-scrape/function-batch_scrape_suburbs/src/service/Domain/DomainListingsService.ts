@@ -4,7 +4,6 @@ import {
     Schema,
     createPostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
-import { scrapeUtil } from '../scrapeUtil'
 import type { Updateable } from 'kysely'
 import { IService } from '../../global/IService'
 
@@ -53,27 +52,55 @@ const nextDataJsonSchema = z.object({
 
 export class DomainListingsService extends IService {
     /**
+     * @description Homes tend to sell at higher price.
+     * @returns Integer price
+     */
+    highestPriceFromString(priceString: string) {
+        const prices = priceString
+            .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
+            .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
+            .toArray()
+        if (prices.length === 0) return null
+        const priceList = prices.map((match) =>
+            Number.parseFloat(match.toString().replaceAll('$', '')),
+        )
+        return Math.max(...priceList)
+    }
+
+    /**
+     * Parse raw datetime to ISO format
+     * @param datetime
+     * @returns
+     */
+    parseDatetime(datetime: string | null | undefined) {
+        if (datetime) {
+            return z.iso.datetime().parse(`${datetime}Z`)
+        } else {
+            return null
+        }
+    }
+
+    /**
      * @description Extract array of raw listings from Next.js JSON.
      * @description Detects isLastPage for looping.
      * @param nextDataJson
      */
     tryExtractListings(args: { nextDataJson: object }) {
-        return this.tryCatchLogException(
-            args,
-            () => {
-                this.log('debug', this.tryExtractListings, 'Parsing Nextjs json')
-                const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
-                this.log('debug', this.tryExtractListings, 'Unpacking raw Nextjs json')
-                const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
-                const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
-                const listings = Object.values(
-                    validNextjson.props.pageProps.componentProps.listingsMap,
-                ) as ListingsSchemaDTO[]
-                const isLastPage = lastPageNumber === currentPageNumber
-                return { listings, isLastPage }
-            },
-            null,
-        )
+        try {
+            this.log('debug', this.tryExtractListings, 'Parsing Nextjs json')
+            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
+            this.log('debug', this.tryExtractListings, 'Unpacking raw Nextjs json')
+            const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
+            const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
+            const listings = Object.values(
+                validNextjson.props.pageProps.componentProps.listingsMap,
+            ) as ListingsSchemaDTO[]
+            const isLastPage = lastPageNumber === currentPageNumber
+            return { listings, isLastPage }
+        } catch (e) {
+            this.logException('error', e, args)
+            return null
+        }
     }
 
     /**
@@ -82,32 +109,31 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformListing(args: { listing: ListingsSchemaDTO }) {
-        return this.tryCatchLogException(
-            args,
-            () => {
-                this.log('debug', this.tryTransformListing, 'Parsing Nextjs json')
-                const listingModel = args.listing.listingModel
-                const address = listingModel.address
-                const features = listingModel.features
-                return {
-                    common_features_table: {
-                        bed_quantity: features.beds,
-                        bath_quantity: features.baths,
-                        car_quantity: features.parking,
-                        home_type: features.propertyType,
-                        is_retirement: features.isRetirement,
-                    } satisfies Updateable<Schema.CommonFeaturesTable>,
-                    home_table: {
-                        street_address: address.street,
-                        gps: createPostgisPointString(address.lng, address.lat),
-                        land_m2: features.landSize,
-                        inspection_time: scrapeUtil.parseDatetime(listingModel.inspection.openTime),
-                        auction_time: scrapeUtil.parseDatetime(listingModel.auction),
-                    } satisfies Updateable<Schema.HomeTable>,
-                }
-            },
-            null,
-        )
+        try {
+            this.log('debug', this.tryTransformListing, 'Parsing Nextjs json')
+            const listingModel = args.listing.listingModel
+            const address = listingModel.address
+            const features = listingModel.features
+            return {
+                common_features_table: {
+                    bed_quantity: features.beds,
+                    bath_quantity: features.baths,
+                    car_quantity: features.parking,
+                    home_type: features.propertyType,
+                    is_retirement: features.isRetirement,
+                } satisfies Updateable<Schema.CommonFeaturesTable>,
+                home_table: {
+                    street_address: address.street,
+                    gps: createPostgisPointString(address.lng, address.lat),
+                    land_m2: features.landSize,
+                    inspection_time: this.parseDatetime(listingModel.inspection.openTime),
+                    auction_time: this.parseDatetime(listingModel.auction),
+                } satisfies Updateable<Schema.HomeTable>,
+            }
+        } catch (e) {
+            this.logException('error', e, args)
+            return null
+        }
     }
 
     /**
@@ -116,29 +142,28 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformSalePrice(args: { listing: ListingsSchemaDTO }) {
-        return this.tryCatchLogException(
-            args,
-            () => {
-                const beds = args.listing.listingModel.features.beds
-                const land = args.listing.listingModel.features.landSize
-                const priceString = args.listing.listingModel.price
-                const price = scrapeUtil.highestPriceFromString(priceString)
+        try {
+            const beds = args.listing.listingModel.features.beds
+            const land = args.listing.listingModel.features.landSize
+            const priceString = args.listing.listingModel.price
+            const price = this.highestPriceFromString(priceString)
 
-                if (!price)
-                    throw Error(
-                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                    )
-                return {
-                    sale_price_table: {
-                        last_scrape_date: '',
-                        higher_price_aud: price,
-                        aud_per_bed: beds > 0 ? price / beds : 0,
-                        aud_per_land_m2: land > 0 ? price / land : 0,
-                    } satisfies Updateable<Schema.SalePriceTable>,
-                }
-            },
-            null,
-        )
+            if (!price)
+                throw Error(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+                )
+            return {
+                sale_price_table: {
+                    last_scrape_date: '',
+                    higher_price_aud: price,
+                    aud_per_bed: beds > 0 ? price / beds : 0,
+                    aud_per_land_m2: land > 0 ? price / land : 0,
+                } satisfies Updateable<Schema.SalePriceTable>,
+            }
+        } catch (e) {
+            this.logException('error', e, args)
+            return null
+        }
     }
 
     /**
@@ -147,25 +172,24 @@ export class DomainListingsService extends IService {
      * @returns Object containing tables for database inserts
      */
     tryTransformRentPrice(args: { listing: ListingsSchemaDTO }) {
-        return this.tryCatchLogException(
-            args,
-            () => {
-                const beds = args.listing.listingModel.features.beds
-                const land = args.listing.listingModel.features.landSize
-                const priceString = args.listing.listingModel.price
-                const price = scrapeUtil.highestPriceFromString(priceString)
+        try {
+            const beds = args.listing.listingModel.features.beds
+            const land = args.listing.listingModel.features.landSize
+            const priceString = args.listing.listingModel.price
+            const price = this.highestPriceFromString(priceString)
 
-                if (!price) throw Error('no price in listing.listingModel.price')
-                return {
-                    rent_price_table: {
-                        last_scrape_date: '',
-                        weekly_rent_aud: price,
-                        aud_per_bed: beds > 0 ? price / beds : 0,
-                        aud_per_land_m2: land > 0 ? price / land : 0,
-                    } satisfies Updateable<Schema.RentPriceTable>,
-                }
-            },
-            null,
-        )
+            if (!price) throw Error('no price in listing.listingModel.price')
+            return {
+                rent_price_table: {
+                    last_scrape_date: '',
+                    weekly_rent_aud: price,
+                    aud_per_bed: beds > 0 ? price / beds : 0,
+                    aud_per_land_m2: land > 0 ? price / land : 0,
+                } satisfies Updateable<Schema.RentPriceTable>,
+            }
+        } catch (e) {
+            this.logException('error', e, args)
+            return null
+        }
     }
 }
