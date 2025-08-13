@@ -2,7 +2,7 @@ import { getKyselyPostgresDb } from './connection.ts'
 import * as Schema from './schema.ts'
 import { config } from 'dotenv'
 import { enumToArray, createPostgisPointString, createPostgisPolygonString } from './util'
-import { kyselyPostgisMigrate } from './dev/migrator.ts'
+import { setupTestPostgisDb } from './dev/setupTestPostgisDb'
 
 config()
 
@@ -12,11 +12,12 @@ config()
  */
 // biome-ignore lint/complexity/useLiteralKeys: <untyped>
 export const DB_SERVICE_SCRAPE = process.env['DB_SERVICE_SCRAPE']
+
 export {
     getKyselyPostgresDb,
     Schema,
     enumToArray,
     createPostgisPointString,
     createPostgisPolygonString,
-    kyselyPostgisMigrate,
+    setupTestPostgisDb,
 }

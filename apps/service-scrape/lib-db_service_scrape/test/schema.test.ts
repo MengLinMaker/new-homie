@@ -1,27 +1,14 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: <test is controlled> */
-import { beforeAll, describe, expect, it, afterAll } from 'vitest'
+import { describe, expect, it, afterAll } from 'vitest'
 import { faker } from '@faker-js/faker'
-import type { Insertable, Kysely } from 'kysely'
+import type { Insertable } from 'kysely'
 
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
-import { postgisTestContainer } from '../src/dev/postgisTestContainer'
-import { kyselyPostgisMigrate } from '../src/dev/migrator'
-import { kyselyPostgisGenerateSchema } from '../src/dev/generator'
+import { setupTestPostgisDb } from '../src'
 
 describe('schema.ts', async () => {
-    let db: Kysely<DB>
-    let container: Awaited<ReturnType<typeof postgisTestContainer>>
-
-    beforeAll(async () => {
-        container = await postgisTestContainer()
-        const _db = await kyselyPostgisMigrate(container.getConnectionUri())
-        if (!_db) throw new Error('Test database migration failed')
-        const generateSuccess = await kyselyPostgisGenerateSchema(container.getConnectionUri())
-        if (!generateSuccess) throw new Error('Test database code generation failed')
-        db = _db
-    }, 300000)
-
+    const { container, db } = await setupTestPostgisDb()
     afterAll(async () => {
         await db.destroy()
         await container.stop()
@@ -117,4 +104,4 @@ describe('schema.ts', async () => {
             expect(noData).toBeUndefined()
         }
     })
-})
+}, 300000)

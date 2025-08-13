@@ -1,5 +1,5 @@
 import { AbstractStartedContainer, GenericContainer, Wait } from 'testcontainers'
-import { LOG } from './log'
+import { LOG } from './log.ts'
 
 // Globals for postgres setup - shouldn't require any changing
 const POSTGRES_PORT = 5432

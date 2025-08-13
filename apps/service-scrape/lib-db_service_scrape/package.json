@@ -13,7 +13,8 @@
         "dist"
     ],
     "scripts": {
-        "migrate": "node ./migrate.ts | pnpm dlx pino-pretty",
+        "migrate": "node ./migrate.ts",
+        "generate": "node ./generate.ts",
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
         "test:type": "tsc",
