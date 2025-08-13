@@ -1,7 +1,9 @@
 import { load } from 'cheerio'
-import { IService } from '../global/IService'
+import { ILoggable } from '../global/ILoggable'
 
-export class ScrapeUtilService extends IService {
+class ScrapeUtilServiceError extends Error {}
+
+export class ScrapeUtilService extends ILoggable {
     /**
      * @description Extract nicely formatted hydration JSON from <script id="__NEXT_DATA__">
      * @param html
@@ -11,7 +13,7 @@ export class ScrapeUtilService extends IService {
         try {
             const $ = load(args.html)
             const nextJson = $('script[id="__NEXT_DATA__"]').text()
-            if (nextJson === '') throw Error('Cannot extract Next.js JSON')
+            if (nextJson === '') throw new ScrapeUtilServiceError('Cannot extract Next.js JSON')
             return JSON.parse(nextJson) as object
         } catch (e) {
             this.logException('error', e, args)

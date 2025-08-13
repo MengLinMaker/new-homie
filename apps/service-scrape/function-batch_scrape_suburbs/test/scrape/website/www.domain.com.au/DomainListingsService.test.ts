@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import {
     DomainListingsService,
     type ListingsSchemaDTO,
-} from '../../../src/service/Domain/DomainListingsService'
-import { LOGGER, parseJsonFile } from '../../util'
+} from '../../../../src/scrape/website/www.domain.com.au/DomainListingsService'
+import { LOGGER, parseJsonFile } from '../../../util'
 
 const testSuiteName = 'DomainListingsService'
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`
@@ -107,6 +107,38 @@ describe(testSuiteName, () => {
         it('should not transform invalid input', () => {
             const databaseInserts = domainListingsService.tryTransformRentPrice({} as never)
             expect(databaseInserts).toBeNull()
+        })
+    })
+
+    describe('tryExtractSalesPage', () => {
+        it.for(['sale.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
+            const nextDataJson = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`) as object
+
+            const result = domainListingsService.tryExtractSalesPage({ nextDataJson })
+            if (!result) return expect(result).toBeDefined()
+            expect(result.isLastPage).toBeDefined()
+            expect(result.validSalesInfo.length).toBeGreaterThan(0)
+        })
+
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractSalesPage({ nextDataJson: {} })
+            expect(result).toBeNull()
+        })
+    })
+
+    describe('tryExtractRentsPage', () => {
+        it.for(['sale.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
+            const nextDataJson = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`) as object
+
+            const result = domainListingsService.tryExtractRentsPage({ nextDataJson })
+            if (!result) return expect(result).toBeDefined()
+            expect(result.isLastPage).toBeDefined()
+            expect(result.validRentsInfo.length).toBeGreaterThan(0)
+        })
+
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractRentsPage({ nextDataJson: {} })
+            expect(result).toBeNull()
         })
     })
 })

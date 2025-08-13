@@ -5,7 +5,7 @@ import {
     createPostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
-import { IService } from '../../global/IService'
+import { ILoggable } from '../../../global/ILoggable'
 
 const listingsSchema = z.object({
     listingModel: z.object({
@@ -50,7 +50,9 @@ const nextDataJsonSchema = z.object({
     }),
 })
 
-export class DomainListingsService extends IService {
+class DomainListingsServiceError extends Error {}
+
+export class DomainListingsService extends ILoggable {
     /**
      * @description Homes tend to sell at higher price.
      * @returns Integer price
@@ -151,7 +153,7 @@ export class DomainListingsService extends IService {
             const price = this.highestPriceFromString(priceString)
 
             if (!price)
-                throw Error(
+                throw new DomainListingsServiceError(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
             return {
@@ -181,7 +183,10 @@ export class DomainListingsService extends IService {
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
 
-            if (!price) throw Error('no price in listing.listingModel.price')
+            if (!price)
+                throw new DomainListingsServiceError(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+                )
             return {
                 rent_price_table: {
                     last_scrape_date: '',
@@ -194,5 +199,51 @@ export class DomainListingsService extends IService {
             this.logException('error', e, args)
             return null
         }
+    }
+
+    tryExtractSalesPage(args: { nextDataJson: object }) {
+        this.log('debug', this.tryExtractSalesPage)
+        const { nextDataJson } = args
+        const result = this.tryExtractListings({ nextDataJson })
+        if (!result) return null
+        const { listings, isLastPage } = result
+
+        const validSalesInfo = listings
+            .map((listing) => {
+                const listingInfo = this.tryTransformListing({ listing })
+                const priceInfo = this.tryTransformSalePrice({ listing })
+
+                if (!listingInfo || !priceInfo) return null
+                const validSaleInfo = {
+                    ...listingInfo,
+                    ...priceInfo,
+                }
+                return validSaleInfo
+            })
+            .filter((result) => result !== null)
+        return { validSalesInfo, isLastPage }
+    }
+
+    tryExtractRentsPage(args: { nextDataJson: object }) {
+        this.log('debug', this.tryExtractRentsPage)
+        const { nextDataJson } = args
+        const result = this.tryExtractListings({ nextDataJson })
+        if (!result) return null
+        const { listings, isLastPage } = result
+
+        const validRentsInfo = listings
+            .map((listing) => {
+                const listingInfo = this.tryTransformListing({ listing })
+                const priceInfo = this.tryTransformRentPrice({ listing })
+
+                if (!listingInfo || !priceInfo) return null
+                const validSaleInfo = {
+                    ...listingInfo,
+                    ...priceInfo,
+                }
+                return validSaleInfo
+            })
+            .filter((result) => result !== null)
+        return { validRentsInfo, isLastPage }
     }
 }

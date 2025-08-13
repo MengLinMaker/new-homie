@@ -6,7 +6,7 @@ import {
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
-import { IService } from '../../global/IService'
+import { ILoggable } from '../../../global/ILoggable'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
@@ -73,7 +73,7 @@ const nextDataJsonSchema = z.object({
     }),
 })
 
-export class DomainSuburbService extends IService {
+export class DomainSuburbService extends ILoggable {
     /**
      * @description Extract raw objects from Next.js JSON
      * @param nextDataJson

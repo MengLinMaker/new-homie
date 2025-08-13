@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { LOGGER, parseJsonFile } from '../../util'
+import { LOGGER, parseJsonFile } from '../../../util'
 import {
     type DomainListingsDTO,
     DomainSuburbService,
-} from '../../../src/service/Domain/DomainSuburbService'
+} from '../../../../src/scrape/website/www.domain.com.au/DomainSuburbService'
 
 const testSuiteName = 'DomainSuburbService'
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`

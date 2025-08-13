@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ScrapeUtilService } from '../../src/service/ScrapeUtilService'
+import { ScrapeUtilService } from '../../src/scrape/ScrapeUtilService'
 import { LOGGER } from '../util'
 
 describe('ScrapeUtilService', () => {
