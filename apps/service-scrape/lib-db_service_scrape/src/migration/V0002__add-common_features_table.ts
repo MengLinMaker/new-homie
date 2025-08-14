@@ -3,7 +3,29 @@ import { type Kysely, sql } from 'kysely'
 export async function up(db: Kysely<unknown>): Promise<void> {
     await db.schema
         .createType('home_type_enum')
-        .asEnum(['ApartmentUnitFlat', 'House', 'Townhouse', 'BlockOfUnits'])
+        // Enums are taken from "ptype" query param
+        .asEnum([
+            'Apartment', // Not specified in "ptype" query param
+            'ApartmentUnitFlat',
+            'BlockOfUnits',
+            'DevelopmentSite',
+            'Duplex',
+            'FreeStanding',
+            'House', // Not specified in "ptype" query param
+            'Land', // Not specified in "ptype" query param
+            'NewApartments',
+            'NewHomeDesigns',
+            'NewHouseLand',
+            'NewLand',
+            'PentHouse',
+            'Retirement', // Not specified in "ptype" query param
+            'SemiDetached',
+            'Studio',
+            'Terrace',
+            'TownHouse',
+            'VacantLand',
+            'Villa',
+        ])
         .execute()
     await db.schema
         .createTable('common_features_table')

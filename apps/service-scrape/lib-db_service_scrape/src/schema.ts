@@ -6,10 +6,26 @@
 import type { ColumnType } from 'kysely'
 
 export enum HomeTypeEnum {
+    APARTMENT = 'Apartment',
     APARTMENT_UNIT_FLAT = 'ApartmentUnitFlat',
     BLOCK_OF_UNITS = 'BlockOfUnits',
+    DEVELOPMENT_SITE = 'DevelopmentSite',
+    DUPLEX = 'Duplex',
+    FREE_STANDING = 'FreeStanding',
     HOUSE = 'House',
-    TOWNHOUSE = 'Townhouse',
+    LAND = 'Land',
+    NEW_APARTMENTS = 'NewApartments',
+    NEW_HOME_DESIGNS = 'NewHomeDesigns',
+    NEW_HOUSE_LAND = 'NewHouseLand',
+    NEW_LAND = 'NewLand',
+    PENT_HOUSE = 'PentHouse',
+    RETIREMENT = 'Retirement',
+    SEMI_DETACHED = 'SemiDetached',
+    STUDIO = 'Studio',
+    TERRACE = 'Terrace',
+    TOWN_HOUSE = 'TownHouse',
+    VACANT_LAND = 'VacantLand',
+    VILLA = 'Villa',
 }
 
 export enum StateAbbreviationEnum {
