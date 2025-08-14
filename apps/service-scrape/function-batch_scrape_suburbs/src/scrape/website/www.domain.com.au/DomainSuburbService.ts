@@ -82,18 +82,28 @@ export class DomainSuburbService extends ILoggable {
     tryExtractProfile(args: { nextDataJson: object }) {
         this.log('debug', this.tryExtractProfile)
         try {
-            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
+            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
+                reportInput: true,
+            })
             const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
             return {
-                ..._rawSuburbSchema.parse({
-                    suburb: intestingObjects[0],
-                    location: intestingObjects[1],
-                }),
+                ..._rawSuburbSchema.parse(
+                    {
+                        suburb: intestingObjects[0],
+                        location: intestingObjects[1],
+                    },
+                    {
+                        reportInput: true,
+                    },
+                ),
                 boundaryGeoJson: _boundaryGeoJsonSchema.parse(
                     JSON.parse(
                         intestingObjects[0]['suburbShape({"geometryPrecision":"high"})']
                             .boundaryGeoJson,
                     ),
+                    {
+                        reportInput: true,
+                    },
                 ),
             } satisfies DomainListingsDTO
         } catch (e) {

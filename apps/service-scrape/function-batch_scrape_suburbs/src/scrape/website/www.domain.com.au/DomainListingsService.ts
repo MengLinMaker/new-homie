@@ -78,7 +78,9 @@ export class DomainListingsService extends ILoggable {
     parseDatetime(datetime: string | null | undefined) {
         this.log('debug', this.parseDatetime)
         if (datetime) {
-            return z.iso.datetime().parse(`${datetime}Z`)
+            return z.iso.datetime().parse(`${datetime}Z`, {
+                reportInput: true,
+            })
         } else {
             return null
         }
@@ -92,7 +94,9 @@ export class DomainListingsService extends ILoggable {
     tryExtractListings(args: { nextDataJson: object }) {
         this.log('debug', this.tryExtractListings)
         try {
-            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson)
+            const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
+                reportInput: true,
+            })
             const currentPageNumber = validNextjson.props.pageProps.componentProps.currentPage
             const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
             const listings = Object.values(
@@ -183,10 +187,16 @@ export class DomainListingsService extends ILoggable {
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
 
-            if (!price)
-                throw new DomainListingsServiceError(
-                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+            if (!price) {
+                this.logException(
+                    'warn',
+                    new DomainListingsServiceError(
+                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+                    ),
+                    args,
                 )
+                return null
+            }
             return {
                 rent_price_table: {
                     last_scrape_date: '',
