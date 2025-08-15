@@ -1,11 +1,9 @@
 {
     "name": "@service-scrape/script",
-    "version": "1.0.0",
     "private": "true",
     "scripts": {
         "compress": "node ./src/compress.ts",
         "format": "biome format --write",
-        "bump": "npx npm-check-updates -u && pnpm install",
         "test:lint": "biome lint --write",
         "test:type": "tsc"
     },
