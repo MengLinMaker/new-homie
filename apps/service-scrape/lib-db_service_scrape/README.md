@@ -12,7 +12,7 @@ Ideally the query builder should provide linting capabilities through eslint plu
 
 ### Database uri dependency injection
 Allow different uris for unit testing and integration testing.
-Docker-compose is used to spin up a PostGis container - Testcontainer does not support PostGis for Arm64.
+[Testcontainer](https://node.testcontainers.org/features/images/) is used to spin up a PostGis container. The "postgis.dockerfile" image can be used in all "service-scrape" sub packages.
 
 ### Export DB_SERVICE_SCRAPE env variable
 This export standardises the database uri shared among multiple services.
