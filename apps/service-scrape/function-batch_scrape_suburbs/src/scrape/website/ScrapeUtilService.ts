@@ -1,5 +1,5 @@
+import { ILoggable } from '../../global/ILoggable'
 import { load } from 'cheerio'
-import { ILoggable } from '../global/ILoggable'
 
 class ScrapeUtilServiceError extends Error {}
 
@@ -13,10 +13,11 @@ export class ScrapeUtilService extends ILoggable {
         try {
             const $ = load(args.html)
             const nextJson = $('script[id="__NEXT_DATA__"]').text()
+
             if (nextJson === '') throw new ScrapeUtilServiceError('Cannot extract Next.js JSON')
             return JSON.parse(nextJson) as object
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('error', e, 'Too large to display')
             return null
         }
     }

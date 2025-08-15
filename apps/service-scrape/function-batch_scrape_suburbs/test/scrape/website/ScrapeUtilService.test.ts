@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { ScrapeUtilService } from '../../src/scrape/ScrapeUtilService'
-import { LOGGER } from '../util'
+import { ScrapeUtilService } from '../../../src/scrape/website/ScrapeUtilService'
+import { LOGGER } from '../../util'
 
 describe('ScrapeUtilService', () => {
     const scrapeUtilService = new ScrapeUtilService(LOGGER)
@@ -20,7 +20,7 @@ describe('ScrapeUtilService', () => {
                 scriptLoader: [],
             }
             const resultObject = scrapeUtilService.tryExtractNextJson({
-                html: `<html><script id="__NEXT_DATA__">${JSON.stringify(expectedObject)}</script></html>`,
+                html: `<html><script id="__NEXT_DATA__" type="application/json">${JSON.stringify(expectedObject)}</script></html>`,
             })
             expect(resultObject).toStrictEqual(expectedObject)
         })
