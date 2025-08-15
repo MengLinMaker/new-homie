@@ -11,9 +11,8 @@ services:
       resources:
         limits:
           cpus: '1'
-          memory: 1024m
+          memory: 1000m
     restart: unless-stopped
 
 volumes:
-  db: {}
   otel-lgtm-data: {}

@@ -1,3 +1,9 @@
+import {
+    ATTR_CODE_FUNCTION_NAME,
+    ATTR_EXCEPTION_MESSAGE,
+    ATTR_EXCEPTION_STACKTRACE,
+    ATTR_EXCEPTION_TYPE,
+} from '@opentelemetry/semantic-conventions'
 import type { Level, Logger } from 'pino'
 
 /**
@@ -49,7 +55,7 @@ export class ILoggable {
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
             // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
-            'code.function.name': `${thisClass.constructor.name}.${func.name}`,
+            [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
         }
         switch (logLevel) {
             case 'fatal':
@@ -92,9 +98,9 @@ export class ILoggable {
             // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
             'code.function.args': args, // No convention
             // OTEL semantic convention for exceptions - https://opentelemetry.io/docs/specs/semconv/exceptions/exceptions-logs/
-            'exception.type': validError.name,
-            'exception.message': validError.message,
-            'exception.stacktrace': cleanStackTrace(validError.stack),
+            [ATTR_EXCEPTION_TYPE]: validError.name,
+            [ATTR_EXCEPTION_MESSAGE]: validError.message,
+            [ATTR_EXCEPTION_STACKTRACE]: cleanStackTrace(validError.stack),
         }
         switch (logLevel) {
             case 'fatal':
