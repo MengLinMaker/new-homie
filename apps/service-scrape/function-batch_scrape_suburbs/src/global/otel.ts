@@ -1,6 +1,12 @@
 import { NodeSDK } from '@opentelemetry/sdk-node'
 import { resourceFromAttributes } from '@opentelemetry/resources'
-import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions'
+import {
+    ATTR_EXCEPTION_MESSAGE,
+    ATTR_EXCEPTION_STACKTRACE,
+    ATTR_EXCEPTION_TYPE,
+    ATTR_SERVICE_NAME,
+    ATTR_SERVICE_VERSION,
+} from '@opentelemetry/semantic-conventions'
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node'
 
 import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
@@ -19,7 +25,7 @@ ENV.OLTP_HEADERS.split(', ').map((header) => {
     if (key && val) OLTP_HEADERS[key] = val
 })
 
-const SERVICE_NAME = 'function-batch_scrape_suburbs'
+export const SERVICE_NAME = 'function-batch_scrape_suburbs'
 
 const sdk = new NodeSDK({
     resource: resourceFromAttributes({
@@ -55,3 +61,11 @@ export const LOGGER = pino({
         target: 'pino-opentelemetry-transport',
     },
 })
+
+export const otelException = (e: Error) => {
+    return {
+        [ATTR_EXCEPTION_TYPE]: e.name,
+        [ATTR_EXCEPTION_MESSAGE]: e.message,
+        [ATTR_EXCEPTION_STACKTRACE]: e.stack,
+    }
+}
