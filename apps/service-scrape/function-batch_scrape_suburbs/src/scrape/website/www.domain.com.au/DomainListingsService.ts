@@ -105,7 +105,7 @@ export class DomainListingsService extends ILoggable {
             const isLastPage = lastPageNumber === currentPageNumber
             return { listings, isLastPage }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('error', e, 'Too large to display')
             return null
         }
     }
@@ -155,11 +155,16 @@ export class DomainListingsService extends ILoggable {
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
-
-            if (!price)
-                throw new DomainListingsServiceError(
-                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+            if (!price) {
+                this.logException(
+                    'warn',
+                    new DomainListingsServiceError(
+                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
+                    ),
+                    args,
                 )
+                return null
+            }
             return {
                 sale_price_table: {
                     last_scrape_date: '',
@@ -186,7 +191,6 @@ export class DomainListingsService extends ILoggable {
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
-
             if (!price) {
                 this.logException(
                     'warn',
@@ -218,7 +222,7 @@ export class DomainListingsService extends ILoggable {
         if (!result) return null
         const { listings, isLastPage } = result
 
-        const validSalesInfo = listings
+        const salesInfo = listings
             .map((listing) => {
                 const listingInfo = this.tryTransformListing({ listing })
                 const priceInfo = this.tryTransformSalePrice({ listing })
@@ -231,7 +235,7 @@ export class DomainListingsService extends ILoggable {
                 return validSaleInfo
             })
             .filter((result) => result !== null)
-        return { validSalesInfo, isLastPage }
+        return { salesInfo, isLastPage }
     }
 
     tryExtractRentsPage(args: { nextDataJson: object }) {
@@ -241,7 +245,7 @@ export class DomainListingsService extends ILoggable {
         if (!result) return null
         const { listings, isLastPage } = result
 
-        const validRentsInfo = listings
+        const rentsInfo = listings
             .map((listing) => {
                 const listingInfo = this.tryTransformListing({ listing })
                 const priceInfo = this.tryTransformRentPrice({ listing })
@@ -254,6 +258,6 @@ export class DomainListingsService extends ILoggable {
                 return validSaleInfo
             })
             .filter((result) => result !== null)
-        return { validRentsInfo, isLastPage }
+        return { rentsInfo, isLastPage }
     }
 }

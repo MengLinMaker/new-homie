@@ -3,9 +3,9 @@ import {
     DomainListingsService,
     type ListingsSchemaDTO,
 } from '../../../../src/scrape/website/www.domain.com.au/DomainListingsService'
-import { LOGGER, parseJsonFile } from '../../../util'
+import { LOGGER, parseJsonFile, suiteNameFromFileName } from '../../../util'
 
-const testSuiteName = 'DomainListingsService'
+const testSuiteName = suiteNameFromFileName(import.meta.filename)
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`
 
 describe(testSuiteName, () => {
@@ -117,7 +117,7 @@ describe(testSuiteName, () => {
             const result = domainListingsService.tryExtractSalesPage({ nextDataJson })
             if (!result) return expect(result).toBeDefined()
             expect(result.isLastPage).toBeDefined()
-            expect(result.validSalesInfo.length).toBeGreaterThan(0)
+            expect(result.salesInfo.length).toBeGreaterThan(0)
         })
 
         it('should not extract invalid input', () => {
@@ -133,7 +133,7 @@ describe(testSuiteName, () => {
             const result = domainListingsService.tryExtractRentsPage({ nextDataJson })
             if (!result) return expect(result).toBeDefined()
             expect(result.isLastPage).toBeDefined()
-            expect(result.validRentsInfo.length).toBeGreaterThan(0)
+            expect(result.rentsInfo.length).toBeGreaterThan(0)
         })
 
         it('should not extract invalid input', () => {

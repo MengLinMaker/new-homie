@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { LOGGER, parseJsonFile } from '../../../util'
+import { LOGGER, parseJsonFile, suiteNameFromFileName } from '../../../util'
 import {
     type DomainListingsDTO,
     DomainSuburbService,
 } from '../../../../src/scrape/website/www.domain.com.au/DomainSuburbService'
 
-const testSuiteName = 'DomainSuburbService'
+const testSuiteName = suiteNameFromFileName(import.meta.filename)
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`
 
 describe(testSuiteName, () => {

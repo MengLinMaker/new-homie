@@ -107,7 +107,7 @@ export class DomainSuburbService extends ILoggable {
                 ),
             } satisfies DomainListingsDTO
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('error', e, 'Too large to display')
             return null
         }
     }
