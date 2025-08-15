@@ -1,7 +1,7 @@
 import { afterAll, describe, expect, it } from 'vitest'
 import { LOGGER, parseTextFile, MockBrowserService, suiteNameFromFileName } from '../util'
 import { ScrapeController } from '../../src/scrape/ScrapeController'
-import { setupTestPostgisDb } from '@service-scrape/lib-db_service_scrape'
+import { setupTestPostgisDb } from '@service-scrape/lib-db_service_scrape/dev'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`
@@ -15,8 +15,8 @@ describe(testSuiteName, async () => {
 
     const locality = {
         suburb: 'dandenong',
-        state: 'vic',
-        postcode: 3175,
+        state: 'VIC',
+        postcode: '3175',
     }
     const localityPage = { ...locality, page: 1 }
 
