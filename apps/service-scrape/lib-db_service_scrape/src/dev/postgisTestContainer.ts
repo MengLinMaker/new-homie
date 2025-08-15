@@ -12,7 +12,7 @@ const POSTGRES_PASSWORD = 'password'
  * @method getConnectionUri
  * @method stop
  */
-export class StartedPostgisContainer extends AbstractStartedContainer {
+class StartedPostgisContainer extends AbstractStartedContainer {
     public getConnectionUri() {
         const url = new URL('', 'postgresql://')
         url.hostname = this.getHost()

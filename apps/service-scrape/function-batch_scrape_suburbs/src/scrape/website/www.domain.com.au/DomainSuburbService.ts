@@ -6,7 +6,7 @@ import {
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
-import { ILoggable } from '../../../global/ILoggable'
+import { ILoggable } from '../../../base/ILoggable'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),

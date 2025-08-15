@@ -1,4 +1,4 @@
-import { IDatabased } from '../global/IDatabased'
+import { IDatabased } from '../base/IDatabased'
 import { DomainListingsService } from './website/www.domain.com.au/DomainListingsService'
 import { ScrapeUtilService } from './website/ScrapeUtilService'
 import type { BrowserService } from './website/BrowserService'
@@ -29,7 +29,11 @@ export class ScrapeController extends IDatabased {
         sort: 'price-asc',
     }
 
-    async tryExtractSuburbPage(args: { suburb: string; state: string; postcode: number }) {
+    async tryExtractSuburbPage(args: {
+        suburb: string
+        state: string | Schema.StateAbbreviationEnum
+        postcode: string
+    }) {
         try {
             const { suburb, state, postcode } = args
             const url = new URL(
@@ -50,8 +54,8 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractRentsPage(args: {
         suburb: string
-        state: string
-        postcode: number
+        state: string | Schema.StateAbbreviationEnum
+        postcode: string
         page: number
     }) {
         try {
@@ -78,8 +82,8 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractSalesPage(args: {
         suburb: string
-        state: string
-        postcode: number
+        state: string | Schema.StateAbbreviationEnum
+        postcode: string
         page: number
     }) {
         try {

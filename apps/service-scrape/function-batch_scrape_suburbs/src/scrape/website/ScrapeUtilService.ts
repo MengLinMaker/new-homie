@@ -1,4 +1,4 @@
-import { ILoggable } from '../../global/ILoggable'
+import { ILoggable } from '../../base/ILoggable'
 import { load } from 'cheerio'
 
 class ScrapeUtilServiceError extends Error {}

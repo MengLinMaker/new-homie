@@ -1,5 +1,5 @@
 import type { Logger } from 'pino'
-import { ILoggable } from '../../global/ILoggable'
+import { ILoggable } from '../../base/ILoggable'
 import { launchChromium } from 'playwright-aws-lambda'
 import type { Browser, BrowserContext } from 'playwright'
 

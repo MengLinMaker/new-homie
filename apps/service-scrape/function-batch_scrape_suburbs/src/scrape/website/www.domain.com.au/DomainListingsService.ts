@@ -5,7 +5,7 @@ import {
     createPostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
-import { ILoggable } from '../../../global/ILoggable'
+import { ILoggable } from '../../../base/ILoggable'
 
 const listingsSchema = z.object({
     listingModel: z.object({
