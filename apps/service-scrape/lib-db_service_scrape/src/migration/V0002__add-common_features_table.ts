@@ -22,7 +22,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
             'SemiDetached',
             'Studio',
             'Terrace',
-            'TownHouse',
+            'Townhouse', // Follow spelling in filter
             'VacantLand',
             'Villa',
         ])

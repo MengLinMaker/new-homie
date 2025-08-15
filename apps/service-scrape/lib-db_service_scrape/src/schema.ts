@@ -23,7 +23,7 @@ export enum HomeTypeEnum {
     SEMI_DETACHED = 'SemiDetached',
     STUDIO = 'Studio',
     TERRACE = 'Terrace',
-    TOWN_HOUSE = 'TownHouse',
+    TOWNHOUSE = 'Townhouse',
     VACANT_LAND = 'VacantLand',
     VILLA = 'Villa',
 }
