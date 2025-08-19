@@ -16,7 +16,7 @@ module.exports = {
                     '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$', // dot files
                     '[.]d[.]ts$', // TypeScript declaration files
                     '(^|/)tsconfig[.]json$', // TypeScript config
-                    '(^|/)(?:babel|webpack|vite|vitest)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$', // other configs
+                    '(^|/)(?:babel|webpack|vite|vitest|tsup)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$', // other configs
                 ],
             },
             to: {},
@@ -148,33 +148,5 @@ module.exports = {
            for details
          */
         skipAnalysisNotInRules: true,
-
-        reporterOptions: {
-            dot: {
-                /* pattern of modules that can be consolidated in the detailed
-                   graphical dependency graph. The default pattern in this configuration
-                   collapses everything in node_modules to one folder deep so you see
-                   the external modules, but their innards.
-                 */
-                collapsePattern: 'node_modules/(?:@[^/]+/[^/]+|[^/]+)',
-                showMetrics: false,
-                /* Options to tweak the appearance of your graph.See
-                   https://github.com/sverweij/dependency-cruiser/blob/main/doc/options-reference.md#reporteroptions
-                   for details and some examples. If you don't specify a theme
-                   dependency-cruiser falls back to a built-in one.
-                */
-                theme: {
-                    graph: {
-                        splines: 'true',
-                        color: 'lightgrey',
-                    },
-                    edge: {
-                        arrowsize: '0.6',
-                        penwidth: '0.6',
-                        color: 'black',
-                    },
-                },
-            },
-        },
     },
 }
