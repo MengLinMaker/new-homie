@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs'
 import pino from 'pino'
 import { BrowserService } from '../src/scrape/website/BrowserService'
 import path from 'node:path'
+import type { Kysely } from 'kysely'
+import type { Schema } from '@service-scrape/lib-db_service_scrape'
 
 export const suiteNameFromFileName = (filePath: string) =>
     // biome-ignore lint/style/noNonNullAssertion: <will exist>
@@ -21,6 +23,9 @@ export class MockBrowserService extends BrowserService {
         return this.html
     }
 }
+
+export const dbCountRow = async (db: Kysely<Schema.DB>, tableName: keyof Schema.DB) =>
+    await db.selectFrom(tableName).select('id').execute()
 
 export const LOGGER = pino({
     level: 'fatal',
