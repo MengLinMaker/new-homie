@@ -5,7 +5,7 @@ import type { Insertable } from 'kysely'
 
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
 import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
-import { setupTestPostgisDb } from '../src'
+import { setupTestPostgisDb } from '../src/dev'
 
 describe('schema.ts', async () => {
     const { container, db } = await setupTestPostgisDb()
