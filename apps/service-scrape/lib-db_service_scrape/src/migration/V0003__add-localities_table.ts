@@ -18,6 +18,11 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addColumn('postcode', 'text', (col) => col.notNull())
         .addCheckConstraint('localities_table_postcode_check', sql`LENGTH(postcode) = 4`)
         .addColumn('state_abbreviation', sql`state_abbreviation_enum`, (col) => col.notNull())
+        .addUniqueConstraint('localities_table_suburb_name_postcode_state_abbreviation_unique', [
+            'suburb_name',
+            'postcode',
+            'state_abbreviation',
+        ])
         .addColumn('boundary_coordinates', sql`geometry(polygon)`, (col) => col.notNull())
         .execute()
 }

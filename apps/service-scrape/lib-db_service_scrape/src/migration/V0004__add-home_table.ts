@@ -13,6 +13,10 @@ export async function up(db: Kysely<unknown>): Promise<void> {
             col.notNull().references('common_features_table.id'),
         )
         .addColumn('street_address', 'text', (col) => col.notNull())
+        .addUniqueConstraint('home_table_localities_table_id_street_address_unique', [
+            'localities_table_id',
+            'street_address',
+        ])
         .addCheckConstraint(
             'home_table_street_address_check',
             sql`LENGTH(street_address) > 0 AND LENGTH(street_address) < 64`,

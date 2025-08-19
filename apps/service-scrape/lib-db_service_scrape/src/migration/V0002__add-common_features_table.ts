@@ -40,6 +40,13 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addCheckConstraint('common_features_table_car_quantity_check', sql`car_quantity >= 0`)
         .addColumn('home_type', sql`home_type_enum`, (col) => col.notNull())
         .addColumn('is_retirement', 'boolean', (col) => col.notNull())
+        .addUniqueConstraint('common_features_table_unique', [
+            'bed_quantity',
+            'bath_quantity',
+            'car_quantity',
+            'home_type',
+            'is_retirement',
+        ])
         .execute()
 }
 

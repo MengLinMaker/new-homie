@@ -1,6 +1,5 @@
 import { Cli } from 'kysely-codegen'
 import path from 'node:path'
-import { LOG } from './log.ts'
 
 /**
  * Generates schema from migrated Postgis database
@@ -17,10 +16,10 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             includePattern: '*_(table)',
             runtimeEnums: true,
         })
-        LOG.debug('Kysely code generated')
+        console.debug('Kysely code generated')
         return true
     } catch {
-        LOG.fatal('Kysely code generation failed')
+        console.error('Kysely code generation failed')
         return false
     }
 }

@@ -1,5 +1,4 @@
 import { AbstractStartedContainer, GenericContainer, Wait } from 'testcontainers'
-import { LOG } from './log.ts'
 
 // Globals for postgres setup - shouldn't require any changing
 const POSTGRES_PORT = 5432
@@ -12,7 +11,7 @@ const POSTGRES_PASSWORD = 'password'
  * @method getConnectionUri
  * @method stop
  */
-class StartedPostgisContainer extends AbstractStartedContainer {
+export class StartedPostgisContainer extends AbstractStartedContainer {
     public getConnectionUri() {
         const url = new URL('', 'postgresql://')
         url.hostname = this.getHost()
@@ -25,7 +24,7 @@ class StartedPostgisContainer extends AbstractStartedContainer {
 }
 
 export const postgisTestContainer = async () => {
-    LOG.debug('Building postgis docker image for "service-scrape"')
+    console.debug('Building postgis docker image for "service-scrape"')
     /**
      * Use same image for all "service-scrape" sub packages
      * Build custom image according to - https://node.testcontainers.org/features/images/
@@ -34,7 +33,7 @@ export const postgisTestContainer = async () => {
         'lib-db_service_scrape',
         { deleteOnExit: false },
     )
-    LOG.debug('Booting postgis container for "service-scrape"')
+    console.debug('Booting postgis container for "service-scrape"')
     /**
      * Create container and wait until it is ready
      * Current configuration refer to - https://github.com/testcontainers/testcontainers-node/blob/main/packages/modules/postgresql/src/postgresql-container.ts
@@ -58,6 +57,6 @@ export const postgisTestContainer = async () => {
         .withWaitStrategy(Wait.forAll([Wait.forHealthCheck(), Wait.forListeningPorts()]))
         .withStartupTimeout(300000)
         .start()
-    LOG.debug('Postgis container for "service-scrape" is ready')
+    console.debug('Postgis container for "service-scrape" is ready')
     return new StartedPostgisContainer(container)
 }
