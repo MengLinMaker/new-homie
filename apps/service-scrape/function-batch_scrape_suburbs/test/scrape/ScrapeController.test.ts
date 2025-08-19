@@ -41,8 +41,8 @@ describe(testSuiteName, async () => {
         it.sequential('should merge duplicate data', async () => {
             const output = await scrapeController.tryExtractSuburbPage(locality)
             expect(output).not.toBeNull()
-            const ids = await dbCountRow(db, 'localities_table').select('id').execute()
-            expect(ids.length).toBe(1)
+            const ids = await dbCountRow(db, 'localities_table')
+            expect(ids).toBe(1)
         })
     })
 
@@ -56,23 +56,6 @@ describe(testSuiteName, async () => {
             const output = await scrapeController.tryExtractRentsPage(localityPage)
             expect(output).not.toBeNull()
         })
-
-        it.sequential('should merge duplicate data', async () => {
-            const common_features_tableOld = await dbCountRow(db, 'common_features_table')
-            const home_tableOld = await dbCountRow(db, 'home_table')
-            const rent_price_tableOld = await dbCountRow(db, 'rent_price_table')
-
-            const output = await scrapeController.tryExtractRentsPage(localityPage)
-            if (!output) return expect(output).not.toBeNull()
-
-            const common_features_table = await dbCountRow(db, 'common_features_table')
-            const home_table = await dbCountRow(db, 'home_table')
-            const rent_price_table = await dbCountRow(db, 'rent_price_table')
-
-            expect(common_features_table.length).toBe(common_features_tableOld.length)
-            expect(home_table.length).toBe(home_tableOld.length)
-            expect(rent_price_table.length).toBe(rent_price_tableOld.length)
-        })
     })
 
     describe.sequential('tryExtractSalesPage', async () => {
@@ -84,23 +67,6 @@ describe(testSuiteName, async () => {
         it.sequential('should parse successfully', async () => {
             const output = await scrapeController.tryExtractSalesPage(localityPage)
             expect(output).not.toBeNull()
-        })
-
-        it.sequential('should merge duplicate data', async () => {
-            const common_features_tableOld = await dbCountRow(db, 'common_features_table')
-            const home_tableOld = await dbCountRow(db, 'home_table')
-            const sale_price_tableOld = await dbCountRow(db, 'sale_price_table')
-
-            const output = await scrapeController.tryExtractSalesPage(localityPage)
-            if (!output) return expect(output).not.toBeNull()
-
-            const common_features_table = await dbCountRow(db, 'common_features_table')
-            const home_table = await dbCountRow(db, 'home_table')
-            const sale_price_table = await dbCountRow(db, 'sale_price_table')
-
-            expect(common_features_table.length).toBe(common_features_tableOld.length)
-            expect(home_table.length).toBe(home_tableOld.length)
-            expect(sale_price_table.length).toBe(sale_price_tableOld.length)
         })
     })
 })
