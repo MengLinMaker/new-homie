@@ -25,7 +25,7 @@ export class MockBrowserService extends BrowserService {
 }
 
 export const dbCountRow = async (db: Kysely<Schema.DB>, tableName: keyof Schema.DB) =>
-    await db.selectFrom(tableName).select('id').execute()
+    (await db.selectFrom(tableName).select('id').execute()).length
 
 export const LOGGER = pino({
     level: 'fatal',

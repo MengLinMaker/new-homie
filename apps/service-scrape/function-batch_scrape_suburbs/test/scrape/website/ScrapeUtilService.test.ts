@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { ScrapeUtilService } from '../../../src/scrape/website/ScrapeUtilService'
-import { LOGGER } from '../../util'
+import { LOGGER, suiteNameFromFileName } from '../../util'
 
-describe('ScrapeUtilService', () => {
+const testSuiteName = suiteNameFromFileName(import.meta.filename)
+
+describe(testSuiteName, () => {
     const scrapeUtilService = new ScrapeUtilService(LOGGER)
 
     describe('tryExtractNextJson', () => {
