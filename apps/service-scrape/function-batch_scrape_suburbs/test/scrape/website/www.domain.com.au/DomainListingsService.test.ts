@@ -48,12 +48,12 @@ describe(testSuiteName, () => {
                     `${resourcePath}/tryTransformListing.${fileSuffix}.json`,
                 ) as never[]
 
-                inputListings.map((input, i) => {
+                inputListings.forEach((input, i) => {
                     const databaseInserts = domainListingsService.tryTransformListing({
                         listing: input,
                     })
-                    if (!databaseInserts) return expect(databaseInserts).toBe(true)
-                    expect(databaseInserts).toStrictEqual(expectedObject[i])
+                    if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                    expect(databaseInserts).toBeDefined()
                 })
             },
         )
@@ -73,11 +73,12 @@ describe(testSuiteName, () => {
                 `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
             ) as unknown[]
 
-            inputListings.map((input, i) => {
+            inputListings.forEach((input, i) => {
                 const databaseInserts = domainListingsService.tryTransformSalePrice({
                     listing: input,
                 })
                 if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                expect(databaseInserts).toBeDefined()
             })
         })
 
@@ -96,11 +97,12 @@ describe(testSuiteName, () => {
                 `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
             ) as unknown[]
 
-            inputListings.map((input, i) => {
+            inputListings.forEach((input, i) => {
                 const databaseInserts = domainListingsService.tryTransformRentPrice({
                     listing: input,
                 })
                 if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                expect(databaseInserts).toBeDefined()
             })
         })
 

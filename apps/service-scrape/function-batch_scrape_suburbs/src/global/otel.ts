@@ -20,7 +20,7 @@ import { ENV } from './env'
 import pino from 'pino'
 
 const OLTP_HEADERS: Record<string, string> = {}
-ENV.OLTP_HEADERS.split(', ').map((header) => {
+ENV.OLTP_HEADERS.split(', ').forEach((header) => {
     const [key, val] = header.split(': ')
     if (key && val) OLTP_HEADERS[key] = val
 })
