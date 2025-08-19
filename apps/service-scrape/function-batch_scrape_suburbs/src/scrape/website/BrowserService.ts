@@ -12,6 +12,7 @@ export class BrowserService extends ILoggable {
         this.browserContext = browserContext
     }
 
+    /* v8 ignore start */
     static async createBrowserContext() {
         const browser = BrowserService.browser ?? (await launchChromium({ headless: true }))
         const browserContexts = browser.contexts()

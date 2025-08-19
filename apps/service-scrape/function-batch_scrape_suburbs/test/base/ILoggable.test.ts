@@ -10,7 +10,7 @@ describe(testSuiteName, () => {
     it('should not throw with stringifiable non-error', () => {
         const stringifiableObject = { msg: 'stringifiable' }
         JSON.stringify(stringifiableObject)
-        loggable.logException('fatal', stringifiableObject, null)
+        loggable.logException('trace', stringifiableObject, null)
     })
 
     it('should not throw with non-stringifiable non-error', () => {
@@ -19,6 +19,6 @@ describe(testSuiteName, () => {
         expect(() => {
             JSON.stringify(invalidObject)
         }).toThrow()
-        loggable.logException('fatal', invalidObject, null)
+        loggable.logException('trace', invalidObject, null)
     })
 })

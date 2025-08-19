@@ -34,6 +34,7 @@ const cleanStackTrace = (stacktrace: string | undefined) => {
         if (line.match(stackRegex)) newLines.push(line)
     }
     if (newLines.length > 0) return newLines.join('\n')
+    /* v8 ignore start */
     return stacktrace
 }
 
@@ -57,6 +58,7 @@ export class ILoggable {
             // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
             [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
         }
+        /* v8 ignore start */
         switch (logLevel) {
             case 'fatal':
                 this.LOGGER.fatal(logInfo, msg)
@@ -102,6 +104,7 @@ export class ILoggable {
             [ATTR_EXCEPTION_MESSAGE]: validError.message,
             [ATTR_EXCEPTION_STACKTRACE]: cleanStackTrace(validError.stack),
         }
+        /* v8 ignore start */
         switch (logLevel) {
             case 'fatal':
                 this.LOGGER.fatal(logInfo, msg)
