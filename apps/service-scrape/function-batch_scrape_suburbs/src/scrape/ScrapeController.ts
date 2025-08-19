@@ -6,6 +6,7 @@ import type { Logger } from 'pino'
 import type { Kysely } from 'kysely'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
 import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbService'
+import { ScrapeModel } from './website/ScrapeModel'
 
 export class ScrapeController extends IDatabased {
     readonly browserService
@@ -17,6 +18,7 @@ export class ScrapeController extends IDatabased {
     scrapeUtilService = new ScrapeUtilService(this.LOGGER)
     domainListingsService = new DomainListingsService(this.LOGGER)
     domainSuburbService = new DomainSuburbService(this.LOGGER)
+    scrapeModel = new ScrapeModel(this.LOGGER, this.DB)
 
     sharedSearchparams = {
         // Restrictions reduce amount of data scraped
@@ -29,6 +31,10 @@ export class ScrapeController extends IDatabased {
         sort: 'price-asc',
     }
 
+    /**
+     * Scrape suburb and update database
+     * @returns localityId from database
+     */
     async tryExtractSuburbPage(args: {
         suburb: string
         state: string | Schema.StateAbbreviationEnum
@@ -45,9 +51,14 @@ export class ScrapeController extends IDatabased {
             if (!nextDataJson) return null
             const rawSuburbData = this.domainSuburbService.tryExtractProfile({ nextDataJson })
             if (!rawSuburbData) return null
-            return this.domainSuburbService.tryTransformProfile({ rawSuburbData })
+            const suburbData = this.domainSuburbService.tryTransformProfile({ rawSuburbData })
+            if (!suburbData) return null
+
+            const returnedData = await this.scrapeModel.tryUpdateSuburb({ suburbData })
+            if (!returnedData) return null
+            return returnedData.id
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('fatal', e, args)
             return null
         }
     }
@@ -57,6 +68,7 @@ export class ScrapeController extends IDatabased {
         state: string | Schema.StateAbbreviationEnum
         postcode: string
         page: number
+        localityId: number
     }) {
         try {
             const { suburb, state, postcode, page } = args
@@ -73,9 +85,19 @@ export class ScrapeController extends IDatabased {
             if (!html) return null
             const nextDataJson = this.scrapeUtilService.tryExtractNextJson({ html })
             if (!nextDataJson) return null
-            return this.domainListingsService.tryExtractRentsPage({ nextDataJson })
+            const rentsData = this.domainListingsService.tryExtractRentsPage({ nextDataJson })
+            if (!rentsData) return null
+
+            for (const rentData of rentsData.rentsInfo) {
+                await this.scrapeModel.tryUpdateRentListing({
+                    rentData,
+                    localityId: args.localityId,
+                })
+            }
+            return rentsData
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('fatal', e, args)
+            this.logException('fatal', e, args)
             return null
         }
     }
@@ -85,6 +107,7 @@ export class ScrapeController extends IDatabased {
         state: string | Schema.StateAbbreviationEnum
         postcode: string
         page: number
+        localityId: number
     }) {
         try {
             const { suburb, state, postcode, page } = args
@@ -101,9 +124,18 @@ export class ScrapeController extends IDatabased {
             if (!html) return null
             const nextDataJson = this.scrapeUtilService.tryExtractNextJson({ html })
             if (!nextDataJson) return null
-            return this.domainListingsService.tryExtractSalesPage({ nextDataJson })
+            const salesData = this.domainListingsService.tryExtractSalesPage({ nextDataJson })
+            if (!salesData) return null
+
+            for (const saleData of salesData.salesInfo) {
+                await this.scrapeModel.tryUpdateSaleListing({
+                    saleData,
+                    localityId: args.localityId,
+                })
+            }
+            return salesData
         } catch (e) {
-            this.logException('error', e, args)
+            this.logException('fatal', e, args)
             return null
         }
     }
