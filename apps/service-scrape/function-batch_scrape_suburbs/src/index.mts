@@ -18,12 +18,16 @@ const app = new Hono().use(requestId()).use('*', otel())
 app.post('/', localityValidator, async (c) => {
     const locality = c.req.valid('json')
 
-    const suburbInfo = await scrapeController.tryExtractSuburbPage(locality)
-    if (suburbInfo)
+    const localityId = await scrapeController.tryExtractSuburbPage(locality)
+    if (localityId === null)
         return c.text(`${SERVICE_NAME} not scrape suburb`, StatusCodes.INTERNAL_SERVER_ERROR)
 
     for (let page = 1; ; page++) {
-        const salesInfo = await scrapeController.tryExtractSalesPage({ ...locality, page })
+        const salesInfo = await scrapeController.tryExtractSalesPage({
+            ...locality,
+            page,
+            localityId,
+        })
         if (!salesInfo)
             return c.text(
                 `${SERVICE_NAME} not scrape sale listings`,
@@ -32,7 +36,11 @@ app.post('/', localityValidator, async (c) => {
         if (salesInfo.isLastPage) break
     }
     for (let page = 1; ; page++) {
-        const rentsInfo = await scrapeController.tryExtractRentsPage({ ...locality, page })
+        const rentsInfo = await scrapeController.tryExtractRentsPage({
+            ...locality,
+            page,
+            localityId,
+        })
         if (!rentsInfo)
             return c.text(
                 `${SERVICE_NAME} not scrape rent listings`,
