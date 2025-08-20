@@ -8,6 +8,7 @@ on:
 
 jobs:
   typescript_ci:
+    # runs-on: ubuntu-24.04-arm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
