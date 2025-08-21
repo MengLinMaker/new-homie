@@ -1,5 +1,4 @@
 name: ci
-description: runs affected tests
 
 on:
   pull_request:
@@ -7,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  typescript_ci:
+  test-unit:
     # runs-on: ubuntu-24.04-arm
     runs-on: ubuntu-latest
     steps:
