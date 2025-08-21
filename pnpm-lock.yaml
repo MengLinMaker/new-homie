@@ -167,7 +167,14 @@ importers:
         specifier: ^11.5.1
         version: 11.5.1
 
-  apps/service-scrape/script: {}
+  apps/service-scrape/script:
+    dependencies:
+      '@service-scrape/lib-db_service_scrape':
+        specifier: workspace:*
+        version: link:../lib-db_service_scrape
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
 
 packages:
 
@@ -4049,9 +4056,6 @@ packages:
     peerDependencies:
       zod: ^3.18.0
 
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
-
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
@@ -7552,8 +7556,8 @@ snapshots:
       smol-toml: 1.4.1
       strip-json-comments: 5.0.2
       typescript: 5.9.2
-      zod: 3.24.2
-      zod-validation-error: 3.4.0(zod@3.24.2)
+      zod: 3.25.76
+      zod-validation-error: 3.4.0(zod@3.25.76)
 
   kysely-codegen@0.18.5(kysely@0.28.4)(pg@8.16.3)(tarn@3.0.2)(typescript@5.9.2):
     dependencies:
@@ -8775,11 +8779,9 @@ snapshots:
       compress-commons: 6.0.2
       readable-stream: 4.7.0
 
-  zod-validation-error@3.4.0(zod@3.24.2):
+  zod-validation-error@3.4.0(zod@3.25.76):
     dependencies:
-      zod: 3.24.2
-
-  zod@3.24.2: {}
+      zod: 3.25.76
 
   zod@3.25.76: {}
 

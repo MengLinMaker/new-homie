@@ -1,5 +1,8 @@
 import { writeFileSync } from 'node:fs'
-import { LOG, notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
+import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
+import z from 'zod'
+import '@service-scrape/lib-db_service_scrape'
+import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
 
 /**
  * GENERATE AUSTRALIAN AMENITIES JSON IN THIS FORMAT
@@ -10,7 +13,7 @@ const newAmenitiesData: {
     category: string
     gps: [number, number]
 }[] = []
-const finalAmenitiesFilePath = './resource/australia-amenities-final.json'
+const finalAmenitiesFilePath = './src/resource/australia-amenities-final.json'
 
 /**
  * SPECIFY BROTLI COMPRESSED DATA URL SOURCE
@@ -123,5 +126,79 @@ const finalAmenitiesFilePath = './resource/australia-amenities-final.json'
     }
 }
 
-writeFileSync(finalAmenitiesFilePath, JSON.stringify(newAmenitiesData, null, 2))
-LOG.info('Completed writing final amenities file')
+writeFileSync(finalAmenitiesFilePath, JSON.stringify(newAmenitiesData, null, 4))
+console.info('Completed writing "australia-amenities-final.json"')
+
+/**
+ * Separate script to parse schools data - https://asl.acara.edu.au/School-Search
+ */
+{
+    const schoolsData = readBrotliJson('./resource/australia-schools.json.br')
+    const schema = z.array(
+        z.object({
+            ACARAId: z.preprocess((a) => parseInt(z.string().parse(a), 10), z.number().positive()),
+            SchoolName: z.string(),
+            SchoolType: z.enum(['Pri/Sec', 'Prim', 'Sec', 'Special']),
+            SchoolURL: z.url().nullable().catch(null),
+            SchoolSector: z.enum(['NG', 'Gov']),
+            IndependentSchool: z.enum(['Y', 'N']),
+            AddressList: z
+                .array(
+                    z.object({
+                        City: z.string(),
+                        StateProvince: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
+                        PostalCode: z.string().length(4),
+                        GridLocation: z.object({
+                            Latitude: z.number(),
+                            Longitude: z.number(),
+                        }),
+                    }),
+                )
+                .length(1),
+        }),
+    )
+    const validSchoolsData = schema.parse(schoolsData, {
+        reportInput: true,
+    })
+    const localities = new Set()
+    const transformedSchoolsData = validSchoolsData.map((school) => {
+        const address = school.AddressList[0]
+        if (!address) throw new Error(`No address found for ACARAId: ${school.ACARAId}`)
+        const locality_table = {
+            suburb: address.City,
+            state: address.StateProvince,
+            postcode: address.PostalCode,
+        }
+        localities.add(locality_table)
+        return {
+            school_table: {
+                name: school.SchoolName,
+                url: school.SchoolURL,
+                acara_id: school.ACARAId,
+                gps: {
+                    lng: address.GridLocation.Longitude,
+                    lat: address.GridLocation.Latitude,
+                },
+            },
+            school_feature_table: {
+                primary: school.SchoolType === 'Prim' || school.SchoolType === 'Pri/Sec',
+                secondary: school.SchoolType === 'Sec' || school.SchoolType === 'Pri/Sec',
+                government_sector: school.SchoolSector === 'Gov',
+                independent: school.IndependentSchool === 'Y',
+                special_needs: school.SchoolType === 'Special',
+            },
+            locality_table,
+        }
+    })
+    writeFileSync(
+        './src/resource/australia-schools-final.json',
+        JSON.stringify(transformedSchoolsData, null, 4),
+    )
+    console.info('Completed writing "australia-schools-final.json"')
+
+    writeFileSync(
+        './src/resource/australia-localities.json',
+        JSON.stringify(Array.from(localities), null, 4),
+    )
+    console.info('Completed writing "australia-localities-final.json"')
+}

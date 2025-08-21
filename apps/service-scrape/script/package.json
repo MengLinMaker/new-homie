@@ -2,10 +2,14 @@
     "name": "@service-scrape/script",
     "private": "true",
     "scripts": {
-        "compress": "node ./src/compress.ts",
         "format": "biome format --write",
         "test:lint": "biome lint --write",
-        "test:type": "tsc"
+        "test:type": "tsc",
+        "build": "node ./src/compress.ts"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "zod": "4.0.17",
+        "@service-scrape/lib-db_service_scrape": "workspace:*"
+    }
 }
