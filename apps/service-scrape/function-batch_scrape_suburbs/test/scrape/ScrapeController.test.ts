@@ -41,7 +41,7 @@ describe(testSuiteName, async () => {
         it.sequential('should merge duplicate data', async () => {
             const output = await scrapeController.tryExtractSuburbPage(locality)
             expect(output).not.toBeNull()
-            const ids = await dbCountRow(db, 'localities_table')
+            const ids = await dbCountRow(db, 'locality_table')
             expect(ids).toBe(1)
         })
     })

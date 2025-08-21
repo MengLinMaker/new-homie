@@ -5,17 +5,17 @@ import type { Schema } from '@service-scrape/lib-db_service_scrape'
 export class ScrapeModel extends IDatabased {
     async tryUpdateSuburb(args: {
         suburbData: {
-            localities_table: Insertable<Schema.LocalitiesTable>
+            locality_table: Insertable<Schema.LocalityTable>
         }
     }) {
         const { suburbData } = args
         try {
-            return await this.DB.insertInto('localities_table')
-                .values(suburbData.localities_table)
+            return await this.DB.insertInto('locality_table')
+                .values(suburbData.locality_table)
                 .onConflict((oc) =>
                     oc
                         .columns(['suburb_name', 'state_abbreviation', 'postcode'])
-                        .doUpdateSet(suburbData.localities_table),
+                        .doUpdateSet(suburbData.locality_table),
                 )
                 .returning('id')
                 .executeTakeFirstOrThrow()
@@ -27,14 +27,14 @@ export class ScrapeModel extends IDatabased {
 
     private async updateListing(args: {
         listingData: {
-            common_features_table: Insertable<Schema.CommonFeaturesTable>
+            home_feature_table: Insertable<Schema.HomeFeatureTable>
             home_table: Updateable<Schema.HomeTable>
         }
         localityId: number
     }) {
         const { listingData, localityId } = args
-        const common_features_table = await this.DB.insertInto('common_features_table')
-            .values(listingData.common_features_table)
+        const home_feature_table = await this.DB.insertInto('home_feature_table')
+            .values(listingData.home_feature_table)
             .onConflict((oc) =>
                 oc
                     .columns([
@@ -44,20 +44,20 @@ export class ScrapeModel extends IDatabased {
                         'home_type',
                         'is_retirement',
                     ])
-                    .doUpdateSet(listingData.common_features_table),
+                    .doUpdateSet(listingData.home_feature_table),
             )
             .returning('id')
             .executeTakeFirstOrThrow()
 
         const home_tableValues = {
             ...listingData.home_table,
-            common_features_table_id: common_features_table.id,
-            localities_table_id: localityId,
+            home_feature_table_id: home_feature_table.id,
+            locality_table_id: localityId,
         } as Insertable<Schema.HomeTable>
         const home_table = await this.DB.insertInto('home_table')
             .values(home_tableValues)
             .onConflict((oc) =>
-                oc.columns(['localities_table_id', 'street_address']).doUpdateSet(home_tableValues),
+                oc.columns(['locality_table_id', 'street_address']).doUpdateSet(home_tableValues),
             )
             .returning('id')
             .executeTakeFirstOrThrow()
@@ -67,7 +67,7 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateRentListing(args: {
         rentData: {
-            common_features_table: Insertable<Schema.CommonFeaturesTable>
+            home_feature_table: Insertable<Schema.HomeFeatureTable>
             home_table: Updateable<Schema.HomeTable>
             rent_price_table: Updateable<Schema.RentPriceTable>
         }
@@ -114,7 +114,7 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSaleListing(args: {
         saleData: {
-            common_features_table: Insertable<Schema.CommonFeaturesTable>
+            home_feature_table: Insertable<Schema.HomeFeatureTable>
             home_table: Updateable<Schema.HomeTable>
             sale_price_table: Updateable<Schema.SalePriceTable>
         }

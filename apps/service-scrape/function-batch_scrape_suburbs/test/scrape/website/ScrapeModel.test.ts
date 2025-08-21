@@ -35,48 +35,48 @@ describe(testSuiteName, async () => {
             [0, 0],
         ])
         if (!boundary_coordinates) throw Error('boundary_coordinates is invalid')
-        const localities_table = {
+        const locality_table = {
             suburb_name: 'Melbourne',
             state_abbreviation: Schema.StateAbbreviationEnum.VIC,
             postcode: '3000',
             boundary_coordinates,
-        } satisfies Insertable<Schema.LocalitiesTable>
+        } satisfies Insertable<Schema.LocalityTable>
 
         it.sequential('should not insert same data', async () => {
-            const suburbData = { localities_table }
+            const suburbData = { locality_table }
 
             await scrapeModel.tryUpdateSuburb({ suburbData })
-            const oldLength = await dbCountRow(db, 'localities_table')
+            const oldLength = await dbCountRow(db, 'locality_table')
 
             await scrapeModel.tryUpdateSuburb({ suburbData })
-            const newLength = await dbCountRow(db, 'localities_table')
+            const newLength = await dbCountRow(db, 'locality_table')
 
             expect(oldLength).toBe(newLength)
         })
 
         it.sequential('should insert new data', async () => {
-            const length_1 = await dbCountRow(db, 'localities_table')
+            const length_1 = await dbCountRow(db, 'locality_table')
 
             await scrapeModel.tryUpdateSuburb({
                 suburbData: {
-                    localities_table: {
-                        ...localities_table,
+                    locality_table: {
+                        ...locality_table,
                         postcode: '3001',
                     },
                 },
             })
-            const length_2 = await dbCountRow(db, 'localities_table')
+            const length_2 = await dbCountRow(db, 'locality_table')
             expect(length_1 + 1).toBe(length_2)
 
             await scrapeModel.tryUpdateSuburb({
                 suburbData: {
-                    localities_table: {
-                        ...localities_table,
+                    locality_table: {
+                        ...locality_table,
                         suburb_name: 'Melbourne North',
                     },
                 },
             })
-            const length_3 = await dbCountRow(db, 'localities_table')
+            const length_3 = await dbCountRow(db, 'locality_table')
             expect(length_2 + 1).toBe(length_3)
         })
     })
@@ -84,7 +84,7 @@ describe(testSuiteName, async () => {
     describe.sequential('tryUpdateRentListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
         const rentData = {
-            common_features_table: {
+            home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
@@ -109,7 +109,7 @@ describe(testSuiteName, async () => {
         const localityId = 1
         const dbCountRows = async () => {
             return {
-                common_features_table: await dbCountRow(db, 'common_features_table'),
+                home_feature_table: await dbCountRow(db, 'home_feature_table'),
                 home_table: await dbCountRow(db, 'home_table'),
                 rent_price_table: await dbCountRow(db, 'rent_price_table'),
             }
@@ -153,14 +153,14 @@ describe(testSuiteName, async () => {
             },
         )
 
-        it.sequential('should update "home_table" on new "common_features_table"', async () => {
-            rentData.common_features_table.is_retirement = true
+        it.sequential('should update "home_table" on new "home_feature_table"', async () => {
+            rentData.home_feature_table.is_retirement = true
             rentData.home_table.land_m2 = 2
             const lengths_1 = await dbCountRows()
 
             await scrapeModel.tryUpdateRentListing({ rentData, localityId })
             const lengths_2 = await dbCountRows()
-            lengths_1.common_features_table++
+            lengths_1.home_feature_table++
             expect(lengths_1).toStrictEqual(lengths_2)
         })
     })
@@ -168,7 +168,7 @@ describe(testSuiteName, async () => {
     describe.sequential('tryUpdateSaleListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
         const saleData = {
-            common_features_table: {
+            home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
@@ -193,7 +193,7 @@ describe(testSuiteName, async () => {
         const localityId = 1
         const dbCountRows = async () => {
             return {
-                common_features_table: await dbCountRow(db, 'common_features_table'),
+                home_feature_table: await dbCountRow(db, 'home_feature_table'),
                 home_table: await dbCountRow(db, 'home_table'),
                 sale_price_table: await dbCountRow(db, 'sale_price_table'),
             }
@@ -237,14 +237,14 @@ describe(testSuiteName, async () => {
             },
         )
 
-        it.sequential('should update "home_table" on new "common_features_table"', async () => {
-            saleData.common_features_table.bath_quantity = 2
+        it.sequential('should update "home_table" on new "home_feature_table"', async () => {
+            saleData.home_feature_table.bath_quantity = 2
             saleData.home_table.land_m2 = 2
             const lengths_1 = await dbCountRows()
 
             await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
             const lengths_2 = await dbCountRows()
-            lengths_1.common_features_table++
+            lengths_1.home_feature_table++
             expect(lengths_1).toStrictEqual(lengths_2)
         })
     })

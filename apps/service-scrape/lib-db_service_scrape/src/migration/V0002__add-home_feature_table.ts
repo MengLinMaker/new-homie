@@ -28,19 +28,19 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         ])
         .execute()
     await db.schema
-        .createTable('common_features_table')
+        .createTable('home_feature_table')
         .addColumn('id', 'integer', (col) =>
             col.notNull().primaryKey().generatedByDefaultAsIdentity(),
         )
         .addColumn('bed_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint('common_features_table_bed_quantity_check', sql`bed_quantity >= 0`)
+        .addCheckConstraint('home_feature_table_bed_quantity_check', sql`bed_quantity >= 0`)
         .addColumn('bath_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint('common_features_table_bath_quantity_check', sql`bath_quantity >= 0`)
+        .addCheckConstraint('home_feature_table_bath_quantity_check', sql`bath_quantity >= 0`)
         .addColumn('car_quantity', 'integer', (col) => col.notNull())
-        .addCheckConstraint('common_features_table_car_quantity_check', sql`car_quantity >= 0`)
+        .addCheckConstraint('home_feature_table_car_quantity_check', sql`car_quantity >= 0`)
         .addColumn('home_type', sql`home_type_enum`, (col) => col.notNull())
         .addColumn('is_retirement', 'boolean', (col) => col.notNull())
-        .addUniqueConstraint('common_features_table_unique', [
+        .addUniqueConstraint('home_feature_table_unique', [
             'bed_quantity',
             'bath_quantity',
             'car_quantity',
@@ -52,5 +52,5 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 
 export async function down(db: Kysely<unknown>): Promise<void> {
     await db.schema.dropType('home_type_enum').execute()
-    await db.schema.dropTable('common_features_table').execute()
+    await db.schema.dropTable('home_feature_table').execute()
 }

@@ -139,12 +139,12 @@ export class DomainSuburbService extends ILoggable {
             // rawSuburbData.location.data.propertyCategories
             // rawSuburbData.suburb.schools
             return {
-                localities_table: {
+                locality_table: {
                     postcode: args.rawSuburbData.suburb.postcode,
                     suburb_name: args.rawSuburbData.suburb.name,
                     state_abbreviation: args.rawSuburbData.suburb.state,
                     boundary_coordinates: boundaryCoord,
-                } satisfies Updateable<Schema.LocalitiesTable>,
+                } satisfies Updateable<Schema.LocalityTable>,
             }
         } catch (e) {
             this.logException('error', e, args)

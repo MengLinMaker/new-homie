@@ -1,6 +1,6 @@
 [
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 2,
             "car_quantity": 2,
@@ -16,7 +16,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -32,7 +32,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 3,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -48,7 +48,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 3,
@@ -64,7 +64,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -80,7 +80,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -96,7 +96,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 3,
             "bath_quantity": 1,
             "car_quantity": 6,
@@ -112,7 +112,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -128,7 +128,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -144,7 +144,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 1,
             "bath_quantity": 1,
             "car_quantity": 0,
@@ -160,7 +160,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -176,7 +176,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 0,
@@ -192,7 +192,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -208,7 +208,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -224,7 +224,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 3,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -240,7 +240,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 4,
             "bath_quantity": 2,
             "car_quantity": 2,
@@ -256,7 +256,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,
@@ -272,7 +272,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 3,
             "bath_quantity": 2,
             "car_quantity": 2,
@@ -288,7 +288,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 3,
             "bath_quantity": 1,
             "car_quantity": 4,
@@ -304,7 +304,7 @@
         }
     },
     {
-        "common_features_table": {
+        "home_feature_table": {
             "bed_quantity": 2,
             "bath_quantity": 1,
             "car_quantity": 1,

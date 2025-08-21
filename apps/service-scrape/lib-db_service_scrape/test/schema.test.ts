@@ -31,7 +31,7 @@ describe('schema.ts', async () => {
             expect(id).toBeDefined()
             insertIds.set(tableName, id)
         }
-        await insertIntoTable('localities_table', {
+        await insertIntoTable('locality_table', {
             suburb_name: faker.location.city(),
             postcode: faker.location.zipCode('####'),
             state_abbreviation: StateAbbreviationEnum.VIC,
@@ -42,7 +42,7 @@ describe('schema.ts', async () => {
                 [1, 2],
             ])!,
         })
-        await insertIntoTable('common_features_table', {
+        await insertIntoTable('home_feature_table', {
             bed_quantity: faker.number.int({ min: 1, max: 5 }),
             bath_quantity: faker.number.int({ min: 1, max: 5 }),
             car_quantity: faker.number.int({ min: 1, max: 5 }),
@@ -50,8 +50,8 @@ describe('schema.ts', async () => {
             is_retirement: Math.random() < 0.5,
         })
         await insertIntoTable('home_table', {
-            localities_table_id: insertIds.get('localities_table')!,
-            common_features_table_id: insertIds.get('common_features_table')!,
+            locality_table_id: insertIds.get('locality_table')!,
+            home_feature_table_id: insertIds.get('home_feature_table')!,
             street_address: faker.location.streetAddress(),
             gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
             land_m2: faker.number.int({ min: 0, max: 10000 }),

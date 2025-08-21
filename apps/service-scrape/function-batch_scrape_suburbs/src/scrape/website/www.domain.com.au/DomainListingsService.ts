@@ -122,13 +122,13 @@ export class DomainListingsService extends ILoggable {
             const address = listingModel.address
             const features = listingModel.features
             return {
-                common_features_table: {
+                home_feature_table: {
                     bed_quantity: features.beds,
                     bath_quantity: features.baths,
                     car_quantity: features.parking,
                     home_type: features.propertyType,
                     is_retirement: features.isRetirement,
-                } satisfies Updateable<Schema.CommonFeaturesTable>,
+                } satisfies Updateable<Schema.HomeFeatureTable>,
                 home_table: {
                     street_address: address.street,
                     gps: createPostgisPointString(address.lng, address.lat),

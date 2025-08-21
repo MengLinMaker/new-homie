@@ -45,7 +45,7 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
-export interface CommonFeaturesTable {
+export interface HomeFeatureTable {
     bath_quantity: number
     bed_quantity: number
     car_quantity: number
@@ -56,16 +56,16 @@ export interface CommonFeaturesTable {
 
 export interface HomeTable {
     auction_time: Timestamp | null
-    common_features_table_id: number
     gps: string
+    home_feature_table_id: number
     id: Generated<number>
     inspection_time: Timestamp | null
     land_m2: number
-    localities_table_id: number
+    locality_table_id: number
     street_address: string
 }
 
-export interface LocalitiesTable {
+export interface LocalityTable {
     boundary_coordinates: string
     id: Generated<number>
     postcode: string
@@ -94,9 +94,9 @@ export interface SalePriceTable {
 }
 
 export interface DB {
-    common_features_table: CommonFeaturesTable
+    home_feature_table: HomeFeatureTable
     home_table: HomeTable
-    localities_table: LocalitiesTable
+    locality_table: LocalityTable
     rent_price_table: RentPriceTable
     sale_price_table: SalePriceTable
 }

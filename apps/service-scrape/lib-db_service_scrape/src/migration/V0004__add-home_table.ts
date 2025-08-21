@@ -6,15 +6,15 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addColumn('id', 'integer', (col) =>
             col.notNull().primaryKey().generatedByDefaultAsIdentity(),
         )
-        .addColumn('localities_table_id', 'integer', (col) =>
-            col.notNull().references('localities_table.id'),
+        .addColumn('locality_table_id', 'integer', (col) =>
+            col.notNull().references('locality_table.id'),
         )
-        .addColumn('common_features_table_id', 'integer', (col) =>
-            col.notNull().references('common_features_table.id'),
+        .addColumn('home_feature_table_id', 'integer', (col) =>
+            col.notNull().references('home_feature_table.id'),
         )
         .addColumn('street_address', 'text', (col) => col.notNull())
-        .addUniqueConstraint('home_table_localities_table_id_street_address_unique', [
-            'localities_table_id',
+        .addUniqueConstraint('home_table_locality_table_id_street_address_unique', [
+            'locality_table_id',
             'street_address',
         ])
         .addCheckConstraint(
