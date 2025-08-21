@@ -74,6 +74,21 @@ describe('schema.ts', async () => {
             aud_per_bed: 0,
             aud_per_land_m2: 0,
         })
+        await insertIntoTable('school_feature_table', {
+            primary: faker.datatype.boolean(),
+            secondary: faker.datatype.boolean(),
+            government_sector: faker.datatype.boolean(),
+            independent: faker.datatype.boolean(),
+            special_needs: faker.datatype.boolean(),
+        })
+        await insertIntoTable('school_table', {
+            school_feature_table_id: insertIds.get('school_feature_table')!,
+            locality_table_id: insertIds.get('locality_table')!,
+            name: faker.company.name(),
+            url: faker.internet.url(),
+            acara_id: faker.number.int({ min: 100000, max: 999999 }),
+            gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
+        })
     })
 
     it.sequential('should select from all tables', async () => {
