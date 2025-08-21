@@ -2,7 +2,12 @@ import { writeFileSync } from 'node:fs'
 import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
 import z from 'zod'
 import '@service-scrape/lib-db_service_scrape'
-import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
+import {
+    createPostgisPointString,
+    enumToArray,
+    Schema,
+} from '@service-scrape/lib-db_service_scrape'
+import type { Updateable } from 'kysely'
 
 /**
  * GENERATE AUSTRALIAN AMENITIES JSON IN THIS FORMAT
@@ -165,20 +170,20 @@ console.info('Completed writing "australia-amenities-final.json"')
         const address = school.AddressList[0]
         if (!address) throw new Error(`No address found for ACARAId: ${school.ACARAId}`)
         const locality_table = {
-            suburb: address.City,
-            state: address.StateProvince,
+            suburb_name: address.City,
+            state_abbreviation: address.StateProvince,
             postcode: address.PostalCode,
-        }
+        } satisfies Updateable<Schema.LocalityTable>
         localities.add(locality_table)
         return {
             school_table: {
                 name: school.SchoolName,
                 url: school.SchoolURL,
                 acara_id: school.ACARAId,
-                gps: {
-                    lng: address.GridLocation.Longitude,
-                    lat: address.GridLocation.Latitude,
-                },
+                gps: createPostgisPointString(
+                    address.GridLocation.Longitude,
+                    address.GridLocation.Latitude,
+                ),
             },
             school_feature_table: {
                 primary: school.SchoolType === 'Prim' || school.SchoolType === 'Pri/Sec',
@@ -188,6 +193,10 @@ console.info('Completed writing "australia-amenities-final.json"')
                 special_needs: school.SchoolType === 'Special',
             },
             locality_table,
+        } satisfies {
+            school_table: Updateable<Schema.SchoolTable>
+            school_feature_table: Updateable<Schema.SchoolFeatureTable>
+            locality_table: Updateable<Schema.LocalityTable>
         }
     })
     writeFileSync(

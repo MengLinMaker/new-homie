@@ -9,7 +9,8 @@
     },
     "type": "module",
     "dependencies": {
-        "zod": "4.0.17",
-        "@service-scrape/lib-db_service_scrape": "workspace:*"
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
+        "kysely": "0.28.4",
+        "zod": "4.0.17"
     }
 }

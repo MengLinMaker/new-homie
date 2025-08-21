@@ -136,6 +136,18 @@ importers:
         specifier: ^1.54.2
         version: 1.54.2
 
+  apps/service-scrape/lib-australia_amenity:
+    dependencies:
+      '@service-scrape/lib-db_service_scrape':
+        specifier: workspace:*
+        version: link:../lib-db_service_scrape
+      kysely:
+        specifier: 0.28.4
+        version: 0.28.4
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
+
   apps/service-scrape/lib-db_service_scrape:
     dependencies:
       dotenv:
