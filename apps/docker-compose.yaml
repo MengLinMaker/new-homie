@@ -1,4 +1,4 @@
-name: new-homie-apps
+name: new-homie
 services:
 
   # For OpenTelemetry and observability as code

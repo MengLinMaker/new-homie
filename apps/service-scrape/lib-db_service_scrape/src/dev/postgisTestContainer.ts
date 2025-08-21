@@ -30,7 +30,7 @@ export const postgisTestContainer = async () => {
      * Build custom image according to - https://node.testcontainers.org/features/images/
      */
     const image = await GenericContainer.fromDockerfile('../', 'postgis.dockerfile').build(
-        'lib-db_service_scrape',
+        'new-homie-lib-db_service_scrape',
         { deleteOnExit: false },
     )
     console.debug('Booting postgis container for "service-scrape"')
