@@ -7,6 +7,7 @@ import type { Kysely } from 'kysely'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
 import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbService'
 import { ScrapeModel } from './website/ScrapeModel'
+import { AracaSchoolsService } from './website/asl.acara.edu.au/AracaSchoolsService'
 
 export class ScrapeController extends IDatabased {
     readonly browserService
@@ -18,6 +19,7 @@ export class ScrapeController extends IDatabased {
     scrapeUtilService = new ScrapeUtilService(this.LOGGER)
     domainListingsService = new DomainListingsService(this.LOGGER)
     domainSuburbService = new DomainSuburbService(this.LOGGER)
+    aracaSchoolsService = new AracaSchoolsService(this.LOGGER)
     scrapeModel = new ScrapeModel(this.LOGGER, this.DB)
 
     sharedSearchparams = {
@@ -63,6 +65,24 @@ export class ScrapeController extends IDatabased {
         }
     }
 
+    async tryExtractSchools(args: {
+        suburb: string
+        state: string | Schema.StateAbbreviationEnum
+        postcode: string
+        localityId: number
+    }) {
+        try {
+            const schools = this.aracaSchoolsService.getSchools(args)
+            for (const schoolData of schools) {
+                await this.scrapeModel.tryUpdateSchool({ schoolData, localityId: args.localityId })
+            }
+            return true
+        } catch (e) {
+            this.logException('fatal', e, args)
+            return false
+        }
+    }
+
     async tryExtractRentsPage(args: {
         suburb: string
         state: string | Schema.StateAbbreviationEnum
@@ -96,7 +116,6 @@ export class ScrapeController extends IDatabased {
             }
             return rentsData
         } catch (e) {
-            this.logException('fatal', e, args)
             this.logException('fatal', e, args)
             return null
         }

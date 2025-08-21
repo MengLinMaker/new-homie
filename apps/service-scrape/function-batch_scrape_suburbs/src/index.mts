@@ -3,7 +3,7 @@ import { handle } from 'hono/aws-lambda'
 import { requestId } from 'hono/request-id'
 import { otel } from '@hono/otel'
 
-import { scrapeController } from './global/setup'
+import { browserService, scrapeController } from './global/setup'
 
 // Run setup for OpenTelemetry
 import './global/otel'
@@ -16,15 +16,19 @@ const app = new Hono().use(requestId()).use('*', otel())
 
 // Routes
 app.post('/', localityValidator, async (c) => {
-    const locality = c.req.valid('json')
+    const { suburb, state, postcode } = c.req.valid('json')
 
-    const localityId = await scrapeController.tryExtractSuburbPage(locality)
+    const localityId = await scrapeController.tryExtractSuburbPage({ suburb, state, postcode })
     if (localityId === null)
         return c.text(`${SERVICE_NAME} not scrape suburb`, StatusCodes.INTERNAL_SERVER_ERROR)
 
+    await scrapeController.tryExtractSchools({ suburb, state, postcode, localityId })
+
     for (let page = 1; ; page++) {
         const salesInfo = await scrapeController.tryExtractSalesPage({
-            ...locality,
+            suburb,
+            state,
+            postcode,
             page,
             localityId,
         })
@@ -37,7 +41,9 @@ app.post('/', localityValidator, async (c) => {
     }
     for (let page = 1; ; page++) {
         const rentsInfo = await scrapeController.tryExtractRentsPage({
-            ...locality,
+            suburb,
+            state,
+            postcode,
             page,
             localityId,
         })
@@ -49,11 +55,17 @@ app.post('/', localityValidator, async (c) => {
         if (rentsInfo.isLastPage) break
     }
 
-    return c.text('Success')
+    return c.text('Success', StatusCodes.OK)
 })
 
 app.get('/', async (c) => {
-    return c.text(`${SERVICE_NAME} is available`, StatusCodes.OK)
+    const html = await browserService.getHTML('https://www.google.com.au')
+    if (!html)
+        return c.text(
+            `${SERVICE_NAME} browser failed to boot up`,
+            StatusCodes.INTERNAL_SERVER_ERROR,
+        )
+    return c.html(html, StatusCodes.OK)
 })
 
 // Enable AWS Lambda

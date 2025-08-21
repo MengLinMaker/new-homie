@@ -14,5 +14,5 @@ if (!DB) {
 }
 
 const browserContext = await BrowserService.createBrowserContext()
-const browserService = new BrowserService(LOGGER, browserContext)
+export const browserService = new BrowserService(LOGGER, browserContext)
 export const scrapeController = new ScrapeController(LOGGER, DB, browserService)

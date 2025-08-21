@@ -46,6 +46,17 @@ describe(testSuiteName, async () => {
         })
     })
 
+    describe.sequential('tryExtractSchools', async () => {
+        // Mock individually to prevent data race
+        const mockBrowserService = new MockBrowserService(LOGGER, null as never)
+        const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
+
+        it.sequential('should parse successfully', async () => {
+            const output = await scrapeController.tryExtractSchools(locality)
+            expect(output).toBe(true)
+        })
+    })
+
     describe.sequential('tryExtractRentsPage', async () => {
         // Mock individually to prevent data race
         const mockBrowserService = new MockBrowserService(LOGGER, null as never)

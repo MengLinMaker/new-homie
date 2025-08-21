@@ -1,5 +1,7 @@
 import { ILoggable } from '../../../base/ILoggable'
 import { australiaSchools } from '@service-scrape/lib-australia_amenity'
+import type { Updateable } from 'kysely'
+import type { Schema } from '@service-scrape/lib-db_service_scrape'
 
 export class AracaSchoolsService extends ILoggable {
     /**
@@ -25,7 +27,10 @@ export class AracaSchoolsService extends ILoggable {
         return filteredSchools.map((school) => {
             return {
                 school_feature_table: school.school_feature_table,
-                school_table: school,
+                school_table: school.school_table,
+            } satisfies {
+                school_feature_table: Updateable<Schema.SchoolFeatureTable>
+                school_table: Updateable<Schema.SchoolTable>
             }
         })
     }
