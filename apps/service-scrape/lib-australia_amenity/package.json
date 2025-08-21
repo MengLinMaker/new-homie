@@ -1,5 +1,5 @@
 {
-    "name": "@service-scrape/script",
+    "name": "@service-scrape/lib-australia_amenity",
     "private": "true",
     "scripts": {
         "format": "biome format --write",
