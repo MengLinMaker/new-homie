@@ -9,6 +9,13 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .addColumn('government_sector', 'boolean', (col) => col.notNull())
         .addColumn('independent', 'boolean', (col) => col.notNull())
         .addColumn('special_needs', 'boolean', (col) => col.notNull())
+        .addUniqueConstraint('school_feature_table_unique', [
+            'primary',
+            'secondary',
+            'government_sector',
+            'independent',
+            'special_needs',
+        ])
         .execute()
 }
 

@@ -41,10 +41,9 @@ describe(testSuiteName, async () => {
             postcode: '3000',
             boundary_coordinates,
         } satisfies Insertable<Schema.LocalityTable>
+        const suburbData = { locality_table }
 
         it.sequential('should not insert same data', async () => {
-            const suburbData = { locality_table }
-
             await scrapeModel.tryUpdateSuburb({ suburbData })
             const oldLength = await dbCountRow(db, 'locality_table')
 
@@ -57,27 +56,68 @@ describe(testSuiteName, async () => {
         it.sequential('should insert new data', async () => {
             const length_1 = await dbCountRow(db, 'locality_table')
 
-            await scrapeModel.tryUpdateSuburb({
-                suburbData: {
-                    locality_table: {
-                        ...locality_table,
-                        postcode: '3001',
-                    },
-                },
-            })
+            suburbData.locality_table.postcode = '3001'
+            await scrapeModel.tryUpdateSuburb({ suburbData })
             const length_2 = await dbCountRow(db, 'locality_table')
             expect(length_1 + 1).toBe(length_2)
 
-            await scrapeModel.tryUpdateSuburb({
-                suburbData: {
-                    locality_table: {
-                        ...locality_table,
-                        suburb_name: 'Melbourne North',
-                    },
-                },
-            })
+            suburbData.locality_table.suburb_name = 'Melbourne North'
+            await scrapeModel.tryUpdateSuburb({ suburbData })
             const length_3 = await dbCountRow(db, 'locality_table')
             expect(length_2 + 1).toBe(length_3)
+        })
+    })
+
+    describe.sequential('tryUpdateSchool', () => {
+        const schoolData = {
+            school_table: {
+                name: 'A B Paterson College',
+                url: 'https://www.abpat.qld.edu.au/',
+                acara_id: 48096,
+                gps: 'POINT(153.36 -27.9277)',
+            },
+            school_feature_table: {
+                primary: true,
+                secondary: true,
+                government_sector: false,
+                independent: true,
+                special_needs: false,
+            },
+        }
+        const localityId = 1
+        const dbCountRows = async () => {
+            return {
+                school_table: await dbCountRow(db, 'school_table'),
+                school_feature_table: await dbCountRow(db, 'school_feature_table'),
+            }
+        }
+
+        it.sequential('should not insert same data', async () => {
+            const beginLength = await dbCountRows()
+            await scrapeModel.tryUpdateSchool({ schoolData, localityId })
+            const oldLength = await dbCountRows()
+            beginLength.school_table++
+            beginLength.school_feature_table++
+            expect(beginLength).toStrictEqual(oldLength)
+
+            await scrapeModel.tryUpdateSchool({ schoolData, localityId })
+            const newLength = await dbCountRows()
+            expect(oldLength).toStrictEqual(newLength)
+        })
+
+        it.sequential('should insert new data', async () => {
+            const lengths_1 = await dbCountRows()
+
+            schoolData.school_table.acara_id = 99999
+            await scrapeModel.tryUpdateSchool({ schoolData, localityId })
+            const lengths_2 = await dbCountRows()
+            lengths_1.school_table++
+            expect(lengths_1).toStrictEqual(lengths_2)
+
+            schoolData.school_table.name = 'My Hero Academia High School'
+            await scrapeModel.tryUpdateSchool({ schoolData, localityId })
+            const lengths_3 = await dbCountRows()
+            expect(lengths_2).toStrictEqual(lengths_3)
         })
     })
 
