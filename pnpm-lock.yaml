@@ -86,6 +86,9 @@ importers:
       '@opentelemetry/semantic-conventions':
         specifier: ^1.36.0
         version: 1.36.0
+      '@service-scrape/lib-australia_amenity':
+        specifier: workspace:*
+        version: link:../lib-australia_amenity
       '@service-scrape/lib-db_service_scrape':
         specifier: workspace:*
         version: link:../lib-db_service_scrape
@@ -147,6 +150,10 @@ importers:
       zod:
         specifier: 4.0.17
         version: 4.0.17
+    devDependencies:
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(@swc/core@1.11.4(@swc/helpers@0.5.15))(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.7.0)
 
   apps/service-scrape/lib-db_service_scrape:
     dependencies:
@@ -178,15 +185,6 @@ importers:
       testcontainers:
         specifier: ^11.5.1
         version: 11.5.1
-
-  apps/service-scrape/script:
-    dependencies:
-      '@service-scrape/lib-db_service_scrape':
-        specifier: workspace:*
-        version: link:../lib-db_service_scrape
-      zod:
-        specifier: 4.0.17
-        version: 4.0.17
 
 packages:
 

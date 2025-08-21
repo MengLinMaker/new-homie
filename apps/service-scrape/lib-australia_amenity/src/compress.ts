@@ -18,7 +18,7 @@ const newAmenitiesData: {
     category: string
     gps: [number, number]
 }[] = []
-const finalAmenitiesFilePath = './src/resource/australia-amenities-final.json'
+const finalAmenitiesFilePath = './src/resource/australia-amenities.json'
 
 /**
  * SPECIFY BROTLI COMPRESSED DATA URL SOURCE
@@ -132,7 +132,7 @@ const finalAmenitiesFilePath = './src/resource/australia-amenities-final.json'
 }
 
 writeFileSync(finalAmenitiesFilePath, JSON.stringify(newAmenitiesData, null, 4))
-console.info('Completed writing "australia-amenities-final.json"')
+console.info('Completed writing "australia-amenities.json"')
 
 /**
  * Separate script to parse schools data - https://asl.acara.edu.au/School-Search
@@ -200,14 +200,14 @@ console.info('Completed writing "australia-amenities-final.json"')
         }
     })
     writeFileSync(
-        './src/resource/australia-schools-final.json',
+        './src/resource/australia-schools.json',
         JSON.stringify(transformedSchoolsData, null, 4),
     )
-    console.info('Completed writing "australia-schools-final.json"')
+    console.info('Completed writing "australia-schools.json"')
 
     writeFileSync(
         './src/resource/australia-localities.json',
         JSON.stringify(Array.from(localities), null, 4),
     )
-    console.info('Completed writing "australia-localities-final.json"')
+    console.info('Completed writing "australia-localities.json"')
 }

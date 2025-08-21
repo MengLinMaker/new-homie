@@ -1,9 +1,6 @@
-import _australiaSchools from './resource/australia-schools.json'
-import _australiaLocalities from './resource/australia-localities.json'
+import _australiaSchools from './australia-schools.json'
 import type { Updateable } from 'kysely'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
-
-export const australiaLocalities = _australiaLocalities as Updateable<Schema.LocalityTable>[]
 
 export const australiaSchools = _australiaSchools as {
     school_table: Updateable<Schema.SchoolTable>
