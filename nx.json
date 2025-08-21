@@ -1,56 +1,43 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "targetDefaults": {
-    "test:lint": {
-      "dependsOn": [
-        "^test:lint"
-      ],
-      "cache": true
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "tui": {
+        "enabled": false
     },
-    "test:type": {
-      "dependsOn": [
-        "^test:type"
-      ],
-      "cache": true
-    },
-    "test:unit": {
-      "dependsOn": [
-        "^test:unit"
-      ],
-      "cache": true
-    },
-    "test:perf": {
-      "dependsOn": [
-        "^test:perf"
-      ],
-      "cache": true
-    },
-    "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ],
-      "cache": true
-    },
-    "build:sam": {
-      "dependsOn": [
-        "^build:sam"
-      ],
-      "outputs": [
-        "{projectRoot}/.aws-sam"
-      ],
-      "cache": true
-    },
-    "format": {
-      "cache": true
-    },
-    "test": {
-      "cache": true
-    },
-    "compress": {
-      "cache": true
+    "targetDefaults": {
+        "test:lint": {
+            "dependsOn": ["^test:lint"],
+            "cache": true
+        },
+        "test:type": {
+            "dependsOn": ["^test:type"],
+            "cache": true
+        },
+        "test:unit": {
+            "dependsOn": ["^test:unit"],
+            "cache": true
+        },
+        "test:perf": {
+            "dependsOn": ["^test:perf"],
+            "cache": true
+        },
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["{projectRoot}/dist"],
+            "cache": true
+        },
+        "build:sam": {
+            "dependsOn": ["^build:sam"],
+            "outputs": ["{projectRoot}/.aws-sam"],
+            "cache": true
+        },
+        "format": {
+            "cache": true
+        },
+        "test": {
+            "cache": true
+        },
+        "compress": {
+            "cache": true
+        }
     }
-  }
 }

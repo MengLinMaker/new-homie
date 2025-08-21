@@ -1,0 +1,7 @@
+{
+    "name": "@apps/root",
+    "scripts": {
+        "docker:down": "docker compose down -v",
+        "docker:up": "docker compose up --build -d"
+    }
+}

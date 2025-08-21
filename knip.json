@@ -1,9 +1,6 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignoreBinaries": [
-    "sam",
-    "only-allow",
-    "sleep",
-    "docker-compose"
-  ]
+    "$schema": "https://unpkg.com/knip@5/schema.json",
+    "ignoreBinaries": ["sam", "only-allow"],
+    "ignore": ["**/src/migration/*.ts", "**/src/schema.ts"],
+    "ignoreDependencies": ["pino-pretty", "chromium-bidi"]
 }

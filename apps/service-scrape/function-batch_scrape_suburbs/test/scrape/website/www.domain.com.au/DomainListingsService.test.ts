@@ -1,0 +1,146 @@
+import { describe, expect, it } from 'vitest'
+import {
+    DomainListingsService,
+    type ListingsSchemaDTO,
+} from '../../../../src/scrape/website/www.domain.com.au/DomainListingsService'
+import { LOGGER, parseJsonFile, suiteNameFromFileName } from '../../../util'
+
+const testSuiteName = suiteNameFromFileName(import.meta.filename)
+const resourcePath = `${import.meta.dirname}/${testSuiteName}`
+
+describe(testSuiteName, () => {
+    const domainListingsService = new DomainListingsService(LOGGER)
+
+    describe('tryExtractListing', () => {
+        it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
+            'should extract listings from %s',
+            (fileSuffix) => {
+                const inputObject = parseJsonFile(
+                    `${resourcePath}/raw.${fileSuffix}.json`,
+                ) as object
+                const expectedObject = parseJsonFile(
+                    `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+                ) as unknown
+
+                const result = domainListingsService.tryExtractListings({
+                    nextDataJson: inputObject,
+                })
+                if (!result) return expect(result).toBeNull()
+                expect(result.isLastPage).toBeDefined()
+                expect(result.listings).toStrictEqual(expectedObject)
+            },
+        )
+
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractListings({ nextDataJson: {} })
+            expect(result).toBeNull()
+        })
+    })
+
+    describe('tryTransformListing', () => {
+        it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
+            'should transform listings from %s',
+            (fileSuffix) => {
+                const inputListings = parseJsonFile(
+                    `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+                ) as ListingsSchemaDTO[]
+                const expectedObject = parseJsonFile(
+                    `${resourcePath}/tryTransformListing.${fileSuffix}.json`,
+                ) as never[]
+
+                inputListings.forEach((input, i) => {
+                    const databaseInserts = domainListingsService.tryTransformListing({
+                        listing: input,
+                    })
+                    if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                    expect(databaseInserts).toBeDefined()
+                })
+            },
+        )
+
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformListing({} as never)
+            expect(databaseInserts).toBeNull()
+        })
+    })
+
+    describe('tryTransformSalePrice', () => {
+        it.for(['sale.dandenong-vic-3175'])('should transform listings from %s', (fileSuffix) => {
+            const inputListings = parseJsonFile(
+                `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+            ) as ListingsSchemaDTO[]
+            const expectedObject = parseJsonFile(
+                `${resourcePath}/tryTransformSalePrice.${fileSuffix}.json`,
+            ) as unknown[]
+
+            inputListings.forEach((input, i) => {
+                const databaseInserts = domainListingsService.tryTransformSalePrice({
+                    listing: input,
+                })
+                if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                expect(databaseInserts).toBeDefined()
+            })
+        })
+
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformSalePrice({} as never)
+            expect(databaseInserts).toBeNull()
+        })
+    })
+
+    describe('tryTransformRentPrice', () => {
+        it.for(['rent.dandenong-vic-3175'])('should transform listings from %s', (fileSuffix) => {
+            const inputListings = parseJsonFile(
+                `${resourcePath}/tryExtractListings.${fileSuffix}.json`,
+            ) as ListingsSchemaDTO[]
+            const expectedObject = parseJsonFile(
+                `${resourcePath}/tryTransformRentPrice.${fileSuffix}.json`,
+            ) as unknown[]
+
+            inputListings.forEach((input, i) => {
+                const databaseInserts = domainListingsService.tryTransformRentPrice({
+                    listing: input,
+                })
+                if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
+                expect(databaseInserts).toBeDefined()
+            })
+        })
+
+        it('should not transform invalid input', () => {
+            const databaseInserts = domainListingsService.tryTransformRentPrice({} as never)
+            expect(databaseInserts).toBeNull()
+        })
+    })
+
+    describe('tryExtractSalesPage', () => {
+        it.for(['sale.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
+            const nextDataJson = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`) as object
+
+            const result = domainListingsService.tryExtractSalesPage({ nextDataJson })
+            if (!result) return expect(result).toBeDefined()
+            expect(result.isLastPage).toBeDefined()
+            expect(result.salesInfo.length).toBeGreaterThan(0)
+        })
+
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractSalesPage({ nextDataJson: {} })
+            expect(result).toBeNull()
+        })
+    })
+
+    describe('tryExtractRentsPage', () => {
+        it.for(['sale.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
+            const nextDataJson = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`) as object
+
+            const result = domainListingsService.tryExtractRentsPage({ nextDataJson })
+            if (!result) return expect(result).toBeDefined()
+            expect(result.isLastPage).toBeDefined()
+            expect(result.rentsInfo.length).toBeGreaterThan(0)
+        })
+
+        it('should not extract invalid input', () => {
+            const result = domainListingsService.tryExtractRentsPage({ nextDataJson: {} })
+            expect(result).toBeNull()
+        })
+    })
+})

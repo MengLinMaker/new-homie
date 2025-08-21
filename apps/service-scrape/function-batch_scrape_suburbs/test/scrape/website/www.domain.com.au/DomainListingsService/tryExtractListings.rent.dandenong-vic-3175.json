@@ -1,0 +1,502 @@
+[
+    {
+        "listingModel": {
+            "url": "/2-27-benga-avenue-dandenong-vic-3175-16108292",
+            "price": "$495 p/w",
+            "address": {
+                "street": "2/27 Benga Avenue",
+                "lat": -37.98033,
+                "lng": 145.20033
+            },
+            "features": {
+                "beds": 2,
+                "baths": 2,
+                "parking": 2,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T12:05:00",
+                "closeTime": "2025-02-01T12:15:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/4-28-olive-street-dandenong-vic-3175-17403231",
+            "price": "$ 430 PER WEEK",
+            "address": {
+                "street": "4/28 Olive Street",
+                "lat": -37.980778,
+                "lng": 145.21875
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T10:45:00",
+                "closeTime": "2025-02-01T10:55:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/66-langhorne-street-dandenong-vic-3175-17403436",
+            "price": "$ 490 PER WEEK",
+            "address": {
+                "street": "66 Langhorne Street",
+                "lat": -37.991848,
+                "lng": 145.21875
+            },
+            "features": {
+                "beds": 3,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T11:25:00",
+                "closeTime": "2025-02-01T11:35:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/31b-wilma-avenue-dandenong-vic-3175-17403456",
+            "price": "$530",
+            "address": {
+                "street": "31B Wilma Avenue",
+                "lat": -37.98103,
+                "lng": 145.20241
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 3,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T12:15:00",
+                "closeTime": "2025-02-01T12:30:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/2-49-loch-road-dandenong-vic-3175-17404632",
+            "price": "$ 500 PER WEEK",
+            "address": {
+                "street": "2/49 Loch Road",
+                "lat": -37.960266,
+                "lng": 145.2227
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-13T17:15:00",
+                "closeTime": "2025-02-13T17:30:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/18-2-4-hutton-street-dandenong-vic-3175-17404914",
+            "price": "$ 450 PER WEEK",
+            "address": {
+                "street": "18/2-4 Hutton Street",
+                "lat": -37.9869,
+                "lng": 145.21017
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/22-leonard-street-dandenong-vic-3175-17405566",
+            "price": "$550 per week",
+            "address": {
+                "street": "22 Leonard Street",
+                "lat": -37.974174,
+                "lng": 145.22557
+            },
+            "features": {
+                "beds": 3,
+                "baths": 1,
+                "parking": 6,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/4-30-32-close-avenue-avenue-dandenong-vic-3175-17405594",
+            "price": "$ 450 PER WEEK",
+            "address": {
+                "street": "4/30-32 Close Avenue Avenue",
+                "lat": -37.981995,
+                "lng": 145.20773
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/1-30-32-close-avenue-dandenong-vic-3175-17405605",
+            "price": "$ 450 PER WEEK",
+            "address": {
+                "street": "1/30-32 Close Avenue",
+                "lat": -37.981995,
+                "lng": 145.20773
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-03T11:30:00",
+                "closeTime": "2025-02-03T11:40:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/98-keneally-street-dandenong-vic-3175-17407593",
+            "price": "$420",
+            "address": {
+                "street": "98 Keneally Street",
+                "lat": -37.992256,
+                "lng": 145.20573
+            },
+            "features": {
+                "beds": 1,
+                "baths": 1,
+                "parking": 0,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 555,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/8-79-cleeland-street-dandenong-vic-3175-17407759",
+            "price": "$465",
+            "address": {
+                "street": "8/79 Cleeland Street",
+                "lat": -37.979908,
+                "lng": 145.21439
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/rear-18-lexton-avenue-dandenong-vic-3175-17409876",
+            "price": "$400 per week",
+            "address": {
+                "street": "REAR 18 Lexton Avenue",
+                "lat": -37.97732,
+                "lng": 145.1994
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 0,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T11:00:00",
+                "closeTime": "2025-02-01T11:10:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/1-42-44-bryants-road-dandenong-vic-3175-17410677",
+            "price": "$530 per week",
+            "address": {
+                "street": "1/42-44 Bryants Road",
+                "lat": -37.997078,
+                "lng": 145.21364
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T16:15:00",
+                "closeTime": "2025-02-01T16:30:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/2-60-potter-street-dandenong-vic-3175-17411970",
+            "price": "$360.00",
+            "address": {
+                "street": "2/60 Potter Street",
+                "lat": -37.979904,
+                "lng": 145.2069
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T09:30:00",
+                "closeTime": "2025-02-01T09:40:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/3-19-edward-avenue-dandenong-vic-3175-17412128",
+            "price": "$480 per week",
+            "address": {
+                "street": "3/19 Edward Avenue",
+                "lat": -37.975025,
+                "lng": 145.21243
+            },
+            "features": {
+                "beds": 3,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T10:05:00",
+                "closeTime": "2025-02-01T10:15:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/27-kyla-avenue-dandenong-vic-3175-17412258",
+            "price": "$680",
+            "address": {
+                "street": "27 Kyla Avenue",
+                "lat": -37.999958,
+                "lng": 145.19551
+            },
+            "features": {
+                "beds": 4,
+                "baths": 2,
+                "parking": 2,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T12:25:00",
+                "closeTime": "2025-02-01T12:40:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/7-81-83-potter-street-dandenong-vic-3175-17413240",
+            "price": "$ 420 PER WEEK",
+            "address": {
+                "street": "7/81-83 Potter Street",
+                "lat": -37.978664,
+                "lng": 145.20653
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-01-31T11:00:00",
+                "closeTime": "2025-01-31T11:15:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/83-ross-street-dandenong-vic-3175-17413486",
+            "price": "$650 per week",
+            "address": {
+                "street": "83 Ross Street",
+                "lat": -37.975876,
+                "lng": 145.22708
+            },
+            "features": {
+                "beds": 3,
+                "baths": 2,
+                "parking": 2,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/75-ann-street-dandenong-vic-3175-17413608",
+            "price": "$550 PER WEEK",
+            "address": {
+                "street": "75 Ann Street",
+                "lat": -37.979153,
+                "lng": 145.21973
+            },
+            "features": {
+                "beds": 3,
+                "baths": 1,
+                "parking": 4,
+                "propertyType": "House",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": "2025-02-01T11:00:00",
+                "closeTime": "2025-02-01T11:10:00"
+            },
+            "auction": null
+        }
+    },
+    {
+        "listingModel": {
+            "url": "/1-15-janice-grove-dandenong-vic-3175-17418994",
+            "price": "$ 550 PER WEEK",
+            "address": {
+                "street": "1/15 Janice Grove",
+                "lat": -37.97074,
+                "lng": 145.20276
+            },
+            "features": {
+                "beds": 2,
+                "baths": 1,
+                "parking": 1,
+                "propertyType": "ApartmentUnitFlat",
+                "isRural": false,
+                "landSize": 0,
+                "isRetirement": false
+            },
+            "inspection": {
+                "openTime": null,
+                "closeTime": null
+            },
+            "auction": null
+        }
+    }
+]

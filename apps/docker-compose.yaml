@@ -1,0 +1,43 @@
+name: new-homie-apps
+services:
+
+  # For OpenTelemetry and observability as code
+  otel-lgtm:
+    image: grafana/otel-lgtm:0.11.4
+    ports:
+      - "3000:3000" # Grafana UI
+      - "4317:4317" # OTel gRPC
+      - "4318:4318" # OTel HTTP
+    volumes:
+      - otel-lgtm-data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1000m
+    restart: unless-stopped
+
+  # Database for "service-scrape" quantum - https://www.youtube.com/watch?v=pwW6H6UJDWg
+  lib-db_service_scrape:
+    build:
+      context: ./service-scrape
+      dockerfile: postgis.dockerfile
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - lib-db_service_scrape-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256m
+    restart: unless-stopped
+
+volumes:
+  otel-lgtm-data: {}
+  lib-db_service_scrape-data: {}

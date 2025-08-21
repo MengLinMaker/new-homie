@@ -1,48 +1,31 @@
 {
-  "name": "@service-scrape/lib-db_service_scrape",
-  "version": "1.0.0",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    "import": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+    "name": "@service-scrape/lib-db_service_scrape",
+    "exports": {
+        ".": "./dist/index.js",
+        "./dev": "./dist/dev/index.js"
     },
-    "require": {
-      "types": "./dist/index.d.cts",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": ["dist"],
-  "scripts": {
-    "format": "biome format --write",
-    "docker:down": "docker compose down -v",
-    "docker:up": "docker compose up --build -d && sleep 1 && drizzle-kit migrate",
-    "studio": "drizzle-kit studio",
-    "generate": "drizzle-kit generate --name",
-    "migrate": "drizzle-kit migrate",
-    "test": "pnpm run /^test:/",
-    "test:lint": "biome lint --write",
-    "test:type": "tsc",
-    "test:unit": "vitest run --coverage",
-    "dev:test:unit": "vitest --coverage",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean --sourcemap"
-  },
-  "dependencies": {
-    "consola": "3.4.0",
-    "dotenv": "16.4.7",
-    "drizzle-kit": "0.30.4",
-    "drizzle-orm": "0.40.0",
-    "drizzle-zod": "0.7.0",
-    "kysely": "0.27.5",
-    "pg": "8.13.3",
-    "postgres": "3.4.5",
-    "zod": "3.24.2"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "9.5.0",
-    "@types/pg": "8.11.11"
-  },
-  "type": "module"
+    "scripts": {
+        "migrate": "node ./migrate.ts",
+        "generate": "node ./generate.ts",
+        "test": "pnpm run /^test:/",
+        "test:lint": "biome lint --write",
+        "test:type": "tsc",
+        "test:unit": "vitest run --coverage",
+        "dev:test:unit": "vitest --coverage",
+        "build": "tsup"
+    },
+    "dependencies": {
+        "dotenv": "17.2.1",
+        "kysely": "0.28.4",
+        "pg": "8.16.3",
+        "zod": "4.0.17"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "9.9.0",
+        "@types/pg": "8.15.5",
+        "kysely-codegen": "0.18.5",
+        "pino-pretty": "13.1.1",
+        "testcontainers": "^11.5.1"
+    },
+    "type": "module"
 }

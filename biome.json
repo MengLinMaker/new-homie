@@ -1,38 +1,35 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "lineWidth": 100
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "useLiteralKeys": "off"
-      },
-      "suspicious": {
-        "noExplicitAny": "off"
-      },
-      "style": {
-        "noArguments": "off",
-        "noNonNullAssertion": "off"
-      }
-    }
-  },
-  "javascript": {
+    "$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
     "formatter": {
-      "semicolons": "asNeeded",
-      "quoteStyle": "single"
+        "enabled": true,
+        "indentStyle": "space",
+        "lineWidth": 100,
+        "indentWidth": 4
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "complexity": {
+                "useLiteralKeys": "warn",
+                "noArguments": "warn"
+            },
+            "suspicious": {
+                "noExplicitAny": "warn"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "semicolons": "asNeeded",
+            "quoteStyle": "single"
+        }
+    },
+    "files": {
+        "includes": ["**/*", "!**/coverage/**", "!**/dist/**", "!**/node_modules/**"],
+        "ignoreUnknown": true
+    },
+    "assist": {
+        "enabled": false
     }
-  },
-  "files": {
-    "ignore": [
-      "coverage",
-      "dist",
-      "node_modules"
-    ],
-    "ignoreUnknown": true
-  }
 }

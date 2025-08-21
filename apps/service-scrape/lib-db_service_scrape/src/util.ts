@@ -1,43 +1,44 @@
-import { sql as drizzleSql, type SQL } from 'drizzle-orm'
-import type { ExtraConfigColumn, PgIndexMethod } from 'drizzle-orm/pg-core'
-import { check, index } from 'drizzle-orm/pg-core'
-import { sql as kyselySql } from 'kysely'
+import z from 'zod'
 
 /**
- * @param tableName
- * @returns functions to create an index named {tableName}_{columnName}_{suffix}
+ * Conversion for zod
+ * @param enumType - Kysely enum
+ * @returns Array of string
  */
-export const conventionalConstraintFactory = (tableName: string) => ({
-  index: (indexMethod: PgIndexMethod, column: ExtraConfigColumn) =>
-    index(`${tableName}_${column.name}_idx`).using(indexMethod, column),
-
-  textSearchIndex: (column: ExtraConfigColumn) =>
-    index(`${tableName}_${column.name}_idx`).using(
-      'gist',
-      // @ts-ignore
-      drizzleSql`to_tsvector('english', ${column})`,
-    ),
-
-  check: (column: ExtraConfigColumn, sqlQuery: SQL<unknown>) =>
-    // @ts-ignore
-    check(`${tableName}_${column.name}_check`, sqlQuery),
-})
+export const enumToArray = <T extends { [key: string]: string }>(enumType: T) => {
+    type Value = T[keyof T]
+    return Object.values(enumType) as [Value, ...Value[]]
+}
 
 /**
- * @param inputDatetime - ISO timestamp string.
- * @returns Postgres compatible timestamp string.
- * @link Postgres timestamp spec: https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-INPUT-TIME-STAMPS
+ * Helper to insert PostGIS point to database
+ * @param long - Longitude
+ * @param lat - Latitude
+ * @returns PostGIS point string
  */
-export const toPgDatetime = <T>(inputDatetime: T) =>
-  typeof inputDatetime === 'string'
-    ? (inputDatetime.replaceAll('T', ' ').replaceAll('Z', '').replaceAll('.000', '') as T)
-    : (null as T)
+export const createPostgisPointString = (long: number, lat: number) => `POINT(${long} ${lat})`
 
 /**
- *
- * @param pt - [Latitude, Longitude] tuple.
- * @returns Kysely sql for creating Postgres point.
- * @lint Postgres points doc: https://www.postgresql.org/docs/current/datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS
+ * Helper to insert PostGIS polygon to database
+ * @param polygonCoord Simple polygon coordinate
+ * @returns PostGIS polygon string
  */
-export const toPostgisPoint = (pt: [number, number]): [number, number] =>
-  kyselySql<[number, number]>`${`POINT(${pt[0]} ${pt[1]})`}` as never
+export const createPostgisPolygonString = (polygonCoord: number[][] | undefined | null) => {
+    try {
+        const validCoord = z.array(z.array(z.number()).length(2)).min(4).parse(polygonCoord)
+
+        const len = validCoord.length
+        if (
+            // biome-ignore lint/style/noNonNullAssertion: <already validated>
+            validCoord[0]![0] !== validCoord[len - 1]![0] &&
+            // biome-ignore lint/style/noNonNullAssertion: <already validated>
+            validCoord[0]![1] !== validCoord[len - 1]![1]
+        )
+            return null
+
+        const joinedCoord = validCoord.map((e) => `${e[0]} ${e[1]}`).join(', ')
+        return `POLYGON((${joinedCoord}))`
+    } catch {
+        return null
+    }
+}
