@@ -93,10 +93,31 @@ export interface SalePriceTable {
     last_scrape_date: Generated<Timestamp>
 }
 
+export interface SchoolFeatureTable {
+    government_sector: boolean
+    id: Generated<number>
+    independent: boolean
+    primary: boolean
+    secondary: boolean
+    special_needs: boolean
+}
+
+export interface SchoolTable {
+    acara_id: number
+    gps: string
+    id: Generated<number>
+    locality_table_id: number
+    name: string
+    school_feature_table_id: number
+    url: string | null
+}
+
 export interface DB {
     home_feature_table: HomeFeatureTable
     home_table: HomeTable
     locality_table: LocalityTable
     rent_price_table: RentPriceTable
     sale_price_table: SalePriceTable
+    school_feature_table: SchoolFeatureTable
+    school_table: SchoolTable
 }

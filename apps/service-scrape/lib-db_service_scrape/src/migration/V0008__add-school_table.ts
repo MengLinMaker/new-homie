@@ -1,0 +1,22 @@
+import { type Kysely, sql } from 'kysely'
+
+export async function up(db: Kysely<unknown>): Promise<void> {
+    await db.schema
+        .createTable('school_table')
+        .addColumn('id', 'integer', (col) => col.notNull().primaryKey().generatedAlwaysAsIdentity())
+        .addColumn('locality_table_id', 'integer', (col) =>
+            col.notNull().references('locality_table.id'),
+        )
+        .addColumn('school_feature_table_id', 'integer', (col) =>
+            col.notNull().references('school_feature_table.id'),
+        )
+        .addColumn('name', 'text', (col) => col.notNull())
+        .addColumn('url', 'text')
+        .addColumn('acara_id', 'integer', (col) => col.notNull())
+        .addColumn('gps', sql`geometry(point)`, (col) => col.notNull())
+        .execute()
+}
+
+export async function down(db: Kysely<unknown>): Promise<void> {
+    await db.schema.dropTable('rent_price_table').execute()
+}

@@ -1,0 +1,17 @@
+import type { Kysely } from 'kysely'
+
+export async function up(db: Kysely<unknown>): Promise<void> {
+    await db.schema
+        .createTable('school_feature_table')
+        .addColumn('id', 'integer', (col) => col.notNull().primaryKey().generatedAlwaysAsIdentity())
+        .addColumn('primary', 'boolean', (col) => col.notNull())
+        .addColumn('secondary', 'boolean', (col) => col.notNull())
+        .addColumn('government_sector', 'boolean', (col) => col.notNull())
+        .addColumn('independent', 'boolean', (col) => col.notNull())
+        .addColumn('special_needs', 'boolean', (col) => col.notNull())
+        .execute()
+}
+
+export async function down(db: Kysely<unknown>): Promise<void> {
+    await db.schema.dropTable('school_feature_table').execute()
+}
