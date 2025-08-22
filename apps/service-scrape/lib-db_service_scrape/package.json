@@ -5,8 +5,9 @@
         "./dev": "./dist/dev/index.js"
     },
     "scripts": {
+        "format": "biome format --write",
         "migrate": "node ./migrate.ts",
-        "generate": "node ./generate.ts",
+        "generate": "node ./generate.ts && biome format --write",
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
         "test:type": "tsc",
