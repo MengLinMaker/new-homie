@@ -1,0 +1,25 @@
+{
+    "name": "@observability/grafana-lgtm",
+    "private": true,
+    "scripts": {
+        "format": "biome format --write",
+        "test:lint": "biome lint --write",
+        "test:type": "tsc",
+        "generate": "openapi-typescript --array-length true --properties-required-by-default true './src/api/openapi.json' -o './src/api/schema.d.ts' && biome format --write",
+        "build": "node ./src/iac/index.ts",
+        "extract": "node ./src/extract.ts && biome format --write",
+        "deploy": "node ./src/deploy.ts"
+    },
+    "type": "module",
+    "dependencies": {
+        "@grafana/grafana-foundation-sdk": "11.6.0-cogv0.0.x.1753977659"
+    },
+    "devDependencies": {
+        "@zodios/core": "^10.9.6",
+        "dotenv": "17.2.1",
+        "ofetch": "^1.4.1",
+        "openapi-fetch": "^0.14.0",
+        "openapi-typescript": "^7.9.1",
+        "zod": "4.0.17"
+    }
+}
