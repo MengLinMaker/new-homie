@@ -1,8 +1,7 @@
-import { ENV, RESOURCE_FOLDER } from './util.ts'
-import type { paths } from './api/schema.ts'
+import { dashboardSchema, ENV, RESOURCE_FOLDER } from './util.ts'
+import type { paths } from './api/schema'
 import createClient from 'openapi-fetch'
 import { exit } from 'node:process'
-import z from 'zod'
 import { writeFileSync } from 'node:fs'
 
 const client = createClient<paths>({ baseUrl: ENV.GRAFANA_URL })
@@ -33,17 +32,16 @@ for (const dashboardSummary of dashboardSummaries.data) {
     dashboards.push(dashboard.data)
 }
 
-const dashboardSchema = z.object({
-    dashboard: z.object({
-        title: z.string(),
-    }),
-})
-
 // Write dashboards as json files
 for (const dashboard of dashboards) {
+    // Provisioned dashboards cannot be modified through API
+    if (dashboard.meta.provisioned) continue
+
     const validDashboard = dashboardSchema.parse(dashboard, { reportInput: true })
+    delete dashboard.dashboard['id']
     writeFileSync(
         `${RESOURCE_FOLDER}/${validDashboard.dashboard.title}.json`,
         JSON.stringify(dashboard, null, 4),
     )
+    console.info(`Wrote dashboard file - ${validDashboard.dashboard.title}`)
 }

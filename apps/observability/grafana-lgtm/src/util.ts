@@ -19,3 +19,11 @@ export const ENV = {
 }
 
 export const RESOURCE_FOLDER = `${import.meta.dirname}/resource`
+
+export const dashboardSchema = z.object({
+    dashboard: z.object({
+        title: z.string(),
+        uid: z.string(),
+        id: z.number(),
+    }),
+})

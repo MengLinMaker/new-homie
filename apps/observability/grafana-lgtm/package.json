@@ -7,8 +7,8 @@
         "test:type": "tsc",
         "generate": "openapi-typescript --array-length true --properties-required-by-default true './src/api/openapi.json' -o './src/api/schema.d.ts' && biome format --write",
         "build": "node ./src/iac/index.ts",
-        "extract": "node ./src/extract.ts && biome format --write",
-        "deploy": "node ./src/deploy.ts"
+        "dash:extract": "node ./src/extract.ts && biome format --write",
+        "dash:import": "node ./src/import.ts"
     },
     "type": "module",
     "dependencies": {
