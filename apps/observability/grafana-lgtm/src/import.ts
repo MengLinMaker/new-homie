@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync } from 'node:fs'
-import { ENV, RESOURCE_FOLDER } from './util.ts'
+import { dashboardSchema, ENV, RESOURCE_FOLDER } from './util.ts'
 import createClient from 'openapi-fetch'
 import type { components, paths } from './api/schema'
 
@@ -16,6 +16,9 @@ for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
         meta: components['schemas']['DashboardMeta']
     } = JSON.parse(readFileSync(dashboardPath).toString())
 
+    const validDashboard = dashboardSchema.parse(dashboard, { reportInput: true })
+    existingUids.add(validDashboard.dashboard.uid)
+
     const updateResult = await client.POST('/dashboards/db', {
         body: {
             UpdatedAt: new Date().toISOString(),
@@ -29,7 +32,7 @@ for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
         },
     })
     if (updateResult.data) {
-        console.info(`Updated dashboard - ${dashboardFile}`)
+        console.info(`Updated dashboard - ${dashboardFile} (${validDashboard.dashboard.uid})`)
         continue
     }
 
@@ -45,8 +48,33 @@ for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
         },
     })
     if (importResult.data) {
-        console.info(`Imported dashboard - ${dashboardFile}`)
+        console.info(`Imported dashboard - ${dashboardFile} (${validDashboard.dashboard.uid})`)
         continue
     }
-    console.error(`Failed to import - ${dashboardFile} -`, importResult.error)
+    console.error(
+        `Failed to import - ${dashboardFile} (${validDashboard.dashboard.uid}) -`,
+        importResult.error,
+    )
+}
+
+// Delete dashboards that are not in the resource folder
+const dashboardSummaries = await client.GET('/search')
+if (!dashboardSummaries.data) {
+    console.error('Search dashboards failed', dashboardSummaries.error)
+    process.exit(1)
+}
+for (const dashboardSummary of dashboardSummaries.data) {
+    if (existingUids.has(dashboardSummary.uid)) continue
+
+    const deleteResult = await client.DELETE('/dashboards/uid/{uid}', {
+        params: { path: { uid: dashboardSummary.uid } },
+    })
+    if (deleteResult.data) {
+        console.info(`Deleted dashboard - ${dashboardSummary.title} (${dashboardSummary.uid})`)
+        continue
+    }
+    console.error(
+        `Failed to delete - ${dashboardSummary.title} (${dashboardSummary.uid}) -`,
+        deleteResult.error,
+    )
 }

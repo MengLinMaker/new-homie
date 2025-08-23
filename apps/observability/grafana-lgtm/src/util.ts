@@ -24,6 +24,5 @@ export const dashboardSchema = z.object({
     dashboard: z.object({
         title: z.string(),
         uid: z.string(),
-        id: z.number(),
     }),
 })
