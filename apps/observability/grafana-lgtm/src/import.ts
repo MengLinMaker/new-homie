@@ -5,6 +5,9 @@ import type { components, paths } from './api/schema'
 
 const client = createClient<paths>({ baseUrl: ENV.GRAFANA_URL })
 
+// Keep track of dashboard uids to avoid duplicates. AI?
+
+// Get all dashboards in the resource folder
 for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
     const dashboardPath = `${RESOURCE_FOLDER}/${dashboardFile}`
     const dashboard: {
@@ -24,8 +27,10 @@ for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
             userId: 0,
         },
     })
-    if (updateResult.data) continue
-    console.error(`Failed to update - ${dashboardFile} -`, updateResult.error)
+    if (updateResult.data) {
+        console.info(`Updated dashboard - ${dashboardFile}`)
+        continue
+    }
 
     const importResult = await client.POST('/dashboards/import', {
         body: {
@@ -38,6 +43,9 @@ for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
             pluginId: '',
         },
     })
-    if (importResult.data) continue
+    if (importResult.data) {
+        console.info(`Imported dashboard - ${dashboardFile}`)
+        continue
+    }
     console.error(`Failed to import - ${dashboardFile} -`, importResult.error)
 }
