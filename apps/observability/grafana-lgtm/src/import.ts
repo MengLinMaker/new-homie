@@ -5,7 +5,8 @@ import type { components, paths } from './api/schema'
 
 const client = createClient<paths>({ baseUrl: ENV.GRAFANA_URL })
 
-// Keep track of dashboard uids to avoid duplicates. AI?
+// Keep track of dashboard uids to avoid duplicates
+const existingUids = new Set<string>()
 
 // Get all dashboards in the resource folder
 for (const dashboardFile of readdirSync(RESOURCE_FOLDER)) {
