@@ -47,27 +47,27 @@ const client = createClient<paths>({
         console.error(`Failed to create folder - ${folderFile} -`, importResult.error)
     }
 
-    // Delete folders that are not in the resource folder
-    const folders = await client.GET('/folders')
-    if (!folders.data) {
-        console.error('Get folders failed', folders.error)
-        process.exit(1)
-    }
-    for (const folder of folders.data) {
-        if (existingUids.has(folder.uid)) continue
+    // // Delete folders that are not in the resource folder
+    // const folders = await client.GET('/folders')
+    // if (!folders.data) {
+    //     console.error('Get folders failed', folders.error)
+    //     process.exit(1)
+    // }
+    // for (const folder of folders.data) {
+    //     if (existingUids.has(folder.uid)) continue
 
-        const deleteResult = await client.DELETE('/folders/{folder_uid}', {
-            params: { path: { folder_uid: folder.uid } },
-        })
-        if (deleteResult.data) {
-            console.info(`Deleted folder - ${folder.title} (${folder.uid})`)
-            continue
-        }
-        console.error(
-            `Failed to delete folder - ${folder.title} (${folder.uid}) -`,
-            deleteResult.error,
-        )
-    }
+    //     const deleteResult = await client.DELETE('/folders/{folder_uid}', {
+    //         params: { path: { folder_uid: folder.uid } },
+    //     })
+    //     if (deleteResult.data) {
+    //         console.info(`Deleted folder - ${folder.title} (${folder.uid})`)
+    //         continue
+    //     }
+    //     console.error(
+    //         `Failed to delete folder - ${folder.title} (${folder.uid}) -`,
+    //         deleteResult.error,
+    //     )
+    // }
 }
 
 /**
@@ -123,34 +123,34 @@ const client = createClient<paths>({
         console.error(`Failed to import - ${dashboardFile} -`, importResult.error)
     }
 
-    // Delete dashboards that are not in the resource folder
-    const dashboardSummaries = await client.GET('/search', {
-        params: { query: { type: 'dash-db' } },
-    })
-    if (!dashboardSummaries.data) {
-        console.error('Search dashboards failed', dashboardSummaries.error)
-        process.exit(1)
-    }
-    for (const { title, uid } of dashboardSummaries.data) {
-        if (existingUids.has(uid)) continue
+    // // Delete dashboards that are not in the resource folder
+    // const dashboardSummaries = await client.GET('/search', {
+    //     params: { query: { type: 'dash-db' } },
+    // })
+    // if (!dashboardSummaries.data) {
+    //     console.error('Search dashboards failed', dashboardSummaries.error)
+    //     process.exit(1)
+    // }
+    // for (const { title, uid } of dashboardSummaries.data) {
+    //     if (existingUids.has(uid)) continue
 
-        const dashboard = await client.GET('/dashboards/uid/{uid}', {
-            params: { path: { uid } },
-        })
-        if (!dashboard.data) {
-            console.error(`Failed to fetch dashboard - ${title} (${uid})`, dashboard.error)
-            continue
-        }
-        // Provisioned dashboards cannot be modified through API
-        if (dashboard.data.meta.provisioned) continue
+    //     const dashboard = await client.GET('/dashboards/uid/{uid}', {
+    //         params: { path: { uid } },
+    //     })
+    //     if (!dashboard.data) {
+    //         console.error(`Failed to fetch dashboard - ${title} (${uid})`, dashboard.error)
+    //         continue
+    //     }
+    //     // Provisioned dashboards cannot be modified through API
+    //     if (dashboard.data.meta.provisioned) continue
 
-        const deleteResult = await client.DELETE('/dashboards/uid/{uid}', {
-            params: { path: { uid } },
-        })
-        if (deleteResult.data) {
-            console.info(`Deleted dashboard - ${title} (${uid})`)
-            continue
-        }
-        console.error(`Failed to delete - ${title} (${uid}) -`, deleteResult.error)
-    }
+    //     const deleteResult = await client.DELETE('/dashboards/uid/{uid}', {
+    //         params: { path: { uid } },
+    //     })
+    //     if (deleteResult.data) {
+    //         console.info(`Deleted dashboard - ${title} (${uid})`)
+    //         continue
+    //     }
+    //     console.error(`Failed to delete - ${title} (${uid}) -`, deleteResult.error)
+    // }
 }
