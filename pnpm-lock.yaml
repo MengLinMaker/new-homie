@@ -50,10 +50,6 @@ importers:
   apps/observability: {}
 
   apps/observability/grafana-lgtm:
-    dependencies:
-      '@grafana/grafana-foundation-sdk':
-        specifier: 11.6.0-cogv0.0.x.1753977659
-        version: 11.6.0-cogv0.0.x.1753977659
     devDependencies:
       dotenv:
         specifier: 17.2.1
@@ -460,9 +456,6 @@ packages:
   '@faker-js/faker@9.9.0':
     resolution: {integrity: sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
-
-  '@grafana/grafana-foundation-sdk@11.6.0-cogv0.0.x.1753977659':
-    resolution: {integrity: sha512-RZFJWcq/sYRSS+9PnXsDbrpzSHcp2aH/0c5MlRSaAyWkU9eILQP7s83sOYfC8O84Zhco2UUjB72c96YV6X132g==}
 
   '@grpc/grpc-js@1.12.6':
     resolution: {integrity: sha512-JXUj6PI0oqqzTGvKtzOkxtpsyPRNsrmhh41TtIz/zEB6J+AUiZZ0dxWzcMwO9Ns5rmSPuMdghlTbUuqIM48d3Q==}
@@ -4305,10 +4298,6 @@ snapshots:
     optional: true
 
   '@faker-js/faker@9.9.0': {}
-
-  '@grafana/grafana-foundation-sdk@11.6.0-cogv0.0.x.1753977659':
-    dependencies:
-      tslib: 2.8.1
 
   '@grpc/grpc-js@1.12.6':
     dependencies:
