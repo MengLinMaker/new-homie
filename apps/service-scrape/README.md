@@ -1,4 +1,4 @@
-# Scrape service
+# @service-scrape/root
 Service for scraping and serving property and amenities data.
 
 ### Architecture
@@ -13,8 +13,8 @@ CQRS pattern for different read/write requirements:
 
 Logging with OTel distributed tracing and Serilog to identify erroneous input to functions.
 
-### 0. Script
-Scripts is used to initialise amenities data that does not change often into the database.
+### 0. lib-australia_amenity
+This package reformats amenity data into exportable json files.
 
 ### 1. BatchTrigger function
 Localities as unit of progress. Scrapes Australian localities, then sendMesageBatch() to SQS queue for persistence.
