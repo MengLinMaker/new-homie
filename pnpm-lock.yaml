@@ -45,11 +45,7 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/node@24.2.0)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.20.3)(yaml@2.7.0)
 
-  apps: {}
-
-  apps/observability: {}
-
-  apps/observability/grafana-lgtm:
+  apps/observability/grafana:
     devDependencies:
       dotenv:
         specifier: 17.2.1

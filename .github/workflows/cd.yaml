@@ -19,7 +19,7 @@ jobs:
           run_install: false
 
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
 
       - name: Deploy observability
         run: cd ./apps/observability && pnpm grafana:import
