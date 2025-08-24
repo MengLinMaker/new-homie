@@ -25,4 +25,4 @@ jobs:
         run: cd ./apps/observability && pnpm grafana:import
         env:
           GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
-          GRAFANA_URL: ${{ secrets.GRAFANA_URL }}
+          GRAFANA_API: ${{ secrets.GRAFANA_API }}
