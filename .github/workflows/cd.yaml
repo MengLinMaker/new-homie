@@ -1,0 +1,28 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-observability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          # Reduce installation time with cache - https://github.com/pnpm/action-setup/tree/v4/?tab=readme-ov-file#use-cache-to-reduce-installation-time
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Deploy observability
+        run: cd ./apps/observability && pnpm grafana:import
+        env:
+          GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
+          GRAFANA_URL: ${{ secrets.GRAFANA_URL }}
