@@ -6,7 +6,6 @@
         "test:lint": "biome lint --write",
         "test:type": "tsc",
         "generate": "openapi-typescript --array-length true --properties-required-by-default true './src/api/openapi.json' -o './src/api/schema.d.ts' && biome format --write",
-        "build": "node ./src/iac/index.ts",
         "grafana:export": "node ./src/export.ts && biome format --write",
         "grafana:import": "node ./src/import.ts"
     },
