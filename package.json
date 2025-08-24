@@ -2,14 +2,14 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "postinstall": "simple-git-hooks",
+        "docker:down": "docker compose down -v",
+        "docker:up": "docker compose up --build -d",
         "format": "biome format --write",
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "test": "nx run-many -t test:lint test:type test:unit test:perf test:arch",
         "test:arch": "depcruise .",
         "build": "nx run-many -t build",
-        "docker:up": "nx affected -t docker:up",
-        "docker:down": "nx affected -t docker:down",
         "build:ci": "nx affected -t build",
         "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
     },
