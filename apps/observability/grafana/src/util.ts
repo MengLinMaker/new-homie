@@ -11,11 +11,13 @@ export const ENV = {
      * @description For deploying dashboards to Grafana
      * @default 'http://localhost:3000/api' - Locally hosted Grafana LGTM
      */
-    GRAFANA_URL: z
+    GRAFANA_API: z
         .string()
         .regex(/https?:\/\/.+\/v1\//)
         .default('http://localhost:3000/api')
-        .parse(process.env['GRAFANA_URL']),
+        .parse(process.env['GRAFANA_API']),
+
+    GRAFANA_API_KEY: z.string().default('').parse(process.env['GRAFANA_API_KEY']),
 }
 
 export const RESOURCE_FOLDER = `${import.meta.dirname}/../resource`

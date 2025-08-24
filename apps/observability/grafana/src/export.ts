@@ -4,7 +4,10 @@ import createClient from 'openapi-fetch'
 import { exit } from 'node:process'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 
-const client = createClient<paths>({ baseUrl: ENV.GRAFANA_URL })
+const client = createClient<paths>({
+    baseUrl: ENV.GRAFANA_API,
+    headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
+})
 
 // Resource folder should be cleaned before export
 mkdirSync(RESOURCE_FOLDER, { recursive: true })

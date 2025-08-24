@@ -3,7 +3,10 @@ import { ENV, RESOURCE_FOLDER } from './util.ts'
 import createClient from 'openapi-fetch'
 import type { components, paths } from './api/schema'
 
-const client = createClient<paths>({ baseUrl: ENV.GRAFANA_URL })
+const client = createClient<paths>({
+    baseUrl: ENV.GRAFANA_API,
+    headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
+})
 
 /**
  * @description Import all folders from resource folder
