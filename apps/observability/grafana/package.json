@@ -1,5 +1,5 @@
 {
-    "name": "@observability/grafana-lgtm",
+    "name": "@observability/grafana",
     "private": true,
     "scripts": {
         "format": "biome format --write",

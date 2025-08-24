@@ -18,4 +18,4 @@ export const ENV = {
         .parse(process.env['GRAFANA_URL']),
 }
 
-export const RESOURCE_FOLDER = `${import.meta.dirname}/resource`
+export const RESOURCE_FOLDER = `${import.meta.dirname}/../resource`
