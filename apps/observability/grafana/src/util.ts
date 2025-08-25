@@ -13,7 +13,7 @@ export const ENV = {
      */
     GRAFANA_API: z
         .string()
-        .regex(/https?:\/\/.+\/v1\//)
+        .regex(/https?:\/\/.+\/api)
         .default('http://localhost:3000/api')
         .parse(process.env['GRAFANA_API']),
 
