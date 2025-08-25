@@ -18,6 +18,12 @@ jobs:
           # Reduce installation time with cache - https://github.com/pnpm/action-setup/tree/v4/?tab=readme-ov-file#use-cache-to-reduce-installation-time
           run_install: false
 
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
       - name: Install dependencies
         run: pnpm i --no-frozen-lockfile
 
