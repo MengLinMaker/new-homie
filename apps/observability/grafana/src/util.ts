@@ -24,21 +24,18 @@ export const ENV = {
 
 export const RESOURCE_FOLDER = path.join(`${import.meta.dirname}/../resource`)
 
-export type ResourceType = 'dashboard' | 'playlist' | 'datasource'
-
 /**
  * @description Recursively walk through folders and files
  * @param folderPathList - Start with single element array of root folder path
  * @param visitorFunc - Function to be called for each file and folder
  */
-export const walkFolders = (
+export const walkFolders = async (
     rootFolderPath: string,
-    visitorFunc: (entry: Dirent<string>, parentFolder: string) => void,
-    parentFolder = '',
+    visitorFunc: (entry: Dirent<string>) => void,
 ) => {
     const entries = readdirSync(rootFolderPath, { withFileTypes: true })
     for (const entry of entries) {
-        visitorFunc(entry, parentFolder as string)
+        await visitorFunc(entry)
         if (entry.isDirectory())
             walkFolders(path.join(rootFolderPath, entry.name), visitorFunc, entry.name)
     }
