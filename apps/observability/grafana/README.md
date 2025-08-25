@@ -15,7 +15,8 @@ pnpm grafana:export
 ```
 
 ### Import folders and dashboards
-Will update or import new folders and dashboards, while deleting undocumented ones:
+Will update or import new folders and dashboards:
 ```bash
 pnpm grafana:import
 ```
+_NOTE: importing will not delete unspecified dashboards or folders - for safety reasons_
