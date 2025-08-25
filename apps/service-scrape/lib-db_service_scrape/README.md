@@ -1,6 +1,17 @@
-# lib-db_service_scrape
+# @service-scrape/lib-db_service_scrape
 Australian property database for mostly OLTP and some OLAP workloads.
 Database logic will be shared between separate serverless functions.
+
+### Chosen database - Posgres with Postgis
+We require complex spatial and time series queries. SQL is prefered for complex queries:
+  - Postgres has postgis extension for spatial queries.
+  - MySQL does have spatial data types. But not as featureful. Side note: [5.5 has issues - does not follow SQL standard closely](https://vimeo.com/43536445#t=293s).
+  - SQL Server is licenced.
+
+Postgres extensions to consider:
+  - postgis: well maintained geography features
+  - pg_partman: partition tables (especially time series)
+  - pg_stat_statements: track query performance
 
 ### Choosing an SQL query builder - Kysely
 As performance and flexibility are top priority, a query builder is prefered over ORM.

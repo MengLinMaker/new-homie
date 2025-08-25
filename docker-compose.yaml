@@ -1,9 +1,9 @@
-name: new-homie-apps
+name: new-homie
 services:
 
   # For OpenTelemetry and observability as code
   otel-lgtm:
-    image: grafana/otel-lgtm:0.11.4
+    image: grafana/otel-lgtm:0.11.6
     ports:
       - "3000:3000" # Grafana UI
       - "4317:4317" # OTel gRPC
@@ -20,7 +20,7 @@ services:
   # Database for "service-scrape" quantum - https://www.youtube.com/watch?v=pwW6H6UJDWg
   lib-db_service_scrape:
     build:
-      context: ./service-scrape
+      context: ./apps/service-scrape
       dockerfile: postgis.dockerfile
     ports:
       - "54320:5432"

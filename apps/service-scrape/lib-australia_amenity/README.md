@@ -1,5 +1,5 @@
-# Scripts for service-scrape
-These scripts are mainly used for transforming raw data ready to injest into production database
+# @service-scrape/lib-australia_amenity
+These scripts are mainly used for transforming raw data. The exported json can be injested into production database.
 
 ### Input data format
 Install the [brotli](https://github.com/google/brotli) tool to compress data:
@@ -19,4 +19,3 @@ brotli -d ./script/COMPRESSED_BROTLI_FILE
 
 ### Data sources:
 Sources are documented in `compress.ts`.
-_Note: enable type stripping on `node22` or use `node23`_

@@ -1,0 +1,77 @@
+{
+    "meta": {
+        "type": "db",
+        "canSave": true,
+        "canEdit": true,
+        "canAdmin": true,
+        "canStar": false,
+        "canDelete": true,
+        "slug": "function-scrape-locality-trigger",
+        "url": "/d/f865a1fc-ecd4-4635-b5b6-aeec5c43fa4e/function-scrape-locality-trigger",
+        "expires": "0001-01-01T00:00:00Z",
+        "created": "2025-08-24T12:26:28Z",
+        "updated": "2025-08-24T12:26:28Z",
+        "updatedBy": "admin",
+        "createdBy": "admin",
+        "version": 1,
+        "hasAcl": false,
+        "isFolder": false,
+        "apiVersion": "v0alpha1",
+        "folderId": 16,
+        "folderUid": "devqw4buyi134a",
+        "folderTitle": "service-scrape",
+        "folderUrl": "/dashboards/f/devqw4buyi134a/service-scrape",
+        "provisioned": false,
+        "provisionedExternalId": "",
+        "annotationsPermissions": {
+            "dashboard": {
+                "canAdd": true,
+                "canEdit": true,
+                "canDelete": true
+            },
+            "organization": {
+                "canAdd": true,
+                "canEdit": true,
+                "canDelete": true
+            }
+        }
+    },
+    "dashboard": {
+        "annotations": {
+            "list": [
+                {
+                    "builtIn": 1,
+                    "datasource": {
+                        "type": "grafana",
+                        "uid": "-- Grafana --"
+                    },
+                    "enable": true,
+                    "hide": true,
+                    "iconColor": "rgba(0, 211, 255, 1)",
+                    "name": "Annotations & Alerts",
+                    "type": "dashboard"
+                }
+            ]
+        },
+        "editable": true,
+        "fiscalYearStartMonth": 0,
+        "graphTooltip": 0,
+        "links": [],
+        "panels": [],
+        "preload": false,
+        "schemaVersion": 41,
+        "tags": [],
+        "templating": {
+            "list": []
+        },
+        "time": {
+            "from": "now-6h",
+            "to": "now"
+        },
+        "timepicker": {},
+        "timezone": "browser",
+        "title": "function-scrape_locality_trigger",
+        "uid": "f865a1fc-ecd4-4635-b5b6-aeec5c43fa4e",
+        "version": 1
+    }
+}
