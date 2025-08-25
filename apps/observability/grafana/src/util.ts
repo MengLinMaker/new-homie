@@ -1,6 +1,8 @@
 /** biome-ignore-all lint/complexity/useLiteralKeys: <All env variables can be potentially accessed> */
 import { z } from 'zod'
 import { config } from 'dotenv'
+import path from 'node:path'
+import { type Dirent, readdirSync } from 'node:fs'
 config()
 
 /**
@@ -20,4 +22,24 @@ export const ENV = {
     GRAFANA_API_KEY: z.string().default('').parse(process.env['GRAFANA_API_KEY']),
 }
 
-export const RESOURCE_FOLDER = `${import.meta.dirname}/../resource`
+export const RESOURCE_FOLDER = path.join(`${import.meta.dirname}/../resource`)
+
+export type ResourceType = 'dashboard' | 'playlist' | 'datasource'
+
+/**
+ * @description Recursively walk through folders and files
+ * @param folderPathList - Start with single element array of root folder path
+ * @param visitorFunc - Function to be called for each file and folder
+ */
+export const walkFolders = (
+    rootFolderPath: string,
+    visitorFunc: (entry: Dirent<string>, parentFolder: string) => void,
+    parentFolder = '',
+) => {
+    const entries = readdirSync(rootFolderPath, { withFileTypes: true })
+    for (const entry of entries) {
+        visitorFunc(entry, parentFolder as string)
+        if (entry.isDirectory())
+            walkFolders(path.join(rootFolderPath, entry.name), visitorFunc, entry.name)
+    }
+}
