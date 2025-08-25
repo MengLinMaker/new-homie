@@ -22,7 +22,7 @@ jobs:
         run: pnpm i --no-frozen-lockfile
 
       - name: Deploy observability
-        run: cd ./apps/observability && pnpm grafana:import
+        run: pnpm -r grafana:import
         env:
           GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
           GRAFANA_API: ${{ secrets.GRAFANA_API }}
