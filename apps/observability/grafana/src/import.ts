@@ -16,12 +16,13 @@ const importFolder: ImportFunction = async (entry) => {
     const folder = readJsonFile(`${entry.parentPath}/${entry.name}/folder.json`)
     const newFolder = {
         description: '',
+        overwrite: true,
         ...folder,
     }
 
     const updateResult = await client.PUT('/folders/{folder_uid}', {
         params: { path: { folder_uid: folder.uid } },
-        body: { overwrite: true, ...newFolder },
+        body: newFolder as never,
     })
     if (updateResult.data) return
     console.error(updateResult.error)
