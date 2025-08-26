@@ -1,77 +1,83 @@
 import { ENV, RESOURCE_FOLDER } from './util.ts'
-import type { paths } from './api/schema'
+import type { components, paths } from './api/schema'
 import createClient from 'openapi-fetch'
-import { exit } from 'node:process'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
 
 const client = createClient<paths>({
     baseUrl: ENV.GRAFANA_API,
     headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
 })
 
-// Resource folder should be cleaned before export
-mkdirSync(RESOURCE_FOLDER, { recursive: true })
-rmSync(RESOURCE_FOLDER, { recursive: true })
-mkdirSync(`${RESOURCE_FOLDER}/dashboards`, { recursive: true })
-mkdirSync(`${RESOURCE_FOLDER}/folders`, { recursive: true })
+type FolderUidToPath = { [k: string]: string }
 
-/**
- * @description Exports all dashboards to resource folder
- */
-{
-    // Searching for all dashboards does not return full dashboard data
+const exportFolders = async () => {
+    const folderUidToChildren: {
+        [k: string]: components['schemas']['FolderSearchHit'][]
+    } = {}
+
+    const folders = await client.GET('/search', {
+        params: { query: { type: 'dash-folder' } },
+    })
+
+    // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
+    for (const { uid } of folders.data!) {
+        const folder = await client.GET('/folders/{folder_uid}', {
+            params: { path: { folder_uid: uid } },
+        })
+
+        // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
+        const newFolder = folder.data!
+        const parentUid = newFolder.parentUid ?? ''
+
+        if (folderUidToChildren[parentUid]) folderUidToChildren[parentUid].push(newFolder)
+        else folderUidToChildren[parentUid] = [newFolder]
+    }
+
+    const folderUidToPath: FolderUidToPath = {}
+
+    const dfsWriteFolder = (writePath: string = RESOURCE_FOLDER, parentUid: string = '') => {
+        if (!folderUidToChildren[parentUid]) return
+        for (const insertFolder of folderUidToChildren[parentUid]) {
+            const newWritePath = path.join(writePath, insertFolder.title)
+            mkdirSync(newWritePath, { recursive: true })
+            writeFileSync(`${newWritePath}/folder.json`, JSON.stringify(insertFolder))
+            folderUidToPath[insertFolder.uid] = newWritePath
+            dfsWriteFolder(newWritePath, insertFolder.uid)
+        }
+    }
+    dfsWriteFolder()
+
+    return folderUidToPath
+}
+
+const exportDashboards = async (folderUidToPath: FolderUidToPath) => {
     const dashboardSummaries = await client.GET('/search', {
         params: { query: { type: 'dash-db' } },
     })
-    if (!dashboardSummaries.data) {
-        console.error('Search dashboards failed', dashboardSummaries.error)
-        exit(1)
-    }
 
-    for (const { title, uid } of dashboardSummaries.data) {
-        // Fetch full dashboard data
-        const dashboard = await client.GET('/dashboards/uid/{uid}', {
+    // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
+    for (const { title, uid } of dashboardSummaries.data!) {
+        const dashboardResult = await client.GET('/dashboards/uid/{uid}', {
             params: { path: { uid } },
         })
-        if (!dashboard.data) {
-            console.error(`Failed to fetch dashboard - ${title} (${uid})`, dashboard.error)
-            continue
-        }
+        // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
+        const { meta, dashboard } = dashboardResult.data!
+
         // Provisioned dashboards cannot be modified through API
-        if (dashboard.data.meta.provisioned) continue
+        if (meta.provisioned) continue
 
         // Defined id prevents import
-        delete dashboard.data.dashboard['id']
-        writeFileSync(
-            `${RESOURCE_FOLDER}/dashboards/${title}.${uid}.json`,
-            JSON.stringify(dashboard.data, null, 4),
-        )
-        console.info(`Wrote dashboard file - ${title} (${uid})`)
+        // biome-ignore lint/complexity/useLiteralKeys: <expected to exist>
+        delete dashboard['id']
+        writeFileSync(`${folderUidToPath[meta.folderUid]}/${title}.json`, JSON.stringify(dashboard))
     }
 }
 
-/**
- * @description Exports all folders to resource folder
- */
-{
-    // Get all folders
-    const folderSummaries = await client.GET('/search', {
-        params: { query: { type: 'dash-folder' } },
-    })
-    if (!folderSummaries.data) {
-        console.error('Failed to fetch folders', folderSummaries.error)
-        exit(1)
-    }
+// Resource folder should be cleaned before export
+mkdirSync(RESOURCE_FOLDER, { recursive: true })
+rmSync(RESOURCE_FOLDER, { recursive: true })
 
-    // Write folders as json files
-    for (const folder of folderSummaries.data) {
-        // @ts-expect-error Delete schema for import to work
-        delete folder.id
-        const { title, uid } = folder
-        writeFileSync(
-            `${RESOURCE_FOLDER}/folders/${title}.${uid}.json`,
-            JSON.stringify(folder, null, 4),
-        )
-        console.info(`Wrote folder file - ${title} (${uid})`)
-    }
-}
+// Export folders first so dashboards can be saved
+const folderUidToPath = await exportFolders()
+await exportDashboards(folderUidToPath)
