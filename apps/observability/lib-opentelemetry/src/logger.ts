@@ -5,13 +5,17 @@ import {
 } from '@opentelemetry/semantic-conventions'
 import { ENV } from './util/env'
 import pino from 'pino'
+import pinoOpentelemetryTransport from 'pino-opentelemetry-transport'
 
-export const LOGGER = pino({
-    level: ENV.LOG_LEVEL,
-    transport: {
-        target: 'pino-opentelemetry-transport',
+export const LOGGER = pino(
+    {
+        level: ENV.LOG_LEVEL,
     },
-})
+    await pinoOpentelemetryTransport({
+        loggerName: '',
+        serviceVersion: '',
+    }),
+)
 
 /**
  * Force error to be type of Error - https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
