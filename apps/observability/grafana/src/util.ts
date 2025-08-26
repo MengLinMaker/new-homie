@@ -36,7 +36,6 @@ export const walkFolders = async (
     const entries = readdirSync(rootFolderPath, { withFileTypes: true })
     for (const entry of entries) {
         await visitorFunc(entry)
-        if (entry.isDirectory())
-            walkFolders(path.join(rootFolderPath, entry.name), visitorFunc, entry.name)
+        if (entry.isDirectory()) walkFolders(path.join(rootFolderPath, entry.name), visitorFunc)
     }
 }
