@@ -60,6 +60,70 @@ importers:
         specifier: 4.0.17
         version: 4.0.17
 
+  apps/observability/lib-opentelemetry:
+    dependencies:
+      '@opentelemetry/auto-instrumentations-node':
+        specifier: ^0.62.1
+        version: 0.62.1(@opentelemetry/api@1.9.0)(@opentelemetry/core@2.0.1(@opentelemetry/api@1.9.0))
+      '@opentelemetry/exporter-logs-otlp-proto':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-metrics-otlp-proto':
+        specifier: ^0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-trace-otlp-proto':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources':
+        specifier: ^2.0.1
+        version: 2.0.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-logs':
+        specifier: ^0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-metrics':
+        specifier: ^2.0.1
+        version: 2.0.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-node':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions':
+        specifier: ^1.36.0
+        version: 1.36.0
+      dotenv:
+        specifier: 17.2.1
+        version: 17.2.1
+      kysely:
+        specifier: 0.28.4
+        version: 0.28.4
+      pg:
+        specifier: 8.16.3
+        version: 8.16.3
+      pino:
+        specifier: 9.8.0
+        version: 9.8.0
+      pino-opentelemetry-transport:
+        specifier: ^1.0.1
+        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
+    devDependencies:
+      '@faker-js/faker':
+        specifier: 9.9.0
+        version: 9.9.0
+      '@types/pg':
+        specifier: 8.15.5
+        version: 8.15.5
+      kysely-codegen:
+        specifier: 0.18.5
+        version: 0.18.5(kysely@0.28.4)(pg@8.16.3)(tarn@3.0.2)(typescript@5.9.2)
+      pino-pretty:
+        specifier: 13.1.1
+        version: 13.1.1
+      testcontainers:
+        specifier: ^11.5.1
+        version: 11.5.1
+
   apps/service-scrape: {}
 
   apps/service-scrape/function-batch_scrape_suburbs:
@@ -103,6 +167,97 @@ importers:
       '@service-scrape/lib-db_service_scrape':
         specifier: workspace:*
         version: link:../lib-db_service_scrape
+      '@turf/turf':
+        specifier: 7.2.0
+        version: 7.2.0
+      cheerio:
+        specifier: 1.1.2
+        version: 1.1.2
+      common-errors:
+        specifier: ^1.2.0
+        version: 1.2.0
+      dotenv:
+        specifier: 17.2.1
+        version: 17.2.1
+      hono:
+        specifier: 4.9.0
+        version: 4.9.0
+      http-status-codes:
+        specifier: ^2.3.0
+        version: 2.3.0
+      kysely:
+        specifier: 0.28.4
+        version: 0.28.4
+      pino:
+        specifier: 9.8.0
+        version: 9.8.0
+      playwright-aws-lambda:
+        specifier: ^0.11.0
+        version: 0.11.0(playwright-core@1.54.2)
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
+    devDependencies:
+      '@hono/vite-dev-server':
+        specifier: 0.20.1
+        version: 0.20.1(hono@4.9.0)
+      '@types/common-errors':
+        specifier: ^1.0.5
+        version: 1.0.5
+      chromium-bidi:
+        specifier: ^8.0.0
+        version: 8.0.0(devtools-protocol@0.0.1501221)
+      pino-pretty:
+        specifier: 13.1.1
+        version: 13.1.1
+      playwright:
+        specifier: ^1.54.2
+        version: 1.54.2
+
+  apps/service-scrape/function-scrape_locality:
+    dependencies:
+      '@hono/otel':
+        specifier: ^0.4.0
+        version: 0.4.0(hono@4.9.0)
+      '@opentelemetry/api':
+        specifier: 1.9.0
+        version: 1.9.0
+      '@opentelemetry/auto-instrumentations-node':
+        specifier: ^0.62.1
+        version: 0.62.1(@opentelemetry/api@1.9.0)(@opentelemetry/core@2.0.1(@opentelemetry/api@1.9.0))
+      '@opentelemetry/exporter-logs-otlp-proto':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-metrics-otlp-proto':
+        specifier: ^0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-trace-otlp-proto':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources':
+        specifier: ^2.0.1
+        version: 2.0.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-logs':
+        specifier: ^0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-metrics':
+        specifier: ^2.0.1
+        version: 2.0.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-node':
+        specifier: 0.203.0
+        version: 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions':
+        specifier: ^1.36.0
+        version: 1.36.0
+      '@service-scrape/lib-australia_amenity':
+        specifier: workspace:*
+        version: link:../lib-australia_amenity
+      '@service-scrape/lib-db_service_scrape':
+        specifier: workspace:*
+        version: link:../lib-db_service_scrape
+      '@service-scrape/lib-opentelemetry':
+        specifier: workspace:*
+        version: link:../../observability/lib-opentelemetry
       '@turf/turf':
         specifier: 7.2.0
         version: 7.2.0
@@ -3254,6 +3409,9 @@ packages:
     resolution: {integrity: sha512-zAKMgGXUim0Jyd6CXK9lraBnD3H5yPGBPPOkC23a2BG6hsm4Zu6OQSjQuEtV0BHDf4aKHcUFvJiGRrFuW3MG8g==}
     engines: {node: '>=10'}
 
+  otlp-logger@1.1.11:
+    resolution: {integrity: sha512-ZidS1+gOOJqKIv5q3YRXIUhtGmwNc6fWQYocL+37pH/5r0pTHafIgaIiqwPnI9ubTT0nQys3TxvWpY6NszwwMw==}
+
   oxc-resolver@11.6.1:
     resolution: {integrity: sha512-WQgmxevT4cM5MZ9ioQnEwJiHpPzbvntV5nInGAKo9NQZzegcOonHvcVcnkYqld7bTG35UFHEKeF7VwwsmA3cZg==}
 
@@ -3321,9 +3479,6 @@ packages:
   pg-protocol@1.10.3:
     resolution: {integrity: sha512-6DIBgBQaTKDJyxnXaLiLR8wBpQQcGWuAESkRBX/t6OwA8YsqP+iVSiond2EDy6Y/dsGk8rh/jtax3js5NeV7JQ==}
 
-  pg-protocol@1.7.1:
-    resolution: {integrity: sha512-gjTHWGYWsEgy9MsY0Gp6ZJxV24IjDqdpTW7Eh0x+WfJLFsm/TJx1MzL6T0D88mBvkpxotCQ6TwW6N+Kko7lhgQ==}
-
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
     engines: {node: '>=4'}
@@ -3353,6 +3508,11 @@ packages:
 
   pino-abstract-transport@2.0.0:
     resolution: {integrity: sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==}
+
+  pino-opentelemetry-transport@1.0.1:
+    resolution: {integrity: sha512-o9Lh72uyH00jPARPsLFJkIZm6x/i7Qe7LNsagCLrQxKkadaviEKkjUx2kEBMWgh5HZjqT8caEuHIrxtw7DVoPA==}
+    peerDependencies:
+      pino: ^8.21.0 || ^9.0.0
 
   pino-pretty@13.1.1:
     resolution: {integrity: sha512-TNNEOg0eA0u+/WuqH0MH0Xui7uqVk9D74ESOpjtebSQYbNWJk/dIxCXIxFsNfeN53JmtWqYHP2OrIZjT/CBEnA==}
@@ -6596,7 +6756,7 @@ snapshots:
   '@types/pg@8.15.5':
     dependencies:
       '@types/node': 24.2.0
-      pg-protocol: 1.7.1
+      pg-protocol: 1.10.3
       pg-types: 2.2.0
 
   '@types/qs@6.14.0': {}
@@ -7970,6 +8130,17 @@ snapshots:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
 
+  otlp-logger@1.1.11(@opentelemetry/api@1.9.0):
+    dependencies:
+      '@opentelemetry/api-logs': 0.203.0
+      '@opentelemetry/exporter-logs-otlp-grpc': 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-logs-otlp-http': 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-logs-otlp-proto': 0.203.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources': 2.0.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-logs': 0.203.0(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - '@opentelemetry/api'
+
   oxc-resolver@11.6.1:
     dependencies:
       napi-postinstall: 0.3.2
@@ -8054,8 +8225,6 @@ snapshots:
 
   pg-protocol@1.10.3: {}
 
-  pg-protocol@1.7.1: {}
-
   pg-types@2.2.0:
     dependencies:
       pg-int8: 1.0.1
@@ -8087,6 +8256,14 @@ snapshots:
   pino-abstract-transport@2.0.0:
     dependencies:
       split2: 4.2.0
+
+  pino-opentelemetry-transport@1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0):
+    dependencies:
+      otlp-logger: 1.1.11(@opentelemetry/api@1.9.0)
+      pino: 9.8.0
+      pino-abstract-transport: 2.0.0
+    transitivePeerDependencies:
+      - '@opentelemetry/api'
 
   pino-pretty@13.1.1:
     dependencies:
