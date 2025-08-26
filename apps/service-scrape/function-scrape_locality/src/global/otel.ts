@@ -20,7 +20,7 @@ import { ENV } from './env'
 import pino from 'pino'
 
 const OLTP_HEADERS: Record<string, string> = {}
-ENV.OLTP_HEADERS.split(', ').forEach((header) => {
+ENV.OTEL_EXPORTER_OTLP_HEADERS.split(', ').forEach((header) => {
     const [key, val] = header.split(': ')
     if (key && val) OLTP_HEADERS[key] = val
 })
@@ -33,19 +33,19 @@ const sdk = new NodeSDK({
         [ATTR_SERVICE_VERSION]: '1.0',
     }),
     traceExporter: new OTLPTraceExporter({
-        url: `${ENV.OLTP_BASE_URL}/v1/traces`,
+        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
         headers: OLTP_HEADERS,
     }),
     metricReader: new PeriodicExportingMetricReader({
         exporter: new OTLPMetricExporter({
-            url: `${ENV.OLTP_BASE_URL}/v1/metrics`,
+            url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/metrics`,
             headers: OLTP_HEADERS,
         }),
     }),
     logRecordProcessors: [
         new SimpleLogRecordProcessor(
             new OTLPLogExporter({
-                url: `${ENV.OLTP_BASE_URL}/v1/logs`,
+                url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
                 headers: OLTP_HEADERS,
             }),
         ),

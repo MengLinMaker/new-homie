@@ -14,7 +14,7 @@ export const ENV = {
      * @description Sends to locally hosted Grafana LGTM
      * @default 'http://localhost:4318'
      */
-    OLTP_BASE_URL: z
+    OTEL_EXPORTER_OTLP_ENDPOINT: z
         .string()
         .regex(/https?:\/\/.+/)
         .default('http://localhost:4318')
@@ -24,7 +24,7 @@ export const ENV = {
      * @description Headers for Open Telemetry provider
      * @example key1: val1, key2, val2
      */
-    OLTP_HEADERS: z
+    OTEL_EXPORTER_OTLP_HEADERS: z
         .string()
         .regex(/(([\w-]+: [\w-_. ]+(, )?)+)?/)
         .default('')
