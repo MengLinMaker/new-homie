@@ -1,4 +1,4 @@
-import { IDatabased } from '../base/IDatabased'
+import { IDatabased } from '../global/IDatabased'
 import { DomainListingsService } from './website/www.domain.com.au/DomainListingsService'
 import { ScrapeUtilService } from './website/ScrapeUtilService'
 import type { BrowserService } from './website/BrowserService'

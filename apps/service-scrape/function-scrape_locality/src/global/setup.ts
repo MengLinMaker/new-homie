@@ -1,8 +1,12 @@
 import { DB_SERVICE_SCRAPE, getKyselyPostgresDb } from '@service-scrape/lib-db_service_scrape'
 import { ConnectionError } from 'common-errors'
-import { LOGGER, otelException, SERVICE_NAME } from './otel'
 import { BrowserService } from '../scrape/website/BrowserService'
 import { ScrapeController } from '../scrape/ScrapeController'
+import { LOGGER, otelException, startOpenTelemetry } from '@observability/lib-opentelemetry'
+
+export const SERVICE_NAME = 'function-scrape_locality'
+
+startOpenTelemetry(SERVICE_NAME)
 
 const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE ?? '')
 

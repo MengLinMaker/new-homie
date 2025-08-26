@@ -1,5 +1,5 @@
 import type { Updateable } from 'kysely'
-import { IDatabased } from '../../base/IDatabased'
+import { IDatabased } from '../../global/IDatabased'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
 
 export class ScrapeModel extends IDatabased {
