@@ -4,6 +4,7 @@
         "postinstall": "simple-git-hooks",
         "docker:down": "docker compose down -v",
         "docker:up": "docker compose up --build -d",
+        "graph": "pnpm nx graph",
         "format": "biome format --write",
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
