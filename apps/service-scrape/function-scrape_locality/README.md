@@ -1,4 +1,4 @@
-# @service-scrape/function-batch_scrape_suburbs
+# @service-scrape/function-scrape_locality
 Suburb webscraping worker extracts and transforms data for database insertion.
 
 ### Listings

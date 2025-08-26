@@ -16,7 +16,7 @@ export const ENV = {
      */
     OLTP_BASE_URL: z
         .string()
-        .regex(/https?:\/\/.+\/v1\//)
+        .regex(/https?:\/\/.+/)
         .default('http://localhost:4318')
         .parse(process.env['OLTP_BASE_URL']),
 

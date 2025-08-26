@@ -25,7 +25,7 @@ ENV.OLTP_HEADERS.split(', ').forEach((header) => {
     if (key && val) OLTP_HEADERS[key] = val
 })
 
-export const SERVICE_NAME = 'function-batch_scrape_suburbs'
+export const SERVICE_NAME = 'function-scrape_locality'
 
 const sdk = new NodeSDK({
     resource: resourceFromAttributes({

@@ -1,5 +1,5 @@
 {
-    "name": "@service-scrape/function-batch_scrape_suburbs",
+    "name": "@service-scrape/function-scrape_locality",
     "scripts": {
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
