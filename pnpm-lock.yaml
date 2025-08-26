@@ -92,12 +92,6 @@ importers:
       dotenv:
         specifier: 17.2.1
         version: 17.2.1
-      kysely:
-        specifier: 0.28.4
-        version: 0.28.4
-      pg:
-        specifier: 8.16.3
-        version: 8.16.3
       pino:
         specifier: 9.8.0
         version: 9.8.0
@@ -107,22 +101,6 @@ importers:
       zod:
         specifier: 4.0.17
         version: 4.0.17
-    devDependencies:
-      '@faker-js/faker':
-        specifier: 9.9.0
-        version: 9.9.0
-      '@types/pg':
-        specifier: 8.15.5
-        version: 8.15.5
-      kysely-codegen:
-        specifier: 0.18.5
-        version: 0.18.5(kysely@0.28.4)(pg@8.16.3)(tarn@3.0.2)(typescript@5.9.2)
-      pino-pretty:
-        specifier: 13.1.1
-        version: 13.1.1
-      testcontainers:
-        specifier: ^11.5.1
-        version: 11.5.1
 
   apps/service-scrape: {}
 
@@ -134,36 +112,6 @@ importers:
       '@observability/lib-opentelemetry':
         specifier: workspace:*
         version: link:../../observability/lib-opentelemetry
-      '@opentelemetry/api':
-        specifier: 1.9.0
-        version: 1.9.0
-      '@opentelemetry/auto-instrumentations-node':
-        specifier: ^0.62.1
-        version: 0.62.1(@opentelemetry/api@1.9.0)(@opentelemetry/core@2.0.1(@opentelemetry/api@1.9.0))
-      '@opentelemetry/exporter-logs-otlp-proto':
-        specifier: 0.203.0
-        version: 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-metrics-otlp-proto':
-        specifier: ^0.203.0
-        version: 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-trace-otlp-proto':
-        specifier: 0.203.0
-        version: 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources':
-        specifier: ^2.0.1
-        version: 2.0.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-logs':
-        specifier: ^0.203.0
-        version: 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-metrics':
-        specifier: ^2.0.1
-        version: 2.0.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-node':
-        specifier: 0.203.0
-        version: 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/semantic-conventions':
-        specifier: ^1.36.0
-        version: 1.36.0
       '@service-scrape/lib-australia_amenity':
         specifier: workspace:*
         version: link:../lib-australia_amenity
@@ -179,9 +127,6 @@ importers:
       common-errors:
         specifier: ^1.2.0
         version: 1.2.0
-      dotenv:
-        specifier: 17.2.1
-        version: 17.2.1
       hono:
         specifier: 4.9.0
         version: 4.9.0
@@ -216,6 +161,40 @@ importers:
       playwright:
         specifier: ^1.54.2
         version: 1.54.2
+
+  apps/service-scrape/function-scrape_locality_trigger:
+    dependencies:
+      '@hono/otel':
+        specifier: ^0.4.0
+        version: 0.4.0(hono@4.9.0)
+      '@observability/lib-opentelemetry':
+        specifier: workspace:*
+        version: link:../../observability/lib-opentelemetry
+      '@service-scrape/lib-australia_amenity':
+        specifier: workspace:*
+        version: link:../lib-australia_amenity
+      common-errors:
+        specifier: ^1.2.0
+        version: 1.2.0
+      hono:
+        specifier: 4.9.0
+        version: 4.9.0
+      http-status-codes:
+        specifier: ^2.3.0
+        version: 2.3.0
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
+    devDependencies:
+      '@hono/vite-dev-server':
+        specifier: 0.20.1
+        version: 0.20.1(hono@4.9.0)
+      '@types/common-errors':
+        specifier: ^1.0.5
+        version: 1.0.5
+      pino-pretty:
+        specifier: 13.1.1
+        version: 13.1.1
 
   apps/service-scrape/lib-australia_amenity:
     dependencies:
