@@ -1,4 +1,4 @@
-import { ILoggable } from '../../base/ILoggable'
+import { ILoggable } from '@observability/lib-opentelemetry'
 import { load } from 'cheerio'
 
 class ScrapeUtilServiceError extends Error {}

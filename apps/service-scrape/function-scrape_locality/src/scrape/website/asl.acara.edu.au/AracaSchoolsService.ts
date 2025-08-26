@@ -1,7 +1,7 @@
-import { ILoggable } from '../../../base/ILoggable'
 import { australiaSchools } from '@service-scrape/lib-australia_amenity'
 import type { Updateable } from 'kysely'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
+import { ILoggable } from '@observability/lib-opentelemetry'
 
 export class AracaSchoolsService extends ILoggable {
     /**

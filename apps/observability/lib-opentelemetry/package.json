@@ -1,5 +1,5 @@
 {
-    "name": "@service-scrape/lib-opentelemetry",
+    "name": "@observability/lib-opentelemetry",
     "exports": {
         ".": "./dist/index.js"
     },

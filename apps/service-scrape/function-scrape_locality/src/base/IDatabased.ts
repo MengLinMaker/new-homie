@@ -1,6 +1,6 @@
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
 import type { Kysely } from 'kysely'
-import { ILoggable } from './ILoggable'
+import { ILoggable } from '@observability/lib-opentelemetry'
 import type { Logger } from 'pino'
 
 export class IDatabased extends ILoggable {

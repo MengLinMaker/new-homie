@@ -29,6 +29,7 @@
         "@opentelemetry/semantic-conventions": "^1.36.0",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "@service-scrape/lib-australia_amenity": "workspace:*",
+        "@observability/lib-opentelemetry": "workspace:*",
         "@turf/turf": "7.2.0",
         "cheerio": "1.1.2",
         "common-errors": "^1.2.0",

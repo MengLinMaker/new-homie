@@ -6,7 +6,7 @@ import {
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
-import { ILoggable } from '../../../base/ILoggable'
+import { ILoggable } from '@observability/lib-opentelemetry'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
