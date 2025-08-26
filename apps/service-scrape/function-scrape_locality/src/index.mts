@@ -3,13 +3,11 @@ import { handle } from 'hono/aws-lambda'
 import { requestId } from 'hono/request-id'
 import { otel } from '@hono/otel'
 
-import { browserService, scrapeController } from './global/setup'
+import { browserService, scrapeController, SERVICE_NAME } from './global/setup'
 
 // Run setup for OpenTelemetry
-import './global/otel'
-import { localityValidator } from './util'
+import { localityValidator } from './global/util'
 import { StatusCodes } from 'http-status-codes'
-import { SERVICE_NAME } from './global/otel'
 
 // Middlewares
 const app = new Hono().use(requestId()).use('*', otel())

@@ -1,8 +1,10 @@
 import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
 import { validator } from 'hono/validator'
 import z from 'zod'
-import { LOGGER, otelException, SERVICE_NAME } from './global/otel'
 import { StatusCodes } from 'http-status-codes'
+import '@observability/lib-opentelemetry'
+import { LOGGER, otelException } from '@observability/lib-opentelemetry'
+import { SERVICE_NAME } from './setup'
 
 const localitySchema = z.object({
     suburb: z.string(),
