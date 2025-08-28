@@ -1,6 +1,7 @@
 {
     "name": "@service-scrape/cdk",
     "scripts": {
+        "format": "biome format --write",
         "test": "pnpm /test:.*/",
         "test:lint": "sam validate --lint",
         "build:sam": "sam build",
