@@ -1,9 +1,9 @@
 import { getKyselyPostgresDb } from './connection.ts'
 import * as Schema from './schema.ts'
-import { config } from 'dotenv'
 import { enumToArray, createPostgisPointString, createPostgisPolygonString } from './util'
 
-config()
+import { config } from 'dotenv'
+config({ quiet: true })
 
 /**
  * Uri to database from env variable

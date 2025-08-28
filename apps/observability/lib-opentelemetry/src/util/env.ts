@@ -1,8 +1,9 @@
 /** biome-ignore-all lint/complexity/useLiteralKeys: <All env variables can be potentially accessed> */
 import { z } from 'zod'
-import { config } from 'dotenv'
 import type { Level } from 'pino'
-config()
+
+import { config } from 'dotenv'
+config({ quiet: true })
 
 /**
  * @description Type safe env keys
