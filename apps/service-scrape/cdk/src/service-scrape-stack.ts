@@ -83,9 +83,11 @@ export class ServiceScrapeStack extends cdk.Stack {
         // api.root.addMethod('GET', new apigateway.LambdaIntegration(readPublicFunction));
 
         // Outputs
-        new cdk.CfnOutput(this, 'ScrapeLocalityQueueUrl', {
-            value: scrapeLocalityQueue.queueUrl,
-            description: 'URL of the batch scrape suburbs queue',
+        new cdk.CfnOutput(this, 'ScrapeLocalityTriggerFunctionName', {
+            value: scrapeLocalityTriggerFunction.functionName,
+        })
+        new cdk.CfnOutput(this, 'ScrapeLocalityFunctionName', {
+            value: scrapeLocalityFunction.functionName,
         })
     }
 }
