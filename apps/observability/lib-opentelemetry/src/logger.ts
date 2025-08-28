@@ -22,7 +22,7 @@ export const LOGGER = pino(
  * @param maybeError
  * @returns
  */
-const enforceErrorType = (maybeError: unknown) => {
+export const enforceErrorType = (maybeError: unknown) => {
     if (maybeError instanceof Error) return maybeError
     try {
         return new Error(JSON.stringify(maybeError))
@@ -36,7 +36,7 @@ const enforceErrorType = (maybeError: unknown) => {
  * @param stacktrace Error.stack
  * @returns Stacktrace without messages
  */
-const cleanStackTrace = (stacktrace: string | undefined) => {
+export const cleanStackTrace = (stacktrace: string | undefined) => {
     if (!stacktrace) return undefined
     const stackRegex = /at (?:(.+?) )?\(?([^:]+):(\d+):(\d+)\)?/
     const lines = stacktrace.split('\n')
