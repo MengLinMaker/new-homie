@@ -35,6 +35,7 @@ services:
     ports:
       - "54320:5432"
     environment:
+      # URI - postgres://user:password@localhost:54320/db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
