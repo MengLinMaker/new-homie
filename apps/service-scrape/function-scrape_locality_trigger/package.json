@@ -1,23 +1,20 @@
 {
     "name": "@service-scrape/function-scrape_locality_trigger",
     "scripts": {
+        "format": "biome format --write",
         "test": "pnpm run /^test:/",
         "test:lint": "biome lint --write",
-        "test:type": "tsc",
-        "test:unit": "vitest run --coverage",
-        "dev:test:unit": "vitest --coverage",
-        "dev": "vite dev"
+        "test:type": "tsc"
     },
     "devDependencies": {
-        "@hono/vite-dev-server": "0.20.1",
         "@types/common-errors": "^1.0.5",
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
+        "@aws-sdk/client-sqs": "^3.876.0",
         "@hono/otel": "^0.4.0",
-        "@service-scrape/lib-australia_amenity": "workspace:*",
         "@observability/lib-opentelemetry": "workspace:*",
-        "common-errors": "^1.2.0",
+        "@service-scrape/lib-australia_amenity": "workspace:*",
         "hono": "4.9.0",
         "http-status-codes": "^2.3.0",
         "zod": "4.0.17"

@@ -11,6 +11,6 @@ export const ENV = parseEnvSchema(
         /**
          * SQS queue url
          */
-        QUEUE_URL: z.url(),
+        QUEUE_URL: z.string(),
     }),
 )
