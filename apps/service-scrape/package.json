@@ -1,8 +1,0 @@
-{
-    "name": "@service-scrape/root",
-    "scripts": {
-        "test": "pnpm /test:.*/",
-        "test:lint": "sam validate --lint",
-        "build:sam": "sam build"
-    }
-}
