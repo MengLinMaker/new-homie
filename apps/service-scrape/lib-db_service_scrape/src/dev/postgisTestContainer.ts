@@ -29,10 +29,10 @@ export const postgisTestContainer = async () => {
      * Use same image for all "service-scrape" sub packages
      * Build custom image according to - https://node.testcontainers.org/features/images/
      */
-    const image = await GenericContainer.fromDockerfile('../', 'postgis.dockerfile').build(
-        'new-homie-lib-db_service_scrape',
-        { deleteOnExit: false },
-    )
+    const image = await GenericContainer.fromDockerfile(
+        '../lib-db_service_scrape',
+        'postgis.dockerfile',
+    ).build('new-homie-lib-db_service_scrape', { deleteOnExit: false })
     console.debug('Booting postgis container for "service-scrape"')
     /**
      * Create container and wait until it is ready

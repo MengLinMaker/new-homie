@@ -1,7 +1,17 @@
 name: new-homie
 services:
 
-  # For OpenTelemetry and observability as code
+  # Emulate AWS services
+  localstack:
+    image: localstack/localstack:4.7.0
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    volumes:
+      - "./.localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  # OpenTelemetry and observability as code
   otel-lgtm:
     image: grafana/otel-lgtm:0.11.6
     ports:
@@ -20,7 +30,7 @@ services:
   # Database for "service-scrape" quantum - https://www.youtube.com/watch?v=pwW6H6UJDWg
   lib-db_service_scrape:
     build:
-      context: ./apps/service-scrape
+      context: ./apps/service-scrape/lib-db_service_scrape
       dockerfile: postgis.dockerfile
     ports:
       - "54320:5432"
