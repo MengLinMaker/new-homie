@@ -1,13 +1,7 @@
-import { ENV, RESOURCE_FOLDER } from './util.ts'
-import type { components, paths } from './api/schema'
-import createClient from 'openapi-fetch'
+import { client, RESOURCE_FOLDER } from './util.ts'
+import type { components } from './api/schema'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-
-const client = createClient<paths>({
-    baseUrl: ENV.GRAFANA_API,
-    headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
-})
 
 type FolderUidToPath = { [k: string]: string }
 
