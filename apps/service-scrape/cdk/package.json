@@ -7,7 +7,8 @@
         "build:sam": "sam build",
         "cdk:deploy": "cdk synth && cdk deploy",
         "cdk:destroy": "cdk destroy",
-        "local:deploy": "cdk synth && cdklocal deploy",
+        "local:boot": "cdklocal bootstrap",
+        "local:deploy": "cdk synth && cdklocal deploy -y",
         "local:invoke": "sam local invoke -t ./cdk.out/ServiceScrapeStack.template.json"
     },
     "devDependencies": {
