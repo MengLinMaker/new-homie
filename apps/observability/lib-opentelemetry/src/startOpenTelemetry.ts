@@ -10,8 +10,8 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 
-import { ENV } from './util/env'
-import { commitId } from './util/commitId'
+import { ENV } from './env'
+import { commitId } from './commitId'
 
 export const startOpenTelemetry = (serviceName: string, serviceVersion: string = '') => {
     // Headers need to be parsed into a record

@@ -19,7 +19,7 @@ export const ENV = {
         .string()
         .regex(/https?:\/\/.+/)
         .default('http://localhost:4318')
-        .parse(process.env['OLTP_BASE_URL']),
+        .parse(process.env['OTEL_EXPORTER_OTLP_ENDPOINT']),
 
     /**
      * @description Headers for Open Telemetry provider
@@ -29,7 +29,7 @@ export const ENV = {
         .string()
         .regex(/(([\w-]+: [\w-_. ]+(, )?)+)?/)
         .default('')
-        .parse(process.env['OLTP_HEADERS']),
+        .parse(process.env['OTEL_EXPORTER_OTLP_HEADERS']),
 
     /**
      * @description Log level at bootup

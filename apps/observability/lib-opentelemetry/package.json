@@ -10,7 +10,7 @@
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "dev:test:unit": "vitest --coverage",
-        "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/util/commitId.ts && tsup"
+        "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts && tsup"
     },
     "dependencies": {
         "@opentelemetry/auto-instrumentations-node": "^0.62.1",

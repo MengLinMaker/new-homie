@@ -3,7 +3,7 @@ import {
     ATTR_EXCEPTION_STACKTRACE,
     ATTR_EXCEPTION_TYPE,
 } from '@opentelemetry/semantic-conventions'
-import { ENV } from './util/env'
+import { ENV } from './env'
 import pino from 'pino'
 import pinoOpentelemetryTransport from 'pino-opentelemetry-transport'
 
