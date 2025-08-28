@@ -1,12 +1,12 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/aws-lambda'
 import { requestId } from 'hono/request-id'
-import { prettyJSON } from 'hono/pretty-json'
 import { otel } from '@hono/otel'
 import { StatusCodes } from 'http-status-codes'
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { sqsClient } from './global/setup'
 import { SendMessageBatchCommand } from '@aws-sdk/client-sqs'
+
 import { ENV } from './global/env'
 import { chunkArray } from './util'
 
@@ -15,7 +15,7 @@ import './global/setup'
 import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 
 // Middlewares
-const app = new Hono().use(requestId()).use('*', otel()).use('*', prettyJSON())
+const app = new Hono().use(requestId()).use('*', otel())
 
 // Routes
 app.get('/', async (c) => {
@@ -35,11 +35,19 @@ app.get('/', async (c) => {
                 }),
             )
         } catch (e) {
-            LOGGER.fatal(otelException(e))
+            const formattedError = otelException(e)
+            LOGGER.fatal(formattedError)
+            return c.json(formattedError, StatusCodes.INTERNAL_SERVER_ERROR)
         }
     }
 
-    return c.body('', StatusCodes.OK)
+    return c.json(
+        {
+            status: 'Success',
+            localityCount: filteredLocality.length,
+        },
+        StatusCodes.OK,
+    )
 })
 
 // Enable AWS Lambda
