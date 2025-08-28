@@ -14,6 +14,7 @@
     "devDependencies": {
         "@types/aws-lambda": "^8.10.152",
         "aws-cdk-lib": "^2.212.0",
-        "constructs": "^10.4.2"
+        "constructs": "^10.4.2",
+        "@service-scrape/lib-db_service_scrape": "workspace:*"
     }
 }

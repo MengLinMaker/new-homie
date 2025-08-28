@@ -3,8 +3,11 @@ import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
 import * as targets from 'aws-cdk-lib/aws-events-targets'
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources'
+import * as apigateway from 'aws-cdk-lib/aws-apigateway'
 import type { Construct } from 'constructs'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
+
+import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 
 import { functionDefaults, NODE_OPTIONS } from './util/functionDefaults.ts'
 
@@ -53,7 +56,12 @@ export class ServiceScrapeStack extends cdk.Stack {
             memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 1,
-            environment: { NODE_OPTIONS },
+            environment: {
+                NODE_OPTIONS,
+                // Default to docker-compose setup
+                DB_SERVICE_SCRAPE:
+                    DB_SERVICE_SCRAPE ?? 'postgres://user:password@localhost:54320/db',
+            },
         })
         scrapeLocalityFunction.addEventSource(
             new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
@@ -61,6 +69,16 @@ export class ServiceScrapeStack extends cdk.Stack {
                 maxConcurrency: 2,
             }),
         )
+
+        const api = new apigateway.RestApi(this, 'ServiceScrapeApi')
+        api.root.addProxy({
+            defaultIntegration: new apigateway.LambdaIntegration(scrapeLocalityFunction),
+            anyMethod: false,
+        })
+        api.root.addMethod('GET', new apigateway.LambdaIntegration(scrapeLocalityFunction))
+        new cdk.CfnOutput(this, 'ServiceScrapeApiPath', {
+            value: api.root.path,
+        })
 
         // Read Public Lambda Function (if it exists)
         // Note: This function doesn't exist in the current structure, so commenting out
