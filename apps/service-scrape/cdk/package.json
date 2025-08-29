@@ -7,14 +7,14 @@
         "build:sam": "sam build",
         "cdk:deploy": "cdk synth && cdk deploy",
         "cdk:destroy": "cdk destroy",
-        "local:boot": "cdklocal bootstrap",
-        "local:deploy": "cdk synth && cdklocal deploy -y",
+        "local:boot": "cdklocal bootstrap && pnpm dlx tsx ../lib-db_service_scrape/migrate.ts",
+        "local:deploy": "cdk synth && cdklocal deploy --require-approval never",
         "local:invoke": "sam local invoke -t ./cdk.out/ServiceScrapeStack.template.json"
     },
     "devDependencies": {
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
         "@types/aws-lambda": "^8.10.152",
         "aws-cdk-lib": "^2.212.0",
-        "constructs": "^10.4.2",
-        "@service-scrape/lib-db_service_scrape": "workspace:*"
+        "constructs": "^10.4.2"
     }
 }
