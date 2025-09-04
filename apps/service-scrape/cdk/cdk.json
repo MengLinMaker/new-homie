@@ -1,5 +1,7 @@
 {
     "app": "node src/index.ts",
+    "requireApproval": "never",
+    "staging": false,
     "watch": {
         "include": ["**"],
         "exclude": [

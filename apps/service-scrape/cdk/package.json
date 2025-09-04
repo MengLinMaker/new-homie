@@ -3,18 +3,17 @@
     "scripts": {
         "format": "biome format --write",
         "test": "pnpm /test:.*/",
-        "test:lint": "sam validate --lint",
-        "build:sam": "sam build",
-        "cdk:deploy": "cdk synth && cdk deploy",
-        "cdk:destroy": "cdk destroy",
-        "local:boot": "cdklocal bootstrap && pnpm dlx tsx ../lib-db_service_scrape/migrate.ts",
-        "local:deploy": "cdk synth && cdklocal deploy --require-approval never",
-        "local:invoke": "sam local invoke -t ./cdk.out/ServiceScrapeStack.template.json"
+        "cdk:synth": "cdk synth",
+        "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback --progress",
+        "cdk:destroy": "cdk destroy"
     },
     "devDependencies": {
+        "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "@types/aws-lambda": "^8.10.152",
         "aws-cdk-lib": "^2.212.0",
+        "cdk-nag": "^2.37.15",
         "constructs": "^10.4.2"
-    }
+    },
+    "type": "module"
 }
