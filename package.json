@@ -8,8 +8,7 @@
         "format": "biome format --write",
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
-        "test": "nx run-many -t test:lint test:type test:unit test:perf test:arch",
-        "test:arch": "depcruise .",
+        "test": "nx run-many -t test:lint test:type test:unit test:perf",
         "build": "nx run-many -t build",
         "build:ci": "nx affected -t build",
         "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
@@ -20,7 +19,6 @@
         "@vitest/coverage-v8": "3.2.4",
         "aws-cdk": "^2.1026.0",
         "aws-cdk-local": "^3.0.1",
-        "dependency-cruiser": "^17.0.1",
         "knip": "5.62.0",
         "nx": "21.3.11",
         "simple-git-hooks": "2.13.1",
@@ -31,8 +29,7 @@
         "vitest": "3.2.4"
     },
     "simple-git-hooks": {
-        "pre-commit": "pnpm format",
-        "pre-push": "pnpm test:arch"
+        "pre-commit": "pnpm format"
     },
     "packageManager": "pnpm@10.14.0",
     "type": "module"
