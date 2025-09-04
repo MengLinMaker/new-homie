@@ -5,8 +5,8 @@ dist
 .aws-sam
 cdk.out
 
-# Localstack
-.localstack
+# Puppeteer
+.puppeteer
 
 # Dependencies
 node_modules
