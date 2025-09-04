@@ -1,7 +1,6 @@
 import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
 import { validator } from 'hono/validator'
 import z from 'zod'
-import { StatusCodes } from 'http-status-codes'
 import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 import { SERVICE_NAME } from './setup'
 
@@ -18,7 +17,7 @@ export const localityValidator = validator('json', (value, c) => {
             otelException(locality.error),
             `${SERVICE_NAME} requires valid locality data in request`,
         )
-        return c.text(locality.error.stack ?? locality.error.message, StatusCodes.BAD_REQUEST)
+        throw locality.error
     }
     return locality.data
 })
