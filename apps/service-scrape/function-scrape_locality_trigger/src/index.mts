@@ -30,6 +30,7 @@ app.get('/', async (c) => {
                     QueueUrl: ENV.QUEUE_URL,
                     Entries: chunkLocality.map((locality, id) => ({
                         Id: id.toString(),
+                        MessageGroupId: id.toString(),
                         MessageBody: JSON.stringify(locality),
                     })),
                 }),
