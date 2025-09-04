@@ -12,10 +12,26 @@ import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from './util/functionDefaults.ts'
 import path from 'node:path'
 import { Asset } from 'aws-cdk-lib/aws-s3-assets'
+import { NagSuppressions } from 'cdk-nag'
 
 export class ServiceScrapeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props)
+        NagSuppressions.addStackSuppressions(this, [
+            { id: 'Serverless-EventBusDLQ', reason: 'Failures cannot be handled' },
+            { id: 'Serverless-SQSRedrivePolicy', reason: 'Not all errors need redrive' },
+            {
+                id: 'Serverless-LambdaEventSourceMappingDestination',
+                reason: 'Failures are expected, not handled',
+            },
+            { id: 'Serverless-LambdaDLQ', reason: 'Failures are expected, not handled' },
+            {
+                id: 'Serverless-LambdaAsyncFailureDestination',
+                reason: 'Failures are expected, not handled',
+            },
+            { id: 'AwsSolutions-IAM4', reason: 'Use default IAM permission for now' },
+            { id: 'AwsSolutions-IAM5', reason: 'Use default IAM permission for now' },
+        ])
 
         // Main SQS Queue for batch scraping
         const scrapeLocalityQueue = new sqs.Queue(this, 'ScrapeLocalityQueue', {
@@ -36,6 +52,7 @@ export class ServiceScrapeStack extends cdk.Stack {
         // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
         const scrapeLocalityTriggerFunction = new NodejsFunction(this, 'ScrapeLocalityTrigger', {
             ...functionDefaults,
+            memorySize: 128,
             entry: path.join(
                 import.meta.dirname,
                 '../../function-scrape_locality_trigger/src/index.mts',
@@ -56,7 +73,8 @@ export class ServiceScrapeStack extends cdk.Stack {
                 hour: '22',
                 weekDay: '6',
             }),
-        }).addTarget(new targets.LambdaFunction(scrapeLocalityTriggerFunction))
+            targets: [new targets.LambdaFunction(scrapeLocalityTriggerFunction)],
+        })
 
         const scrapeChromePuppeteerAsset = new Asset(this, 'ScrapeChromePuppeteerAsset', {
             path: path.join(
@@ -69,22 +87,23 @@ export class ServiceScrapeStack extends cdk.Stack {
         const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
             ...functionDefaults,
             entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.mts'),
-            memorySize: 1769,
+            memorySize: 1000,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
+            retryAttempts: 0,
             environment: {
                 ...functionDefaults.environment,
                 DB_SERVICE_SCRAPE,
                 CHROME_PUPPETEER_ASSET_URL: scrapeChromePuppeteerAsset.httpUrl,
             },
+            events: [
+                new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
+                    batchSize: 1,
+                    maxConcurrency: 2,
+                }),
+            ],
         })
         scrapeChromePuppeteerAsset.grantRead(scrapeLocalityFunction)
-        scrapeLocalityFunction.addEventSource(
-            new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
-                batchSize: 1,
-                maxConcurrency: 2,
-            }),
-        )
 
         // const api = new apigateway.RestApi(this, 'ServiceScrapeApi')
         // const lambdaIntegration = new apigateway.LambdaIntegration(scrapeLocalityFunction, {
@@ -117,13 +136,5 @@ export class ServiceScrapeStack extends cdk.Stack {
         //   anyMethod: false,
         // });
         // api.root.addMethod('GET', new apigateway.LambdaIntegration(readPublicFunction));
-
-        // Outputs
-        new cdk.CfnOutput(this, 'ScrapeLocalityTriggerFunctionName', {
-            value: scrapeLocalityTriggerFunction.functionName,
-        })
-        new cdk.CfnOutput(this, 'ScrapeLocalityFunctionName', {
-            value: scrapeLocalityFunction.functionName,
-        })
     }
 }
