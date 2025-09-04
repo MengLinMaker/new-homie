@@ -1,10 +1,12 @@
-import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda'
+import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda'
 import { type NodejsFunctionProps, OutputFormat } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { ENV as OTEL_ENV } from '@observability/lib-opentelemetry'
 
 export const functionDefaults: NodejsFunctionProps = {
     runtime: Runtime.NODEJS_22_X,
     architecture: Architecture.ARM_64,
+    // Distributed tracing debugging
+    tracing: Tracing.ACTIVE,
     bundling: {
         format: OutputFormat.ESM,
         // lines joined to prevent syntax token error
@@ -23,7 +25,6 @@ export const functionDefaults: NodejsFunctionProps = {
         keepNames: true,
         // Source map to source code
         sourceMap: true,
-        externalModules: ['@aws-sdk/*', 'aws-sdk'],
     },
     environment: {
         NODE_OPTIONS: '--enable-source-maps',
