@@ -10,8 +10,8 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 
 import { functionDefaults } from './util/functionDefaults.ts'
-import { DockerImageCode, DockerImageFunction, LayerVersion } from 'aws-cdk-lib/aws-lambda'
-// import { DockerImageCode, DockerImageFunction } from 'aws-cdk-lib/aws-lambda'
+import path from 'node:path'
+import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 export class ServiceScrapeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -36,7 +36,10 @@ export class ServiceScrapeStack extends cdk.Stack {
         // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
         const scrapeLocalityTriggerFunction = new NodejsFunction(this, 'ScrapeLocalityTrigger', {
             ...functionDefaults,
-            entry: '../function-scrape_locality_trigger/src/index.mts',
+            entry: path.join(
+                import.meta.dirname,
+                '../../function-scrape_locality_trigger/src/index.mts',
+            ),
             timeout: cdk.Duration.seconds(60),
             reservedConcurrentExecutions: 1,
             environment: {
@@ -55,30 +58,27 @@ export class ServiceScrapeStack extends cdk.Stack {
             }),
         }).addTarget(new targets.LambdaFunction(scrapeLocalityTriggerFunction))
 
+        const scrapeChromePuppeteerAsset = new Asset(this, 'ScrapeChromePuppeteerAsset', {
+            path: path.join(
+                import.meta.dirname,
+                '../../function-scrape_locality/src/asset/chromium-v138.0.2-pack.arm64.tar',
+            ),
+        })
+
         // Batch Scrape Suburbs Lambda Function - 1x 1vCPU for max duration
-        const scrapeLocalityFunction = new DockerImageFunction(this, 'ScrapeLocality', {
+        const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
             ...functionDefaults,
-            code: DockerImageCode.fromImageAsset('../function-scrape_locality'),
+            entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.mts'),
             memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
             environment: {
                 ...functionDefaults.environment,
                 DB_SERVICE_SCRAPE,
+                CHROME_PUPPETEER_ASSET_URL: scrapeChromePuppeteerAsset.httpUrl,
             },
         })
-
-        // const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
-        //     ...functionDefaults,
-        //     entry: '../function-scrape_locality/src/index.mts',
-        //     memorySize: 1769,
-        //     timeout: cdk.Duration.seconds(900),
-        //     reservedConcurrentExecutions: 2,
-        //     environment: {
-        //         ...functionDefaults.environment,
-        //         DB_SERVICE_SCRAPE,
-        //     },
-        // })
+        scrapeChromePuppeteerAsset.grantRead(scrapeLocalityFunction)
         scrapeLocalityFunction.addEventSource(
             new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
                 batchSize: 1,
