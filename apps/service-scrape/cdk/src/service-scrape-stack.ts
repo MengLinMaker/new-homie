@@ -9,7 +9,9 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 
-import { functionDefaults, NODE_OPTIONS } from './util/functionDefaults.ts'
+import { functionDefaults } from './util/functionDefaults.ts'
+import { DockerImageCode, DockerImageFunction, LayerVersion } from 'aws-cdk-lib/aws-lambda'
+// import { DockerImageCode, DockerImageFunction } from 'aws-cdk-lib/aws-lambda'
 
 export class ServiceScrapeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -18,10 +20,14 @@ export class ServiceScrapeStack extends cdk.Stack {
         // Main SQS Queue for batch scraping
         const scrapeLocalityQueue = new sqs.Queue(this, 'ScrapeLocalityQueue', {
             queueName: 'ScrapeLocalityQueue',
+            enforceSSL: true,
+            // Duration of AWS lambda
+            visibilityTimeout: cdk.Duration.minutes(15),
             // No plans to process failed requests
             deadLetterQueue: {
                 queue: new sqs.Queue(this, 'ScrapeLocalityDLQ', {
                     queueName: 'ScrapeLocalityQueue-DLQ',
+                    enforceSSL: true,
                 }),
                 maxReceiveCount: 2,
             },
@@ -34,7 +40,7 @@ export class ServiceScrapeStack extends cdk.Stack {
             timeout: cdk.Duration.seconds(60),
             reservedConcurrentExecutions: 1,
             environment: {
-                NODE_OPTIONS,
+                ...functionDefaults.environment,
                 QUEUE_URL: scrapeLocalityQueue.queueUrl,
             },
         })
@@ -50,19 +56,29 @@ export class ServiceScrapeStack extends cdk.Stack {
         }).addTarget(new targets.LambdaFunction(scrapeLocalityTriggerFunction))
 
         // Batch Scrape Suburbs Lambda Function - 1x 1vCPU for max duration
-        const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
+        const scrapeLocalityFunction = new DockerImageFunction(this, 'ScrapeLocality', {
             ...functionDefaults,
-            entry: '../function-scrape_locality/src/index.mts',
+            code: DockerImageCode.fromImageAsset('../function-scrape_locality'),
             memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
-            reservedConcurrentExecutions: 1,
+            reservedConcurrentExecutions: 2,
             environment: {
-                NODE_OPTIONS,
-                // Default to docker-compose setup
-                DB_SERVICE_SCRAPE:
-                    DB_SERVICE_SCRAPE ?? 'postgres://user:password@localhost:54320/db',
+                ...functionDefaults.environment,
+                DB_SERVICE_SCRAPE,
             },
         })
+
+        // const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
+        //     ...functionDefaults,
+        //     entry: '../function-scrape_locality/src/index.mts',
+        //     memorySize: 1769,
+        //     timeout: cdk.Duration.seconds(900),
+        //     reservedConcurrentExecutions: 2,
+        //     environment: {
+        //         ...functionDefaults.environment,
+        //         DB_SERVICE_SCRAPE,
+        //     },
+        // })
         scrapeLocalityFunction.addEventSource(
             new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
                 batchSize: 1,
@@ -70,15 +86,17 @@ export class ServiceScrapeStack extends cdk.Stack {
             }),
         )
 
-        const api = new apigateway.RestApi(this, 'ServiceScrapeApi')
-        api.root.addProxy({
-            defaultIntegration: new apigateway.LambdaIntegration(scrapeLocalityFunction),
-            anyMethod: false,
-        })
-        api.root.addMethod('GET', new apigateway.LambdaIntegration(scrapeLocalityFunction))
-        new cdk.CfnOutput(this, 'ServiceScrapeApiPath', {
-            value: api.root.path,
-        })
+        // const api = new apigateway.RestApi(this, 'ServiceScrapeApi')
+        // const lambdaIntegration = new apigateway.LambdaIntegration(scrapeLocalityFunction, {
+        //     timeout: cdk.Duration.seconds(29),
+        // })
+        // api.root.addProxy({
+        //     defaultIntegration: lambdaIntegration,
+        // })
+        // api.root.addMethod('GET', lambdaIntegration)
+        // new cdk.CfnOutput(this, 'ServiceScrapeApiPath', {
+        //     value: api.root.path,
+        // })
 
         // Read Public Lambda Function (if it exists)
         // Note: This function doesn't exist in the current structure, so commenting out
