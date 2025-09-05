@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { StatusCodes } from 'http-status-codes'
 
 describe('handler', async () => {
     // biome-ignore lint/complexity/useLiteralKeys: <setting value>
@@ -7,8 +6,9 @@ describe('handler', async () => {
     const { handler } = await import('../src/index.mts')
 
     it('Should validate incorrect input', async () => {
-        const result = await handler({} as never, undefined as never)
-        expect(result).toStrictEqual({ status: StatusCodes.BAD_REQUEST })
+        expect(() => handler({} as never, undefined as never)).rejects.toThrowError(
+            'Failed to parse schema',
+        )
     })
 
     const validEventbridgeEvent = {
@@ -28,8 +28,8 @@ describe('handler', async () => {
     }
 
     it('Should parse correct input', async () => {
-        const result = await handler(validEventbridgeEvent as never, undefined as never)
-        // Error expected as SQS cannot be reached
-        expect(result).toStrictEqual({ status: StatusCodes.INTERNAL_SERVER_ERROR })
+        expect(() =>
+            handler(validEventbridgeEvent as never, undefined as never),
+        ).rejects.toThrowError('The specified queue does not exist.')
     })
 })

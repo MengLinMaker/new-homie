@@ -21,7 +21,8 @@ export const handler = middy()
                 args: event.originalEvent,
                 ...otelException(event.error),
             })
-            return { status: StatusCodes.BAD_REQUEST }
+            LOGGER.flush()
+            throw event.error
         }
         event.data
 
@@ -48,12 +49,14 @@ export const handler = middy()
             } catch (e) {
                 const formattedError = otelException(e)
                 LOGGER.fatal(formattedError)
-                return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+                LOGGER.flush()
+                throw e
             }
         }
 
         LOGGER.info({
             localityLength: filteredLocality.length,
         })
+        LOGGER.flush()
         return { status: StatusCodes.OK }
     })
