@@ -9,8 +9,7 @@ Nx is used to determine which packages to test, reducing CI time.
 
 Workflows:
 - `ci` - runs a bunch of tests with Nx in parallel
-    - `test-unit` - runs affected unit tests
-    - `test-lint` - runs affected linting tests
+    - `test-unit` - runs affected unit tests, including linting
     - `test-integration` - runs affected integration tests
 - `cd` - deploys all infrastructure in parallel
     - `deploy-observability` - deploys dashboards to grafana cloud

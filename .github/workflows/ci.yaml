@@ -15,19 +15,7 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
       - name: Test
-        run: pnpm nx affected -t test:unit
-
-  test-lint:
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - name: Shallow checkout branch
-        uses: actions/checkout@v4
-
-      - name: Setup dependencies Nx
-        uses: ./.github/actions/setup-ci
-
-      - name: Test
-        run: pnpm nx affected -t test:lint test:type
+        run: pnpm nx affected -t test:unit test:lint test:type
 
   test-integration:
     runs-on: ubuntu-24.04-arm
