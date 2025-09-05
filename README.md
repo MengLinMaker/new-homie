@@ -34,3 +34,8 @@ Upgrade all dependencies:
 ```bash
 pnpm bump
 ```
+
+Visualise local package dependency:
+```bash
+pnpm graph
+```

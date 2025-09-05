@@ -27,5 +27,5 @@
         /* do not output */
         "noEmit": true
     },
-    "exclude": ["**/dist"]
+    "exclude": ["**/dist", "**/.puppeteer", "**/cdk.out"]
 }

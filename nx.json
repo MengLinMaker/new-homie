@@ -4,10 +4,6 @@
         "enabled": false
     },
     "targetDefaults": {
-        "test:lint": {
-            "dependsOn": ["^test:lint"],
-            "cache": true
-        },
         "test:type": {
             "dependsOn": ["^test:type"],
             "cache": true

@@ -6,7 +6,6 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "test:lint": "biome lint --write",
         "test:type": "tsc",
         "build": "node ./src/compress.ts && tsup"
     },

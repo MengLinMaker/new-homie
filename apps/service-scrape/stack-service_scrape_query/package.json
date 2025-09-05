@@ -1,0 +1,21 @@
+{
+    "name": "@service-scrape/stack-service_scrape_query",
+    "private": true,
+    "exports": {
+        ".": "./dist/index.js"
+    },
+    "scripts": {
+        "format": "biome format --write",
+        "test:type": "tsc",
+        "cdk:synth": "cdk synth",
+        "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
+    },
+    "devDependencies": {
+        "@infra/common": "workspace:*",
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
+        "aws-cdk-lib": "^2.212.0",
+        "cdk-nag": "^2.37.15",
+        "constructs": "^10.4.2"
+    },
+    "type": "module"
+}

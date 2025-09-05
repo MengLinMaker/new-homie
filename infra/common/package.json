@@ -1,0 +1,18 @@
+{
+    "name": "@infra/common",
+    "private": true,
+    "exports": {
+        ".": "./dist/index.js"
+    },
+    "scripts": {
+        "format": "biome format --write",
+        "test:type": "tsc",
+        "build": "tsup"
+    },
+    "devDependencies": {
+        "@observability/lib-opentelemetry": "workspace:*",
+        "aws-cdk-lib": "^2.212.0",
+        "tsup": "^8.5.0"
+    },
+    "type": "module"
+}

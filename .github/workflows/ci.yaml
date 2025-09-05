@@ -7,39 +7,38 @@ on:
 
 jobs:
   test-unit:
-    # runs-on: ubuntu-24.04-arm
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
-      - name: Checkout branch
+      - name: Deep checkout branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Nx select BASE + HEAD SHAs
-        id: setSHAs
-        uses: nrwl/nx-set-shas@v4
-
-      - name: Output Nx select BASE + HEAD SHAs
-        run: |
-          echo "BASE: ${{ steps.setSHAs.outputs.base }}"
-          echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          # Reduce installation time with cache - https://github.com/pnpm/action-setup/tree/v4/?tab=readme-ov-file#use-cache-to-reduce-installation-time
-          run_install: false
-
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm i --no-frozen-lockfile
-
-      - name: Build
-        run: pnpm build:ci
+      - name: Setup dependencies Nx
+        uses: ./.github/actions/setup-ci
       - name: Test
-        run: pnpm test:ci
+        run: pnpm nx affected -t test:unit test:type
+
+  test-integration:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Deep checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup dependencies Nx
+        uses: ./.github/actions/setup-ci
+
+      - name: Deploy cdk quantum stacks
+        run: pnpm nx affected -t cdk:dev
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_SERVICE_SCRAPE: ${{ secrets.DB_SERVICE_SCRAPE }}
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+
+      # TODO: add integration test scripts
+      - name: Test
+        run: echo 'TODO'

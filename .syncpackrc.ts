@@ -1,7 +1,7 @@
 export default {
     versionGroups: [
         {
-            dependencies: ['nx'],
+            dependencies: ['nx', 'puppeteer-core', '@sparticuz/chromium-min'],
             isIgnored: true,
         },
     ],

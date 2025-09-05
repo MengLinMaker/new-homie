@@ -1,12 +1,5 @@
 import { type Dirent, readFileSync } from 'node:fs'
-import { ENV, RESOURCE_FOLDER, walkFolders } from './util.ts'
-import createClient from 'openapi-fetch'
-import type { paths } from './api/schema'
-
-const client = createClient<paths>({
-    baseUrl: ENV.GRAFANA_API,
-    headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
-})
+import { client, RESOURCE_FOLDER, walkFolders } from './util.ts'
 
 type ImportFunction = (entry: Dirent<string>) => void
 

@@ -165,7 +165,7 @@ console.info('Completed writing "australia-amenities.json"')
     const validSchoolsData = schema.parse(schoolsData, {
         reportInput: true,
     })
-    const localities = new Set()
+    const localities = new Map()
     const transformedSchoolsData = validSchoolsData.map((school) => {
         const address = school.AddressList[0]
         if (!address) throw new Error(`No address found for ACARAId: ${school.ACARAId}`)
@@ -174,7 +174,7 @@ console.info('Completed writing "australia-amenities.json"')
             state_abbreviation: address.StateProvince,
             postcode: address.PostalCode,
         } satisfies Updateable<Schema.LocalityTable>
-        localities.add(locality_table)
+        localities.set(JSON.stringify(locality_table), locality_table)
         return {
             school_table: {
                 name: school.SchoolName,
@@ -207,7 +207,7 @@ console.info('Completed writing "australia-amenities.json"')
 
     writeFileSync(
         './src/resource/australia-localities.json',
-        JSON.stringify(Array.from(localities), null, 4),
+        JSON.stringify(Array.from(localities.values()), null, 4),
     )
     console.info('Completed writing "australia-localities.json"')
 }

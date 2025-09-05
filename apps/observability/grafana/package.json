@@ -3,14 +3,13 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
-        "test:lint": "biome lint --write",
+        "test:type": "tsc",
         "generate": "openapi-typescript --array-length true --properties-required-by-default true './src/api/openapi.json' -o './src/api/schema.d.ts' && biome format --write",
         "grafana:export": "node ./src/export.ts && biome format --write",
         "grafana:import": "node ./src/import.ts"
     },
     "type": "module",
     "devDependencies": {
-        "dotenv": "17.2.1",
         "openapi-fetch": "^0.14.0",
         "openapi-typescript": "^7.9.1",
         "zod": "4.0.17"
