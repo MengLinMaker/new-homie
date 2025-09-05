@@ -1,5 +1,6 @@
 {
     "name": "@service-scrape/function-scrape_locality",
+    "private": true,
     "scripts": {
         "format": "biome format --write",
         "puppeteer": "pnpm dlx @puppeteer/browsers install chrome-headless-shell@stable && mv ./chrome-headless-shell/*/* ./.puppeteer && rm -r chrome-headless-shell",

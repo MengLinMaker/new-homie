@@ -1,5 +1,6 @@
 {
     "name": "@service-scrape/lib-db_service_scrape",
+    "private": true,
     "exports": {
         ".": "./dist/index.js",
         "./dev": "./dist/dev/index.js"

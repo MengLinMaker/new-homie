@@ -1,5 +1,6 @@
 {
     "name": "@service-scrape/function-scrape_locality_trigger",
+    "private": true,
     "scripts": {
         "format": "biome format --write",
         "test": "pnpm run /^test:/",

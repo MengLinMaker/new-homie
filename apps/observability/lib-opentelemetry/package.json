@@ -1,5 +1,6 @@
 {
     "name": "@observability/lib-opentelemetry",
+    "private": true,
     "exports": {
         ".": "./dist/index.js"
     },
