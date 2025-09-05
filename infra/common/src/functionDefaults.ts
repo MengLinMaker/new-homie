@@ -2,7 +2,9 @@ import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda'
 import { type NodejsFunctionProps, OutputFormat } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { ENV as OTEL_ENV } from '@observability/lib-opentelemetry'
 
-// lines joined to prevent syntax token error
+/**
+ * Banners to make cjs work in esm
+ */
 export const esbuildBanner = [
     // Banner to enable dynamic require in esm - https://github.com/evanw/esbuild/issues/1944#issuecomment-1022886747
     `import { createRequire } from 'module'`,
