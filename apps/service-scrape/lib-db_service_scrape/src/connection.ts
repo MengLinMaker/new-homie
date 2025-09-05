@@ -14,19 +14,15 @@ const { Pool } = pgImport
 
 export const getKyselyPostgresDb = async (postgresUri: string) => {
     try {
-        const validUri = z
-            .string()
-            .regex(/postgres(ql)?:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
-                message: 'Invalid postgres uri',
-            })
-            .parse(postgresUri)
+        const validUri = z.url().parse(postgresUri)
         const db = new Kysely<DB>({
             dialect: new PostgresDialect({
                 pool: new Pool({ connectionString: validUri }),
             }),
         })
         return db
-    } catch {
+    } catch (e) {
+        console.error(e)
         return null
     }
 }
