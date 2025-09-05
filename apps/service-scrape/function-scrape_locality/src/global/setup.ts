@@ -8,7 +8,7 @@ export const SERVICE_NAME = 'function-scrape_locality'
 
 startOpenTelemetry(SERVICE_NAME)
 
-const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE ?? '')
+const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE)
 
 // Application depends on database, hence it should crash
 if (!DB) {
@@ -18,5 +18,5 @@ if (!DB) {
 }
 
 const browserContext = await BrowserService.createBrowserContext()
-export const browserService = new BrowserService(LOGGER, browserContext)
+const browserService = new BrowserService(LOGGER, browserContext)
 export const scrapeController = new ScrapeController(LOGGER, DB, browserService)

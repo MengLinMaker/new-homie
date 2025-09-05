@@ -1,77 +1,49 @@
-import { Hono } from 'hono'
-import { handle } from 'hono/aws-lambda'
-import { requestId } from 'hono/request-id'
-import { otel } from '@hono/otel'
-
-import { createServer } from 'node:http'
 import { StatusCodes } from 'http-status-codes'
-import { ValidationError } from 'common-errors'
+import middy from '@middy/core'
 
 // Setup persistent resources
-import { browserService, scrapeController, SERVICE_NAME } from './global/setup'
-import { localityValidator } from './global/util'
+import { scrapeController } from './global/setup'
+import { tracerMiddleware, validatorMiddleware } from './middleware'
+import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 
-// Middlewares
-const app = new Hono().use(requestId()).use('*', otel())
+export const handler = middy()
+    .use(validatorMiddleware)
+    .use(tracerMiddleware)
+    .handler(async (event, _context) => {
+        if (!event.success) {
+            LOGGER.fatal({
+                args: event.originalEvent,
+                ...otelException(event.error),
+            })
+            return { status: StatusCodes.BAD_REQUEST }
+        }
+        // biome-ignore lint/style/noNonNullAssertion: <validated>
+        const locality = event.data.Records[0]!.body
 
-// Routes
-app.post('/', localityValidator, async (c) => {
-    const locality = c.req.valid('json')
+        // For testing purposes
+        if (locality.postcode === '0000') return { status: StatusCodes.ACCEPTED }
 
-    // Locality data
-    const localityId = await scrapeController.tryExtractSuburbPage(locality)
-    if (localityId === null)
-        throw new ValidationError(`${SERVICE_NAME} couldn't scrape locality - ${locality}`)
+        // Locality data
+        const localityId = await scrapeController.tryExtractSuburbPage(locality)
+        if (localityId === null) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
 
-    await scrapeController.tryExtractSchools({ ...locality, localityId })
+        await scrapeController.tryExtractSchools({ ...locality, localityId })
 
-    // Sale listing data
-    for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const salesInfo = await scrapeController.tryExtractSalesPage(args)
-        if (!salesInfo)
-            throw new ValidationError(`${SERVICE_NAME} couldn't scrape sale listing - ${args}`)
-        if (salesInfo.isLastPage) break
-    }
+        // Sale listing data
+        for (let page = 1; ; page++) {
+            const args = { ...locality, page, localityId }
+            const salesInfo = await scrapeController.tryExtractSalesPage(args)
+            if (!salesInfo) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+            if (salesInfo.isLastPage) break
+        }
 
-    // Rent listing data
-    for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const rentsInfo = await scrapeController.tryExtractRentsPage(args)
-        if (!rentsInfo)
-            throw new ValidationError(`${SERVICE_NAME} couldn't scrape rent listing - ${args}`)
-        if (rentsInfo.isLastPage) break
-    }
+        // Rent listing data
+        for (let page = 1; ; page++) {
+            const args = { ...locality, page, localityId }
+            const rentsInfo = await scrapeController.tryExtractRentsPage(args)
+            if (!rentsInfo) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+            if (rentsInfo.isLastPage) break
+        }
 
-    return c.json(locality, StatusCodes.OK)
-})
-
-// Test url - test webscraping with local server
-app.get('/test', async (c) => {
-    const server = createServer((_req, res) => {
-        res.end('<h1>Hello</h1>')
+        return { status: StatusCodes.OK }
     })
-    const hostname = '127.0.0.1'
-    const port = 8765
-    const serverInstance = server.listen(port, hostname)
-    const testUrl = `http://${hostname}:${port}`
-
-    try {
-        let scrapeTimeMs = performance.now()
-
-        const html = await browserService.getHTML(testUrl)
-
-        scrapeTimeMs = Math.ceil(performance.now() - scrapeTimeMs)
-        serverInstance.close()
-        return c.json({ scrapeTimeMs, html }, StatusCodes.OK)
-    } catch (e) {
-        serverInstance.close()
-        return c.json({ error: e }, StatusCodes.INTERNAL_SERVER_ERROR)
-    }
-})
-
-// Handler or AWS Lambda
-export const handler = handle(app)
-
-// Export for Vite dev server
-export default app

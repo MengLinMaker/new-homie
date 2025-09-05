@@ -11,6 +11,7 @@ import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from '@infra/common'
+import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
 
 interface StackServiceScrapePipelineProps extends cdk.StackProps {
     production: boolean
@@ -103,6 +104,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                     maxConcurrency: 2,
                 }),
             ],
+            insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
         })
         scrapeLocalityFunction.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
         scrapeChromePuppeteerAsset.grantRead(scrapeLocalityFunction)
