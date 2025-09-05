@@ -10,9 +10,7 @@
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "test": "nx run-many -t test:lint test:type test:unit test:perf",
-        "build": "nx run-many -t build",
-        "build:ci": "nx affected -t build",
-        "test:ci": "nx affected -t test:lint test:type test:unit test:perf"
+        "build": "nx run-many -t build"
     },
     "devDependencies": {
         "@biomejs/biome": "2.2.0",
