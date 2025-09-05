@@ -16,7 +16,7 @@ export const getKyselyPostgresDb = async (postgresUri: string) => {
     try {
         const validUri = z
             .string()
-            .regex(/postgresql:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
+            .regex(/postgres(ql)?:\/\/\w+:\w+@[\w-.:]+\/\w+((\?)(\w+=\w+)+)?/, {
                 message: 'Invalid postgres uri',
             })
             .parse(postgresUri)
