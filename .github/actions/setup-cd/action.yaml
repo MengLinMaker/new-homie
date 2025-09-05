@@ -1,5 +1,5 @@
 name: "Setup CD"
-description: "Prepare CD job. Checkout code, then setup node and pnpm. Install dependencies"
+description: "Prepare CD job. Setup node and pnpm. Install dependencies"
 runs:
   using: "composite"
   steps:

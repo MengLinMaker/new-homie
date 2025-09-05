@@ -9,8 +9,10 @@ jobs:
   test-unit:
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Shallow checkout branch
+      - name: Deep checkout branch
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
@@ -20,8 +22,10 @@ jobs:
   test-integration:
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Shallow checkout branch
+      - name: Deep checkout branch
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
