@@ -37,14 +37,12 @@ export class StackServiceScrapePipeline extends cdk.Stack {
 
         // Main SQS Queue for batch scraping
         const scrapeLocalityQueue = new sqs.Queue(this, 'ScrapeLocalityQueue', {
-            queueName: 'ScrapeLocalityQueue',
             enforceSSL: true,
             // Duration of AWS lambda
             visibilityTimeout: cdk.Duration.minutes(15),
             // No plans to process failed requests
             deadLetterQueue: {
                 queue: new sqs.Queue(this, 'ScrapeLocalityDLQ', {
-                    queueName: 'ScrapeLocalityQueue-DLQ',
                     enforceSSL: true,
                 }),
                 maxReceiveCount: 2,
