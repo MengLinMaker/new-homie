@@ -3,7 +3,7 @@ import middy from '@middy/core'
 
 // Setup persistent resources
 import { scrapeController } from './global/setup'
-import { tracerMiddleware, validatorMiddleware } from './middleware'
+import { tracerMiddleware, validatorMiddleware } from './global/middleware'
 import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 
 export const handler = middy()

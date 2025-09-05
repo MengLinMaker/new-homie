@@ -168,21 +168,24 @@ importers:
 
   apps/service-scrape/function-scrape_locality_trigger:
     dependencies:
+      '@aws-lambda-powertools/parser':
+        specifier: ^2.25.2
+        version: 2.25.2(@middy/core@6.4.4)(zod@4.0.17)
+      '@aws-lambda-powertools/tracer':
+        specifier: ^2.25.2
+        version: 2.25.2(@middy/core@6.4.4)
       '@aws-sdk/client-sqs':
         specifier: ^3.876.0
         version: 3.876.0
-      '@hono/otel':
-        specifier: ^0.4.0
-        version: 0.4.0(hono@4.9.0)
+      '@middy/core':
+        specifier: ^6.4.4
+        version: 6.4.4
       '@observability/lib-opentelemetry':
         specifier: workspace:*
         version: link:../../observability/lib-opentelemetry
       '@service-scrape/lib-australia_amenity':
         specifier: workspace:*
         version: link:../lib-australia_amenity
-      hono:
-        specifier: 4.9.0
-        version: 4.9.0
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
@@ -828,11 +831,6 @@ packages:
     resolution: {integrity: sha512-AiXO/bfe9bmxBjxxtYxFAXGZvMaN5s8kO+jBHAJCON8rJoB5YS/D6X7ZNc6XQkuHNmyl4CYaMI1fJ/Gn27RGGw==}
     engines: {node: '>=6'}
     hasBin: true
-
-  '@hono/otel@0.4.0':
-    resolution: {integrity: sha512-5c5jphVdIWqImJhhB+r8feewzKMAcTotCPWE/0EObFA6ktZ/WU5o6BB7kmzXIJPaZY4oBfSzAHtRg8rOVHMhiw==}
-    peerDependencies:
-      hono: '>=4.0.0'
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3295,10 +3293,6 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.9.0:
-    resolution: {integrity: sha512-JAUc4Sqi3lhby2imRL/67LMcJFKiCu7ZKghM7iwvltVZzxEC5bVJCsAa4NTnSfmWGb+N2eOVtFE586R+K3fejA==}
-    engines: {node: '>=16.9.0'}
-
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
@@ -5669,12 +5663,6 @@ snapshots:
       long: 5.3.1
       protobufjs: 7.4.0
       yargs: 17.7.2
-
-  '@hono/otel@0.4.0(hono@4.9.0)':
-    dependencies:
-      '@opentelemetry/api': 1.9.0
-      '@opentelemetry/semantic-conventions': 1.36.0
-      hono: 4.9.0
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -9265,8 +9253,6 @@ snapshots:
       function-bind: 1.1.2
 
   help-me@5.0.0: {}
-
-  hono@4.9.0: {}
 
   html-escaper@2.0.2: {}
 
