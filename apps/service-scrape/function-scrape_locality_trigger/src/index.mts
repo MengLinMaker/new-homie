@@ -38,7 +38,7 @@ app.get('/', async (c) => {
         } catch (e) {
             const formattedError = otelException(e)
             LOGGER.fatal(formattedError)
-            return c.json(formattedError, StatusCodes.INTERNAL_SERVER_ERROR)
+            throw e
         }
     }
 
