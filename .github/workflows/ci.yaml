@@ -22,3 +22,16 @@ jobs:
 
       - name: Test
         run: pnpm nx affected -t test:lint test:type
+
+  test-integration:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Setup dependencies Nx
+        uses: ./.github/actions/setup-ci
+
+      - name: Deploy cdk quantum stacks
+        run: pnpm nx affected -t cdk:dev
+
+      # TODO: add integration test scripts
+      - name: Test
+        run: echo 'TODO'
