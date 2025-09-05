@@ -1,0 +1,39 @@
+name: "Setup CI"
+description: "Prepare CI job. Checkout code with history, then setup Nx, node and pnpm. Install dependencies and build affected packages"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Nx select BASE + HEAD SHAs
+      id: setSHAs
+      uses: nrwl/nx-set-shas@v4
+
+    - name: Output Nx select BASE + HEAD SHAs
+      shell: bash
+      run: |
+        echo "BASE: ${{ steps.setSHAs.outputs.base }}"
+        echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        # Reduce installation time with cache - https://github.com/pnpm/action-setup/tree/v4/?tab=readme-ov-file#use-cache-to-reduce-installation-time
+        run_install: false
+
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: "pnpm"
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm i --no-frozen-lockfile
+
+    - name: Build affected packages
+      shell: bash
+      run: pnpm nx affected -t build

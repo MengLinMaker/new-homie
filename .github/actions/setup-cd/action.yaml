@@ -1,0 +1,23 @@
+name: "Setup CD"
+description: "Prepare CD job. Checkout code, then setup node and pnpm. Install dependencies"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        # Reduce installation time with cache - https://github.com/pnpm/action-setup/tree/v4/?tab=readme-ov-file#use-cache-to-reduce-installation-time
+        run_install: false
+
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: "pnpm"
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm i --no-frozen-lockfile
