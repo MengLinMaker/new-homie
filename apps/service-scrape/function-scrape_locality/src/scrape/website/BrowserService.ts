@@ -1,12 +1,10 @@
 import type { Logger } from 'pino'
 import { ILoggable, LOGGER, otelException } from '@observability/lib-opentelemetry'
-import puppeteer, { Browser, BrowserContext } from 'puppeteer-core'
+import puppeteer, { type BrowserContext, type Browser } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { URIError } from 'common-errors'
-
 export class BrowserService extends ILoggable {
     static browser: Browser
     private browserContext
@@ -29,6 +27,7 @@ export class BrowserService extends ILoggable {
 
         // Download chrome at runtime to increase deployment speed
         const s3Client = new S3Client()
+        // biome-ignore lint/complexity/useLiteralKeys: <error handled>
         const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
         if (!chromeTarUrl) {
             const error = new URIError('CHROME_PUPPETEER_ASSET_URL is undefined')
