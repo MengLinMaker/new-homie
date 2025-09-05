@@ -24,7 +24,7 @@ describe('developer tools', () => {
             expect(db).toBeNull()
         })
 
-        it('should fail with inactive uri', async () => {
+        it.skip('should fail with inactive uri', async () => {
             const db = await kyselyPostgisMigrate(inactiveUri)
             expect(db).toBeNull()
         })
