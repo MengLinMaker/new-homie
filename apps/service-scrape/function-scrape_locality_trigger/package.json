@@ -7,7 +7,6 @@
         "test:type": "tsc"
     },
     "devDependencies": {
-        "@types/common-errors": "^1.0.5",
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
