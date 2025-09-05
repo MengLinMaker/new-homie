@@ -51,5 +51,43 @@ app.get('/', async (c) => {
     )
 })
 
+// Test route for specific locality
+app.get('/test', async (c) => {
+    const filteredLocality = australiaLocalities.filter((locality) => {
+        return (
+            locality.suburb_name === 'Dandenong' &&
+            locality.state_abbreviation === 'VIC' &&
+            locality.postcode === '3175'
+        )
+    })
+
+    for (const chunkLocality of chunkArray(filteredLocality, 10)) {
+        try {
+            await sqsClient.send(
+                new SendMessageBatchCommand({
+                    QueueUrl: ENV.QUEUE_URL,
+                    Entries: chunkLocality.map((locality, id) => ({
+                        Id: id.toString(),
+                        MessageGroupId: id.toString(),
+                        MessageBody: JSON.stringify(locality),
+                    })),
+                }),
+            )
+        } catch (e) {
+            const formattedError = otelException(e)
+            LOGGER.fatal(formattedError)
+            throw e
+        }
+    }
+
+    return c.json(
+        {
+            status: 'Success',
+            localityCount: filteredLocality.length,
+        },
+        StatusCodes.OK,
+    )
+})
+
 // Enable AWS Lambda
 export const handler = handle(app)
