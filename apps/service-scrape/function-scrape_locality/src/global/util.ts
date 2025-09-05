@@ -10,7 +10,7 @@ const localitySchema = z.object({
     postcode: z.string().length(4),
 })
 
-export const localityValidator = validator('json', (value, c) => {
+export const localityValidator = validator('json', (value) => {
     const locality = localitySchema.safeParse(value)
     if (!locality.success) {
         LOGGER.fatal(
