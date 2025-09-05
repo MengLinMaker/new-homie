@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "test:type": "tsc",
-        "cdk:deploy": "cdk deploy --all --asset-parallelism true"
+        "cdk:deploy:production": "cdk deploy --all --asset-parallelism true"
     },
     "type": "module",
     "devDependencies": {
