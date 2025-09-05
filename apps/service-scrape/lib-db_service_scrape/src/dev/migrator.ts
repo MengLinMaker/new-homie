@@ -40,6 +40,7 @@ export const kyselyPostgisMigrate = async (
     }
 
     if (error) {
+        console.log(error)
         console.error('MIGRATION FAILED - could not migrate files')
         return db
     }
