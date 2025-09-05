@@ -3,7 +3,7 @@ import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
 import * as targets from 'aws-cdk-lib/aws-events-targets'
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources'
-import * as apigateway from 'aws-cdk-lib/aws-apigateway'
+// import * as apigateway from 'aws-cdk-lib/aws-apigateway'
 import type { Construct } from 'constructs'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
 

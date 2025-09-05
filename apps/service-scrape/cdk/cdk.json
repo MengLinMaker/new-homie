@@ -1,5 +1,5 @@
 {
-    "app": "node src/index.ts",
+    "app": "node src/app.ts",
     "requireApproval": "never",
     "staging": false,
     "watch": {
