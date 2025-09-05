@@ -7,7 +7,7 @@ describe('handler', async () => {
     const { handler } = await import('../src/index.mts')
 
     it('Should validate incorrect input', async () => {
-        const result = await handler({} as never, undefined)
+        const result = await handler({} as never, undefined as never)
         expect(result).toStrictEqual({ status: StatusCodes.BAD_REQUEST })
     })
 
@@ -28,7 +28,7 @@ describe('handler', async () => {
     }
 
     it('Should parse correct input', async () => {
-        const result = await handler(validEventbridgeEvent as never, undefined)
+        const result = await handler(validEventbridgeEvent as never, undefined as never)
         // Error expected as SQS cannot be reached
         expect(result).toStrictEqual({ status: StatusCodes.INTERNAL_SERVER_ERROR })
     })

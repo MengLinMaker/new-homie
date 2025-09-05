@@ -7,7 +7,7 @@ const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
 describe(testSuiteName, async () => {
     it('Should validate incorrect input', async () => {
-        const result = await handler({} as never, undefined)
+        const result = await handler({} as never, undefined as never)
         expect(result).toStrictEqual({ status: StatusCodes.BAD_REQUEST })
     })
 
@@ -38,7 +38,7 @@ describe(testSuiteName, async () => {
     }
 
     it('Should parse correct input', async () => {
-        const result = await handler(validSqsEvent as never, undefined)
+        const result = await handler(validSqsEvent as never, undefined as never)
         expect(result).toStrictEqual({ status: StatusCodes.ACCEPTED })
     })
 })
