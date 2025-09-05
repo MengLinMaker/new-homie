@@ -16,7 +16,7 @@ import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from '@infra/common'
 
-export class ServiceScrapeStack extends cdk.Stack {
+export class StackServiceScrapePipeline extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props)
         NagSuppressions.addStackSuppressions(this, [
