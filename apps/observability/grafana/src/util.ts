@@ -2,7 +2,7 @@ import path from 'node:path'
 import { type Dirent, readdirSync } from 'node:fs'
 import createClient from 'openapi-fetch'
 import type { paths } from './api/schema'
-import { ENV } from './env'
+import { ENV } from './env.ts'
 
 export const RESOURCE_FOLDER = path.join(`${import.meta.dirname}/../resource`)
 
