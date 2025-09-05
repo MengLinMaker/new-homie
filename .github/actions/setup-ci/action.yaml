@@ -3,7 +3,7 @@ description: "Prepare CI job. Checkout code with history, then setup Nx, node an
 runs:
   using: "composite"
   steps:
-    - name: Checkout branch
+    - name: Deep checkout branch
       uses: actions/checkout@v4
       with:
         fetch-depth: 0

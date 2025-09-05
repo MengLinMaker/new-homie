@@ -9,6 +9,9 @@ jobs:
   test-unit:
     runs-on: ubuntu-24.04-arm
     steps:
+      - name: Shallow checkout branch
+        uses: actions/checkout@v4
+
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
       - name: Test
@@ -17,6 +20,9 @@ jobs:
   test-lint:
     runs-on: ubuntu-24.04-arm
     steps:
+      - name: Shallow checkout branch
+        uses: actions/checkout@v4
+
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
@@ -26,6 +32,9 @@ jobs:
   test-integration:
     runs-on: ubuntu-24.04-arm
     steps:
+      - name: Shallow checkout branch
+        uses: actions/checkout@v4
+
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 

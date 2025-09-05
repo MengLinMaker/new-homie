@@ -3,9 +3,6 @@ description: "Prepare CD job. Checkout code, then setup node and pnpm. Install d
 runs:
   using: "composite"
   steps:
-    - name: Checkout branch
-      uses: actions/checkout@v4
-
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:

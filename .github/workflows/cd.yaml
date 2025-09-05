@@ -9,6 +9,9 @@ jobs:
   deploy-observability:
     runs-on: ubuntu-latest
     steps:
+      - name: Shallow checkout branch
+        uses: actions/checkout@v4
+
       - name: Setup dependencies
         uses: ./.github/actions/setup-cd
       - name: Deploy observability
