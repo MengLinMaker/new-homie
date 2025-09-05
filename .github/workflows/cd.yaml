@@ -30,6 +30,9 @@ jobs:
       - name: Setup dependencies
         uses: ./.github/actions/setup-cd
 
+      - name: Migrate databases
+        run: pnpm -r migrate
+
       - name: Deploy infrastructure
         run: pnpm -r cdk:deploy:production
         env:
