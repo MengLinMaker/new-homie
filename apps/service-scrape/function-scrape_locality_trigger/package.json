@@ -3,8 +3,6 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
-        "test": "pnpm run /^test:/",
-        "test:lint": "biome lint --write",
         "test:type": "tsc"
     },
     "devDependencies": {

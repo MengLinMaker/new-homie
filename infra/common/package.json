@@ -6,8 +6,6 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "test": "pnpm /test:.*/",
-        "test:lint": "biome lint --write",
         "test:type": "tsc",
         "build": "tsup"
     },

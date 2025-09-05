@@ -7,9 +7,10 @@
         "docker:up": "docker compose up --build -d",
         "graph": "pnpm nx graph",
         "format": "biome format --write",
+        "lint": "biome lint --write",
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
-        "test": "nx run-many -t test:lint test:type test:unit test:perf",
+        "test": "nx run-many -t test:type test:unit",
         "build": "nx run-many -t build"
     },
     "devDependencies": {
@@ -28,7 +29,7 @@
         "vitest": "3.2.4"
     },
     "simple-git-hooks": {
-        "pre-commit": "pnpm format"
+        "pre-commit": "pnpm format && pnpm lint"
     },
     "packageManager": "pnpm@10.14.0",
     "type": "module"

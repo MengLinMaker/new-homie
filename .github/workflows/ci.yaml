@@ -17,7 +17,7 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
       - name: Test
-        run: pnpm nx affected -t test:unit test:lint test:type
+        run: pnpm nx affected -t test:unit test:type
 
   test-integration:
     runs-on: ubuntu-24.04-arm

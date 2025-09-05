@@ -6,8 +6,6 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "test": "pnpm run /^test:/",
-        "test:lint": "biome lint --write",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "dev:test:unit": "vitest --coverage",

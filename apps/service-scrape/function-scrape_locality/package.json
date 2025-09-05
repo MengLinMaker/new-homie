@@ -4,8 +4,6 @@
     "scripts": {
         "format": "biome format --write",
         "puppeteer": "pnpm dlx @puppeteer/browsers install chrome-headless-shell@stable && mv ./chrome-headless-shell/*/* ./.puppeteer && rm -r chrome-headless-shell",
-        "test": "pnpm run /^test:/",
-        "test:lint": "biome lint --write",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "dev:test:unit": "vitest --coverage",
