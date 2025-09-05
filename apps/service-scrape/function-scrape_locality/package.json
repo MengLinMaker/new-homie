@@ -29,7 +29,7 @@
         "common-errors": "^1.2.0",
         "http-status-codes": "^2.3.0",
         "kysely": "0.28.4",
-        "puppeteer-core": "^24.18.0",
+        "puppeteer-core": "^24.19.0",
         "zod": "4.0.17"
     },
     "type": "module"
