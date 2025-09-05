@@ -2,9 +2,7 @@
 import { z } from 'zod'
 import type { Level } from 'pino'
 
-import { config } from 'dotenv'
 import { parseEnvSchema } from './parseEnvSchema'
-config({ quiet: true })
 
 /**
  * @description Type safe env keys
