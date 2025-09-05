@@ -1,3 +1,3 @@
-import { functionDefaults } from './functionDefaults'
+import { functionDefaults, esbuildBanner } from './functionDefaults'
 
-export { functionDefaults }
+export { functionDefaults, esbuildBanner }
