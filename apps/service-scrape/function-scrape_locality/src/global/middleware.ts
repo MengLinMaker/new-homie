@@ -1,6 +1,6 @@
 import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
 import z from 'zod'
-import { SERVICE_NAME } from './global/setup'
+import { SERVICE_NAME } from './setup'
 
 import { parser } from '@aws-lambda-powertools/parser/middleware'
 import { SqsRecordSchema, SqsSchema } from '@aws-lambda-powertools/parser/schemas'
