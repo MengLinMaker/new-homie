@@ -13,8 +13,12 @@ import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from '@infra/common'
 
+interface StackServiceScrapePipelineProps extends cdk.StackProps {
+    production: boolean
+}
+
 export class StackServiceScrapePipeline extends cdk.Stack {
-    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props?: StackServiceScrapePipelineProps) {
         super(scope, id, props)
         NagSuppressions.addStackSuppressions(this, [
             { id: 'Serverless-EventBusDLQ', reason: 'Failures cannot be handled' },
@@ -67,6 +71,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
 
         // Schedule trigger at 8am Saturday AEST
         new events.Rule(this, 'ScrapeLocalityTriggerEvent', {
+            enabled: props?.production ?? false,
             schedule: events.Schedule.cron({
                 minute: '0',
                 hour: '22',

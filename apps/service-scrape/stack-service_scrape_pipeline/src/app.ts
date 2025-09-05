@@ -12,6 +12,7 @@ cdkNagger.add(new ServerlessChecks({ verbose: true }))
 cdkNagger.add(new AwsSolutionsChecks({ verbose: true }))
 
 new StackServiceScrapePipeline(app, 'NewHomie-ServiceScrape-Dev', {
+    production: false,
     env: {
         region: 'ap-southeast-2',
     },
