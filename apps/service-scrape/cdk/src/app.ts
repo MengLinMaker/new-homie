@@ -13,8 +13,8 @@ cdkNagger.add(new AwsSolutionsChecks({ verbose: true }))
 
 new ServiceScrapeStack(app, 'NewHomie-ServiceScrape-Dev', {
     env: {
-        // Deploy to Melbourne region
-        region: 'ap-southeast-4',
+        // Deploy to Sydney region
+        region: 'ap-southeast-2',
     },
     tags: {
         app: 'NewHomie',
