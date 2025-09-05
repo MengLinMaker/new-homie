@@ -1,0 +1,12 @@
+{
+    "name": "@infra/deploy",
+    "private": true,
+    "scripts": {
+        "test:type": "tsc",
+        "cdk:deploy": "cdk deploy --all --asset-parallelism true"
+    },
+    "type": "module",
+    "devDependencies": {
+        "aws-cdk-lib": "^2.212.0"
+    }
+}
