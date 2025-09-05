@@ -37,4 +37,4 @@ runs:
 
     - name: Build all packages
       shell: bash
-      run: pnpm nx affected -t build
+      run: pnpm -r build
