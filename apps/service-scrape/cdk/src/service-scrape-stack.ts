@@ -87,7 +87,7 @@ export class ServiceScrapeStack extends cdk.Stack {
         const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
             ...functionDefaults,
             entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.mts'),
-            memorySize: 1000,
+            memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
             retryAttempts: 0,
