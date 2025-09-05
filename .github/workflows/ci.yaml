@@ -32,6 +32,12 @@ jobs:
 
       - name: Deploy cdk quantum stacks
         run: pnpm nx affected -t cdk:dev
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_SERVICE_SCRAPE: ${{ secrets.DB_SERVICE_SCRAPE }}
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
 
       # TODO: add integration test scripts
       - name: Test
