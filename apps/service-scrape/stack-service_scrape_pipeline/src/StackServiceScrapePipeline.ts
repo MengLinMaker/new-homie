@@ -1,3 +1,5 @@
+import path from 'node:path'
+import { NagSuppressions } from 'cdk-nag'
 import * as cdk from 'aws-cdk-lib'
 import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
@@ -6,15 +8,12 @@ import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources'
 // import * as apigateway from 'aws-cdk-lib/aws-apigateway'
 import type { Construct } from 'constructs'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
+import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
+import { functionDefaults } from '@infra/common'
 
-import { functionDefaults } from './util/functionDefaults.ts'
-import path from 'node:path'
-import { Asset } from 'aws-cdk-lib/aws-s3-assets'
-import { NagSuppressions } from 'cdk-nag'
-
-export class ServiceScrapeStack extends cdk.Stack {
+export class StackServiceScrapePipeline extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props)
         NagSuppressions.addStackSuppressions(this, [
@@ -103,6 +102,7 @@ export class ServiceScrapeStack extends cdk.Stack {
                 }),
             ],
         })
+        scrapeLocalityFunction.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
         scrapeChromePuppeteerAsset.grantRead(scrapeLocalityFunction)
 
         // const api = new apigateway.RestApi(this, 'ServiceScrapeApi')

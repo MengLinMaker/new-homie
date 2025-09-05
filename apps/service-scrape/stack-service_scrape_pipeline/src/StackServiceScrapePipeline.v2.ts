@@ -1,3 +1,5 @@
+import path from 'node:path'
+import { NagSuppressions } from 'cdk-nag'
 import * as cdk from 'aws-cdk-lib'
 import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
@@ -9,13 +11,10 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2'
 import * as ecs from 'aws-cdk-lib/aws-ecs'
 import * as batch from 'aws-cdk-lib/aws-batch'
 import * as ecr from 'aws-cdk-lib/aws-ecr'
+import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
-
-import { functionDefaults } from './util/functionDefaults.ts'
-import path from 'node:path'
-import { Asset } from 'aws-cdk-lib/aws-s3-assets'
-import { NagSuppressions } from 'cdk-nag'
+import { functionDefaults } from '@infra/common'
 
 export class ServiceScrapeStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
