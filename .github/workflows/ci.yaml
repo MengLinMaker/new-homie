@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Setup dependencies Nx
-        uses: ./.github/actions/setup-dependencies-nx
-
+        uses: ./.github/actions/setup-ci
       - name: Test
         run: pnpm nx affected -t test:unit
 
@@ -19,7 +18,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Setup dependencies Nx
-        uses: ./.github/actions/setup-dependencies-nx
+        uses: ./.github/actions/setup-ci
 
       - name: Test
         run: pnpm nx affected -t test:lint test:type

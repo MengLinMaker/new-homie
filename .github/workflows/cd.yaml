@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup dependencies
-        uses: ./.github/actions/setup-dependencies-nx
-
+        uses: ./.github/actions/setup-cd
       - name: Deploy observability
         run: pnpm -r grafana:import
         env:
