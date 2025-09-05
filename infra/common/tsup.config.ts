@@ -8,6 +8,6 @@ export default defineConfig({
         js: bundlingOptions.banner,
     },
     dts: true,
-    sourcemap: false,
+    sourcemap: true,
     clean: true,
 })
