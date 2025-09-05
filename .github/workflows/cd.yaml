@@ -32,6 +32,8 @@ jobs:
 
       - name: Migrate databases
         run: pnpm -r migrate
+        env:
+          DB_SERVICE_SCRAPE: ${{ secrets.DB_SERVICE_SCRAPE }}
 
       - name: Deploy infrastructure
         run: pnpm -r cdk:deploy:production
