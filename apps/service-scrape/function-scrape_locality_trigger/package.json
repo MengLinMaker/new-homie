@@ -3,17 +3,20 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
-        "test:type": "tsc"
+        "test:type": "tsc",
+        "test:unit": "vitest run --coverage",
+        "dev:test:unit": "vitest --coverage"
     },
     "devDependencies": {
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
+        "@aws-lambda-powertools/parser": "^2.25.2",
+        "@aws-lambda-powertools/tracer": "^2.25.2",
         "@aws-sdk/client-sqs": "^3.876.0",
-        "@hono/otel": "^0.4.0",
+        "@middy/core": "^6.4.4",
         "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-australia_amenity": "workspace:*",
-        "hono": "4.9.0",
         "http-status-codes": "^2.3.0",
         "zod": "4.0.17"
     },

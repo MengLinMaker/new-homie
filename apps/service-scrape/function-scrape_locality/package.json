@@ -6,20 +6,20 @@
         "puppeteer": "pnpm dlx @puppeteer/browsers install chrome-headless-shell@stable && mv ./chrome-headless-shell/*/* ./.puppeteer && rm -r chrome-headless-shell",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
-        "dev:test:unit": "vitest --coverage",
-        "dev": "vite dev"
+        "dev:test:unit": "vitest --coverage"
     },
     "devDependencies": {
-        "@hono/vite-dev-server": "0.20.1",
         "@types/common-errors": "^1.0.5",
         "chromium-bidi": "^8.0.0",
         "pino": "9.8.0",
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
+        "@aws-lambda-powertools/parser": "^2.25.2",
+        "@aws-lambda-powertools/tracer": "^2.25.2",
         "@aws-sdk/client-s3": "^3.879.0",
         "@aws-sdk/s3-request-presigner": "^3.879.0",
-        "@hono/otel": "^0.4.0",
+        "@middy/core": "^6.4.4",
         "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-australia_amenity": "workspace:*",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
@@ -27,10 +27,9 @@
         "@turf/turf": "7.2.0",
         "cheerio": "1.1.2",
         "common-errors": "^1.2.0",
-        "hono": "4.9.0",
         "http-status-codes": "^2.3.0",
         "kysely": "0.28.4",
-        "puppeteer-core": "^24.18.0",
+        "puppeteer-core": "^24.19.0",
         "zod": "4.0.17"
     },
     "type": "module"
