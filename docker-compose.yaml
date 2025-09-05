@@ -1,16 +1,6 @@
 name: new-homie
 services:
 
-  # Emulate AWS services
-  localstack:
-    image: localstack/localstack:4.7.0
-    ports:
-      - "4566:4566"            # LocalStack Gateway
-      - "4510-4559:4510-4559"  # external services port range
-    volumes:
-      - "./.localstack:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-
   # OpenTelemetry and observability as code
   otel-lgtm:
     image: grafana/otel-lgtm:0.11.6
