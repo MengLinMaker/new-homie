@@ -1,4 +1,4 @@
-import { Kysely, PostgresDialect, sql } from 'kysely'
+import { Kysely, PostgresDialect } from 'kysely'
 import { z } from 'zod'
 
 import type { DB } from './schema.ts'
@@ -25,7 +25,6 @@ export const getKyselyPostgresDb = async (postgresUri: string) => {
                 pool: new Pool({ connectionString: validUri }),
             }),
         })
-        await db.executeQuery(sql`SELECT 1`.compile(db))
         return db
     } catch {
         return null
