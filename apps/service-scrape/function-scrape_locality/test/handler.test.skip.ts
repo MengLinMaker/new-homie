@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
-describe.skip(testSuiteName, async () => {
+describe(testSuiteName, async () => {
     // biome-ignore lint/complexity/useLiteralKeys: <setting value>
     process.env['CHROME_PUPPETEER_ASSET_URL'] = '../../asset/chromium-v138.0.2-pack.arm64.tar'
     const { handler } = await import('../src/index.mts')
