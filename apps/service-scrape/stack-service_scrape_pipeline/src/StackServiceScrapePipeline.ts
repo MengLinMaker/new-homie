@@ -54,7 +54,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
         const scrapeLocalityTriggerFunction = new NodejsFunction(this, 'ScrapeLocalityTrigger', {
             ...functionDefaults,
-            memorySize: 128,
+            memorySize: 1769,
             entry: path.join(
                 import.meta.dirname,
                 '../../function-scrape_locality_trigger/src/index.mts',
