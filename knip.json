@@ -2,5 +2,5 @@
     "$schema": "https://unpkg.com/knip@5/schema.json",
     "ignoreBinaries": ["only-allow"],
     "ignore": [".github/**/*", "**/src/migration/*.ts", "**/src/schema.ts"],
-    "ignoreDependencies": ["pino-pretty", "chromium-bidi"]
+    "ignoreDependencies": ["pino-pretty", "chromium-bidi", "esbuild"]
 }
