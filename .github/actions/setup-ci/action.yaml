@@ -29,6 +29,6 @@ runs:
       shell: bash
       run: pnpm i --no-frozen-lockfile
 
-    - name: Build affected packages
+    - name: Build all packages
       shell: bash
-      run: pnpm nx affected -t build
+      run: pnpm -r build
