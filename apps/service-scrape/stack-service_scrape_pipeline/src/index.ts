@@ -1,3 +1,3 @@
-import { ServiceScrapeStack } from './service-scrape-pipeline-stack'
+import { StackServiceScrapePipeline } from './StackServiceScrapePipeline'
 
-export { ServiceScrapeStack }
+export { StackServiceScrapePipeline }
