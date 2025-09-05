@@ -1,3 +1,5 @@
+// @ts-nocheck file not used
+// biome-ignore-all lint: file not used
 import path from 'node:path'
 import { NagSuppressions } from 'cdk-nag'
 import * as cdk from 'aws-cdk-lib'
