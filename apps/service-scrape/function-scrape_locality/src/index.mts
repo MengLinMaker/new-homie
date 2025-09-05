@@ -3,81 +3,75 @@ import { handle } from 'hono/aws-lambda'
 import { requestId } from 'hono/request-id'
 import { otel } from '@hono/otel'
 
-import { browserService } from './global/setup'
-
-// Run setup for OpenTelemetry
-import { localityValidator } from './global/util'
+import { createServer } from 'node:http'
 import { StatusCodes } from 'http-status-codes'
+import { ValidationError } from 'common-errors'
+
+// Setup persistent resources
+import { browserService, scrapeController, SERVICE_NAME } from './global/setup'
+import { localityValidator } from './global/util'
 
 // Middlewares
 const app = new Hono().use(requestId()).use('*', otel())
 
 // Routes
 app.post('/', localityValidator, async (c) => {
-    const { suburb, state, postcode } = c.req.valid('json')
+    const locality = c.req.valid('json')
 
-    //     const localityId = await scrapeController.tryExtractSuburbPage({ suburb, state, postcode })
-    //     if (localityId === null)
-    //         return c.text(`${SERVICE_NAME} not scrape suburb`, StatusCodes.INTERNAL_SERVER_ERROR)
+    // Locality data
+    const localityId = await scrapeController.tryExtractSuburbPage(locality)
+    if (localityId === null)
+        throw new ValidationError(`${SERVICE_NAME} couldn't scrape locality - ${locality}`)
 
-    //     await scrapeController.tryExtractSchools({ suburb, state, postcode, localityId })
+    await scrapeController.tryExtractSchools({ ...locality, localityId })
 
-    //     for (let page = 1; ; page++) {
-    //         const salesInfo = await scrapeController.tryExtractSalesPage({
-    //             suburb,
-    //             state,
-    //             postcode,
-    //             page,
-    //             localityId,
-    //         })
-    //         if (!salesInfo)
-    //             return c.text(
-    //                 `${SERVICE_NAME} not scrape sale listings`,
-    //                 StatusCodes.INTERNAL_SERVER_ERROR,
-    //             )
-    //         if (salesInfo.isLastPage) break
-    //     }
-    //     for (let page = 1; ; page++) {
-    //         const rentsInfo = await scrapeController.tryExtractRentsPage({
-    //             suburb,
-    //             state,
-    //             postcode,
-    //             page,
-    //             localityId,
-    //         })
-    //         if (!rentsInfo)
-    //             return c.text(
-    //                 `${SERVICE_NAME} not scrape rent listings`,
-    //                 StatusCodes.INTERNAL_SERVER_ERROR,
-    //             )
-    //         if (rentsInfo.isLastPage) break
-    //     }
+    // Sale listing data
+    for (let page = 1; ; page++) {
+        const args = { ...locality, page, localityId }
+        const salesInfo = await scrapeController.tryExtractSalesPage(args)
+        if (!salesInfo)
+            throw new ValidationError(`${SERVICE_NAME} couldn't scrape sale listing - ${args}`)
+        if (salesInfo.isLastPage) break
+    }
 
-    return c.json(
-        {
-            status: 'Success',
-            input: {
-                suburb,
-                state,
-                postcode,
-            },
-        },
-        StatusCodes.OK,
-    )
+    // Rent listing data
+    for (let page = 1; ; page++) {
+        const args = { ...locality, page, localityId }
+        const rentsInfo = await scrapeController.tryExtractRentsPage(args)
+        if (!rentsInfo)
+            throw new ValidationError(`${SERVICE_NAME} couldn't scrape rent listing - ${args}`)
+        if (rentsInfo.isLastPage) break
+    }
+
+    return c.json(locality, StatusCodes.OK)
 })
 
-app.get('/', async (c) => {
-    const start = performance.now()
-    const html = await browserService.getHTML('https://www.google.com.au')
-    if (!html) throw new Error('Failed to scrape')
+// Test url - test webscraping with local server
+app.get('/test', async (c) => {
+    const server = createServer((_req, res) => {
+        res.end('<h1>Hello</h1>')
+    })
+    const hostname = '127.0.0.1'
+    const port = 8765
+    const serverInstance = server.listen(port, hostname)
+    const testUrl = `http://${hostname}:${port}`
 
-    const scrapeTime = performance.now() - start
+    try {
+        let scrapeTimeMs = performance.now()
 
-    return c.json({ scrapeTime, html }, StatusCodes.OK)
+        const html = await browserService.getHTML(testUrl)
+
+        scrapeTimeMs = Math.ceil(performance.now() - scrapeTimeMs)
+        serverInstance.close()
+        return c.json({ scrapeTimeMs, html }, StatusCodes.OK)
+    } catch (e) {
+        serverInstance.close()
+        return c.json({ error: e }, StatusCodes.INTERNAL_SERVER_ERROR)
+    }
 })
 
-// Enable AWS Lambda
+// Handler or AWS Lambda
 export const handler = handle(app)
 
-// Export for testing and Vite dev
+// Export for Vite dev server
 export default app
