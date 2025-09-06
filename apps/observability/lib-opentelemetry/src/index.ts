@@ -1,8 +1,8 @@
 import { ENV } from './env'
 import { ILoggable } from './ILoggable'
-import { startOpenTelemetry } from './startOpenTelemetry'
-import { LOGGER, otelException } from './logger'
+import { OpenTelemetry } from './OpenTelemetry'
+import { otelException } from './otelException'
 import { commitId } from './commitId'
 import { parseEnvSchema } from './parseEnvSchema'
 
-export { startOpenTelemetry, LOGGER, ILoggable, otelException, commitId, parseEnvSchema, ENV }
+export { OpenTelemetry, ILoggable, otelException, commitId, parseEnvSchema, ENV }
