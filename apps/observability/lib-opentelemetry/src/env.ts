@@ -5,10 +5,10 @@ import type { Level } from 'pino'
 import { parseEnvSchema } from './parseEnvSchema'
 
 export const supportedLogLevels = Object.freeze([
-    'error',
     'fatal',
-    'info',
+    'error',
     'warn',
+    'info',
 ] satisfies Level[])
 export type OtelLogLevel = (typeof supportedLogLevels)[number]
 
