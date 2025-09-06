@@ -12,6 +12,7 @@
         "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts && tsup"
     },
     "dependencies": {
+        "@opentelemetry/api": "^1.9.0",
         "@opentelemetry/auto-instrumentations-node": "^0.62.1",
         "@opentelemetry/exporter-logs-otlp-proto": "0.203.0",
         "@opentelemetry/exporter-metrics-otlp-proto": "^0.203.0",

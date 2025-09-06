@@ -1,8 +1,8 @@
 import { NodeSDK } from '@opentelemetry/sdk-node'
+import { trace } from '@opentelemetry/api'
 
 import { type DetectedResourceAttributes, resourceFromAttributes } from '@opentelemetry/resources'
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions'
-import { ATTR_DEPLOYMENT_ID } from '@opentelemetry/semantic-conventions/incubating'
 
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node'
 
@@ -13,8 +13,8 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 
-import pino, { type Logger } from 'pino'
-import pinoOpentelemetryTransport from 'pino-opentelemetry-transport'
+import pino from 'pino'
+import 'pino-opentelemetry-transport'
 
 import { ENV } from './env'
 import { commitId } from './commitId'
@@ -41,6 +41,7 @@ interface ResourceAttributes extends DetectedResourceAttributes {
 export class OpenTelemetry {
     /**
      *  Starts opentelemetry NodeSDK
+     *  @returns TRACER - @opentelemetry/api tracer
      *  @returns LOGGER - pino logger
      */
     public async start(resourceAttributes: ResourceAttributes) {
@@ -51,8 +52,7 @@ export class OpenTelemetry {
             if (key && val) OLTP_HEADERS[key] = val
         })
         const attributes = {
-            [ATTR_SERVICE_VERSION]: new Date().toISOString(),
-            [ATTR_DEPLOYMENT_ID]: commitId,
+            [ATTR_SERVICE_VERSION]: commitId,
             ...resourceAttributes,
         }
 
@@ -82,21 +82,28 @@ export class OpenTelemetry {
         sdk.start()
 
         return {
+            TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
             LOGGER: pino(
-                {
+                pino.transport({
                     level: ENV.LOG_LEVEL,
-                    timestamp: true,
-                },
-                await pinoOpentelemetryTransport({
-                    loggerName: attributes[ATTR_SERVICE_NAME],
-                    serviceVersion: attributes[ATTR_SERVICE_VERSION],
-                    resourceAttributes: attributes,
-                    logRecordProcessorOptions: [
-                        {
-                            recordProcessorType: 'simple',
-                            exporterOptions: { protocol: 'http' },
-                        },
-                    ],
+                    target: 'pino-opentelemetry-transport',
+                    options: {
+                        loggerName: attributes[ATTR_SERVICE_NAME],
+                        serviceVersion: attributes[ATTR_SERVICE_VERSION],
+                        resourceAttributes: attributes,
+                        logRecordProcessorOptions: [
+                            {
+                                recordProcessorType: 'simple',
+                                exporterOptions: {
+                                    protocol: 'http',
+                                    httpExporterOptions: {
+                                        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
+                                        headers: OLTP_HEADERS,
+                                    },
+                                },
+                            },
+                        ],
+                    },
                 }),
             ),
         }
