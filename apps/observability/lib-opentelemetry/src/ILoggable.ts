@@ -1,6 +1,6 @@
 import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
 import type { Level, Logger } from 'pino'
-import { otelException } from './logger'
+import { otelException } from './otelException'
 
 export class ILoggable {
     readonly LOGGER
