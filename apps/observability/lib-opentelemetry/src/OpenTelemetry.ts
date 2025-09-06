@@ -85,7 +85,7 @@ export class OpenTelemetry {
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
             LOGGER: pino(
                 pino.transport({
-                    level: ENV.LOG_LEVEL,
+                    level: ENV.OTEL_LOG_LEVEL,
                     target: 'pino-opentelemetry-transport',
                     options: {
                         loggerName: attributes[ATTR_SERVICE_NAME],

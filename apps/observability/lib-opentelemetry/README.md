@@ -5,9 +5,7 @@ A library to setup opentelemetry for node.js servers
 These [OTLP exporter config variables](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/) are required in production:
 - `OTEL_EXPORTER_OTLP_ENDPOINT`
 - `OTEL_EXPORTER_OTLP_HEADERS`
-
-Additional config:
-- `LOG_LEVEL`
+- `OTEL_LOG_LEVEL`
 
 The default values point to the local Grafana LGTM docker instance.
 

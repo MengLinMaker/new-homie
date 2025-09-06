@@ -16,8 +16,8 @@ describe(testSuiteName, async () => {
         LOGGER.error('error')
         LOGGER.warn('warn')
         LOGGER.info('info')
-        LOGGER.debug('debug')
-        LOGGER.trace('trace')
+        LOGGER.debug('debug') // will not show
+        LOGGER.trace('trace') // will not show
         LOGGER.flush()
     })
 
