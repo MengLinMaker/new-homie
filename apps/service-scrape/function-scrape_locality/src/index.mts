@@ -1,22 +1,25 @@
 import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
+import { otelException } from '@observability/lib-opentelemetry'
 
 // Setup persistent resources
-import { scrapeController } from './global/setup'
+import { LOGGER, SERVICE_NAME, scrapeController } from './global/setup'
 import { tracerMiddleware, validatorMiddleware } from './global/middleware'
-import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 
 export const handler = middy()
     .use(validatorMiddleware)
     .use(tracerMiddleware)
     .handler(async (event, _context) => {
-        if (!event.success) {
-            LOGGER.fatal({
-                args: event.originalEvent,
-                ...otelException(event.error),
-            })
-            return { status: StatusCodes.BAD_REQUEST }
-        }
+        LOGGER.info({}, `START ${SERVICE_NAME}`)
+        if (!event.success)
+            throw LOGGER.fatal(
+                {
+                    args: event.originalEvent,
+                    ...otelException(event.error),
+                },
+                `FAIL ${SERVICE_NAME} validation error`,
+            )
+
         // biome-ignore lint/style/noNonNullAssertion: <validated>
         const locality = event.data.Records[0]!.body
 
@@ -25,7 +28,13 @@ export const handler = middy()
 
         // Locality data
         const localityId = await scrapeController.tryExtractSuburbPage(locality)
-        if (localityId === null) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+        if (localityId === null)
+            throw LOGGER.fatal(
+                {
+                    args: locality,
+                },
+                `FAIL ${SERVICE_NAME} tryExtractSuburbPage`,
+            )
 
         await scrapeController.tryExtractSchools({ ...locality, localityId })
 
@@ -33,7 +42,7 @@ export const handler = middy()
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const salesInfo = await scrapeController.tryExtractSalesPage(args)
-            if (!salesInfo) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+            if (!salesInfo) throw LOGGER.fatal({ args }, `FAIL ${SERVICE_NAME} tryExtractSalesPage`)
             if (salesInfo.isLastPage) break
         }
 
@@ -41,9 +50,10 @@ export const handler = middy()
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const rentsInfo = await scrapeController.tryExtractRentsPage(args)
-            if (!rentsInfo) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+            if (!rentsInfo) throw LOGGER.fatal({ args }, `FAIL ${SERVICE_NAME} tryExtractRentsPage`)
             if (rentsInfo.isLastPage) break
         }
 
+        LOGGER.info({ args: locality }, `SUCCESS ${SERVICE_NAME}`)
         return { status: StatusCodes.OK }
     })

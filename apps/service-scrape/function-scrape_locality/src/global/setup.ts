@@ -2,17 +2,20 @@ import { DB_SERVICE_SCRAPE, getKyselyPostgresDb } from '@service-scrape/lib-db_s
 import { ConnectionError } from 'common-errors'
 import { BrowserService } from '../scrape/website/BrowserService'
 import { ScrapeController } from '../scrape/ScrapeController'
-import { LOGGER, otelException, startOpenTelemetry } from '@observability/lib-opentelemetry'
+import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
 
 export const SERVICE_NAME = 'function-scrape_locality'
 
-startOpenTelemetry(SERVICE_NAME)
+const otel = new OpenTelemetry()
+export const { LOGGER, TRACER } = otel.start({
+    'service.name': SERVICE_NAME
+})
 
 const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE)
 
 // Application depends on database, hence it should crash
 if (!DB) {
-    const e = new ConnectionError(`${SERVICE_NAME} failed to connect to postgis database`)
+    const e = new ConnectionError(`Failed to connect to postgis database`)
     LOGGER.fatal(otelException(e))
     throw e
 }
