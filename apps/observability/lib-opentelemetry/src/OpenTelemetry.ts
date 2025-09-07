@@ -20,6 +20,7 @@ import { ENV } from './env'
 import { commitId } from './commitId'
 import type { Options } from 'otlp-logger'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { ATTR_SERVICE_NAMESPACE } from '@opentelemetry/semantic-conventions/incubating'
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
 }
@@ -114,6 +115,7 @@ export class OpenTelemetry {
      */
     public async start(resourceAttributes: ResourceAttributes) {
         const attributes = {
+            [ATTR_SERVICE_NAMESPACE]: 'NewHomie',
             [ATTR_SERVICE_VERSION]: commitId,
             ...resourceAttributes,
         }
