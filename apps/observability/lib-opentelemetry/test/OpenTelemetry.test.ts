@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { suiteNameFromFileName } from './util'
-import { OpenTelemetry } from '../src'
+import { OpenTelemetry } from '../src/OpenTelemetry'
 import type { Span } from '@opentelemetry/api'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
@@ -8,7 +8,7 @@ const testSuiteName = suiteNameFromFileName(import.meta.filename)
 describe(testSuiteName, async () => {
     const otel = new OpenTelemetry()
     const { LOGGER, TRACER } = await otel.start({
-        'service.name': '@observabilitylib-opentelemetry',
+        'service.name': '@observabilitylib-opentelemetry/test',
     })
 
     it('should log', () => {
@@ -16,8 +16,8 @@ describe(testSuiteName, async () => {
         LOGGER.error('error')
         LOGGER.warn('warn')
         LOGGER.info('info')
-        LOGGER.debug('debug') // will not show
-        LOGGER.trace('trace') // will not show
+        LOGGER.debug('debug')
+        LOGGER.trace('trace')
         LOGGER.flush()
     })
 

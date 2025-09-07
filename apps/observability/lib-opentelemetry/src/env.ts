@@ -4,14 +4,6 @@ import type { Level } from 'pino'
 
 import { parseEnvSchema } from './parseEnvSchema'
 
-export const supportedLogLevels = Object.freeze([
-    'fatal',
-    'error',
-    'warn',
-    'info',
-] satisfies Level[])
-export type OtelLogLevel = (typeof supportedLogLevels)[number]
-
 /**
  *  Type safe env keys
  * @todo Use SSM Parameter Store instead
@@ -41,6 +33,8 @@ export const ENV = parseEnvSchema(
          * Log level at bootup
          * Levels that Grafana can receive
          */
-        OTEL_LOG_LEVEL: z.enum(supportedLogLevels).default('warn'),
+        OTEL_LOG_LEVEL: z
+            .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'] satisfies Level[])
+            .default('warn'),
     }),
 )

@@ -1,7 +1,6 @@
 import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
-import type { Logger } from 'pino'
+import type { Level, Logger } from 'pino'
 import { otelException } from './otelException'
-import type { OtelLogLevel } from './env'
 
 export class ILoggable {
     readonly LOGGER
@@ -16,11 +15,7 @@ export class ILoggable {
      * @param func the method itself
      * @param msg message
      */
-    public log<I, O>(
-        logLevel: OtelLogLevel,
-        func: (args: I) => O,
-        msg: string | undefined = undefined,
-    ) {
+    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string | undefined = undefined) {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
@@ -41,6 +36,12 @@ export class ILoggable {
             case 'info':
                 this.LOGGER.info(logInfo, msg)
                 break
+            case 'debug':
+                this.LOGGER.debug(logInfo, msg)
+                break
+            case 'trace':
+                this.LOGGER.trace(logInfo, msg)
+                break
         }
     }
 
@@ -52,7 +53,7 @@ export class ILoggable {
      * @param msg optional message
      */
     public logException<I, E>(
-        logLevel: OtelLogLevel,
+        logLevel: Level,
         maybeError: E,
         args: I | undefined = undefined,
         msg: string | undefined = undefined,
@@ -76,6 +77,12 @@ export class ILoggable {
                 break
             case 'info':
                 this.LOGGER.info(logInfo, msg)
+                break
+            case 'debug':
+                this.LOGGER.debug(logInfo, msg)
+                break
+            case 'trace':
+                this.LOGGER.trace(logInfo, msg)
                 break
         }
     }
