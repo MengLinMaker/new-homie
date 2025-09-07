@@ -113,7 +113,7 @@ export class OpenTelemetry {
      * @returns LOGGER - pino logger
      * @returns TRACER - @opentelemetry/api tracer
      */
-    public async start(resourceAttributes: ResourceAttributes) {
+    public start(resourceAttributes: ResourceAttributes) {
         const attributes = {
             [ATTR_SERVICE_NAMESPACE]: 'NewHomie',
             [ATTR_SERVICE_VERSION]: commitId,
