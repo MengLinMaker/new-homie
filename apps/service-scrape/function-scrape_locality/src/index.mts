@@ -17,7 +17,7 @@ export const handler = middy()
                     args: event.originalEvent,
                     ...otelException(event.error),
                 },
-                `FAIL ${SERVICE_NAME} validation error`,
+                `FATAL ${SERVICE_NAME} validation error`,
             )
 
         // biome-ignore lint/style/noNonNullAssertion: <validated>
@@ -33,7 +33,7 @@ export const handler = middy()
                 {
                     args: locality,
                 },
-                `FAIL ${SERVICE_NAME} tryExtractSuburbPage`,
+                `FATAL ${SERVICE_NAME} tryExtractSuburbPage`,
             )
 
         await scrapeController.tryExtractSchools({ ...locality, localityId })
@@ -42,7 +42,8 @@ export const handler = middy()
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const salesInfo = await scrapeController.tryExtractSalesPage(args)
-            if (!salesInfo) throw LOGGER.fatal({ args }, `FAIL ${SERVICE_NAME} tryExtractSalesPage`)
+            if (!salesInfo)
+                throw LOGGER.fatal({ args }, `FATAL ${SERVICE_NAME} tryExtractSalesPage`)
             if (salesInfo.isLastPage) break
         }
 
@@ -50,7 +51,8 @@ export const handler = middy()
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const rentsInfo = await scrapeController.tryExtractRentsPage(args)
-            if (!rentsInfo) throw LOGGER.fatal({ args }, `FAIL ${SERVICE_NAME} tryExtractRentsPage`)
+            if (!rentsInfo)
+                throw LOGGER.fatal({ args }, `FATAL ${SERVICE_NAME} tryExtractRentsPage`)
             if (rentsInfo.isLastPage) break
         }
 
