@@ -8,7 +8,7 @@ export const SERVICE_NAME = 'function-scrape_locality'
 
 const otel = new OpenTelemetry()
 export const { LOGGER, TRACER } = otel.start({
-    'service.name': SERVICE_NAME
+    'service.name': SERVICE_NAME,
 })
 
 const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE)
