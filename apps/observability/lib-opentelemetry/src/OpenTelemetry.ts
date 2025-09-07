@@ -47,7 +47,7 @@ ENV.OTEL_EXPORTER_OTLP_HEADERS.split(', ').forEach((header) => {
  * const { LOGGER } = await otel.start(attributes)
  */
 export class OpenTelemetry {
-    private startNodeSDK(attributes: ResourceAttributes) {
+    private startAutoInstrumentation(attributes: ResourceAttributes) {
         const sdk = new NodeSDK({
             resource: resourceFromAttributes(attributes),
             traceExporter: new OTLPTraceExporter({
@@ -116,7 +116,7 @@ export class OpenTelemetry {
         }
 
         return {
-            SDK: this.startNodeSDK(attributes),
+            SDK: this.startAutoInstrumentation(attributes),
             LOGGER: this.startPinoLogger(attributes),
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
         }
