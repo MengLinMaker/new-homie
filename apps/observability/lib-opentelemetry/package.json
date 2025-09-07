@@ -7,8 +7,8 @@
     "scripts": {
         "format": "biome format --write",
         "test:type": "tsc",
-        "test:unit": "vitest run --coverage",
-        "dev:test:unit": "vitest --coverage",
+        "test:unit": "OTEL_LOG_LEVEL=trace vitest run --coverage",
+        "dev:test:unit": "OTEL_LOG_LEVEL=trace vitest --coverage",
         "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts && tsup"
     },
     "dependencies": {
