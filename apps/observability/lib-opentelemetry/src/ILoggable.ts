@@ -19,9 +19,11 @@ export class ILoggable {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
-            // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
             [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
         }
+
+        if (!msg) msg = `${logLevel.toUpperCase()} ${thisClass.constructor.name}.${func.name}`
+
         /* v8 ignore start */
         switch (logLevel) {
             case 'fatal':
@@ -52,18 +54,24 @@ export class ILoggable {
      * @param args method arguments
      * @param msg optional message
      */
-    public logException<I, E>(
+    public logException<I, O, E>(
         logLevel: Level,
+        func: (args: I) => O,
         maybeError: E,
         args: I | undefined = undefined,
         msg: string | undefined = undefined,
     ) {
         // This class is the extended class
+        const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
             // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
             'code.function.args': args, // No convention
+            [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
             ...otelException(maybeError),
         }
+
+        if (!msg) msg = `${logLevel.toUpperCase()} ${thisClass.constructor.name}.${func.name}`
+
         /* v8 ignore start */
         switch (logLevel) {
             case 'fatal':
