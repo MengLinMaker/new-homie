@@ -51,6 +51,7 @@ export class ILoggable {
      * Enforce structured logging for error
      * @param logLevel pino logging level
      * @param error error from try catch
+     * @param func the method itself
      * @param args method arguments
      * @param msg optional message
      */
