@@ -20,8 +20,6 @@ import { ENV } from './env'
 import { commitId } from './commitId'
 import type { Options } from 'otlp-logger'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
-import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
-
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
 }
@@ -52,10 +50,14 @@ export class OpenTelemetry {
     private startAutoInstrumentation(attributes: ResourceAttributes) {
         const sdk = new NodeSDK({
             resource: resourceFromAttributes(attributes),
-            traceExporter: new OTLPTraceExporter({
-                url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
-                headers: OLTP_HEADERS,
-            }),
+            spanProcessors: [
+                new SimpleSpanProcessor(
+                    new OTLPTraceExporter({
+                        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
+                        headers: OLTP_HEADERS,
+                    }),
+                ),
+            ],
             metricReader: new PeriodicExportingMetricReader({
                 exporter: new OTLPMetricExporter({
                     url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/metrics`,
@@ -95,7 +97,6 @@ export class OpenTelemetry {
                 },
             ],
         } satisfies Options
-
         return pino({
             level: ENV.OTEL_LOG_LEVEL,
             transport: {
@@ -116,21 +117,6 @@ export class OpenTelemetry {
             [ATTR_SERVICE_VERSION]: commitId,
             ...resourceAttributes,
         }
-
-        const provider = new NodeTracerProvider({
-            spanProcessors: [
-                new SimpleSpanProcessor(
-                    new OTLPTraceExporter({
-                        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
-                        headers: OLTP_HEADERS,
-                    }),
-                ),
-            ],
-        })
-        provider.register()
-
-        // trace.setGlobalTracerProvider(new BasicTracerProvider())
-
         return {
             SDK: this.startAutoInstrumentation(attributes),
             LOGGER: this.startPinoLogger(attributes),

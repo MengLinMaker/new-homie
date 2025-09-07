@@ -4,6 +4,7 @@ import { OpenTelemetry } from '../src/OpenTelemetry'
 import type { Span } from '@opentelemetry/api'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 describe(testSuiteName, async () => {
     const otel = new OpenTelemetry()
@@ -21,16 +22,18 @@ describe(testSuiteName, async () => {
         LOGGER.flush()
     })
 
-    it('should trace', () => {
+    it('should trace', async () => {
         const spans: Span[] = []
         const numSpans = 10
 
         for (let i = 0; i < numSpans; i++) {
             const span = TRACER.startSpan(i.toString())
-            spans.unshift(span)
+            spans.push(span)
+            await sleep(10)
         }
-        spans.forEach((span) => {
+        spans.forEach(async (span) => {
             span.end()
+            await sleep(10)
         })
     })
 })
