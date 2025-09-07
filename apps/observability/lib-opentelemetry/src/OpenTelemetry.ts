@@ -18,10 +18,18 @@ import 'pino-opentelemetry-transport'
 
 import { ENV } from './env'
 import { commitId } from './commitId'
+import type { Options } from 'otlp-logger'
 
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
 }
+
+// Headers need to be parsed into a record
+const OLTP_HEADERS: Record<string, string> = {}
+ENV.OTEL_EXPORTER_OTLP_HEADERS.split(', ').forEach((header) => {
+    const [key, val] = header.split(': ')
+    if (key && val) OLTP_HEADERS[key] = val
+})
 
 /**
  * Wrapper to setup OpenTelemetry SDK for Nodejs
@@ -39,23 +47,7 @@ interface ResourceAttributes extends DetectedResourceAttributes {
  * const { LOGGER } = await otel.start(attributes)
  */
 export class OpenTelemetry {
-    /**
-     *  Starts opentelemetry NodeSDK
-     *  @returns TRACER - @opentelemetry/api tracer
-     *  @returns LOGGER - pino logger
-     */
-    public async start(resourceAttributes: ResourceAttributes) {
-        // Headers need to be parsed into a record
-        const OLTP_HEADERS: Record<string, string> = {}
-        ENV.OTEL_EXPORTER_OTLP_HEADERS.split(', ').forEach((header) => {
-            const [key, val] = header.split(': ')
-            if (key && val) OLTP_HEADERS[key] = val
-        })
-        const attributes = {
-            [ATTR_SERVICE_VERSION]: commitId,
-            ...resourceAttributes,
-        }
-
+    private startNodeSDK(attributes: ResourceAttributes) {
         const sdk = new NodeSDK({
             resource: resourceFromAttributes(attributes),
             traceExporter: new OTLPTraceExporter({
@@ -80,32 +72,53 @@ export class OpenTelemetry {
             autoDetectResources: true,
         })
         sdk.start()
+        return sdk
+    }
+
+    private startPinoLogger(attributes: ResourceAttributes) {
+        const transportOptions = {
+            loggerName: attributes[ATTR_SERVICE_NAME],
+            serviceVersion: commitId,
+            resourceAttributes: attributes,
+            logRecordProcessorOptions: [
+                {
+                    recordProcessorType: 'simple',
+                    exporterOptions: {
+                        protocol: 'http/protobuf',
+                        protobufExporterOptions: {
+                            url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
+                            headers: OLTP_HEADERS,
+                        },
+                    },
+                },
+            ],
+        } satisfies Options
+
+        return pino({
+            level: ENV.OTEL_LOG_LEVEL,
+            transport: {
+                target: 'pino-opentelemetry-transport',
+                options: transportOptions,
+            },
+        })
+    }
+
+    /**
+     * Starts opentelemetry NodeSDK
+     * @returns SDK - Otel NodeSDK
+     * @returns LOGGER - pino logger
+     * @returns TRACER - @opentelemetry/api tracer
+     */
+    public async start(resourceAttributes: ResourceAttributes) {
+        const attributes = {
+            [ATTR_SERVICE_VERSION]: commitId,
+            ...resourceAttributes,
+        }
 
         return {
+            SDK: this.startNodeSDK(attributes),
+            LOGGER: this.startPinoLogger(attributes),
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
-            LOGGER: pino(
-                pino.transport({
-                    level: ENV.OTEL_LOG_LEVEL,
-                    target: 'pino-opentelemetry-transport',
-                    options: {
-                        loggerName: attributes[ATTR_SERVICE_NAME],
-                        serviceVersion: attributes[ATTR_SERVICE_VERSION],
-                        resourceAttributes: attributes,
-                        logRecordProcessorOptions: [
-                            {
-                                recordProcessorType: 'simple',
-                                exporterOptions: {
-                                    protocol: 'http',
-                                    httpExporterOptions: {
-                                        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
-                                        headers: OLTP_HEADERS,
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                }),
-            ),
         }
     }
 }
