@@ -19,6 +19,8 @@ import 'pino-opentelemetry-transport'
 import { ENV } from './env'
 import { commitId } from './commitId'
 import type { Options } from 'otlp-logger'
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
 
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
@@ -114,6 +116,20 @@ export class OpenTelemetry {
             [ATTR_SERVICE_VERSION]: commitId,
             ...resourceAttributes,
         }
+
+        const provider = new NodeTracerProvider({
+            spanProcessors: [
+                new SimpleSpanProcessor(
+                    new OTLPTraceExporter({
+                        url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
+                        headers: OLTP_HEADERS,
+                    }),
+                ),
+            ],
+        })
+        provider.register()
+
+        // trace.setGlobalTracerProvider(new BasicTracerProvider())
 
         return {
             SDK: this.startAutoInstrumentation(attributes),
