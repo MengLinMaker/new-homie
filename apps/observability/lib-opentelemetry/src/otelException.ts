@@ -10,11 +10,14 @@ import {
  * @returns
  */
 const enforceErrorType = (maybeError: unknown) => {
-    if (maybeError instanceof Error) return maybeError
+    // Assume error doesn't have to be error type, as long as type interface is enforced
+    const isError = maybeError as Error | undefined
+    if (isError?.name && isError.message) return isError
+
     try {
-        return new Error(JSON.stringify(maybeError))
+        return Error(JSON.stringify(maybeError))
     } catch {
-        return new Error(String(maybeError))
+        return Error(String(maybeError))
     }
 }
 
@@ -29,5 +32,6 @@ export const otelException = (maybeError: unknown) => {
         [ATTR_EXCEPTION_TYPE]: e.name,
         [ATTR_EXCEPTION_MESSAGE]: e.message,
         [ATTR_EXCEPTION_STACKTRACE]: e.stack,
+        'exception.cause': e.cause,
     }
 }
