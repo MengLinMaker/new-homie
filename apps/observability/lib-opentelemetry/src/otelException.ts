@@ -28,10 +28,10 @@ const enforceErrorType = (maybeError: unknown) => {
  */
 export const otelException = (maybeError: unknown) => {
     const e = enforceErrorType(maybeError)
-    return {
+    const structuredError: Record<string, string> = {
         [ATTR_EXCEPTION_TYPE]: e.name,
         [ATTR_EXCEPTION_MESSAGE]: e.message,
-        [ATTR_EXCEPTION_STACKTRACE]: e.stack,
-        'exception.cause': e.cause,
     }
+    if (e.stack) structuredError[ATTR_EXCEPTION_STACKTRACE] = e.stack
+    return structuredError
 }
