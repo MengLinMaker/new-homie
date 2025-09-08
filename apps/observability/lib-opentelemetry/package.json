@@ -2,14 +2,14 @@
     "name": "@observability/lib-opentelemetry",
     "private": true,
     "exports": {
-        ".": "./dist/index.js"
+        ".": "./src/index.ts"
     },
     "scripts": {
         "format": "biome format --write",
         "test:type": "tsc",
         "test:unit": "OTEL_LOG_LEVEL=trace vitest run --coverage",
         "dev:test:unit": "OTEL_LOG_LEVEL=trace vitest --coverage",
-        "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts && tsup"
+        "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts"
     },
     "dependencies": {
         "@opentelemetry/api": "^1.9.0",
