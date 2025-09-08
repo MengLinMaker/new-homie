@@ -1,5 +1,5 @@
 import { NodeSDK } from '@opentelemetry/sdk-node'
-import { trace } from '@opentelemetry/api'
+import { type Exception, type Span, SpanStatusCode, trace } from '@opentelemetry/api'
 
 import { type DetectedResourceAttributes, resourceFromAttributes } from '@opentelemetry/resources'
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions'
@@ -99,6 +99,8 @@ export class OpenTelemetry {
             ],
         } satisfies Options
         return pino({
+            // Remove pid and hostname
+            base: null,
             level: ENV.OTEL_LOG_LEVEL,
             transport: {
                 target: 'pino-opentelemetry-transport',
@@ -125,4 +127,9 @@ export class OpenTelemetry {
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
         }
     }
+}
+
+export const spanExceptionEnd = (span: Span, exception: Exception) => {
+    span.setStatus({ code: SpanStatusCode.ERROR }).recordException(exception)
+    span.end()
 }
