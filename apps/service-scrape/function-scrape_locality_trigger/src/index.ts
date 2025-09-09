@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
-import { tracerMiddleware, validatorMiddleware } from './global/middleware'
+import { validatorMiddleware } from './global/middleware'
 import { chunkArray } from './util'
 import { ENV } from './global/env'
 
@@ -13,7 +13,6 @@ import { enforceErrorType, spanExceptionEnd } from '@observability/lib-opentelem
 
 export const handler = middy()
     .use(validatorMiddleware)
-    .use(tracerMiddleware)
     .handler(async (event, _context) => {
         const span = TRACER.startSpan('handler')
         if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
