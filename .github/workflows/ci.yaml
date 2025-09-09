@@ -15,25 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup dependencies Nx
-        id: setup
         uses: ./.github/actions/setup-ci
-
-      - name: Load cache Nx tasks from BASE SHA
-        id: nx-cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: .nx
-          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
 
       - name: Test
         run: pnpm nx affected -t test:unit test:type
-
-      - name: Save cache Nx tasks from BASE SHA
-        uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: .nx
-          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
 
   test-integration:
     runs-on: ubuntu-24.04-arm
@@ -44,15 +29,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup dependencies Nx
-        id: setup
         uses: ./.github/actions/setup-ci
-
-      - name: Load cache Nx tasks from BASE SHA
-        id: nx-cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: .nx
-          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
 
       - name: Deploy cdk quantum stacks
         run: pnpm nx affected -t cdk:dev
@@ -72,11 +49,3 @@ jobs:
           DB_SERVICE_SCRAPE: ${{ secrets.DB_SERVICE_SCRAPE }}
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
-
-      - name: Save cache Nx tasks from BASE SHA
-        uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: .nx
-          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
-
