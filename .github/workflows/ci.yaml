@@ -6,7 +6,8 @@ on:
       - '**'
 
 jobs:
-  test-unit:
+  test-fast:
+    name: Test fast - linting all and testing libraries
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
@@ -16,10 +17,33 @@ jobs:
 
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
-      - name: Test
-        run: pnpm nx affected -t test:unit test:type
 
-  test-integration:
+      - name: Lint all
+        run: pnpm lint
+
+      - name: Type test all
+        run: pnpm nx affected -t test:type
+
+      - name: Unit test libraries
+        run: pnpm nx affected -t test:unit --exclude='*,!**/lib-*'
+
+  test-functions:
+    name: Test functions - testing all lambda functions
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Deep checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup dependencies Nx
+        uses: ./.github/actions/setup-ci
+
+      - name: Unit test functions
+        run: pnpm nx affected -t test:unit --exclude='*,!**/function-*'
+
+  test-cdk:
+    name: Test cdk - infrastructure deployment
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
@@ -42,3 +66,9 @@ jobs:
       # TODO: add integration test scripts
       - name: Test
         run: echo 'TODO'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_SERVICE_SCRAPE: ${{ secrets.DB_SERVICE_SCRAPE }}
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}

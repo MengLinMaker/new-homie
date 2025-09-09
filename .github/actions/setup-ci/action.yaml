@@ -7,12 +7,6 @@ runs:
       id: setSHAs
       uses: nrwl/nx-set-shas@v4
 
-    - name: Output Nx select BASE + HEAD SHAs
-      shell: bash
-      run: |
-        echo "BASE: ${{ steps.setSHAs.outputs.base }}"
-        echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
-
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
@@ -29,12 +23,19 @@ runs:
       shell: bash
       run: pnpm i --no-frozen-lockfile
 
-    - name: Cache Nx tasks
-      uses: actions/cache@v4
-      with:
-        path: .nx/cache
-        key: nx-cache
-
     - name: Build all packages
       shell: bash
       run: pnpm -r build
+
+    - name: Cache Nx tasks from BASE SHA
+      uses: actions/cache@v4
+      with:
+        path: .nx
+        key: nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}-${{ github.event.pull_request.number }}-${{ github.run_id }}
+        # 1. Prefer to restore from closest job and pr (common base sha)
+        # 2. Then restore from closest job and base sha
+        # 3. Then restore from closest job
+        restore-keys: |
+          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}-${{ github.event.pull_request.number }}
+          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}
+          nx-cache-${{ github.job }}
