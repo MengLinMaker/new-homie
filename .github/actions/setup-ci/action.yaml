@@ -1,9 +1,5 @@
 name: "Setup CI"
 description: "Prepare CI job. Setup Nx, node and pnpm. Install dependencies and build affected packages"
-inputs:
-  job-name:
-    required: true
-    description: "Name of job - for caching purposes"
 outputs:
   nx-cache-key:
     description: "Key for saving Nx tasks cache"
@@ -46,4 +42,4 @@ runs:
       uses: actions/cache/restore@v4
       with:
         path: .nx
-        key: nx-cache-${{ inputs.job-name }}-${{ steps.setSHAs.outputs.base }}
+        key: nx-cache-${{ github.job }}-${{ steps.setSHAs.outputs.base }}

@@ -17,8 +17,6 @@ jobs:
       - name: Setup dependencies Nx
         id: setup
         uses: ./.github/actions/setup-ci
-        with:
-          job-name: test-unit
 
       - name: Test
         run: pnpm nx affected -t test:unit test:type
@@ -41,8 +39,6 @@ jobs:
       - name: Setup dependencies Nx
         id: setup
         uses: ./.github/actions/setup-ci
-        with:
-          job-name: test-integration
 
       - name: Deploy cdk quantum stacks
         run: pnpm nx affected -t cdk:dev
