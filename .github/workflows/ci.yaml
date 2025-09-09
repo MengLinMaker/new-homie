@@ -25,7 +25,7 @@ jobs:
         run: pnpm nx affected -t test:type
 
       - name: Unit test libraries
-        run: pnpm nx affected -t test:unit -p **/lib-*
+        run: pnpm nx affected -t test:unit --exclude='*,!**/lib-*'
 
   test-functions:
     name: Test functions - testing all lambda functions
@@ -40,7 +40,7 @@ jobs:
         uses: ./.github/actions/setup-ci
 
       - name: Unit test functions
-        run: pnpm nx affected -t test:unit -p **/function-*
+        run: pnpm nx affected -t test:unit --exclude='*,!**/function-*'
 
   test-cdk:
     name: Test cdk - infrastructure deployment
