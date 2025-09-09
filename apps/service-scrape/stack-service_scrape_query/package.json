@@ -8,6 +8,7 @@
         "format": "biome format --write",
         "test:type": "tsc",
         "cdk:synth": "cdk synth",
+        "cdk:dev:deploy": "cdk deploy -m direct --no-rollback --asset-parallelism true",
         "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
     },
     "devDependencies": {
