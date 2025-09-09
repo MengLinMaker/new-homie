@@ -17,7 +17,7 @@ import pino from 'pino'
 import 'pino-opentelemetry-transport'
 
 import { ENV } from './env.ts'
-import { commitId } from './commitId.ts'
+import { commitId } from './../dist/commitId.ts'
 import type { Options } from 'otlp-logger'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 import { ATTR_SERVICE_NAMESPACE } from '@opentelemetry/semantic-conventions/incubating'
