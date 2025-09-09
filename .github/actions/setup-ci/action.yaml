@@ -46,4 +46,4 @@ runs:
       uses: actions/cache/restore@v4
       with:
         path: .nx
-        key: nx-cache${{ inputs.job-name }}-${{ steps.setSHAs.outputs.base }}
+        key: nx-cache-${{ inputs.job-name }}-${{ steps.setSHAs.outputs.base }}
