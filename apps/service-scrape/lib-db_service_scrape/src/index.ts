@@ -3,7 +3,7 @@ import * as Schema from './schema.ts'
 import { createPostgisPointString, createPostgisPolygonString } from './util.ts'
 
 import { config } from 'dotenv'
-import { tryCreatePostgisPointString } from './util'
+import { tryCreatePostgisPointString } from './util.ts'
 config({ quiet: true })
 
 /**
