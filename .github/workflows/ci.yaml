@@ -18,6 +18,13 @@ jobs:
         id: setup
         uses: ./.github/actions/setup-ci
 
+      - name: Load cache Nx tasks from BASE SHA
+        id: nx-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
+
       - name: Test
         run: pnpm nx affected -t test:unit test:type
 
@@ -39,6 +46,13 @@ jobs:
       - name: Setup dependencies Nx
         id: setup
         uses: ./.github/actions/setup-ci
+
+      - name: Load cache Nx tasks from BASE SHA
+        id: nx-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
 
       - name: Deploy cdk quantum stacks
         run: pnpm nx affected -t cdk:dev
