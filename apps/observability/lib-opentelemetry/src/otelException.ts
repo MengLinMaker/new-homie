@@ -9,7 +9,7 @@ import {
  * @param maybeError
  * @returns
  */
-const enforceErrorType = (maybeError: unknown) => {
+export const enforceErrorType = (maybeError: unknown) => {
     // Assume error doesn't have to be error type, as long as type interface is enforced
     const isError = maybeError as Error | undefined
     if (isError?.name && isError.message) return isError

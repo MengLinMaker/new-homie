@@ -2,7 +2,7 @@
 import { z } from 'zod'
 import type { Level } from 'pino'
 
-import { parseEnvSchema } from './parseEnvSchema'
+import { parseEnvSchema } from './parseEnvSchema.ts'
 
 /**
  *  Type safe env keys
