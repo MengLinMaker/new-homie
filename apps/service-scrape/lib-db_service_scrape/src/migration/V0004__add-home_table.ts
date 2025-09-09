@@ -1,6 +1,7 @@
 import { type Kysely, sql } from 'kysely'
+import type { DB } from '../schema.ts'
 
-export async function up(db: Kysely<unknown>): Promise<void> {
+export async function up(db: Kysely<DB>): Promise<void> {
     await db.schema
         .createTable('home_table')
         .addColumn('id', 'integer', (col) =>
@@ -29,6 +30,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<unknown>): Promise<void> {
+export async function down(db: Kysely<DB>): Promise<void> {
     await db.schema.dropTable('home_table').execute()
 }

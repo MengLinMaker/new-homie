@@ -1,6 +1,7 @@
 import { type Kysely, sql } from 'kysely'
+import type { DB } from '../schema.ts'
 
-export async function up(db: Kysely<unknown>): Promise<void> {
+export async function up(db: Kysely<DB>): Promise<void> {
     await db.schema
         .createType('home_type_enum')
         // Enums are taken from "ptype" query param
@@ -50,7 +51,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<unknown>): Promise<void> {
+export async function down(db: Kysely<DB>): Promise<void> {
     await db.schema.dropType('home_type_enum').execute()
     await db.schema.dropTable('home_feature_table').execute()
 }
