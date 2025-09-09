@@ -5,35 +5,21 @@
     },
     "targetDefaults": {
         "test:type": {
-            "dependsOn": ["^test:type"],
             "cache": true
         },
         "test:unit": {
-            "dependsOn": ["^test:unit"],
             "cache": true
         },
-        "test:perf": {
-            "dependsOn": ["^test:perf"],
+        "test:int": {
             "cache": true
         },
-        "build": {
-            "dependsOn": ["^build"],
-            "outputs": ["{projectRoot}/dist"],
-            "cache": true
+        "cdk:synth": {
+            "cache": true,
+            "outputs": ["{projectRoot}/cdk.out"]
         },
-        "build:sam": {
-            "dependsOn": ["^build:sam"],
-            "outputs": ["{projectRoot}/.aws-sam"],
-            "cache": true
-        },
-        "format": {
-            "cache": true
-        },
-        "test": {
-            "cache": true
-        },
-        "compress": {
-            "cache": true
+        "cdk:dev": {
+            "cache": true,
+            "outputs": ["{projectRoot}/cdk.out"]
         }
     }
 }
