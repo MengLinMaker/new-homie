@@ -56,7 +56,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
             memorySize: 1769,
             entry: path.join(
                 import.meta.dirname,
-                '../../function-scrape_locality_trigger/src/index.mts',
+                '../../function-scrape_locality_trigger/src/index.ts',
             ),
             timeout: cdk.Duration.seconds(60),
             reservedConcurrentExecutions: 1,
@@ -88,7 +88,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         // Batch Scrape Suburbs Lambda Function - 1x 1vCPU for max duration
         const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
             ...functionDefaults,
-            entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.mts'),
+            entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.ts'),
             memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
