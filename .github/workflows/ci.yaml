@@ -33,7 +33,7 @@ jobs:
         if: always()
         with:
           path: .nx
-          key: ${{ steps.setup.outputs.nx-cache-key }}
+          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
 
   test-integration:
     runs-on: ubuntu-24.04-arm
@@ -78,4 +78,5 @@ jobs:
         if: always()
         with:
           path: .nx
-          key: ${{ steps.setup.outputs.nx-cache-key }}
+          key: nx-cache-${{ github.job }}-${{ steps.setup.outputs.nx-base-sha }}
+
