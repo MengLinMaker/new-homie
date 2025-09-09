@@ -19,11 +19,9 @@ export const handler = middy()
         if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
 
         const filteredLocality = australiaLocalities.filter((locality) => {
-            return (
-                locality.suburb_name === 'Dandenong' &&
-                locality.state_abbreviation === 'VIC' &&
-                locality.postcode === '3175'
-            )
+            if (!locality.postcode) return false
+            const postcode = parseInt(locality.postcode, 10)
+            return postcode >= 3170 && postcode <= 3180
         })
 
         for (const chunkLocality of chunkArray(filteredLocality, 10)) {
