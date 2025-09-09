@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  test-type:
+  test-lint:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
@@ -17,7 +17,10 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
-      - name: Test
+      - name: Test biome lint
+        run: pnpm lint
+
+      - name: Type test
         run: pnpm nx affected -t test:type
 
   test-unit:
@@ -31,7 +34,7 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
-      - name: Test
+      - name: Unit test
         run: pnpm nx affected -t test:unit
 
   test-cdk:
