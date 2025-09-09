@@ -5,7 +5,7 @@ import { ENV } from './env'
 export const SERVICE_NAME = 'function-scrape_locality_trigger'
 
 const otel = new OpenTelemetry()
-export const { LOGGER, TRACER } = otel.start({
+export const { LOGGER, TRACER } = await otel.start({
     'service.name': SERVICE_NAME,
 })
 
