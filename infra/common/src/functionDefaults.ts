@@ -1,4 +1,4 @@
-import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda'
+import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda'
 import { type NodejsFunctionProps, OutputFormat } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { ENV as OTEL_ENV } from '@observability/lib-opentelemetry'
 
