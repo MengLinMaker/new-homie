@@ -4,14 +4,19 @@ import { CreateQueueCommand, SQSClient } from '@aws-sdk/client-sqs'
 import { StatusCodes } from 'http-status-codes'
 
 describe('handler', async () => {
+    // Setup localstack AWS mock
     const localstack = await new LocalstackContainer('localstack/localstack:4.7.0').start()
     process.env['AWS_ENDPOINT_URL'] = localstack.getConnectionUri()
+    process.env['AWS_REGION'] = 'us-east-1'
+
+    // Setup SQS mock infrastructure
     const sqsClient = new SQSClient()
     console.log(sqsClient.config.endpoint)
     const queue = await sqsClient.send(new CreateQueueCommand({ QueueName: 'TestQueue' }))
     process.env['QUEUE_URL'] = queue.QueueUrl
-    const { handler } = await import('../src/index.mts')
 
+    // Load env variables into test handler
+    const { handler } = await import('../src/index.mts')
     afterAll(async () => await localstack.stop())
 
     it('Should validate incorrect input', async () => {

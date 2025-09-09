@@ -10,8 +10,11 @@ export const { LOGGER, TRACER } = otel.start({
 
 const awsClientConfig: {
     endpoint?: string
+    region?: string
 } = {}
 const endpoint = process.env['AWS_ENDPOINT_URL']
 if (endpoint) awsClientConfig.endpoint = endpoint
+const region = process.env['AWS_REGION']
+if (region) awsClientConfig.region = region
 
 export const sqsClient = new SQSClient(awsClientConfig)
