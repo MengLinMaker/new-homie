@@ -6,7 +6,7 @@ import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
 export const SERVICE_NAME = 'function-scrape_locality'
 
 const otel = new OpenTelemetry()
-export const { LOGGER, TRACER } = otel.start({
+export const { LOGGER, TRACER } = await otel.start({
     'service.name': SERVICE_NAME,
 })
 

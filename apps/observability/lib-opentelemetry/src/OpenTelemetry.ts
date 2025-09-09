@@ -3,6 +3,7 @@ import { type Exception, type Span, SpanStatusCode, trace } from '@opentelemetry
 
 import { type DetectedResourceAttributes, resourceFromAttributes } from '@opentelemetry/resources'
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions'
+import { ATTR_SERVICE_NAMESPACE } from '@opentelemetry/semantic-conventions/incubating'
 
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node'
 
@@ -13,14 +14,13 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 
-import pino from 'pino'
-import 'pino-opentelemetry-transport'
-
 import { ENV } from './env.ts'
 import { commitId } from './../dist/commitId.ts'
-import type { Options } from 'otlp-logger'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
-import { ATTR_SERVICE_NAMESPACE } from '@opentelemetry/semantic-conventions/incubating'
+
+import pino from 'pino'
+import pinoOpentelemetryTransport from 'pino-opentelemetry-transport'
+
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
 }
@@ -80,8 +80,8 @@ export class OpenTelemetry {
         return sdk
     }
 
-    private startPinoLogger(attributes: ResourceAttributes) {
-        const transportOptions = {
+    private async startPinoLogger(attributes: ResourceAttributes) {
+        const stream = await pinoOpentelemetryTransport({
             loggerName: attributes[ATTR_SERVICE_NAME],
             serviceVersion: commitId,
             resourceAttributes: attributes,
@@ -97,16 +97,15 @@ export class OpenTelemetry {
                     },
                 },
             ],
-        } satisfies Options
-        return pino({
-            // Remove pid and hostname
-            base: null,
-            level: ENV.OTEL_LOG_LEVEL,
-            transport: {
-                target: 'pino-opentelemetry-transport',
-                options: transportOptions,
-            },
         })
+        return pino(
+            {
+                // Remove pid and hostname
+                base: null,
+                level: ENV.OTEL_LOG_LEVEL,
+            },
+            stream,
+        )
     }
 
     /**
@@ -115,7 +114,7 @@ export class OpenTelemetry {
      * @returns LOGGER - pino logger
      * @returns TRACER - @opentelemetry/api tracer
      */
-    public start(resourceAttributes: ResourceAttributes) {
+    public async start(resourceAttributes: ResourceAttributes) {
         const attributes = {
             [ATTR_SERVICE_NAMESPACE]: 'NewHomie',
             [ATTR_SERVICE_VERSION]: commitId,
@@ -123,7 +122,7 @@ export class OpenTelemetry {
         }
         return {
             SDK: this.startAutoInstrumentation(attributes),
-            LOGGER: this.startPinoLogger(attributes),
+            LOGGER: await this.startPinoLogger(attributes),
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
         }
     }
