@@ -36,6 +36,6 @@ runs:
         # 2. Then restore from closest job and base sha
         # 3. Then restore from closest job
         restore-keys: |
-          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}-${{ github.event.pull_request.number }}
-          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}
-          nx-cache-${{ github.job }}
+          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}-${{ github.event.pull_request.number }}-
+          nx-cache-${{ github.job }}-${{ github.event.pull_request.base.sha }}-
+          nx-cache-${{ github.job }}-
