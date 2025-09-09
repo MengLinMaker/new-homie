@@ -26,13 +26,13 @@ export const functionDefaults: NodejsFunctionProps = {
         // lines joined to prevent syntax token error
         banner: esbuildBanner,
         // Minify with names for logging purposes
-        minify: true,
+        minify: false,
         keepNames: true,
         // Source map to source code
-        sourceMap: true,
+        // sourceMap: true,
     },
     environment: {
-        NODE_OPTIONS: '--enable-source-maps',
+        // NODE_OPTIONS: '--enable-source-maps',
         ...OTEL_ENV,
     },
 }
