@@ -20,6 +20,10 @@
         "cdk:dev": {
             "cache": true,
             "outputs": ["{projectRoot}/cdk.out"]
+        },
+        "cdk:dev:deploy": {
+            "cache": true,
+            "outputs": ["{projectRoot}/cdk.out"]
         }
     }
 }
