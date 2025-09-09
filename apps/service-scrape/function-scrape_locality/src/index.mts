@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 // Setup persistent resources
-import { SERVICE_NAME, TRACER, scrapeController } from './global/setup'
+import { SERVICE_NAME, TRACER, logLambdaException, scrapeController } from './global/setup'
 import { tracerMiddleware, validatorMiddleware } from './global/middleware'
 import { spanExceptionEnd } from '@observability/lib-opentelemetry'
 
@@ -24,16 +24,20 @@ export const handler = middy()
 
         // Locality data
         const localityId = await scrapeController.tryExtractSuburbPage(locality)
-        if (localityId === null)
-            throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} tryExtractSuburbPage`)
+        if (localityId === null) {
+            logLambdaException(`FATAL ScrapeController.tryExtractSuburbPage falied`, locality)
+            return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+        }
         await scrapeController.tryExtractSchools({ ...locality, localityId })
 
         // Sale listing data
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const salesInfo = await scrapeController.tryExtractSalesPage(args)
-            if (!salesInfo)
-                throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} tryExtractSalesPage`)
+            if (!salesInfo) {
+                logLambdaException(`FATAL ScrapeController.tryExtractSalesPage falied`, args)
+                break
+            }
             if (salesInfo.isLastPage) break
         }
 
@@ -41,8 +45,10 @@ export const handler = middy()
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const rentsInfo = await scrapeController.tryExtractRentsPage(args)
-            if (!rentsInfo)
-                throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} tryExtractRentsPage`)
+            if (!rentsInfo) {
+                logLambdaException(`FATAL ScrapeController.tryExtractRentsPage falied`, args)
+                break
+            }
             if (rentsInfo.isLastPage) break
         }
 
