@@ -9,6 +9,18 @@ import z from 'zod'
 export const createPostgisPointString = (long: number, lat: number) => `POINT(${long} ${lat})`
 
 /**
+ * Helper to insert PostGIS point to database
+ * @param long - Longitude
+ * @param lat - Latitude
+ * @returns PostGIS point string
+ */
+export const tryCreatePostgisPointString = (long: number | null, lat: number | null) => {
+    if (typeof long !== 'number') return null
+    if (typeof lat !== 'number') return null
+    return createPostgisPointString(long, lat)
+}
+
+/**
  * Helper to insert PostGIS polygon to database
  * @param polygonCoord Simple polygon coordinate
  * @returns PostGIS polygon string

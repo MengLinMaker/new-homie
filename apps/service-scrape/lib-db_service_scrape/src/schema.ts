@@ -46,7 +46,7 @@ export interface HomeFeatureTable {
 
 export interface HomeTable {
     auction_time: Timestamp | null
-    gps: string
+    gps: string | null
     home_feature_table_id: number
     id: Generated<number>
     inspection_time: Timestamp | null

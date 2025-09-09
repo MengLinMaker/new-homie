@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { type Schema, createPostgisPointString } from '@service-scrape/lib-db_service_scrape'
+import { type Schema, tryCreatePostgisPointString } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { ILoggable } from '@observability/lib-opentelemetry'
 
@@ -32,8 +32,8 @@ const listingsSchema = z.object({
         price: z.string(),
         address: z.object({
             street: z.string(),
-            lat: z.number(),
-            lng: z.number(),
+            lat: z.number().nullable(),
+            lng: z.number().nullable(),
         }),
         features: z.object({
             beds: z.number().catch(0),
@@ -68,8 +68,6 @@ const nextDataJsonSchema = z.object({
         }),
     }),
 })
-
-class DomainListingsServiceError extends Error {}
 
 export class DomainListingsService extends ILoggable {
     /**
@@ -146,7 +144,7 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.HomeFeatureTable>,
                 home_table: {
                     street_address: address.street,
-                    gps: createPostgisPointString(address.lng, address.lat),
+                    gps: tryCreatePostgisPointString(address.lng, address.lat),
                     land_m2: features.landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime),
                     auction_time: this.parseDatetime(listingModel.auction),
@@ -170,10 +168,10 @@ export class DomainListingsService extends ILoggable {
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
             if (!price) {
-                const e = new DomainListingsServiceError(
+                const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
-                this.logExceptionArgs('warn', this.tryTransformSalePrice, args, e)
+                this.logException('warn', this.tryTransformSalePrice, e)
                 return null
             }
             return {
@@ -202,10 +200,10 @@ export class DomainListingsService extends ILoggable {
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
             if (!price) {
-                const e = new DomainListingsServiceError(
+                const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
-                this.logExceptionArgs('warn', this.tryTransformRentPrice, args, e)
+                this.logException('warn', this.tryTransformRentPrice, e)
                 return null
             }
             return {

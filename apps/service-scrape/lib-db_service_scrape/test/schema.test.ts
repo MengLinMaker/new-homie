@@ -53,7 +53,7 @@ describe('schema.ts', async () => {
             locality_table_id: insertIds.get('locality_table')!,
             home_feature_table_id: insertIds.get('home_feature_table')!,
             street_address: faker.location.streetAddress(),
-            gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
+            gps: null,
             land_m2: faker.number.int({ min: 0, max: 10000 }),
             inspection_time: faker.date.anytime(),
             auction_time: null,

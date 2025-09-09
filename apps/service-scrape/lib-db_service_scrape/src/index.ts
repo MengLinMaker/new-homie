@@ -3,6 +3,7 @@ import * as Schema from './schema.ts'
 import { createPostgisPointString, createPostgisPolygonString } from './util.ts'
 
 import { config } from 'dotenv'
+import { tryCreatePostgisPointString } from './util'
 config({ quiet: true })
 
 /**
@@ -12,4 +13,10 @@ config({ quiet: true })
 export const DB_SERVICE_SCRAPE =
     process.env['DB_SERVICE_SCRAPE'] ?? 'postgres://user:password@localhost:54320/db'
 
-export { getKyselyPostgresDb, Schema, createPostgisPointString, createPostgisPolygonString }
+export {
+    getKyselyPostgresDb,
+    Schema,
+    createPostgisPointString,
+    tryCreatePostgisPointString,
+    createPostgisPolygonString,
+}
