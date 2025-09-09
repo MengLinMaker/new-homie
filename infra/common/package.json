@@ -10,8 +10,7 @@
     },
     "devDependencies": {
         "@observability/lib-opentelemetry": "workspace:*",
-        "aws-cdk-lib": "^2.212.0",
-        "tsup": "^8.5.0"
+        "aws-cdk-lib": "^2.212.0"
     },
     "type": "module"
 }
