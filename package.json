@@ -23,7 +23,6 @@
         "nx": "21.3.11",
         "simple-git-hooks": "2.13.1",
         "syncpack": "14.0.0-alpha.19",
-        "tsup": "8.5.0",
         "typescript": "~5.9.2",
         "vite": "7.1.2",
         "vitest": "3.2.4"

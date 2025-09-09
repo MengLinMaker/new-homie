@@ -2,12 +2,11 @@
     "name": "@infra/common",
     "private": true,
     "exports": {
-        ".": "./dist/index.js"
+        ".": "./src/index.ts"
     },
     "scripts": {
         "format": "biome format --write",
-        "test:type": "tsc",
-        "build": "tsup"
+        "test:type": "tsc"
     },
     "devDependencies": {
         "@observability/lib-opentelemetry": "workspace:*",
