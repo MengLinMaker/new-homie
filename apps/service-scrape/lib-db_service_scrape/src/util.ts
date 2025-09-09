@@ -14,7 +14,7 @@ export const createPostgisPointString = (long: number, lat: number) => `POINT(${
  * @param lat - Latitude
  * @returns PostGIS point string
  */
-export const tryCreatePostgisPointString = (long: number | null, lat: number | null) => {
+export const tryCreatePostgisPointString = <A, B>(long: A, lat: B) => {
     if (typeof long !== 'number') return null
     if (typeof lat !== 'number') return null
     return createPostgisPointString(long, lat)

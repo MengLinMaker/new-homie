@@ -32,8 +32,8 @@ const listingsSchema = z.object({
         price: z.string(),
         address: z.object({
             street: z.string(),
-            lat: z.number().nullable(),
-            lng: z.number().nullable(),
+            lat: z.number().nullish(),
+            lng: z.number().nullish(),
         }),
         features: z.object({
             beds: z.number().catch(0),
@@ -133,6 +133,8 @@ export class DomainListingsService extends ILoggable {
         try {
             const listingModel = args.listing.listingModel
             const address = listingModel.address
+            if (address.street.length === 0) return null
+
             const features = listingModel.features
             return {
                 home_feature_table: {
@@ -167,6 +169,7 @@ export class DomainListingsService extends ILoggable {
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
+            if (!priceString.match(/\d/g)) return
             if (!price) {
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
@@ -199,6 +202,7 @@ export class DomainListingsService extends ILoggable {
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
+            if (!priceString.match(/\d/g)) return
             if (!price) {
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
