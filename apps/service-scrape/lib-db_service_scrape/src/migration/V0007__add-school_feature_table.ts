@@ -1,6 +1,7 @@
 import type { Kysely } from 'kysely'
+import type { DB } from '../schema.ts'
 
-export async function up(db: Kysely<unknown>): Promise<void> {
+export async function up(db: Kysely<DB>): Promise<void> {
     await db.schema
         .createTable('school_feature_table')
         .addColumn('id', 'integer', (col) => col.notNull().primaryKey().generatedAlwaysAsIdentity())
@@ -19,6 +20,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<unknown>): Promise<void> {
+export async function down(db: Kysely<DB>): Promise<void> {
     await db.schema.dropTable('school_feature_table').execute()
 }

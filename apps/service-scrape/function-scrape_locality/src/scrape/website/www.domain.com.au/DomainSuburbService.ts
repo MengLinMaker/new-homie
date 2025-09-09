@@ -1,8 +1,4 @@
-import {
-    createPostgisPolygonString,
-    enumToArray,
-    Schema,
-} from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPolygonString, type Schema } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
@@ -13,10 +9,21 @@ const _boundaryGeoJsonSchema = z.object({
     coordinates: z.array(z.array(z.array(z.number()).length(2))),
 })
 
+const StateAbbreviationEnum: Schema.StateAbbreviationEnum[] = [
+    'ACT',
+    'NSW',
+    'NT',
+    'QLD',
+    'SA',
+    'TAS',
+    'VIC',
+    'WA',
+]
+
 const _rawSuburbSchema = z.object({
     suburb: z.object({
         name: z.string(),
-        state: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
+        state: z.enum(StateAbbreviationEnum),
         postcode: z.string(),
         statistics: z.object({
             marriedPercentage: z.number(),
@@ -80,7 +87,6 @@ export class DomainSuburbService extends ILoggable {
      * @returns object containing rawSuburbSchema
      */
     tryExtractProfile(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractProfile)
         try {
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
                 reportInput: true,
@@ -107,7 +113,7 @@ export class DomainSuburbService extends ILoggable {
                 ),
             } satisfies DomainListingsDTO
         } catch (e) {
-            this.logException('error', e, 'Too large to display')
+            this.logException('error', this.tryExtractProfile, e)
             return null
         }
     }
@@ -118,7 +124,6 @@ export class DomainSuburbService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformProfile(args: { rawSuburbData: DomainListingsDTO }) {
-        this.log('debug', this.tryTransformProfile)
         try {
             // Simplify geo boundary to reduce storage size.
             const compressedCoordinates = simplify(
@@ -130,7 +135,10 @@ export class DomainSuburbService extends ILoggable {
             ).geometry.coordinates
 
             const boundaryCoord = createPostgisPolygonString(compressedCoordinates[0])
-            if (!boundaryCoord) throw new Error('invalid locality boundary coordinate')
+            if (!boundaryCoord) {
+                const e = new Error('invalid locality boundary coordinate')
+                throw this.logExceptionArgs('fatal', this.tryTransformProfile, args, e)
+            }
 
             // rawSuburbData.suburb.statistics.population
             // rawSuburbData.suburb.statistics.ownerOccupierPercentage
@@ -147,7 +155,7 @@ export class DomainSuburbService extends ILoggable {
                 } satisfies Updateable<Schema.LocalityTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformProfile, args, e)
             return null
         }
     }

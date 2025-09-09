@@ -2,35 +2,26 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
-import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 import { tracerMiddleware, validatorMiddleware } from './global/middleware'
 import { chunkArray } from './util'
 import { ENV } from './global/env'
 
 // Setup OpenTelemetry and connections
-import './global/setup'
-import { sqsClient } from './global/setup'
+import { LOGGER, SERVICE_NAME, sqsClient, TRACER } from './global/setup'
 import { SendMessageBatchCommand } from '@aws-sdk/client-sqs'
+import { enforceErrorType, spanExceptionEnd } from '@observability/lib-opentelemetry'
 
 export const handler = middy()
     .use(validatorMiddleware)
     .use(tracerMiddleware)
     .handler(async (event, _context) => {
-        if (!event.success) {
-            LOGGER.fatal({
-                args: event.originalEvent,
-                ...otelException(event.error),
-            })
-            return { status: StatusCodes.BAD_REQUEST }
-        }
-        event.data
+        const span = TRACER.startSpan('handler')
+        if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
 
         const filteredLocality = australiaLocalities.filter((locality) => {
-            return (
-                locality.suburb_name === 'Dandenong' &&
-                locality.state_abbreviation === 'VIC' &&
-                locality.postcode === '3175'
-            )
+            if (!locality.postcode) return false
+            const postcode = parseInt(locality.postcode, 10)
+            return postcode >= 3170 && postcode <= 3180
         })
 
         for (const chunkLocality of chunkArray(filteredLocality, 10)) {
@@ -46,8 +37,7 @@ export const handler = middy()
                     }),
                 )
             } catch (e) {
-                const formattedError = otelException(e)
-                LOGGER.fatal(formattedError)
+                spanExceptionEnd(span, enforceErrorType(e))
                 return { status: StatusCodes.INTERNAL_SERVER_ERROR }
             }
         }
@@ -55,5 +45,6 @@ export const handler = middy()
         LOGGER.info({
             localityLength: filteredLocality.length,
         })
+        span.end()
         return { status: StatusCodes.OK }
     })

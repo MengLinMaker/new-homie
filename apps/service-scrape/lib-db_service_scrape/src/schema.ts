@@ -5,43 +5,33 @@
 
 import type { ColumnType } from 'kysely'
 
-export enum HomeTypeEnum {
-    APARTMENT = 'Apartment',
-    APARTMENT_UNIT_FLAT = 'ApartmentUnitFlat',
-    BLOCK_OF_UNITS = 'BlockOfUnits',
-    DEVELOPMENT_SITE = 'DevelopmentSite',
-    DUPLEX = 'Duplex',
-    FREE_STANDING = 'FreeStanding',
-    HOUSE = 'House',
-    LAND = 'Land',
-    NEW_APARTMENTS = 'NewApartments',
-    NEW_HOME_DESIGNS = 'NewHomeDesigns',
-    NEW_HOUSE_LAND = 'NewHouseLand',
-    NEW_LAND = 'NewLand',
-    PENT_HOUSE = 'PentHouse',
-    RETIREMENT = 'Retirement',
-    SEMI_DETACHED = 'SemiDetached',
-    STUDIO = 'Studio',
-    TERRACE = 'Terrace',
-    TOWNHOUSE = 'Townhouse',
-    VACANT_LAND = 'VacantLand',
-    VILLA = 'Villa',
-}
-
-export enum StateAbbreviationEnum {
-    ACT = 'ACT',
-    NSW = 'NSW',
-    NT = 'NT',
-    QLD = 'QLD',
-    SA = 'SA',
-    TAS = 'TAS',
-    VIC = 'VIC',
-    WA = 'WA',
-}
-
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
     ? ColumnType<S, I | undefined, U>
     : ColumnType<T, T | undefined, T>
+
+export type HomeTypeEnum =
+    | 'Apartment'
+    | 'ApartmentUnitFlat'
+    | 'BlockOfUnits'
+    | 'DevelopmentSite'
+    | 'Duplex'
+    | 'FreeStanding'
+    | 'House'
+    | 'Land'
+    | 'NewApartments'
+    | 'NewHomeDesigns'
+    | 'NewHouseLand'
+    | 'NewLand'
+    | 'PentHouse'
+    | 'Retirement'
+    | 'SemiDetached'
+    | 'Studio'
+    | 'Terrace'
+    | 'Townhouse'
+    | 'VacantLand'
+    | 'Villa'
+
+export type StateAbbreviationEnum = 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
@@ -56,7 +46,7 @@ export interface HomeFeatureTable {
 
 export interface HomeTable {
     auction_time: Timestamp | null
-    gps: string
+    gps: string | null
     home_feature_table_id: number
     id: Generated<number>
     inspection_time: Timestamp | null

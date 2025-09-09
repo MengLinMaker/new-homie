@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import type { Insertable } from 'kysely'
 
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
-import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
+import type { DB } from '../src/schema'
 import { setupTestPostgisDb } from '../src/dev'
 
 describe('schema.ts', async () => {
@@ -34,7 +34,7 @@ describe('schema.ts', async () => {
         await insertIntoTable('locality_table', {
             suburb_name: faker.location.city(),
             postcode: faker.location.zipCode('####'),
-            state_abbreviation: StateAbbreviationEnum.VIC,
+            state_abbreviation: 'VIC',
             boundary_coordinates: createPostgisPolygonString([
                 [1, 2],
                 [3, 4],
@@ -46,14 +46,14 @@ describe('schema.ts', async () => {
             bed_quantity: faker.number.int({ min: 1, max: 5 }),
             bath_quantity: faker.number.int({ min: 1, max: 5 }),
             car_quantity: faker.number.int({ min: 1, max: 5 }),
-            home_type: HomeTypeEnum.APARTMENT_UNIT_FLAT,
+            home_type: 'ApartmentUnitFlat',
             is_retirement: Math.random() < 0.5,
         })
         await insertIntoTable('home_table', {
             locality_table_id: insertIds.get('locality_table')!,
             home_feature_table_id: insertIds.get('home_feature_table')!,
             street_address: faker.location.streetAddress(),
-            gps: createPostgisPointString(faker.location.longitude(), faker.location.latitude()),
+            gps: null,
             land_m2: faker.number.int({ min: 0, max: 10000 }),
             inspection_time: faker.date.anytime(),
             auction_time: null,

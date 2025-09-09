@@ -9,7 +9,6 @@ export class ScrapeUtilService extends ILoggable {
      * @param html
      */
     tryExtractNextJson(args: { html: string }) {
-        this.log('debug', this.tryExtractNextJson)
         try {
             const $ = load(args.html)
             const nextJson = $('script[id="__NEXT_DATA__"]').text()
@@ -17,7 +16,7 @@ export class ScrapeUtilService extends ILoggable {
             if (nextJson === '') throw new ScrapeUtilServiceError('Cannot extract Next.js JSON')
             return JSON.parse(nextJson) as object
         } catch (e) {
-            this.logException('error', e, 'Too large to display')
+            this.logException('error', this.tryExtractNextJson, e)
             return null
         }
     }

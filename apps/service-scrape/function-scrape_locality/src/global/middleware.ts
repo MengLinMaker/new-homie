@@ -1,4 +1,3 @@
-import { enumToArray, Schema } from '@service-scrape/lib-db_service_scrape'
 import z from 'zod'
 import { SERVICE_NAME } from './setup'
 
@@ -8,7 +7,7 @@ import { JSONStringified } from '@aws-lambda-powertools/parser/helpers'
 
 const localitySchema = z.object({
     suburb: z.string(),
-    state: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
+    state: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
     postcode: z.string().length(4),
 })
 

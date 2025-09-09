@@ -8,7 +8,6 @@ export default defineConfig({
         coverage: {
             provider: 'v8',
             reporter: ['text'],
-            exclude: ['src/commitId.ts', 'src/startOpenTelemetry.ts', 'src/index.ts'],
             include: ['src/**/*.ts'],
         },
     },

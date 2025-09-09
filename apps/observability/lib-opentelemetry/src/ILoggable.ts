@@ -1,12 +1,48 @@
-import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
+import {
+    ATTR_CODE_FUNCTION_NAME,
+    ATTR_EXCEPTION_STACKTRACE,
+} from '@opentelemetry/semantic-conventions'
 import type { Level, Logger } from 'pino'
-import { otelException } from './logger'
+import { otelException } from './otelException.ts'
 
+class ILoggableError extends Error {}
 export class ILoggable {
     readonly LOGGER
 
     constructor(logger: Logger) {
         this.LOGGER = logger
+        if (this.constructor.name === ILoggable.name)
+            throw new ILoggableError('Illegal instantiation of interface class ILoggable')
+    }
+
+    /**
+     * Wrapper for logging internally
+     * @param logLevel
+     * @param logInfo
+     * @param msg
+     */
+    private _log<T>(logLevel: Level, logInfo: T, msg?: T extends string ? never : string) {
+        /* v8 ignore start */
+        switch (logLevel) {
+            case 'fatal':
+                this.LOGGER.fatal(logInfo, msg)
+                break
+            case 'error':
+                this.LOGGER.error(logInfo, msg)
+                break
+            case 'warn':
+                this.LOGGER.warn(logInfo, msg)
+                break
+            case 'info':
+                this.LOGGER.info(logInfo, msg)
+                break
+            case 'debug':
+                this.LOGGER.debug(logInfo, msg)
+                break
+            case 'trace':
+                this.LOGGER.trace(logInfo, msg)
+                break
+        }
     }
 
     /**
@@ -15,75 +51,54 @@ export class ILoggable {
      * @param func the method itself
      * @param msg message
      */
-    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string | undefined = undefined) {
+    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string) {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
-            // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
             [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
         }
-        /* v8 ignore start */
-        switch (logLevel) {
-            case 'fatal':
-                this.LOGGER.fatal(logInfo, msg)
-                break
-            case 'error':
-                this.LOGGER.error(logInfo, msg)
-                break
-            case 'warn':
-                this.LOGGER.warn(logInfo, msg)
-                break
-            case 'info':
-                this.LOGGER.info(logInfo, msg)
-                break
-            case 'debug':
-                this.LOGGER.debug(logInfo, msg)
-                break
-            case 'trace':
-                this.LOGGER.trace(logInfo, msg)
-                break
-        }
+        this._log(logLevel, logInfo, msg)
     }
 
     /**
      * Enforce structured logging for error
      * @param logLevel pino logging level
-     * @param error error from try catch
-     * @param args method arguments
-     * @param msg optional message
+     * @param func the method itself
+     * @param maybeError error from try catch
      */
-    public logException<I, E>(
+    public logException<I, O, E>(logLevel: Level, func: (args: I) => O, maybeError: E) {
+        // This class is the extended class
+        const thisClass = Object.getPrototypeOf(this) as ILoggable
+        const logInfo: Record<string, string> = {
+            ...otelException(maybeError),
+            [ATTR_EXCEPTION_STACKTRACE]: 'Removed to save bandwidth',
+            [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
+        }
+        this._log(logLevel, logInfo)
+    }
+
+    /**
+     * Enforce structured logging for error
+     * @param logLevel pino logging level
+     * @param func the method itself
+     * @param args method arguments
+     * @param maybeError error from try catch
+     */
+    public logExceptionArgs<I, O, E>(
         logLevel: Level,
+        func: (args: I) => O,
+        args: I,
         maybeError: E,
-        args: I | undefined = undefined,
-        msg: string | undefined = undefined,
     ) {
         // This class is the extended class
-        const logInfo = {
-            // OTEL semantic convention for code - https://opentelemetry.io/docs/specs/semconv/code/
-            'code.function.args': args, // No convention
+        const thisClass = Object.getPrototypeOf(this) as ILoggable
+        const logInfo: Record<string, string> = {
             ...otelException(maybeError),
+            [ATTR_EXCEPTION_STACKTRACE]: 'Removed to save bandwidth',
+            [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
+            // No OTEL semantic convention
+            'code.function.args': JSON.stringify(args),
         }
-        /* v8 ignore start */
-        switch (logLevel) {
-            case 'fatal':
-                this.LOGGER.fatal(logInfo, msg)
-                break
-            case 'error':
-                this.LOGGER.error(logInfo, msg)
-                break
-            case 'warn':
-                this.LOGGER.warn(logInfo, msg)
-                break
-            case 'info':
-                this.LOGGER.info(logInfo, msg)
-                break
-            case 'debug':
-                this.LOGGER.debug(logInfo, msg)
-                break
-            case 'trace':
-                this.LOGGER.trace(logInfo, msg)
-                break
-        }
+        this._log(logLevel, logInfo)
     }
 }

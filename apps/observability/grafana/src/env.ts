@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/complexity/useLiteralKeys: <All env variables can be potentially accessed> */
 import { z } from 'zod'
 
 import { parseEnvSchema } from '../../lib-opentelemetry/src/parseEnvSchema.ts'

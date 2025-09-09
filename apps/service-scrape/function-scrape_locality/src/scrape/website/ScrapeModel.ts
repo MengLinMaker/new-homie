@@ -28,7 +28,7 @@ export class ScrapeModel extends IDatabased {
                 suburbData.locality_table,
             )
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryUpdateSuburb, args, e)
             return null
         }
     }
@@ -52,7 +52,7 @@ export class ScrapeModel extends IDatabased {
             await this.conflictInsertReturnId('school_table', ['acara_id'], schoolData.school_table)
             return true
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryUpdateSchool, args, e)
             return false
         }
     }
@@ -120,7 +120,7 @@ export class ScrapeModel extends IDatabased {
                 .execute()
             return true
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryUpdateRentListing, args, e)
             return false
         }
     }
@@ -166,7 +166,7 @@ export class ScrapeModel extends IDatabased {
                 .execute()
             return true
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryUpdateSaleListing, args, e)
             return false
         }
     }

@@ -8,6 +8,7 @@
         "dev:test:unit": "vitest --coverage"
     },
     "devDependencies": {
+        "@testcontainers/localstack": "^11.5.1",
         "pino-pretty": "13.1.1"
     },
     "dependencies": {

@@ -2,11 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
 import z from 'zod'
 import '@service-scrape/lib-db_service_scrape'
-import {
-    createPostgisPointString,
-    enumToArray,
-    Schema,
-} from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPointString, type Schema } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 
 /**
@@ -151,7 +147,16 @@ console.info('Completed writing "australia-amenities.json"')
                 .array(
                     z.object({
                         City: z.string(),
-                        StateProvince: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
+                        StateProvince: z.enum([
+                            'ACT',
+                            'NSW',
+                            'NT',
+                            'QLD',
+                            'SA',
+                            'TAS',
+                            'VIC',
+                            'WA',
+                        ]),
                         PostalCode: z.string().length(4),
                         GridLocation: z.object({
                             Latitude: z.number(),

@@ -1,19 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { enumToArray, createPostgisPointString, createPostgisPolygonString } from '../src/util'
+import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
 
 describe('util functions', () => {
-    describe('enumToArray', () => {
-        it('should convert enum to array', () => {
-            const mockEnum = {
-                FIRST: 'first',
-                SECOND: 'second',
-                THIRD: 'third',
-            }
-            const result = enumToArray(mockEnum)
-            expect(result).toEqual(['first', 'second', 'third'])
-        })
-    })
-
     describe('createPostgisPointString', () => {
         it('should return valid string', () => {
             const long = 144.9631

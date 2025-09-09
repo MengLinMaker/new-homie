@@ -1,8 +1,9 @@
 import { getKyselyPostgresDb } from './connection.ts'
 import * as Schema from './schema.ts'
-import { enumToArray, createPostgisPointString, createPostgisPolygonString } from './util.ts'
+import { createPostgisPointString, createPostgisPolygonString } from './util.ts'
 
 import { config } from 'dotenv'
+import { tryCreatePostgisPointString } from './util.ts'
 config({ quiet: true })
 
 /**
@@ -10,13 +11,12 @@ config({ quiet: true })
  * @todo: Replace env variable with SSM parameter store for better security
  */
 export const DB_SERVICE_SCRAPE =
-    // biome-ignore lint/complexity/useLiteralKeys: <untyped>
     process.env['DB_SERVICE_SCRAPE'] ?? 'postgres://user:password@localhost:54320/db'
 
 export {
     getKyselyPostgresDb,
     Schema,
-    enumToArray,
     createPostgisPointString,
+    tryCreatePostgisPointString,
     createPostgisPolygonString,
 }

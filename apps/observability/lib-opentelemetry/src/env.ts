@@ -1,18 +1,17 @@
-/** biome-ignore-all lint/complexity/useLiteralKeys: <All env variables can be potentially accessed> */
 import { z } from 'zod'
 import type { Level } from 'pino'
 
-import { parseEnvSchema } from './parseEnvSchema'
+import { parseEnvSchema } from './parseEnvSchema.ts'
 
 /**
- * @description Type safe env keys
+ *  Type safe env keys
  * @todo Use SSM Parameter Store instead
  */
 export const ENV = parseEnvSchema(
     z.object({
         /**
-         * @description Send Open Telemetry data to this URL
-         * @description Sends to locally hosted Grafana LGTM
+         * Send Open Telemetry data to this URL
+         * Sends to locally hosted Grafana LGTM
          * @default 'http://localhost:4318'
          */
         OTEL_EXPORTER_OTLP_ENDPOINT: z
@@ -21,7 +20,7 @@ export const ENV = parseEnvSchema(
             .default('http://localhost:4318'),
 
         /**
-         * @description Headers for Open Telemetry provider
+         * Headers for Open Telemetry provider
          * @example key1: val1, key2, val2
          */
         OTEL_EXPORTER_OTLP_HEADERS: z
@@ -30,10 +29,11 @@ export const ENV = parseEnvSchema(
             .default(''),
 
         /**
-         * @description Log level at bootup
+         * Log level at bootup
+         * Levels that Grafana can receive
          */
-        LOG_LEVEL: z
-            .enum(['debug', 'error', 'fatal', 'info', 'trace', 'warn'] satisfies Level[])
+        OTEL_LOG_LEVEL: z
+            .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'] satisfies Level[])
             .default('warn'),
     }),
 )

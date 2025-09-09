@@ -14,7 +14,7 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             dialect: 'postgres',
             url: connectionString,
             includePattern: '*_(table)',
-            runtimeEnums: true,
+            runtimeEnums: false,
         })
         console.debug('Kysely code generated')
         return true

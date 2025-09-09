@@ -1,8 +1,17 @@
-import { ENV } from './env'
-import { ILoggable } from './ILoggable'
-import { startOpenTelemetry } from './startOpenTelemetry'
-import { LOGGER, otelException } from './logger'
-import { commitId } from './commitId'
-import { parseEnvSchema } from './parseEnvSchema'
+import { ENV } from './env.ts'
+import { ILoggable } from './ILoggable.ts'
+import { OpenTelemetry, spanExceptionEnd } from './OpenTelemetry.ts'
+import { otelException, enforceErrorType } from './otelException.ts'
+import { commitId } from './commitId.ts'
+import { parseEnvSchema } from './parseEnvSchema.ts'
 
-export { startOpenTelemetry, LOGGER, ILoggable, otelException, commitId, parseEnvSchema, ENV }
+export {
+    OpenTelemetry,
+    ILoggable,
+    otelException,
+    commitId,
+    parseEnvSchema,
+    ENV,
+    spanExceptionEnd,
+    enforceErrorType,
+}

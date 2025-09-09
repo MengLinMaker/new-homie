@@ -2,20 +2,17 @@
     "name": "@service-scrape/lib-australia_amenity",
     "private": true,
     "exports": {
-        ".": "./dist/index.js"
+        ".": "./src/index.ts"
     },
     "scripts": {
         "format": "biome format --write",
         "test:type": "tsc",
-        "build": "node ./src/compress.ts && tsup"
+        "build": "node ./src/compress.ts && pnpm format"
     },
     "type": "module",
     "dependencies": {
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "kysely": "0.28.4",
         "zod": "4.0.17"
-    },
-    "devDependencies": {
-        "tsup": "^8.5.0"
     }
 }

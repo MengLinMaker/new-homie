@@ -1,11 +1,30 @@
 import { z } from 'zod'
-import {
-    enumToArray,
-    Schema,
-    createPostgisPointString,
-} from '@service-scrape/lib-db_service_scrape'
+import { type Schema, tryCreatePostgisPointString } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { ILoggable } from '@observability/lib-opentelemetry'
+
+const HomeTypeEnum: Schema.HomeTypeEnum[] = [
+    'Apartment',
+    'ApartmentUnitFlat',
+    'BlockOfUnits',
+    'DevelopmentSite',
+    'Duplex',
+    'FreeStanding',
+    'House',
+    'Land',
+    'NewApartments',
+    'NewHomeDesigns',
+    'NewHouseLand',
+    'NewLand',
+    'PentHouse',
+    'Retirement',
+    'SemiDetached',
+    'Studio',
+    'Terrace',
+    'Townhouse',
+    'VacantLand',
+    'Villa',
+]
 
 const listingsSchema = z.object({
     listingModel: z.object({
@@ -13,14 +32,14 @@ const listingsSchema = z.object({
         price: z.string(),
         address: z.object({
             street: z.string(),
-            lat: z.number(),
-            lng: z.number(),
+            lat: z.number().nullish(),
+            lng: z.number().nullish(),
         }),
         features: z.object({
             beds: z.number().catch(0),
             baths: z.number().catch(0),
             parking: z.number().catch(0),
-            propertyType: z.enum(enumToArray(Schema.HomeTypeEnum)),
+            propertyType: z.enum(HomeTypeEnum),
             isRural: z.boolean(),
             landSize: z.number().catch(0),
             isRetirement: z.boolean(),
@@ -50,15 +69,12 @@ const nextDataJsonSchema = z.object({
     }),
 })
 
-class DomainListingsServiceError extends Error {}
-
 export class DomainListingsService extends ILoggable {
     /**
      * @description Homes tend to sell at higher price.
      * @returns Integer price
      */
     highestPriceFromString(priceString: string) {
-        this.log('debug', this.highestPriceFromString)
         const prices = priceString
             .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
             .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
@@ -76,7 +92,6 @@ export class DomainListingsService extends ILoggable {
      * @returns
      */
     parseDatetime(datetime: string | null | undefined) {
-        this.log('debug', this.parseDatetime)
         if (datetime) {
             return z.iso.datetime().parse(`${datetime}Z`, {
                 reportInput: true,
@@ -92,7 +107,6 @@ export class DomainListingsService extends ILoggable {
      * @param nextDataJson
      */
     tryExtractListings(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractListings)
         try {
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
                 reportInput: true,
@@ -105,7 +119,7 @@ export class DomainListingsService extends ILoggable {
             const isLastPage = lastPageNumber === currentPageNumber
             return { listings, isLastPage }
         } catch (e) {
-            this.logException('error', e, 'Too large to display')
+            this.logException('error', this.tryExtractListings, e)
             return null
         }
     }
@@ -116,10 +130,11 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformListing(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformListing)
         try {
             const listingModel = args.listing.listingModel
             const address = listingModel.address
+            if (address.street.length === 0) return null
+
             const features = listingModel.features
             return {
                 home_feature_table: {
@@ -131,14 +146,14 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.HomeFeatureTable>,
                 home_table: {
                     street_address: address.street,
-                    gps: createPostgisPointString(address.lng, address.lat),
+                    gps: tryCreatePostgisPointString(address.lng, address.lat),
                     land_m2: features.landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime),
                     auction_time: this.parseDatetime(listingModel.auction),
                 } satisfies Updateable<Schema.HomeTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformListing, args, e)
             return null
         }
     }
@@ -149,20 +164,17 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformSalePrice(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformSalePrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
+            if (!priceString.match(/\d/g)) return
             if (!price) {
-                this.logException(
-                    'warn',
-                    new DomainListingsServiceError(
-                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                    ),
-                    args,
+                const e = new Error(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
+                this.logException('warn', this.tryTransformSalePrice, e)
                 return null
             }
             return {
@@ -174,7 +186,7 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.SalePriceTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformSalePrice, args, e)
             return null
         }
     }
@@ -185,20 +197,17 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformRentPrice(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformRentPrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
+            if (!priceString.match(/\d/g)) return
             if (!price) {
-                this.logException(
-                    'warn',
-                    new DomainListingsServiceError(
-                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                    ),
-                    args,
+                const e = new Error(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
+                this.logException('warn', this.tryTransformRentPrice, e)
                 return null
             }
             return {
@@ -210,13 +219,12 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.RentPriceTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformRentPrice, args, e)
             return null
         }
     }
 
     tryExtractSalesPage(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractSalesPage)
         const { nextDataJson } = args
         const result = this.tryExtractListings({ nextDataJson })
         if (!result) return null
@@ -239,7 +247,6 @@ export class DomainListingsService extends ILoggable {
     }
 
     tryExtractRentsPage(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractRentsPage)
         const { nextDataJson } = args
         const result = this.tryExtractListings({ nextDataJson })
         if (!result) return null
