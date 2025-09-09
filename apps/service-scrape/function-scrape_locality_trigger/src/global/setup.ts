@@ -16,5 +16,6 @@ const endpoint = process.env['AWS_ENDPOINT_URL']
 if (endpoint) awsClientConfig.endpoint = endpoint
 const region = process.env['AWS_REGION']
 if (region) awsClientConfig.region = region
+console.log(awsClientConfig)
 
 export const sqsClient = new SQSClient(awsClientConfig)

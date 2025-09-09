@@ -1,16 +1,16 @@
 import { afterAll, describe, expect, it } from 'vitest'
 import { LocalstackContainer } from '@testcontainers/localstack'
-import { CreateQueueCommand, SQSClient } from '@aws-sdk/client-sqs'
+import { CreateQueueCommand } from '@aws-sdk/client-sqs'
 import { StatusCodes } from 'http-status-codes'
 
 describe('handler', async () => {
-    // Setup localstack AWS mock
+    // Setup localstack
     const localstack = await new LocalstackContainer('localstack/localstack:4.7.0').start()
     process.env['AWS_ENDPOINT_URL'] = localstack.getConnectionUri()
     process.env['AWS_REGION'] = 'us-east-1'
 
-    // Setup SQS mock infrastructure
-    const sqsClient = new SQSClient()
+    // Setup mock infrastructure
+    const { sqsClient } = await import('../src/global/setup')
     console.log(sqsClient.config.endpoint)
     const queue = await sqsClient.send(new CreateQueueCommand({ QueueName: 'TestQueue' }))
     process.env['QUEUE_URL'] = queue.QueueUrl
