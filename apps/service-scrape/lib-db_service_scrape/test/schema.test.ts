@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import type { Insertable } from 'kysely'
 
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
-import { HomeTypeEnum, StateAbbreviationEnum, type DB } from '../src/schema'
+import type { DB } from '../src/schema'
 import { setupTestPostgisDb } from '../src/dev'
 
 describe('schema.ts', async () => {
@@ -34,7 +34,7 @@ describe('schema.ts', async () => {
         await insertIntoTable('locality_table', {
             suburb_name: faker.location.city(),
             postcode: faker.location.zipCode('####'),
-            state_abbreviation: StateAbbreviationEnum.VIC,
+            state_abbreviation: 'VIC',
             boundary_coordinates: createPostgisPolygonString([
                 [1, 2],
                 [3, 4],
@@ -46,7 +46,7 @@ describe('schema.ts', async () => {
             bed_quantity: faker.number.int({ min: 1, max: 5 }),
             bath_quantity: faker.number.int({ min: 1, max: 5 }),
             car_quantity: faker.number.int({ min: 1, max: 5 }),
-            home_type: HomeTypeEnum.APARTMENT_UNIT_FLAT,
+            home_type: 'ApartmentUnitFlat',
             is_retirement: Math.random() < 0.5,
         })
         await insertIntoTable('home_table', {

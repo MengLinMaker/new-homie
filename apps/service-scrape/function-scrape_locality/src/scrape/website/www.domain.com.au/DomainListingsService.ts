@@ -1,11 +1,30 @@
 import { z } from 'zod'
-import {
-    enumToArray,
-    Schema,
-    createPostgisPointString,
-} from '@service-scrape/lib-db_service_scrape'
+import { type Schema, createPostgisPointString } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { ILoggable } from '@observability/lib-opentelemetry'
+
+const HomeTypeEnum: Schema.HomeTypeEnum[] = [
+    'Apartment',
+    'ApartmentUnitFlat',
+    'BlockOfUnits',
+    'DevelopmentSite',
+    'Duplex',
+    'FreeStanding',
+    'House',
+    'Land',
+    'NewApartments',
+    'NewHomeDesigns',
+    'NewHouseLand',
+    'NewLand',
+    'PentHouse',
+    'Retirement',
+    'SemiDetached',
+    'Studio',
+    'Terrace',
+    'Townhouse',
+    'VacantLand',
+    'Villa',
+]
 
 const listingsSchema = z.object({
     listingModel: z.object({
@@ -20,7 +39,7 @@ const listingsSchema = z.object({
             beds: z.number().catch(0),
             baths: z.number().catch(0),
             parking: z.number().catch(0),
-            propertyType: z.enum(enumToArray(Schema.HomeTypeEnum)),
+            propertyType: z.enum(HomeTypeEnum),
             isRural: z.boolean(),
             landSize: z.number().catch(0),
             isRetirement: z.boolean(),

@@ -1,8 +1,4 @@
-import {
-    createPostgisPolygonString,
-    enumToArray,
-    Schema,
-} from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPolygonString, type Schema } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
@@ -13,10 +9,21 @@ const _boundaryGeoJsonSchema = z.object({
     coordinates: z.array(z.array(z.array(z.number()).length(2))),
 })
 
+const StateAbbreviationEnum: Schema.StateAbbreviationEnum[] = [
+    'ACT',
+    'NSW',
+    'NT',
+    'QLD',
+    'SA',
+    'TAS',
+    'VIC',
+    'WA',
+]
+
 const _rawSuburbSchema = z.object({
     suburb: z.object({
         name: z.string(),
-        state: z.enum(enumToArray(Schema.StateAbbreviationEnum)),
+        state: z.enum(StateAbbreviationEnum),
         postcode: z.string(),
         statistics: z.object({
             marriedPercentage: z.number(),

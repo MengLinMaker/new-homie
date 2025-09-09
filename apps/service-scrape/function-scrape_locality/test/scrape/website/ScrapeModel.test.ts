@@ -2,11 +2,11 @@ import { afterAll, describe, expect, it, vi } from 'vitest'
 import { dbCountRow, LOGGER, suiteNameFromFileName } from '../../util'
 import { ScrapeModel } from '../../../src/scrape/website/ScrapeModel'
 import { setupTestPostgisDb } from '@service-scrape/lib-db_service_scrape/dev'
-import type { Insertable } from 'kysely'
+import type { Insertable, Updateable } from 'kysely'
 import {
     createPostgisPointString,
     createPostgisPolygonString,
-    Schema,
+    type Schema,
 } from '@service-scrape/lib-db_service_scrape'
 import { afterEach, beforeEach } from 'node:test'
 
@@ -37,7 +37,7 @@ describe(testSuiteName, async () => {
         if (!boundary_coordinates) throw Error('boundary_coordinates is invalid')
         const locality_table = {
             suburb_name: 'Melbourne',
-            state_abbreviation: Schema.StateAbbreviationEnum.VIC,
+            state_abbreviation: 'VIC',
             postcode: '3000',
             boundary_coordinates,
         } satisfies Insertable<Schema.LocalityTable>
@@ -123,12 +123,16 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryUpdateRentListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
-        const rentData = {
+        const rentData: {
+            home_feature_table: Updateable<Schema.HomeFeatureTable>
+            home_table: Updateable<Schema.HomeTable>
+            rent_price_table: Updateable<Schema.RentPriceTable>
+        } = {
             home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
-                home_type: Schema.HomeTypeEnum.APARTMENT,
+                home_type: 'ApartmentUnitFlat',
                 is_retirement: false,
             },
             home_table: {
@@ -207,12 +211,16 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryUpdateSaleListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
-        const saleData = {
+        const saleData: {
+            home_feature_table: Updateable<Schema.HomeFeatureTable>
+            home_table: Updateable<Schema.HomeTable>
+            sale_price_table: Updateable<Schema.SalePriceTable>
+        } = {
             home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
-                home_type: Schema.HomeTypeEnum.APARTMENT,
+                home_type: 'ApartmentUnitFlat',
                 is_retirement: false,
             },
             home_table: {
