@@ -3,12 +3,11 @@ import middy from '@middy/core'
 
 // Setup persistent resources
 import { SERVICE_NAME, TRACER, logLambdaException, scrapeController } from './global/setup'
-import { tracerMiddleware, validatorMiddleware } from './global/middleware'
+import { validatorMiddleware } from './global/middleware'
 import { spanExceptionEnd } from '@observability/lib-opentelemetry'
 
 export const handler = middy()
     .use(validatorMiddleware)
-    .use(tracerMiddleware)
     .handler(async (event, _context) => {
         const span = TRACER.startSpan('handler')
         if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
