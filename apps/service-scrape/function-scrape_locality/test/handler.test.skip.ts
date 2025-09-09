@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { StatusCodes } from 'http-status-codes'
-import { handler } from '../src/index.mts'
+import { handler } from '../src'
 
 const sqsEvent = (locality: { suburb: string; state: string; postcode: string }) => ({
     Records: [

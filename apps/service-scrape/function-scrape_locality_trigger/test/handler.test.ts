@@ -41,7 +41,7 @@ describe('handler', async () => {
     process.env['QUEUE_URL'] = queue.QueueUrl
 
     // Load env variables into test handler
-    const { handler } = await import('../src/index.mts')
+    const { handler } = await import('../src')
     afterAll(async () => await localstack.stop())
 
     it('Should validate incorrect input', async () => {
