@@ -6,7 +6,8 @@ on:
       - '**'
 
 jobs:
-  test-lint:
+  test-fast:
+    name: Test fast - linting all and testing libraries
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
@@ -17,13 +18,17 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
-      - name: Test biome lint
+      - name: Lint all
         run: pnpm lint
 
-      - name: Type test
+      - name: Type test all
         run: pnpm nx affected -t test:type
 
-  test-unit:
+      - name: Unit test libraries
+        run: pnpm nx affected -t test:unit -p **/lib-*
+
+  test-functions:
+    name: Test functions - testing all lambda functions
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
@@ -34,10 +39,11 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
-      - name: Unit test
-        run: pnpm nx affected -t test:unit
+      - name: Unit test functions
+        run: pnpm nx affected -t test:unit -p **/function-*
 
   test-cdk:
+    name: Test cdk - infrastructure deployment
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
