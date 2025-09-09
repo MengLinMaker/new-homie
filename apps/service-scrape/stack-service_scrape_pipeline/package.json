@@ -7,6 +7,7 @@
     "scripts": {
         "format": "biome format --write",
         "test:type": "tsc",
+        "sam:local": "pnpm sam local invoke -t cdk.out/NewHomie-StackServiceScrapePipeline-Dev.template.json --skip-pull-image",
         "cdk:synth": "cdk synth",
         "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
     },
