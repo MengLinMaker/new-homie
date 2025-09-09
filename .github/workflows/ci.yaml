@@ -42,7 +42,7 @@ jobs:
         id: setup
         uses: ./.github/actions/setup-ci
         with:
-          job-name: test-unit
+          job-name: test-integration
 
       - name: Deploy cdk quantum stacks
         run: pnpm nx affected -t cdk:dev
