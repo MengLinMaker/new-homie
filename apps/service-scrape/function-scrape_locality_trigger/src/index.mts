@@ -2,29 +2,21 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
-import { LOGGER, otelException } from '@observability/lib-opentelemetry'
 import { tracerMiddleware, validatorMiddleware } from './global/middleware'
 import { chunkArray } from './util'
 import { ENV } from './global/env'
 
 // Setup OpenTelemetry and connections
-import './global/setup'
-import { sqsClient } from './global/setup'
+import { LOGGER, SERVICE_NAME, sqsClient, TRACER } from './global/setup'
 import { SendMessageBatchCommand } from '@aws-sdk/client-sqs'
+import { enforceErrorType, spanExceptionEnd } from '@observability/lib-opentelemetry'
 
 export const handler = middy()
     .use(validatorMiddleware)
     .use(tracerMiddleware)
     .handler(async (event, _context) => {
-        if (!event.success) {
-            LOGGER.fatal({
-                args: event.originalEvent,
-                ...otelException(event.error),
-            })
-            LOGGER.flush()
-            throw event.error
-        }
-        event.data
+        const span = TRACER.startSpan(SERVICE_NAME)
+        if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
 
         const filteredLocality = australiaLocalities.filter((locality) => {
             return (
@@ -47,16 +39,13 @@ export const handler = middy()
                     }),
                 )
             } catch (e) {
-                const formattedError = otelException(e)
-                LOGGER.fatal(formattedError)
-                LOGGER.flush()
-                throw e
+                throw spanExceptionEnd(span, enforceErrorType(e))
             }
         }
 
         LOGGER.info({
             localityLength: filteredLocality.length,
         })
-        LOGGER.flush()
+        span.end()
         return { status: StatusCodes.OK }
     })
