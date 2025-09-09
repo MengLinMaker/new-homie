@@ -10,7 +10,7 @@ export const handler = middy()
     .use(validatorMiddleware)
     .use(tracerMiddleware)
     .handler(async (event, _context) => {
-        const span = TRACER.startSpan(SERVICE_NAME)
+        const span = TRACER.startSpan('handler')
         if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
 
         // biome-ignore lint/style/noNonNullAssertion: <validated>

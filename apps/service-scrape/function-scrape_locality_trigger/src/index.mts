@@ -15,7 +15,7 @@ export const handler = middy()
     .use(validatorMiddleware)
     .use(tracerMiddleware)
     .handler(async (event, _context) => {
-        const span = TRACER.startSpan(SERVICE_NAME)
+        const span = TRACER.startSpan('handler')
         if (!event.success) throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} validation error`)
 
         const filteredLocality = australiaLocalities.filter((locality) => {
@@ -37,7 +37,8 @@ export const handler = middy()
                     }),
                 )
             } catch (e) {
-                throw spanExceptionEnd(span, enforceErrorType(e))
+                spanExceptionEnd(span, enforceErrorType(e))
+                return { status: StatusCodes.INTERNAL_SERVER_ERROR }
             }
         }
 
