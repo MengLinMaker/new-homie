@@ -7,7 +7,7 @@
     "scripts": {
         "format": "biome format --write",
         "test:type": "tsc",
-        "build": "node ./src/compress.ts && pnpm format"
+        "generate": "node ./src/compress.ts && pnpm format"
     },
     "type": "module",
     "dependencies": {
