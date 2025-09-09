@@ -1,8 +1,11 @@
-import { ATTR_CODE_FUNCTION_NAME, ATTR_EXCEPTION_STACKTRACE } from '@opentelemetry/semantic-conventions'
+import {
+    ATTR_CODE_FUNCTION_NAME,
+    ATTR_EXCEPTION_STACKTRACE,
+} from '@opentelemetry/semantic-conventions'
 import type { Level, Logger } from 'pino'
 import { otelException } from './otelException.ts'
 
-class ILoggableError extends Error { }
+class ILoggableError extends Error {}
 export class ILoggable {
     readonly LOGGER
 
