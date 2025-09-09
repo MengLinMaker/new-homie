@@ -60,7 +60,7 @@ export class ScrapeController extends IDatabased {
             if (!returnedData) return null
             return returnedData.id
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryExtractSuburbPage, args, e)
             return null
         }
     }
@@ -78,7 +78,7 @@ export class ScrapeController extends IDatabased {
             }
             return true
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryExtractSchools, args, e)
             return false
         }
     }
@@ -116,7 +116,7 @@ export class ScrapeController extends IDatabased {
             }
             return rentsData
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryExtractRentsPage, args, e)
             return null
         }
     }
@@ -154,7 +154,7 @@ export class ScrapeController extends IDatabased {
             }
             return salesData
         } catch (e) {
-            this.logException('fatal', e, args)
+            this.logExceptionArgs('error', this.tryExtractSalesPage, args, e)
             return null
         }
     }

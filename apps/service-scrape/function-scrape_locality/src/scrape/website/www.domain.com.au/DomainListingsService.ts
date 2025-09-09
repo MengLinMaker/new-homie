@@ -58,7 +58,6 @@ export class DomainListingsService extends ILoggable {
      * @returns Integer price
      */
     highestPriceFromString(priceString: string) {
-        this.log('debug', this.highestPriceFromString)
         const prices = priceString
             .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
             .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
@@ -76,7 +75,6 @@ export class DomainListingsService extends ILoggable {
      * @returns
      */
     parseDatetime(datetime: string | null | undefined) {
-        this.log('debug', this.parseDatetime)
         if (datetime) {
             return z.iso.datetime().parse(`${datetime}Z`, {
                 reportInput: true,
@@ -92,7 +90,6 @@ export class DomainListingsService extends ILoggable {
      * @param nextDataJson
      */
     tryExtractListings(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractListings)
         try {
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
                 reportInput: true,
@@ -105,7 +102,7 @@ export class DomainListingsService extends ILoggable {
             const isLastPage = lastPageNumber === currentPageNumber
             return { listings, isLastPage }
         } catch (e) {
-            this.logException('error', e, 'Too large to display')
+            this.logException('error', this.tryExtractListings, e)
             return null
         }
     }
@@ -116,7 +113,6 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformListing(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformListing)
         try {
             const listingModel = args.listing.listingModel
             const address = listingModel.address
@@ -138,7 +134,7 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.HomeTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformListing, args, e)
             return null
         }
     }
@@ -149,20 +145,16 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformSalePrice(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformSalePrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
             if (!price) {
-                this.logException(
-                    'warn',
-                    new DomainListingsServiceError(
-                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                    ),
-                    args,
+                const e = new DomainListingsServiceError(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
+                this.logExceptionArgs('warn', this.tryTransformSalePrice, args, e)
                 return null
             }
             return {
@@ -174,7 +166,7 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.SalePriceTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformSalePrice, args, e)
             return null
         }
     }
@@ -185,20 +177,16 @@ export class DomainListingsService extends ILoggable {
      * @returns Object containing tables for database inserts
      */
     tryTransformRentPrice(args: { listing: ListingsSchemaDTO }) {
-        this.log('debug', this.tryTransformRentPrice)
         try {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestPriceFromString(priceString)
             if (!price) {
-                this.logException(
-                    'warn',
-                    new DomainListingsServiceError(
-                        `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
-                    ),
-                    args,
+                const e = new DomainListingsServiceError(
+                    `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
+                this.logExceptionArgs('warn', this.tryTransformRentPrice, args, e)
                 return null
             }
             return {
@@ -210,13 +198,12 @@ export class DomainListingsService extends ILoggable {
                 } satisfies Updateable<Schema.RentPriceTable>,
             }
         } catch (e) {
-            this.logException('error', e, args)
+            this.logExceptionArgs('error', this.tryTransformRentPrice, args, e)
             return null
         }
     }
 
     tryExtractSalesPage(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractSalesPage)
         const { nextDataJson } = args
         const result = this.tryExtractListings({ nextDataJson })
         if (!result) return null
@@ -239,7 +226,6 @@ export class DomainListingsService extends ILoggable {
     }
 
     tryExtractRentsPage(args: { nextDataJson: object }) {
-        this.log('debug', this.tryExtractRentsPage)
         const { nextDataJson } = args
         const result = this.tryExtractListings({ nextDataJson })
         if (!result) return null

@@ -1,5 +1,5 @@
 import type { Logger } from 'pino'
-import { ILoggable, LOGGER, otelException } from '@observability/lib-opentelemetry'
+import { ILoggable } from '@observability/lib-opentelemetry'
 import puppeteer, { type BrowserContext, type Browser } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
@@ -29,11 +29,8 @@ export class BrowserService extends ILoggable {
         const s3Client = new S3Client()
         // biome-ignore lint/complexity/useLiteralKeys: <error handled>
         const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
-        if (!chromeTarUrl) {
-            const error = new URIError('CHROME_PUPPETEER_ASSET_URL is undefined')
-            LOGGER.fatal(otelException(error))
-            throw error
-        }
+        if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
+
         const [, bucket, key] = new URL(chromeTarUrl).pathname.split('/')
         const chromeTarSignedUrl = await getSignedUrl(
             s3Client,
@@ -73,7 +70,7 @@ export class BrowserService extends ILoggable {
             await page.goto(url, { waitUntil: 'domcontentloaded' })
             return await page.content()
         } catch (e) {
-            this.logException('fatal', e, url)
+            this.logExceptionArgs('warn', this.getHTML, url, e)
             return null
         }
     }
