@@ -38,9 +38,6 @@ importers:
       typescript:
         specifier: ~5.9.2
         version: 5.9.2
-      vite:
-        specifier: 7.1.2
-        version: 7.1.2(@types/node@24.2.0)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.20.3)(yaml@2.7.0)
       vitest:
         specifier: 3.2.4
         version: 3.2.4(@types/node@24.2.0)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.20.3)(yaml@2.7.0)
@@ -143,9 +140,6 @@ importers:
       cheerio:
         specifier: 1.1.2
         version: 1.1.2
-      common-errors:
-        specifier: ^1.2.0
-        version: 1.2.0
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
@@ -2793,10 +2787,6 @@ packages:
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
-
-  common-errors@1.2.0:
-    resolution: {integrity: sha512-HtLF1V6LRACyueMEs+MLwf++1Q7cJLC0FFVStFErYZXXCNuTyVwXp67MTn7Mf7+lAaA5HfUe4cREPTwo0LAXkg==}
-    engines: {node: '>=0.8'}
 
   compress-commons@6.0.2:
     resolution: {integrity: sha512-6FqVXeETqWPoGcfzrXb37E50NP0LXT8kAMu5ooZayhWWdgEY4lBEEcbQNXtkuKQsGduxiIcI4gOTsxTmuq/bSg==}
@@ -8579,8 +8569,6 @@ snapshots:
       delayed-stream: 1.0.0
 
   commander@2.20.3: {}
-
-  common-errors@1.2.0: {}
 
   compress-commons@6.0.2:
     dependencies:
