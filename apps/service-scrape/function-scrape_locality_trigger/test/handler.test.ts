@@ -1,14 +1,22 @@
-import { describe, expect, it } from 'vitest'
+import { afterAll, describe, expect, it } from 'vitest'
+import { LocalstackContainer } from '@testcontainers/localstack'
+import { CreateQueueCommand, SQSClient } from '@aws-sdk/client-sqs'
+import { StatusCodes } from 'http-status-codes'
 
 describe('handler', async () => {
-    // biome-ignore lint/complexity/useLiteralKeys: <setting value>
-    process.env['QUEUE_URL'] = 'string'
+    const localstack = await new LocalstackContainer('localstack/localstack:4.7.0').start()
+    process.env['AWS_ENDPOINT_URL'] = localstack.getConnectionUri()
+    const sqsClient = new SQSClient()
+    console.log(sqsClient.config.endpoint)
+    const queue = await sqsClient.send(new CreateQueueCommand({ QueueName: 'TestQueue' }))
+    process.env['QUEUE_URL'] = queue.QueueUrl
     const { handler } = await import('../src/index.mts')
 
+    afterAll(async () => await localstack.stop())
+
     it('Should validate incorrect input', async () => {
-        expect(() => handler({} as never, undefined as never)).rejects.toThrowError(
-            'Failed to parse schema',
-        )
+        const f = handler({} as never, undefined as never)
+        await expect(f).rejects.toThrow()
     })
 
     const validEventbridgeEvent = {
@@ -28,8 +36,7 @@ describe('handler', async () => {
     }
 
     it('Should parse correct input', async () => {
-        expect(() =>
-            handler(validEventbridgeEvent as never, undefined as never),
-        ).rejects.toThrowError('The specified queue does not exist.')
+        const res = await handler(validEventbridgeEvent as never, undefined as never)
+        expect(res).toStrictEqual({ status: StatusCodes.OK })
     })
 })

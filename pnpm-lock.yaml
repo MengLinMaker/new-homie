@@ -199,6 +199,9 @@ importers:
         specifier: 4.0.17
         version: 4.0.17
     devDependencies:
+      '@testcontainers/localstack':
+        specifier: ^11.5.1
+        version: 11.5.1
       pino-pretty:
         specifier: 13.1.1
         version: 13.1.1
@@ -1998,6 +2001,9 @@ packages:
 
   '@swc/types@0.1.19':
     resolution: {integrity: sha512-WkAZaAfj44kh/UFdAQcrMP1I0nwRqpt27u+08LMBYMqmQfwwMofYoMh/48NGkMMRfC4ynpfwRbJuu8ErfNloeA==}
+
+  '@testcontainers/localstack@11.5.1':
+    resolution: {integrity: sha512-uDlPLfRD9sG4X4Dtc1jOAMWAcl//2ISSii/W07vP3/JPseQmSb5cd7P7pGxhqL5xdbk5vjamdaMXAGdIzYZxvg==}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -7139,6 +7145,13 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
     optional: true
+
+  '@testcontainers/localstack@11.5.1':
+    dependencies:
+      testcontainers: 11.5.1
+    transitivePeerDependencies:
+      - bare-buffer
+      - supports-color
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
