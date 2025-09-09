@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - '**'
+  push:
+    branches:
+      # Run again to set cache - https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching#example-of-search-priority
+      - main
 
 jobs:
   test-fast:
