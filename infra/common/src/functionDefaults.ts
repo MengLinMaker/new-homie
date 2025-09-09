@@ -20,7 +20,7 @@ export const functionDefaults: NodejsFunctionProps = {
     runtime: Runtime.NODEJS_22_X,
     architecture: Architecture.ARM_64,
     // Distributed tracing debugging
-    tracing: Tracing.ACTIVE,
+    // tracing: Tracing.ACTIVE,
     bundling: {
         format: OutputFormat.ESM,
         // lines joined to prevent syntax token error
