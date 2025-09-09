@@ -9,7 +9,7 @@
         "test:type": "tsc",
         "test:unit": "OTEL_LOG_LEVEL=trace vitest run --coverage",
         "dev:test:unit": "OTEL_LOG_LEVEL=trace vitest --coverage",
-        "build": "echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./src/commitId.ts"
+        "build": "mkdir dist; echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./dist/commitId.ts"
     },
     "dependencies": {
         "@opentelemetry/api": "^1.9.0",
