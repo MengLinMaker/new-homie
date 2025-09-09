@@ -62,7 +62,6 @@ const exportDashboards = async (folderUidToPath: FolderUidToPath) => {
         if (meta.provisioned) continue
 
         // Defined id prevents import
-        // biome-ignore lint/complexity/useLiteralKeys: <expected to exist>
         delete dashboard['id']
         writeFileSync(`${folderUidToPath[meta.folderUid]}/${title}.json`, JSON.stringify(dashboard))
     }

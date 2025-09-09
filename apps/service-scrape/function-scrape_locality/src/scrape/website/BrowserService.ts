@@ -27,7 +27,6 @@ export class BrowserService extends ILoggable {
 
         // Download chrome at runtime to increase deployment speed
         const s3Client = new S3Client()
-        // biome-ignore lint/complexity/useLiteralKeys: <error handled>
         const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
         if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
 

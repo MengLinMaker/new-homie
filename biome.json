@@ -11,7 +11,7 @@
         "rules": {
             "recommended": true,
             "complexity": {
-                "useLiteralKeys": "warn",
+                "useLiteralKeys": "off",
                 "noArguments": "warn"
             },
             "suspicious": {

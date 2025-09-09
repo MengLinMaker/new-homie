@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/complexity/useLiteralKeys: <All env variables can be potentially accessed> */
 import { parseEnvSchema } from '@observability/lib-opentelemetry'
 import z from 'zod'
 
