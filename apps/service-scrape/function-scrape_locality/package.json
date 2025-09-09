@@ -6,7 +6,7 @@
         "puppeteer": "pnpm dlx @puppeteer/browsers install chrome-headless-shell@stable && mv ./chrome-headless-shell/*/* ./.puppeteer && rm -r chrome-headless-shell",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
-        "dev:test:unit": "vitest --coverage"
+        "test:dev": "vitest --coverage"
     },
     "devDependencies": {
         "@types/common-errors": "^1.0.5",

@@ -8,7 +8,7 @@
         "format": "biome format --write",
         "test:type": "tsc",
         "test:unit": "OTEL_LOG_LEVEL=trace vitest run --coverage",
-        "dev:test:unit": "OTEL_LOG_LEVEL=trace vitest --coverage",
+        "test:dev": "OTEL_LOG_LEVEL=trace vitest --coverage",
         "build": "mkdir dist; echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./dist/commitId.ts"
     },
     "dependencies": {

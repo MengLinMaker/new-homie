@@ -11,7 +11,7 @@
         "generate": "node ./generate.ts && biome format --write",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
-        "dev:test:unit": "vitest --coverage"
+        "test:dev": "vitest --coverage"
     },
     "dependencies": {
         "dotenv": "17.2.1",
