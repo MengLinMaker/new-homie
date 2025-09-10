@@ -6,12 +6,12 @@ describe('getKyselyPostgresDb', () => {
     const inactiveUri = 'postgresql://user:password@localhost:80/invalid_db'
 
     it('should return null with invalid uri', async () => {
-        const db = await getKyselyPostgresDb(invalidUri)
+        const db = getKyselyPostgresDb(invalidUri)
         expect(db).toBeNull()
     })
 
     it.skip('should return null with inactive uri', async () => {
-        const db = await getKyselyPostgresDb(inactiveUri)
+        const db = getKyselyPostgresDb(inactiveUri)
         expect(db).toBeNull()
     })
 })

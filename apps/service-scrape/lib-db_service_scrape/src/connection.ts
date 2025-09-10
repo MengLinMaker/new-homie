@@ -12,7 +12,7 @@ const { Pool } = pgImport
  * @link Kysely docs: https://kysely.dev/
  */
 
-export const getKyselyPostgresDb = async (postgresUri: string) => {
+export const getKyselyPostgresDb = (postgresUri: string) => {
     try {
         const validUri = z.url().parse(postgresUri)
         const db = new Kysely<DB>({
