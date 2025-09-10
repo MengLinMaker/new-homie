@@ -39,6 +39,7 @@ describe('handler', async () => {
     const sqsClient = new SQSClient()
     const queue = await sqsClient.send(new CreateQueueCommand({ QueueName: 'TestQueue' }))
 
+    // biome-ignore lint/style/noNonNullAssertion: <assume successful setup>
     const queueUrl = new URL(queue.QueueUrl!)
     queueUrl.port = localstack.getPort().toString()
     queueUrl.host = localstack.getHost()
