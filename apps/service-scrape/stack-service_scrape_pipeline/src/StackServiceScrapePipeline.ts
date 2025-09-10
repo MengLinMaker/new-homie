@@ -4,14 +4,15 @@ import * as cdk from 'aws-cdk-lib'
 import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
 import * as targets from 'aws-cdk-lib/aws-events-targets'
+import * as lambda from 'aws-cdk-lib/aws-lambda'
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources'
 import type { Construct } from 'constructs'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
-import { functionDefaults } from '@infra/common'
-import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
+import { functionDefaults } from '@infra/lib-common'
+// import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
 
 interface StackServiceScrapePipelineProps extends cdk.StackProps {
     production: boolean
@@ -37,7 +38,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         ])
 
         // Main SQS Queue for batch scraping
-        const scrapeLocalityQueue = new sqs.Queue(this, 'ScrapeLocalityQueue', {
+        const QueueScrapeLocality = new sqs.Queue(this, 'QueueScrapeLocality', {
             enforceSSL: true,
             // Duration of AWS lambda
             visibilityTimeout: cdk.Duration.minutes(15),
@@ -50,22 +51,43 @@ export class StackServiceScrapePipeline extends cdk.Stack {
             },
         })
 
-        // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
-        const scrapeLocalityTriggerFunction = new NodejsFunction(this, 'ScrapeLocalityTrigger', {
-            ...functionDefaults,
-            memorySize: 1769,
-            entry: path.join(
-                import.meta.dirname,
-                '../../function-scrape_locality_trigger/src/index.ts',
-            ),
-            timeout: cdk.Duration.seconds(60),
-            reservedConcurrentExecutions: 1,
-            environment: {
-                ...functionDefaults.environment,
-                QUEUE_URL: scrapeLocalityQueue.queueUrl,
+        const LayerPinoOpentelemetryTransport = new lambda.LayerVersion(
+            this,
+            'LayerPinoOpentelemetryTransport',
+            {
+                code: lambda.Code.fromAsset(
+                    path.join(
+                        import.meta.dirname,
+                        '../../../observability/layer-pino_opentelemetry_transport',
+                    ),
+                ),
+                compatibleRuntimes: [functionDefaults.runtime],
+                compatibleArchitectures: [functionDefaults.architecture],
+                description: 'Package pino-opentelemetry-transport',
             },
-        })
-        scrapeLocalityQueue.grantSendMessages(scrapeLocalityTriggerFunction)
+        )
+
+        // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
+        const FunctionScrapeLocalityTrigger = new NodejsFunction(
+            this,
+            'FunctionScrapeLocalityTrigger',
+            {
+                ...functionDefaults,
+                memorySize: 1769,
+                entry: path.join(
+                    import.meta.dirname,
+                    '../../function-scrape_locality_trigger/src/index.ts',
+                ),
+                timeout: cdk.Duration.seconds(60),
+                reservedConcurrentExecutions: 1,
+                environment: {
+                    ...functionDefaults.environment,
+                    QUEUE_URL: QueueScrapeLocality.queueUrl,
+                },
+                layers: [LayerPinoOpentelemetryTransport],
+            },
+        )
+        QueueScrapeLocality.grantSendMessages(FunctionScrapeLocalityTrigger)
 
         // Schedule trigger at 8am Saturday AEST
         new events.Rule(this, 'ScrapeLocalityTriggerEvent', {
@@ -75,10 +97,10 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                 hour: '22',
                 weekDay: '6',
             }),
-            targets: [new targets.LambdaFunction(scrapeLocalityTriggerFunction)],
+            targets: [new targets.LambdaFunction(FunctionScrapeLocalityTrigger)],
         })
 
-        const scrapeChromePuppeteerAsset = new Asset(this, 'ScrapeChromePuppeteerAsset', {
+        const AssetScrapeChromePuppeteer = new Asset(this, 'AssetScrapeChromePuppeteer', {
             path: path.join(
                 import.meta.dirname,
                 '../../function-scrape_locality/src/asset/chromium-v138.0.2-pack.arm64.tar',
@@ -86,7 +108,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         })
 
         // Batch Scrape Suburbs Lambda Function - 1x 1vCPU for max duration
-        const scrapeLocalityFunction = new NodejsFunction(this, 'ScrapeLocality', {
+        const FunctionScrapeLocality = new NodejsFunction(this, 'FunctionScrapeLocality', {
             ...functionDefaults,
             entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.ts'),
             memorySize: 1769,
@@ -96,17 +118,18 @@ export class StackServiceScrapePipeline extends cdk.Stack {
             environment: {
                 ...functionDefaults.environment,
                 DB_SERVICE_SCRAPE,
-                CHROME_PUPPETEER_ASSET_URL: scrapeChromePuppeteerAsset.httpUrl,
+                CHROME_PUPPETEER_ASSET_URL: AssetScrapeChromePuppeteer.httpUrl,
             },
             events: [
-                new lambdaEventSources.SqsEventSource(scrapeLocalityQueue, {
+                new lambdaEventSources.SqsEventSource(QueueScrapeLocality, {
                     batchSize: 1,
                     maxConcurrency: 2,
                 }),
             ],
-            insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
+            layers: [LayerPinoOpentelemetryTransport],
+            // insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
         })
-        scrapeLocalityFunction.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
-        scrapeChromePuppeteerAsset.grantRead(scrapeLocalityFunction)
+        FunctionScrapeLocality.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
+        AssetScrapeChromePuppeteer.grantRead(FunctionScrapeLocality)
     }
 }
