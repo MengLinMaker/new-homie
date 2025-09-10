@@ -5,13 +5,14 @@ import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+
 export class BrowserService extends ILoggable {
     static browser: Browser
-    private browserContext
+    static browserContext: BrowserContext
 
     constructor(logger: Logger, browserContext: BrowserContext) {
         super(logger)
-        this.browserContext = browserContext
+        BrowserService.browserContext = browserContext
     }
 
     /* v8 ignore start */
@@ -59,8 +60,8 @@ export class BrowserService extends ILoggable {
     }
 
     private async singlePage() {
-        const pages = await this.browserContext.pages()
-        return pages[0] ?? (await this.browserContext.newPage())
+        const pages = await BrowserService.browserContext.pages()
+        return pages[0] ?? (await BrowserService.browserContext.newPage())
     }
 
     async getHTML(url: string) {
