@@ -19,7 +19,7 @@ import { commitId } from './../dist/commitId.ts'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 
 import pino from 'pino'
-import pinoOpentelemetryTransport from 'pino-opentelemetry-transport'
+import type { Options } from 'pino-opentelemetry-transport'
 
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
@@ -81,7 +81,7 @@ export class OpenTelemetry {
     }
 
     private async startPinoLogger(attributes: ResourceAttributes) {
-        const stream = await pinoOpentelemetryTransport({
+        const transportOptions = {
             loggerName: attributes[ATTR_SERVICE_NAME],
             serviceVersion: commitId,
             resourceAttributes: attributes,
@@ -97,15 +97,22 @@ export class OpenTelemetry {
                     },
                 },
             ],
-        })
-        return pino(
-            {
-                // Remove pid and hostname
-                base: null,
-                level: ENV.OTEL_LOG_LEVEL,
+        } satisfies Options
+        const loggerOptions = {
+            // Remove pid and hostname
+            base: null,
+            level: ENV.OTEL_LOG_LEVEL,
+            transport: {
+                target: '../../layer-pino_opentelemetry_transport/nodejs/pino_opentelemetry_transport.cjs',
+                options: transportOptions,
             },
-            stream,
-        )
+        }
+        try {
+            return pino(loggerOptions)
+        } catch {
+            loggerOptions.transport.target = '/opt/nodejs/pino_opentelemetry_transport.cjs'
+            return pino(loggerOptions)
+        }
     }
 
     /**
@@ -131,4 +138,5 @@ export class OpenTelemetry {
 export const spanExceptionEnd = (span: Span, exception: Exception) => {
     span.setStatus({ code: SpanStatusCode.ERROR }).recordException(exception)
     span.end()
+    return exception
 }

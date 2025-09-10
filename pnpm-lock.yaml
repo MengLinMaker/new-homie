@@ -95,12 +95,13 @@ importers:
       pino:
         specifier: 9.8.0
         version: 9.8.0
-      pino-opentelemetry-transport:
-        specifier: ^1.0.1
-        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
       zod:
         specifier: 4.0.17
         version: 4.0.17
+    devDependencies:
+      pino-opentelemetry-transport:
+        specifier: ^1.1.0
+        version: 1.1.0(@opentelemetry/api@1.9.0)(pino@9.8.0)
 
   apps/service-scrape/function-scrape_locality:
     dependencies:
@@ -233,9 +234,9 @@ importers:
 
   apps/service-scrape/stack-service_scrape_pipeline:
     devDependencies:
-      '@infra/common':
+      '@infra/lib-common':
         specifier: workspace:*
-        version: link:../../../infra/common
+        version: link:../../../infra/lib-common
       '@service-scrape/function-scrape_locality':
         specifier: workspace:*
         version: link:../function-scrape_locality
@@ -255,11 +256,23 @@ importers:
         specifier: ^10.4.2
         version: 10.4.2
 
+  apps/service-scrape/stack-service_scrape_pipeline/cdk.out/asset.ca51015037cee6dd6f09f1428947804d9eecc0fbaf22385d72aa4cafe76d476e/nodejs:
+    dependencies:
+      pino-opentelemetry-transport:
+        specifier: ^1.0.1
+        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
+
+  apps/service-scrape/stack-service_scrape_pipeline/cdk.out/asset.d0fee6e1218bf4157d2785823940d47132812772e3afdb0a2154d3c6ec21a2d4/nodejs:
+    dependencies:
+      pino-opentelemetry-transport:
+        specifier: ^1.0.1
+        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
+
   apps/service-scrape/stack-service_scrape_query:
     devDependencies:
-      '@infra/common':
+      '@infra/lib-common':
         specifier: workspace:*
-        version: link:../../../infra/common
+        version: link:../../../infra/lib-common
       '@service-scrape/lib-db_service_scrape':
         specifier: workspace:*
         version: link:../lib-db_service_scrape
@@ -273,17 +286,17 @@ importers:
         specifier: ^10.4.2
         version: 10.4.2
 
-  infra/common:
+  infra/deploy:
     devDependencies:
-      '@observability/lib-opentelemetry':
-        specifier: workspace:*
-        version: link:../../apps/observability/lib-opentelemetry
       aws-cdk-lib:
         specifier: ^2.212.0
         version: 2.212.0(constructs@10.4.2)
 
-  infra/deploy:
+  infra/lib-common:
     devDependencies:
+      '@observability/lib-opentelemetry':
+        specifier: workspace:*
+        version: link:../../apps/observability/lib-opentelemetry
       aws-cdk-lib:
         specifier: ^2.212.0
         version: 2.212.0(constructs@10.4.2)
@@ -3798,6 +3811,11 @@ packages:
 
   pino-opentelemetry-transport@1.0.1:
     resolution: {integrity: sha512-o9Lh72uyH00jPARPsLFJkIZm6x/i7Qe7LNsagCLrQxKkadaviEKkjUx2kEBMWgh5HZjqT8caEuHIrxtw7DVoPA==}
+    peerDependencies:
+      pino: ^8.21.0 || ^9.0.0
+
+  pino-opentelemetry-transport@1.1.0:
+    resolution: {integrity: sha512-yLOaODDxavgkEJX6ySLGHGjRDaX/xtUs35XHrw1C5U2IRBWKakZHJ8UVrFvDQQ0WxJBRUuChC/Vi2zhynIZXgA==}
     peerDependencies:
       pino: ^8.21.0 || ^9.0.0
 
@@ -9554,6 +9572,14 @@ snapshots:
       split2: 4.2.0
 
   pino-opentelemetry-transport@1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0):
+    dependencies:
+      otlp-logger: 1.1.11(@opentelemetry/api@1.9.0)
+      pino: 9.8.0
+      pino-abstract-transport: 2.0.0
+    transitivePeerDependencies:
+      - '@opentelemetry/api'
+
+  pino-opentelemetry-transport@1.1.0(@opentelemetry/api@1.9.0)(pino@9.8.0):
     dependencies:
       otlp-logger: 1.1.11(@opentelemetry/api@1.9.0)
       pino: 9.8.0
