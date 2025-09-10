@@ -80,7 +80,7 @@ export class OpenTelemetry {
         return sdk
     }
 
-    private async startPinoLogger(attributes: ResourceAttributes) {
+    private startPinoLogger(attributes: ResourceAttributes) {
         const transportOptions = {
             loggerName: attributes[ATTR_SERVICE_NAME],
             serviceVersion: commitId,
@@ -121,7 +121,7 @@ export class OpenTelemetry {
      * @returns LOGGER - pino logger
      * @returns TRACER - @opentelemetry/api tracer
      */
-    public async start(resourceAttributes: ResourceAttributes) {
+    public start(resourceAttributes: ResourceAttributes) {
         const attributes = {
             [ATTR_SERVICE_NAMESPACE]: 'NewHomie',
             [ATTR_SERVICE_VERSION]: commitId,
@@ -129,7 +129,7 @@ export class OpenTelemetry {
         }
         return {
             SDK: this.startAutoInstrumentation(attributes),
-            LOGGER: await this.startPinoLogger(attributes),
+            LOGGER: this.startPinoLogger(attributes),
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
         }
     }

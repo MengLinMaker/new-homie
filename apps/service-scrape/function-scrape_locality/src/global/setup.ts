@@ -6,7 +6,7 @@ import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
 export const SERVICE_NAME = 'function-scrape_locality'
 
 const otel = new OpenTelemetry()
-export const { LOGGER, TRACER } = await otel.start({
+export const { LOGGER, TRACER } = otel.start({
     'service.name': SERVICE_NAME,
 })
 
@@ -21,7 +21,7 @@ export const logLambdaException = (msg: string, args?: object) => {
     )
 }
 
-const DB = await getKyselyPostgresDb(DB_SERVICE_SCRAPE)
+const DB = getKyselyPostgresDb(DB_SERVICE_SCRAPE)
 
 // Application depends on database, hence it should crash
 if (!DB) {
