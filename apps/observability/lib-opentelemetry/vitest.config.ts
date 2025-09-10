@@ -9,6 +9,7 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text'],
             include: ['src/**/*.ts'],
+            exclude: ['src/pino_opentelemetry_transport.ts']
         },
     },
 })
