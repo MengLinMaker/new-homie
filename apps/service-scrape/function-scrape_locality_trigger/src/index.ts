@@ -36,8 +36,7 @@ export const handler = middy()
                     }),
                 )
             } catch (e) {
-                spanExceptionEnd(span, enforceErrorType(e))
-                return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+                throw spanExceptionEnd(span, enforceErrorType(e))
             }
         }
 
