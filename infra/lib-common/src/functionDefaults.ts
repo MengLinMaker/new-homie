@@ -16,7 +16,7 @@ export const esbuildBanner = [
     // `const __dirname = dirname(__filename)`,
 ].join(';')
 
-export const functionDefaults: NodejsFunctionProps = {
+export const functionDefaults = {
     runtime: Runtime.NODEJS_22_X,
     architecture: Architecture.ARM_64,
     // Distributed tracing debugging
@@ -30,9 +30,10 @@ export const functionDefaults: NodejsFunctionProps = {
         keepNames: true,
         // Source map to source code
         // sourceMap: true,
+        externalModules: ['pino-opentelemetry-transport'],
     },
     environment: {
         // NODE_OPTIONS: '--enable-source-maps',
         ...OTEL_ENV,
     },
-}
+} satisfies NodejsFunctionProps
