@@ -1,8 +1,10 @@
 import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
-import type { Level, Logger } from 'pino'
+import type { Level } from 'pino'
 import { otelException } from './otelException.ts'
+import type { Logger } from './OpenTelemetry.ts'
+import type { LogAttributes } from '@opentelemetry/api-logs';
 
-class ILoggableError extends Error {}
+class ILoggableError extends Error { }
 export class ILoggable {
     readonly LOGGER
 
@@ -18,28 +20,8 @@ export class ILoggable {
      * @param logInfo
      * @param msg
      */
-    private _log<T>(logLevel: Level, logInfo: T, msg?: T extends string ? never : string) {
-        /* v8 ignore start */
-        switch (logLevel) {
-            case 'fatal':
-                this.LOGGER.fatal(logInfo, msg)
-                break
-            case 'error':
-                this.LOGGER.error(logInfo, msg)
-                break
-            case 'warn':
-                this.LOGGER.warn(logInfo, msg)
-                break
-            case 'info':
-                this.LOGGER.info(logInfo, msg)
-                break
-            case 'debug':
-                this.LOGGER.debug(logInfo, msg)
-                break
-            case 'trace':
-                this.LOGGER.trace(logInfo, msg)
-                break
-        }
+    private _log(logLevel: Level, attibutes: LogAttributes, msg?: string) {
+        this.LOGGER(logLevel, attibutes, msg)
     }
 
     /**

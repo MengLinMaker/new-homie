@@ -1,5 +1,6 @@
 import { NodeSDK } from '@opentelemetry/sdk-node'
 import { type Exception, type Span, SpanStatusCode, trace } from '@opentelemetry/api'
+import { type LogAttributes, logs } from '@opentelemetry/api-logs'
 
 import { type DetectedResourceAttributes, resourceFromAttributes } from '@opentelemetry/resources'
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions'
@@ -18,8 +19,9 @@ import { ENV } from './env.ts'
 import { commitId } from './../dist/commitId.ts'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 
-import pino from 'pino'
-import type { Options } from 'pino-opentelemetry-transport'
+import type { Level } from 'pino'
+
+export type Logger = (level: Level, attributes: LogAttributes, msg?: string) => void
 
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
@@ -74,45 +76,20 @@ export class OpenTelemetry {
                 ),
             ],
             instrumentations: [getNodeAutoInstrumentations()],
-            autoDetectResources: true,
+            autoDetectResources: false,
         })
         sdk.start()
         return sdk
     }
 
-    private startPinoLogger(attributes: ResourceAttributes) {
-        const transportOptions = {
-            loggerName: attributes[ATTR_SERVICE_NAME],
-            serviceVersion: commitId,
-            resourceAttributes: attributes,
-            logRecordProcessorOptions: [
-                {
-                    recordProcessorType: 'simple',
-                    exporterOptions: {
-                        protocol: 'http/protobuf',
-                        protobufExporterOptions: {
-                            url: `${ENV.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
-                            headers: OLTP_HEADERS,
-                        },
-                    },
-                },
-            ],
-        } satisfies Options
-        const loggerOptions = {
-            // Remove pid and hostname
-            base: null,
-            level: ENV.OTEL_LOG_LEVEL,
-            transport: {
-                target: '../../layer-pino_opentelemetry_transport/nodejs/pino_opentelemetry_transport.cjs',
-                options: transportOptions,
-            },
-        }
-        try {
-            return pino(loggerOptions)
-        } catch {
-            loggerOptions.transport.target = '/opt/nodejs/pino_opentelemetry_transport.cjs'
-            return pino(loggerOptions)
-        }
+    private createLogger(globalAttributes: ResourceAttributes) {
+        const logger = logs.getLogger(globalAttributes[ATTR_SERVICE_NAME])
+        return (level: Level, attributes: LogAttributes, msg?: string) =>
+            logger.emit({
+                severityText: level,
+                attributes,
+                body: msg,
+            })
     }
 
     /**
@@ -129,7 +106,7 @@ export class OpenTelemetry {
         }
         return {
             SDK: this.startAutoInstrumentation(attributes),
-            LOGGER: this.startPinoLogger(attributes),
+            LOGGER: this.createLogger(attributes),
             TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
         }
     }
