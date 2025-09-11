@@ -38,7 +38,10 @@ export const handler = middy().handler(async (_event, _context) => {
     }
 
     if (failedLocalities.length > 0) {
-        throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} partial failure send to SQS queue`)
+        throw spanExceptionEnd(
+            span,
+            `FATAL ${SERVICE_NAME} failed to send ${failedLocalities.length} messages to SQS queue`,
+        )
     }
     span.end()
     return { status: StatusCodes.OK }
