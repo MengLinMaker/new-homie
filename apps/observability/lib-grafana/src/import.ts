@@ -1,5 +1,6 @@
 import type { Dirent } from 'node:fs'
 import { client, readJsonFile, RESOURCE_FOLDER, walkFolders } from './util.ts'
+import { DashboardModifier } from './replaceDatasource.ts'
 
 type ImportFunction = (entry: Dirent<string>) => void
 
@@ -25,51 +26,12 @@ const importFolder: ImportFunction = async (entry) => {
     throw new Error(`folder import failed - ${entry.name}`)
 }
 
-type DataSource = {
-    type?: string
-    uid: string
-}
-
-type ReplacementSources = Array<{
-    old: DataSource
-    new: DataSource
-}>
-
-// biome-ignore lint/suspicious/noExplicitAny: <actually is any type>
-const replaceDatasource = (dbChunk: any, replace: ReplacementSources): any => {
-    // do not process primitives
-    if (typeof dbChunk === 'boolean') return dbChunk
-    if (typeof dbChunk === 'number') return dbChunk
-    if (typeof dbChunk === 'undefined') return dbChunk
-    if (typeof dbChunk === 'string') return dbChunk
-
-    if (Array.isArray(dbChunk)) {
-        const newDbChunk = []
-        for (const smallDbChunk of dbChunk) {
-            if (smallDbChunk) newDbChunk.push(replaceDatasource(smallDbChunk as never, replace))
-        }
-        return newDbChunk
-    }
-
-    for (const replacement of replace) {
-        if (JSON.stringify(dbChunk) === JSON.stringify(replacement.old)) {
-            return replacement.new
-        }
-    }
-    const newDbChunk: typeof dbChunk = {}
-    if (typeof dbChunk === 'object') {
-        for (const [key, smallDbChunk] of Object.entries(dbChunk)) {
-            newDbChunk[key] = replaceDatasource(smallDbChunk, replace)
-        }
-    }
-    return newDbChunk
-}
-
 const importDashboard: ImportFunction = async (entry) => {
+    const dashboardModifier = new DashboardModifier()
     const rawDashboard = readJsonFile(`${entry.parentPath}/${entry.name}`)
     const newDashboard = {
         // Update datasources
-        dashboard: replaceDatasource(rawDashboard, [
+        dashboard: dashboardModifier.replaceDatasource(rawDashboard, [
             {
                 old: { uid: 'loki' },
                 new: { type: 'loki', uid: 'grafanacloud-logs' },
