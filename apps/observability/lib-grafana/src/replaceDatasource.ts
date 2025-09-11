@@ -1,5 +1,5 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: <actually is any type>
-type DataSource = {
+type Datasource = {
     type?: string
     uid: string
 }
@@ -16,7 +16,7 @@ export class DashboardModifier {
         dbChunk: any,
         replace: Array<{
             oldJson: string
-            new: DataSource
+            new: Datasource
         }>,
     ): { output: any; match: boolean } {
         // do not process primitives
@@ -73,8 +73,8 @@ export class DashboardModifier {
     replaceDatasource(
         dashboard: any,
         replacements: Array<{
-            old: DataSource
-            new: DataSource
+            old: Datasource
+            new: Datasource
         }>,
     ) {
         // Precalculate for performance
