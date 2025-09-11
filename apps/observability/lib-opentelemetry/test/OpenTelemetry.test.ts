@@ -9,7 +9,7 @@ describe(testSuiteName, async () => {
     it('should log', () => {
         const span = TRACER.startSpan('test.context')
         const attributes = {
-            'custom.attribute': 'custom.attribute'
+            'custom.attribute': 'custom.attribute',
         }
         LOGGER('fatal', attributes, 'fatal')
         LOGGER('error', attributes, 'error')

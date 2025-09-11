@@ -15,13 +15,11 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 
-import { ENV } from './env.ts'
+import { ENV, type LogLevel } from './env.ts'
 import { commitId } from './../dist/commitId.ts'
 import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 
-import type { Level } from 'pino'
-
-export type Logger = (level: Level, attributes: LogAttributes, msg?: string) => void
+export type Logger = (level: LogLevel, attributes: LogAttributes, msg?: string) => void
 
 interface ResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
@@ -84,7 +82,7 @@ export class OpenTelemetry {
 
     private createLogger(globalAttributes: ResourceAttributes) {
         const logger = logs.getLogger(globalAttributes[ATTR_SERVICE_NAME])
-        return (level: Level, attributes: LogAttributes, msg?: string) =>
+        return (level: LogLevel, attributes: LogAttributes, msg?: string) =>
             logger.emit({
                 severityText: level,
                 attributes,

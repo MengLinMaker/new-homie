@@ -95,16 +95,9 @@ importers:
       dotenv:
         specifier: 17.2.1
         version: 17.2.1
-      pino:
-        specifier: 9.8.0
-        version: 9.8.0
       zod:
         specifier: 4.0.17
         version: 4.0.17
-    devDependencies:
-      pino-opentelemetry-transport:
-        specifier: ^1.1.0
-        version: 1.1.0(@opentelemetry/api@1.9.0)(pino@9.8.0)
 
   apps/service-scrape/function-scrape_locality:
     dependencies:
@@ -258,18 +251,6 @@ importers:
       constructs:
         specifier: ^10.4.2
         version: 10.4.2
-
-  apps/service-scrape/stack-service_scrape_pipeline/cdk.out/asset.ca51015037cee6dd6f09f1428947804d9eecc0fbaf22385d72aa4cafe76d476e/nodejs:
-    dependencies:
-      pino-opentelemetry-transport:
-        specifier: ^1.0.1
-        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
-
-  apps/service-scrape/stack-service_scrape_pipeline/cdk.out/asset.d0fee6e1218bf4157d2785823940d47132812772e3afdb0a2154d3c6ec21a2d4/nodejs:
-    dependencies:
-      pino-opentelemetry-transport:
-        specifier: ^1.0.1
-        version: 1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0)
 
   apps/service-scrape/stack-service_scrape_query:
     devDependencies:
@@ -3705,9 +3686,6 @@ packages:
     resolution: {integrity: sha512-zAKMgGXUim0Jyd6CXK9lraBnD3H5yPGBPPOkC23a2BG6hsm4Zu6OQSjQuEtV0BHDf4aKHcUFvJiGRrFuW3MG8g==}
     engines: {node: '>=10'}
 
-  otlp-logger@1.1.11:
-    resolution: {integrity: sha512-ZidS1+gOOJqKIv5q3YRXIUhtGmwNc6fWQYocL+37pH/5r0pTHafIgaIiqwPnI9ubTT0nQys3TxvWpY6NszwwMw==}
-
   oxc-resolver@11.7.1:
     resolution: {integrity: sha512-PzbEnD6NKTCFVKkUZtmQcX69ajdfM33RqI5kyb8mH9EdIqEUS00cWSXN0lsgYrtdTMzwo0EKKoH7hnGg6EDraQ==}
 
@@ -3815,16 +3793,6 @@ packages:
 
   pino-abstract-transport@2.0.0:
     resolution: {integrity: sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==}
-
-  pino-opentelemetry-transport@1.0.1:
-    resolution: {integrity: sha512-o9Lh72uyH00jPARPsLFJkIZm6x/i7Qe7LNsagCLrQxKkadaviEKkjUx2kEBMWgh5HZjqT8caEuHIrxtw7DVoPA==}
-    peerDependencies:
-      pino: ^8.21.0 || ^9.0.0
-
-  pino-opentelemetry-transport@1.1.0:
-    resolution: {integrity: sha512-yLOaODDxavgkEJX6ySLGHGjRDaX/xtUs35XHrw1C5U2IRBWKakZHJ8UVrFvDQQ0WxJBRUuChC/Vi2zhynIZXgA==}
-    peerDependencies:
-      pino: ^8.21.0 || ^9.0.0
 
   pino-pretty@13.1.1:
     resolution: {integrity: sha512-TNNEOg0eA0u+/WuqH0MH0Xui7uqVk9D74ESOpjtebSQYbNWJk/dIxCXIxFsNfeN53JmtWqYHP2OrIZjT/CBEnA==}
@@ -9435,17 +9403,6 @@ snapshots:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
 
-  otlp-logger@1.1.11(@opentelemetry/api@1.9.0):
-    dependencies:
-      '@opentelemetry/api-logs': 0.203.0
-      '@opentelemetry/exporter-logs-otlp-grpc': 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-logs-otlp-http': 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-logs-otlp-proto': 0.203.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 2.0.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-logs': 0.203.0(@opentelemetry/api@1.9.0)
-    transitivePeerDependencies:
-      - '@opentelemetry/api'
-
   oxc-resolver@11.7.1:
     dependencies:
       napi-postinstall: 0.3.2
@@ -9581,22 +9538,6 @@ snapshots:
   pino-abstract-transport@2.0.0:
     dependencies:
       split2: 4.2.0
-
-  pino-opentelemetry-transport@1.0.1(@opentelemetry/api@1.9.0)(pino@9.8.0):
-    dependencies:
-      otlp-logger: 1.1.11(@opentelemetry/api@1.9.0)
-      pino: 9.8.0
-      pino-abstract-transport: 2.0.0
-    transitivePeerDependencies:
-      - '@opentelemetry/api'
-
-  pino-opentelemetry-transport@1.1.0(@opentelemetry/api@1.9.0)(pino@9.8.0):
-    dependencies:
-      otlp-logger: 1.1.11(@opentelemetry/api@1.9.0)
-      pino: 9.8.0
-      pino-abstract-transport: 2.0.0
-    transitivePeerDependencies:
-      - '@opentelemetry/api'
 
   pino-pretty@13.1.1:
     dependencies:

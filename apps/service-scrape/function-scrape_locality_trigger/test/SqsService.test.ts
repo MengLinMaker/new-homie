@@ -1,25 +1,12 @@
 import { afterAll, describe, expect, it } from 'vitest'
 import { LocalstackContainer } from '@testcontainers/localstack'
 import { CreateQueueCommand, SQSClient } from '@aws-sdk/client-sqs'
-import { StatusCodes } from 'http-status-codes'
+import { LOGGER, suiteNameFromFileName } from './util'
+import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 
-const validEventbridgeEvent = {
-    version: '0',
-    id: 'abc-123-def-456',
-    'detail-type': 'EC2 Instance State-change Notification',
-    source: 'aws.ec2',
-    account: '123456789012',
-    time: '2025-09-06T05:00:00Z',
-    region: 'us-east-1',
-    resources: ['arn:aws:ec2:us-east-1:123456789012:instance/i-0abcdef1234567890'],
-    detail: {
-        'instance-id': 'i-0abcdef1234567890',
-        state: 'running',
-        'previous-state': 'pending',
-    },
-}
+const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
-describe.skip('handler', async () => {
+describe(testSuiteName, async () => {
     // Setup localstack
     const localstack = await new LocalstackContainer('localstack/localstack:4.7.0').start()
     const awsClientConfig = {
@@ -45,17 +32,14 @@ describe.skip('handler', async () => {
     queueUrl.host = localstack.getHost()
     process.env['QUEUE_URL'] = queueUrl.toString()
 
-    // Load env variables into test handler
-    const { handler } = await import('../src')
+    const { SqsService } = await import('../src/SqsService')
+    const sqsService = new SqsService(LOGGER)
+
     afterAll(async () => await localstack.stop())
 
-    it('Should validate incorrect input', async () => {
-        const f = handler({} as never, undefined as never)
-        await expect(f).rejects.toThrow()
-    })
-
-    it('Should parse correct input', async () => {
-        const res = await handler(validEventbridgeEvent as never, undefined as never)
-        expect(res).toStrictEqual({ status: StatusCodes.OK })
+    it('sendBatchSQS', async () => {
+        const localities = australiaLocalities.slice(0, 10)
+        const success = await sqsService.sendBatchSQS(localities)
+        expect(success).toBe(true)
     })
 })
