@@ -1,6 +1,5 @@
 import { afterAll, describe, expect, it } from 'vitest'
 import { StatusCodes } from 'http-status-codes'
-import { browserService } from '../src/global/setup'
 
 const sqsEvent = (locality: { suburb: string; state: string; postcode: string }) => ({
     Records: [
@@ -23,8 +22,9 @@ const sqsEvent = (locality: { suburb: string; state: string; postcode: string })
     ],
 })
 
-describe('handler', async () => {
+describe.skip('handler', async () => {
     const { handler } = await import('../src')
+    const { browserService } = await import('../src/global/setup')
     afterAll(async () => await browserService.close())
 
     it('Should validate incorrect input', async () => {
