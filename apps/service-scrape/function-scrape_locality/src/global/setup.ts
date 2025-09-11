@@ -3,7 +3,7 @@ import { BrowserService } from '../scrape/website/BrowserService'
 import { ScrapeController } from '../scrape/ScrapeController'
 import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
 
-export const SERVICE_NAME = 'function-scrape_locality'
+const SERVICE_NAME = 'function-scrape_locality'
 
 const otel = new OpenTelemetry()
 export const { LOGGER, TRACER } = otel.start({

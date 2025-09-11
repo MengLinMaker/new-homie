@@ -1,5 +1,4 @@
 import z from 'zod'
-import { parser } from '@aws-lambda-powertools/parser/middleware'
 import { SqsRecordSchema, SqsSchema } from '@aws-lambda-powertools/parser/schemas'
 import { JSONStringified } from '@aws-lambda-powertools/parser/helpers'
 
@@ -9,15 +8,12 @@ const localitySchema = z.object({
     postcode: z.string().length(4),
 })
 
-export const validatorMiddleware = parser({
-    safeParse: true,
-    schema: SqsSchema.extend({
-        Records: z
-            .array(
-                SqsRecordSchema.extend({
-                    body: JSONStringified(localitySchema),
-                }),
-            )
-            .length(1),
-    }),
+export const eventSchema = SqsSchema.extend({
+    Records: z
+        .array(
+            SqsRecordSchema.extend({
+                body: JSONStringified(localitySchema),
+            }),
+        )
+        .length(1),
 })
