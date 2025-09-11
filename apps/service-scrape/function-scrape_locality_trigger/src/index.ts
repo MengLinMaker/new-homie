@@ -33,8 +33,8 @@ export const handler = middy().handler(async (_event, _context) => {
     let failedLocalities: typeof australiaLocalities = []
 
     for (const chunkLocality of chunkArray(filteredLocality, 10)) {
-        const success = sqsService.sendBatchSQS(chunkLocality)
-        if (!success) failedLocalities = failedLocalities.concat(failedLocalities)
+        const success = await sqsService.sendBatchSQS(chunkLocality)
+        if (!success) failedLocalities = failedLocalities.concat(chunkLocality)
     }
 
     if (failedLocalities.length > 0) {
