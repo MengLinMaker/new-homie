@@ -10,7 +10,7 @@ export const { LOGGER, TRACER } = otel.start({
     'service.name': SERVICE_NAME,
 })
 
-export const logLambdaException = (msg: string, args?: object) => {
+const logLambdaException = (msg: string, args?: object) => {
     LOGGER.fatal(
         {
             'code.function.name': 'handler',
@@ -22,12 +22,7 @@ export const logLambdaException = (msg: string, args?: object) => {
 }
 
 const DB = getKyselyPostgresDb(DB_SERVICE_SCRAPE)
+if (!DB) throw logLambdaException(`FATAL ${SERVICE_NAME} database connection`)
 
-// Application depends on database, hence it should crash
-if (!DB) {
-    throw logLambdaException(`FATAL ${SERVICE_NAME} database connection`)
-}
-
-const browserContext = await BrowserService.createBrowserContext()
-const browserService = new BrowserService(LOGGER, browserContext)
+export const browserService = new BrowserService(LOGGER)
 export const scrapeController = new ScrapeController(LOGGER, DB, browserService)

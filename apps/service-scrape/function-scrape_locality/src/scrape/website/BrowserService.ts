@@ -1,75 +1,69 @@
-import type { Logger } from 'pino'
 import { ILoggable } from '@observability/lib-opentelemetry'
-import puppeteer, { type BrowserContext, type Browser } from 'puppeteer-core'
+import puppeteer, { type Browser } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
+/**
+ * Launches single browser and context.
+ * Create a page for each request, then close
+ */
 export class BrowserService extends ILoggable {
-    static browser: Browser
-    static browserContext: BrowserContext
+    private static browser: Browser
 
-    constructor(logger: Logger, browserContext: BrowserContext) {
-        super(logger)
-        BrowserService.browserContext = browserContext
+    async close() {
+        await BrowserService.browser.close()
     }
 
-    /* v8 ignore start */
-    static async launchBrowser() {
-        if (BrowserService.browser) return BrowserService.browser
+    private async launchSingleBrowser() {
+        try {
+            if (BrowserService.browser) return
 
-        // Local chrome execution
-        if (existsSync('./.puppeteer'))
-            return await puppeteer.launch({
+            // Local chrome execution
+            if (existsSync('./.puppeteer')) {
+                BrowserService.browser = await puppeteer.launch({
+                    args: chromium.args,
+                    executablePath: './.puppeteer/chrome-headless-shell',
+                })
+                return
+            }
+
+            // Download chrome at runtime to increase deployment speed
+            const s3Client = new S3Client()
+            const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
+            if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
+
+            const [, bucket, key] = new URL(chromeTarUrl).pathname.split('/')
+            const chromeTarSignedUrl = await getSignedUrl(
+                s3Client,
+                new GetObjectCommand({
+                    Bucket: bucket,
+                    Key: key,
+                }),
+                { expiresIn: 60 },
+            )
+            BrowserService.browser = await puppeteer.launch({
                 args: chromium.args,
-                executablePath: './.puppeteer/chrome-headless-shell',
+                executablePath: await chromium.executablePath(chromeTarSignedUrl),
             })
-
-        // Download chrome at runtime to increase deployment speed
-        const s3Client = new S3Client()
-        const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
-        if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
-
-        const [, bucket, key] = new URL(chromeTarUrl).pathname.split('/')
-        const chromeTarSignedUrl = await getSignedUrl(
-            s3Client,
-            new GetObjectCommand({
-                Bucket: bucket,
-                Key: key,
-            }),
-            { expiresIn: 60 },
-        )
-        return await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath(chromeTarSignedUrl),
-        })
-    }
-
-    /* v8 ignore start */
-    static async createBrowserContext() {
-        const browser = await BrowserService.launchBrowser()
-        BrowserService.browser = browser
-        const browserContexts = browser.browserContexts()
-        return browserContexts[0] ?? browser.createBrowserContext()
-    }
-
-    /* v8 ignore start */
-    static async close() {
-        BrowserService.browser.close()
-    }
-
-    private async singlePage() {
-        const pages = await BrowserService.browserContext.pages()
-        return pages[0] ?? (await BrowserService.browserContext.newPage())
+            return
+        } catch (e) {
+            this.logException('fatal', this.launchSingleBrowser, e)
+        }
     }
 
     async getHTML(url: string) {
+        await this.launchSingleBrowser()
+        // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
+        const page = await BrowserService.browser.browserContexts()[0]!.newPage()
         try {
-            const page = await this.singlePage()
             await page.goto(url, { waitUntil: 'domcontentloaded' })
-            return await page.content()
+            const html = await page.content()
+            await page.close()
+            return html
         } catch (e) {
+            await page.close()
             this.logExceptionArgs('warn', this.getHTML, url, e)
             return null
         }
