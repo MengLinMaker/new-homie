@@ -9,7 +9,7 @@ describe('replaceDatasource', () => {
     it('should replace datasource', () => {
         const input = readJsonFile(path.join(__dirname, './in.dashboard.json'))
         const expected = readJsonFile(path.join(__dirname, './out.dashboard.json'))
-        const { output } = dashboardModifier.replaceDatasource(input, [
+        const output = dashboardModifier.replaceDatasource(input, [
             {
                 old: { uid: 'loki' },
                 new: { type: 'loki', uid: 'grafanacloud-logs' },
