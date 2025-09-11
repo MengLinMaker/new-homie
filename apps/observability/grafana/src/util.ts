@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { type Dirent, readdirSync } from 'node:fs'
+import { type Dirent, readdirSync, readFileSync } from 'node:fs'
 import createClient from 'openapi-fetch'
 import type { paths } from './api/schema'
 import { ENV } from './env.ts'
@@ -26,3 +26,5 @@ export const client = createClient<paths>({
     baseUrl: ENV.GRAFANA_API,
     headers: { Authorization: `Bearer ${ENV.GRAFANA_API_KEY}` },
 })
+
+export const readJsonFile = (filePath: string) => JSON.parse(readFileSync(filePath).toString())
