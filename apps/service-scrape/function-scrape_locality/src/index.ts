@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 // Setup persistent resources
-import { SERVICE_NAME, TRACER, logLambdaException, scrapeController } from './global/setup'
+import { SERVICE_NAME, TRACER, scrapeController } from './global/setup'
 import { validatorMiddleware } from './global/middleware'
 import { spanExceptionEnd } from '@observability/lib-opentelemetry'
 
@@ -23,32 +23,22 @@ export const handler = middy()
 
         // Locality data
         const localityId = await scrapeController.tryExtractSuburbPage(locality)
-        if (localityId === null) {
-            logLambdaException(`FATAL ScrapeController.tryExtractSuburbPage falied`, locality)
-            return { status: StatusCodes.INTERNAL_SERVER_ERROR }
-        }
+        if (localityId === null) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
         await scrapeController.tryExtractSchools({ ...locality, localityId })
 
         // Sale listing data
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const salesInfo = await scrapeController.tryExtractSalesPage(args)
-            if (!salesInfo) {
-                logLambdaException(`FATAL ScrapeController.tryExtractSalesPage falied`, args)
-                break
-            }
-            if (salesInfo.isLastPage) break
+            if (!salesInfo || salesInfo.isLastPage) break
         }
 
         // Rent listing data
         for (let page = 1; ; page++) {
             const args = { ...locality, page, localityId }
             const rentsInfo = await scrapeController.tryExtractRentsPage(args)
-            if (!rentsInfo) {
-                logLambdaException(`FATAL ScrapeController.tryExtractRentsPage falied`, args)
-                break
-            }
-            if (rentsInfo.isLastPage) break
+            if (!rentsInfo) break
+            if (!rentsInfo || rentsInfo.isLastPage) break
         }
 
         span.end()

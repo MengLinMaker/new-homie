@@ -11,7 +11,9 @@
         "knip": "knip",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "test": "nx run-many -t test:type test:unit",
-        "build": "nx run-many -t build"
+        "build": "nx run-many -t build",
+        "git:main": "git checkout main && git pull",
+        "git:b": "git checkout -b"
     },
     "devDependencies": {
         "@biomejs/biome": "2.2.3",

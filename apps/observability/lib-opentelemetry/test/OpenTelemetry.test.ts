@@ -8,7 +8,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 describe(testSuiteName, async () => {
     const otel = new OpenTelemetry()
-    const { LOGGER, TRACER } = await otel.start({
+    const { LOGGER, TRACER } = otel.start({
         'service.name': '@observabilitylib-opentelemetry/test',
     })
 

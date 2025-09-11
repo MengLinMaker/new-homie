@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - '**'
+  push:
+    branches:
+      # Run again to set cache - https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching#example-of-search-priority
+      - main
 
 jobs:
   test-fast:
@@ -54,8 +58,8 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
-      - name: Deploy cdk quantum stacks
-        run: pnpm nx affected -t cdk:dev
+      - name: Deploy all cdk quantum stacks
+        run: pnpm -r cdk:dev:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -15,7 +15,7 @@ export const kyselyPostgisMigrate = async (
     migrationFolder: string = `${import.meta.dirname}/../migration`,
 ) => {
     console.debug(`DATABASE MIGRATION from ${path.join(import.meta.dirname, '../migration')}`)
-    const db = await getKyselyPostgresDb(connectionString)
+    const db = getKyselyPostgresDb(connectionString)
     if (db === null) {
         console.error('MIGRATION FAILED - Invalid uri or database is not running')
         return db

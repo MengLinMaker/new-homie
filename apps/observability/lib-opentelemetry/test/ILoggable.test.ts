@@ -17,9 +17,9 @@ describe(testSuiteName, () => {
             const error = new Error('test_logException')
             this.logException('debug', this.test_logException, error)
         }
-        public test_logExceptionArgs() {
+        public test_logExceptionArgs(args: string) {
             const error = new Error('test_logExceptionArgs')
-            this.logException('debug', this.test_logExceptionArgs, error)
+            this.logExceptionArgs('debug', this.test_logExceptionArgs, args, error)
         }
     }
     const loggable = new Loggable(LOGGER)
@@ -33,6 +33,6 @@ describe(testSuiteName, () => {
     })
 
     it('should logExceptionArgs', () => {
-        loggable.test_logExceptionArgs()
+        loggable.test_logExceptionArgs('args')
     })
 })

@@ -1,7 +1,4 @@
-import {
-    ATTR_CODE_FUNCTION_NAME,
-    ATTR_EXCEPTION_STACKTRACE,
-} from '@opentelemetry/semantic-conventions'
+import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
 import type { Level, Logger } from 'pino'
 import { otelException } from './otelException.ts'
 
@@ -71,7 +68,6 @@ export class ILoggable {
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo: Record<string, string> = {
             ...otelException(maybeError),
-            [ATTR_EXCEPTION_STACKTRACE]: 'Removed to save bandwidth',
             [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
         }
         this._log(logLevel, logInfo)
@@ -94,7 +90,6 @@ export class ILoggable {
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo: Record<string, string> = {
             ...otelException(maybeError),
-            [ATTR_EXCEPTION_STACKTRACE]: 'Removed to save bandwidth',
             [ATTR_CODE_FUNCTION_NAME]: `${thisClass.constructor.name}.${func.name}`,
             // No OTEL semantic convention
             'code.function.args': JSON.stringify(args),

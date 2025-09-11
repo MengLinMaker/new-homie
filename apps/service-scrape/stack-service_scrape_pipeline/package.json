@@ -9,13 +9,14 @@
         "test:type": "tsc",
         "sam:local": "pnpm sam local invoke -t cdk.out/NewHomie-StackServiceScrapePipeline-Dev.template.json --skip-pull-image",
         "cdk:synth": "cdk synth",
+        "cdk:dev:deploy": "cdk deploy -m direct --no-rollback --asset-parallelism true",
         "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
     },
     "devDependencies": {
-        "@infra/common": "workspace:*",
+        "@infra/lib-common": "workspace:*",
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
         "@service-scrape/function-scrape_locality_trigger": "workspace:*",
         "@service-scrape/function-scrape_locality": "workspace:*",
-        "@service-scrape/lib-db_service_scrape": "workspace:*",
         "aws-cdk-lib": "^2.212.0",
         "cdk-nag": "^2.37.15",
         "constructs": "^10.4.2"

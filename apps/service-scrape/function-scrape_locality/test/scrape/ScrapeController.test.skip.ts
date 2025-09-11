@@ -29,7 +29,7 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryExtractSuburbPage', async () => {
         // Mock individually to prevent data race
-        const mockBrowserService = new MockBrowserService(LOGGER, null as never)
+        const mockBrowserService = new MockBrowserService(LOGGER)
         const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
         mockBrowserService.mockHTML(parseTextFile(`${resourcePath}/domain.suburb.html`))
 
@@ -48,7 +48,7 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryExtractSchools', async () => {
         // Mock individually to prevent data race
-        const mockBrowserService = new MockBrowserService(LOGGER, null as never)
+        const mockBrowserService = new MockBrowserService(LOGGER)
         const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
 
         it.sequential('should parse successfully', async () => {
@@ -59,7 +59,7 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryExtractRentsPage', async () => {
         // Mock individually to prevent data race
-        const mockBrowserService = new MockBrowserService(LOGGER, null as never)
+        const mockBrowserService = new MockBrowserService(LOGGER)
         const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
         mockBrowserService.mockHTML(parseTextFile(`${resourcePath}/domain.rent.html`))
 
@@ -71,7 +71,7 @@ describe(testSuiteName, async () => {
 
     describe.sequential('tryExtractSalesPage', async () => {
         // Mock individually to prevent data race
-        const mockBrowserService = new MockBrowserService(LOGGER, null as never)
+        const mockBrowserService = new MockBrowserService(LOGGER)
         const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
         mockBrowserService.mockHTML(parseTextFile(`${resourcePath}/domain.sale.html`))
 

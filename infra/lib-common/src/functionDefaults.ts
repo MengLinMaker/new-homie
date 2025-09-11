@@ -1,4 +1,4 @@
-import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda'
+import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda'
 import { type NodejsFunctionProps, OutputFormat } from 'aws-cdk-lib/aws-lambda-nodejs'
 import { ENV as OTEL_ENV } from '@observability/lib-opentelemetry'
 
@@ -16,23 +16,24 @@ export const esbuildBanner = [
     `const __dirname = dirname(__filename)`,
 ].join(';')
 
-export const functionDefaults: NodejsFunctionProps = {
+export const functionDefaults = {
     runtime: Runtime.NODEJS_22_X,
     architecture: Architecture.ARM_64,
     // Distributed tracing debugging
-    tracing: Tracing.ACTIVE,
+    // tracing: Tracing.ACTIVE,
     bundling: {
         format: OutputFormat.ESM,
         // lines joined to prevent syntax token error
         banner: esbuildBanner,
         // Minify with names for logging purposes
-        minify: true,
+        minify: false,
         keepNames: true,
         // Source map to source code
-        sourceMap: true,
+        // sourceMap: true,
+        externalModules: ['pino-opentelemetry-transport'],
     },
     environment: {
-        NODE_OPTIONS: '--enable-source-maps',
+        // NODE_OPTIONS: '--enable-source-maps',
         ...OTEL_ENV,
     },
-}
+} satisfies NodejsFunctionProps

@@ -8,10 +8,11 @@
         "format": "biome format --write",
         "test:type": "tsc",
         "cdk:synth": "cdk synth",
+        "cdk:dev:deploy": "cdk deploy -m direct --no-rollback --asset-parallelism true",
         "cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
     },
     "devDependencies": {
-        "@infra/common": "workspace:*",
+        "@infra/lib-common": "workspace:*",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "aws-cdk-lib": "^2.212.0",
         "cdk-nag": "^2.37.15",

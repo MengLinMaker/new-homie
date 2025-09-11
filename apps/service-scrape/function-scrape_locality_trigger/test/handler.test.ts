@@ -36,9 +36,14 @@ describe('handler', async () => {
     process.env['AWS_SECRET_ACCESS_KEY'] = awsClientConfig.credentials.secretAccessKey
 
     // Setup mock infrastructure
-    const sqsClient = new SQSClient(awsClientConfig)
+    const sqsClient = new SQSClient()
     const queue = await sqsClient.send(new CreateQueueCommand({ QueueName: 'TestQueue' }))
-    process.env['QUEUE_URL'] = queue.QueueUrl
+
+    // biome-ignore lint/style/noNonNullAssertion: <assume successful setup>
+    const queueUrl = new URL(queue.QueueUrl!)
+    queueUrl.port = localstack.getPort().toString()
+    queueUrl.host = localstack.getHost()
+    process.env['QUEUE_URL'] = queueUrl.toString()
 
     // Load env variables into test handler
     const { handler } = await import('../src')
