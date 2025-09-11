@@ -26,6 +26,7 @@
         }
     },
     "files": {
+        "maxSize": 10000000,
         "includes": [
             "**/*",
             "!**/coverage",
