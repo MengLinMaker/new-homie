@@ -1,7 +1,8 @@
 import { z } from 'zod'
-import type { Level } from 'pino'
-
 import { parseEnvSchema } from './parseEnvSchema.ts'
+
+const loglevels = ['fatal', 'error', 'warn', 'info', 'debug', 'trace'] as const
+export type LogLevel = (typeof loglevels)[number]
 
 /**
  *  Type safe env keys
@@ -32,8 +33,6 @@ export const ENV = parseEnvSchema(
          * Log level at bootup
          * Levels that Grafana can receive
          */
-        OTEL_LOG_LEVEL: z
-            .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'] satisfies Level[])
-            .default('warn'),
+        OTEL_LOG_LEVEL: z.enum(loglevels).default('warn'),
     }),
 )

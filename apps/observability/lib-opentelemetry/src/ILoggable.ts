@@ -1,6 +1,8 @@
 import { ATTR_CODE_FUNCTION_NAME } from '@opentelemetry/semantic-conventions'
-import type { Level, Logger } from 'pino'
 import { otelException } from './otelException.ts'
+import type { Logger } from './OpenTelemetry.ts'
+import type { LogAttributes } from '@opentelemetry/api-logs'
+import type { LogLevel } from './env.ts'
 
 class ILoggableError extends Error {}
 export class ILoggable {
@@ -18,28 +20,8 @@ export class ILoggable {
      * @param logInfo
      * @param msg
      */
-    private _log<T>(logLevel: Level, logInfo: T, msg?: T extends string ? never : string) {
-        /* v8 ignore start */
-        switch (logLevel) {
-            case 'fatal':
-                this.LOGGER.fatal(logInfo, msg)
-                break
-            case 'error':
-                this.LOGGER.error(logInfo, msg)
-                break
-            case 'warn':
-                this.LOGGER.warn(logInfo, msg)
-                break
-            case 'info':
-                this.LOGGER.info(logInfo, msg)
-                break
-            case 'debug':
-                this.LOGGER.debug(logInfo, msg)
-                break
-            case 'trace':
-                this.LOGGER.trace(logInfo, msg)
-                break
-        }
+    private _log(logLevel: LogLevel, attibutes: LogAttributes, msg?: string) {
+        this.LOGGER(logLevel, attibutes, msg)
     }
 
     /**
@@ -48,7 +30,7 @@ export class ILoggable {
      * @param func the method itself
      * @param msg message
      */
-    public log<I, O>(logLevel: Level, func: (args: I) => O, msg: string) {
+    public log<I, O>(logLevel: LogLevel, func: (args: I) => O, msg: string) {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo = {
@@ -63,7 +45,7 @@ export class ILoggable {
      * @param func the method itself
      * @param maybeError error from try catch
      */
-    public logException<I, O, E>(logLevel: Level, func: (args: I) => O, maybeError: E) {
+    public logException<I, O, E>(logLevel: LogLevel, func: (args: I) => O, maybeError: E) {
         // This class is the extended class
         const thisClass = Object.getPrototypeOf(this) as ILoggable
         const logInfo: Record<string, string> = {
@@ -81,7 +63,7 @@ export class ILoggable {
      * @param maybeError error from try catch
      */
     public logExceptionArgs<I, O, E>(
-        logLevel: Level,
+        logLevel: LogLevel,
         func: (args: I) => O,
         args: I,
         maybeError: E,

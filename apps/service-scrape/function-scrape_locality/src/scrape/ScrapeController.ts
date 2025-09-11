@@ -2,12 +2,12 @@ import { IDatabased } from '../global/IDatabased'
 import { DomainListingsService } from './website/www.domain.com.au/DomainListingsService'
 import { ScrapeUtilService } from './website/ScrapeUtilService'
 import type { BrowserService } from './website/BrowserService'
-import type { Logger } from 'pino'
 import type { Kysely } from 'kysely'
 import type { Schema } from '@service-scrape/lib-db_service_scrape'
 import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbService'
 import { ScrapeModel } from './website/ScrapeModel'
 import { AracaSchoolsService } from './website/asl.acara.edu.au/AracaSchoolsService'
+import type { Logger } from '@observability/lib-opentelemetry'
 
 export class ScrapeController extends IDatabased {
     readonly browserService

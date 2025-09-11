@@ -11,7 +11,8 @@ export const { LOGGER, TRACER } = otel.start({
 })
 
 const logLambdaException = (msg: string, args?: object) => {
-    LOGGER.fatal(
+    LOGGER(
+        'fatal',
         {
             'code.function.name': 'handler',
             'code.function.args': args ? JSON.stringify(args) : undefined,

@@ -4,7 +4,6 @@ import * as cdk from 'aws-cdk-lib'
 import * as sqs from 'aws-cdk-lib/aws-sqs'
 import * as events from 'aws-cdk-lib/aws-events'
 import * as targets from 'aws-cdk-lib/aws-events-targets'
-import * as lambda from 'aws-cdk-lib/aws-lambda'
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources'
 import type { Construct } from 'constructs'
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
@@ -51,22 +50,6 @@ export class StackServiceScrapePipeline extends cdk.Stack {
             },
         })
 
-        const LayerPinoOpentelemetryTransport = new lambda.LayerVersion(
-            this,
-            'LayerPinoOpentelemetryTransport',
-            {
-                code: lambda.Code.fromAsset(
-                    path.join(
-                        import.meta.dirname,
-                        '../../../observability/layer-pino_opentelemetry_transport',
-                    ),
-                ),
-                compatibleRuntimes: [functionDefaults.runtime],
-                compatibleArchitectures: [functionDefaults.architecture],
-                description: 'Package pino-opentelemetry-transport',
-            },
-        )
-
         // Batch Trigger Lambda Function - 1x smallest instance for slow trigger
         const FunctionScrapeLocalityTrigger = new NodejsFunction(
             this,
@@ -84,7 +67,6 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                     ...functionDefaults.environment,
                     QUEUE_URL: QueueScrapeLocality.queueUrl,
                 },
-                layers: [LayerPinoOpentelemetryTransport],
             },
         )
         QueueScrapeLocality.grantSendMessages(FunctionScrapeLocalityTrigger)
@@ -126,7 +108,6 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                     maxConcurrency: 2,
                 }),
             ],
-            layers: [LayerPinoOpentelemetryTransport],
             // insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
         })
         FunctionScrapeLocality.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)

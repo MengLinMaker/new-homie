@@ -9,10 +9,11 @@
         "test:type": "tsc",
         "test:unit": "OTEL_LOG_LEVEL=trace vitest run --coverage",
         "test:dev": "OTEL_LOG_LEVEL=trace vitest --coverage",
-        "build": "node esbuild.ts && mkdir dist; echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./dist/commitId.ts"
+        "build": "mkdir dist; echo export const commitId = \\\"$(git rev-parse --short HEAD)\\\" > ./dist/commitId.ts"
     },
     "dependencies": {
         "@opentelemetry/api": "^1.9.0",
+        "@opentelemetry/api-logs": "^0.205.0",
         "@opentelemetry/auto-instrumentations-node": "^0.62.1",
         "@opentelemetry/exporter-logs-otlp-proto": "0.203.0",
         "@opentelemetry/exporter-metrics-otlp-proto": "^0.203.0",
@@ -24,11 +25,7 @@
         "@opentelemetry/sdk-trace-base": "^2.1.0",
         "@opentelemetry/semantic-conventions": "^1.36.0",
         "dotenv": "17.2.1",
-        "pino": "9.8.0",
         "zod": "4.0.17"
     },
-    "type": "module",
-    "devDependencies": {
-        "pino-opentelemetry-transport": "^1.1.0"
-    }
+    "type": "module"
 }

@@ -3,13 +3,20 @@ import middy from '@middy/core'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { validatorMiddleware } from './global/middleware'
-import { chunkArray } from './util'
-import { ENV } from './global/env'
 
 // Setup OpenTelemetry and connections
-import { LOGGER, SERVICE_NAME, sqsClient, TRACER } from './global/setup'
-import { SendMessageBatchCommand } from '@aws-sdk/client-sqs'
-import { enforceErrorType, spanExceptionEnd } from '@observability/lib-opentelemetry'
+import { LOGGER, SERVICE_NAME, TRACER } from './global/setup'
+import { spanExceptionEnd } from '@observability/lib-opentelemetry'
+import { SqsService } from './SqsService'
+
+export const chunkArray = <T>(array: T[], chunkSize: number) => {
+    const newArray: T[][] = []
+    for (let i = 0; i < array.length; i += chunkSize) {
+        const chunk = array.slice(i, i + chunkSize)
+        newArray.push(chunk)
+    }
+    return newArray
+}
 
 export const handler = middy()
     .use(validatorMiddleware)
@@ -23,26 +30,17 @@ export const handler = middy()
             return postcode >= 3170 && postcode <= 3180
         })
 
+        const sqsService = new SqsService(LOGGER)
+        let failedLocalities: typeof australiaLocalities = []
+
         for (const chunkLocality of chunkArray(filteredLocality, 10)) {
-            try {
-                await sqsClient.send(
-                    new SendMessageBatchCommand({
-                        QueueUrl: ENV.QUEUE_URL,
-                        Entries: chunkLocality.map((locality, id) => ({
-                            Id: id.toString(),
-                            MessageGroupId: id.toString(),
-                            MessageBody: JSON.stringify(locality),
-                        })),
-                    }),
-                )
-            } catch (e) {
-                throw spanExceptionEnd(span, enforceErrorType(e))
-            }
+            const success = sqsService.sendBatchSQS(chunkLocality)
+            if (!success) failedLocalities = failedLocalities.concat(failedLocalities)
         }
 
-        LOGGER.info({
-            localityLength: filteredLocality.length,
-        })
+        if (failedLocalities.length > 0) {
+            throw spanExceptionEnd(span, `FATAL ${SERVICE_NAME} partial failure send to SQS queue`)
+        }
         span.end()
         return { status: StatusCodes.OK }
     })
