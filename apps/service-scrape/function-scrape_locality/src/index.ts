@@ -3,14 +3,18 @@ import middy from '@middy/core'
 
 // Setup persistent resources
 import { TRACER, scrapeController } from './global/setup'
-import { spanExceptionEnd } from '@observability/lib-opentelemetry'
+import { spanExceptionEnd, SpanStatusCode } from '@observability/lib-opentelemetry'
 import { SqsSchema } from '@aws-lambda-powertools/parser/schemas'
 import z from 'zod'
 
 export const handler = middy().handler(async (_event, _context) => {
     const event = SqsSchema.safeParse(_event, { reportInput: true })
     const span = TRACER.startSpan('handler')
-    if (!event.success) throw spanExceptionEnd(span, event.error)
+    if (!event.success)
+        return {
+            status: StatusCodes.BAD_REQUEST,
+            error: spanExceptionEnd(span, event.error),
+        }
 
     const body = z
         .object({
@@ -20,7 +24,11 @@ export const handler = middy().handler(async (_event, _context) => {
         })
         // biome-ignore lint/style/noNonNullAssertion: <should exist>
         .safeParse(JSON.parse(event.data.Records[0]!.body), { reportInput: true })
-    if (!body.success) throw spanExceptionEnd(span, body.error)
+    if (!body.success)
+        return {
+            status: StatusCodes.BAD_REQUEST,
+            error: spanExceptionEnd(span, body.error),
+        }
     const locality = {
         suburb: body.data.suburb_name,
         state: body.data.state_abbreviation,
@@ -29,13 +37,18 @@ export const handler = middy().handler(async (_event, _context) => {
 
     // For testing purposes
     if (locality.postcode === '0000') {
-        span.end()
+        span.setStatus({ code: SpanStatusCode.OK }).end()
         return { status: StatusCodes.ACCEPTED }
     }
 
     // Locality data
     const localityId = await scrapeController.tryExtractSuburbPage(locality)
-    if (localityId === null) return { status: StatusCodes.INTERNAL_SERVER_ERROR }
+    const extractProfileError = new Error(`Couldn't extract profile: ${JSON.stringify(locality)}`)
+    if (localityId === null)
+        return {
+            status: StatusCodes.INTERNAL_SERVER_ERROR,
+            error: spanExceptionEnd(span, extractProfileError),
+        }
     await scrapeController.tryExtractSchools({ ...locality, localityId })
 
     // Sale listing data
@@ -53,6 +66,6 @@ export const handler = middy().handler(async (_event, _context) => {
         if (!rentsInfo || rentsInfo.isLastPage) break
     }
 
-    span.end()
+    span.setStatus({ code: SpanStatusCode.OK }).end()
     return { status: StatusCodes.OK }
 })
