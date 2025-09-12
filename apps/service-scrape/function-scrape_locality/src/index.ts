@@ -3,16 +3,29 @@ import middy from '@middy/core'
 
 // Setup persistent resources
 import { TRACER, scrapeController } from './global/setup'
-import { eventSchema } from './global/middleware'
 import { spanExceptionEnd } from '@observability/lib-opentelemetry'
+import { SqsSchema } from '@aws-lambda-powertools/parser/schemas'
+import z from 'zod'
 
 export const handler = middy().handler(async (_event, _context) => {
-    const event = eventSchema.safeParse(_event, { reportInput: true })
+    const event = SqsSchema.safeParse(_event, { reportInput: true })
     const span = TRACER.startSpan('handler')
     if (!event.success) throw spanExceptionEnd(span, event.error)
 
-    // biome-ignore lint/style/noNonNullAssertion: <validated>
-    const locality = event.data.Records[0]!.body
+    const body = z
+        .object({
+            suburb_name: z.string(),
+            state_abbreviation: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
+            postcode: z.string().length(4),
+        })
+        // biome-ignore lint/style/noNonNullAssertion: <should exist>
+        .safeParse(JSON.parse(event.data.Records[0]!.body), { reportInput: true })
+    if (!body.success) throw spanExceptionEnd(span, body.error)
+    const locality = {
+        suburb: body.data.suburb_name,
+        state: body.data.state_abbreviation,
+        postcode: body.data.postcode,
+    }
 
     // For testing purposes
     if (locality.postcode === '0000') {
