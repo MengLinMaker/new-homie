@@ -5,6 +5,7 @@ import { OpenTelemetry, spanExceptionEnd, type Logger } from './OpenTelemetry.ts
 import { otelException, enforceErrorType } from './otelException.ts'
 import { parseEnvSchema } from './parseEnvSchema.ts'
 import type { LogLevel } from './env'
+import { SpanStatusCode } from '@opentelemetry/api'
 
 export {
     type LogLevel,
@@ -17,4 +18,5 @@ export {
     ENV,
     spanExceptionEnd,
     enforceErrorType,
+    SpanStatusCode,
 }

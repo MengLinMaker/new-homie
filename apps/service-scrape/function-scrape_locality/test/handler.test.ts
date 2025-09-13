@@ -1,7 +1,11 @@
 import { afterAll, describe, expect, it } from 'vitest'
 import { StatusCodes } from 'http-status-codes'
 
-const sqsEvent = (locality: { suburb: string; state: string; postcode: string }) => ({
+const sqsEvent = (locality: {
+    suburb_name: string
+    state_abbreviation: string
+    postcode: string
+}) => ({
     Records: [
         {
             messageId: '2e1424d4-f796-459a-8184-9c92662be6da',
@@ -27,38 +31,36 @@ describe.skip('handler', async () => {
     const { browserService } = await import('../src/global/setup')
     afterAll(async () => await browserService.close())
 
-    it('Should validate incorrect input', async () => {
-        const h = handler(
-            sqsEvent({
-                suburb: 'TEST',
-                state: 'TEST',
-                postcode: 'TEST',
-            }) as never,
-            undefined as never,
-        )
-        await expect(h).rejects.toThrow()
+    it('Should invalidate incorrect input', async () => {
+        const locality = {
+            suburb_name: 'TEST',
+            state_abbreviation: 'TEST',
+            postcode: 'TEST',
+        }
+        const res = await handler(sqsEvent(locality) as never, undefined as never)
+        expect(res.status).toStrictEqual(StatusCodes.BAD_REQUEST)
     })
 
     it('Should parse correct input', async () => {
         const locality = {
-            suburb: 'Test',
-            state: 'VIC',
+            suburb_name: 'Test',
+            state_abbreviation: 'VIC',
             postcode: '0000',
         }
-        const result = await handler(sqsEvent(locality) as never, undefined as never)
-        expect(result).toStrictEqual({ status: StatusCodes.ACCEPTED })
+        const res = await handler(sqsEvent(locality) as never, undefined as never)
+        expect(res.status).toStrictEqual(StatusCodes.ACCEPTED)
     })
 
     it(
         'Should scrape real data',
         async () => {
             const locality = {
-                suburb: 'Dandenong',
-                state: 'VIC',
+                suburb_name: 'Dandenong',
+                state_abbreviation: 'VIC',
                 postcode: '3175',
             }
-            const result = await handler(sqsEvent(locality) as never, undefined as never)
-            expect(result).toStrictEqual({ status: StatusCodes.OK })
+            const res = await handler(sqsEvent(locality) as never, undefined as never)
+            expect(res.status).toStrictEqual(StatusCodes.OK)
         },
         900 * 1000,
     )

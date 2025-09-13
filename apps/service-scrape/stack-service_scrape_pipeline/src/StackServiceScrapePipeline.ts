@@ -11,6 +11,7 @@ import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from '@infra/lib-common'
+import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
 // import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
 
 interface StackServiceScrapePipelineProps extends cdk.StackProps {
@@ -71,12 +72,12 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         )
         QueueScrapeLocality.grantSendMessages(FunctionScrapeLocalityTrigger)
 
-        // Schedule trigger at 8am Saturday AEST
+        // Schedule trigger at 7am Saturday AEST
         new events.Rule(this, 'ScrapeLocalityTriggerEvent', {
             enabled: props?.production ?? false,
             schedule: events.Schedule.cron({
                 minute: '0',
-                hour: '22',
+                hour: '21',
                 weekDay: '6',
             }),
             targets: [new targets.LambdaFunction(FunctionScrapeLocalityTrigger)],
@@ -93,7 +94,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         const FunctionScrapeLocality = new NodejsFunction(this, 'FunctionScrapeLocality', {
             ...functionDefaults,
             entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.ts'),
-            memorySize: 1769,
+            memorySize: 1200,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
             retryAttempts: 0,
@@ -108,7 +109,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                     maxConcurrency: 2,
                 }),
             ],
-            // insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
+            insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
         })
         FunctionScrapeLocality.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
         AssetScrapeChromePuppeteer.grantRead(FunctionScrapeLocality)
