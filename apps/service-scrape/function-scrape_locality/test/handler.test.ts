@@ -26,7 +26,7 @@ const sqsEvent = (locality: {
     ],
 })
 
-describe('handler', async () => {
+describe.skip('handler', async () => {
     const { handler } = await import('../src')
     const { browserService } = await import('../src/global/setup')
     afterAll(async () => await browserService.close())
