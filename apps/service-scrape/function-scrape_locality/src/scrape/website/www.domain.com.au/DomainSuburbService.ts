@@ -91,12 +91,19 @@ export class DomainSuburbService extends ILoggable {
             const validNextjson = nextDataJsonSchema.parse(args.nextDataJson, {
                 reportInput: true,
             })
-            const intestingObjects = Object.values(validNextjson.props.pageProps.__APOLLO_STATE__)
+            const __APOLLO_STATE__ = validNextjson.props.pageProps.__APOLLO_STATE__
+            // biome-ignore lint/style/noNonNullAssertion: <let it fail>
+            const suburbKey = Object.keys(__APOLLO_STATE__).filter((x) => /^Suburb:/.test(x))[0]!
+            // biome-ignore lint/style/noNonNullAssertion: <let it fail>
+            const locationProfileKey = Object.keys(__APOLLO_STATE__).filter((x) =>
+                /^LocationProfile:/.test(x),
+            )[0]!
+
             return {
                 ..._rawSuburbSchema.parse(
                     {
-                        suburb: intestingObjects[0],
-                        location: intestingObjects[1],
+                        suburb: __APOLLO_STATE__[suburbKey],
+                        location: __APOLLO_STATE__[locationProfileKey],
                     },
                     {
                         reportInput: true,
@@ -104,7 +111,7 @@ export class DomainSuburbService extends ILoggable {
                 ),
                 boundaryGeoJson: _boundaryGeoJsonSchema.parse(
                     JSON.parse(
-                        intestingObjects[0]['suburbShape({"geometryPrecision":"high"})']
+                        __APOLLO_STATE__[suburbKey]['suburbShape({"geometryPrecision":"high"})']
                             .boundaryGeoJson,
                     ),
                     {
