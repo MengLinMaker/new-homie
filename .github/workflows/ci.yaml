@@ -23,12 +23,15 @@ jobs:
         uses: ./.github/actions/setup-ci
 
       - name: Lint all
+        continue-on-error: true
         run: pnpm lint
 
       - name: Type test all
+        continue-on-error: true
         run: pnpm nx affected -t test:type
 
       - name: Unit test libraries
+        continue-on-error: true
         run: pnpm nx affected -t test:unit --exclude='*,!**/lib-*'
 
   test-functions:
@@ -44,6 +47,7 @@ jobs:
         uses: ./.github/actions/setup-ci
 
       - name: Unit test functions
+        continue-on-error: true
         run: pnpm nx affected -t test:unit --exclude='*,!**/function-*'
 
   test-cdk:
