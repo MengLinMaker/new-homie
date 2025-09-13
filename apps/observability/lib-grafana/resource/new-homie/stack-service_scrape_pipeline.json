@@ -20,6 +20,165 @@
         {
             "collapsed": false,
             "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+            "id": 10,
+            "panels": [],
+            "title": "Infra",
+            "type": "row"
+        },
+        {
+            "datasource": { "uid": "tempo" },
+            "fieldConfig": {
+                "defaults": {
+                    "color": { "mode": "palette-classic" },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.1,
+                        "drawStyle": "bars",
+                        "fillOpacity": 100,
+                        "gradientMode": "hue",
+                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 0,
+                        "pointSize": 5,
+                        "scaleDistribution": { "type": "linear" },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": { "group": "A", "mode": "none" },
+                        "thresholdsStyle": { "mode": "off" }
+                    },
+                    "mappings": [],
+                    "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] }
+                },
+                "overrides": []
+            },
+            "gridPos": { "h": 7, "w": 24, "x": 0, "y": 1 },
+            "id": 11,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "right",
+                    "showLegend": false
+                },
+                "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+            },
+            "pluginVersion": "12.0.2",
+            "targets": [
+                {
+                    "filters": [
+                        { "id": "9115303b", "operator": "=", "scope": "span" },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": ["function-scrape_locality"]
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": ["handler"]
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "value": "ok",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "hide": true,
+                    "limit": 20,
+                    "metricsQueryType": "range",
+                    "queryType": "traceqlSearch",
+                    "refId": "ok",
+                    "tableType": "traces"
+                },
+                {
+                    "datasource": { "type": "tempo", "uid": "tempo" },
+                    "filters": [
+                        { "id": "9115303b", "operator": "=", "scope": "span" },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": ["function-scrape_locality"]
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": ["handler"]
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "value": "error",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "hide": true,
+                    "limit": 20,
+                    "metricsQueryType": "range",
+                    "queryType": "traceqlSearch",
+                    "refId": "error",
+                    "tableType": "traces"
+                },
+                {
+                    "datasource": { "type": "tempo", "uid": "tempo" },
+                    "filters": [
+                        { "id": "9115303b", "operator": "=", "scope": "span" },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": ["function-scrape_locality"]
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": ["handler"]
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "value": "unset",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "hide": false,
+                    "limit": 20,
+                    "metricsQueryType": "range",
+                    "queryType": "traceqlSearch",
+                    "refId": "unset",
+                    "tableType": "traces"
+                }
+            ],
+            "title": "function-scrape_locality duration",
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "gridPos": { "h": 1, "w": 24, "x": 0, "y": 8 },
             "id": 4,
             "panels": [],
             "title": "Logs",
@@ -36,7 +195,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 1 },
+            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 9 },
             "id": 5,
             "options": {
                 "calculate": false,
@@ -136,7 +295,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 5 },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 13 },
             "id": 9,
             "options": {
                 "calculate": false,
@@ -271,7 +430,7 @@
                     }
                 ]
             },
-            "gridPos": { "h": 15, "w": 24, "x": 0, "y": 10 },
+            "gridPos": { "h": 15, "w": 24, "x": 0, "y": 18 },
             "id": 1,
             "options": {
                 "cellHeight": "sm",
@@ -456,7 +615,7 @@
     "time": { "from": "now-6h", "to": "now" },
     "timepicker": {},
     "timezone": "browser",
-    "title": "function-scrape_locality",
+    "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 31
+    "version": 35
 }

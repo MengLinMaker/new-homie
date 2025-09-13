@@ -24,7 +24,7 @@
     "time": { "from": "now-6h", "to": "now" },
     "timepicker": {},
     "timezone": "browser",
-    "title": "function-scrape_locality_trigger",
+    "title": "stack-service_scrape_query",
     "uid": "f865a1fc-ecd4-4635-b5b6-aeec5c43fa4e",
-    "version": 1
+    "version": 3
 }
