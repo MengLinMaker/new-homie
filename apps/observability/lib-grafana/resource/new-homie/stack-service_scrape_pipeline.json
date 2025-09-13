@@ -22,48 +22,35 @@
             "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
             "id": 10,
             "panels": [],
-            "title": "Infra",
+            "title": "function-scrape_locality",
             "type": "row"
         },
         {
             "datasource": { "uid": "tempo" },
             "fieldConfig": {
                 "defaults": {
-                    "color": { "mode": "palette-classic" },
+                    "color": { "fixedColor": "green", "mode": "fixed" },
                     "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "barWidthFactor": 0.1,
-                        "drawStyle": "bars",
-                        "fillOpacity": 100,
-                        "gradientMode": "hue",
+                        "fillOpacity": 80,
+                        "gradientMode": "none",
                         "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
                         "lineWidth": 0,
-                        "pointSize": 5,
-                        "scaleDistribution": { "type": "linear" },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": { "group": "A", "mode": "none" },
-                        "thresholdsStyle": { "mode": "off" }
+                        "stacking": { "group": "A", "mode": "none" }
                     },
                     "mappings": [],
+                    "max": 900000,
+                    "min": 0,
                     "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] }
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 7, "w": 24, "x": 0, "y": 1 },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 1 },
             "id": 11,
             "options": {
                 "legend": {
                     "calcs": [],
-                    "displayMode": "hidden",
-                    "placement": "right",
+                    "displayMode": "list",
+                    "placement": "bottom",
                     "showLegend": false
                 },
                 "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
@@ -96,93 +83,20 @@
                             "valueType": "keyword"
                         }
                     ],
-                    "hide": true,
+                    "hide": false,
                     "limit": 20,
                     "metricsQueryType": "range",
                     "queryType": "traceqlSearch",
                     "refId": "ok",
                     "tableType": "traces"
-                },
-                {
-                    "datasource": { "type": "tempo", "uid": "tempo" },
-                    "filters": [
-                        { "id": "9115303b", "operator": "=", "scope": "span" },
-                        {
-                            "id": "service-name",
-                            "operator": "=",
-                            "scope": "resource",
-                            "tag": "service.name",
-                            "value": ["function-scrape_locality"]
-                        },
-                        {
-                            "id": "span-name",
-                            "operator": "=",
-                            "scope": "span",
-                            "tag": "name",
-                            "value": ["handler"]
-                        },
-                        {
-                            "id": "status",
-                            "operator": "=",
-                            "scope": "intrinsic",
-                            "tag": "status",
-                            "value": "error",
-                            "valueType": "keyword"
-                        }
-                    ],
-                    "hide": true,
-                    "limit": 20,
-                    "metricsQueryType": "range",
-                    "queryType": "traceqlSearch",
-                    "refId": "error",
-                    "tableType": "traces"
-                },
-                {
-                    "datasource": { "type": "tempo", "uid": "tempo" },
-                    "filters": [
-                        { "id": "9115303b", "operator": "=", "scope": "span" },
-                        {
-                            "id": "service-name",
-                            "operator": "=",
-                            "scope": "resource",
-                            "tag": "service.name",
-                            "value": ["function-scrape_locality"]
-                        },
-                        {
-                            "id": "span-name",
-                            "operator": "=",
-                            "scope": "span",
-                            "tag": "name",
-                            "value": ["handler"]
-                        },
-                        {
-                            "id": "status",
-                            "operator": "=",
-                            "scope": "intrinsic",
-                            "tag": "status",
-                            "value": "unset",
-                            "valueType": "keyword"
-                        }
-                    ],
-                    "hide": false,
-                    "limit": 20,
-                    "metricsQueryType": "range",
-                    "queryType": "traceqlSearch",
-                    "refId": "unset",
-                    "tableType": "traces"
                 }
             ],
-            "title": "function-scrape_locality duration",
+            "title": "successful scrape duration",
+            "transformations": [
+                { "id": "filterFieldsByName", "options": { "include": { "pattern": "Duration" } } }
+            ],
             "transparent": true,
-            "type": "timeseries"
-        },
-        {
-            "collapsed": false,
-            "gridPos": { "h": 1, "w": 24, "x": 0, "y": 8 },
-            "id": 4,
-            "panels": [],
-            "title": "Logs",
-            "type": "row"
+            "type": "histogram"
         },
         {
             "datasource": { "uid": "loki" },
@@ -195,7 +109,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 9 },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 6 },
             "id": 5,
             "options": {
                 "calculate": false,
@@ -295,7 +209,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 13 },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 11 },
             "id": 9,
             "options": {
                 "calculate": false,
@@ -430,7 +344,7 @@
                     }
                 ]
             },
-            "gridPos": { "h": 15, "w": 24, "x": 0, "y": 18 },
+            "gridPos": { "h": 9, "w": 24, "x": 0, "y": 16 },
             "id": 1,
             "options": {
                 "cellHeight": "sm",
@@ -617,5 +531,5 @@
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 35
+    "version": 40
 }
