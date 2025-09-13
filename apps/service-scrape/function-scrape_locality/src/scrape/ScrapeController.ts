@@ -45,7 +45,9 @@ export class ScrapeController extends IDatabased {
         try {
             const { suburb, state, postcode } = args
             const url = new URL(
-                `https://www.domain.com.au/suburb-profile/${suburb}-${state}-${postcode}`.toLowerCase(),
+                `https://www.domain.com.au/suburb-profile/${suburb}-${state}-${postcode}`
+                    .replaceAll(' ', '-')
+                    .toLowerCase(),
             )
             const html = await this.browserService.getHTML(url.toString())
             if (!html) return null
@@ -93,7 +95,9 @@ export class ScrapeController extends IDatabased {
         try {
             const { suburb, state, postcode, page } = args
             const url = new URL(
-                `https://www.domain.com.au/rent/${suburb}-${state}-${postcode}`.toLowerCase(),
+                `https://www.domain.com.au/rent/${suburb}-${state}-${postcode}`
+                    .replaceAll(' ', '-')
+                    .toLowerCase(),
             )
             url.search = new URLSearchParams({
                 ...this.sharedSearchparams,
