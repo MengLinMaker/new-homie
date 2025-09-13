@@ -33,8 +33,16 @@ const importDashboard: ImportFunction = async (entry) => {
         // Update datasources
         dashboard: dashboardModifier.replaceDatasource(rawDashboard, [
             {
+                old: { uid: 'prometheus' },
+                new: { type: 'prometheus', uid: 'grafanacloud-prom' },
+            },
+            {
                 old: { uid: 'loki' },
                 new: { type: 'loki', uid: 'grafanacloud-logs' },
+            },
+            {
+                old: { uid: 'tempo' },
+                new: { type: 'tempo', uid: 'grafanacloud-traces' },
             },
         ]),
         folderUid: readJsonFile(`${entry.parentPath}/folder.json`).uid,
