@@ -123,9 +123,3 @@ export class OpenTelemetry {
         }
     }
 }
-
-export const spanExceptionEnd = (span: Span, exception: Exception) => {
-    span.setStatus({ code: SpanStatusCode.ERROR }).recordException(exception)
-    span.end()
-    return exception
-}

@@ -2,18 +2,18 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 // Setup persistent resources
-import { TRACER, scrapeController } from './global/setup'
-import { spanExceptionEnd, SpanStatusCode } from '@observability/lib-opentelemetry'
+import { LOGGER, scrapeController } from './global/setup'
 import { SqsSchema } from '@aws-lambda-powertools/parser/schemas'
 import z from 'zod'
+import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 
 export const handler = middy().handler(async (_event, _context) => {
+    const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
     const event = SqsSchema.safeParse(_event, { reportInput: true })
-    const span = TRACER.startSpan('handler')
     if (!event.success)
         return {
             status: StatusCodes.BAD_REQUEST,
-            error: spanExceptionEnd(span, event.error),
+            error: functionHandlerLogger.recordException(event.error),
         }
 
     const body = z
@@ -27,7 +27,7 @@ export const handler = middy().handler(async (_event, _context) => {
     if (!body.success)
         return {
             status: StatusCodes.BAD_REQUEST,
-            error: spanExceptionEnd(span, body.error),
+            error: functionHandlerLogger.recordException(body.error),
         }
     const locality = {
         suburb: body.data.suburb_name,
@@ -37,7 +37,7 @@ export const handler = middy().handler(async (_event, _context) => {
 
     // For testing purposes
     if (locality.postcode === '0000') {
-        span.setStatus({ code: SpanStatusCode.OK }).end()
+        functionHandlerLogger.recordEnd()
         return { status: StatusCodes.ACCEPTED }
     }
 
@@ -47,7 +47,7 @@ export const handler = middy().handler(async (_event, _context) => {
     if (localityId === null)
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
-            error: spanExceptionEnd(span, extractProfileError),
+            error: functionHandlerLogger.recordException(extractProfileError),
         }
     await scrapeController.tryExtractSchools({ ...locality, localityId })
 
@@ -66,6 +66,6 @@ export const handler = middy().handler(async (_event, _context) => {
         if (!rentsInfo || rentsInfo.isLastPage) break
     }
 
-    span.setStatus({ code: SpanStatusCode.OK }).end()
+    functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }
 })
