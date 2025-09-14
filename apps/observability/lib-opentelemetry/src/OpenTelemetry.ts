@@ -1,5 +1,5 @@
 import { NodeSDK } from '@opentelemetry/sdk-node'
-import { type Exception, type Span, SpanStatusCode, trace } from '@opentelemetry/api'
+import { trace } from '@opentelemetry/api'
 import { type LogAttributes, logs } from '@opentelemetry/api-logs'
 
 import { type DetectedResourceAttributes, resourceFromAttributes } from '@opentelemetry/resources'
