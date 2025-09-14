@@ -21,8 +21,13 @@ import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 
 export type Logger = (level: LogLevel, attributes: LogAttributes, msg?: string) => void
 
-interface ResourceAttributes extends DetectedResourceAttributes {
+interface InputResourceAttributes extends DetectedResourceAttributes {
     [ATTR_SERVICE_NAME]: string
+}
+
+interface MandatoryResourceAttributes extends InputResourceAttributes {
+    [ATTR_SERVICE_NAMESPACE]: string
+    [ATTR_SERVICE_VERSION]: string
 }
 
 // Headers need to be parsed into a record
@@ -48,7 +53,7 @@ ENV.OTEL_EXPORTER_OTLP_HEADERS.split(', ').forEach((header) => {
  * const { LOGGER } = await otel.start(attributes)
  */
 export class OpenTelemetry {
-    private startAutoInstrumentation(attributes: ResourceAttributes) {
+    private startAutoInstrumentation(attributes: MandatoryResourceAttributes) {
         const sdk = new NodeSDK({
             resource: resourceFromAttributes(attributes),
             spanProcessors: [
@@ -80,8 +85,14 @@ export class OpenTelemetry {
         return sdk
     }
 
-    private createLogger(globalAttributes: ResourceAttributes) {
-        const logger = logs.getLogger(globalAttributes[ATTR_SERVICE_NAME])
+    private createLogger(globalAttributes: MandatoryResourceAttributes) {
+        const logger = logs.getLogger(
+            globalAttributes[ATTR_SERVICE_NAME],
+            globalAttributes[ATTR_SERVICE_VERSION],
+            {
+                scopeAttributes: globalAttributes as never,
+            },
+        )
         return (level: LogLevel, attributes: LogAttributes, msg?: string) =>
             logger.emit({
                 severityText: level,
@@ -96,7 +107,7 @@ export class OpenTelemetry {
      * @returns LOGGER - pino logger
      * @returns TRACER - @opentelemetry/api tracer
      */
-    public start(resourceAttributes: ResourceAttributes) {
+    public start(resourceAttributes: InputResourceAttributes) {
         const attributes = {
             [ATTR_SERVICE_NAMESPACE]: 'NewHomie',
             [ATTR_SERVICE_VERSION]: commitId,
@@ -105,7 +116,10 @@ export class OpenTelemetry {
         return {
             SDK: this.startAutoInstrumentation(attributes),
             LOGGER: this.createLogger(attributes),
-            TRACER: trace.getTracer(attributes[ATTR_SERVICE_NAME]),
+            TRACER: trace.getTracer(
+                attributes[ATTR_SERVICE_NAME],
+                attributes[ATTR_SERVICE_VERSION],
+            ),
         }
     }
 }
