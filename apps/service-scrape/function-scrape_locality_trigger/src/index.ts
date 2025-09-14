@@ -8,6 +8,7 @@ import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { LOGGER, SERVICE_NAME, TRACER } from './global/setup'
 import { SqsService } from './SqsService'
 import { spanExceptionEnd } from '@observability/lib-opentelemetry'
+import { metroPostcode } from './metro-postcodes'
 
 export const chunkArray = <T>(array: T[], chunkSize: number) => {
     const newArray: T[][] = []
@@ -26,7 +27,7 @@ export const handler = middy().handler(async (_event, _context) => {
     const filteredLocality = australiaLocalities.filter((locality) => {
         if (!locality.postcode) return false
         const postcode = parseInt(locality.postcode, 10)
-        return postcode >= 3170 && postcode <= 3180
+        return metroPostcode.VIC.includes(postcode)
     })
 
     const sqsService = new SqsService(LOGGER)
