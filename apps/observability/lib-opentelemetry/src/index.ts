@@ -6,7 +6,7 @@ import { otelException, enforceErrorType } from './otelException.ts'
 import { parseEnvSchema } from './parseEnvSchema.ts'
 import type { LogLevel } from './env'
 import { SpanStatusCode } from '@opentelemetry/api'
-import { FunctionHandlerLogger } from './FunctionHandlerLogger'
+import { FunctionHandlerLogger } from './FunctionHandlerLogger.ts'
 
 export {
     type LogLevel,
