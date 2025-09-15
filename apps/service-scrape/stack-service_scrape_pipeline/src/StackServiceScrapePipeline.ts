@@ -11,8 +11,6 @@ import { Asset } from 'aws-cdk-lib/aws-s3-assets'
 
 import { DB_SERVICE_SCRAPE } from '@service-scrape/lib-db_service_scrape'
 import { functionDefaults } from '@infra/lib-common'
-import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
-// import { LambdaInsightsVersion } from 'aws-cdk-lib/aws-lambda'
 
 interface StackServiceScrapePipelineProps extends cdk.StackProps {
     production: boolean
@@ -94,7 +92,7 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         const FunctionScrapeLocality = new NodejsFunction(this, 'FunctionScrapeLocality', {
             ...functionDefaults,
             entry: path.join(import.meta.dirname, '../../function-scrape_locality/src/index.ts'),
-            memorySize: 1200,
+            memorySize: 1769,
             timeout: cdk.Duration.seconds(900),
             reservedConcurrentExecutions: 2,
             retryAttempts: 0,
@@ -109,7 +107,6 @@ export class StackServiceScrapePipeline extends cdk.Stack {
                     maxConcurrency: 2,
                 }),
             ],
-            insightsVersion: LambdaInsightsVersion.VERSION_1_0_404_0,
         })
         FunctionScrapeLocality.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN)
         AssetScrapeChromePuppeteer.grantRead(FunctionScrapeLocality)
