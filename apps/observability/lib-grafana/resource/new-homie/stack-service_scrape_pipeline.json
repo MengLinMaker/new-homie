@@ -18,431 +18,563 @@
     "links": [],
     "panels": [
         {
-            "collapsed": false,
+            "collapsed": true,
             "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
             "id": 10,
-            "panels": [],
-            "title": "function-scrape_locality",
+            "panels": [
+                {
+                    "datasource": { "uid": "loki" },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": { "fixedColor": "green", "mode": "fixed" },
+                            "custom": {
+                                "fillOpacity": 80,
+                                "gradientMode": "none",
+                                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                                "lineWidth": 1,
+                                "stacking": { "group": "A", "mode": "none" }
+                            },
+                            "fieldMinMax": false,
+                            "mappings": [],
+                            "min": 0,
+                            "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] },
+                            "unit": "ms"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": { "h": 5, "w": 24, "x": 0, "y": 1 },
+                    "id": 12,
+                    "options": {
+                        "combine": false,
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": false
+                        },
+                        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+                    },
+                    "pluginVersion": "12.0.2",
+                    "targets": [
+                        {
+                            "direction": "backward",
+                            "editorMode": "builder",
+                            "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
+                            "hide": false,
+                            "queryType": "range",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "faas_duration histogram",
+                    "transformations": [
+                        {
+                            "id": "extractFields",
+                            "options": {
+                                "delimiter": ",",
+                                "format": "kvp",
+                                "jsonPaths": [{ "path": "object.args" }],
+                                "keepTime": false,
+                                "regExp": "/(args_page)/",
+                                "replace": false,
+                                "source": "labels"
+                            }
+                        },
+                        {
+                            "id": "filterFieldsByName",
+                            "options": { "include": { "names": [], "pattern": "faas_duration" } }
+                        },
+                        {
+                            "id": "convertFieldType",
+                            "options": {
+                                "conversions": [
+                                    { "destinationType": "number", "targetField": "faas_duration" }
+                                ],
+                                "fields": {}
+                            }
+                        }
+                    ],
+                    "transparent": true,
+                    "type": "histogram"
+                },
+                {
+                    "datasource": { "uid": "loki" },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": { "fixedColor": "green", "mode": "fixed" },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "hidden",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.1,
+                                "drawStyle": "bars",
+                                "fillOpacity": 100,
+                                "gradientMode": "none",
+                                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": { "type": "linear" },
+                                "showPoints": "always",
+                                "spanNulls": false,
+                                "stacking": { "group": "A", "mode": "none" },
+                                "thresholdsStyle": { "mode": "dashed" }
+                            },
+                            "fieldMinMax": false,
+                            "mappings": [],
+                            "max": 900000,
+                            "min": 0,
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    { "color": "green" },
+                                    { "color": "#6ED0E0", "value": 0 },
+                                    { "color": "#EAB839", "value": 300000 },
+                                    { "color": "orange", "value": 600000 },
+                                    { "color": "red", "value": 900010 }
+                                ]
+                            },
+                            "unit": "ms"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": { "h": 4, "w": 24, "x": 0, "y": 37 },
+                    "id": 13,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": false
+                        },
+                        "timezone": ["browser"],
+                        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+                    },
+                    "pluginVersion": "12.0.2",
+                    "targets": [
+                        {
+                            "direction": "backward",
+                            "editorMode": "builder",
+                            "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
+                            "hide": false,
+                            "queryType": "range",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "faas_duration",
+                    "transformations": [
+                        {
+                            "id": "extractFields",
+                            "options": {
+                                "delimiter": ",",
+                                "format": "kvp",
+                                "jsonPaths": [{ "path": "object.args" }],
+                                "keepTime": false,
+                                "regExp": "/(args_page)/",
+                                "replace": false,
+                                "source": "labels"
+                            }
+                        },
+                        {
+                            "id": "filterFieldsByName",
+                            "options": { "include": { "pattern": "(faas_time|faas_duration)" } }
+                        },
+                        {
+                            "id": "convertFieldType",
+                            "options": {
+                                "conversions": [
+                                    { "destinationType": "number", "targetField": "faas_duration" },
+                                    { "destinationType": "time", "targetField": "faas_time" }
+                                ],
+                                "fields": {}
+                            }
+                        }
+                    ],
+                    "transparent": true,
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": { "uid": "loki" },
+                    "fieldConfig": {
+                        "defaults": {
+                            "custom": {
+                                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                                "scaleDistribution": { "type": "linear" }
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": { "h": 4, "w": 24, "x": 0, "y": 41 },
+                    "id": 5,
+                    "options": {
+                        "calculate": false,
+                        "calculation": {
+                            "xBuckets": { "mode": "size", "value": "" },
+                            "yBuckets": {
+                                "mode": "size",
+                                "scale": { "type": "linear" },
+                                "value": ""
+                            }
+                        },
+                        "cellGap": 0,
+                        "color": {
+                            "exponent": 2,
+                            "fill": "orange",
+                            "min": 0,
+                            "mode": "opacity",
+                            "reverse": false,
+                            "scale": "linear",
+                            "scheme": "RdYlBu",
+                            "steps": 128
+                        },
+                        "exemplars": { "color": "rgba(255,0,255,0.7)" },
+                        "filterValues": { "le": 1e-9 },
+                        "legend": { "show": false },
+                        "rowsFrame": { "layout": "unknown" },
+                        "tooltip": {
+                            "mode": "multi",
+                            "showColorScale": false,
+                            "yHistogram": false
+                        },
+                        "yAxis": { "axisPlacement": "hidden", "reverse": false }
+                    },
+                    "pluginVersion": "12.0.2",
+                    "targets": [
+                        {
+                            "direction": "backward",
+                            "editorMode": "builder",
+                            "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
+                            "hide": true,
+                            "legendFormat": "",
+                            "queryType": "range",
+                            "refId": "Source",
+                            "step": "1m"
+                        },
+                        {
+                            "datasource": {
+                                "name": "Expression",
+                                "type": "__expr__",
+                                "uid": "__expr__"
+                            },
+                            "downsampler": "sum",
+                            "expression": "Source",
+                            "hide": false,
+                            "refId": "detected_level",
+                            "type": "resample",
+                            "upsampler": "fillna",
+                            "window": "$heatmap_interval"
+                        }
+                    ],
+                    "title": "detected_level heatmap",
+                    "transformations": [
+                        { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
+                        {
+                            "filter": { "id": "byRefId", "options": "" },
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": false,
+                                    "{detected_level=\"error\"}": true,
+                                    "{detected_level=\"fatal\"}": true,
+                                    "{detected_level=\"warn\"}": true
+                                },
+                                "includeByName": {},
+                                "indexByName": {
+                                    "Time": 0,
+                                    "detected_level error": 2,
+                                    "detected_level fatal": 3,
+                                    "detected_level warn": 1
+                                },
+                                "renameByName": {
+                                    "Data error": "",
+                                    "Data fatal": "",
+                                    "Data warn": "",
+                                    "ERROR": "",
+                                    "TRACE": "",
+                                    "Time": "",
+                                    "{detected_level=\"debug\"}": "DEBUG",
+                                    "{detected_level=\"error\"}": "ERROR",
+                                    "{detected_level=\"fatal\"}": "FATAL",
+                                    "{detected_level=\"info\"}": "INFO",
+                                    "{detected_level=\"trace\"}": "TRACE",
+                                    "{detected_level=\"warn\"}": "WARN"
+                                }
+                            }
+                        }
+                    ],
+                    "transparent": true,
+                    "type": "heatmap"
+                },
+                {
+                    "datasource": { "uid": "loki" },
+                    "fieldConfig": {
+                        "defaults": {
+                            "custom": {
+                                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                                "scaleDistribution": { "type": "linear" }
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": { "h": 6, "w": 24, "x": 0, "y": 45 },
+                    "id": 9,
+                    "options": {
+                        "calculate": false,
+                        "calculation": {
+                            "xBuckets": { "mode": "size", "value": "" },
+                            "yBuckets": {
+                                "mode": "size",
+                                "scale": { "type": "linear" },
+                                "value": ""
+                            }
+                        },
+                        "cellGap": 0,
+                        "color": {
+                            "exponent": 2,
+                            "fill": "orange",
+                            "min": 0,
+                            "mode": "opacity",
+                            "reverse": false,
+                            "scale": "linear",
+                            "scheme": "RdYlBu",
+                            "steps": 128
+                        },
+                        "exemplars": { "color": "rgba(255,0,255,0.7)" },
+                        "filterValues": { "le": 1e-9 },
+                        "legend": { "show": false },
+                        "rowsFrame": { "layout": "unknown" },
+                        "tooltip": {
+                            "mode": "multi",
+                            "showColorScale": false,
+                            "yHistogram": false
+                        },
+                        "yAxis": { "axisPlacement": "hidden", "reverse": false }
+                    },
+                    "pluginVersion": "12.0.2",
+                    "targets": [
+                        {
+                            "direction": "backward",
+                            "editorMode": "builder",
+                            "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
+                            "hide": true,
+                            "legendFormat": "",
+                            "queryType": "range",
+                            "refId": "Source",
+                            "step": "1m"
+                        },
+                        {
+                            "datasource": {
+                                "name": "Expression",
+                                "type": "__expr__",
+                                "uid": "__expr__"
+                            },
+                            "downsampler": "sum",
+                            "expression": "Source",
+                            "hide": false,
+                            "refId": "code_function_name",
+                            "type": "resample",
+                            "upsampler": "fillna",
+                            "window": "$heatmap_interval"
+                        }
+                    ],
+                    "title": "code_function_name heatmap",
+                    "transformations": [
+                        { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": false,
+                                    "{code_function_name=\"BrowserService.Error\"}": true,
+                                    "{code_function_name=\"BrowserService.getHTML\"}": true,
+                                    "{code_function_name=\"DomainListingsService.tryExtractListings\"}": true,
+                                    "{code_function_name=\"DomainListingsService.tryTransformSalePrice\"}": true,
+                                    "{code_function_name=\"DomainSuburbService.tryExtractProfile\"}": true,
+                                    "{detected_level=\"error\"}": true,
+                                    "{detected_level=\"fatal\"}": true,
+                                    "{detected_level=\"warn\"}": true
+                                },
+                                "includeByName": {},
+                                "indexByName": {
+                                    "Data error": 2,
+                                    "Data fatal": 3,
+                                    "Data warn": 1,
+                                    "Time": 0,
+                                    "{detected_level=\"error\"}": 5,
+                                    "{detected_level=\"fatal\"}": 6,
+                                    "{detected_level=\"warn\"}": 4
+                                },
+                                "renameByName": {
+                                    "Data error": "ERROR",
+                                    "Data fatal": "FATAL",
+                                    "Data warn": "WARN",
+                                    "ERROR": "",
+                                    "TRACE": "",
+                                    "Time": "",
+                                    "{detected_level=\"debug\"}": "DEBUG",
+                                    "{detected_level=\"error\"}": "ERROR",
+                                    "{detected_level=\"fatal\"}": "FATAL",
+                                    "{detected_level=\"info\"}": "INFO",
+                                    "{detected_level=\"trace\"}": "TRACE",
+                                    "{detected_level=\"warn\"}": "WARN"
+                                }
+                            }
+                        }
+                    ],
+                    "transparent": true,
+                    "type": "heatmap"
+                },
+                {
+                    "datasource": { "uid": "loki" },
+                    "fieldConfig": {
+                        "defaults": {
+                            "custom": {
+                                "align": "auto",
+                                "cellOptions": { "type": "auto", "wrapText": false },
+                                "filterable": true,
+                                "inspect": true
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                            }
+                        },
+                        "overrides": [
+                            {
+                                "matcher": { "id": "byName", "options": "Line" },
+                                "properties": [{ "id": "custom.width", "value": 426 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "trace_id" },
+                                "properties": [{ "id": "custom.width", "value": 94 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "labels" },
+                                "properties": [{ "id": "custom.width", "value": 144 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "code_function_name" },
+                                "properties": [{ "id": "custom.width", "value": 357 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "code_function_args" },
+                                "properties": [{ "id": "custom.width", "value": 21 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "exception_type" },
+                                "properties": [{ "id": "custom.width", "value": 107 }]
+                            },
+                            {
+                                "matcher": { "id": "byName", "options": "exception_stacktrace" },
+                                "properties": [{ "id": "custom.width", "value": 24 }]
+                            }
+                        ]
+                    },
+                    "gridPos": { "h": 12, "w": 24, "x": 0, "y": 51 },
+                    "id": 15,
+                    "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                            "countRows": false,
+                            "enablePagination": true,
+                            "fields": "",
+                            "reducer": ["sum"],
+                            "show": false
+                        },
+                        "showHeader": true,
+                        "sortBy": []
+                    },
+                    "pluginVersion": "12.0.2",
+                    "targets": [
+                        {
+                            "direction": "backward",
+                            "editorMode": "builder",
+                            "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `${log_level}`",
+                            "queryType": "range",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "detected_level exception logs",
+                    "transformations": [
+                        {
+                            "id": "filterFieldsByName",
+                            "options": { "include": { "pattern": "(labels)" } }
+                        },
+                        {
+                            "id": "extractFields",
+                            "options": {
+                                "delimiter": ",",
+                                "format": "kvp",
+                                "jsonPaths": [{ "path": "object.args" }],
+                                "keepTime": false,
+                                "regExp": "/(args_page)/",
+                                "replace": false,
+                                "source": "labels"
+                            }
+                        },
+                        {
+                            "id": "filterFieldsByName",
+                            "options": {
+                                "include": {
+                                    "pattern": "(code_function_name|code_function_args|exception_type|exception_stacktrace|exception_message)"
+                                }
+                            }
+                        },
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": true,
+                                    "detected_level": true,
+                                    "exception_stacktrace": false,
+                                    "exception_type": false,
+                                    "host_arch": true,
+                                    "host_id": true,
+                                    "host_name": true,
+                                    "labels": false,
+                                    "observed_timestamp": true,
+                                    "os_type": true,
+                                    "os_version": true,
+                                    "process_command": true,
+                                    "process_command_args": true,
+                                    "process_executable_name": true,
+                                    "process_executable_path": true,
+                                    "process_owner": true,
+                                    "process_pid": true,
+                                    "process_runtime_description": true,
+                                    "process_runtime_name": true,
+                                    "process_runtime_version": true,
+                                    "scope_name": true,
+                                    "scope_version": true,
+                                    "service_name": true,
+                                    "service_namespace": true,
+                                    "service_version": true,
+                                    "severity_number": true,
+                                    "severity_text": true
+                                },
+                                "includeByName": {},
+                                "indexByName": {
+                                    "code_function_args": 1,
+                                    "code_function_name": 0,
+                                    "exception_message": 4,
+                                    "exception_stacktrace": 3,
+                                    "exception_type": 2
+                                },
+                                "renameByName": {}
+                            }
+                        }
+                    ],
+                    "transparent": true,
+                    "type": "table"
+                }
+            ],
+            "repeat": "service_name",
+            "title": "$service_name",
             "type": "row"
-        },
-        {
-            "datasource": { "uid": "loki" },
-            "fieldConfig": {
-                "defaults": {
-                    "color": { "fixedColor": "green", "mode": "fixed" },
-                    "custom": {
-                        "fillOpacity": 80,
-                        "gradientMode": "none",
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "lineWidth": 1,
-                        "stacking": { "group": "A", "mode": "none" }
-                    },
-                    "fieldMinMax": false,
-                    "mappings": [],
-                    "max": 900000,
-                    "min": 0,
-                    "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] },
-                    "unit": "ms"
-                },
-                "overrides": []
-            },
-            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 1 },
-            "id": 12,
-            "options": {
-                "combine": false,
-                "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
-                    "placement": "bottom",
-                    "showLegend": false
-                },
-                "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
-            },
-            "pluginVersion": "12.0.2",
-            "targets": [
-                {
-                    "direction": "backward",
-                    "editorMode": "builder",
-                    "expr": "{service_namespace=\"NewHomie\", service_name=\"function-scrape_locality\"} | detected_level =~ `info` | faas_duration > 0",
-                    "hide": false,
-                    "queryType": "range",
-                    "refId": "A"
-                }
-            ],
-            "title": "faas_duration histogram",
-            "transformations": [
-                {
-                    "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["Time", "labels"] } }
-                },
-                {
-                    "id": "extractFields",
-                    "options": {
-                        "delimiter": ",",
-                        "format": "kvp",
-                        "jsonPaths": [{ "path": "object.args" }],
-                        "keepTime": false,
-                        "regExp": "/(args_page)/",
-                        "replace": false,
-                        "source": "labels"
-                    }
-                },
-                {
-                    "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["faas_duration"] } }
-                },
-                {
-                    "id": "convertFieldType",
-                    "options": {
-                        "conversions": [
-                            { "destinationType": "number", "targetField": "faas_duration" }
-                        ],
-                        "fields": {}
-                    }
-                }
-            ],
-            "transparent": true,
-            "type": "histogram"
-        },
-        {
-            "datasource": { "uid": "loki" },
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "scaleDistribution": { "type": "linear" }
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 6 },
-            "id": 5,
-            "options": {
-                "calculate": false,
-                "calculation": {
-                    "xBuckets": { "mode": "size", "value": "" },
-                    "yBuckets": { "mode": "size", "scale": { "type": "linear" }, "value": "" }
-                },
-                "cellGap": 0,
-                "color": {
-                    "exponent": 2,
-                    "fill": "orange",
-                    "min": 0,
-                    "mode": "opacity",
-                    "reverse": false,
-                    "scale": "linear",
-                    "scheme": "RdYlBu",
-                    "steps": 128
-                },
-                "exemplars": { "color": "rgba(255,0,255,0.7)" },
-                "filterValues": { "le": 1e-9 },
-                "legend": { "show": false },
-                "rowsFrame": { "layout": "unknown" },
-                "tooltip": { "mode": "multi", "showColorScale": false, "yHistogram": false },
-                "yAxis": { "axisPlacement": "hidden", "reverse": false }
-            },
-            "pluginVersion": "12.0.2",
-            "targets": [
-                {
-                    "direction": "backward",
-                    "editorMode": "builder",
-                    "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"function-scrape_locality\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": true,
-                    "legendFormat": "",
-                    "queryType": "range",
-                    "refId": "Source",
-                    "step": "1m"
-                },
-                {
-                    "datasource": { "name": "Expression", "type": "__expr__", "uid": "__expr__" },
-                    "downsampler": "sum",
-                    "expression": "Source",
-                    "hide": false,
-                    "refId": "detected_level",
-                    "type": "resample",
-                    "upsampler": "fillna",
-                    "window": "$heatmap_interval"
-                }
-            ],
-            "title": "detected_level heatmap",
-            "transformations": [
-                { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
-                {
-                    "filter": { "id": "byRefId", "options": "" },
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": false,
-                            "{detected_level=\"error\"}": true,
-                            "{detected_level=\"fatal\"}": true,
-                            "{detected_level=\"warn\"}": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {
-                            "Time": 0,
-                            "detected_level error": 2,
-                            "detected_level fatal": 3,
-                            "detected_level warn": 1
-                        },
-                        "renameByName": {
-                            "Data error": "",
-                            "Data fatal": "",
-                            "Data warn": "",
-                            "ERROR": "",
-                            "TRACE": "",
-                            "Time": "",
-                            "{detected_level=\"debug\"}": "DEBUG",
-                            "{detected_level=\"error\"}": "ERROR",
-                            "{detected_level=\"fatal\"}": "FATAL",
-                            "{detected_level=\"info\"}": "INFO",
-                            "{detected_level=\"trace\"}": "TRACE",
-                            "{detected_level=\"warn\"}": "WARN"
-                        }
-                    }
-                }
-            ],
-            "transparent": true,
-            "type": "heatmap"
-        },
-        {
-            "datasource": { "uid": "loki" },
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "scaleDistribution": { "type": "linear" }
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 10 },
-            "id": 9,
-            "options": {
-                "calculate": false,
-                "calculation": {
-                    "xBuckets": { "mode": "size", "value": "" },
-                    "yBuckets": { "mode": "size", "scale": { "type": "linear" }, "value": "" }
-                },
-                "cellGap": 0,
-                "color": {
-                    "exponent": 2,
-                    "fill": "orange",
-                    "min": 0,
-                    "mode": "opacity",
-                    "reverse": false,
-                    "scale": "linear",
-                    "scheme": "RdYlBu",
-                    "steps": 128
-                },
-                "exemplars": { "color": "rgba(255,0,255,0.7)" },
-                "filterValues": { "le": 1e-9 },
-                "legend": { "show": false },
-                "rowsFrame": { "layout": "unknown" },
-                "tooltip": { "mode": "multi", "showColorScale": false, "yHistogram": false },
-                "yAxis": { "axisPlacement": "hidden", "reverse": false }
-            },
-            "pluginVersion": "12.0.2",
-            "targets": [
-                {
-                    "direction": "backward",
-                    "editorMode": "code",
-                    "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"function-scrape_locality\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": true,
-                    "legendFormat": "",
-                    "queryType": "range",
-                    "refId": "Source",
-                    "step": "1m"
-                },
-                {
-                    "datasource": { "name": "Expression", "type": "__expr__", "uid": "__expr__" },
-                    "downsampler": "sum",
-                    "expression": "Source",
-                    "hide": false,
-                    "refId": "code_function_name",
-                    "type": "resample",
-                    "upsampler": "fillna",
-                    "window": "$heatmap_interval"
-                }
-            ],
-            "title": "code_function_name heatmap",
-            "transformations": [
-                { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": false,
-                            "{code_function_name=\"BrowserService.Error\"}": true,
-                            "{code_function_name=\"BrowserService.getHTML\"}": true,
-                            "{code_function_name=\"DomainListingsService.tryExtractListings\"}": true,
-                            "{code_function_name=\"DomainListingsService.tryTransformSalePrice\"}": true,
-                            "{code_function_name=\"DomainSuburbService.tryExtractProfile\"}": true,
-                            "{detected_level=\"error\"}": true,
-                            "{detected_level=\"fatal\"}": true,
-                            "{detected_level=\"warn\"}": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {
-                            "Data error": 2,
-                            "Data fatal": 3,
-                            "Data warn": 1,
-                            "Time": 0,
-                            "{detected_level=\"error\"}": 5,
-                            "{detected_level=\"fatal\"}": 6,
-                            "{detected_level=\"warn\"}": 4
-                        },
-                        "renameByName": {
-                            "Data error": "ERROR",
-                            "Data fatal": "FATAL",
-                            "Data warn": "WARN",
-                            "ERROR": "",
-                            "TRACE": "",
-                            "Time": "",
-                            "{detected_level=\"debug\"}": "DEBUG",
-                            "{detected_level=\"error\"}": "ERROR",
-                            "{detected_level=\"fatal\"}": "FATAL",
-                            "{detected_level=\"info\"}": "INFO",
-                            "{detected_level=\"trace\"}": "TRACE",
-                            "{detected_level=\"warn\"}": "WARN"
-                        }
-                    }
-                }
-            ],
-            "transparent": true,
-            "type": "heatmap"
-        },
-        {
-            "datasource": { "uid": "loki" },
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": { "type": "auto", "wrapText": false },
-                        "filterable": true,
-                        "inspect": true
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": { "id": "byName", "options": "Line" },
-                        "properties": [{ "id": "custom.width", "value": 426 }]
-                    },
-                    {
-                        "matcher": { "id": "byName", "options": "trace_id" },
-                        "properties": [{ "id": "custom.width", "value": 94 }]
-                    },
-                    {
-                        "matcher": { "id": "byName", "options": "labels" },
-                        "properties": [{ "id": "custom.width", "value": 144 }]
-                    },
-                    {
-                        "matcher": { "id": "byName", "options": "code_function_name" },
-                        "properties": [{ "id": "custom.width", "value": 364 }]
-                    },
-                    {
-                        "matcher": { "id": "byName", "options": "code_function_args" },
-                        "properties": [{ "id": "custom.width", "value": 168 }]
-                    }
-                ]
-            },
-            "gridPos": { "h": 9, "w": 24, "x": 0, "y": 16 },
-            "id": 1,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "enablePagination": true,
-                    "fields": "",
-                    "reducer": ["sum"],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": []
-            },
-            "pluginVersion": "12.0.2",
-            "targets": [
-                {
-                    "direction": "backward",
-                    "editorMode": "code",
-                    "expr": "{service_namespace=\"NewHomie\", service_name=\"function-scrape_locality\"} | detected_level =~ `${log_level}`",
-                    "queryType": "range",
-                    "refId": "A"
-                }
-            ],
-            "title": "detected_level exception logs",
-            "transformations": [
-                {
-                    "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["labels", "Time", "trace_id"] } }
-                },
-                {
-                    "id": "extractFields",
-                    "options": {
-                        "delimiter": ",",
-                        "format": "kvp",
-                        "jsonPaths": [{ "path": "object.args" }],
-                        "keepTime": false,
-                        "regExp": "/(args_page)/",
-                        "replace": false,
-                        "source": "labels"
-                    }
-                },
-                {
-                    "id": "filterFieldsByName",
-                    "options": {
-                        "include": { "names": ["labels", "Time", "trace_id", "exception_message"] }
-                    }
-                },
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "detected_level": true,
-                            "exception_stacktrace": true,
-                            "exception_type": true,
-                            "host_arch": true,
-                            "host_id": true,
-                            "host_name": true,
-                            "labels": false,
-                            "observed_timestamp": true,
-                            "os_type": true,
-                            "os_version": true,
-                            "process_command": true,
-                            "process_command_args": true,
-                            "process_executable_name": true,
-                            "process_executable_path": true,
-                            "process_owner": true,
-                            "process_pid": true,
-                            "process_runtime_description": true,
-                            "process_runtime_name": true,
-                            "process_runtime_version": true,
-                            "scope_name": true,
-                            "scope_version": true,
-                            "service_name": true,
-                            "service_namespace": true,
-                            "service_version": true,
-                            "severity_number": true,
-                            "severity_text": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {
-                            "Time": 3,
-                            "exception_message": 2,
-                            "labels": 1,
-                            "trace_id": 0
-                        },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "transparent": true,
-            "type": "table"
         }
     ],
     "preload": false,
@@ -451,9 +583,9 @@
     "templating": {
         "list": [
             {
-                "auto": false,
-                "auto_count": 30,
-                "auto_min": "10s",
+                "auto": true,
+                "auto_count": 100,
+                "auto_min": "1s",
                 "current": { "text": "1s", "value": "1s" },
                 "description": "",
                 "name": "heatmap_interval",
@@ -476,9 +608,11 @@
                 "type": "interval"
             },
             {
+                "allowCustomValue": false,
                 "current": { "text": "$__all", "value": "$__all" },
                 "description": "",
                 "includeAll": true,
+                "multi": true,
                 "name": "log_level",
                 "options": [
                     { "selected": false, "text": "fatal", "value": "fatal" },
@@ -490,6 +624,29 @@
                 ],
                 "query": "fatal,error,warn,info,debug,trace",
                 "type": "custom"
+            },
+            {
+                "allowCustomValue": false,
+                "current": { "text": ["$__all"], "value": ["$__all"] },
+                "description": "",
+                "includeAll": true,
+                "label": "service_name",
+                "multi": true,
+                "name": "service_name",
+                "options": [
+                    {
+                        "selected": false,
+                        "text": "function-scrape_locality_trigger",
+                        "value": "function-scrape_locality_trigger"
+                    },
+                    {
+                        "selected": false,
+                        "text": "function-scrape_locality",
+                        "value": "function-scrape_locality"
+                    }
+                ],
+                "query": "function-scrape_locality_trigger,function-scrape_locality",
+                "type": "custom"
             }
         ]
     },
@@ -498,5 +655,5 @@
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 45
+    "version": 55
 }

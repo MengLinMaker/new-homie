@@ -14,6 +14,7 @@ export class BrowserService extends ILoggable {
 
     async close() {
         await BrowserService.browser.close()
+        BrowserService.browser = undefined as never
     }
 
     private async launchSingleBrowser() {
@@ -58,7 +59,8 @@ export class BrowserService extends ILoggable {
         // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
         const page = await BrowserService.browser.browserContexts()[0]!.newPage()
         try {
-            await page.goto(url, { waitUntil: 'domcontentloaded' })
+            // Short timeout to prevent hanging scrapes
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
             const html = await page.content()
             await page.close()
             return html

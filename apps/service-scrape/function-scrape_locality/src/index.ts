@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
 // Setup persistent resources
-import { LOGGER, scrapeController } from './global/setup'
+import { browserService, LOGGER, scrapeController } from './global/setup'
 import { SqsSchema } from '@aws-lambda-powertools/parser/schemas'
 import z from 'zod'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
@@ -66,6 +66,8 @@ export const handler = middy().handler(async (_event, _context) => {
         if (!rentsInfo || rentsInfo.isLastPage) break
     }
 
+    // Close browser to prevent ProtocolError - https://github.com/puppeteer/puppeteer/issues/6776
+    await browserService.close()
     functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }
 })

@@ -12,7 +12,7 @@
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "test": "nx run-many -t test:type test:unit",
         "build": "nx run-many -t build",
-        "git:main": "git checkout main && git pull",
+        "git:m": "git checkout main && git pull",
         "git:b": "git checkout -b"
     },
     "devDependencies": {
@@ -22,7 +22,7 @@
         "aws-cdk": "2.1029.0",
         "esbuild": "^0.25.9",
         "knip": "5.63.1",
-        "nx": "21.5.1",
+        "nx": "21.5.2",
         "simple-git-hooks": "2.13.1",
         "syncpack": "14.0.0-alpha.19",
         "typescript": "~5.9.2",
