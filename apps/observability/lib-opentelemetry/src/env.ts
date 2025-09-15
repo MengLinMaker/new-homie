@@ -33,6 +33,6 @@ export const ENV = parseEnvSchema(
          * Log level at bootup
          * Levels that Grafana can receive
          */
-        OTEL_LOG_LEVEL: z.enum(loglevels).default('warn'),
+        OTEL_LOG_LEVEL: z.enum(loglevels).default('info'),
     }),
 )
