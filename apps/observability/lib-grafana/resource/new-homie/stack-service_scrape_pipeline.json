@@ -20,6 +20,230 @@
         {
             "collapsed": false,
             "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+            "id": 14,
+            "panels": [],
+            "title": "function-scrape_locality_trigger",
+            "type": "row"
+        },
+        {
+            "datasource": { "uid": "loki" },
+            "fieldConfig": {
+                "defaults": {
+                    "color": { "fixedColor": "green", "mode": "fixed" },
+                    "custom": {
+                        "fillOpacity": 80,
+                        "gradientMode": "none",
+                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                        "lineWidth": 1,
+                        "stacking": { "group": "A", "mode": "none" }
+                    },
+                    "fieldMinMax": false,
+                    "mappings": [],
+                    "max": 900000,
+                    "min": 0,
+                    "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] },
+                    "unit": "ms"
+                },
+                "overrides": []
+            },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 1 },
+            "id": 16,
+            "options": {
+                "combine": false,
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+            },
+            "pluginVersion": "12.0.2",
+            "targets": [
+                {
+                    "direction": "backward",
+                    "editorMode": "builder",
+                    "expr": "{service_namespace=\"NewHomie\", service_name=\"function-scrape_locality_trigger\"} | detected_level =~ `info` | faas_duration > 0",
+                    "hide": false,
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "faas_duration histogram",
+            "transformations": [
+                {
+                    "id": "extractFields",
+                    "options": {
+                        "delimiter": ",",
+                        "format": "kvp",
+                        "jsonPaths": [{ "path": "object.args" }],
+                        "keepTime": false,
+                        "regExp": "/(args_page)/",
+                        "replace": false,
+                        "source": "labels"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": { "include": { "names": [], "pattern": "faas_duration" } }
+                },
+                {
+                    "id": "convertFieldType",
+                    "options": {
+                        "conversions": [
+                            { "destinationType": "number", "targetField": "faas_duration" }
+                        ],
+                        "fields": {}
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "histogram"
+        },
+        {
+            "datasource": { "uid": "loki" },
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": { "type": "auto", "wrapText": false },
+                        "filterable": true,
+                        "inspect": true
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": { "id": "byName", "options": "Line" },
+                        "properties": [{ "id": "custom.width", "value": 426 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "trace_id" },
+                        "properties": [{ "id": "custom.width", "value": 94 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "labels" },
+                        "properties": [{ "id": "custom.width", "value": 144 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "code_function_name" },
+                        "properties": [{ "id": "custom.width", "value": 235 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "code_function_args" },
+                        "properties": [{ "id": "custom.width", "value": 21 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "exception_type" },
+                        "properties": [{ "id": "custom.width", "value": 170 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "exception_stacktrace" },
+                        "properties": [{ "id": "custom.width", "value": 24 }]
+                    }
+                ]
+            },
+            "gridPos": { "h": 9, "w": 24, "x": 0, "y": 6 },
+            "id": 1,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "enablePagination": true,
+                    "fields": "",
+                    "reducer": ["sum"],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "12.0.2",
+            "targets": [
+                {
+                    "direction": "backward",
+                    "editorMode": "code",
+                    "expr": "{service_namespace=\"NewHomie\", service_name=\"function-scrape_locality_trigger\"} | detected_level =~ `${log_level}`",
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "detected_level exception logs",
+            "transformations": [
+                { "id": "filterFieldsByName", "options": { "include": { "pattern": "(labels)" } } },
+                {
+                    "id": "extractFields",
+                    "options": {
+                        "delimiter": ",",
+                        "format": "kvp",
+                        "jsonPaths": [{ "path": "object.args" }],
+                        "keepTime": false,
+                        "regExp": "/(args_page)/",
+                        "replace": false,
+                        "source": "labels"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "pattern": "(code_function_name|code_function_args|exception_type|exception_stacktrace|exception_message)"
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "detected_level": true,
+                            "exception_stacktrace": false,
+                            "exception_type": false,
+                            "host_arch": true,
+                            "host_id": true,
+                            "host_name": true,
+                            "labels": false,
+                            "observed_timestamp": true,
+                            "os_type": true,
+                            "os_version": true,
+                            "process_command": true,
+                            "process_command_args": true,
+                            "process_executable_name": true,
+                            "process_executable_path": true,
+                            "process_owner": true,
+                            "process_pid": true,
+                            "process_runtime_description": true,
+                            "process_runtime_name": true,
+                            "process_runtime_version": true,
+                            "scope_name": true,
+                            "scope_version": true,
+                            "service_name": true,
+                            "service_namespace": true,
+                            "service_version": true,
+                            "severity_number": true,
+                            "severity_text": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "code_function_args": 1,
+                            "code_function_name": 0,
+                            "exception_message": 4,
+                            "exception_stacktrace": 3,
+                            "exception_type": 2
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "table"
+        },
+        {
+            "collapsed": false,
+            "gridPos": { "h": 1, "w": 24, "x": 0, "y": 15 },
             "id": 10,
             "panels": [],
             "title": "function-scrape_locality",
@@ -46,7 +270,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 1 },
+            "gridPos": { "h": 5, "w": 24, "x": 0, "y": 16 },
             "id": 12,
             "options": {
                 "combine": false,
@@ -72,10 +296,6 @@
             "title": "faas_duration histogram",
             "transformations": [
                 {
-                    "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["Time", "labels"] } }
-                },
-                {
                     "id": "extractFields",
                     "options": {
                         "delimiter": ",",
@@ -89,7 +309,7 @@
                 },
                 {
                     "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["faas_duration"] } }
+                    "options": { "include": { "names": [], "pattern": "faas_duration" } }
                 },
                 {
                     "id": "convertFieldType",
@@ -108,6 +328,106 @@
             "datasource": { "uid": "loki" },
             "fieldConfig": {
                 "defaults": {
+                    "color": { "fixedColor": "green", "mode": "fixed" },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "hidden",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.1,
+                        "drawStyle": "bars",
+                        "fillOpacity": 100,
+                        "gradientMode": "none",
+                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": { "type": "linear" },
+                        "showPoints": "always",
+                        "spanNulls": false,
+                        "stacking": { "group": "A", "mode": "none" },
+                        "thresholdsStyle": { "mode": "dashed" }
+                    },
+                    "fieldMinMax": false,
+                    "mappings": [],
+                    "max": 900000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            { "color": "green" },
+                            { "color": "#6ED0E0", "value": 0 },
+                            { "color": "#EAB839", "value": 300000 },
+                            { "color": "orange", "value": 600000 },
+                            { "color": "red", "value": 900010 }
+                        ]
+                    },
+                    "unit": "ms"
+                },
+                "overrides": []
+            },
+            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 21 },
+            "id": 13,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "timezone": ["browser"],
+                "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+            },
+            "pluginVersion": "12.0.2",
+            "targets": [
+                {
+                    "direction": "backward",
+                    "editorMode": "builder",
+                    "expr": "{service_namespace=\"NewHomie\", service_name=\"function-scrape_locality\"} | detected_level =~ `info` | faas_duration > 0",
+                    "hide": false,
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "faas_duration",
+            "transformations": [
+                {
+                    "id": "extractFields",
+                    "options": {
+                        "delimiter": ",",
+                        "format": "kvp",
+                        "jsonPaths": [{ "path": "object.args" }],
+                        "keepTime": false,
+                        "regExp": "/(args_page)/",
+                        "replace": false,
+                        "source": "labels"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": { "include": { "pattern": "(faas_time|faas_duration)" } }
+                },
+                {
+                    "id": "convertFieldType",
+                    "options": {
+                        "conversions": [
+                            { "destinationType": "number", "targetField": "faas_duration" },
+                            { "destinationType": "time", "targetField": "faas_time" }
+                        ],
+                        "fields": {}
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "datasource": { "uid": "loki" },
+            "fieldConfig": {
+                "defaults": {
                     "custom": {
                         "hideFrom": { "legend": false, "tooltip": false, "viz": false },
                         "scaleDistribution": { "type": "linear" }
@@ -115,7 +435,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 6 },
+            "gridPos": { "h": 4, "w": 24, "x": 0, "y": 25 },
             "id": 5,
             "options": {
                 "calculate": false,
@@ -215,7 +535,7 @@
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 10 },
+            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 29 },
             "id": 9,
             "options": {
                 "calculate": false,
@@ -342,16 +662,24 @@
                     },
                     {
                         "matcher": { "id": "byName", "options": "code_function_name" },
-                        "properties": [{ "id": "custom.width", "value": 364 }]
+                        "properties": [{ "id": "custom.width", "value": 357 }]
                     },
                     {
                         "matcher": { "id": "byName", "options": "code_function_args" },
-                        "properties": [{ "id": "custom.width", "value": 168 }]
+                        "properties": [{ "id": "custom.width", "value": 21 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "exception_type" },
+                        "properties": [{ "id": "custom.width", "value": 107 }]
+                    },
+                    {
+                        "matcher": { "id": "byName", "options": "exception_stacktrace" },
+                        "properties": [{ "id": "custom.width", "value": 24 }]
                     }
                 ]
             },
-            "gridPos": { "h": 9, "w": 24, "x": 0, "y": 16 },
-            "id": 1,
+            "gridPos": { "h": 12, "w": 24, "x": 0, "y": 35 },
+            "id": 15,
             "options": {
                 "cellHeight": "sm",
                 "footer": {
@@ -376,10 +704,7 @@
             ],
             "title": "detected_level exception logs",
             "transformations": [
-                {
-                    "id": "filterFieldsByName",
-                    "options": { "include": { "names": ["labels", "Time", "trace_id"] } }
-                },
+                { "id": "filterFieldsByName", "options": { "include": { "pattern": "(labels)" } } },
                 {
                     "id": "extractFields",
                     "options": {
@@ -395,7 +720,9 @@
                 {
                     "id": "filterFieldsByName",
                     "options": {
-                        "include": { "names": ["labels", "Time", "trace_id", "exception_message"] }
+                        "include": {
+                            "pattern": "(code_function_name|code_function_args|exception_type|exception_stacktrace|exception_message)"
+                        }
                     }
                 },
                 {
@@ -404,8 +731,8 @@
                         "excludeByName": {
                             "Time": true,
                             "detected_level": true,
-                            "exception_stacktrace": true,
-                            "exception_type": true,
+                            "exception_stacktrace": false,
+                            "exception_type": false,
                             "host_arch": true,
                             "host_id": true,
                             "host_name": true,
@@ -432,10 +759,11 @@
                         },
                         "includeByName": {},
                         "indexByName": {
-                            "Time": 3,
-                            "exception_message": 2,
-                            "labels": 1,
-                            "trace_id": 0
+                            "code_function_args": 1,
+                            "code_function_name": 0,
+                            "exception_message": 4,
+                            "exception_stacktrace": 3,
+                            "exception_type": 2
                         },
                         "renameByName": {}
                     }
@@ -498,5 +826,5 @@
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 45
+    "version": 54
 }
