@@ -14,6 +14,7 @@ export class BrowserService extends ILoggable {
 
     async close() {
         await BrowserService.browser.close()
+        BrowserService.browser = undefined as never
     }
 
     private async launchSingleBrowser() {
