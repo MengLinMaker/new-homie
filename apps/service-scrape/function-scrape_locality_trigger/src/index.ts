@@ -41,6 +41,7 @@ export const handler = middy().handler(async (_event, _context) => {
     if (failedLocalities.length > 0) {
         throw functionHandlerLogger.recordException(
             `FATAL ${SERVICE_NAME} failed to send ${failedLocalities.length} messages to SQS queue`,
+            failedLocalities,
         )
     }
     functionHandlerLogger.recordEnd()
