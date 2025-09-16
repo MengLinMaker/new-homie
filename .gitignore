@@ -1,5 +1,6 @@
 # Output
 dist
+.tanstack
 
 # AWS
 .aws-sam
