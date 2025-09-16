@@ -15,7 +15,8 @@
                 "noArguments": "warn"
             },
             "suspicious": {
-                "noExplicitAny": "warn"
+                "noExplicitAny": "warn",
+                "noUnknownAtRules": "off"
             }
         }
     },
