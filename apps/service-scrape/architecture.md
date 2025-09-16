@@ -6,7 +6,7 @@ Service for scraping and serving property and amenities data.
 
 ## Architecture
 ### Observability
-Grafana is used to track scraping progress and errors. [This dashboard snapshot](https://menglinmaker.grafana.net/dashboard/snapshot/1HKc0l6zfBqBDVQCzgzW23hg0zEV7ZEh) demonstrates how errors are captured and correlated with heatmaps for the type of errors and location and scrape worker duration.
+Grafana is used to track scraping progress and errors. [This dashboard snapshot](https://menglinmaker.grafana.net/dashboard/snapshot/nKwrs5tKYP70oIpNhnU24oI77qmLdYOZ) demonstrates how errors are captured and correlated with heatmaps for the type of errors and location and scrape worker duration.
 
 ### Shared library
 `lib-db_service_scrape`
