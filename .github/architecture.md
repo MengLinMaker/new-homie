@@ -1,7 +1,7 @@
-# Github setup
+# Github CICD
 
 ## Architecture
-### CICDC cache
+### CICD cache
 Nx is used to determine which packages to test, reducing CI time. Cache should match closest job name, then base SHA, then PR number, finally run id.
 
 Cache needs to be recreated on main branch.
