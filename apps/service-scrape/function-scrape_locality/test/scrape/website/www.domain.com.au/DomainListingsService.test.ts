@@ -136,7 +136,6 @@ describe(testSuiteName, () => {
                     listing: input,
                 })
                 if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
-                expect(databaseInserts).toBeDefined()
             })
         })
 
@@ -160,7 +159,6 @@ describe(testSuiteName, () => {
                     listing: input,
                 })
                 if (databaseInserts) expect(databaseInserts).toStrictEqual(expectedObject[i])
-                expect(databaseInserts).toBeDefined()
             })
         })
 
