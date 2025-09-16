@@ -72,9 +72,13 @@ const nextDataJsonSchema = z.object({
 export class DomainListingsService extends ILoggable {
     expectedNoMatchingPrice(priceString: string) {
         // No number to extract
-        if (!priceString.match(/\d/g)) return true
+        if (!priceString.match(/\d/)) return true
         // Requires agent contact
-        if (!priceString.match(/(auction|call|contact|offer|expression)/gi)) return true
+        if (!priceString.match(/(auction|call|contact|offer|expression)/i)) return true
+        // Contains a time
+        if (!priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/)) return true
+        // Contains a date
+        if (!priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/)) return true
         return false
     }
 
