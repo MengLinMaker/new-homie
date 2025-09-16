@@ -1,4 +1,4 @@
-# @service-scrape/root
+# @service-scrape
 Service for scraping and serving property and amenities data.
 
 ## TODO

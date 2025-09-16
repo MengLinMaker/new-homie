@@ -1,4 +1,4 @@
-# @observability/root
+# @observability
 Observabiliy (metrics, logs and traces) is used debug errors in production.
 
 ## TODO:
