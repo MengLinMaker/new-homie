@@ -25,12 +25,12 @@ const _rawSuburbSchema = z.object({
         name: z.string(),
         state: z.enum(StateAbbreviationEnum),
         postcode: z.string(),
-        statistics: z.object({
-            marriedPercentage: z.number(),
-            ownerOccupierPercentage: z.number(),
-            population: z.number(),
-            mostCommonAgeBracket: z.string(),
-        }),
+        // statistics: z.object({
+        //     marriedPercentage: z.number(),
+        //     ownerOccupierPercentage: z.number(),
+        //     population: z.number(),
+        //     mostCommonAgeBracket: z.string(),
+        // }),
         schools: z.array(
             z.object({
                 acaraId: z.string(),
