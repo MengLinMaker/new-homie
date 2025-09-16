@@ -14,7 +14,7 @@ This monorepo is arranged in the following format:
     - `service-auth` - Authentication lambda authoriser.
     - `service-user` - Manage users.
     - `web` - Web app.
-- `infra` - manage infrastructure on AWS using CDK.
+- `infra` - Manage infrastructure on AWS using CDK.
 
 ## Development
 Install using pnpm only - git hooks should auto configure:
