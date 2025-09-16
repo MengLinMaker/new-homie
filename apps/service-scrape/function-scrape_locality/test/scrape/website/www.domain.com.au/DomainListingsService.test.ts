@@ -11,6 +11,64 @@ const resourcePath = `${import.meta.dirname}/${testSuiteName}`
 describe(testSuiteName, () => {
     const domainListingsService = new DomainListingsService(LOGGER)
 
+    describe('highestSalePriceFromString', () => {
+        it('should extract highest 6-7 digit numbers', () => {
+            const expected = 638999
+            const inputs = [
+                '580000-638999',
+                '580000 638999',
+                '580,000-638,999',
+                '580,000 638,999',
+                '638999',
+                '638,999',
+            ]
+            for (const input of inputs)
+                expect(domainListingsService.highestSalePriceFromString(input)).toBe(expected)
+        })
+
+        it('should extract 5 and 7 digit numbers', () => {
+            expect(domainListingsService.highestSalePriceFromString('12345')).toBe(12345)
+            expect(domainListingsService.highestSalePriceFromString('1234567')).toBe(1234567)
+        })
+
+        it('should ignore invalid numbers', () => {
+            const inputs = [
+                '5pm',
+                '5:30pm',
+                '11am',
+                '11:30am',
+                '30/09/2025',
+                '30-09-2025',
+                '040 4404 0404',
+                '04044040404',
+            ]
+            for (const input of inputs)
+                expect(domainListingsService.highestSalePriceFromString(input)).toBeNull()
+        })
+    })
+
+    describe('highestRentPriceFromString', () => {
+        it('should extract 3 and 4 digit numbers', () => {
+            expect(domainListingsService.highestRentPriceFromString('123')).toBe(123)
+            expect(domainListingsService.highestRentPriceFromString('1234')).toBe(1234)
+        })
+
+        it('should ignore invalid numbers', () => {
+            const inputs = [
+                '5pm',
+                '5:30pm',
+                '11am',
+                '11:30am',
+                '30/09/2025',
+                '30-09-2025',
+                '040 4404 0404',
+                '04044040404',
+            ]
+            for (const input of inputs)
+                expect(domainListingsService.highestRentPriceFromString(input)).toBeNull()
+        })
+    })
+
     describe('tryExtractListing', () => {
         it.for(['rent.dandenong-vic-3175', 'sale.dandenong-vic-3175'])(
             'should extract listings from %s',
@@ -129,7 +187,7 @@ describe(testSuiteName, () => {
     })
 
     describe('tryExtractRentsPage', () => {
-        it.for(['sale.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
+        it.for(['rent.dandenong-vic-3175'])('should extract listings from %s', (fileSuffix) => {
             const nextDataJson = parseJsonFile(`${resourcePath}/raw.${fileSuffix}.json`) as object
 
             const result = domainListingsService.tryExtractRentsPage({ nextDataJson })

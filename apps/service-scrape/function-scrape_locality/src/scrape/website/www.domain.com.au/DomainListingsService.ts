@@ -74,15 +74,29 @@ export class DomainListingsService extends ILoggable {
      * @description Homes tend to sell at higher price.
      * @returns Integer price
      */
-    highestPriceFromString(priceString: string) {
+    highestSalePriceFromString(priceString: string) {
         const prices = priceString
-            .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
-            .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
+            .replaceAll(',', '') // Remove commas from numbers
+            .matchAll(/\b\d{5,7}\b/g) // Integer totalling 5-7 digits - assume 5 digit houses don't exist
             .toArray()
         if (prices.length === 0) return null
-        const priceList = prices.map((match) =>
-            Number.parseFloat(match.toString().replaceAll('$', '')),
-        )
+        const priceList = prices.map((match) => Number.parseFloat(match.toString()))
+        return Math.max(...priceList)
+    }
+
+    /**
+     * @description Homes tend to sell at higher price.
+     * @returns Integer price
+     */
+    highestRentPriceFromString(priceString: string) {
+        const prices = priceString
+            .replaceAll(/\b\d{3}\b \b\d{4}\b \b\d{4}\b/g, '') // Replace phone numbers
+            .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
+            .replaceAll(',', '') // Remove commas from numbers
+            .matchAll(/\b\d{3,4}\b/g) // Integer totalling 3-4 digits
+            .toArray()
+        if (prices.length === 0) return null
+        const priceList = prices.map((match) => Number.parseFloat(match.toString()))
         return Math.max(...priceList)
     }
 
@@ -168,7 +182,8 @@ export class DomainListingsService extends ILoggable {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
-            const price = this.highestPriceFromString(priceString)
+            const price = this.highestSalePriceFromString(priceString)
+            // No number to extract
             if (!priceString.match(/\d/g)) return
             if (!price) {
                 const e = new Error(
@@ -201,7 +216,9 @@ export class DomainListingsService extends ILoggable {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
-            const price = this.highestPriceFromString(priceString)
+            const price = this.highestRentPriceFromString(priceString)
+            console.log(price, priceString)
+            // No number to extract
             if (!priceString.match(/\d/g)) return
             if (!price) {
                 const e = new Error(
