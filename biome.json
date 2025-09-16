@@ -15,7 +15,8 @@
                 "noArguments": "warn"
             },
             "suspicious": {
-                "noExplicitAny": "warn"
+                "noExplicitAny": "warn",
+                "noUnknownAtRules": "off"
             }
         }
     },
@@ -34,7 +35,8 @@
             "!**/node_modules",
             "!**/.puppeteer",
             "!**/cdk.out",
-            "!.nx"
+            "!.nx",
+            "!**/src/routeTree.gen.ts"
         ],
         "ignoreUnknown": true
     },

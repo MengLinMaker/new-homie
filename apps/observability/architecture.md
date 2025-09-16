@@ -1,7 +1,11 @@
-# @observability/root
+# @observability
 Observabiliy (metrics, logs and traces) is used debug errors in production.
 
-### Observability tech stack
+## TODO:
+- Logging with OTel distributed tracing - but tracing failed to work on Nodejs AWS lambda.
+
+## Architecture
+### Observability stack
 The [Grafana LGTM](https://grafana.com/blog/2025/07/08/observability-in-under-5-seconds-reflecting-on-a-year-of-grafana/otel-lgtm/) stack is chosen for observability:
 - able to run locally through docker-compose
 - dashboards can exported and imported as json
