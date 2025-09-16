@@ -70,6 +70,11 @@ const nextDataJsonSchema = z.object({
 })
 
 export class DomainListingsService extends ILoggable {
+    expectedNoMatchingPrice(priceString: string) {
+        if (!priceString.match(/\d/g)) return true
+        return false
+    }
+
     /**
      * @description Homes tend to sell at higher price.
      * @returns Integer price
@@ -183,9 +188,8 @@ export class DomainListingsService extends ILoggable {
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
             const price = this.highestSalePriceFromString(priceString)
-            // No number to extract
-            if (!priceString.match(/\d/g)) return
             if (!price) {
+                if (this.expectedNoMatchingPrice(priceString)) return
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
@@ -218,9 +222,8 @@ export class DomainListingsService extends ILoggable {
             const priceString = args.listing.listingModel.price
             const price = this.highestRentPriceFromString(priceString)
             console.log(price, priceString)
-            // No number to extract
-            if (!priceString.match(/\d/g)) return
             if (!price) {
+                if (this.expectedNoMatchingPrice(priceString)) return
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
