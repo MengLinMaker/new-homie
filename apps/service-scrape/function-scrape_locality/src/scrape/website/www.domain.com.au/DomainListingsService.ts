@@ -70,19 +70,45 @@ const nextDataJsonSchema = z.object({
 })
 
 export class DomainListingsService extends ILoggable {
+    expectedNoMatchingPrice(priceString: string) {
+        // No number to extract
+        if (!priceString.match(/\d/i)) return true
+        // Requires agent contact
+        if (!priceString.match(/(auction|call|contact|offer|expression)/i)) return true
+        // Contains a time
+        if (!priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
+        // Contains a date
+        if (!priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
+        return false
+    }
+
     /**
      * @description Homes tend to sell at higher price.
      * @returns Integer price
      */
-    highestPriceFromString(priceString: string) {
+    highestSalePriceFromString(priceString: string) {
         const prices = priceString
-            .replaceAll(/[^0-9^ ^-^$^.]+/g, '') // Expect numbers separated by '_' or ' '
-            .matchAll(/[$]( )?\d+/g) // Integer price starts with $, could have a space
+            .replaceAll(',', '') // Remove commas from numbers
+            .matchAll(/\b\d{5,7}\b/g) // Integer totalling 5-7 digits - assume 5 digit houses don't exist
             .toArray()
         if (prices.length === 0) return null
-        const priceList = prices.map((match) =>
-            Number.parseFloat(match.toString().replaceAll('$', '')),
-        )
+        const priceList = prices.map((match) => Number.parseFloat(match.toString()))
+        return Math.max(...priceList)
+    }
+
+    /**
+     * @description Homes tend to sell at higher price.
+     * @returns Integer price
+     */
+    highestRentPriceFromString(priceString: string) {
+        const prices = priceString
+            .replaceAll(/\b\d{3}\b \b\d{4}\b \b\d{4}\b/g, '') // Replace phone numbers
+            .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
+            .replaceAll(',', '') // Remove commas from numbers
+            .matchAll(/\b\d{3,4}\b/g) // Integer totalling 3-4 digits
+            .toArray()
+        if (prices.length === 0) return null
+        const priceList = prices.map((match) => Number.parseFloat(match.toString()))
         return Math.max(...priceList)
     }
 
@@ -168,9 +194,9 @@ export class DomainListingsService extends ILoggable {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
-            const price = this.highestPriceFromString(priceString)
-            if (!priceString.match(/\d/g)) return
+            const price = this.highestSalePriceFromString(priceString)
             if (!price) {
+                if (this.expectedNoMatchingPrice(priceString)) return
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )
@@ -201,9 +227,9 @@ export class DomainListingsService extends ILoggable {
             const beds = args.listing.listingModel.features.beds
             const land = args.listing.listingModel.features.landSize
             const priceString = args.listing.listingModel.price
-            const price = this.highestPriceFromString(priceString)
-            if (!priceString.match(/\d/g)) return
+            const price = this.highestRentPriceFromString(priceString)
             if (!price) {
+                if (this.expectedNoMatchingPrice(priceString)) return
                 const e = new Error(
                     `no price in listing.listingModel.price - "${args.listing.listingModel.price}"`,
                 )

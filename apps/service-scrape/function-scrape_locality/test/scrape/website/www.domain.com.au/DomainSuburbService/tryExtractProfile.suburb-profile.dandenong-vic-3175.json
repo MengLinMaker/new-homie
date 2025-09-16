@@ -3,12 +3,6 @@
         "name": "Dandenong",
         "state": "VIC",
         "postcode": "3175",
-        "statistics": {
-            "marriedPercentage": 0.5095739389920424,
-            "ownerOccupierPercentage": 0.41930361801066124,
-            "population": 29911,
-            "mostCommonAgeBracket": "20 to 39"
-        },
         "schools": [
             {
                 "acaraId": "44271",
