@@ -1,0 +1,21 @@
+{
+    "name": "@service-auth/stack-service_auth",
+    "private": true,
+    "exports": {
+        ".": "./dist/index.js"
+    },
+    "scripts": {
+        "format": "biome format --write",
+        "ignore:test:type": "tsc",
+        "ignore:cdk:synth": "cdk synth",
+        "ignore:cdk:dev:deploy": "cdk deploy -m direct --no-rollback --asset-parallelism true",
+        "ignore:cdk:dev": "cdk deploy -m direct --no-rollback --asset-parallelism true --hotswap-fallback"
+    },
+    "devDependencies": {
+        "@infra/lib-common": "workspace:*",
+        "aws-cdk-lib": "^2.212.0",
+        "cdk-nag": "^2.37.15",
+        "constructs": "^10.4.2"
+    },
+    "type": "module"
+}
