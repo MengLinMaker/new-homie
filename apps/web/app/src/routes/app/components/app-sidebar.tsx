@@ -11,6 +11,7 @@ import {
 import { AppSidebarContent } from '@/routes/app/components/app-sidebar-content'
 import { AppSidebarHeader } from '@/routes/app/components/app-sidebar-header'
 import { Sidebar, SidebarContent, SidebarHeader } from '@/components/ui/sidebar'
+import { AppSidebarContentDashboards } from './app-sidebar-content-dashboards'
 
 const data = {
     user: {
@@ -131,6 +132,7 @@ export function AppSidebar() {
                 <AppSidebarHeader />
             </SidebarHeader>
             <SidebarContent>
+                <AppSidebarContentDashboards />
                 <AppSidebarContent items={data.navMain} />
             </SidebarContent>
         </Sidebar>
