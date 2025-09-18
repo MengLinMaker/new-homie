@@ -1,3 +1,6 @@
+# ENV
+.env
+
 # Output
 dist
 .tanstack
