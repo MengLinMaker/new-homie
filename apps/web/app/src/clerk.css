@@ -1,0 +1,11 @@
+.user-profile-container {
+    container-type: inline-size;
+}
+
+.cl-userProfile-root {
+    width: 100%;
+}
+
+.cl-userProfile-root .cl-cardBox {
+    width: 100%;
+}
