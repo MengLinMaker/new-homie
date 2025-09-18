@@ -4,12 +4,14 @@
     "type": "module",
     "scripts": {
         "format": "biome format --write",
-        "dev": "vite --port 8080",
+        "shad": "shadcn add",
+        "dev": "vite --port 5000",
         "build": "vite build",
         "serve": "vite preview",
         "test:type": "tsc"
     },
     "dependencies": {
+        "@clerk/clerk-react": "^5.47.0",
         "@tailwindcss/vite": "^4.1.13",
         "@tanstack/react-devtools": "^0.2.2",
         "@tanstack/react-router": "^1.131.44",
@@ -19,6 +21,7 @@
         "clsx": "^2.1.1",
         "lucide-react": "^0.476.0",
         "react": "^19.1.1",
+        "react-aria-components": "^1.12.2",
         "react-dom": "^19.1.1",
         "tailwind-merge": "^3.3.1",
         "tailwindcss": "^4.1.13",
@@ -31,6 +34,7 @@
         "@types/react-dom": "^19.1.9",
         "@vitejs/plugin-react": "^4.7.0",
         "jsdom": "^26.1.0",
+        "shadcn": "^3.3.0",
         "typescript": "^5.9.2",
         "vite": "^6.3.6",
         "web-vitals": "^4.2.4"
