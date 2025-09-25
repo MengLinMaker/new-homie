@@ -8,39 +8,89 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppPathlessLayoutRouteImport } from './routes/app/_pathlessLayout'
+import { Route as AppPathlessLayoutIndexRouteImport } from './routes/app/_pathlessLayout/index'
+import { Route as AppPathlessLayoutProfileIndexRouteImport } from './routes/app/_pathlessLayout/profile/index'
 
+const AppRouteImport = createFileRoute('/app')()
+
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppPathlessLayoutRoute = AppPathlessLayoutRouteImport.update({
+  id: '/_pathlessLayout',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPathlessLayoutIndexRoute = AppPathlessLayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppPathlessLayoutRoute,
+} as any)
+const AppPathlessLayoutProfileIndexRoute =
+  AppPathlessLayoutProfileIndexRouteImport.update({
+    id: '/profile/',
+    path: '/profile/',
+    getParentRoute: () => AppPathlessLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppPathlessLayoutRouteWithChildren
+  '/app/': typeof AppPathlessLayoutIndexRoute
+  '/app/profile': typeof AppPathlessLayoutProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppPathlessLayoutIndexRoute
+  '/app/profile': typeof AppPathlessLayoutProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/_pathlessLayout': typeof AppPathlessLayoutRouteWithChildren
+  '/app/_pathlessLayout/': typeof AppPathlessLayoutIndexRoute
+  '/app/_pathlessLayout/profile/': typeof AppPathlessLayoutProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/app' | '/app/' | '/app/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/app' | '/app/profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/_pathlessLayout'
+    | '/app/_pathlessLayout/'
+    | '/app/_pathlessLayout/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +98,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/_pathlessLayout': {
+      id: '/app/_pathlessLayout'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppPathlessLayoutRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/_pathlessLayout/': {
+      id: '/app/_pathlessLayout/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppPathlessLayoutIndexRouteImport
+      parentRoute: typeof AppPathlessLayoutRoute
+    }
+    '/app/_pathlessLayout/profile/': {
+      id: '/app/_pathlessLayout/profile/'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppPathlessLayoutProfileIndexRouteImport
+      parentRoute: typeof AppPathlessLayoutRoute
+    }
   }
 }
 
+interface AppPathlessLayoutRouteChildren {
+  AppPathlessLayoutIndexRoute: typeof AppPathlessLayoutIndexRoute
+  AppPathlessLayoutProfileIndexRoute: typeof AppPathlessLayoutProfileIndexRoute
+}
+
+const AppPathlessLayoutRouteChildren: AppPathlessLayoutRouteChildren = {
+  AppPathlessLayoutIndexRoute: AppPathlessLayoutIndexRoute,
+  AppPathlessLayoutProfileIndexRoute: AppPathlessLayoutProfileIndexRoute,
+}
+
+const AppPathlessLayoutRouteWithChildren =
+  AppPathlessLayoutRoute._addFileChildren(AppPathlessLayoutRouteChildren)
+
+interface AppRouteChildren {
+  AppPathlessLayoutRoute: typeof AppPathlessLayoutRouteWithChildren
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppPathlessLayoutRoute: AppPathlessLayoutRouteWithChildren,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

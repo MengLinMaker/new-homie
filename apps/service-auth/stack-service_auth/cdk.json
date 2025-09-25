@@ -1,0 +1,17 @@
+{
+    "app": "node src/app.ts",
+    "requireApproval": "never",
+    "staging": false,
+    "watch": {
+        "include": ["**"],
+        "exclude": [
+            "README.md",
+            "cdk.json",
+            "tsconfig.json",
+            "package*.json",
+            "node_modules",
+            "test"
+        ]
+    },
+    "context": {}
+}
