@@ -91,12 +91,7 @@ export function AppSidebarHeader() {
             </Skeleton>
         )
     }
-    if (isSignedIn)
-        return (
-            <>
-                <ProfileDropDown />
-            </>
-        )
+    if (isSignedIn) return <ProfileDropDown />
     return (
         <SignInButton>
             <SidebarMenuButton className="border">
