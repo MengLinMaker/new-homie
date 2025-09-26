@@ -11,6 +11,47 @@ const resourcePath = `${import.meta.dirname}/${testSuiteName}`
 describe(testSuiteName, () => {
     const domainListingsService = new DomainListingsService(LOGGER)
 
+    describe('expectedNoMatchingPrice', () => {
+        it('should return true for non-matching prices', () => {
+            const inputs = [
+                'No number',
+                'Contact agent 0400 400 400',
+                'Auction 12345',
+                'Expressions of Interest 12345',
+                'Call agent 12345',
+                'Offers over 12345',
+                '5pm',
+                '5:30pm',
+                '11am',
+                '11:30am',
+                '30/09/2025',
+                '30-09-2025',
+            ]
+            for (const input of inputs)
+                expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
+        })
+
+        it('should return false for matching prices', () => {
+            const inputs = [
+                '$580,000 - $638,999',
+                '$580000 - $638999',
+                '$580,000',
+                '$580000',
+                '$580k - $638k',
+                '$580k',
+                'From $580,000',
+                'Up to $638,999',
+                '$580pw - $638pw',
+                '$580pw',
+                '$580 per week',
+                'From $580 per week',
+                'Up to $638 per week',
+            ]
+            for (const input of inputs)
+                expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(false)
+        })
+    })
+
     describe('highestSalePriceFromString', () => {
         it('should extract highest 6-7 digit numbers', () => {
             const expected = 638999
@@ -92,6 +133,28 @@ describe(testSuiteName, () => {
         it('should not extract invalid input', () => {
             const result = domainListingsService.tryExtractListings({ nextDataJson: {} })
             expect(result).toBeNull()
+        })
+
+        it('should not extract invalid input - invalid record', () => {
+            const result = domainListingsService.tryExtractListings({
+                nextDataJson: {
+                    props: {
+                        pageProps: {
+                            componentProps: {
+                                currentPage: 1,
+                                totalPages: 1,
+                                listingsMap: {
+                                    invalid: { invalid: 'data' },
+                                },
+                            },
+                        },
+                    },
+                },
+            })
+            expect(result).toStrictEqual({
+                isLastPage: true,
+                listings: [],
+            })
         })
     })
 

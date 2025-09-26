@@ -70,12 +70,12 @@ export class StackServiceScrapePipeline extends cdk.Stack {
         )
         QueueScrapeLocality.grantSendMessages(FunctionScrapeLocalityTrigger)
 
-        // Schedule trigger at 7am Saturday AEST
+        // Schedule trigger at 1am Saturday AEST
         new events.Rule(this, 'ScrapeLocalityTriggerEvent', {
             enabled: props?.production ?? false,
             schedule: events.Schedule.cron({
                 minute: '0',
-                hour: '21',
+                hour: '15',
                 weekDay: '6',
             }),
             targets: [new targets.LambdaFunction(FunctionScrapeLocalityTrigger)],

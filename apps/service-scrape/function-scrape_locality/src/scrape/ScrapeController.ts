@@ -44,6 +44,7 @@ export class ScrapeController extends IDatabased {
     }) {
         try {
             const { suburb, state, postcode } = args
+            this.log('info', this.tryExtractSuburbPage, `Extracting ${suburb} ${state} ${postcode}`)
             const url = new URL(
                 `https://www.domain.com.au/suburb-profile/${suburb}-${state}-${postcode}`
                     .replaceAll(' ', '-')
