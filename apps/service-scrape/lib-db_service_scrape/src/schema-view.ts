@@ -6,7 +6,7 @@ import type {
     DB as DB_Tables,
 } from './schema'
 
-export interface LatestSaleView {
+interface LatestSaleView {
     // sale_price_table columns
     aud_per_bed: number
     aud_per_land_m2: number
@@ -35,7 +35,7 @@ export interface LatestSaleView {
     suburb_name: string
 }
 
-export interface LatestRentView {
+interface LatestRentView {
     // sale_price_table columns
     aud_per_bed: number
     aud_per_land_m2: number
@@ -64,7 +64,29 @@ export interface LatestRentView {
     suburb_name: string
 }
 
+interface SchoolView {
+    // school_table columns
+    acara_id: number
+    gps: string
+    locality_table_id: number
+    name: string
+    school_feature_table_id: number
+    url: string | null
+    // school_feature_table columns
+    government_sector: boolean
+    independent: boolean
+    primary: boolean
+    secondary: boolean
+    special_needs: boolean
+    // locality_table columns
+    boundary_coordinates: string
+    postcode: string
+    state_abbreviation: StateAbbreviationEnum
+    suburb_name: string
+}
+
 export interface DB extends DB_Tables {
     latest_sale_view: LatestSaleView
     latest_rent_view: LatestRentView
+    school_view: SchoolView
 }
