@@ -120,7 +120,7 @@ export class DomainSuburbService extends ILoggable {
                 ),
             } satisfies DomainListingsDTO
         } catch (e) {
-            this.logException('error', this.tryExtractProfile, e)
+            this.logExceptionArgs('error', this.tryExtractProfile, args, e)
             return null
         }
     }
