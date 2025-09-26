@@ -1,4 +1,10 @@
-import type { Generated, HomeTypeEnum, StateAbbreviationEnum, Timestamp } from './schema'
+import type {
+    Generated,
+    HomeTypeEnum,
+    StateAbbreviationEnum,
+    Timestamp,
+    DB as DB_Tables,
+} from './schema'
 
 export interface LatestSaleView {
     // sale_price_table columns
@@ -58,7 +64,7 @@ export interface LatestRentView {
     suburb_name: string
 }
 
-export interface DB {
+export interface DB extends DB_Tables {
     latest_sale_view: LatestSaleView
     latest_rent_view: LatestRentView
 }
