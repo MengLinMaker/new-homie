@@ -3,7 +3,10 @@
         "list": [
             {
                 "builtIn": 1,
-                "datasource": { "type": "grafana", "uid": "-- Grafana --" },
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
                 "enable": true,
                 "hide": true,
                 "iconColor": "rgba(0, 211, 255, 1)",
@@ -15,11 +18,17 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
+    "id": 0,
     "links": [],
     "panels": [
         {
             "collapsed": false,
-            "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
             "id": 10,
             "panels": [],
             "repeat": "service_name",
@@ -27,26 +36,52 @@
             "type": "row"
         },
         {
-            "datasource": { "uid": "loki" },
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
             "fieldConfig": {
                 "defaults": {
-                    "color": { "fixedColor": "green", "mode": "fixed" },
+                    "color": {
+                        "fixedColor": "green",
+                        "mode": "fixed"
+                    },
                     "custom": {
                         "fillOpacity": 80,
                         "gradientMode": "none",
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
                         "lineWidth": 1,
-                        "stacking": { "group": "A", "mode": "none" }
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        }
                     },
                     "fieldMinMax": false,
                     "mappings": [],
                     "min": 0,
-                    "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] },
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            }
+                        ]
+                    },
                     "unit": "ms"
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 1 },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 1
+            },
             "id": 12,
             "options": {
                 "combine": false,
@@ -56,9 +91,13 @@
                     "placement": "bottom",
                     "showLegend": false
                 },
-                "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
             },
-            "pluginVersion": "12.0.2",
+            "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
                 {
                     "direction": "backward",
@@ -76,7 +115,11 @@
                     "options": {
                         "delimiter": ",",
                         "format": "kvp",
-                        "jsonPaths": [{ "path": "object.args" }],
+                        "jsonPaths": [
+                            {
+                                "path": "object.args"
+                            }
+                        ],
                         "keepTime": false,
                         "regExp": "/(args_page)/",
                         "replace": false,
@@ -85,13 +128,21 @@
                 },
                 {
                     "id": "filterFieldsByName",
-                    "options": { "include": { "names": [], "pattern": "faas_duration" } }
+                    "options": {
+                        "include": {
+                            "names": [],
+                            "pattern": "faas_duration"
+                        }
+                    }
                 },
                 {
                     "id": "convertFieldType",
                     "options": {
                         "conversions": [
-                            { "destinationType": "number", "targetField": "faas_duration" }
+                            {
+                                "destinationType": "number",
+                                "targetField": "faas_duration"
+                            }
                         ],
                         "fields": {}
                     }
@@ -101,53 +152,89 @@
             "type": "histogram"
         },
         {
-            "datasource": { "uid": "loki" },
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
             "fieldConfig": {
                 "defaults": {
-                    "color": { "fixedColor": "green", "mode": "fixed" },
+                    "color": {
+                        "fixedColor": "green",
+                        "mode": "fixed"
+                    },
                     "custom": {
                         "axisBorderShow": false,
                         "axisCenteredZero": false,
                         "axisColorMode": "text",
                         "axisLabel": "",
                         "axisPlacement": "auto",
-                        "fillOpacity": 100,
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "pointShape": "circle",
-                        "pointSize": { "fixed": 3 },
-                        "pointStrokeWidth": 1,
-                        "scaleDistribution": { "type": "linear" },
-                        "show": "points"
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "points",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 2,
+                        "scaleDistribution": {
+                            "log": 2,
+                            "type": "log"
+                        },
+                        "showPoints": "auto",
+                        "showValues": false,
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
                     },
                     "fieldMinMax": false,
                     "mappings": [],
                     "max": 900000,
                     "min": 0,
-                    "thresholds": { "mode": "absolute", "steps": [{ "color": "green" }] },
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            }
+                        ]
+                    },
                     "unit": "ms"
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 7 },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            },
             "id": 13,
             "options": {
                 "legend": {
-                    "calcs": ["sum", "min", "p25", "median", "p99", "max"],
+                    "calcs": [],
                     "displayMode": "list",
                     "placement": "bottom",
                     "showLegend": true
                 },
-                "mapping": "auto",
-                "series": [
-                    {
-                        "frame": { "matcher": { "id": "byIndex", "options": 0 } },
-                        "x": { "matcher": { "id": "byName", "options": "faas_time" } },
-                        "y": { "matcher": { "id": "byName", "options": "faas_duration" } }
-                    }
-                ],
-                "tooltip": { "hideZeros": false, "mode": "single", "sort": "none" }
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
             },
-            "pluginVersion": "12.0.2",
+            "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
                 {
                     "direction": "backward",
@@ -165,7 +252,11 @@
                     "options": {
                         "delimiter": ",",
                         "format": "kvp",
-                        "jsonPaths": [{ "path": "object.args" }],
+                        "jsonPaths": [
+                            {
+                                "path": "object.args"
+                            }
+                        ],
                         "keepTime": false,
                         "regExp": "/(args_page)/",
                         "replace": false,
@@ -174,40 +265,73 @@
                 },
                 {
                     "id": "filterFieldsByName",
-                    "options": { "include": { "pattern": "(faas_time|faas_duration)" } }
+                    "options": {
+                        "include": {
+                            "pattern": "(faas_time|faas_duration)"
+                        }
+                    }
                 },
                 {
                     "id": "convertFieldType",
                     "options": {
                         "conversions": [
-                            { "destinationType": "number", "targetField": "faas_duration" },
-                            { "destinationType": "time", "targetField": "faas_time" }
+                            {
+                                "destinationType": "number",
+                                "targetField": "faas_duration"
+                            },
+                            {
+                                "destinationType": "time",
+                                "targetField": "faas_time"
+                            }
                         ],
                         "fields": {}
                     }
                 }
             ],
             "transparent": true,
-            "type": "xychart"
+            "type": "timeseries"
         },
         {
-            "datasource": { "uid": "loki" },
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
             "fieldConfig": {
                 "defaults": {
                     "custom": {
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "scaleDistribution": { "type": "linear" }
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "scaleDistribution": {
+                            "type": "linear"
+                        }
                     }
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 13 },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 13
+            },
             "id": 5,
             "options": {
                 "calculate": false,
                 "calculation": {
-                    "xBuckets": { "mode": "size", "value": "" },
-                    "yBuckets": { "mode": "size", "scale": { "type": "linear" }, "value": "" }
+                    "xBuckets": {
+                        "mode": "size",
+                        "value": ""
+                    },
+                    "yBuckets": {
+                        "mode": "size",
+                        "scale": {
+                            "type": "linear"
+                        },
+                        "value": ""
+                    }
                 },
                 "cellGap": 0,
                 "color": {
@@ -215,19 +339,34 @@
                     "fill": "orange",
                     "min": 0,
                     "mode": "scheme",
-                    "reverse": true,
+                    "reverse": false,
                     "scale": "linear",
                     "scheme": "YlOrRd",
                     "steps": 128
                 },
-                "exemplars": { "color": "rgba(255,0,255,0.7)" },
-                "filterValues": { "le": 1e-9 },
-                "legend": { "show": true },
-                "rowsFrame": { "layout": "unknown" },
-                "tooltip": { "mode": "multi", "showColorScale": false, "yHistogram": false },
-                "yAxis": { "axisPlacement": "hidden", "reverse": false }
+                "exemplars": {
+                    "color": "rgba(255,0,255,0.7)"
+                },
+                "filterValues": {
+                    "le": 1e-9
+                },
+                "legend": {
+                    "show": true
+                },
+                "rowsFrame": {
+                    "layout": "unknown"
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "showColorScale": false,
+                    "yHistogram": false
+                },
+                "yAxis": {
+                    "axisPlacement": "hidden",
+                    "reverse": false
+                }
             },
-            "pluginVersion": "12.0.2",
+            "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
                 {
                     "direction": "backward",
@@ -237,10 +376,14 @@
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
-                    "step": "1m"
+                    "step": "1s"
                 },
                 {
-                    "datasource": { "name": "Expression", "type": "__expr__", "uid": "__expr__" },
+                    "datasource": {
+                        "name": "Expression",
+                        "type": "__expr__",
+                        "uid": "__expr__"
+                    },
                     "downsampler": "sum",
                     "expression": "Source",
                     "hide": false,
@@ -252,9 +395,18 @@
             ],
             "title": "detected_level heatmap",
             "transformations": [
-                { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
                 {
-                    "filter": { "id": "byRefId", "options": "" },
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "Time",
+                        "mode": "outer"
+                    }
+                },
+                {
+                    "filter": {
+                        "id": "byRefId",
+                        "options": ""
+                    },
                     "id": "organize",
                     "options": {
                         "excludeByName": {
@@ -291,23 +443,46 @@
             "type": "heatmap"
         },
         {
-            "datasource": { "uid": "loki" },
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
             "fieldConfig": {
                 "defaults": {
                     "custom": {
-                        "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                        "scaleDistribution": { "type": "linear" }
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "scaleDistribution": {
+                            "type": "linear"
+                        }
                     }
                 },
                 "overrides": []
             },
-            "gridPos": { "h": 6, "w": 24, "x": 0, "y": 19 },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 19
+            },
             "id": 9,
             "options": {
                 "calculate": false,
                 "calculation": {
-                    "xBuckets": { "mode": "size", "value": "" },
-                    "yBuckets": { "mode": "size", "scale": { "type": "linear" }, "value": "" }
+                    "xBuckets": {
+                        "mode": "size",
+                        "value": ""
+                    },
+                    "yBuckets": {
+                        "mode": "size",
+                        "scale": {
+                            "type": "linear"
+                        },
+                        "value": ""
+                    }
                 },
                 "cellGap": 0,
                 "color": {
@@ -315,19 +490,34 @@
                     "fill": "orange",
                     "min": 0,
                     "mode": "scheme",
-                    "reverse": true,
+                    "reverse": false,
                     "scale": "linear",
                     "scheme": "YlOrRd",
                     "steps": 128
                 },
-                "exemplars": { "color": "rgba(255,0,255,0.7)" },
-                "filterValues": { "le": 1e-9 },
-                "legend": { "show": true },
-                "rowsFrame": { "layout": "unknown" },
-                "tooltip": { "mode": "multi", "showColorScale": false, "yHistogram": false },
-                "yAxis": { "axisPlacement": "hidden", "reverse": false }
+                "exemplars": {
+                    "color": "rgba(255,0,255,0.7)"
+                },
+                "filterValues": {
+                    "le": 1e-9
+                },
+                "legend": {
+                    "show": true
+                },
+                "rowsFrame": {
+                    "layout": "unknown"
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "showColorScale": false,
+                    "yHistogram": false
+                },
+                "yAxis": {
+                    "axisPlacement": "hidden",
+                    "reverse": false
+                }
             },
-            "pluginVersion": "12.0.2",
+            "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
                 {
                     "direction": "backward",
@@ -337,10 +527,14 @@
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
-                    "step": "1m"
+                    "step": "1s"
                 },
                 {
-                    "datasource": { "name": "Expression", "type": "__expr__", "uid": "__expr__" },
+                    "datasource": {
+                        "name": "Expression",
+                        "type": "__expr__",
+                        "uid": "__expr__"
+                    },
                     "downsampler": "sum",
                     "expression": "Source",
                     "hide": false,
@@ -352,7 +546,13 @@
             ],
             "title": "code_function_name heatmap",
             "transformations": [
-                { "id": "joinByField", "options": { "byField": "Time", "mode": "outer" } },
+                {
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "Time",
+                        "mode": "outer"
+                    }
+                },
                 {
                     "id": "organize",
                     "options": {
@@ -398,67 +598,140 @@
             "type": "heatmap"
         },
         {
-            "datasource": { "uid": "loki" },
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
             "fieldConfig": {
                 "defaults": {
                     "custom": {
                         "align": "auto",
-                        "cellOptions": { "type": "auto", "wrapText": false },
+                        "cellOptions": {
+                            "type": "auto"
+                        },
                         "filterable": true,
-                        "inspect": true
+                        "footer": {
+                            "reducers": []
+                        },
+                        "inspect": true,
+                        "wrapText": false
                     },
                     "mappings": [],
                     "thresholds": {
                         "mode": "absolute",
-                        "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
                     }
                 },
                 "overrides": [
                     {
-                        "matcher": { "id": "byName", "options": "Line" },
-                        "properties": [{ "id": "custom.width", "value": 426 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Line"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 426
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "trace_id" },
-                        "properties": [{ "id": "custom.width", "value": 94 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "trace_id"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 94
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "labels" },
-                        "properties": [{ "id": "custom.width", "value": 144 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "labels"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 144
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "code_function_name" },
-                        "properties": [{ "id": "custom.width", "value": 357 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "code_function_name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 357
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "code_function_args" },
-                        "properties": [{ "id": "custom.width", "value": 21 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "code_function_args"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 21
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "exception_type" },
-                        "properties": [{ "id": "custom.width", "value": 152 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "exception_type"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 152
+                            }
+                        ]
                     },
                     {
-                        "matcher": { "id": "byName", "options": "exception_stacktrace" },
-                        "properties": [{ "id": "custom.width", "value": 45 }]
+                        "matcher": {
+                            "id": "byName",
+                            "options": "exception_stacktrace"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 45
+                            }
+                        ]
                     }
                 ]
             },
-            "gridPos": { "h": 9, "w": 24, "x": 0, "y": 25 },
+            "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 25
+            },
             "id": 15,
             "options": {
                 "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "enablePagination": true,
-                    "fields": "",
-                    "reducer": ["sum"],
-                    "show": false
-                },
+                "enablePagination": true,
                 "showHeader": true,
                 "sortBy": []
             },
-            "pluginVersion": "12.0.2",
+            "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
                 {
                     "direction": "backward",
@@ -470,13 +743,24 @@
             ],
             "title": "detected_level exception logs",
             "transformations": [
-                { "id": "filterFieldsByName", "options": { "include": { "pattern": "(labels)" } } },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "pattern": "(labels)"
+                        }
+                    }
+                },
                 {
                     "id": "extractFields",
                     "options": {
                         "delimiter": ",",
                         "format": "kvp",
-                        "jsonPaths": [{ "path": "object.args" }],
+                        "jsonPaths": [
+                            {
+                                "path": "object.args"
+                            }
+                        ],
                         "keepTime": false,
                         "regExp": "/(args_page)/",
                         "replace": false,
@@ -540,7 +824,8 @@
         }
     ],
     "preload": false,
-    "schemaVersion": 41,
+    "refresh": "",
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
         "list": [
@@ -548,22 +833,73 @@
                 "auto": true,
                 "auto_count": 100,
                 "auto_min": "1s",
-                "current": { "text": "1s", "value": "1s" },
+                "current": {
+                    "text": "10s",
+                    "value": "10s"
+                },
                 "description": "",
                 "name": "heatmap_interval",
                 "options": [
-                    { "selected": true, "text": "1s", "value": "1s" },
-                    { "selected": false, "text": "2s", "value": "2s" },
-                    { "selected": false, "text": "5s", "value": "5s" },
-                    { "selected": false, "text": "10s", "value": "10s" },
-                    { "selected": false, "text": "20s", "value": "20s" },
-                    { "selected": false, "text": "30s", "value": "30s" },
-                    { "selected": false, "text": "1m", "value": "1m" },
-                    { "selected": false, "text": "2m", "value": "2m" },
-                    { "selected": false, "text": "5m", "value": "5m" },
-                    { "selected": false, "text": "10m", "value": "10m" },
-                    { "selected": false, "text": "15m", "value": "15m" },
-                    { "selected": false, "text": "20m", "value": "20m" }
+                    {
+                        "selected": false,
+                        "text": "1s",
+                        "value": "1s"
+                    },
+                    {
+                        "selected": false,
+                        "text": "2s",
+                        "value": "2s"
+                    },
+                    {
+                        "selected": false,
+                        "text": "5s",
+                        "value": "5s"
+                    },
+                    {
+                        "selected": true,
+                        "text": "10s",
+                        "value": "10s"
+                    },
+                    {
+                        "selected": false,
+                        "text": "20s",
+                        "value": "20s"
+                    },
+                    {
+                        "selected": false,
+                        "text": "30s",
+                        "value": "30s"
+                    },
+                    {
+                        "selected": false,
+                        "text": "1m",
+                        "value": "1m"
+                    },
+                    {
+                        "selected": false,
+                        "text": "2m",
+                        "value": "2m"
+                    },
+                    {
+                        "selected": false,
+                        "text": "5m",
+                        "value": "5m"
+                    },
+                    {
+                        "selected": false,
+                        "text": "10m",
+                        "value": "10m"
+                    },
+                    {
+                        "selected": false,
+                        "text": "15m",
+                        "value": "15m"
+                    },
+                    {
+                        "selected": false,
+                        "text": "20m",
+                        "value": "20m"
+                    }
                 ],
                 "query": "1s,2s,5s,10s,20s,30s,1m,2m,5m,10m,15m,20m",
                 "refresh": 2,
@@ -571,25 +907,55 @@
             },
             {
                 "allowCustomValue": false,
-                "current": { "text": "$__all", "value": "$__all" },
+                "current": {
+                    "text": ["error", "warn"],
+                    "value": ["error", "warn"]
+                },
                 "description": "",
                 "includeAll": true,
                 "multi": true,
                 "name": "log_level",
                 "options": [
-                    { "selected": false, "text": "fatal", "value": "fatal" },
-                    { "selected": false, "text": "error", "value": "error" },
-                    { "selected": false, "text": "warn", "value": "warn" },
-                    { "selected": false, "text": "info", "value": "info" },
-                    { "selected": false, "text": "debug", "value": "debug" },
-                    { "selected": false, "text": "trace", "value": "trace" }
+                    {
+                        "selected": false,
+                        "text": "fatal",
+                        "value": "fatal"
+                    },
+                    {
+                        "selected": true,
+                        "text": "error",
+                        "value": "error"
+                    },
+                    {
+                        "selected": true,
+                        "text": "warn",
+                        "value": "warn"
+                    },
+                    {
+                        "selected": false,
+                        "text": "info",
+                        "value": "info"
+                    },
+                    {
+                        "selected": false,
+                        "text": "debug",
+                        "value": "debug"
+                    },
+                    {
+                        "selected": false,
+                        "text": "trace",
+                        "value": "trace"
+                    }
                 ],
                 "query": "fatal,error,warn,info,debug,trace",
                 "type": "custom"
             },
             {
                 "allowCustomValue": false,
-                "current": { "text": ["$__all"], "value": ["$__all"] },
+                "current": {
+                    "text": ["function-scrape_locality"],
+                    "value": ["function-scrape_locality"]
+                },
                 "description": "",
                 "includeAll": true,
                 "label": "service_name",
@@ -602,7 +968,7 @@
                         "value": "function-scrape_locality_trigger"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "function-scrape_locality",
                         "value": "function-scrape_locality"
                     }
@@ -612,10 +978,13 @@
             }
         ]
     },
-    "time": { "from": "now-6h", "to": "now" },
+    "time": {
+        "from": "now-30m",
+        "to": "now"
+    },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 61
+    "version": 60
 }
