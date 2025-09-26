@@ -13,7 +13,7 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             outFile: path.join(import.meta.dirname, '../schema.ts'),
             dialect: 'postgres',
             url: connectionString,
-            includePattern: '*_(table|view)',
+            includePattern: '*_(table)',
             runtimeEnums: false,
         })
         console.debug('Kysely code generated')
