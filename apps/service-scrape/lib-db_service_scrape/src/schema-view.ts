@@ -1,4 +1,4 @@
-import type { HomeTypeEnum, StateAbbreviationEnum, Timestamp } from "./schema"
+import type { HomeTypeEnum, StateAbbreviationEnum, Timestamp } from './schema'
 
 export interface LatestSaleView {
     auction_time: Timestamp | null
