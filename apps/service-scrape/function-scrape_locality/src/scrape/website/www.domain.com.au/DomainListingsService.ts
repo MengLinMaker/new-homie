@@ -39,7 +39,7 @@ const listingsSchema = z.object({
             lng: z.number().nullish(),
         }),
         features: z.object({
-            beds: z.number().catch(0),
+            beds: z.number().min(1),
             baths: z.number().catch(0),
             parking: z.number().catch(0),
             propertyType: z.enum(HomeTypeEnum),
