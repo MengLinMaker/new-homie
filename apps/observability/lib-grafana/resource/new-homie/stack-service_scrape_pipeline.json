@@ -167,7 +167,9 @@
                         "axisCenteredZero": false,
                         "axisColorMode": "text",
                         "axisLabel": "",
-                        "axisPlacement": "auto",
+                        "axisPlacement": "hidden",
+                        "axisSoftMax": 900000,
+                        "axisSoftMin": 500,
                         "barAlignment": 0,
                         "barWidthFactor": 0.6,
                         "drawStyle": "points",
@@ -194,7 +196,7 @@
                             "mode": "none"
                         },
                         "thresholdsStyle": {
-                            "mode": "off"
+                            "mode": "line"
                         }
                     },
                     "fieldMinMax": false,
@@ -207,6 +209,22 @@
                             {
                                 "color": "green",
                                 "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 2000
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 10000
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 300000
+                            },
+                            {
+                                "color": "red",
+                                "value": 900000
                             }
                         ]
                     },
@@ -226,7 +244,7 @@
                     "calcs": [],
                     "displayMode": "list",
                     "placement": "bottom",
-                    "showLegend": true
+                    "showLegend": false
                 },
                 "tooltip": {
                     "hideZeros": false,
@@ -834,8 +852,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "10s",
-                    "value": "10s"
+                    "text": "2s",
+                    "value": "2s"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -846,7 +864,7 @@
                         "value": "1s"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "2s",
                         "value": "2s"
                     },
@@ -856,7 +874,7 @@
                         "value": "5s"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "10s",
                         "value": "10s"
                     },
@@ -979,12 +997,12 @@
         ]
     },
     "time": {
-        "from": "now-30m",
+        "from": "now-1h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 60
+    "version": 64
 }
