@@ -1,4 +1,8 @@
-import { DB_SERVICE_SCRAPE, getKyselyPostgresDb } from '@service-scrape/lib-db_service_scrape'
+import {
+    DB_SERVICE_SCRAPE,
+    getKyselyPostgresDb,
+    type SchemaWrite,
+} from '@service-scrape/lib-db_service_scrape'
 import { BrowserService } from '../scrape/website/BrowserService'
 import { ScrapeController } from '../scrape/ScrapeController'
 import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
@@ -22,7 +26,7 @@ const logLambdaException = (msg: string, args?: object) => {
     )
 }
 
-const DB = getKyselyPostgresDb(DB_SERVICE_SCRAPE)
+const DB = getKyselyPostgresDb<SchemaWrite.DB>(DB_SERVICE_SCRAPE)
 if (!DB) throw logLambdaException(`FATAL ${SERVICE_NAME} database connection`)
 
 export const browserService = new BrowserService(LOGGER)

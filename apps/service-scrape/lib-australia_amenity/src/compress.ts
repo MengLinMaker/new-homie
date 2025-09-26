@@ -2,7 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { notInAustralia, readBrotliJson, roundPlaces, tryCatchError } from './util.ts'
 import z from 'zod'
 import '@service-scrape/lib-db_service_scrape'
-import { createPostgisPointString, type Schema } from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPointString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 
 /**
@@ -178,7 +178,7 @@ console.info('Completed writing "australia-amenities.json"')
             suburb_name: address.City,
             state_abbreviation: address.StateProvince,
             postcode: address.PostalCode,
-        } satisfies Updateable<Schema.LocalityTable>
+        } satisfies Updateable<SchemaWrite.LocalityTable>
         localities.set(JSON.stringify(locality_table), locality_table)
         return {
             school_table: {
@@ -199,9 +199,9 @@ console.info('Completed writing "australia-amenities.json"')
             },
             locality_table,
         } satisfies {
-            school_table: Updateable<Schema.SchoolTable>
-            school_feature_table: Updateable<Schema.SchoolFeatureTable>
-            locality_table: Updateable<Schema.LocalityTable>
+            school_table: Updateable<SchemaWrite.SchoolTable>
+            school_feature_table: Updateable<SchemaWrite.SchoolFeatureTable>
+            locality_table: Updateable<SchemaWrite.LocalityTable>
         }
     })
     writeFileSync(

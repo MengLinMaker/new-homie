@@ -1,4 +1,4 @@
-import { createPostgisPolygonString, type Schema } from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPolygonString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
@@ -9,7 +9,7 @@ const _boundaryGeoJsonSchema = z.object({
     coordinates: z.array(z.array(z.array(z.number()).length(2))),
 })
 
-const StateAbbreviationEnum: Schema.StateAbbreviationEnum[] = [
+const StateAbbreviationEnum: SchemaWrite.StateAbbreviationEnum[] = [
     'ACT',
     'NSW',
     'NT',
@@ -159,7 +159,7 @@ export class DomainSuburbService extends ILoggable {
                     suburb_name: args.rawSuburbData.suburb.name,
                     state_abbreviation: args.rawSuburbData.suburb.state,
                     boundary_coordinates: boundaryCoord,
-                } satisfies Updateable<Schema.LocalityTable>,
+                } satisfies Updateable<SchemaWrite.LocalityTable>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformProfile, args, e)
