@@ -1,9 +1,12 @@
 import { z } from 'zod'
-import { type Schema, tryCreatePostgisPointString } from '@service-scrape/lib-db_service_scrape'
+import {
+    type SchemaWrite,
+    tryCreatePostgisPointString,
+} from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { ILoggable } from '@observability/lib-opentelemetry'
 
-const HomeTypeEnum: Schema.HomeTypeEnum[] = [
+const HomeTypeEnum: SchemaWrite.HomeTypeEnum[] = [
     'Apartment',
     'ApartmentUnitFlat',
     'BlockOfUnits',
@@ -169,14 +172,14 @@ export class DomainListingsService extends ILoggable {
                     car_quantity: features.parking,
                     home_type: features.propertyType,
                     is_retirement: features.isRetirement,
-                } satisfies Updateable<Schema.HomeFeatureTable>,
+                } satisfies Updateable<SchemaWrite.HomeFeatureTable>,
                 home_table: {
                     street_address: address.street,
                     gps: tryCreatePostgisPointString(address.lng, address.lat),
                     land_m2: features.landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime),
                     auction_time: this.parseDatetime(listingModel.auction),
-                } satisfies Updateable<Schema.HomeTable>,
+                } satisfies Updateable<SchemaWrite.HomeTable>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformListing, args, e)
@@ -209,7 +212,7 @@ export class DomainListingsService extends ILoggable {
                     higher_price_aud: price,
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<Schema.SalePriceTable>,
+                } satisfies Updateable<SchemaWrite.SalePriceTable>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformSalePrice, args, e)
@@ -242,7 +245,7 @@ export class DomainListingsService extends ILoggable {
                     weekly_rent_aud: price,
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<Schema.RentPriceTable>,
+                } satisfies Updateable<SchemaWrite.RentPriceTable>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformRentPrice, args, e)

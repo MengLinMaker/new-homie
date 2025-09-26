@@ -1,8 +1,6 @@
 import { Kysely, PostgresDialect } from 'kysely'
 import { z } from 'zod'
 
-import type { DB } from './schema.ts'
-
 // CommonJS import only - no ESM support available
 import pgImport from 'pg'
 const { Pool } = pgImport
@@ -12,7 +10,7 @@ const { Pool } = pgImport
  * @link Kysely docs: https://kysely.dev/
  */
 
-export const getKyselyPostgresDb = (postgresUri: string) => {
+export const getKyselyPostgresDb = <DB>(postgresUri: string) => {
     try {
         const validUri = z.url().parse(postgresUri)
         const db = new Kysely<DB>({

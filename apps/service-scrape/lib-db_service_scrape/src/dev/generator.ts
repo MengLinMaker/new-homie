@@ -10,7 +10,7 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
     try {
         const codegenCli = new Cli()
         await codegenCli.generate({
-            outFile: path.join(import.meta.dirname, '../schema.ts'),
+            outFile: path.join(import.meta.dirname, '../schema-write.ts'),
             dialect: 'postgres',
             url: connectionString,
             includePattern: '*_(table)',

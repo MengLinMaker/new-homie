@@ -6,7 +6,7 @@ import type { Insertable, Updateable } from 'kysely'
 import {
     createPostgisPointString,
     createPostgisPolygonString,
-    type Schema,
+    type SchemaWrite,
 } from '@service-scrape/lib-db_service_scrape'
 import { afterEach, beforeEach } from 'node:test'
 
@@ -40,7 +40,7 @@ describe(testSuiteName, async () => {
             state_abbreviation: 'VIC',
             postcode: '3000',
             boundary_coordinates,
-        } satisfies Insertable<Schema.LocalityTable>
+        } satisfies Insertable<SchemaWrite.LocalityTable>
         const suburbData = { locality_table }
 
         it.sequential('should not insert same data', async () => {
@@ -124,9 +124,9 @@ describe(testSuiteName, async () => {
     describe.sequential('tryUpdateRentListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
         const rentData: {
-            home_feature_table: Updateable<Schema.HomeFeatureTable>
-            home_table: Updateable<Schema.HomeTable>
-            rent_price_table: Updateable<Schema.RentPriceTable>
+            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
+            home_table: Updateable<SchemaWrite.HomeTable>
+            rent_price_table: Updateable<SchemaWrite.RentPriceTable>
         } = {
             home_feature_table: {
                 bath_quantity: 1,
@@ -212,9 +212,9 @@ describe(testSuiteName, async () => {
     describe.sequential('tryUpdateSaleListing', () => {
         vi.setSystemTime(new Date(0).toISOString())
         const saleData: {
-            home_feature_table: Updateable<Schema.HomeFeatureTable>
-            home_table: Updateable<Schema.HomeTable>
-            sale_price_table: Updateable<Schema.SalePriceTable>
+            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
+            home_table: Updateable<SchemaWrite.HomeTable>
+            sale_price_table: Updateable<SchemaWrite.SalePriceTable>
         } = {
             home_feature_table: {
                 bath_quantity: 1,

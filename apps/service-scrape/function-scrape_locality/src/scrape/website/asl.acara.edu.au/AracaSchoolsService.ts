@@ -1,6 +1,6 @@
 import { australiaSchools } from '@service-scrape/lib-australia_amenity'
 import type { Updateable } from 'kysely'
-import type { Schema } from '@service-scrape/lib-db_service_scrape'
+import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { ILoggable } from '@observability/lib-opentelemetry'
 
 export class AracaSchoolsService extends ILoggable {
@@ -24,8 +24,8 @@ export class AracaSchoolsService extends ILoggable {
                 school_feature_table: school.school_feature_table,
                 school_table: school.school_table,
             } satisfies {
-                school_feature_table: Updateable<Schema.SchoolFeatureTable>
-                school_table: Updateable<Schema.SchoolTable>
+                school_feature_table: Updateable<SchemaWrite.SchoolFeatureTable>
+                school_table: Updateable<SchemaWrite.SchoolTable>
             }
         })
     }

@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { BrowserService } from '../src/scrape/website/BrowserService'
 import path from 'node:path'
 import type { Kysely } from 'kysely'
-import type { Schema } from '@service-scrape/lib-db_service_scrape'
+import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { OpenTelemetry } from '@observability/lib-opentelemetry'
 
 export const suiteNameFromFileName = (filePath: string) =>
@@ -24,7 +24,7 @@ export class MockBrowserService extends BrowserService {
     }
 }
 
-export const dbCountRow = async (db: Kysely<Schema.DB>, tableName: keyof Schema.DB) =>
+export const dbCountRow = async (db: Kysely<SchemaWrite.DB>, tableName: keyof SchemaWrite.DB) =>
     (await db.selectFrom(tableName).select('id').execute()).length
 
 const otel = new OpenTelemetry()

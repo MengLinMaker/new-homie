@@ -1,7 +1,7 @@
 import { type Kysely, sql } from 'kysely'
-import type { DB } from '../schema.ts'
+import type { DB } from '../schema-write.ts'
 
-export async function up(db: Kysely<DB>): Promise<void> {
+export async function up(db: Kysely<DB>) {
     await db.schema
         .createType('state_abbreviation_enum')
         .asEnum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'])
@@ -28,7 +28,7 @@ export async function up(db: Kysely<DB>): Promise<void> {
         .execute()
 }
 
-export async function down(db: Kysely<DB>): Promise<void> {
+export async function down(db: Kysely<DB>) {
     await db.schema.dropType('state_abbreviation_enum').execute()
     await db.schema.dropTable('common_features_table').execute()
 }

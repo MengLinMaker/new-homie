@@ -3,6 +3,7 @@ import { promises as fs } from 'node:fs'
 import { Migrator, FileMigrationProvider } from 'kysely'
 
 import { getKyselyPostgresDb } from '../connection.ts'
+import type { DB } from '../schema-write.ts'
 
 /**
  * Migrates postgis database
@@ -15,7 +16,7 @@ export const kyselyPostgisMigrate = async (
     migrationFolder: string = `${import.meta.dirname}/../migration`,
 ) => {
     console.debug(`DATABASE MIGRATION from ${path.join(import.meta.dirname, '../migration')}`)
-    const db = getKyselyPostgresDb(connectionString)
+    const db = getKyselyPostgresDb<DB>(connectionString)
     if (db === null) {
         console.error('MIGRATION FAILED - Invalid uri or database is not running')
         return db

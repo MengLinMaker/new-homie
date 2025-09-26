@@ -1,5 +1,6 @@
 import { getKyselyPostgresDb } from './connection.ts'
-import * as Schema from './schema.ts'
+import * as SchemaWrite from './schema-write.ts'
+import * as SchemaRead from './schema-read.ts'
 import { createPostgisPointString, createPostgisPolygonString } from './util.ts'
 
 import { config } from 'dotenv'
@@ -15,7 +16,8 @@ export const DB_SERVICE_SCRAPE =
 
 export {
     getKyselyPostgresDb,
-    Schema,
+    SchemaWrite,
+    SchemaRead,
     createPostgisPointString,
     tryCreatePostgisPointString,
     createPostgisPolygonString,

@@ -3,7 +3,7 @@ import { DomainListingsService } from './website/www.domain.com.au/DomainListing
 import { ScrapeUtilService } from './website/ScrapeUtilService'
 import type { BrowserService } from './website/BrowserService'
 import type { Kysely } from 'kysely'
-import type { Schema } from '@service-scrape/lib-db_service_scrape'
+import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbService'
 import { ScrapeModel } from './website/ScrapeModel'
 import { AracaSchoolsService } from './website/asl.acara.edu.au/AracaSchoolsService'
@@ -11,7 +11,7 @@ import type { Logger } from '@observability/lib-opentelemetry'
 
 export class ScrapeController extends IDatabased {
     readonly browserService
-    constructor(logger: Logger, db: Kysely<Schema.DB>, browserService: BrowserService) {
+    constructor(logger: Logger, db: Kysely<SchemaWrite.DB>, browserService: BrowserService) {
         super(logger, db)
         this.browserService = browserService
     }
@@ -39,7 +39,7 @@ export class ScrapeController extends IDatabased {
      */
     async tryExtractSuburbPage(args: {
         suburb: string
-        state: string | Schema.StateAbbreviationEnum
+        state: string | SchemaWrite.StateAbbreviationEnum
         postcode: string
     }) {
         try {
@@ -69,7 +69,7 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractSchools(args: {
         suburb: string
-        state: string | Schema.StateAbbreviationEnum
+        state: string | SchemaWrite.StateAbbreviationEnum
         postcode: string
         localityId: number
     }) {
@@ -87,7 +87,7 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractRentsPage(args: {
         suburb: string
-        state: string | Schema.StateAbbreviationEnum
+        state: string | SchemaWrite.StateAbbreviationEnum
         postcode: string
         page: number
         localityId: number
@@ -127,7 +127,7 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractSalesPage(args: {
         suburb: string
-        state: string | Schema.StateAbbreviationEnum
+        state: string | SchemaWrite.StateAbbreviationEnum
         postcode: string
         page: number
         localityId: number

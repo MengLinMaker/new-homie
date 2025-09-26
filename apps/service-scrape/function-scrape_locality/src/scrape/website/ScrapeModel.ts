@@ -1,12 +1,12 @@
 import type { Updateable } from 'kysely'
 import { IDatabased } from '../../global/IDatabased'
-import type { Schema } from '@service-scrape/lib-db_service_scrape'
+import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 
 export class ScrapeModel extends IDatabased {
-    private async conflictInsertReturnId<T extends keyof Schema.DB>(
+    private async conflictInsertReturnId<T extends keyof SchemaWrite.DB>(
         tableName: T,
-        conflictColumns: Array<keyof Updateable<Schema.DB[T]>>,
-        values: Updateable<Schema.DB[T]>,
+        conflictColumns: Array<keyof Updateable<SchemaWrite.DB[T]>>,
+        values: Updateable<SchemaWrite.DB[T]>,
     ) {
         return await this.DB.insertInto(tableName)
             .values(values as never)
@@ -17,7 +17,7 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSuburb(args: {
         suburbData: {
-            locality_table: Updateable<Schema.LocalityTable>
+            locality_table: Updateable<SchemaWrite.LocalityTable>
         }
     }) {
         const { suburbData } = args
@@ -35,8 +35,8 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSchool(args: {
         schoolData: {
-            school_table: Updateable<Schema.SchoolTable>
-            school_feature_table: Updateable<Schema.SchoolFeatureTable>
+            school_table: Updateable<SchemaWrite.SchoolTable>
+            school_feature_table: Updateable<SchemaWrite.SchoolFeatureTable>
         }
         localityId: number
     }) {
@@ -59,8 +59,8 @@ export class ScrapeModel extends IDatabased {
 
     private async updateListing(args: {
         listingData: {
-            home_feature_table: Updateable<Schema.HomeFeatureTable>
-            home_table: Updateable<Schema.HomeTable>
+            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
+            home_table: Updateable<SchemaWrite.HomeTable>
         }
         localityId: number
     }) {
@@ -81,9 +81,9 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateRentListing(args: {
         rentData: {
-            home_feature_table: Updateable<Schema.HomeFeatureTable>
-            home_table: Updateable<Schema.HomeTable>
-            rent_price_table: Updateable<Schema.RentPriceTable>
+            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
+            home_table: Updateable<SchemaWrite.HomeTable>
+            rent_price_table: Updateable<SchemaWrite.RentPriceTable>
         }
         localityId: number
     }) {
@@ -127,9 +127,9 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSaleListing(args: {
         saleData: {
-            home_feature_table: Updateable<Schema.HomeFeatureTable>
-            home_table: Updateable<Schema.HomeTable>
-            sale_price_table: Updateable<Schema.SalePriceTable>
+            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
+            home_table: Updateable<SchemaWrite.HomeTable>
+            sale_price_table: Updateable<SchemaWrite.SalePriceTable>
         }
         localityId: number
     }) {
