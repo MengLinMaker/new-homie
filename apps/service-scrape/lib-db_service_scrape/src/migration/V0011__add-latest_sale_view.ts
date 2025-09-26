@@ -32,17 +32,17 @@ export async function up(db: Kysely<DB>) {
             'auction_time',
             // home_feature_table columns
             'home_feature_table_id',
-            'suburb_name',
-            'state_abbreviation',
-            'postcode',
-            'boundary_coordinates',
-            // locality_table columns
-            'locality_table_id',
             'bed_quantity',
             'bath_quantity',
             'car_quantity',
             'home_type',
             'is_retirement',
+            // locality_table columns
+            'locality_table_id',
+            'suburb_name',
+            'state_abbreviation',
+            'postcode',
+            'boundary_coordinates',
         ])
         .where('last_scrape_date', '=', highest_last_scrape_date)
     await db.schema.createView('latest_sale_view').as(latest_sale_view).execute()
