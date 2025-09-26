@@ -54,33 +54,12 @@ export class BrowserService extends ILoggable {
         }
     }
 
-    private retry<T>(asyncFn: () => Promise<T>, retries = 3, delayMs = 0): Promise<T> {
-        return new Promise((resolve, reject) => {
-            const attempt = async (n: number) => {
-                try {
-                    const result = await asyncFn()
-                    resolve(result)
-                } catch (error) {
-                    if (n === 0) {
-                        reject(error)
-                    } else {
-                        setTimeout(() => attempt(n - 1), delayMs)
-                    }
-                }
-            }
-            attempt(retries)
-        })
-    }
-
     async getHTML(url: string) {
         await this.launchSingleBrowser()
         // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
         const page = await BrowserService.browser.browserContexts()[0]!.newPage()
         try {
-            // Short timeout to prevent hanging scrapes
-            this.retry(async () => {
-                await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
-            })
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
             const html = await page.content()
             await page.close()
             return html
