@@ -2,6 +2,11 @@ import type { Kysely } from 'kysely'
 import type { DB } from '../schema.ts'
 
 export async function up(db: Kysely<DB>) {
+    await db.schema
+        .createIndex('sale_price_table_last_scrape_date_idx')
+        .on('sale_price_table')
+        .column('last_scrape_date')
+        .execute()
     const highest_last_scrape_date = db
         .selectFrom('sale_price_table')
         // @ts-expect-error: Kysely bug with aggregate functions in subqueries
@@ -45,4 +50,5 @@ export async function up(db: Kysely<DB>) {
 
 export async function down(db: Kysely<DB>) {
     db.schema.dropView('latest_sale_view').execute()
+    db.schema.dropIndex('sale_price_table_last_scrape_date_idx').execute()
 }
