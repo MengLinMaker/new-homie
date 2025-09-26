@@ -29,6 +29,36 @@ export interface LatestSaleView {
     suburb_name: string
 }
 
+export interface LatestRentView {
+    // sale_price_table columns
+    aud_per_bed: number
+    aud_per_land_m2: number
+    first_scrape_date: Generated<Timestamp>
+    weekly_rent_aud: number
+    home_table_id: number
+    last_scrape_date: Generated<Timestamp>
+    // home_table columns
+    auction_time: Timestamp | null
+    gps: string | null
+    home_feature_table_id: number
+    inspection_time: Timestamp | null
+    land_m2: number
+    locality_table_id: number
+    street_address: string
+    // home_feature_table columns
+    bath_quantity: number
+    bed_quantity: number
+    car_quantity: number
+    home_type: HomeTypeEnum
+    is_retirement: boolean
+    // locality_table columns
+    boundary_coordinates: string
+    postcode: string
+    state_abbreviation: StateAbbreviationEnum
+    suburb_name: string
+}
+
 export interface DB {
     latest_sale_view: LatestSaleView
+    latest_rent_view: LatestRentView
 }
