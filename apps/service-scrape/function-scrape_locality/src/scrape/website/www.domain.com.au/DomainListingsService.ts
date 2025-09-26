@@ -77,11 +77,11 @@ export class DomainListingsService extends ILoggable {
         // No number to extract
         if (!priceString.match(/\d/i)) return true
         // Requires agent contact
-        if (!priceString.match(/(auction|call|contact|offer|expression)/i)) return true
+        if (priceString.match(/(auction|call|contact|offer|expression)/i)) return true
         // Contains a time
-        if (!priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
+        if (priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
         // Contains a date
-        if (!priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
+        if (priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
         return false
     }
 
