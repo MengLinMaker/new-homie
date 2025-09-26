@@ -66,7 +66,7 @@ const nextDataJsonSchema = z.object({
             componentProps: z.object({
                 currentPage: z.number().min(1),
                 totalPages: z.number().min(0),
-                listingsMap: z.record(z.string(), listingsSchema),
+                listingsMap: z.record(z.string(), listingsSchema.nullable().catch(null)),
             }),
         }),
     }),
@@ -144,7 +144,7 @@ export class DomainListingsService extends ILoggable {
             const lastPageNumber = validNextjson.props.pageProps.componentProps.totalPages
             const listings = Object.values(
                 validNextjson.props.pageProps.componentProps.listingsMap,
-            ) as ListingsSchemaDTO[]
+            ).filter((listing) => !!listing) as ListingsSchemaDTO[]
             const isLastPage = lastPageNumber <= currentPageNumber
             return { listings, isLastPage }
         } catch (e) {

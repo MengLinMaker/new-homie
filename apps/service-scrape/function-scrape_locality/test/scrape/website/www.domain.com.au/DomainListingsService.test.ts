@@ -134,6 +134,28 @@ describe(testSuiteName, () => {
             const result = domainListingsService.tryExtractListings({ nextDataJson: {} })
             expect(result).toBeNull()
         })
+
+        it('should not extract invalid input - invalid record', () => {
+            const result = domainListingsService.tryExtractListings({
+                nextDataJson: {
+                    props: {
+                        pageProps: {
+                            componentProps: {
+                                currentPage: 1,
+                                totalPages: 1,
+                                listingsMap: {
+                                    invalid: { invalid: 'data' },
+                                },
+                            },
+                        },
+                    },
+                },
+            })
+            expect(result).toStrictEqual({
+                isLastPage: true,
+                listings: [],
+            })
+        })
     })
 
     describe('tryTransformListing', () => {
