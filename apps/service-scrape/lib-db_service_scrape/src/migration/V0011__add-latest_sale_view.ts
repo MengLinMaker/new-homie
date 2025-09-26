@@ -21,18 +21,21 @@ export async function up(db: Kysely<DB>) {
                     'higher_price_aud',
                     'aud_per_bed',
                     'aud_per_land_m2',
-                    //  home_table columns
+                    // home_table columns
+                    'home_table_id',
                     'street_address',
                     'gps',
                     'land_m2',
                     'inspection_time',
                     'auction_time',
                     // home_feature_table columns
+                    'home_feature_table_id',
                     'suburb_name',
                     'state_abbreviation',
                     'postcode',
                     'boundary_coordinates',
                     // locality_table columns
+                    'locality_table_id',
                     'bed_quantity',
                     'bath_quantity',
                     'car_quantity',

@@ -11,11 +11,14 @@ export interface LatestSaleView {
     first_scrape_date: Timestamp
     gps: string | null
     higher_price_aud: number
+    home_feature_table_id: number
+    home_table_id: number
     home_type: HomeTypeEnum
     inspection_time: Timestamp | null
     is_retirement: boolean
     land_m2: number
     last_scrape_date: Timestamp
+    locality_table_id: number
     postcode: string
     state_abbreviation: StateAbbreviationEnum
     street_address: string
