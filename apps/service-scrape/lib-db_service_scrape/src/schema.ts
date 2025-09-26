@@ -55,28 +55,6 @@ export interface HomeTable {
     street_address: string
 }
 
-export interface LatestSaleView {
-    auction_time: Timestamp | null
-    aud_per_bed: number | null
-    aud_per_land_m2: number | null
-    bath_quantity: number | null
-    bed_quantity: number | null
-    boundary_coordinates: string | null
-    car_quantity: number | null
-    first_scrape_date: Timestamp | null
-    gps: string | null
-    higher_price_aud: number | null
-    home_type: HomeTypeEnum | null
-    inspection_time: Timestamp | null
-    is_retirement: boolean | null
-    land_m2: number | null
-    last_scrape_date: Timestamp | null
-    postcode: string | null
-    state_abbreviation: StateAbbreviationEnum | null
-    street_address: string | null
-    suburb_name: string | null
-}
-
 export interface LocalityTable {
     boundary_coordinates: string
     id: Generated<number>
@@ -127,7 +105,6 @@ export interface SchoolTable {
 export interface DB {
     home_feature_table: HomeFeatureTable
     home_table: HomeTable
-    latest_sale_view: LatestSaleView
     locality_table: LocalityTable
     rent_price_table: RentPriceTable
     sale_price_table: SalePriceTable
