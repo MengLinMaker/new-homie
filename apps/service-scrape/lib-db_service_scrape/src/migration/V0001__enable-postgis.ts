@@ -1,5 +1,5 @@
 import { type Kysely, sql } from 'kysely'
-import type { DB } from '../schema.ts'
+import type { DB } from '../schema-write.ts'
 
 export async function up(db: Kysely<DB>) {
     await sql`CREATE EXTENSION IF NOT EXISTS postgis`.execute(db)

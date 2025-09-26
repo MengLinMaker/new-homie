@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import type { Insertable } from 'kysely'
 
 import { createPostgisPointString, createPostgisPolygonString } from '../src/util'
-import type { DB } from '../src/schema'
+import type { DB } from '../src/schema-write'
 import { setupTestPostgisDb } from '../src/dev'
 
 describe('schema.ts', async () => {

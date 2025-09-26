@@ -4,7 +4,7 @@ import type {
     StateAbbreviationEnum,
     Timestamp,
     DB as DB_Tables,
-} from './schema'
+} from './schema-write'
 
 interface LatestSaleView {
     // sale_price_table columns
