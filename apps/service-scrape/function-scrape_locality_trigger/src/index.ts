@@ -3,6 +3,7 @@ import middy from '@middy/core'
 import { EventBridgeSchema } from '@aws-lambda-powertools/parser/schemas'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
+import { excludeLocalitySet } from './exclude-locality'
 
 // Setup OpenTelemetry and connections
 import { LOGGER, SERVICE_NAME } from './global/setup'
@@ -26,6 +27,7 @@ export const handler = middy().handler(async (_event, _context) => {
 
     const filteredLocality = australiaLocalities.filter((locality) => {
         if (!locality.postcode) return false
+        if (excludeLocalitySet.has(JSON.stringify(locality))) return false
         const postcode = parseInt(locality.postcode, 10)
         return metroPostcode.VIC.includes(postcode)
     })
