@@ -148,7 +148,7 @@ export class DomainListingsService extends ILoggable {
             const isLastPage = lastPageNumber <= currentPageNumber
             return { listings, isLastPage }
         } catch (e) {
-            this.logException('error', this.tryExtractListings, e)
+            this.logExceptionArgs('error', this.tryExtractListings, args, e)
             return null
         }
     }
