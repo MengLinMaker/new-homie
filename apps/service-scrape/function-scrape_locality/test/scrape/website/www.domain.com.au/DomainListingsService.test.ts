@@ -33,14 +33,14 @@ describe(testSuiteName, () => {
 
         it('should return false for matching prices', () => {
             const inputs = [
-                '$580,000 - $638,999',
-                '$580000 - $638999',
+                '$580,000 - $638,000',
+                '$580000 - $638000',
                 '$580,000',
                 '$580000',
                 '$580k - $638k',
                 '$580k',
                 'From $580,000',
-                'Up to $638,999',
+                'Up to $638,000',
                 '$580pw - $638pw',
                 '$580pw',
                 '$580 per week',
@@ -53,15 +53,22 @@ describe(testSuiteName, () => {
     })
 
     describe('highestSalePriceFromString', () => {
-        it('should extract highest 6-7 digit numbers', () => {
-            const expected = 638999
+        it('should extract highest 6-7 digit number', () => {
+            const expected = 638000
             const inputs = [
-                '580000-638999',
-                '580000 638999',
-                '580,000-638,999',
-                '580,000 638,999',
-                '638999',
-                '638,999',
+                '638k',
+                '638K',
+                '$638k',
+                '638000',
+                '638,000',
+                '$638000',
+                '$638,000',
+                '580k-638k',
+                '$580k-$638k',
+                '580000-638000',
+                '580000 638000',
+                '580,000-638,000',
+                '580,000 638,000',
             ]
             for (const input of inputs)
                 expect(domainListingsService.highestSalePriceFromString(input)).toBe(expected)
@@ -89,6 +96,13 @@ describe(testSuiteName, () => {
     })
 
     describe('highestRentPriceFromString', () => {
+        it('should extract highest valid number', () => {
+            const expected = 315
+            const inputs = ['315', '$315', '315pw', '$315pw', '315 per week', '$315 per week']
+            for (const input of inputs)
+                expect(domainListingsService.highestRentPriceFromString(input)).toBe(expected)
+        })
+
         it('should extract 3 and 4 digit numbers', () => {
             expect(domainListingsService.highestRentPriceFromString('123')).toBe(123)
             expect(domainListingsService.highestRentPriceFromString('1234')).toBe(1234)

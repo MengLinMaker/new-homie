@@ -90,13 +90,25 @@ export class DomainListingsService extends ILoggable {
      * @returns Integer price
      */
     highestSalePriceFromString(priceString: string) {
-        const prices = priceString
-            .replaceAll(',', '') // Remove commas from numbers
+        const digitPrices = priceString
+            .replaceAll(',', '')
             .matchAll(/\b\d{5,7}\b/g) // Integer totalling 5-7 digits - assume 5 digit houses don't exist
             .toArray()
-        if (prices.length === 0) return null
-        const priceList = prices.map((match) => Number.parseFloat(match.toString()))
-        return Math.max(...priceList)
+        if (digitPrices.length !== 0) {
+            const priceList = digitPrices.map((match) => Number.parseFloat(match.toString()))
+            return Math.max(...priceList)
+        }
+        const kPrices = priceString
+            .replaceAll(',', '')
+            .matchAll(/\b\d{2,3}k\b/gi) // Integer totalling 2-3 digits followed by 'k' or 'K'
+            .toArray()
+        if (kPrices.length !== 0) {
+            const priceList = kPrices.map((match) =>
+                Number.parseFloat(match.toString().toLowerCase().replace('k', '')),
+            )
+            return Math.max(...priceList) * 1000
+        }
+        return null
     }
 
     /**
@@ -108,7 +120,7 @@ export class DomainListingsService extends ILoggable {
             .replaceAll(/\b\d{3}\b \b\d{4}\b \b\d{4}\b/g, '') // Replace phone numbers
             .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
             .replaceAll(',', '') // Remove commas from numbers
-            .matchAll(/\b\d{3,4}\b/g) // Integer totalling 3-4 digits
+            .matchAll(/\b\d{3,4}(pw)?\b/g) // Integer totalling 3-4 digits
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))
@@ -148,7 +160,7 @@ export class DomainListingsService extends ILoggable {
             const isLastPage = lastPageNumber <= currentPageNumber
             return { listings, isLastPage }
         } catch (e) {
-            this.logException('error', this.tryExtractListings, e)
+            this.logExceptionArgs('error', this.tryExtractListings, args, e)
             return null
         }
     }
