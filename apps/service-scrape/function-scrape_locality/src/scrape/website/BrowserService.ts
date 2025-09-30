@@ -4,6 +4,7 @@ import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import asyncRetry from 'async-retry'
 
 /**
  * Launches single browser and context.
@@ -59,7 +60,12 @@ export class BrowserService extends ILoggable {
         // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
         const page = await BrowserService.browser.browserContexts()[0]!.newPage()
         try {
-            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
+            await asyncRetry(
+                async () => await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 }),
+                {
+                    retries: 3,
+                },
+            )
             const html = await page.content()
             await page.close()
             return html
