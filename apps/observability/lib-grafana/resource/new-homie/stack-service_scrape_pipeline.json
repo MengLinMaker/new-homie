@@ -84,6 +84,7 @@
             },
             "id": 12,
             "options": {
+                "bucketSize": 5000,
                 "combine": false,
                 "legend": {
                     "calcs": [],
@@ -163,6 +164,227 @@
                         "mode": "fixed"
                     },
                     "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "footer": {
+                            "reducers": []
+                        },
+                        "inspect": false
+                    },
+                    "fieldMinMax": false,
+                    "mappings": [],
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            }
+                        ]
+                    },
+                    "unit": "ms"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "95th %"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 110
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Total"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 105
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Min"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 91
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Median"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 101
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "99th %"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 105
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            },
+            "id": 16,
+            "options": {
+                "cellHeight": "sm",
+                "showHeader": true
+            },
+            "pluginVersion": "12.2.0-17638611789.patch2",
+            "targets": [
+                {
+                    "direction": "backward",
+                    "editorMode": "builder",
+                    "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
+                    "hide": false,
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "faas_duration",
+            "transformations": [
+                {
+                    "id": "extractFields",
+                    "options": {
+                        "delimiter": ",",
+                        "format": "kvp",
+                        "jsonPaths": [
+                            {
+                                "path": "object.args"
+                            }
+                        ],
+                        "keepTime": false,
+                        "regExp": "/(args_page)/",
+                        "replace": false,
+                        "source": "labels"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "names": [],
+                            "pattern": "faas_duration"
+                        }
+                    }
+                },
+                {
+                    "id": "convertFieldType",
+                    "options": {
+                        "conversions": [
+                            {
+                                "destinationType": "number",
+                                "targetField": "faas_duration"
+                            }
+                        ],
+                        "fields": {}
+                    }
+                },
+                {
+                    "id": "transpose",
+                    "options": {}
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "include": [],
+                            "reducer": "sum"
+                        }
+                    }
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "reducer": "min"
+                        }
+                    }
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "reducer": "median"
+                        }
+                    }
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "reducer": "p95"
+                        }
+                    }
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "reducer": "p99"
+                        }
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "pattern": "(Total|Min|Median|95th %|99th %|Max)"
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "grafanacloud-logs"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "fixedColor": "green",
+                        "mode": "fixed"
+                    },
+                    "custom": {
                         "axisBorderShow": false,
                         "axisCenteredZero": false,
                         "axisColorMode": "text",
@@ -216,7 +438,7 @@
                             },
                             {
                                 "color": "yellow",
-                                "value": 10000
+                                "value": 15000
                             },
                             {
                                 "color": "yellow",
@@ -236,7 +458,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 7
+                "y": 10
             },
             "id": 13,
             "options": {
@@ -333,7 +555,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 13
+                "y": 16
             },
             "id": 5,
             "options": {
@@ -484,7 +706,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 19
+                "y": 22
             },
             "id": 9,
             "options": {
@@ -706,7 +928,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 21
+                                "value": 50
                             }
                         ]
                     },
@@ -718,7 +940,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 152
+                                "value": 50
                             }
                         ]
                     },
@@ -733,6 +955,18 @@
                                 "value": 45
                             }
                         ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "exception_message"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 1170
+                            }
+                        ]
                     }
                 ]
             },
@@ -740,14 +974,19 @@
                 "h": 9,
                 "w": 24,
                 "x": 0,
-                "y": 25
+                "y": 28
             },
             "id": 15,
             "options": {
                 "cellHeight": "sm",
                 "enablePagination": true,
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "exception_message"
+                    }
+                ]
             },
             "pluginVersion": "12.2.0-17638611789.patch2",
             "targets": [
@@ -765,6 +1004,10 @@
                     "id": "filterFieldsByName",
                     "options": {
                         "include": {
+                            "names": [
+                                "labels",
+                                "Line"
+                            ],
                             "pattern": "(labels)"
                         }
                     }
@@ -789,6 +1032,14 @@
                     "id": "filterFieldsByName",
                     "options": {
                         "include": {
+                            "names": [
+                                "code_function_name",
+                                "exception_message",
+                                "exception_stacktrace",
+                                "exception_type",
+                                "code_function_args",
+                                "Line"
+                            ],
                             "pattern": "(code_function_name|code_function_args|exception_type|exception_stacktrace|exception_message)"
                         }
                     }
@@ -842,7 +1093,6 @@
         }
     ],
     "preload": false,
-    "refresh": "",
     "schemaVersion": 42,
     "tags": [],
     "templating": {
@@ -852,8 +1102,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "2s",
-                    "value": "2s"
+                    "text": "30s",
+                    "value": "30s"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -864,7 +1114,7 @@
                         "value": "1s"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "2s",
                         "value": "2s"
                     },
@@ -884,7 +1134,7 @@
                         "value": "20s"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "30s",
                         "value": "30s"
                     },
@@ -926,8 +1176,12 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["error", "warn"],
-                    "value": ["error", "warn"]
+                    "text": [
+                        "error"
+                    ],
+                    "value": [
+                        "error"
+                    ]
                 },
                 "description": "",
                 "includeAll": true,
@@ -945,7 +1199,7 @@
                         "value": "error"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "warn",
                         "value": "warn"
                     },
@@ -971,8 +1225,12 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["function-scrape_locality"],
-                    "value": ["function-scrape_locality"]
+                    "text": [
+                        "function-scrape_locality"
+                    ],
+                    "value": [
+                        "function-scrape_locality"
+                    ]
                 },
                 "description": "",
                 "includeAll": true,
@@ -997,12 +1255,12 @@
         ]
     },
     "time": {
-        "from": "now-1h",
-        "to": "now"
+        "from": "2025-09-26T16:00:00.000Z",
+        "to": "2025-09-26T18:15:00.000Z"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 64
+    "version": 73
 }
