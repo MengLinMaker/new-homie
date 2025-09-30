@@ -1004,10 +1004,7 @@
                     "id": "filterFieldsByName",
                     "options": {
                         "include": {
-                            "names": [
-                                "labels",
-                                "Line"
-                            ],
+                            "names": ["labels", "Line"],
                             "pattern": "(labels)"
                         }
                     }
@@ -1176,12 +1173,8 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": [
-                        "error"
-                    ],
-                    "value": [
-                        "error"
-                    ]
+                    "text": ["error"],
+                    "value": ["error"]
                 },
                 "description": "",
                 "includeAll": true,
@@ -1225,12 +1218,8 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": [
-                        "function-scrape_locality"
-                    ],
-                    "value": [
-                        "function-scrape_locality"
-                    ]
+                    "text": ["function-scrape_locality"],
+                    "value": ["function-scrape_locality"]
                 },
                 "description": "",
                 "includeAll": true,
