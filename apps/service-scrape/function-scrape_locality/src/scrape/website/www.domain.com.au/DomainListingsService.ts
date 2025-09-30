@@ -124,7 +124,6 @@ export class DomainListingsService extends ILoggable {
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))
-        console.log('priceList', priceList)
         return Math.max(...priceList)
     }
 
