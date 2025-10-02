@@ -1,3 +1,5 @@
+/// <reference path="../../.sst/platform/config.d.ts" />
+
 import { OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
