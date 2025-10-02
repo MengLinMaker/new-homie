@@ -44,9 +44,9 @@ const BucketChromeAsset =
     $app.stage === 'production'
         ? new sst.aws.Bucket('BucketChromeAsset')
         : sst.aws.Bucket.get(
-            'BucketChromeAsset',
-            'new-homie-production-bucketchromeassetbucket-mdosnrof',
-        )
+              'BucketChromeAsset',
+              'new-homie-production-bucketchromeassetbucket-mdosnrof',
+          )
 // Use same bucket and key - manually chrome tar upload
 const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
 
