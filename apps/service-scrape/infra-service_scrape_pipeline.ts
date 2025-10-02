@@ -4,9 +4,14 @@ import path from 'node:path'
 
 const dirname = './apps/service-scrape'
 
+
 /**
  * 1. Trigger scrape pipeline 1am WED and SAT AEST
- */
+*/
+const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
+    fifo: true,
+    visibilityTimeout: '20 minutes', // Above lambda timeout
+})
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
     handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
     architecture: 'arm64',
@@ -14,6 +19,7 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     memory: '1769 MB',
     timeout: '5 seconds',
     concurrency: { reserved: 1 },
+    link: [QueueScrapeLocality],
 })
 new sst.aws.Cron(`ScrapeLocalityTrigger`, {
     // UTC 15:00 = AEST 1am next day
@@ -25,10 +31,6 @@ new sst.aws.Cron(`ScrapeLocalityTrigger`, {
 /**
  * 2. FunctionScrapeLocalityTrigger adds jobs to QueueScrapeLocality
  */
-const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
-    fifo: true,
-    visibilityTimeout: '20 minutes', // Above lambda timeout
-})
 FunctionScrapeLocalityTrigger.addEnvironment({
     ...OTEL_ENV,
     QUEUE_URL: QueueScrapeLocality.url,
@@ -41,9 +43,9 @@ const BucketChromeAsset =
     $app.stage === 'production'
         ? new sst.aws.Bucket('BucketChromeAsset')
         : sst.aws.Bucket.get(
-              'BucketChromeAsset',
-              'new-homie-production-bucketchromeassetbucket-mdosnrof',
-          )
+            'BucketChromeAsset',
+            'new-homie-production-bucketchromeassetbucket-mdosnrof',
+        )
 // Use same bucket and key - manually chrome tar upload
 const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
 
