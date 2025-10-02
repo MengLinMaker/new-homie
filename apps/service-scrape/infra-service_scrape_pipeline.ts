@@ -4,10 +4,9 @@ import path from 'node:path'
 
 const dirname = './apps/service-scrape'
 
-
 /**
  * 1. Trigger scrape pipeline 1am WED and SAT AEST
-*/
+ */
 const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
     fifo: true,
     visibilityTimeout: '20 minutes', // Above lambda timeout
@@ -43,9 +42,9 @@ const BucketChromeAsset =
     $app.stage === 'production'
         ? new sst.aws.Bucket('BucketChromeAsset')
         : sst.aws.Bucket.get(
-            'BucketChromeAsset',
-            'new-homie-production-bucketchromeassetbucket-mdosnrof',
-        )
+              'BucketChromeAsset',
+              'new-homie-production-bucketchromeassetbucket-mdosnrof',
+          )
 // Use same bucket and key - manually chrome tar upload
 const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
 
