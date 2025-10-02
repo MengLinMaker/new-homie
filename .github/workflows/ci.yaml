@@ -64,7 +64,7 @@ jobs:
         uses: ./.github/actions/setup-ci
 
       - name: Deploy SST infrastructure
-        run: pnpm sst deploy --continue --stage ${{ github.head_ref || github.ref_name }}
+        run: pnpm sst deploy --continue --stage ${{ github.head_ref }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
