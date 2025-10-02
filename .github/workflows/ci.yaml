@@ -52,6 +52,7 @@ jobs:
 
   test-sst:
     name: Test SST - infrastructure deployment
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Deep checkout branch
