@@ -8,7 +8,6 @@ const dirname = './apps/service-scrape'
  * 1. Trigger scrape pipeline 1am WED and SAT AEST
  */
 const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
-    fifo: true,
     visibilityTimeout: '20 minutes', // Above lambda timeout
 })
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
