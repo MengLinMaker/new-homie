@@ -2,8 +2,7 @@
     "name": "@infra/deploy",
     "private": true,
     "scripts": {
-        "test:type": "tsc",
-        "cdk:deploy:production": "cdk deploy --all --asset-parallelism true"
+        "test:type": "tsc"
     },
     "type": "module",
     "devDependencies": {
