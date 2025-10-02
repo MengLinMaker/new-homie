@@ -1,7 +1,7 @@
-new sst.aws.StaticSite("WebApp", {
-    domain: "www.newhomie.org",
+new sst.aws.StaticSite('WebApp', {
+    domain: 'www.newhomie.org',
     build: {
-        command: "npm run build",
-        output: "dist"
-    }
+        command: 'npm run build',
+        output: 'dist',
+    },
 })
