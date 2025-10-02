@@ -36,7 +36,8 @@
             "!**/.puppeteer",
             "!**/cdk.out",
             "!.nx",
-            "!**/src/routeTree.gen.ts"
+            "!**/src/routeTree.gen.ts",
+            "!.sst/*"
         ],
         "ignoreUnknown": true
     },
