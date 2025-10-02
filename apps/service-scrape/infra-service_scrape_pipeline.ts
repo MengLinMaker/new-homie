@@ -1,3 +1,5 @@
+/// <reference path="../../.sst/platform/config.d.ts" />
+
 import { OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
@@ -42,9 +44,9 @@ const BucketChromeAsset =
     $app.stage === 'production'
         ? new sst.aws.Bucket('BucketChromeAsset')
         : sst.aws.Bucket.get(
-              'BucketChromeAsset',
-              'new-homie-production-bucketchromeassetbucket-mdosnrof',
-          )
+            'BucketChromeAsset',
+            'new-homie-production-bucketchromeassetbucket-mdosnrof',
+        )
 // Use same bucket and key - manually chrome tar upload
 const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
 
