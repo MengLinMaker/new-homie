@@ -3,7 +3,7 @@
         {
             "messageId": "2e1424d4-f796-459a-8184-9c92662be6da",
             "receiptHandle": "AQEBzWwaftRI0KuVm4tP+/7q1rGgNqicHq...",
-            "body": "{\"suburb\":\"Dandenong\",\"state\":\"VIC\",\"postcode\":\"3175\"}",
+            "body": "{\"suburb_name\":\"Dandenong\",\"state_abbreviation\":\"VIC\",\"postcode\":\"3175\"}",
             "attributes": {
                 "ApproximateReceiveCount": "1",
                 "SentTimestamp": "1545082650636",
