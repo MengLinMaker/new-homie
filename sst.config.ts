@@ -7,7 +7,14 @@ export default $config({
             removal: input?.stage === 'production' ? 'retain' : 'remove',
             protect: ['production'].includes(input?.stage),
             home: 'aws',
+            providers: {
+                aws: {
+                    region: 'ap-southeast-2',
+                },
+            },
         }
     },
-    async run() {},
+    async run() {
+        await import('./apps/service-scrape/infra-service_scrape_pipeline')
+    },
 })

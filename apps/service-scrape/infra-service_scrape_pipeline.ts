@@ -1,0 +1,66 @@
+import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
+import path from 'node:path'
+
+const dirname = './apps/service-scrape'
+
+/**
+ * 1. Trigger scrape pipeline 1am WED and SAT AEST
+ */
+const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
+    handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
+    architecture: 'arm64',
+    runtime: 'nodejs22.x',
+    memory: '1769 MB',
+    timeout: '5 seconds',
+    concurrency: { reserved: 1 },
+})
+if ($app.stage === 'production')
+    new sst.aws.Cron(`ScrapeLocalityTrigger`, {
+        // UTC 15:00 = AEST 1am next day
+        schedule: `cron(0 15 ? * TUE,FRI *)`,
+        function: FunctionScrapeLocalityTrigger.arn,
+    })
+
+/**
+ * 2. FunctionScrapeLocalityTrigger adds jobs to QueueScrapeLocality
+ */
+const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
+    fifo: true,
+    visibilityTimeout: '20 minutes', // Above lambda timeout
+})
+FunctionScrapeLocalityTrigger.addEnvironment({
+    QUEUE_URL: QueueScrapeLocality.url,
+})
+
+/**
+ * 3. Chromium asset stored in S3 for faster cold start and smaller package size
+ */
+const BucketChromeAsset =
+    $app.stage === 'production'
+        ? new sst.aws.Bucket('BucketChromeAsset')
+        : sst.aws.Bucket.get(
+              'BucketChromeAsset',
+              'new-homie-production-bucketchromeassetbucket-mdosnrof',
+          )
+// Use same bucket and key - manually chrome tar upload
+const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
+
+/**
+ * 4. Jobs processed in FunctionScrapeLocality and stored in DB_SERVICE_SCRAPE
+ */
+const FunctionScrapeLocality = new sst.aws.Function('FunctionScrapeLocality', {
+    handler: path.join(dirname, './function-scrape_locality/src/index.handler'),
+    architecture: 'arm64',
+    runtime: 'nodejs22.x',
+    memory: '1769 MB',
+    timeout: '15 minutes',
+    concurrency: { reserved: 1 },
+    link: [BucketChromeAsset, QueueScrapeLocality],
+    environment: {
+        DB_SERVICE_SCRAPE,
+        CHROME_PUPPETEER_ASSET_URL: $interpolate`https://useless_string_for_compatibility/${BucketChromeAsset.name}/${BucketChromeAssetKey}`,
+    },
+})
+QueueScrapeLocality.subscribe(FunctionScrapeLocality.arn, {
+    batch: { size: 1 },
+})
