@@ -1,3 +1,4 @@
+import { OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
 
@@ -14,12 +15,12 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     timeout: '5 seconds',
     concurrency: { reserved: 1 },
 })
-if ($app.stage === 'production')
-    new sst.aws.Cron(`ScrapeLocalityTrigger`, {
-        // UTC 15:00 = AEST 1am next day
-        schedule: `cron(0 15 ? * TUE,FRI *)`,
-        function: FunctionScrapeLocalityTrigger.arn,
-    })
+new sst.aws.Cron(`ScrapeLocalityTrigger`, {
+    // UTC 15:00 = AEST 1am next day
+    schedule: `cron(0 15 ? * TUE,FRI *)`,
+    function: FunctionScrapeLocalityTrigger.arn,
+    enabled: $app.stage === 'production',
+})
 
 /**
  * 2. FunctionScrapeLocalityTrigger adds jobs to QueueScrapeLocality
@@ -29,6 +30,7 @@ const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
     visibilityTimeout: '20 minutes', // Above lambda timeout
 })
 FunctionScrapeLocalityTrigger.addEnvironment({
+    ...OTEL_ENV,
     QUEUE_URL: QueueScrapeLocality.url,
 })
 
@@ -57,6 +59,7 @@ const FunctionScrapeLocality = new sst.aws.Function('FunctionScrapeLocality', {
     concurrency: { reserved: 1 },
     link: [BucketChromeAsset, QueueScrapeLocality],
     environment: {
+        ...OTEL_ENV,
         DB_SERVICE_SCRAPE,
         CHROME_PUPPETEER_ASSET_URL: $interpolate`https://useless_string_for_compatibility/${BucketChromeAsset.name}/${BucketChromeAssetKey}`,
     },
