@@ -6,6 +6,7 @@ on:
 jobs:
   remove-test-infra:
       name: Remove SST - removes test infrastructure
+      if: github.event.ref_type == 'branch'
       runs-on: ubuntu-24.04-arm
       steps:
         - name: Deep checkout branch
@@ -17,7 +18,7 @@ jobs:
           uses: ./.github/actions/setup-cd
 
         - name: Remove SST infrastructure
-          run: pnpm sst remove --stage ${{ github.ref_name || github.head_ref }}
+          run: pnpm sst remove --stage ${{ github.event.ref }}
           env:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
