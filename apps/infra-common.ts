@@ -2,16 +2,22 @@ import { ENV as OTEL_ENV } from './observability/lib-opentelemetry/src/env'
 
 export { OTEL_ENV }
 
-export const domain =
+// Domain layout inspired by https://sst.dev/docs/configure-a-router
+const domain =
     $app.stage === 'production'
         ? 'newhomie.com'
         : $app.stage === 'dev'
           ? 'dev.newhomie.com'
-          : undefined
+          : `${$app.stage}.dev.newhomie.com`
 
-export const router = new sst.aws.Router('Router', {
+const router = new sst.aws.Router('Router', {
     domain: {
         name: domain,
         aliases: [`*.${domain}`],
     },
+})
+
+export const subdomain = (sub: string) => ({
+    instance: router,
+    domain: `${sub}.${domain}`,
 })
