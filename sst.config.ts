@@ -16,5 +16,6 @@ export default $config({
     },
     async run() {
         await import('./apps/service-scrape/infra-service_scrape_pipeline')
+        await import('./apps/frontend/infra')
     },
 })
