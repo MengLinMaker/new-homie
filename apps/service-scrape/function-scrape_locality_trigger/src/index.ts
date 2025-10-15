@@ -22,8 +22,6 @@ export const chunkArray = <T>(array: T[], chunkSize: number) => {
 
 export const handler = middy().handler(async (_event, _context) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
-    const event = EventBridgeSchema.safeParse(_event, { reportInput: true })
-    if (!event.success) throw functionHandlerLogger.recordException(event.error)
 
     const filteredLocality = australiaLocalities.filter((locality) => {
         if (!locality.postcode) return false
