@@ -43,6 +43,7 @@
         "@vitejs/plugin-react": "^4.7.0",
         "shadcn": "^3.3.0",
         "typescript": "^5.9.2",
-        "vite": "^6.3.6"
+        "vite": "^6.3.6",
+        "vite-plugin-pwa": "^1.1.0"
     }
 }
