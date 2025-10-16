@@ -54,18 +54,18 @@ function ProfileDropDown() {
                             Upgrade to Pro
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <a href="/app/profile">
+                        <a href="/app/profile#/">
                             <DropdownMenuItem>
                                 <UserRoundIcon />
                                 Profile
                             </DropdownMenuItem>
                         </a>
-                        <Link to="/app/profile" hash="/security">
+                        <a href="/app/profile#/security">
                             <DropdownMenuItem>
                                 <LockIcon />
                                 Security
                             </DropdownMenuItem>
-                        </Link>
+                        </a>
                         <DropdownMenuSeparator />
                         <SignOutButton>
                             <DropdownMenuItem>
