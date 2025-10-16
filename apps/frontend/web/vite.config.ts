@@ -10,9 +10,7 @@ export default defineConfig({
         tanstackRouter({ autoCodeSplitting: true }),
         react(),
         tailwindcss(),
-        VitePWA({
-            registerType: 'autoUpdate',
-        }),
+        VitePWA({ registerType: 'autoUpdate' }),
     ],
     resolve: {
         alias: {
