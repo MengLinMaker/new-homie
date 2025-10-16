@@ -15,7 +15,11 @@ export default $config({
         }
     },
     async run() {
+        const { Router } = await import('./apps/infra-common')
         await import('./apps/service-scrape/infra-service_scrape_pipeline')
         await import('./apps/frontend/infra')
+        return {
+            'Router.distributionID': Router.distributionID,
+        }
     },
 })
