@@ -21,6 +21,10 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     timeout: '5 seconds',
     concurrency: { reserved: 1 },
     link: [QueueScrapeLocality],
+    environment: {
+        ...OTEL_ENV,
+        QUEUE_URL: QueueScrapeLocality.url,
+    },
 })
 new sst.aws.Cron(`ScrapeLocalityTrigger`, {
     // UTC 15:00 = AEST 1am next day
@@ -30,15 +34,7 @@ new sst.aws.Cron(`ScrapeLocalityTrigger`, {
 })
 
 /**
- * 2. FunctionScrapeLocalityTrigger adds jobs to QueueScrapeLocality
- */
-FunctionScrapeLocalityTrigger.addEnvironment({
-    ...OTEL_ENV,
-    QUEUE_URL: QueueScrapeLocality.url,
-})
-
-/**
- * 3. Chromium asset stored in S3 for faster cold start and smaller package size
+ * 2. Chromium asset stored in S3 for faster cold start and smaller package size
  */
 const BucketChromeAsset =
     $app.stage === 'production'
@@ -51,7 +47,7 @@ const BucketChromeAsset =
 const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
 
 /**
- * 4. Jobs processed in FunctionScrapeLocality and stored in DB_SERVICE_SCRAPE
+ * 3. Jobs processed in FunctionScrapeLocality and stored in DB_SERVICE_SCRAPE
  */
 const FunctionScrapeLocality = new sst.aws.Function('FunctionScrapeLocality', {
     handler: path.join(dirname, './function-scrape_locality/src/index.handler'),
