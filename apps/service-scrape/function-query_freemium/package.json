@@ -1,0 +1,17 @@
+{
+    "name": "@service-scrape/function-query_freemium",
+    "private": true,
+    "scripts": {
+        "format": "biome format --write",
+        "test:type": "tsc"
+    },
+    "dependencies": {
+        "@hono/otel": "^0.6.0",
+        "@observability/lib-opentelemetry": "workspace:*",
+        "@service-scrape/lib-db_service_scrape": "workspace:*",
+        "hono": "^4.9.12",
+        "kysely": "0.28.4",
+        "zod": "4.0.17"
+    },
+    "type": "module"
+}

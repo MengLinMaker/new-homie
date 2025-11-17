@@ -20,3 +20,8 @@ export const subdomain = (sub: string) => ({
     instance: Router,
     domain: `${sub}.${domain}`,
 })
+
+export const ApiGatewayV1 = new sst.aws.ApiGatewayV1('ApiGatewayV1', {
+    domain: `api.${domain}`,
+    endpoint: { type: 'regional' },
+})
