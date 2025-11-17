@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "dev": "pnpm sst dev",
         "build": "nx run-many -t build",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "docker:down": "docker compose down -v",
