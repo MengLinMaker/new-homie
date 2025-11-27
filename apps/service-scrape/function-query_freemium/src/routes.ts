@@ -9,12 +9,12 @@ import {
 
 const objectKeys = <T extends Object>(input: T) => Object.keys(input) as (keyof T)[]
 
-const locationInput = os.input(
+const homeFilterInput = os.input(
     localityTableSchema.partial().omit({ id: true, boundary_coordinates: true }),
 )
 
 export const router = {
-    findLatestSale: locationInput
+    findLatestSale: homeFilterInput
         .route({ method: 'GET', path: `/latestSale` })
         .output(z.array(latestSaleViewSchema))
         .handler(async ({ input }) => {
@@ -25,7 +25,7 @@ export const router = {
             return await query.execute()
         }),
 
-    findLatestRent: locationInput
+    findLatestRent: homeFilterInput
         .route({ method: 'GET', path: `/latestRent` })
         .output(z.array(latestRentViewSchema))
         .handler(async ({ input }) => {
