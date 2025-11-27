@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <assume exists> */
 import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
@@ -5,19 +6,12 @@ import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { excludeLocalitySet } from './exclude-locality'
 
 // Setup OpenTelemetry and connections
-import { LOGGER, SERVICE_NAME } from './global/setup'
-import { SqsService } from './SqsService'
+import { LOGGER } from './global/setup'
 import { metroPostcode } from './metro-postcodes'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 
-export const chunkArray = <T>(array: T[], chunkSize: number) => {
-    const newArray: T[][] = []
-    for (let i = 0; i < array.length; i += chunkSize) {
-        const chunk = array.slice(i, i + chunkSize)
-        newArray.push(chunk)
-    }
-    return newArray
-}
+import { Resource } from 'sst'
+import { task } from 'sst/aws/task'
 
 export const handler = middy().handler(async (_event, _context) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
@@ -28,21 +22,18 @@ export const handler = middy().handler(async (_event, _context) => {
         const postcode = parseInt(locality.postcode, 10)
         return metroPostcode.VIC.includes(postcode)
     })
-
-    const sqsService = new SqsService(LOGGER)
-    let failedLocalities: typeof australiaLocalities = []
-
-    for (const chunkLocality of chunkArray(filteredLocality, 10)) {
-        const success = await sqsService.sendBatchSQS(chunkLocality)
-        if (!success) failedLocalities = failedLocalities.concat(chunkLocality)
-    }
-
-    if (failedLocalities.length > 0) {
-        throw functionHandlerLogger.recordException(
-            `FATAL ${SERVICE_NAME} failed to send ${failedLocalities.length} messages to SQS queue`,
-            failedLocalities,
+    for (const locality of filteredLocality) {
+        await task.run(
+            Resource.ScrapeLocalityTask,
+            {
+                suburb_name: locality.suburb_name!,
+                state_abbreviation: locality.state_abbreviation!,
+                postcode: locality.postcode!,
+            },
+            { capacity: 'spot' },
         )
     }
+
     functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }
 })
