@@ -22,11 +22,11 @@ export const subdomain = (sub: string) => ({
 })
 
 export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV1', {
-    domain: `www.${domain}`,
+    domain: `api.${domain}`,
     cors: {
         allowOrigins: [
             `https://www.${domain}`,
-            domain === 'dev.newhomie.com' ? 'http://localhost:5000' : '',
+            $app.stage === 'production' ? '' : 'http://localhost:5000',
         ],
     },
 })

@@ -2,7 +2,7 @@
     "openapi": "3.0.3",
     "info": { "title": "function-query_freemium", "version": "40ef568" },
     "paths": {
-        "/api/service-scrape/freemium/latestSale": {
+        "/service-scrape/freemium/latestSale": {
             "get": {
                 "operationId": "findLatestSale",
                 "parameters": [
@@ -157,7 +157,7 @@
                 }
             }
         },
-        "/api/service-scrape/freemium/latestRent": {
+        "/service-scrape/freemium/latestRent": {
             "get": {
                 "operationId": "findLatestRent",
                 "parameters": [
