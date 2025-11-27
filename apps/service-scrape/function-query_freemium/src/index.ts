@@ -4,7 +4,7 @@ import { OpenAPIHandler } from '@orpc/openapi/fetch'
 
 import { router } from './routes.ts'
 
-export const basePath = '/service-scrape/freemium'
+export const basePath = '/api/service-scrape/freemium'
 const app = new Hono<{ Bindings: { event: LambdaEvent; lambdaContext: LambdaContext } }>().basePath(
     basePath,
 )

@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    '/service-scrape/freemium/latestSale': {
+    '/api/service-scrape/freemium/latestSale': {
         parameters: {
             query?: never
             header?: never
@@ -20,7 +20,7 @@ export interface paths {
         patch?: never
         trace?: never
     }
-    '/service-scrape/freemium/latestRent': {
+    '/api/service-scrape/freemium/latestRent': {
         parameters: {
             query?: never
             header?: never
