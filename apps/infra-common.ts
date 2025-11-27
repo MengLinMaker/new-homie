@@ -21,7 +21,12 @@ export const subdomain = (sub: string) => ({
     domain: `${sub}.${domain}`,
 })
 
-export const ApiGatewayV1 = new sst.aws.ApiGatewayV1('ApiGatewayV1', {
-    domain: `api.${domain}`,
-    endpoint: { type: 'regional' },
+export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV1', {
+    domain: `www.${domain}`,
+    cors: {
+        allowOrigins: [
+            `https://www.${domain}`,
+            domain === 'dev.newhomie.com' ? 'http://localhost:5000' : '',
+        ],
+    },
 })

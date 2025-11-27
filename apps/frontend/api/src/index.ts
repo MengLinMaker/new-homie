@@ -8,6 +8,6 @@ import createClient from 'openapi-react-query'
 export const $api = createClient(
     createFetchClient<paths>({
         // baseUrl: Resource.ApiGatewayV1.url,
-        baseUrl: 'https://api.dev.newhomie.com',
+        baseUrl: 'https://www.dev.newhomie.com',
     }),
 )
