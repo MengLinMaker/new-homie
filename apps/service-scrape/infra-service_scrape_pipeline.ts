@@ -17,8 +17,8 @@ const ScrapeLocalityTask = new sst.aws.Task('ScrapeLocalityTask', {
     cpu: '1 vCPU',
     memory: '2 GB',
     image: {
-        context: './function-scrape_locality',
-        dockerfile: 'Dockerfile',
+        context: path.join(dirname, './function-scrape_locality'),
+        dockerfile: 'dockerfile',
     },
     environment: {
         ...OTEL_ENV,
