@@ -37,7 +37,8 @@
             "!**/cdk.out",
             "!.nx",
             "!**/src/routeTree.gen.ts",
-            "!.sst/*"
+            "!.sst/*",
+            "**/sst-env.d.ts"
         ],
         "ignoreUnknown": true
     },

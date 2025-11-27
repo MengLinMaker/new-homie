@@ -3,39 +3,26 @@
 /* eslint-disable */
 /* deno-fmt-ignore-file */
 
-declare module 'sst' {
-    export interface Resource {
-        ApiGatewayV2: {
-            type: 'sst.aws.ApiGatewayV2'
-            url: string
-        }
-        FunctionScrapeLocalityTrigger: {
-            name: string
-            type: 'sst.aws.Function'
-            url: string
-        }
-        Router: {
-            type: 'sst.aws.Router'
-            url: string
-        }
-        ScrapeLocalityTask: {
-            assignPublicIp: boolean
-            cluster: string
-            containers: any
-            securityGroups: any
-            subnets: any
-            taskDefinition: string
-            type: 'sst.aws.Task'
-        }
-        ServiceScrapePipelineVpc: {
-            type: 'sst.aws.Vpc'
-        }
-        WebApp: {
-            type: 'sst.aws.StaticSite'
-            url: string
-        }
+declare module "sst" {
+  export interface Resource {
+    "ApiGatewayV2": {
+      "type": "sst.aws.ApiGatewayV2"
+      "url": string
     }
+    "Router": {
+      "type": "sst.aws.Router"
+      "url": string
+    }
+    "ServiceScrapePipelineVpc": {
+      "type": "sst.aws.Vpc"
+    }
+    "WebApp": {
+      "type": "sst.aws.StaticSite"
+      "url": string
+    }
+  }
 }
 /// <reference path="sst-env.d.ts" />
 
-import 'sst'
+import "sst"
+export {}
