@@ -1,6 +1,5 @@
 import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
-import { EventBridgeSchema } from '@aws-lambda-powertools/parser/schemas'
 
 import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { excludeLocalitySet } from './exclude-locality'

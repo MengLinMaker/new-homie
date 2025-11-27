@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "dev": "pnpm sst dev",
         "build": "nx run-many -t build",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "docker:down": "docker compose down -v",
@@ -28,6 +29,7 @@
         "sst": "3.17.14",
         "syncpack": "14.0.0-alpha.19",
         "typescript": "~5.9.2",
+        "vite": "^7.1.10",
         "vitest": "3.2.4"
     },
     "simple-git-hooks": {

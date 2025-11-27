@@ -13,6 +13,7 @@ jobs:
   test-fast:
     name: Test fast - linting all and testing libraries
     runs-on: ubuntu-24.04-arm
+    continue-on-error: true
     steps:
       - name: Deep checkout branch
         uses: actions/checkout@v4
@@ -23,15 +24,12 @@ jobs:
         uses: ./.github/actions/setup-ci
 
       - name: Lint all
-        continue-on-error: true
         run: pnpm lint
 
       - name: Type test all
-        continue-on-error: true
         run: pnpm nx affected -t test:type
 
       - name: Unit test libraries
-        continue-on-error: true
         run: pnpm nx affected -t test:unit --exclude='*,!**/lib-*'
 
   test-functions:
@@ -72,6 +70,7 @@ jobs:
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+          VITE_API_URL: https://www.${{ github.event.ref }}.dev.newhomie.com
 
       # TODO: add integration test scripts
       - name: Test
