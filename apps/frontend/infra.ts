@@ -14,5 +14,6 @@ new sst.aws.StaticSite('WebApp', {
     router: subdomain('www'),
     environment: {
         VITE_API_URL: ApiGatewayV2.url,
+        VITE_CLERK_PUBLISHABLE_KEY: 'pk_test_ZW5oYW5jZWQtZ29zaGF3ay02Ni5jbGVyay5hY2NvdW50cy5kZXYk',
     },
 })
