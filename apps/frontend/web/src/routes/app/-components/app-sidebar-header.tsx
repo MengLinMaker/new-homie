@@ -9,7 +9,6 @@ import {
     DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Link } from '@tanstack/react-router'
 
 function ProfileDropDown() {
     return (

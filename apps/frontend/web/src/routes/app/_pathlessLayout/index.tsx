@@ -17,7 +17,6 @@ export const Route = createFileRoute('/app/_pathlessLayout/')({
 
 export const $api = createClient(
     createFetchClient<paths>({
-        // baseUrl: Resource.ApiGatewayV1.url,
         baseUrl: import.meta.env.VITE_API_URL ?? '',
     }),
 )
