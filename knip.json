@@ -8,5 +8,11 @@
         "**/src/app.ts",
         "**/migrate.ts"
     ],
-    "ignoreDependencies": ["pino-pretty", "chromium-bidi", "esbuild", "@.+/function-.+"]
+    "ignoreDependencies": [
+        "tailwindcss",
+        "pino-pretty",
+        "chromium-bidi",
+        "esbuild",
+        "@.+/function-.+"
+    ]
 }

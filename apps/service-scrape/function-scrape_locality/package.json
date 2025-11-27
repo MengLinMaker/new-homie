@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
+        "build": "node esbuild.ts",
         "puppeteer": "pnpm dlx @puppeteer/browsers install chrome-headless-shell@stable && mv ./chrome-headless-shell/*/* ./.puppeteer && rm -r chrome-headless-shell",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
@@ -10,13 +11,10 @@
     },
     "devDependencies": {
         "@types/async-retry": "^1.4.9",
-        "chromium-bidi": "^8.0.0"
+        "chromium-bidi": "^8.0.0",
+        "esbuild": "^0.27.0"
     },
     "dependencies": {
-        "@aws-lambda-powertools/parser": "^2.25.2",
-        "@aws-sdk/client-s3": "^3.879.0",
-        "@aws-sdk/s3-request-presigner": "^3.879.0",
-        "@middy/core": "^6.4.4",
         "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-australia_amenity": "workspace:*",
         "@service-scrape/lib-db_service_scrape": "workspace:*",

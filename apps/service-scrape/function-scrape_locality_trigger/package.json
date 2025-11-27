@@ -12,7 +12,6 @@
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
-        "@aws-lambda-powertools/parser": "^2.25.2",
         "@aws-sdk/client-sqs": "^3.876.0",
         "@middy/core": "^6.4.4",
         "@observability/lib-opentelemetry": "workspace:*",

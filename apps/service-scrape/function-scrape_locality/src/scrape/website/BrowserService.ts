@@ -2,8 +2,6 @@ import { ILoggable } from '@observability/lib-opentelemetry'
 import puppeteer, { type Browser } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { existsSync } from 'node:fs'
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import asyncRetry from 'async-retry'
 
 /**
@@ -31,25 +29,15 @@ export class BrowserService extends ILoggable {
                 return
             }
 
-            // Download chrome at runtime to increase deployment speed
-            const s3Client = new S3Client()
-            const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
-            if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
-
-            const [, bucket, key] = new URL(chromeTarUrl).pathname.split('/')
-            const chromeTarSignedUrl = await getSignedUrl(
-                s3Client,
-                new GetObjectCommand({
-                    Bucket: bucket,
-                    Key: key,
-                }),
-                { expiresIn: 60 },
-            )
-            BrowserService.browser = await puppeteer.launch({
-                args: chromium.args,
-                executablePath: await chromium.executablePath(chromeTarSignedUrl),
-            })
-            return
+            // Arm64 docker chrome execution
+            const prebuiltChromeBinaryPath = '/usr/bin/headless-chromium'
+            if (existsSync(prebuiltChromeBinaryPath)) {
+                BrowserService.browser = await puppeteer.launch({
+                    args: chromium.args,
+                    executablePath: await chromium.executablePath(prebuiltChromeBinaryPath),
+                })
+                return
+            }
         } catch (e) {
             this.logException('fatal', this.launchSingleBrowser, e)
         }
