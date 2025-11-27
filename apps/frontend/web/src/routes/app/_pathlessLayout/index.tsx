@@ -7,7 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { type paths } from '@frontend/api'
+import type { paths } from '@frontend/api'
 import createClient from 'openapi-react-query'
 import createFetchClient from 'openapi-fetch'
 
