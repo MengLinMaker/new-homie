@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { handle, type LambdaContext, type LambdaEvent } from 'hono/aws-lambda'
 import { OpenAPIHandler } from '@orpc/openapi/fetch'
 
-import { router } from './routes'
+import { router } from './routes.ts'
 
 export const basePath = '/service-scrape/query/freemium'
 const app = new Hono<{ Bindings: { event: LambdaEvent; lambdaContext: LambdaContext } }>().basePath(

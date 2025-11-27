@@ -1,13 +1,13 @@
 import { os } from '@orpc/server'
 import z from 'zod'
-import { DB } from './global/setup'
+import { DB } from './global/setup.ts'
 import {
     latestRentViewSchema,
     latestSaleViewSchema,
     localityTableSchema,
 } from '@service-scrape/lib-db_service_scrape/zod'
 
-const objectKeys = <T extends Object>(input: T) => Object.keys(input) as (keyof T)[]
+const objectKeys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[]
 
 const homeFilterInput = os.input(
     localityTableSchema.partial().omit({ id: true, boundary_coordinates: true }),

@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
+        "build": "node openapi.ts && biome format --write",
         "test:type": "tsc"
     },
     "dependencies": {
@@ -16,5 +17,9 @@
         "kysely": "0.28.4",
         "zod": "4.0.17"
     },
-    "type": "module"
+    "type": "module",
+    "devDependencies": {
+        "@orpc/zod": "^1.11.3",
+        "openapi-typescript": "^7.9.1"
+    }
 }
