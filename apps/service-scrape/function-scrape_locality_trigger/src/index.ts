@@ -31,7 +31,7 @@ export const handler = middy().handler(async (_event, _context) => {
                 state_abbreviation: locality.state_abbreviation!,
                 postcode: locality.postcode!,
             },
-            { capacity: 'spot' },
+            { capacity: 'fargate' },
         )
     }
 
