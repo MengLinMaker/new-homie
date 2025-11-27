@@ -3,26 +3,25 @@
 /* eslint-disable */
 /* deno-fmt-ignore-file */
 
-declare module "sst" {
-  export interface Resource {
-    "ApiGatewayV2": {
-      "type": "sst.aws.ApiGatewayV2"
-      "url": string
+declare module 'sst' {
+    export interface Resource {
+        ApiGatewayV2: {
+            type: 'sst.aws.ApiGatewayV2'
+            url: string
+        }
+        Router: {
+            type: 'sst.aws.Router'
+            url: string
+        }
+        ServiceScrapePipelineVpc: {
+            type: 'sst.aws.Vpc'
+        }
+        WebApp: {
+            type: 'sst.aws.StaticSite'
+            url: string
+        }
     }
-    "Router": {
-      "type": "sst.aws.Router"
-      "url": string
-    }
-    "ServiceScrapePipelineVpc": {
-      "type": "sst.aws.Vpc"
-    }
-    "WebApp": {
-      "type": "sst.aws.StaticSite"
-      "url": string
-    }
-  }
 }
 /// <reference path="sst-env.d.ts" />
 
-import "sst"
-export {}
+import 'sst'
