@@ -1,0 +1,21 @@
+{
+    "name": "@frontend/api",
+    "private": true,
+    "exports": {
+        ".": "./src/schema.ts"
+    },
+    "scripts": {
+        "format": "biome format --write",
+        "build": "node src/mergeOpenapi.ts && openapi-typescript --array-length true --properties-required-by-default true src/openapi.json -o src/schema.d.ts && biome format --write"
+    },
+    "dependencies": {
+        "@service-scrape/function-query_freemium": "workspace:*",
+        "openapi-fetch": "^0.14.0",
+        "openapi-react-query": "^0.5.1"
+    },
+    "type": "module",
+    "devDependencies": {
+        "openapi-merge": "^1.3.3",
+        "openapi-typescript": "^7.9.1"
+    }
+}
