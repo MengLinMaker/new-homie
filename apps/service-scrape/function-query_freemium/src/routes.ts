@@ -4,16 +4,13 @@ import { DB } from './global/setup'
 import {
     latestRentViewSchema,
     latestSaleViewSchema,
-    stateAbbreviationEnumSchema,
+    localityTableSchema,
 } from '@service-scrape/lib-db_service_scrape/zod'
 
 const objectKeys = <T extends Object>(input: T) => Object.keys(input) as (keyof T)[]
 
 const locationInput = os.input(
-    z.object({
-        state_abbreviation: stateAbbreviationEnumSchema.optional(),
-        postcode: z.string().length(4).optional(),
-    }),
+    localityTableSchema.partial().omit({ id: true, boundary_coordinates: true }),
 )
 
 export const router = {
