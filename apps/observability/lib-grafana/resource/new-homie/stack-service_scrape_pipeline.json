@@ -98,7 +98,7 @@
                     "sort": "none"
                 }
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
@@ -261,7 +261,7 @@
                 "cellHeight": "sm",
                 "showHeader": true
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
@@ -474,7 +474,7 @@
                     "sort": "none"
                 }
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
@@ -606,31 +606,17 @@
                     "reverse": false
                 }
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": true,
+                    "hide": false,
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
-                    "step": "1s"
-                },
-                {
-                    "datasource": {
-                        "name": "Expression",
-                        "type": "__expr__",
-                        "uid": "__expr__"
-                    },
-                    "downsampler": "sum",
-                    "expression": "Source",
-                    "hide": false,
-                    "refId": "detected_level",
-                    "type": "resample",
-                    "upsampler": "fillna",
-                    "window": "$heatmap_interval"
+                    "step": "$heatmap_interval"
                 }
             ],
             "title": "detected_level heatmap",
@@ -651,17 +637,18 @@
                     "options": {
                         "excludeByName": {
                             "Time": false,
-                            "{detected_level=\"error\"}": true,
+                            "{detected_level=\"error\"}": false,
                             "{detected_level=\"fatal\"}": true,
-                            "{detected_level=\"warn\"}": true
+                            "{detected_level=\"warn\"}": false
                         },
                         "includeByName": {},
                         "indexByName": {
                             "Time": 0,
-                            "detected_level error": 2,
-                            "detected_level fatal": 3,
-                            "detected_level warn": 1
+                            "{detected_level=\"error\"}": 2,
+                            "{detected_level=\"warn\"}": 1
                         },
+                        "orderBy": [],
+                        "orderByMode": "manual",
                         "renameByName": {
                             "Data error": "",
                             "Data fatal": "",
@@ -757,31 +744,17 @@
                     "reverse": false
                 }
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": true,
+                    "hide": false,
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
-                    "step": "1s"
-                },
-                {
-                    "datasource": {
-                        "name": "Expression",
-                        "type": "__expr__",
-                        "uid": "__expr__"
-                    },
-                    "downsampler": "sum",
-                    "expression": "Source",
-                    "hide": false,
-                    "refId": "code_function_name",
-                    "type": "resample",
-                    "upsampler": "fillna",
-                    "window": "$heatmap_interval"
+                    "step": "$heatmap_interval"
                 }
             ],
             "title": "code_function_name heatmap",
@@ -800,9 +773,9 @@
                             "Time": false,
                             "{code_function_name=\"BrowserService.Error\"}": true,
                             "{code_function_name=\"BrowserService.getHTML\"}": true,
-                            "{code_function_name=\"DomainListingsService.tryExtractListings\"}": true,
-                            "{code_function_name=\"DomainListingsService.tryTransformSalePrice\"}": true,
-                            "{code_function_name=\"DomainSuburbService.tryExtractProfile\"}": true,
+                            "{code_function_name=\"DomainListingsService.tryExtractListings\"}": false,
+                            "{code_function_name=\"DomainListingsService.tryTransformSalePrice\"}": false,
+                            "{code_function_name=\"DomainSuburbService.tryExtractProfile\"}": false,
                             "{detected_level=\"error\"}": true,
                             "{detected_level=\"fatal\"}": true,
                             "{detected_level=\"warn\"}": true
@@ -817,6 +790,7 @@
                             "{detected_level=\"fatal\"}": 6,
                             "{detected_level=\"warn\"}": 4
                         },
+                        "orderByMode": "auto",
                         "renameByName": {
                             "Data error": "ERROR",
                             "Data fatal": "FATAL",
@@ -988,7 +962,7 @@
                     }
                 ]
             },
-            "pluginVersion": "12.2.0-17638611789.patch2",
+            "pluginVersion": "12.4.0-19508498046",
             "targets": [
                 {
                     "direction": "backward",
@@ -1099,8 +1073,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "30s",
-                    "value": "30s"
+                    "text": "5m",
+                    "value": "5m"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -1131,7 +1105,7 @@
                         "value": "20s"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "30s",
                         "value": "30s"
                     },
@@ -1146,7 +1120,7 @@
                         "value": "2m"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "5m",
                         "value": "5m"
                     },
@@ -1173,8 +1147,8 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["error"],
-                    "value": ["error"]
+                    "text": ["warn", "fatal", "error"],
+                    "value": ["warn", "fatal", "error"]
                 },
                 "description": "",
                 "includeAll": true,
@@ -1182,7 +1156,7 @@
                 "name": "log_level",
                 "options": [
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "fatal",
                         "value": "fatal"
                     },
@@ -1192,7 +1166,7 @@
                         "value": "error"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "warn",
                         "value": "warn"
                     },
@@ -1244,12 +1218,12 @@
         ]
     },
     "time": {
-        "from": "2025-09-26T16:00:00.000Z",
-        "to": "2025-09-26T18:15:00.000Z"
+        "from": "2025-11-14T14:59:10.931Z",
+        "to": "2025-11-14T20:47:36.248Z"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 73
+    "version": 103
 }
