@@ -5,4 +5,5 @@ COPY ./src/asset /app/asset
 COPY ./package.json /app/package.json
 COPY ./dist /app
 
-CMD ["node", "/app/index.js"]
+ENTRYPOINT ["node"]
+CMD ["/app/index.js"]
