@@ -2,7 +2,7 @@
     "name": "@frontend/api",
     "private": true,
     "exports": {
-        ".": "./src/schema.ts"
+        ".": "./src/index.ts"
     },
     "scripts": {
         "format": "biome format --write",
