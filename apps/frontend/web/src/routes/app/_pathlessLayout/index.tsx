@@ -7,12 +7,37 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import { type paths } from '@frontend/api'
+import createClient from 'openapi-react-query'
+import createFetchClient from 'openapi-fetch'
 
 export const Route = createFileRoute('/app/_pathlessLayout/')({
     component: RouteComponent,
 })
 
+export const $api = createClient(
+    createFetchClient<paths>({
+        // baseUrl: Resource.ApiGatewayV1.url,
+        baseUrl: import.meta.env.VITE_API_URL ?? '',
+    }),
+)
+
 function RouteComponent() {
+    const { data, error, isLoading } = $api.useQuery(
+        'get',
+        '/service-scrape/freemium/latestSale',
+        {
+            params: {
+                query: {
+                    postcode: '3175',
+                },
+            },
+        },
+        {
+            staleTime: 1000 * 60 * 60 * 6, // 6 hour
+        },
+    )
+
     return (
         <>
             <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -31,6 +56,14 @@ function RouteComponent() {
                 </div>
             </header>
             <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                VITE_API_URL: "{import.meta.env.VITE_API_URL}"{isLoading && <div>Loading...</div>}
+                {error && <div>Error: {JSON.stringify(error)}</div>}
+                {data && (
+                    <div>
+                        <h2>Latest Sale Data:</h2>
+                        <pre>{JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                )}
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                     <div className="bg-muted/50 aspect-video rounded-xl" />
                     <div className="bg-muted/50 aspect-video rounded-xl" />

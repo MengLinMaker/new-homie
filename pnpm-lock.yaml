@@ -56,12 +56,6 @@ importers:
       '@service-scrape/function-query_freemium':
         specifier: workspace:*
         version: link:../../service-scrape/function-query_freemium
-      openapi-fetch:
-        specifier: ^0.14.0
-        version: 0.14.0
-      openapi-react-query:
-        specifier: ^0.5.1
-        version: 0.5.1(@tanstack/react-query@5.90.11(react@19.1.1))(openapi-fetch@0.14.0)
     devDependencies:
       openapi-merge:
         specifier: ^1.3.3
@@ -123,6 +117,12 @@ importers:
       lucide-react:
         specifier: ^0.476.0
         version: 0.476.0(react@19.1.1)
+      openapi-fetch:
+        specifier: ^0.14.0
+        version: 0.14.0
+      openapi-react-query:
+        specifier: ^0.5.1
+        version: 0.5.1(@tanstack/react-query@5.90.11(react@19.1.1))(openapi-fetch@0.14.0)
       react:
         specifier: ^19.1.1
         version: 19.1.1
