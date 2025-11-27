@@ -24,6 +24,7 @@ export const handler = middy().handler(async (_event, _context) => {
     })
     for (const locality of filteredLocality) {
         await task.run(
+            // @ts-ignore somehow not defined
             Resource.ScrapeLocalityTask,
             {
                 suburb_name: locality.suburb_name!,

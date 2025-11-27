@@ -16,7 +16,8 @@
             },
             "suspicious": {
                 "noExplicitAny": "warn",
-                "noUnknownAtRules": "off"
+                "noUnknownAtRules": "off",
+                "noTsIgnore": "off"
             }
         }
     },
