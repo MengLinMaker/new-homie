@@ -60,7 +60,7 @@ export const homeTableSchema = z.object({
 export const localityTableSchema = z.object({
     boundary_coordinates: z.string(),
     id: z.number(),
-    postcode: z.string(),
+    postcode: z.string().length(4),
     state_abbreviation: stateAbbreviationEnumSchema,
     suburb_name: z.string(),
 })
