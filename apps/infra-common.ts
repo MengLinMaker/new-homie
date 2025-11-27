@@ -21,7 +21,7 @@ export const subdomain = (sub: string) => ({
     domain: `${sub}.${domain}`,
 })
 
-export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV1', {
+export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV2', {
     domain: `api.${domain}`,
     cors: {
         allowOrigins: [
