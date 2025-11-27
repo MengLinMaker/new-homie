@@ -18,7 +18,7 @@ export const handler = middy().handler(async (_event, _context) => {
 
     const body = z
         .object({
-            suburb_name: z.string(),
+            suburb_name: z.string().transform((val) => val.replaceAll(' ', '-').toLowerCase()),
             state_abbreviation: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
             postcode: z.string().length(4),
         })
