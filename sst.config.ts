@@ -15,13 +15,12 @@ export default $config({
         }
     },
     async run() {
-        const { Router, ApiGatewayV2 } = await import('./apps/infra-common')
+        const { Router } = await import('./apps/infra-common')
         await import('./apps/service-scrape/infra-service_scrape_pipeline')
-        await import('./apps/service-scrape/infra-service_scrape_query')
+        // await import('./apps/service-scrape/infra-service_scrape_query')
         await import('./apps/frontend/infra')
         return {
             'Router.distributionID': Router.distributionID,
-            'ApiGatewayV2.url': ApiGatewayV2.url,
         }
     },
 })
