@@ -23,6 +23,9 @@ const ScrapeLocalityTask = new sst.aws.Task('ScrapeLocalityTask', {
     environment: {
         ...OTEL_ENV,
         DB_SERVICE_SCRAPE,
+        suburb_name: 'TEST',
+        state_abbreviation: 'VIC',
+        postcode: '0000',
     },
     dev: {
         command: 'node dist/index.js',
