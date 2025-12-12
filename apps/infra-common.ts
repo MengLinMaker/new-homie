@@ -30,3 +30,7 @@ export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV2', {
         ],
     },
 })
+
+export const Repository = new awsx.ecr.Repository('new-homie-repository', {
+    forceDelete: true,
+})
