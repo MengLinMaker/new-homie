@@ -1,7 +1,7 @@
 FROM --platform=linux/arm64 node:24.11.1-trixie-slim
 
 WORKDIR /app
-COPY ./src/asset /app/asset
+COPY ./chromium /chromium
 COPY ./package.json /app/package.json
 COPY ./dist /app
 
