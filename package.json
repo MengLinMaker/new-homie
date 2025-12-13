@@ -25,7 +25,7 @@
         "knip": "5.63.1",
         "nx": "21.5.2",
         "simple-git-hooks": "2.13.1",
-        "sst": "3.17.14",
+        "sst": "3.17.25",
         "syncpack": "14.0.0-alpha.19",
         "typescript": "~5.9.2",
         "vite": "^7.1.10",
