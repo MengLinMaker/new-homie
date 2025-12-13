@@ -1,8 +1,6 @@
 name: service-scrape_function-scrape_locality
 services:
   function-scrape_locality:
-    depends_on:
-      - lib-db_service_scrape
     build:
       context: ./
     environment:
