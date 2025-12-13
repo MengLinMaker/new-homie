@@ -34,7 +34,7 @@ const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment'
 const ImageScrapeLocality = new awsx.ecr.Image('ImageScrapeLocality', {
     repositoryUrl: Repository.url,
     platform: 'linux/arm64',
-    dockerfile: 'dockerfile',
+    dockerfile: path.join('../../', dirname, './function-scrape_locality/dockerfile'),
     context: path.join('../../', dirname, './function-scrape_locality'),
 })
 const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
