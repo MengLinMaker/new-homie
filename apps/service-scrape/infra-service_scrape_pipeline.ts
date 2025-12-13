@@ -38,9 +38,8 @@ const ImageScrapeLocality = createImage(
 const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
     type: 'container',
     platformCapabilities: ['FARGATE'],
-    timeout: {
-        attemptDurationSeconds: 60 * 30,
-    },
+    timeout: { attemptDurationSeconds: 60 * 30 },
+    retryStrategy: { attempts: 3 },
     containerProperties: pulumi.jsonStringify({
         executionRoleArn: RoleBatchEcs.arn,
         image: ImageScrapeLocality.imageUri,
@@ -68,30 +67,6 @@ const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', 
 })
 
 /**
- * 3. ECS Fargate task to run the scrape job
- */
-const ScrapeLocalityTask = new sst.aws.Task('ScrapeLocalityTask', {
-    cluster: new sst.aws.Cluster('ScrapeLocalityCluster', { vpc: Vpc }),
-    architecture: 'arm64',
-    cpu: '1 vCPU',
-    memory: '2 GB',
-    image: {
-        context: path.join(dirname, './function-scrape_locality'),
-        dockerfile: 'dockerfile',
-    },
-    environment: {
-        ...OTEL_ENV,
-        DB_SERVICE_SCRAPE,
-        suburb_name: 'TEST',
-        state_abbreviation: 'VIC',
-        postcode: '0000',
-    },
-    dev: {
-        command: 'node dist/index.js',
-    },
-})
-
-/**
  * 2. Lambda function to trigger the ECS Fargate task
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
@@ -101,8 +76,12 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     memory: '1769 MB',
     timeout: '5 seconds',
     concurrency: { reserved: 1 },
-    environment: { ...OTEL_ENV },
-    link: [ScrapeLocalityTask],
+    environment: {
+        ...OTEL_ENV,
+        JOB_DEFINITION_ARN: JobDefinitionScrapeLocality.arn,
+        JOB_QUEUE_ARN: JobQueueScrapeLocality.arn,
+    },
+    link: [JobDefinitionScrapeLocality, JobQueueScrapeLocality],
     url: $app.stage !== 'production',
 })
 
