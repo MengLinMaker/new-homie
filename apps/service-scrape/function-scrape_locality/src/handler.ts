@@ -62,7 +62,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         const args = { ...locality, page, localityId }
         const salesInfo = await scrapeController.tryExtractSalesPage(args)
         if (!salesInfo || salesInfo.isLastPage) break
-        console.info('SUCCESS Page', page)
+        console.info('SUCCESS page', page)
     }
     console.info('SUCCESS scrapeController.tryExtractSalesPage')
 
