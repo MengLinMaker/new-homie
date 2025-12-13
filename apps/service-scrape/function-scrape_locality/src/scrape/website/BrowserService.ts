@@ -1,6 +1,6 @@
 import { ILoggable } from '@observability/lib-opentelemetry'
 import chromiumSetting from '@sparticuz/chromium-min'
-import { Browser, BrowserContext, chromium } from 'playwright'
+import { type Browser, type BrowserContext, chromium } from 'playwright'
 import asyncRetry from 'async-retry'
 
 /**
