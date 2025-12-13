@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { ENV as OTEL_ENV } from './observability/lib-opentelemetry/src/env'
 
 export { OTEL_ENV }
@@ -34,3 +35,10 @@ export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV2', {
 export const Repository = new awsx.ecr.Repository('new-homie-repository', {
     forceDelete: true,
 })
+export const createImage = (name: string, contextPath: string) =>
+    new awsx.ecr.Image('ImageScrapeLocality', {
+        repositoryUrl: Repository.url,
+        platform: 'linux/arm64',
+        dockerfile: path.join('../../', contextPath, 'dockerfile'),
+        context: path.join('../../', contextPath),
+    })

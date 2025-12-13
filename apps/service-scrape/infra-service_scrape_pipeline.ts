@@ -1,6 +1,6 @@
 /// <reference path="../../.sst/platform/config.d.ts" />
 
-import { OTEL_ENV, Repository } from '../infra-common'
+import { createImage, OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
 import * as pulumi from '@pulumi/pulumi'
@@ -31,12 +31,10 @@ const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment'
     },
     type: 'MANAGED',
 })
-const ImageScrapeLocality = new awsx.ecr.Image('ImageScrapeLocality', {
-    repositoryUrl: Repository.url,
-    platform: 'linux/arm64',
-    dockerfile: path.join('../../', dirname, './function-scrape_locality/dockerfile'),
-    context: path.join('../../', dirname, './function-scrape_locality'),
-})
+const ImageScrapeLocality = createImage(
+    'ImageScrapeLocality',
+    path.join(dirname, './function-scrape_locality'),
+)
 const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
     type: 'container',
     platformCapabilities: ['FARGATE'],
