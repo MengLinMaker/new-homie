@@ -21,6 +21,7 @@ esbuild
         format: 'esm',
         // lines joined to prevent syntax token error
         banner: { js: esbuildBanner },
+        external: ['playwright'],
         minify: false,
         keepNames: true,
         // Source map to source code
