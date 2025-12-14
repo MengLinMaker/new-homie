@@ -32,7 +32,7 @@ export const ApiGatewayV2 = new sst.aws.ApiGatewayV2('ApiGatewayV2', {
     },
 })
 
-const Repository = new awsx.ecr.Repository('new-homie-repository', {
+export const Repository = new awsx.ecr.Repository('new-homie-repository', {
     forceDelete: true,
 })
 export const createImage = (name: string, contextPath: string) =>
