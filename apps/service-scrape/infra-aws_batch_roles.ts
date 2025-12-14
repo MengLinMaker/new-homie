@@ -1,7 +1,5 @@
 /// <reference path="../../.sst/platform/config.d.ts" />
 
-import { Repository } from '../infra-common'
-
 export const RoleBatchEcs = new aws.iam.Role('RoleBatchEcs', {
     assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({
         Service: ['ecs-tasks.amazonaws.com'],
@@ -17,20 +15,12 @@ export const RoleBatchEcs = new aws.iam.Role('RoleBatchEcs', {
                             'ecr:BatchCheckLayerAvailability',
                             'ecr:GetDownloadUrlForLayer',
                             'ecr:BatchGetImage',
-                        ],
-                        resources: [Repository.repository.arn],
-                    },
-                    {
-                        actions: [
                             'ssmmessages:CreateControlChannel',
                             'ssmmessages:CreateDataChannel',
                             'ssmmessages:OpenControlChannel',
                             'ssmmessages:OpenDataChannel',
+                            'logs:CreateLogStream',
                         ],
-                        resources: ['*'],
-                    },
-                    {
-                        actions: ['logs:CreateLogStream'],
                         resources: ['*'],
                     },
                 ],
