@@ -26,11 +26,6 @@ export const handler = middy().handler(async (_event, _context) => {
     })
 
     for (const locality of filteredLocality) {
-        const newLocality = {
-            suburb_name: locality.suburb_name!,
-            state_abbreviation: locality.state_abbreviation!,
-            postcode: locality.postcode!,
-        }
         await batchClient.send(
             new SubmitJobCommand({
                 jobName:
@@ -39,8 +34,13 @@ export const handler = middy().handler(async (_event, _context) => {
                         .replaceAll(' ', '-'),
                 jobQueue: ENV.JOB_QUEUE_ARN,
                 jobDefinition: ENV.JOB_DEFINITION_ARN,
-                parameters: newLocality,
-                tags: newLocality,
+                containerOverrides: {
+                    environment: [
+                        { name: 'suburb_name', value: locality.suburb_name },
+                        { name: 'state_abbreviation', value: locality.state_abbreviation },
+                        { name: 'postcode', value: locality.postcode },
+                    ],
+                },
             }),
         )
     }
