@@ -24,7 +24,7 @@ const expandEnv = (envMap: { [k: string]: string }) => {
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
     computeResources: {
-        maxVcpus: 1,
+        maxVcpus: 3,
         securityGroupIds: Vpc.securityGroups,
         subnets: Vpc.publicSubnets,
         type: 'FARGATE_SPOT',
