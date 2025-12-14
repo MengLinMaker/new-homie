@@ -3,9 +3,7 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
-        "test:type": "tsc",
-        "test:unit": "vitest run --coverage",
-        "test:dev": "vitest --coverage"
+        "test:type": "tsc"
     },
     "devDependencies": {
         "@testcontainers/localstack": "^11.5.1",
