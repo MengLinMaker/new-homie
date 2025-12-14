@@ -73,15 +73,21 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
-    memory: '1769 MB',
-    timeout: '5 seconds',
+    memory: '1024 MB',
+    timeout: '15 minutes',
     concurrency: { reserved: 1 },
     environment: {
         ...OTEL_ENV,
         JOB_DEFINITION_ARN: JobDefinitionScrapeLocality.arn,
         JOB_QUEUE_ARN: JobQueueScrapeLocality.arn,
     },
-    link: [JobDefinitionScrapeLocality, JobQueueScrapeLocality],
+    permissions: [
+        {
+            effect: 'allow',
+            actions: ['batch:SubmitJob', 'batch:TagResource'],
+            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
+        },
+    ],
     url: $app.stage !== 'production',
 })
 
