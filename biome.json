@@ -16,7 +16,8 @@
             },
             "suspicious": {
                 "noExplicitAny": "warn",
-                "noUnknownAtRules": "off"
+                "noUnknownAtRules": "off",
+                "noTsIgnore": "off"
             }
         }
     },
@@ -37,7 +38,8 @@
             "!**/cdk.out",
             "!.nx",
             "!**/src/routeTree.gen.ts",
-            "!.sst/*"
+            "!.sst/*",
+            "**/sst-env.d.ts"
         ],
         "ignoreUnknown": true
     },

@@ -1,5 +1,4 @@
 /// <reference path="./.sst/platform/config.d.ts" />
-
 export default $config({
     app(input) {
         return {
@@ -11,6 +10,7 @@ export default $config({
                 aws: {
                     region: 'ap-southeast-2',
                 },
+                awsx: '3.1.0',
             },
         }
     },

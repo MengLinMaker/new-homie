@@ -1,68 +1,102 @@
 /// <reference path="../../.sst/platform/config.d.ts" />
 
-import { OTEL_ENV } from '../infra-common'
+import { createImage, OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
+import * as pulumi from '@pulumi/pulumi'
+import { RoleBatchEcs } from './infra-aws_batch_roles'
 
 const dirname = './apps/service-scrape'
 
 /**
- * 1. Trigger scrape pipeline 1am WED and SAT AEST
+ * Expands key value map for AWS format - https://docs.aws.amazon.com/batch/latest/APIReference/API_KeyValuePair.html
+ * @param envMap key value map
  */
-const QueueScrapeLocality = new sst.aws.Queue('QueueScrapeLocality', {
-    fifo: { contentBasedDeduplication: true },
-    visibilityTimeout: '20 minutes', // Above lambda timeout
+const expandEnv = (envMap: { [k: string]: string }) => {
+    const expanded: { name: string; value: string }[] = []
+    for (const [name, value] of Object.entries(envMap)) expanded.push({ name, value })
+    return expanded
+}
+
+/**
+ * 3. AWS Batch for fault tolerant scraping on cheap fargate spot instances
+ */
+const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
+const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
+    computeResources: {
+        maxVcpus: 3,
+        securityGroupIds: Vpc.securityGroups,
+        subnets: Vpc.publicSubnets,
+        type: 'FARGATE_SPOT',
+    },
+    type: 'MANAGED',
 })
+const ImageScrapeLocality = createImage(
+    'ImageScrapeLocality',
+    path.join(dirname, './function-scrape_locality'),
+)
+const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
+    type: 'container',
+    platformCapabilities: ['FARGATE'],
+    timeout: { attemptDurationSeconds: 60 * 30 },
+    retryStrategy: { attempts: 3 },
+    containerProperties: pulumi.jsonStringify({
+        executionRoleArn: RoleBatchEcs.arn,
+        image: ImageScrapeLocality.imageUri,
+        runtimePlatform: { cpuArchitecture: 'ARM64' },
+        command: ['node', '/app/index.js'],
+        resourceRequirements: [
+            { type: 'VCPU', value: '1' },
+            { type: 'MEMORY', value: '2048' },
+        ],
+        networkConfiguration: { assignPublicIp: 'ENABLED' },
+        environment: expandEnv({
+            DB_SERVICE_SCRAPE,
+            ...OTEL_ENV,
+            // Default testing inputs
+            suburb_name: 'Test',
+            state_abbreviation: 'VIC',
+            postcode: '0000',
+        }),
+    }),
+})
+const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', {
+    state: 'ENABLED',
+    priority: 1,
+    computeEnvironmentOrders: [{ computeEnvironment: ComputeEnvironment.arn, order: 1 }],
+})
+
+/**
+ * 2. Lambda function to trigger the ECS Fargate task
+ */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
     handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
-    memory: '1769 MB',
-    timeout: '5 seconds',
+    memory: '1024 MB',
+    timeout: '15 minutes',
     concurrency: { reserved: 1 },
-    link: [QueueScrapeLocality],
     environment: {
         ...OTEL_ENV,
-        QUEUE_URL: QueueScrapeLocality.url,
+        JOB_DEFINITION_ARN: JobDefinitionScrapeLocality.arn,
+        JOB_QUEUE_ARN: JobQueueScrapeLocality.arn,
     },
+    permissions: [
+        {
+            effect: 'allow',
+            actions: ['batch:SubmitJob', 'batch:TagResource'],
+            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
+        },
+    ],
+    url: $app.stage !== 'production',
 })
+
+/**
+ * 1. Trigger scrape pipeline 1am WED and SAT AEST
+ */
 new sst.aws.Cron(`ScrapeLocalityTrigger`, {
     // UTC 15:00 = AEST 1am next day
     schedule: `cron(0 15 ? * TUE,FRI *)`,
     function: FunctionScrapeLocalityTrigger.arn,
     enabled: $app.stage === 'production',
-})
-
-/**
- * 2. Chromium asset stored in S3 for faster cold start and smaller package size
- */
-const BucketChromeAsset =
-    $app.stage === 'production'
-        ? new sst.aws.Bucket('BucketChromeAsset')
-        : sst.aws.Bucket.get(
-              'BucketChromeAsset',
-              'new-homie-production-bucketchromeassetbucket-mdosnrof',
-          )
-// Use same bucket and key - manually chrome tar upload
-const BucketChromeAssetKey = 'chromium-v138.0.2-pack.arm64.tar'
-
-/**
- * 3. Jobs processed in FunctionScrapeLocality and stored in DB_SERVICE_SCRAPE
- */
-const FunctionScrapeLocality = new sst.aws.Function('FunctionScrapeLocality', {
-    handler: path.join(dirname, './function-scrape_locality/src/index.handler'),
-    architecture: 'arm64',
-    runtime: 'nodejs22.x',
-    memory: '1769 MB',
-    timeout: '15 minutes',
-    concurrency: { reserved: 1 },
-    link: [BucketChromeAsset, QueueScrapeLocality],
-    environment: {
-        ...OTEL_ENV,
-        DB_SERVICE_SCRAPE,
-        CHROME_PUPPETEER_ASSET_URL: $interpolate`https://useless_string_for_compatibility/${BucketChromeAsset.name}/${BucketChromeAssetKey}`,
-    },
-})
-QueueScrapeLocality.subscribe(FunctionScrapeLocality.arn, {
-    batch: { size: 1 },
 })

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <assume exists> */
 import { StatusCodes } from 'http-status-codes'
 import middy from '@middy/core'
 
@@ -5,19 +6,14 @@ import { australiaLocalities } from '@service-scrape/lib-australia_amenity'
 import { excludeLocalitySet } from './exclude-locality'
 
 // Setup OpenTelemetry and connections
-import { LOGGER, SERVICE_NAME } from './global/setup'
-import { SqsService } from './SqsService'
+import { LOGGER } from './global/setup'
 import { metroPostcode } from './metro-postcodes'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 
-export const chunkArray = <T>(array: T[], chunkSize: number) => {
-    const newArray: T[][] = []
-    for (let i = 0; i < array.length; i += chunkSize) {
-        const chunk = array.slice(i, i + chunkSize)
-        newArray.push(chunk)
-    }
-    return newArray
-}
+import { BatchClient, SubmitJobCommand } from '@aws-sdk/client-batch'
+import { ENV } from './global/env'
+
+const batchClient = new BatchClient()
 
 export const handler = middy().handler(async (_event, _context) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
@@ -29,20 +25,26 @@ export const handler = middy().handler(async (_event, _context) => {
         return metroPostcode.VIC.includes(postcode)
     })
 
-    const sqsService = new SqsService(LOGGER)
-    let failedLocalities: typeof australiaLocalities = []
-
-    for (const chunkLocality of chunkArray(filteredLocality, 10)) {
-        const success = await sqsService.sendBatchSQS(chunkLocality)
-        if (!success) failedLocalities = failedLocalities.concat(chunkLocality)
-    }
-
-    if (failedLocalities.length > 0) {
-        throw functionHandlerLogger.recordException(
-            `FATAL ${SERVICE_NAME} failed to send ${failedLocalities.length} messages to SQS queue`,
-            failedLocalities,
+    for (const locality of filteredLocality) {
+        await batchClient.send(
+            new SubmitJobCommand({
+                jobName:
+                    `${locality.suburb_name}-${locality.state_abbreviation}-${locality.postcode}`
+                        .toLowerCase()
+                        .replaceAll(' ', '-'),
+                jobQueue: ENV.JOB_QUEUE_ARN,
+                jobDefinition: ENV.JOB_DEFINITION_ARN,
+                containerOverrides: {
+                    environment: [
+                        { name: 'suburb_name', value: locality.suburb_name },
+                        { name: 'state_abbreviation', value: locality.state_abbreviation },
+                        { name: 'postcode', value: locality.postcode },
+                    ],
+                },
+            }),
         )
     }
+
     functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }
 })

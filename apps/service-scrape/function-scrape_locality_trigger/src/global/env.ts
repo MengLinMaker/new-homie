@@ -8,8 +8,13 @@ import z from 'zod'
 export const ENV = parseEnvSchema(
     z.object({
         /**
-         * SQS queue url
+         * function-scrape_locality AWS batch job definition
          */
-        QUEUE_URL: z.string(),
+        JOB_DEFINITION_ARN: z.string(),
+
+        /**
+         * function-scrape_locality AWS batch job queue
+         */
+        JOB_QUEUE_ARN: z.string(),
     }),
 )

@@ -1,9 +1,6 @@
 import { ILoggable } from '@observability/lib-opentelemetry'
-import puppeteer, { type Browser } from 'puppeteer-core'
-import chromium from '@sparticuz/chromium-min'
-import { existsSync } from 'node:fs'
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import chromiumSetting from '@sparticuz/chromium-min'
+import { type Browser, type BrowserContext, chromium } from 'playwright'
 import asyncRetry from 'async-retry'
 
 /**
@@ -12,53 +9,35 @@ import asyncRetry from 'async-retry'
  */
 export class BrowserService extends ILoggable {
     private static browser: Browser
+    private static browserContext: BrowserContext
 
     async close() {
-        await BrowserService.browser.close()
-        BrowserService.browser = undefined as never
+        try {
+            await BrowserService.browser.close()
+            BrowserService.browser = undefined as never
+            return true
+        } catch (e) {
+            this.logException('fatal', this.close, e)
+            return false
+        }
     }
 
-    private async launchSingleBrowser() {
+    async launchSingleBrowser() {
         try {
-            if (BrowserService.browser) return
-
-            // Local chrome execution
-            if (existsSync('./.puppeteer')) {
-                BrowserService.browser = await puppeteer.launch({
-                    args: chromium.args,
-                    executablePath: './.puppeteer/chrome-headless-shell',
-                })
-                return
-            }
-
-            // Download chrome at runtime to increase deployment speed
-            const s3Client = new S3Client()
-            const chromeTarUrl = process.env['CHROME_PUPPETEER_ASSET_URL']
-            if (!chromeTarUrl) throw new URIError(`FATAL CHROME_PUPPETEER_ASSET_URL is undefined`)
-
-            const [, bucket, key] = new URL(chromeTarUrl).pathname.split('/')
-            const chromeTarSignedUrl = await getSignedUrl(
-                s3Client,
-                new GetObjectCommand({
-                    Bucket: bucket,
-                    Key: key,
-                }),
-                { expiresIn: 60 },
-            )
-            BrowserService.browser = await puppeteer.launch({
-                args: chromium.args,
-                executablePath: await chromium.executablePath(chromeTarSignedUrl),
-            })
-            return
+            if (BrowserService.browser) return true
+            BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
+            BrowserService.browserContext = await BrowserService.browser.newContext()
+            return true
         } catch (e) {
             this.logException('fatal', this.launchSingleBrowser, e)
+            return false
         }
     }
 
     async getHTML(url: string) {
         await this.launchSingleBrowser()
         // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
-        const page = await BrowserService.browser.browserContexts()[0]!.newPage()
+        const page = await BrowserService.browserContext.newPage()
         try {
             await asyncRetry(
                 async () => await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 }),
@@ -70,7 +49,9 @@ export class BrowserService extends ILoggable {
             await page.close()
             return html
         } catch (e) {
-            await page.close()
+            try {
+                await page.close()
+            } catch {}
             this.logExceptionArgs('warn', this.getHTML, url, e)
             return null
         }
