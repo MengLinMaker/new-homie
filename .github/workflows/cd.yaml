@@ -34,6 +34,15 @@ jobs:
       - name: Setup dependencies
         uses: ./.github/actions/setup-cd
 
+      - name: Cache .sst folder
+        uses: actions/cache@v4
+        with:
+          path: .sst
+          key: sst-cache-${{ github.job }}-${{ github.run_id }}
+          restore-keys: |
+            sst-cache-${{ github.job }}-
+            sst-cache-
+
       - name: Migrate databases
         run: pnpm -r migrate
         env:
