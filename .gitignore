@@ -16,9 +16,7 @@ cdk.out
 node_modules
 
 # Nx
-.nx/installation
-.nx/cache
-.nx/workspace-data
+.nx
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 

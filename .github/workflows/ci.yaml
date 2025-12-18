@@ -61,6 +61,15 @@ jobs:
       - name: Setup dependencies Nx
         uses: ./.github/actions/setup-ci
 
+      - name: Cache .sst folder
+        uses: actions/cache@v4
+        with:
+          path: .sst
+          key: sst-cache-${{ github.job }}-${{ github.run_id }}
+          restore-keys: |
+            sst-cache-${{ github.job }}-
+            sst-cache-
+
       - name: Deploy SST infrastructure
         run: pnpm sst deploy --print-logs --continue --stage ${{ github.head_ref }}
         env:

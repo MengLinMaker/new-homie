@@ -98,13 +98,12 @@
                     "sort": "none"
                 }
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
-                    "hide": false,
                     "queryType": "range",
                     "refId": "A"
                 }
@@ -196,7 +195,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 110
+                                "value": 105
                             }
                         ]
                     },
@@ -208,7 +207,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 105
+                                "value": 93
                             }
                         ]
                     },
@@ -220,7 +219,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 91
+                                "value": 81
                             }
                         ]
                     },
@@ -232,7 +231,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 101
+                                "value": 91
                             }
                         ]
                     },
@@ -244,14 +243,38 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 105
+                                "value": 95
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Count"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 78
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Localities"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 101
                             }
                         ]
                     }
                 ]
             },
             "gridPos": {
-                "h": 3,
+                "h": 4,
                 "w": 24,
                 "x": 0,
                 "y": 7
@@ -259,15 +282,15 @@
             "id": 16,
             "options": {
                 "cellHeight": "sm",
-                "showHeader": true
+                "showHeader": true,
+                "sortBy": []
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
-                    "hide": false,
                     "queryType": "range",
                     "refId": "A"
                 }
@@ -314,6 +337,32 @@
                 {
                     "id": "transpose",
                     "options": {}
+                },
+                {
+                    "id": "calculateField",
+                    "options": {
+                        "alias": "Localities",
+                        "mode": "reduceRow",
+                        "reduce": {
+                            "reducer": "count"
+                        },
+                        "replaceFields": false
+                    }
+                },
+                {
+                    "id": "convertFieldType",
+                    "options": {
+                        "conversions": [
+                            {
+                                "destinationType": "enum",
+                                "enumConfig": {
+                                    "text": [342]
+                                },
+                                "targetField": "Localities"
+                            }
+                        ],
+                        "fields": {}
+                    }
                 },
                 {
                     "id": "calculateField",
@@ -365,7 +414,7 @@
                     "id": "filterFieldsByName",
                     "options": {
                         "include": {
-                            "pattern": "(Total|Min|Median|95th %|99th %|Max)"
+                            "pattern": "(Total|Localities|Min|Median|95th %|99th %)"
                         }
                     }
                 }
@@ -458,7 +507,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 10
+                "y": 11
             },
             "id": 13,
             "options": {
@@ -474,13 +523,12 @@
                     "sort": "none"
                 }
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "{service_namespace=\"NewHomie\", service_name=\"$service_name\"} | detected_level =~ `info` | faas_duration > 0",
-                    "hide": false,
                     "queryType": "range",
                     "refId": "A"
                 }
@@ -555,7 +603,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 16
+                "y": 17
             },
             "id": 5,
             "options": {
@@ -606,13 +654,12 @@
                     "reverse": false
                 }
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": false,
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
@@ -693,7 +740,7 @@
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 22
+                "y": 23
             },
             "id": 9,
             "options": {
@@ -744,13 +791,12 @@
                     "reverse": false
                 }
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
                     "editorMode": "builder",
                     "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
-                    "hide": false,
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
@@ -948,7 +994,7 @@
                 "h": 9,
                 "w": 24,
                 "x": 0,
-                "y": 28
+                "y": 29
             },
             "id": 15,
             "options": {
@@ -962,7 +1008,7 @@
                     }
                 ]
             },
-            "pluginVersion": "12.4.0-19508498046",
+            "pluginVersion": "12.4.0-20160616057",
             "targets": [
                 {
                     "direction": "backward",
@@ -1073,8 +1119,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "5m",
-                    "value": "5m"
+                    "text": "2m",
+                    "value": "2m"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -1115,12 +1161,12 @@
                         "value": "1m"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "2m",
                         "value": "2m"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "5m",
                         "value": "5m"
                     },
@@ -1147,45 +1193,14 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["warn", "fatal", "error"],
-                    "value": ["warn", "fatal", "error"]
+                    "text": ["$__all"],
+                    "value": ["$__all"]
                 },
                 "description": "",
                 "includeAll": true,
                 "multi": true,
                 "name": "log_level",
-                "options": [
-                    {
-                        "selected": true,
-                        "text": "fatal",
-                        "value": "fatal"
-                    },
-                    {
-                        "selected": true,
-                        "text": "error",
-                        "value": "error"
-                    },
-                    {
-                        "selected": true,
-                        "text": "warn",
-                        "value": "warn"
-                    },
-                    {
-                        "selected": false,
-                        "text": "info",
-                        "value": "info"
-                    },
-                    {
-                        "selected": false,
-                        "text": "debug",
-                        "value": "debug"
-                    },
-                    {
-                        "selected": false,
-                        "text": "trace",
-                        "value": "trace"
-                    }
-                ],
+                "options": [],
                 "query": "fatal,error,warn,info,debug,trace",
                 "type": "custom"
             },
@@ -1200,30 +1215,20 @@
                 "label": "service_name",
                 "multi": true,
                 "name": "service_name",
-                "options": [
-                    {
-                        "selected": false,
-                        "text": "function-scrape_locality_trigger",
-                        "value": "function-scrape_locality_trigger"
-                    },
-                    {
-                        "selected": true,
-                        "text": "function-scrape_locality",
-                        "value": "function-scrape_locality"
-                    }
-                ],
+                "options": [],
                 "query": "function-scrape_locality_trigger,function-scrape_locality",
                 "type": "custom"
             }
         ]
     },
     "time": {
-        "from": "2025-11-14T14:59:10.931Z",
-        "to": "2025-11-14T20:47:36.248Z"
+        "from": "now-24h",
+        "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 103
+    "version": 107,
+    "weekStart": ""
 }
