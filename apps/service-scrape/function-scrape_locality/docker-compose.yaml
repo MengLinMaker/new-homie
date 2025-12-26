@@ -3,18 +3,16 @@ services:
   function-scrape_locality:
     build:
       context: ./
+    env_file:
+      - ../../../.env
     environment:
       suburb_name: Dandenong
       state_abbreviation: VIC
       postcode: 3175
-      DB_SERVICE_SCRAPE: ${DB_SERVICE_SCRAPE}
-      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT}
-      OTEL_EXPORTER_OTLP_HEADERS: ${OTEL_EXPORTER_OTLP_HEADERS}
-      OTEL_LOG_LEVEL: ${OTEL_LOG_LEVEL}
     deploy:
       resources:
         limits:
           # Smallest valid fargate instance
-          cpus: "1"
+          cpus: '1'
           memory: 2048m
     restart: no
