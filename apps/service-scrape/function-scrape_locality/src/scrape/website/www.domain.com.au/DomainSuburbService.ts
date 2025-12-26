@@ -1,3 +1,4 @@
+import { localityArgs, urlArgs } from './../../debug'
 import { createPostgisPolygonString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
@@ -80,6 +81,11 @@ const nextDataJsonSchema = z.object({
     }),
 })
 
+/**
+ * Next.js 404 json schema
+ */
+const nextData404JsonSchema = z.object({ page: z.literal('/404') })
+
 export class DomainSuburbService extends ILoggable {
     /**
      * @description Extract raw objects from Next.js JSON
@@ -120,6 +126,16 @@ export class DomainSuburbService extends ILoggable {
                 ),
             } satisfies DomainListingsDTO
         } catch (e) {
+            // Debug common /404 page error with locality args
+            const pageIs404 = nextData404JsonSchema.safeParse(args.nextDataJson, {
+                reportInput: true,
+            }).success
+            if (pageIs404) {
+                const pageIs404Args = { urlArgs, localityArgs } as never
+                this.logExceptionArgs('error', this.tryExtractProfile, pageIs404Args, e)
+                return null
+            }
+
             this.logExceptionArgs('error', this.tryExtractProfile, args, e)
             return null
         }

@@ -84,7 +84,7 @@
             },
             "id": 12,
             "options": {
-                "bucketSize": 5000,
+                "bucketSize": 1000,
                 "combine": false,
                 "legend": {
                     "calcs": [],
@@ -243,7 +243,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 95
+                                "value": 102
                             }
                         ]
                     },
@@ -267,7 +267,19 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 101
+                                "value": 114
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "1st %"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 89
                             }
                         ]
                     }
@@ -354,7 +366,7 @@
                     "options": {
                         "conversions": [
                             {
-                                "destinationType": "enum",
+                                "destinationType": "number",
                                 "enumConfig": {
                                     "text": [342]
                                 },
@@ -379,7 +391,7 @@
                     "options": {
                         "mode": "reduceRow",
                         "reduce": {
-                            "reducer": "min"
+                            "reducer": "p1"
                         }
                     }
                 },
@@ -414,7 +426,7 @@
                     "id": "filterFieldsByName",
                     "options": {
                         "include": {
-                            "pattern": "(Total|Localities|Min|Median|95th %|99th %)"
+                            "pattern": "(Total|Localities|1st %|Median|95th %|99th %)"
                         }
                     }
                 }
@@ -1119,8 +1131,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "2m",
-                    "value": "2m"
+                    "text": "10m",
+                    "value": "10m"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -1161,7 +1173,7 @@
                         "value": "1m"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "2m",
                         "value": "2m"
                     },
@@ -1171,7 +1183,7 @@
                         "value": "5m"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "10m",
                         "value": "10m"
                     },
@@ -1193,8 +1205,8 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["$__all"],
-                    "value": ["$__all"]
+                    "text": ["fatal", "error", "warn"],
+                    "value": ["fatal", "error", "warn"]
                 },
                 "description": "",
                 "includeAll": true,
@@ -1222,13 +1234,13 @@
         ]
     },
     "time": {
-        "from": "now-24h",
+        "from": "now-7d",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 107,
+    "version": 111,
     "weekStart": ""
 }
