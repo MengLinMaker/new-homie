@@ -4,7 +4,7 @@
     "scripts": {
         "format": "biome format --write",
         "build": "node esbuild.ts",
-        "dev": "docker compose up --build --force-recreate",
+        "dev": "node esbuild.ts && docker compose up --build --force-recreate",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "test:dev": "vitest --coverage"
