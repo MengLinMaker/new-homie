@@ -2,7 +2,7 @@ import { australiaSchools } from '@service-scrape/lib-australia_amenity'
 import type { Updateable } from 'kysely'
 import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { ILoggable } from '@observability/lib-opentelemetry'
-import { Locality } from '../../global'
+import type { Locality } from '../../global'
 
 export class AracaSchoolsService extends ILoggable {
     /**
