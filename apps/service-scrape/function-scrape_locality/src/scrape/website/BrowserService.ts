@@ -24,9 +24,10 @@ export class BrowserService extends ILoggable {
 
     async launchSingleBrowser() {
         try {
-            if (BrowserService.browser) return true
-            BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
-            BrowserService.browserContext = await BrowserService.browser.newContext()
+            if (!BrowserService.browser)
+                BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
+            if (!BrowserService.browserContext)
+                BrowserService.browserContext = await BrowserService.browser.newContext()
             return true
         } catch (e) {
             this.logException('fatal', this.launchSingleBrowser, e)
@@ -36,14 +37,11 @@ export class BrowserService extends ILoggable {
 
     async getHTML(url: string) {
         await this.launchSingleBrowser()
-        // biome-ignore lint/style/noNonNullAssertion: <context should be launched already>
         const page = await BrowserService.browserContext.newPage()
         try {
             await asyncRetry(
                 async () => await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 }),
-                {
-                    retries: 3,
-                },
+                { retries: 3 },
             )
             const html = await page.content()
             await page.close()
