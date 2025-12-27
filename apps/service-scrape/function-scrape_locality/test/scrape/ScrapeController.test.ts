@@ -20,8 +20,8 @@ describe.skip(testSuiteName, async () => {
     })
 
     const locality = {
-        suburb: 'dandenong',
-        state: 'VIC',
+        suburb_name: 'dandenong',
+        state_abbreviation: 'VIC' as const,
         postcode: '3175',
         localityId: 1,
     }

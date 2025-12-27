@@ -8,6 +8,17 @@ import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbSer
 import { ScrapeModel } from './website/ScrapeModel'
 import { AracaSchoolsService } from './website/asl.acara.edu.au/AracaSchoolsService'
 import type { Logger } from '@observability/lib-opentelemetry'
+import { Locality } from './global'
+
+interface LocalityWithId extends Locality {
+    localityId: number
+}
+interface LocalityWithIdPage extends LocalityWithId {
+    page: number
+}
+
+const localityString = (locality: Locality) =>
+    `${locality.postcode}-${locality.state_abbreviation}-${locality.postcode}`
 
 export class ScrapeController extends IDatabased {
     readonly browserService
@@ -37,15 +48,10 @@ export class ScrapeController extends IDatabased {
      * Scrape suburb and update database
      * @returns localityId from database
      */
-    async tryExtractSuburbPage(args: {
-        suburb: string
-        state: string | SchemaWrite.StateAbbreviationEnum
-        postcode: string
-    }) {
+    async tryExtractSuburbPage(args: Locality) {
         try {
-            const { suburb, state, postcode } = args
             const url = new URL(
-                `https://www.domain.com.au/suburb-profile/${suburb}-${state}-${postcode}`
+                `https://www.domain.com.au/suburb-profile/${localityString(args)}`
                     .replaceAll(' ', '-')
                     .toLowerCase(),
             )
@@ -67,12 +73,7 @@ export class ScrapeController extends IDatabased {
         }
     }
 
-    async tryExtractSchools(args: {
-        suburb: string
-        state: string | SchemaWrite.StateAbbreviationEnum
-        postcode: string
-        localityId: number
-    }) {
+    async tryExtractSchools(args: LocalityWithId) {
         try {
             const schools = this.aracaSchoolsService.getSchools(args)
             for (const schoolData of schools) {
@@ -85,17 +86,10 @@ export class ScrapeController extends IDatabased {
         }
     }
 
-    async tryExtractRentsPage(args: {
-        suburb: string
-        state: string | SchemaWrite.StateAbbreviationEnum
-        postcode: string
-        page: number
-        localityId: number
-    }) {
+    async tryExtractRentsPage(args: LocalityWithIdPage) {
         try {
-            const { suburb, state, postcode, page } = args
             const url = new URL(
-                `https://www.domain.com.au/rent/${suburb}-${state}-${postcode}`
+                `https://www.domain.com.au/rent/${localityString(args)}`
                     .replaceAll(' ', '-')
                     .toLowerCase(),
             )
@@ -103,7 +97,7 @@ export class ScrapeController extends IDatabased {
                 ...this.sharedSearchparams,
                 excludedeposittaken: 1,
                 price: '0-1000',
-                page,
+                page: args.page,
             } as never).toString()
             const html = await this.browserService.getHTML(url.toString())
             if (!html) return null
@@ -125,23 +119,14 @@ export class ScrapeController extends IDatabased {
         }
     }
 
-    async tryExtractSalesPage(args: {
-        suburb: string
-        state: string | SchemaWrite.StateAbbreviationEnum
-        postcode: string
-        page: number
-        localityId: number
-    }) {
+    async tryExtractSalesPage(args: LocalityWithIdPage) {
         try {
-            const { suburb, state, postcode, page } = args
-            const url = new URL(
-                `https://www.domain.com.au/sale/${suburb}-${state}-${postcode}`.toLowerCase(),
-            )
+            const url = new URL(`https://www.domain.com.au/sale/${localityString(args)}`)
             url.search = new URLSearchParams({
                 ...this.sharedSearchparams,
                 excludeunderoffer: 1,
                 price: '0-1000000',
-                page,
+                page: args.page,
             } as never).toString()
             const html = await this.browserService.getHTML(url.toString())
             if (!html) return null

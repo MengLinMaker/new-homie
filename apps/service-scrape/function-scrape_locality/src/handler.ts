@@ -41,7 +41,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
     }
 
     // Locality data
-    const localityId = await scrapeController.tryExtractSuburbPage(locality)
+    const localityId = await scrapeController.tryExtractSuburbPage(args)
     if (localityId === null) {
         console.error('FAIL scrapeController.tryExtractSuburbPage')
         return {
@@ -52,13 +52,12 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         }
     }
     console.info('SUCCESS tryExtractSuburbPage')
-    await scrapeController.tryExtractSchools({ ...locality, localityId })
+    await scrapeController.tryExtractSchools({ ...args, localityId })
     console.info('SUCCESS scrapeController.tryExtractSchools')
 
     // Sale listing data
     for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const salesInfo = await scrapeController.tryExtractSalesPage(args)
+        const salesInfo = await scrapeController.tryExtractSalesPage({ ...args, page, localityId })
         if (!salesInfo || salesInfo.isLastPage) break
         console.info('SUCCESS page', page)
     }
@@ -66,8 +65,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
 
     // Rent listing data
     for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const rentsInfo = await scrapeController.tryExtractRentsPage(args)
+        const rentsInfo = await scrapeController.tryExtractRentsPage({ ...args, page, localityId })
         if (!rentsInfo) break
         if (!rentsInfo || rentsInfo.isLastPage) break
         console.info('SUCCESS page', page)
