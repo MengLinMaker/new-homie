@@ -1,4 +1,4 @@
-import { localityArgs, urlArgs } from './../../debug'
+import { localityArgs, urlArgs } from '../../global'
 import { createPostgisPolygonString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import type { Updateable } from 'kysely'
