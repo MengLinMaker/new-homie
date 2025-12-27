@@ -18,7 +18,7 @@ interface LocalityWithIdPage extends LocalityWithId {
 }
 
 const localityString = (locality: Locality) =>
-    `${locality.postcode}-${locality.state_abbreviation}-${locality.postcode}`
+    `${locality.suburb_name}-${locality.state_abbreviation}-${locality.postcode}`
 
 export class ScrapeController extends IDatabased {
     readonly browserService
