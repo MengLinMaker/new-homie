@@ -21,7 +21,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
     }
 
     // For testing purposes
-    if (locality.postcode === '0000') {
+    if (args.postcode === '0000') {
         console.info('ACCEPTED test succeeded')
         functionHandlerLogger.recordEnd()
         return { status: StatusCodes.ACCEPTED }
@@ -35,9 +35,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(
-                    `Couldn't browserService.launchSingleBrowser: ${JSON.stringify(locality)}`,
-                ),
+                new Error(`Couldn't browserService.launchSingleBrowser: ${JSON.stringify(args)}`),
             ),
         }
     }
@@ -49,7 +47,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(`Couldn't extract profile: ${JSON.stringify(locality)}`),
+                new Error(`Couldn't extract profile: ${JSON.stringify(args)}`),
             ),
         }
     }
