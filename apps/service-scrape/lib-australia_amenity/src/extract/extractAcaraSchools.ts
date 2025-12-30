@@ -1,4 +1,4 @@
-import { createPostgisPointString, SchemaWrite } from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPointString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { writeFileSync } from 'node:fs'
 import { type Locality, localitySchema } from '../index.ts'
