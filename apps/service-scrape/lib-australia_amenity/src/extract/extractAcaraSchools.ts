@@ -1,7 +1,7 @@
 import { createPostgisPointString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import type { Updateable } from 'kysely'
 import { writeFileSync } from 'node:fs'
-import { type Locality, localitySchema } from '../index.ts'
+import { localitySchema } from '../index.ts'
 import { readBrotliJson } from '../util.ts'
 import z from 'zod'
 import { stateAbbreviationEnumSchema } from '@service-scrape/lib-db_service_scrape/zod'
@@ -9,7 +9,7 @@ import { stateAbbreviationEnumSchema } from '@service-scrape/lib-db_service_scra
 /**
  * Separate script to parse schools data - https://asl.acara.edu.au/School-Search
  */
-export const extractAcaraSchools = async () => {
+export const extractAcaraSchools = () => {
     const schoolsData = readBrotliJson('./resource/australia-schools.json.br')
     const schema = z.array(
         z.object({
@@ -34,10 +34,7 @@ export const extractAcaraSchools = async () => {
                 .length(1),
         }),
     )
-    const validSchoolsData = schema.parse(schoolsData, {
-        reportInput: true,
-    })
-    const localities = new Map<string, Locality>()
+    const validSchoolsData = schema.parse(schoolsData, { reportInput: true })
     const transformedSchoolsData = validSchoolsData.map((school) => {
         const address = school.AddressList[0]
         if (!address) throw new Error(`No address found for ACARAId: ${school.ACARAId}`)
@@ -46,7 +43,6 @@ export const extractAcaraSchools = async () => {
             state_abbreviation: address.StateProvince,
             postcode: address.PostalCode,
         })
-        localities.set(JSON.stringify(locality_table), locality_table)
         return {
             school_table: {
                 name: school.SchoolName,
@@ -76,14 +72,7 @@ export const extractAcaraSchools = async () => {
         JSON.stringify(transformedSchoolsData, null, 4),
     )
     console.info('Completed writing "australia-schools.json"')
-    console.info(`Extracted ${transformedSchoolsData.length} schools`)
-
-    writeFileSync(
-        './src/resource/target-localities.json',
-        JSON.stringify(Array.from(localities.values()), null, 4),
-    )
-    console.info('Completed writing "target-localities.json"')
-    console.info(`Extracted ${localities.size} school localities`)
+    console.info(`Extracted ${transformedSchoolsData.length} schools\n`)
 
     return transformedSchoolsData
 }
