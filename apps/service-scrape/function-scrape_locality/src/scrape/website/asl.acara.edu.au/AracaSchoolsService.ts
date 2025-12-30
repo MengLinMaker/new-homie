@@ -7,22 +7,13 @@ export class AracaSchoolsService extends ILoggable {
      * Fetches schools based on locality data.
      * @param args locality data
      */
-    getSchools(args: Locality) {
-        const filteredSchools = australiaSchools.filter((school) => {
+    getSchools = (args: Locality) =>
+        australiaSchools.filter((school) => {
             const l = school.locality_table
-            school.school_feature_table
             return (
-                l.suburb_name?.toLowerCase() === args.suburb_name.toLowerCase() &&
-                l.state_abbreviation?.toLowerCase() === args.state_abbreviation.toLowerCase() &&
+                l.suburb_name === args.suburb_name &&
+                l.state_abbreviation === args.state_abbreviation &&
                 l.postcode === args.postcode
             )
         })
-
-        return filteredSchools.map((school) => {
-            return {
-                school_feature_table: school.school_feature_table,
-                school_table: school.school_table,
-            }
-        })
-    }
 }

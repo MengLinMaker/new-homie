@@ -10,7 +10,7 @@ describe(testSuiteName, () => {
     describe('getSchools', () => {
         it('should parse next.js html successfully', async () => {
             const resultObject = scrapeUtilService.getSchools({
-                suburb_name: 'dandenong',
+                suburb_name: 'Dandenong',
                 state_abbreviation: 'VIC',
                 postcode: '3175',
             })
