@@ -1,7 +1,19 @@
-import _australiaSchools from './resource/australia-schools.json'
-import _australiaLocalities from './resource/australia-localities.json'
+import _australiaSchools from './resource/australia-schools.json' with { type: 'json' }
+import _australiaLocalities from './resource/australia-localities.json' with { type: 'json' }
 import type { Selectable, Updateable } from 'kysely'
 import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
+import z from 'zod'
+import { toUpperCaseWords } from './util.ts'
+
+export const stateAbbreviationSchema = z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'])
+
+export const localitySchema = z.object({
+    suburb_name: z.string().transform(toUpperCaseWords),
+    state_abbreviation: stateAbbreviationSchema,
+    postcode: z.string().length(4).regex(/^\d+$/),
+})
+
+export interface Locality extends z.output<typeof localitySchema> { }
 
 export const australiaLocalities = _australiaLocalities as Omit<
     Selectable<SchemaWrite.LocalityTable>,
