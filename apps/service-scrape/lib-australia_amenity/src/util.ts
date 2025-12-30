@@ -39,3 +39,15 @@ export const tryCatchError = (fn: () => void) => {
         console.error(err)
     }
 }
+
+/**
+ * Upper case word
+ */
+const toUpperCaseStart = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
+
+/**
+ * Capitalise each word
+ */
+export const toUpperCaseWords = (s: string) => {
+    return s.split(/[ -]/).map(toUpperCaseStart).join(' ')
+}
