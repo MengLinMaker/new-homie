@@ -7,7 +7,7 @@ import { targetLocalities } from '@service-scrape/lib-australia_amenity'
 
 // Setup OpenTelemetry and connections
 import { LOGGER } from './global/setup'
-import { metroPostcode } from './metro-postcodes'
+// import { metroPostcode } from './metro-postcodes'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 
 import { BatchClient, SubmitJobCommand } from '@aws-sdk/client-batch'
@@ -20,8 +20,9 @@ export const handler = middy().handler(async (_event, _context) => {
 
     const filteredLocality = targetLocalities.filter((locality) => {
         // if (excludeLocalitySet.has(JSON.stringify(locality))) return false
-        const postcode = parseInt(locality.postcode, 10)
-        return metroPostcode.VIC.includes(postcode)
+        // const postcode = parseInt(locality.postcode, 10)
+        // return metroPostcode.VIC.includes(postcode)
+        return locality.state_abbreviation === 'VIC'
     })
 
     for (const locality of filteredLocality) {
