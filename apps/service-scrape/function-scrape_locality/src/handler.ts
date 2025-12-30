@@ -3,16 +3,10 @@ import { StatusCodes } from 'http-status-codes'
 // Setup persistent resources
 import { browserService, LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
-import { Locality } from '@service-scrape/lib-australia_amenity'
+import type { Locality } from '@service-scrape/lib-australia_amenity'
 
 export const handler = async (args: Locality) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
-
-    const locality = {
-        suburb: args.suburb_name,
-        state: args.state_abbreviation,
-        postcode: args.postcode,
-    }
 
     // For testing purposes
     if (args.postcode === '0000') {
@@ -74,7 +68,7 @@ export const handler = async (args: Locality) => {
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(`Couldn't browserService.close: ${JSON.stringify(locality)}`),
+                new Error(`Couldn't browserService.close: ${JSON.stringify(args)}`),
             ),
         }
     }
