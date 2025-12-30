@@ -19,6 +19,8 @@ interface LocalityWithIdPage extends LocalityWithId {
 
 const localityString = (locality: Locality) =>
     `${locality.suburb_name}-${locality.state_abbreviation}-${locality.postcode}`
+        .replaceAll(' ', '-')
+        .toLowerCase()
 
 export class ScrapeController extends IDatabased {
     readonly browserService
@@ -50,11 +52,7 @@ export class ScrapeController extends IDatabased {
      */
     async tryExtractSuburbPage(args: Locality) {
         try {
-            const url = new URL(
-                `https://www.domain.com.au/suburb-profile/${localityString(args)}`
-                    .replaceAll(' ', '-')
-                    .toLowerCase(),
-            )
+            const url = new URL(`https://www.domain.com.au/suburb-profile/${localityString(args)}`)
             const html = await this.browserService.getHTML(url.toString())
             if (!html) return null
             const nextDataJson = this.scrapeUtilService.tryExtractNextJson({ html })
@@ -88,11 +86,7 @@ export class ScrapeController extends IDatabased {
 
     async tryExtractRentsPage(args: LocalityWithIdPage) {
         try {
-            const url = new URL(
-                `https://www.domain.com.au/rent/${localityString(args)}`
-                    .replaceAll(' ', '-')
-                    .toLowerCase(),
-            )
+            const url = new URL(`https://www.domain.com.au/rent/${localityString(args)}`)
             url.search = new URLSearchParams({
                 ...this.sharedSearchparams,
                 excludedeposittaken: 1,
