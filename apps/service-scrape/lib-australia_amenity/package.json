@@ -13,6 +13,7 @@
     "dependencies": {
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "kysely": "0.28.4",
+        "pdf-parse": "^2.4.5",
         "zod": "4.0.17"
     }
 }
