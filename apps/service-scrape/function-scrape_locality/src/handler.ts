@@ -2,16 +2,10 @@ import { StatusCodes } from 'http-status-codes'
 
 // Setup persistent resources
 import { browserService, LOGGER, scrapeController } from './global/setup'
-import z from 'zod'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
+import { Locality } from '@service-scrape/lib-australia_amenity'
 
-export const handlerSchema = z.object({
-    suburb_name: z.string().transform((val) => val.replaceAll(' ', '-').toLowerCase()),
-    state_abbreviation: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
-    postcode: z.string().length(4),
-})
-
-export const handler = async (args: z.infer<typeof handlerSchema>) => {
+export const handler = async (args: Locality) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
     const locality = {
