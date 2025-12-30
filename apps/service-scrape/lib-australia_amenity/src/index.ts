@@ -13,7 +13,7 @@ export const localitySchema = z.object({
     postcode: z.string().length(4).regex(/^\d+$/),
 })
 
-export interface Locality extends z.output<typeof localitySchema> { }
+export interface Locality extends z.output<typeof localitySchema> {}
 
 export const australiaLocalities = _australiaLocalities as Omit<
     Selectable<SchemaWrite.LocalityTable>,
