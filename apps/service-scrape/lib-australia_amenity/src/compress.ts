@@ -1,6 +1,7 @@
 import '@service-scrape/lib-db_service_scrape'
 import { extractAusPostLocalities } from './extract/extractAusPostLocalities.ts'
 import { extractAcaraSchools } from './extract/extractAcaraSchools.ts'
+import { extractTargetLocalities } from './extract/extractTargetLocalities.ts'
 
 // /**
 //  * GENERATE AUSTRALIAN AMENITIES JSON IN THIS FORMAT
@@ -128,4 +129,5 @@ import { extractAcaraSchools } from './extract/extractAcaraSchools.ts'
 // console.info('Completed writing "australia-amenities.json"')
 
 const localities = await extractAusPostLocalities()
-const schools = await extractAcaraSchools()
+const schools = extractAcaraSchools()
+extractTargetLocalities({ localities, schools })
