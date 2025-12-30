@@ -4,12 +4,11 @@ import type { Selectable, Updateable } from 'kysely'
 import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import z from 'zod'
 import { toUpperCaseWords } from './util.ts'
-
-export const stateAbbreviationSchema = z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'])
+import { stateAbbreviationEnumSchema } from '@service-scrape/lib-db_service_scrape/zod'
 
 export const localitySchema = z.object({
     suburb_name: z.string().transform(toUpperCaseWords),
-    state_abbreviation: stateAbbreviationSchema,
+    state_abbreviation: stateAbbreviationEnumSchema,
     postcode: z.string().length(4).regex(/^\d+$/),
 })
 
