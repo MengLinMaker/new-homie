@@ -72,7 +72,7 @@ export const extractAcaraSchools = () => {
         JSON.stringify(transformedSchoolsData, null, 4),
     )
     console.info('Completed writing "australia-schools.json"')
-    console.info(`Extracted ${transformedSchoolsData.length} schools\n`)
+    console.info('Extracted schools:', transformedSchoolsData.length, '\n')
 
     return transformedSchoolsData
 }

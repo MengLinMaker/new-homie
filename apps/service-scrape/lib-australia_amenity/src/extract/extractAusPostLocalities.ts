@@ -48,7 +48,7 @@ export const extractAusPostLocalities = async () => {
         JSON.stringify(Array.from(localities.values()), null, 4),
     )
     console.info('Completed writing "australia-localities.json"')
-    console.info(`Extracted ${localities.size} localities\n`)
+    console.info('Extracted localities:', localities.size, '\n')
 
     return localities
 }
