@@ -2,26 +2,14 @@ import { StatusCodes } from 'http-status-codes'
 
 // Setup persistent resources
 import { browserService, LOGGER, scrapeController } from './global/setup'
-import z from 'zod'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
+import type { Locality } from '@service-scrape/lib-australia_amenity'
 
-export const handlerSchema = z.object({
-    suburb_name: z.string().transform((val) => val.replaceAll(' ', '-').toLowerCase()),
-    state_abbreviation: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
-    postcode: z.string().length(4),
-})
-
-export const handler = async (args: z.infer<typeof handlerSchema>) => {
+export const handler = async (args: Locality) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
-    const locality = {
-        suburb: args.suburb_name,
-        state: args.state_abbreviation,
-        postcode: args.postcode,
-    }
-
     // For testing purposes
-    if (locality.postcode === '0000') {
+    if (args.postcode === '0000') {
         console.info('ACCEPTED test succeeded')
         functionHandlerLogger.recordEnd()
         return { status: StatusCodes.ACCEPTED }
@@ -35,32 +23,29 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(
-                    `Couldn't browserService.launchSingleBrowser: ${JSON.stringify(locality)}`,
-                ),
+                new Error(`Couldn't browserService.launchSingleBrowser: ${JSON.stringify(args)}`),
             ),
         }
     }
 
     // Locality data
-    const localityId = await scrapeController.tryExtractSuburbPage(locality)
+    const localityId = await scrapeController.tryExtractSuburbPage(args)
     if (localityId === null) {
         console.error('FAIL scrapeController.tryExtractSuburbPage')
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(`Couldn't extract profile: ${JSON.stringify(locality)}`),
+                new Error(`Couldn't extract profile: ${JSON.stringify(args)}`),
             ),
         }
     }
     console.info('SUCCESS tryExtractSuburbPage')
-    await scrapeController.tryExtractSchools({ ...locality, localityId })
+    await scrapeController.tryExtractSchools({ ...args, localityId })
     console.info('SUCCESS scrapeController.tryExtractSchools')
 
     // Sale listing data
     for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const salesInfo = await scrapeController.tryExtractSalesPage(args)
+        const salesInfo = await scrapeController.tryExtractSalesPage({ ...args, page, localityId })
         if (!salesInfo || salesInfo.isLastPage) break
         console.info('SUCCESS page', page)
     }
@@ -68,8 +53,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
 
     // Rent listing data
     for (let page = 1; ; page++) {
-        const args = { ...locality, page, localityId }
-        const rentsInfo = await scrapeController.tryExtractRentsPage(args)
+        const rentsInfo = await scrapeController.tryExtractRentsPage({ ...args, page, localityId })
         if (!rentsInfo) break
         if (!rentsInfo || rentsInfo.isLastPage) break
         console.info('SUCCESS page', page)
@@ -84,7 +68,7 @@ export const handler = async (args: z.infer<typeof handlerSchema>) => {
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
-                new Error(`Couldn't browserService.close: ${JSON.stringify(locality)}`),
+                new Error(`Couldn't browserService.close: ${JSON.stringify(args)}`),
             ),
         }
     }

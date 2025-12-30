@@ -6,22 +6,21 @@ const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
 describe(testSuiteName, () => {
     const scrapeUtilService = new AracaSchoolsService(LOGGER)
-    const locality = {
-        suburb: 'dandenong',
-        state: 'VIC',
-        postcode: '3175',
-    }
 
     describe('getSchools', () => {
         it('should parse next.js html successfully', async () => {
-            const resultObject = scrapeUtilService.getSchools(locality)
+            const resultObject = scrapeUtilService.getSchools({
+                suburb_name: 'Dandenong',
+                state_abbreviation: 'VIC',
+                postcode: '3175',
+            })
             expect(resultObject.length).toBeGreaterThan(0)
         })
 
         it('should return empty array for non-existent locality', async () => {
             const result = scrapeUtilService.getSchools({
-                suburb: 'nonexistent',
-                state: 'XXX',
+                suburb_name: 'nonexistent',
+                state_abbreviation: 'VIC',
                 postcode: '0000',
             })
             expect(result).toStrictEqual([])

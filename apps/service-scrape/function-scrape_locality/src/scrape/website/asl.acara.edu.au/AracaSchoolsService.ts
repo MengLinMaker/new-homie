@@ -1,32 +1,19 @@
 import { australiaSchools } from '@service-scrape/lib-australia_amenity'
-import type { Updateable } from 'kysely'
-import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { ILoggable } from '@observability/lib-opentelemetry'
+import type { Locality } from '../../global'
 
 export class AracaSchoolsService extends ILoggable {
     /**
      * Fetches schools based on locality data.
      * @param args locality data
      */
-    getSchools(args: { suburb: string; state: string; postcode: string }) {
-        const filteredSchools = australiaSchools.filter((school) => {
+    getSchools = (args: Locality) =>
+        australiaSchools.filter((school) => {
             const l = school.locality_table
-            school.school_feature_table
             return (
-                l.suburb_name?.toLowerCase() === args.suburb.toLowerCase() &&
-                l.state_abbreviation?.toLowerCase() === args.state.toLowerCase() &&
+                l.suburb_name === args.suburb_name &&
+                l.state_abbreviation === args.state_abbreviation &&
                 l.postcode === args.postcode
             )
         })
-
-        return filteredSchools.map((school) => {
-            return {
-                school_feature_table: school.school_feature_table,
-                school_table: school.school_table,
-            } satisfies {
-                school_feature_table: Updateable<SchemaWrite.SchoolFeatureTable>
-                school_table: Updateable<SchemaWrite.SchoolTable>
-            }
-        })
-    }
 }
