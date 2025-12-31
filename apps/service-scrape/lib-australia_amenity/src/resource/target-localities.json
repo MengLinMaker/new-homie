@@ -1780,11 +1780,6 @@
         "postcode": "3550"
     },
     {
-        "suburb_name": "Bendigo",
-        "state_abbreviation": "VIC",
-        "postcode": "3552"
-    },
-    {
         "suburb_name": "Ben Lomond",
         "state_abbreviation": "NSW",
         "postcode": "2365"
@@ -3128,11 +3123,6 @@
         "suburb_name": "Brunswick North",
         "state_abbreviation": "VIC",
         "postcode": "3056"
-    },
-    {
-        "suburb_name": "Brunswick South",
-        "state_abbreviation": "VIC",
-        "postcode": "3055"
     },
     {
         "suburb_name": "Brunswick West",
@@ -7715,11 +7705,6 @@
         "postcode": "3199"
     },
     {
-        "suburb_name": "Frankston East",
-        "state_abbreviation": "VIC",
-        "postcode": "3199"
-    },
-    {
         "suburb_name": "Frankston North",
         "state_abbreviation": "VIC",
         "postcode": "3200"
@@ -9790,11 +9775,6 @@
         "postcode": "3400"
     },
     {
-        "suburb_name": "Horsham",
-        "state_abbreviation": "VIC",
-        "postcode": "3402"
-    },
-    {
         "suburb_name": "Horsley",
         "state_abbreviation": "NSW",
         "postcode": "2530"
@@ -11467,11 +11447,6 @@
     {
         "suburb_name": "Kyabram",
         "state_abbreviation": "VIC",
-        "postcode": "3619"
-    },
-    {
-        "suburb_name": "Kyabram",
-        "state_abbreviation": "VIC",
         "postcode": "3620"
     },
     {
@@ -12530,11 +12505,6 @@
         "postcode": "3085"
     },
     {
-        "suburb_name": "Macleod West",
-        "state_abbreviation": "VIC",
-        "postcode": "3085"
-    },
-    {
         "suburb_name": "Macquarie",
         "state_abbreviation": "ACT",
         "postcode": "2614"
@@ -12783,11 +12753,6 @@
         "suburb_name": "Mansfield",
         "state_abbreviation": "VIC",
         "postcode": "3722"
-    },
-    {
-        "suburb_name": "Mansfield",
-        "state_abbreviation": "VIC",
-        "postcode": "3724"
     },
     {
         "suburb_name": "Mansfield",
@@ -13520,16 +13485,6 @@
         "postcode": "3500"
     },
     {
-        "suburb_name": "Mildura",
-        "state_abbreviation": "VIC",
-        "postcode": "3502"
-    },
-    {
-        "suburb_name": "Mildura South",
-        "state_abbreviation": "VIC",
-        "postcode": "3501"
-    },
-    {
         "suburb_name": "Mile End",
         "state_abbreviation": "SA",
         "postcode": "5031"
@@ -14073,11 +14028,6 @@
         "suburb_name": "Moree",
         "state_abbreviation": "NSW",
         "postcode": "2400"
-    },
-    {
-        "suburb_name": "Moreland",
-        "state_abbreviation": "VIC",
-        "postcode": "3058"
     },
     {
         "suburb_name": "Morgan",
@@ -14873,11 +14823,6 @@
         "suburb_name": "Myrtle Bank",
         "state_abbreviation": "SA",
         "postcode": "5064"
-    },
-    {
-        "suburb_name": "Myrtleford",
-        "state_abbreviation": "VIC",
-        "postcode": "3736"
     },
     {
         "suburb_name": "Myrtleford",
@@ -18525,11 +18470,6 @@
         "postcode": "3660"
     },
     {
-        "suburb_name": "Seymour",
-        "state_abbreviation": "VIC",
-        "postcode": "3661"
-    },
-    {
         "suburb_name": "Shailer Park",
         "state_abbreviation": "QLD",
         "postcode": "4128"
@@ -18598,11 +18538,6 @@
         "suburb_name": "Shepparton",
         "state_abbreviation": "VIC",
         "postcode": "3630"
-    },
-    {
-        "suburb_name": "Shepparton",
-        "state_abbreviation": "VIC",
-        "postcode": "3632"
     },
     {
         "suburb_name": "Shepparton East",
@@ -21532,11 +21467,6 @@
     {
         "suburb_name": "Wangaratta",
         "state_abbreviation": "VIC",
-        "postcode": "3676"
-    },
-    {
-        "suburb_name": "Wangaratta",
-        "state_abbreviation": "VIC",
         "postcode": "3677"
     },
     {
@@ -22608,11 +22538,6 @@
         "suburb_name": "Wivenhoe",
         "state_abbreviation": "TAS",
         "postcode": "7320"
-    },
-    {
-        "suburb_name": "Wodonga",
-        "state_abbreviation": "VIC",
-        "postcode": "3689"
     },
     {
         "suburb_name": "Wodonga",
