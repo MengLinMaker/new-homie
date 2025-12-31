@@ -451,8 +451,7 @@
                         "axisColorMode": "text",
                         "axisLabel": "",
                         "axisPlacement": "hidden",
-                        "axisSoftMax": 900000,
-                        "axisSoftMin": 500,
+                        "axisSoftMin": 0,
                         "barAlignment": 0,
                         "barWidthFactor": 0.6,
                         "drawStyle": "points",
@@ -484,7 +483,6 @@
                     },
                     "fieldMinMax": false,
                     "mappings": [],
-                    "max": 900000,
                     "min": 0,
                     "thresholds": {
                         "mode": "absolute",
@@ -495,19 +493,7 @@
                             },
                             {
                                 "color": "red",
-                                "value": 2000
-                            },
-                            {
-                                "color": "yellow",
-                                "value": 15000
-                            },
-                            {
-                                "color": "yellow",
-                                "value": 300000
-                            },
-                            {
-                                "color": "red",
-                                "value": 900000
+                                "value": 8000
                             }
                         ]
                     },
@@ -671,7 +657,7 @@
                 {
                     "direction": "backward",
                     "editorMode": "builder",
-                    "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
+                    "expr": "count by(detected_level) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `$log_level` [$__auto]))",
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
@@ -808,7 +794,7 @@
                 {
                     "direction": "backward",
                     "editorMode": "builder",
-                    "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `(fatal|error|warn)` [$__auto]))",
+                    "expr": "count by(code_function_name) (count_over_time({service_namespace=\"NewHomie\", service_name=\"$service_name\"} | code_function_name != `` | detected_level =~ `$log_level` [$__auto]))",
                     "legendFormat": "",
                     "queryType": "range",
                     "refId": "Source",
@@ -1016,7 +1002,7 @@
                 "sortBy": [
                     {
                         "desc": false,
-                        "displayName": "exception_message"
+                        "displayName": "code_function_name"
                     }
                 ]
             },
@@ -1131,8 +1117,8 @@
                 "auto_count": 100,
                 "auto_min": "1s",
                 "current": {
-                    "text": "10m",
-                    "value": "10m"
+                    "text": "2m",
+                    "value": "2m"
                 },
                 "description": "",
                 "name": "heatmap_interval",
@@ -1173,7 +1159,7 @@
                         "value": "1m"
                     },
                     {
-                        "selected": false,
+                        "selected": true,
                         "text": "2m",
                         "value": "2m"
                     },
@@ -1183,7 +1169,7 @@
                         "value": "5m"
                     },
                     {
-                        "selected": true,
+                        "selected": false,
                         "text": "10m",
                         "value": "10m"
                     },
@@ -1205,8 +1191,8 @@
             {
                 "allowCustomValue": false,
                 "current": {
-                    "text": ["fatal", "error", "warn"],
-                    "value": ["fatal", "error", "warn"]
+                    "text": ["error", "fatal", "warn"],
+                    "value": ["error", "fatal", "warn"]
                 },
                 "description": "",
                 "includeAll": true,
@@ -1234,13 +1220,13 @@
         ]
     },
     "time": {
-        "from": "now-7d",
-        "to": "now"
+        "from": "2025-12-30T14:51:43.629Z",
+        "to": "2025-12-30T21:57:56.738Z"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "stack-service_scrape_pipeline",
     "uid": "c7106517-a852-446a-aa7b-800c8a522bc0",
-    "version": 111,
+    "version": 116,
     "weekStart": ""
 }
