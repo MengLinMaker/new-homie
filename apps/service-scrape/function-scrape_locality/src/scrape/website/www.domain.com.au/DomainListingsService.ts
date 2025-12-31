@@ -44,7 +44,11 @@ const listingsSchema = z.object({
             parking: z.number().catch(0),
             propertyType: z.enum(HomeTypeEnum),
             isRural: z.boolean(),
-            landSize: z.number().catch(0),
+            landSize: z
+                .number()
+                .catch(0)
+                // Convert from hectare to m2 if float
+                .transform((e) => (Number.isInteger(e) ? e : e * 10 ** 4)),
             isRetirement: z.boolean(),
         }),
         inspection: z.object({
