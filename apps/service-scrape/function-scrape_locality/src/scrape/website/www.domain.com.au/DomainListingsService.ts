@@ -108,9 +108,16 @@ export class DomainListingsService extends ILoggable {
             .toArray()
         if (kPrices.length !== 0) {
             const priceList = kPrices.map((match) =>
-                Number.parseFloat(match.toString().toLowerCase().replace('k', '')),
+                Number.parseFloat(match.toString().toLowerCase().replace(/k/g, '')),
             )
             return Math.max(...priceList) * 1000
+        }
+        const spacedPrices = priceString.matchAll(/\b[$]?\d{3} 0{3}\b/g).toArray()
+        if (spacedPrices.length !== 0) {
+            const priceList = spacedPrices.map((match) =>
+                Number.parseFloat(match.toString().replaceAll(/[ $]/g, '')),
+            )
+            return Math.max(...priceList)
         }
         return null
     }
@@ -124,7 +131,8 @@ export class DomainListingsService extends ILoggable {
             .replaceAll(/\b\d{3}\b \b\d{4}\b \b\d{4}\b/g, '') // Replace phone numbers
             .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
             .replaceAll(',', '') // Remove commas from numbers
-            .matchAll(/\b\d{3,4}(pw)?\b/g) // Integer totalling 3-4 digits
+            .toLowerCase()
+            .matchAll(/\b\d{3,4}(pw|p\/w)?\b/g) // Integer totalling 3-4 digits
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))
