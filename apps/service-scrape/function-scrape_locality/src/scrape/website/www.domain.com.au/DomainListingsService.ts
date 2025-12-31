@@ -48,7 +48,7 @@ const listingsSchema = z.object({
                 .number()
                 .catch(0)
                 // Convert from hectare to m2 if float
-                .transform((e) => (Number.isInteger(e) ? e : e * 10 ** 4)),
+                .transform((e) => (Number.isInteger(e) ? e : Math.floor(e * 10 ** 4))),
             isRetirement: z.boolean(),
         }),
         inspection: z.object({
