@@ -44,11 +44,7 @@ const listingsSchema = z.object({
             parking: z.number().catch(0),
             propertyType: z.enum(HomeTypeEnum),
             isRural: z.boolean(),
-            landSize: z
-                .number()
-                .catch(0)
-                // Convert from hectare to m2 if float
-                .transform((e) => (Number.isInteger(e) ? e : Math.floor(e * 10 ** 4))),
+            landSize: z.number().catch(0),
             isRetirement: z.boolean(),
         }),
         inspection: z.object({
@@ -191,6 +187,10 @@ export class DomainListingsService extends ILoggable {
             if (address.street.length === 0) return null
 
             const features = listingModel.features
+            // Convert to hectares if needed
+            const landSize = Number.isInteger(features.landSize)
+                ? features.landSize
+                : Math.floor(features.landSize * 10 ** 4)
             return {
                 home_feature_table: {
                     bed_quantity: features.beds,
@@ -202,7 +202,7 @@ export class DomainListingsService extends ILoggable {
                 home_table: {
                     street_address: address.street,
                     gps: tryCreatePostgisPointString(address.lng, address.lat),
-                    land_m2: features.landSize,
+                    land_m2: landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime),
                     auction_time: this.parseDatetime(listingModel.auction),
                 } satisfies Updateable<SchemaWrite.HomeTable>,
