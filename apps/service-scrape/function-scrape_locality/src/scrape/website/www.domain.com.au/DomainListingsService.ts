@@ -82,6 +82,8 @@ export class DomainListingsService extends ILoggable {
         if (priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
         // Contains a date
         if (priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
+        // Exclude not many numeric characters
+        if (priceString.matchAll(/\d/g).toArray().length / priceString.length < 1 / 10) return true
         return false
     }
 
@@ -104,9 +106,16 @@ export class DomainListingsService extends ILoggable {
             .toArray()
         if (kPrices.length !== 0) {
             const priceList = kPrices.map((match) =>
-                Number.parseFloat(match.toString().toLowerCase().replace('k', '')),
+                Number.parseFloat(match.toString().toLowerCase().replace(/k/g, '')),
             )
             return Math.max(...priceList) * 1000
+        }
+        const spacedPrices = priceString.matchAll(/\b[$]?\d{3} 0{3}\b/g).toArray()
+        if (spacedPrices.length !== 0) {
+            const priceList = spacedPrices.map((match) =>
+                Number.parseFloat(match.toString().replaceAll(/[ $]/g, '')),
+            )
+            return Math.max(...priceList)
         }
         return null
     }
@@ -120,7 +129,8 @@ export class DomainListingsService extends ILoggable {
             .replaceAll(/\b\d{3}\b \b\d{4}\b \b\d{4}\b/g, '') // Replace phone numbers
             .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
             .replaceAll(',', '') // Remove commas from numbers
-            .matchAll(/\b\d{3,4}(pw)?\b/g) // Integer totalling 3-4 digits
+            .toLowerCase()
+            .matchAll(/\b\d{3,4}(pw|p\/w)?\b/g) // Integer totalling 3-4 digits
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))
@@ -177,6 +187,10 @@ export class DomainListingsService extends ILoggable {
             if (address.street.length === 0) return null
 
             const features = listingModel.features
+            // Convert to hectares if needed
+            const landSize = Number.isInteger(features.landSize)
+                ? features.landSize
+                : Math.floor(features.landSize * 10 ** 4)
             return {
                 home_feature_table: {
                     bed_quantity: features.beds,
@@ -188,7 +202,7 @@ export class DomainListingsService extends ILoggable {
                 home_table: {
                     street_address: address.street,
                     gps: tryCreatePostgisPointString(address.lng, address.lat),
-                    land_m2: features.landSize,
+                    land_m2: landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime),
                     auction_time: this.parseDatetime(listingModel.auction),
                 } satisfies Updateable<SchemaWrite.HomeTable>,

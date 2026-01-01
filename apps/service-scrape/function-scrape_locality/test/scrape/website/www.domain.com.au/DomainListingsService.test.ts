@@ -37,6 +37,7 @@ describe(testSuiteName, () => {
                 '$580000 - $638000',
                 '$580,000',
                 '$580000',
+                '$580 000',
                 '$580k - $638k',
                 '$580k',
                 'From $580,000',
@@ -61,6 +62,7 @@ describe(testSuiteName, () => {
                 '$638k',
                 '638000',
                 '638,000',
+                '638 000',
                 '$638000',
                 '$638,000',
                 '580k-638k',
@@ -89,6 +91,8 @@ describe(testSuiteName, () => {
                 '30-09-2025',
                 '040 4404 0404',
                 '04044040404',
+                '638 0000',
+                '6381 000',
             ]
             for (const input of inputs)
                 expect(domainListingsService.highestSalePriceFromString(input)).toBeNull()
@@ -98,7 +102,16 @@ describe(testSuiteName, () => {
     describe('highestRentPriceFromString', () => {
         it('should extract highest valid number', () => {
             const expected = 315
-            const inputs = ['315', '$315', '315pw', '$315pw', '315 per week', '$315 per week']
+            const inputs = [
+                '315',
+                '$315',
+                '315pw',
+                '$315pw',
+                '315 per week',
+                '$315 per week',
+                '315/week',
+                '315p/w',
+            ]
             for (const input of inputs)
                 expect(domainListingsService.highestRentPriceFromString(input)).toBe(expected)
         })
