@@ -8,13 +8,8 @@ import z from 'zod'
 export const ENV = parseEnvSchema(
     z.object({
         /**
-         * function-scrape_locality AWS batch job definition
+         * For triggering StepFunctionsScrapePipeline
          */
-        JOB_DEFINITION_ARN: z.string(),
-
-        /**
-         * function-scrape_locality AWS batch job queue
-         */
-        JOB_QUEUE_ARN: z.string(),
+        STEP_FUNCTION_ARN: z.string(),
     }),
 )

@@ -67,6 +67,45 @@ const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', 
 })
 
 /**
+ * Step function to orchestrate data pipeline
+ */
+const StepScrapeLocality = sst.aws.StepFunctions.task({
+    name: 'StepScrapeLocality',
+    resource: 'arn:aws:states:::batch:submitJob.sync',
+    arguments: {
+        JobName:
+            '{% $states.input.suburb_name %}-{% $states.input.state_abbreviation %}-{% $states.input.postcode %}',
+        JobQueue: JobQueueScrapeLocality.arn,
+        JobDefinition: JobDefinitionScrapeLocality.arn,
+        Parameters: {
+            ContainerOverrides: {
+                Environment: expandEnv({
+                    suburb_name: '{% $states.input.suburb_name %}',
+                    state_abbreviation: '{% $states.input.state_abbreviation %}',
+                    postcode: '{% $states.input.postcode %}',
+                }),
+            },
+        },
+    },
+    permissions: [
+        {
+            effect: 'allow',
+            actions: ['batch:SubmitJob', 'batch:TagResource'],
+            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
+        },
+    ],
+})
+const StepMapScrapeLocality = sst.aws.StepFunctions.map({
+    name: 'StepMapScrapeLocality',
+    processor: StepScrapeLocality,
+    items: '{% $states.input.items %}',
+})
+const StepDone = sst.aws.StepFunctions.succeed({ name: 'StepDone' })
+const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
+    definition: StepMapScrapeLocality.next(StepDone),
+})
+
+/**
  * 2. Lambda function to trigger the ECS Fargate task
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
@@ -78,8 +117,7 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     concurrency: { reserved: 1 },
     environment: {
         ...OTEL_ENV,
-        JOB_DEFINITION_ARN: JobDefinitionScrapeLocality.arn,
-        JOB_QUEUE_ARN: JobQueueScrapeLocality.arn,
+        STEP_FUNCTION_ARN: StepFunctionsScrapePipeline.arn,
     },
     permissions: [
         {
@@ -88,7 +126,6 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
             resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
         },
     ],
-    url: $app.stage !== 'production',
 })
 
 /**
