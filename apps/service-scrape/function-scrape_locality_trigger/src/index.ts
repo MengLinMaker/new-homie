@@ -23,7 +23,7 @@ export const handler = middy().handler(async (_event, _context) => {
     await sfnClient.send(
         new StartExecutionCommand({
             stateMachineArn: ENV.STEP_FUNCTION_ARN,
-            input: JSON.stringify(filteredLocality.slice(0, 1)),
+            input: JSON.stringify(filteredLocality),
         }),
     )
 
