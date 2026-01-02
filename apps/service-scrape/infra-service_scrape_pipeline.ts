@@ -119,13 +119,7 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
         ...OTEL_ENV,
         STEP_FUNCTION_ARN: StepFunctionsScrapePipeline.arn,
     },
-    permissions: [
-        {
-            effect: 'allow',
-            actions: ['batch:SubmitJob', 'batch:TagResource'],
-            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
-        },
-    ],
+    link: [StepFunctionsScrapePipeline],
 })
 
 /**
