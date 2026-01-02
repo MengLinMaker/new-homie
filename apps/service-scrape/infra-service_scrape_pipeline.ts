@@ -75,7 +75,7 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
     arguments: {
         // Follow JSONata syntax - https://www.youtube.com/watch?v=kVWxJoO_zc8&t=87s
         JobName:
-            "{% $replace($states.input.suburb_name, /[ ]/g, '-') & '-' & $states.input.state_abbreviation & '-' & $states.input.postcode %}",
+            "{% $replace($states.input.suburb_name, ' ', '-') & '-' & $states.input.state_abbreviation & '-' & $states.input.postcode %}",
         JobQueue: JobQueueScrapeLocality.arn,
         JobDefinition: JobDefinitionScrapeLocality.arn,
         ContainerOverrides: {
