@@ -10,7 +10,7 @@
         "pino-pretty": "13.1.1"
     },
     "dependencies": {
-        "@aws-sdk/client-batch": "^3.948.0",
+        "@aws-sdk/client-sfn": "^3.958.0",
         "@middy/core": "^6.4.4",
         "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-australia_amenity": "workspace:*",

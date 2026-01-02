@@ -13,8 +13,8 @@ const dirname = './apps/service-scrape'
  * @param envMap key value map
  */
 const expandEnv = (envMap: { [k: string]: string }) => {
-    const expanded: { name: string; value: string }[] = []
-    for (const [name, value] of Object.entries(envMap)) expanded.push({ name, value })
+    const expanded: { Name: string; Value: string }[] = []
+    for (const [Name, Value] of Object.entries(envMap)) expanded.push({ Name, Value })
     return expanded
 }
 
@@ -67,6 +67,43 @@ const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', 
 })
 
 /**
+ * Step function to orchestrate data pipeline
+ */
+const StepScrapeLocality = sst.aws.StepFunctions.task({
+    name: 'StepScrapeLocality',
+    resource: 'arn:aws:states:::batch:submitJob.sync',
+    arguments: {
+        // Follow JSONata syntax - https://www.youtube.com/watch?v=kVWxJoO_zc8&t=87s
+        JobName:
+            "{% $states.input.suburb_name & '-' & $states.input.state_abbreviation & '-' & $states.input.postcode %}",
+        JobQueue: JobQueueScrapeLocality.arn,
+        JobDefinition: JobDefinitionScrapeLocality.arn,
+        ContainerOverrides: {
+            Environment: expandEnv({
+                suburb_name: '{% $states.input.suburb_name %}',
+                state_abbreviation: '{% $states.input.state_abbreviation %}',
+                postcode: '{% $states.input.postcode %}',
+            }),
+        },
+    },
+    permissions: [
+        {
+            actions: ['batch:SubmitJob', 'batch:TagResource'],
+            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
+        },
+    ],
+})
+const StepMapScrapeLocality = sst.aws.StepFunctions.map({
+    name: 'StepMapScrapeLocality',
+    processor: StepScrapeLocality,
+    items: '{% $states.input %}',
+})
+const StepDone = sst.aws.StepFunctions.succeed({ name: 'StepDone' })
+const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
+    definition: StepMapScrapeLocality.next(StepDone),
+})
+
+/**
  * 2. Lambda function to trigger the ECS Fargate task
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
@@ -78,17 +115,9 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
     concurrency: { reserved: 1 },
     environment: {
         ...OTEL_ENV,
-        JOB_DEFINITION_ARN: JobDefinitionScrapeLocality.arn,
-        JOB_QUEUE_ARN: JobQueueScrapeLocality.arn,
+        STEP_FUNCTION_ARN: StepFunctionsScrapePipeline.arn,
     },
-    permissions: [
-        {
-            effect: 'allow',
-            actions: ['batch:SubmitJob', 'batch:TagResource'],
-            resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
-        },
-    ],
-    url: $app.stage !== 'production',
+    link: [StepFunctionsScrapePipeline],
 })
 
 /**
