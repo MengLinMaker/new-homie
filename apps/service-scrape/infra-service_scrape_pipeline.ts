@@ -93,7 +93,7 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
         },
     ],
     // Disable output - not needed
-    output: {}
+    output: {},
 })
 const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     name: 'StepMapScrapeLocality',
