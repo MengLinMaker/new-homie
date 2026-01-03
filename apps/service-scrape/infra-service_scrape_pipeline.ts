@@ -92,6 +92,8 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
             resources: [JobDefinitionScrapeLocality.arn, JobQueueScrapeLocality.arn],
         },
     ],
+    // Reduce output to fit into 256kb limit - output execution time in ms
+    output: '{% $states.input.StoppedAt - $states.input.StartedAt %}'
 })
 const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     name: 'StepMapScrapeLocality',
