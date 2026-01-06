@@ -76,7 +76,7 @@ interface SchoolView {
 }
 
 export interface DB extends DB_Tables {
-    latest_sale_view: LatestSaleMV
-    latest_rent_view: LatestRentMV
+    latest_sale_mv: LatestSaleMV
+    latest_rent_mv: LatestRentMV
     school_view: SchoolView
 }
