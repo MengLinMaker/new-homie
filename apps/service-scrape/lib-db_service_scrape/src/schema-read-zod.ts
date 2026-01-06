@@ -104,7 +104,7 @@ export const schoolTableSchema = z.object({
     url: z.string().nullable(),
 })
 
-export const latestSaleViewSchema = z.object({
+export const latestSaleMVSchema = z.object({
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
     first_scrape_date: timestampSchema,
@@ -123,13 +123,9 @@ export const latestSaleViewSchema = z.object({
     car_quantity: z.number(),
     home_type: homeTypeEnumSchema,
     is_retirement: z.boolean(),
-    boundary_coordinates: z.string(),
-    postcode: z.string(),
-    state_abbreviation: stateAbbreviationEnumSchema,
-    suburb_name: z.string(),
 })
 
-export const latestRentViewSchema = z.object({
+export const latestRentMVSchema = z.object({
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
     first_scrape_date: timestampSchema,
@@ -148,10 +144,6 @@ export const latestRentViewSchema = z.object({
     car_quantity: z.number(),
     home_type: homeTypeEnumSchema,
     is_retirement: z.boolean(),
-    boundary_coordinates: z.string(),
-    postcode: z.string(),
-    state_abbreviation: stateAbbreviationEnumSchema,
-    suburb_name: z.string(),
 })
 
 export const schoolViewSchema = z.object({
