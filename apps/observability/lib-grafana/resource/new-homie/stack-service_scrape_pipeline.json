@@ -1214,7 +1214,7 @@
                 "multi": true,
                 "name": "service_name",
                 "options": [],
-                "query": "function-scrape_locality_trigger,function-scrape_locality",
+                "query": "function-scrape_locality_trigger,function-scrape_locality,function-scrape_postprocess",
                 "type": "custom"
             }
         ]

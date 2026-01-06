@@ -19,7 +19,24 @@ const expandEnv = (envMap: { [k: string]: string }) => {
 }
 
 /**
- * 3. AWS Batch for fault tolerant scraping on cheap fargate spot instances
+ * 5. Postprocess - update materialised views
+ */
+const FunctionScrapePostprocess = new sst.aws.Function('FunctionScrapePostprocess', {
+    handler: path.join(dirname, './function-scrape_postprocess/src/index.handler'),
+    architecture: 'arm64',
+    runtime: 'nodejs22.x',
+    memory: '1024 MB',
+    timeout: '30 seconds',
+    concurrency: { reserved: 1 },
+    environment: { ...OTEL_ENV },
+})
+const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
+    name: 'StepScrapeLocalityPostprocess',
+    function: FunctionScrapePostprocess,
+})
+
+/**
+ * 4. AWS Batch for fault tolerant scraping on cheap fargate spot instances
  */
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
@@ -67,7 +84,7 @@ const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', 
 })
 
 /**
- * Step function to orchestrate data pipeline
+ * 3. Step function to orchestrate data pipeline
  */
 const StepScrapeLocality = sst.aws.StepFunctions.task({
     name: 'StepScrapeLocality',
@@ -100,13 +117,12 @@ const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     processor: StepScrapeLocality,
     items: '{% $states.input %}',
 })
-const StepDone = sst.aws.StepFunctions.succeed({ name: 'StepDone' })
 const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
-    definition: StepMapScrapeLocality.next(StepDone),
+    definition: StepMapScrapeLocality.next(StepScrapePostprocess),
 })
 
 /**
- * 2. Lambda function to trigger the ECS Fargate task
+ * 2. Lambda function calculates which localities to scrape
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
     handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
