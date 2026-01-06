@@ -13,6 +13,7 @@
         "@observability/lib-opentelemetry": "workspace:*",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
         "http-status-codes": "^2.3.0",
+        "kysely": "0.28.4",
         "zod": "4.0.17"
     },
     "type": "module"

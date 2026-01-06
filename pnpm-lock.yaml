@@ -319,9 +319,31 @@ importers:
       '@testcontainers/localstack':
         specifier: ^11.5.1
         version: 11.5.1
-      pino-pretty:
-        specifier: 13.1.1
-        version: 13.1.1
+
+  apps/service-scrape/function-scrape_postprocess:
+    dependencies:
+      '@middy/core':
+        specifier: ^6.4.4
+        version: 6.4.4
+      '@observability/lib-opentelemetry':
+        specifier: workspace:*
+        version: link:../../observability/lib-opentelemetry
+      '@service-scrape/lib-db_service_scrape':
+        specifier: workspace:*
+        version: link:../lib-db_service_scrape
+      http-status-codes:
+        specifier: ^2.3.0
+        version: 2.3.0
+      kysely:
+        specifier: 0.28.4
+        version: 0.28.4
+      zod:
+        specifier: 4.0.17
+        version: 4.0.17
+    devDependencies:
+      '@testcontainers/localstack':
+        specifier: ^11.5.1
+        version: 11.5.1
 
   apps/service-scrape/lib-australia_amenity:
     dependencies:
@@ -8983,6 +9005,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
