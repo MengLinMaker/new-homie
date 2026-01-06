@@ -2,8 +2,8 @@ import { os } from '@orpc/server'
 import z from 'zod'
 import { DB } from './global/setup.ts'
 import {
-    latestRentViewSchema,
-    latestSaleViewSchema,
+    latestSaleMVSchema,
+    latestRentMVSchema,
     localityTableSchema,
 } from '@service-scrape/lib-db_service_scrape/zod'
 
@@ -16,9 +16,11 @@ const homeFilterInput = os.input(
 export const router = {
     findLatestSale: homeFilterInput
         .route({ method: 'GET', path: `/latestSale` })
-        .output(z.array(latestSaleViewSchema))
+        .output(z.array(latestSaleMVSchema))
         .handler(async ({ input }) => {
-            let query = DB.selectFrom('latest_sale_view').selectAll()
+            let query = DB.selectFrom('latest_sale_mv')
+                .leftJoin('locality_table', 'locality_table_id', 'locality_table.id')
+                .selectAll('latest_sale_mv')
             for (const key of objectKeys(input)) {
                 if (input[key]) query = query.where(key, '=', input[key])
             }
@@ -27,9 +29,11 @@ export const router = {
 
     findLatestRent: homeFilterInput
         .route({ method: 'GET', path: `/latestRent` })
-        .output(z.array(latestRentViewSchema))
+        .output(z.array(latestRentMVSchema))
         .handler(async ({ input }) => {
-            let query = DB.selectFrom('latest_rent_view').selectAll()
+            let query = DB.selectFrom('latest_rent_mv')
+                .leftJoin('locality_table', 'locality_table_id', 'locality_table.id')
+                .selectAll('latest_rent_mv')
             for (const key of objectKeys(input)) {
                 if (input[key]) query = query.where(key, '=', input[key])
             }
