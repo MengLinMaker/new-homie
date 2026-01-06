@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict vRYybBTSh1L2GiurGq3eKOZJZPTGVSsz8PMYMQTEO2mz2WwOx9kf5e0gOcjO9CW
+\restrict gRqHfruEXBM34zCFgTGPbOPcQgSJZk13K7alHMBLnfTKVAxj2BMv2M7Ath8mACI
 
 -- Dumped from database version 17.6 (Debian 17.6-1.pgdg13+1)
 -- Dumped by pg_dump version 18.1 (Homebrew)
@@ -554,21 +554,21 @@ COPY public.home_table (id, locality_table_id, home_feature_table_id, street_add
 --
 
 COPY public.kysely_migration (name, "timestamp") FROM stdin;
-V0001__enable-postgis	2026-01-06T11:27:47.764Z
-V0002__add-home_feature_table	2026-01-06T11:27:47.776Z
-V0003__add-locality_table	2026-01-06T11:27:47.778Z
-V0004__add-home_table	2026-01-06T11:27:47.782Z
-V0005__add-sale_price_table	2026-01-06T11:27:47.785Z
-V0006__add-rent_price_table	2026-01-06T11:27:47.788Z
-V0007__add-school_feature_table	2026-01-06T11:27:47.789Z
-V0008__add-school_table	2026-01-06T11:27:47.792Z
-V0009__alter-home_table-alter-gps_column	2026-01-06T11:27:47.793Z
-V0010__add-indexes_to_foreign_keys	2026-01-06T11:27:47.797Z
-V0011__add-latest_sale_view	2026-01-06T11:27:47.801Z
-V0012__add-latest_rent_view	2026-01-06T11:27:47.803Z
-V0013__add-school_view	2026-01-06T11:27:47.805Z
-V0014__alter-latest_sale_view	2026-01-06T11:27:47.809Z
-V0015__add-rent_price_view	2026-01-06T11:27:47.813Z
+V0001__enable-postgis	2026-01-06T11:31:48.359Z
+V0002__add-home_feature_table	2026-01-06T11:31:48.367Z
+V0003__add-locality_table	2026-01-06T11:31:48.369Z
+V0004__add-home_table	2026-01-06T11:31:48.372Z
+V0005__add-sale_price_table	2026-01-06T11:31:48.373Z
+V0006__add-rent_price_table	2026-01-06T11:31:48.376Z
+V0007__add-school_feature_table	2026-01-06T11:31:48.379Z
+V0008__add-school_table	2026-01-06T11:31:48.382Z
+V0009__alter-home_table-alter-gps_column	2026-01-06T11:31:48.383Z
+V0010__add-indexes_to_foreign_keys	2026-01-06T11:31:48.387Z
+V0011__add-latest_sale_view	2026-01-06T11:31:48.391Z
+V0012__add-latest_rent_view	2026-01-06T11:31:48.398Z
+V0013__add-school_view	2026-01-06T11:31:48.404Z
+V0014__alter-latest_sale_mv	2026-01-06T11:31:48.416Z
+V0015__add-rent_price_mv	2026-01-06T11:31:48.424Z
 \.
 
 
@@ -912,5 +912,5 @@ REFRESH MATERIALIZED VIEW public.latest_sale_mv;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict vRYybBTSh1L2GiurGq3eKOZJZPTGVSsz8PMYMQTEO2mz2WwOx9kf5e0gOcjO9CW
+\unrestrict gRqHfruEXBM34zCFgTGPbOPcQgSJZk13K7alHMBLnfTKVAxj2BMv2M7Ath8mACI
 
