@@ -6,7 +6,7 @@ export async function up(db: Kysely<DB>) {
     WITH scrape_dates AS (
         SELECT last_scrape_date, COUNT(*) AS frequency
         FROM rent_price_table
-        WHERE last_scrape_date > NOW() - INTERVAL '1 week'
+        WHERE last_scrape_date > NOW() - INTERVAL '4 days'
         GROUP BY last_scrape_date
         ORDER BY frequency DESC
         LIMIT 2

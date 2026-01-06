@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict gRqHfruEXBM34zCFgTGPbOPcQgSJZk13K7alHMBLnfTKVAxj2BMv2M7Ath8mACI
+\restrict FdlCOJctZ0FeTBmzYIduMOCmh7vHAXefXQW1fqJMxH14twrcfTNFUqDakk8jHdS
 
 -- Dumped from database version 17.6 (Debian 17.6-1.pgdg13+1)
 -- Dumped by pg_dump version 18.1 (Homebrew)
@@ -202,7 +202,7 @@ CREATE MATERIALIZED VIEW public.latest_rent_mv AS
          SELECT rent_price_table.last_scrape_date,
             count(*) AS frequency
            FROM public.rent_price_table
-          WHERE (rent_price_table.last_scrape_date > (now() - '7 days'::interval))
+          WHERE (rent_price_table.last_scrape_date > (now() - '4 days'::interval))
           GROUP BY rent_price_table.last_scrape_date
           ORDER BY (count(*)) DESC
          LIMIT 2
@@ -324,7 +324,7 @@ CREATE MATERIALIZED VIEW public.latest_sale_mv AS
          SELECT sale_price_table.last_scrape_date,
             count(*) AS frequency
            FROM public.sale_price_table
-          WHERE (sale_price_table.last_scrape_date > (now() - '7 days'::interval))
+          WHERE (sale_price_table.last_scrape_date > (now() - '4 days'::interval))
           GROUP BY sale_price_table.last_scrape_date
           ORDER BY (count(*)) DESC
          LIMIT 2
@@ -554,21 +554,21 @@ COPY public.home_table (id, locality_table_id, home_feature_table_id, street_add
 --
 
 COPY public.kysely_migration (name, "timestamp") FROM stdin;
-V0001__enable-postgis	2026-01-06T11:31:48.359Z
-V0002__add-home_feature_table	2026-01-06T11:31:48.367Z
-V0003__add-locality_table	2026-01-06T11:31:48.369Z
-V0004__add-home_table	2026-01-06T11:31:48.372Z
-V0005__add-sale_price_table	2026-01-06T11:31:48.373Z
-V0006__add-rent_price_table	2026-01-06T11:31:48.376Z
-V0007__add-school_feature_table	2026-01-06T11:31:48.379Z
-V0008__add-school_table	2026-01-06T11:31:48.382Z
-V0009__alter-home_table-alter-gps_column	2026-01-06T11:31:48.383Z
-V0010__add-indexes_to_foreign_keys	2026-01-06T11:31:48.387Z
-V0011__add-latest_sale_view	2026-01-06T11:31:48.391Z
-V0012__add-latest_rent_view	2026-01-06T11:31:48.398Z
-V0013__add-school_view	2026-01-06T11:31:48.404Z
-V0014__alter-latest_sale_mv	2026-01-06T11:31:48.416Z
-V0015__add-rent_price_mv	2026-01-06T11:31:48.424Z
+V0001__enable-postgis	2026-01-06T11:39:34.412Z
+V0002__add-home_feature_table	2026-01-06T11:39:34.424Z
+V0003__add-locality_table	2026-01-06T11:39:34.426Z
+V0004__add-home_table	2026-01-06T11:39:34.428Z
+V0005__add-sale_price_table	2026-01-06T11:39:34.430Z
+V0006__add-rent_price_table	2026-01-06T11:39:34.431Z
+V0007__add-school_feature_table	2026-01-06T11:39:34.432Z
+V0008__add-school_table	2026-01-06T11:39:34.435Z
+V0009__alter-home_table-alter-gps_column	2026-01-06T11:39:34.436Z
+V0010__add-indexes_to_foreign_keys	2026-01-06T11:39:34.439Z
+V0011__add-latest_sale_view	2026-01-06T11:39:34.443Z
+V0012__add-latest_rent_view	2026-01-06T11:39:34.446Z
+V0013__add-school_view	2026-01-06T11:39:34.447Z
+V0014__alter-latest_sale_mv	2026-01-06T11:39:34.451Z
+V0015__alter-rent_price_mv	2026-01-06T11:39:34.454Z
 \.
 
 
@@ -912,5 +912,5 @@ REFRESH MATERIALIZED VIEW public.latest_sale_mv;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict gRqHfruEXBM34zCFgTGPbOPcQgSJZk13K7alHMBLnfTKVAxj2BMv2M7Ath8mACI
+\unrestrict FdlCOJctZ0FeTBmzYIduMOCmh7vHAXefXQW1fqJMxH14twrcfTNFUqDakk8jHdS
 
