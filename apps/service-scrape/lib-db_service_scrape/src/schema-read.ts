@@ -6,7 +6,7 @@ import type {
     DB as DB_Tables,
 } from './schema-write'
 
-interface LatestSaleView {
+interface LatestSaleMV {
     // sale_price_table columns
     aud_per_bed: number
     aud_per_land_m2: number
@@ -28,14 +28,9 @@ interface LatestSaleView {
     car_quantity: number
     home_type: HomeTypeEnum
     is_retirement: boolean
-    // locality_table columns
-    boundary_coordinates: string
-    postcode: string
-    state_abbreviation: StateAbbreviationEnum
-    suburb_name: string
 }
 
-interface LatestRentView {
+interface LatestRentMV {
     // sale_price_table columns
     aud_per_bed: number
     aud_per_land_m2: number
@@ -57,11 +52,6 @@ interface LatestRentView {
     car_quantity: number
     home_type: HomeTypeEnum
     is_retirement: boolean
-    // locality_table columns
-    boundary_coordinates: string
-    postcode: string
-    state_abbreviation: StateAbbreviationEnum
-    suburb_name: string
 }
 
 interface SchoolView {
@@ -86,7 +76,7 @@ interface SchoolView {
 }
 
 export interface DB extends DB_Tables {
-    latest_sale_view: LatestSaleView
-    latest_rent_view: LatestRentView
+    latest_sale_view: LatestSaleMV
+    latest_rent_view: LatestRentMV
     school_view: SchoolView
 }
