@@ -18,15 +18,6 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             runtimeEnums: false,
         })
         console.debug('Kysely code generated')
-        execSync(
-            [
-                `pg_dump -d ${connectionString} --exclude-table=kysely_migration --exclude-table=kysely_migration_lock`,
-                `| sed -E 's/[\\](un)?restrict /-- /g'`,
-                `| sed -E 's/[\\][.]//g'`,
-                `> src/dev/schema.sql`,
-            ].join(' '),
-        )
-        console.debug('Schema Dumped')
         return true
     } catch {
         console.error('Kysely code generation failed')
