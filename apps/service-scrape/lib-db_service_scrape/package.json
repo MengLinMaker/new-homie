@@ -8,7 +8,7 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "migrate": "pnpm dlx tsx ./migrate.ts",
+        "migrate": "node ./migrate.ts",
         "generate": "node ./generate.ts && biome format --write",
         "zod": "ts-to-zod src/schema-read-zod.ts src/schema-read-zod.ts && biome format --write",
         "test:type": "tsc",
