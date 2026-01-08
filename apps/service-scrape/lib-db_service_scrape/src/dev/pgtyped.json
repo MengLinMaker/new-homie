@@ -1,9 +1,9 @@
 {
     "transforms": [
         {
-            "mode": "sql",
-            "include": "**/*.sql",
-            "emitTemplate": "{{dir}}/{{name}}.sql.ts"
+            "mode": "ts",
+            "include": "**/*.ts",
+            "emitTemplate": "{{dir}}/{{name}}.types.ts"
         }
     ],
     "srcDir": "./src/"
