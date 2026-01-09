@@ -27,10 +27,6 @@ node_modules
 .DS_Store
 Thumbs.db
 
-# IDE
-.vscode
-.idea
-
 # sst
 .sst
 sst-env.d.ts

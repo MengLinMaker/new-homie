@@ -1,0 +1,17 @@
+{
+    "serverlessConsole.services": [
+        {
+            "type": "cloudformation",
+            "title": "sst-dev-test",
+            "timeOffsetInMs": 0,
+            "awsProfile": "default",
+            "stacks": [
+                {
+                    "region": "us-east-1",
+                    "stackName": "sst-test-dev",
+                    "stage": "dev"
+                }
+            ]
+        }
+    ]
+}
