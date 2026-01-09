@@ -1,0 +1,8 @@
+{
+    "$schema": "https://pg-language-server.com/latest/schema.json",
+    "extends": ["../../postgres-language-server.jsonc"],
+    "db": {
+        "connectionString": "postgres://user:password@localhost:54320/db",
+        "allowStatementExecutionsAgainst": ["127.0.0.1/*", "localhost/*"]
+    }
+}
