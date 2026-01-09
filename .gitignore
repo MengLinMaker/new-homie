@@ -21,7 +21,7 @@ node_modules
 .github/instructions/nx.instructions.md
 
 # Env
-.env
+.env*
 
 # System Files
 .DS_Store
