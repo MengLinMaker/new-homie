@@ -6,5 +6,6 @@
             "emitTemplate": "{{dir}}/{{name}}.types.ts"
         }
     ],
-    "srcDir": "./src/"
+    "srcDir": "./src/",
+    "dbUrl": "postgres://user:password@localhost:54320/db"
 }

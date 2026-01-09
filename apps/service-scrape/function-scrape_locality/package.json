@@ -8,7 +8,7 @@
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "test:dev": "vitest --coverage",
-        "watch:gen": "node node_modules/@service-scrape/lib-db_service_scrape/src/dev/generatePgtyped.ts"
+        "watch:gen": "npx pgtyped -w --config node_modules/@service-scrape/lib-db_service_scrape/src/dev/pgtyped.json"
     },
     "devDependencies": {
         "@pgtyped/cli": "^2.4.3",
