@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import {
+    type RemoveTableIds,
     type SchemaWrite,
     tryCreatePostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
-import type { Updateable } from 'kysely'
 import { ILoggable } from '@observability/lib-opentelemetry'
 
 const HomeTypeEnum: SchemaWrite.HomeTypeEnum[] = [
@@ -198,14 +198,14 @@ export class DomainListingsService extends ILoggable {
                     car_quantity: features.parking,
                     home_type: features.propertyType,
                     is_retirement: features.isRetirement,
-                } satisfies Updateable<SchemaWrite.HomeFeatureTable>,
+                } satisfies RemoveTableIds<SchemaWrite.HomeFeatureTable>,
                 home_table: {
                     street_address: address.street,
                     gps: tryCreatePostgisPointString(address.lng, address.lat),
                     land_m2: landSize,
-                    inspection_time: this.parseDatetime(listingModel.inspection.openTime),
-                    auction_time: this.parseDatetime(listingModel.auction),
-                } satisfies Updateable<SchemaWrite.HomeTable>,
+                    inspection_time: this.parseDatetime(listingModel.inspection.openTime) as never,
+                    auction_time: this.parseDatetime(listingModel.auction) as never,
+                } satisfies RemoveTableIds<SchemaWrite.HomeTable>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformListing, args, e)
@@ -234,11 +234,13 @@ export class DomainListingsService extends ILoggable {
             }
             return {
                 sale_price_table: {
-                    last_scrape_date: '',
                     higher_price_aud: price,
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<SchemaWrite.SalePriceTable>,
+                } satisfies Omit<
+                    RemoveTableIds<SchemaWrite.SalePriceTable>,
+                    `${string}_scrape_date`
+                >,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformSalePrice, args, e)
@@ -267,11 +269,13 @@ export class DomainListingsService extends ILoggable {
             }
             return {
                 rent_price_table: {
-                    last_scrape_date: '',
                     weekly_rent_aud: price,
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
-                } satisfies Updateable<SchemaWrite.RentPriceTable>,
+                } satisfies Omit<
+                    RemoveTableIds<SchemaWrite.RentPriceTable>,
+                    `${string}_scrape_date`
+                >,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformRentPrice, args, e)

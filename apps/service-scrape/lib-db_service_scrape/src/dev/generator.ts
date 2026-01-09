@@ -1,5 +1,4 @@
 import { Cli } from 'kysely-codegen'
-import { execSync } from 'node:child_process'
 import path from 'node:path'
 
 /**
@@ -18,8 +17,6 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             runtimeEnums: false,
         })
         console.debug('Kysely code generated')
-        execSync(`pg_dump -d ${connectionString} > src/dev/schema.sql`)
-        console.debug('Schema Dumped')
         return true
     } catch {
         console.error('Kysely code generation failed')

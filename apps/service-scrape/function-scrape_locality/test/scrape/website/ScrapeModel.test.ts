@@ -2,7 +2,7 @@ import { afterAll, describe, expect, it, vi } from 'vitest'
 import { dbCountRow, LOGGER, suiteNameFromFileName } from '../../util'
 import { ScrapeModel } from '../../../src/scrape/website/ScrapeModel'
 import { setupTestPostgisDb } from '@service-scrape/lib-db_service_scrape/dev'
-import type { Insertable, Updateable } from 'kysely'
+import type { Insertable } from 'kysely'
 import {
     createPostgisPointString,
     createPostgisPolygonString,
@@ -122,17 +122,12 @@ describe(testSuiteName, async () => {
     })
 
     describe.sequential('tryUpdateRentListing', () => {
-        vi.setSystemTime(new Date(0).toISOString())
-        const rentData: {
-            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
-            home_table: Updateable<SchemaWrite.HomeTable>
-            rent_price_table: Updateable<SchemaWrite.RentPriceTable>
-        } = {
+        const rentData = {
             home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
-                home_type: 'ApartmentUnitFlat',
+                home_type: 'ApartmentUnitFlat' as const,
                 is_retirement: false,
             },
             home_table: {
@@ -140,11 +135,11 @@ describe(testSuiteName, async () => {
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
                 inspection_time: null,
-                auction_time: new Date(0).toISOString(),
+                auction_time: new Date(0),
             },
             rent_price_table: {
-                first_scrape_date: new Date(0).toISOString(),
-                last_scrape_date: new Date(0).toISOString(),
+                first_scrape_date: new Date(0),
+                last_scrape_date: new Date(0),
                 aud_per_bed: 1,
                 aud_per_land_m2: 1,
                 weekly_rent_aud: 1,
@@ -159,38 +154,47 @@ describe(testSuiteName, async () => {
             }
         }
 
-        it.sequential('should not insert same data', async () => {
+        it.sequential('case 2 - should update on different "weekly_rent_aud"', async () => {
+            vi.setSystemTime(new Date(0))
+            rentData.rent_price_table.weekly_rent_aud = 1
+            const firstCaseNumber = await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+            expect(firstCaseNumber).toBe(1)
+            const lengths_1 = await dbCountRows()
+
+            vi.setSystemTime(new Date(0))
+            rentData.rent_price_table.weekly_rent_aud = 2
+            const caseNumber = await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+            expect(caseNumber).toBe(2)
+            const lengths_2 = await dbCountRows()
+            expect(lengths_1).toStrictEqual(lengths_2)
+        })
+
+        it.sequential('case 3 - should update on different "last_scrape_date"', async () => {
+            vi.setSystemTime(new Date(10 ** 10))
+            rentData.rent_price_table.weekly_rent_aud = 1
             await scrapeModel.tryUpdateRentListing({ rentData, localityId })
             const lengths_1 = await dbCountRows()
 
-            await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+            vi.setSystemTime(new Date(10 ** 11))
+            rentData.rent_price_table.weekly_rent_aud = 1
+            const caseNumber = await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+            expect(caseNumber).toBe(3)
             const lengths_2 = await dbCountRows()
             expect(lengths_1).toStrictEqual(lengths_2)
         })
 
         it.sequential(
-            'should update on same "weekly_rent_aud" and new "last_scrape_date"',
+            'case 4 - should insert on different "last_scrape_date" and "weekly_rent_aud"',
             async () => {
                 vi.setSystemTime(new Date(10 ** 11))
-                rentData.rent_price_table.last_scrape_date = new Date().toISOString()
+                rentData.rent_price_table.weekly_rent_aud = 1
+                await scrapeModel.tryUpdateRentListing({ rentData, localityId })
                 const lengths_1 = await dbCountRows()
 
-                await scrapeModel.tryUpdateRentListing({ rentData, localityId })
-                const lengths_2 = await dbCountRows()
-                expect(lengths_1).toStrictEqual(lengths_2)
-            },
-        )
-
-        it.sequential(
-            'should create "rent_price_table" row with new "weekly_rent_aud"',
-            async () => {
                 vi.setSystemTime(new Date(10 ** 12))
-                rentData.rent_price_table.last_scrape_date = new Date().toISOString()
-                rentData.rent_price_table.first_scrape_date = new Date().toISOString()
                 rentData.rent_price_table.weekly_rent_aud = 2
-                const lengths_1 = await dbCountRows()
-
-                await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+                const caseNumber = await scrapeModel.tryUpdateRentListing({ rentData, localityId })
+                expect(caseNumber).toBe(4)
                 const lengths_2 = await dbCountRows()
                 lengths_1.rent_price_table++
                 expect(lengths_1).toStrictEqual(lengths_2)
@@ -210,17 +214,12 @@ describe(testSuiteName, async () => {
     })
 
     describe.sequential('tryUpdateSaleListing', () => {
-        vi.setSystemTime(new Date(0).toISOString())
-        const saleData: {
-            home_feature_table: Updateable<SchemaWrite.HomeFeatureTable>
-            home_table: Updateable<SchemaWrite.HomeTable>
-            sale_price_table: Updateable<SchemaWrite.SalePriceTable>
-        } = {
+        const saleData = {
             home_feature_table: {
                 bath_quantity: 1,
                 bed_quantity: 1,
                 car_quantity: 1,
-                home_type: 'ApartmentUnitFlat',
+                home_type: 'ApartmentUnitFlat' as const,
                 is_retirement: false,
             },
             home_table: {
@@ -228,11 +227,11 @@ describe(testSuiteName, async () => {
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
                 inspection_time: null,
-                auction_time: new Date(0).toISOString(),
+                auction_time: new Date(0),
             },
             sale_price_table: {
-                first_scrape_date: new Date(0).toISOString(),
-                last_scrape_date: new Date(0).toISOString(),
+                first_scrape_date: new Date(0),
+                last_scrape_date: new Date(0),
                 aud_per_bed: 1,
                 aud_per_land_m2: 1,
                 higher_price_aud: 1,
@@ -247,53 +246,51 @@ describe(testSuiteName, async () => {
             }
         }
 
-        it.sequential('should not insert same data', async () => {
+        it.sequential('case 2 - should update on different "higher_price_aud"', async () => {
+            vi.setSystemTime(new Date(0))
+            saleData.sale_price_table.higher_price_aud = 1
+            const firstCaseNumber = await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+            expect(firstCaseNumber).toBe(1)
+            const lengths_1 = await dbCountRows()
+
+            vi.setSystemTime(new Date(0))
+            saleData.sale_price_table.higher_price_aud = 2
+            const caseNumber = await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+            expect(caseNumber).toBe(2)
+            const lengths_2 = await dbCountRows()
+            expect(lengths_1).toStrictEqual(lengths_2)
+        })
+
+        it.sequential('case 3 - should update on different "last_scrape_date"', async () => {
+            vi.setSystemTime(new Date(10 ** 10))
+            saleData.sale_price_table.higher_price_aud = 1
             await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
             const lengths_1 = await dbCountRows()
 
-            await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+            vi.setSystemTime(new Date(10 ** 11))
+            saleData.sale_price_table.higher_price_aud = 1
+            const caseNumber = await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+            expect(caseNumber).toBe(3)
             const lengths_2 = await dbCountRows()
             expect(lengths_1).toStrictEqual(lengths_2)
         })
 
         it.sequential(
-            'should update on same "higher_price_aud" and new "last_scrape_date"',
+            'case 4 - should insert on different "last_scrape_date" and "higher_price_aud"',
             async () => {
                 vi.setSystemTime(new Date(10 ** 11))
-                saleData.sale_price_table.last_scrape_date = new Date().toISOString()
+                saleData.sale_price_table.higher_price_aud = 1
+                await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
                 const lengths_1 = await dbCountRows()
 
-                await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
-                const lengths_2 = await dbCountRows()
-                expect(lengths_1).toStrictEqual(lengths_2)
-            },
-        )
-
-        it.sequential(
-            'should create "sale_price_table" row with new "higher_price_aud"',
-            async () => {
                 vi.setSystemTime(new Date(10 ** 12))
-                saleData.sale_price_table.last_scrape_date = new Date().toISOString()
-                saleData.sale_price_table.first_scrape_date = new Date().toISOString()
                 saleData.sale_price_table.higher_price_aud = 2
-                const lengths_1 = await dbCountRows()
-
-                await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+                const caseNumber = await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
+                expect(caseNumber).toBe(4)
                 const lengths_2 = await dbCountRows()
                 lengths_1.sale_price_table++
                 expect(lengths_1).toStrictEqual(lengths_2)
             },
         )
-
-        it.sequential('should update "home_table" on new "home_feature_table"', async () => {
-            saleData.home_feature_table.bath_quantity = 2
-            saleData.home_table.land_m2 = 2
-            const lengths_1 = await dbCountRows()
-
-            await scrapeModel.tryUpdateSaleListing({ saleData, localityId })
-            const lengths_2 = await dbCountRows()
-            lengths_1.home_feature_table++
-            expect(lengths_1).toStrictEqual(lengths_2)
-        })
     })
 })

@@ -1,3 +1,4 @@
+import type { Selectable } from 'kysely'
 import { getKyselyPostgresDb } from './connection.ts'
 import * as SchemaWrite from './schema-write.ts'
 import * as SchemaRead from './schema-read.ts'
@@ -22,3 +23,5 @@ export {
     tryCreatePostgisPointString,
     createPostgisPolygonString,
 }
+
+export type RemoveTableIds<DbTable> = Omit<Selectable<DbTable>, `${string}_table_id` | 'id'>

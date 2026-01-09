@@ -1,0 +1,11 @@
+{
+    "transforms": [
+        {
+            "mode": "ts",
+            "include": "**/*.ts",
+            "emitTemplate": "{{dir}}/{{name}}.types.ts"
+        }
+    ],
+    "srcDir": "./src/",
+    "dbUrl": "postgres://user:password@localhost:54320/db"
+}
