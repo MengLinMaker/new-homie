@@ -24,9 +24,6 @@
     },
     "db": {
         "connectionString": "postgres://user:password@localhost:54320/db",
-        "allowStatementExecutionsAgainst": [
-            "127.0.0.1/*",
-            "localhost/*"
-        ]
+        "allowStatementExecutionsAgainst": ["127.0.0.1/*", "localhost/*"]
     }
 }
