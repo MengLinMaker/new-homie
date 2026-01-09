@@ -239,7 +239,7 @@ export class DomainListingsService extends ILoggable {
                     aud_per_land_m2: land > 0 ? price / land : 0,
                 } satisfies Omit<
                     RemoveTableIds<SchemaWrite.SalePriceTable>,
-                    'first_scrape_date' | 'last_scrape_date'
+                    `${string}_scrape_date`
                 >,
             }
         } catch (e) {
@@ -274,7 +274,7 @@ export class DomainListingsService extends ILoggable {
                     aud_per_land_m2: land > 0 ? price / land : 0,
                 } satisfies Omit<
                     RemoveTableIds<SchemaWrite.RentPriceTable>,
-                    'first_scrape_date' | 'last_scrape_date'
+                    `${string}_scrape_date`
                 >,
             }
         } catch (e) {
