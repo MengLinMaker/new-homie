@@ -12,7 +12,7 @@ import { setupTestPostgisDb } from '@service-scrape/lib-db_service_scrape/dev'
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
 const resourcePath = `${import.meta.dirname}/${testSuiteName}`
 
-describe.skip(testSuiteName, async () => {
+describe(testSuiteName, async () => {
     const { container, db } = await setupTestPostgisDb()
     afterAll(async () => {
         await db.destroy()
