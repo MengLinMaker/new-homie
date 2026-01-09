@@ -22,3 +22,5 @@ export {
     tryCreatePostgisPointString,
     createPostgisPolygonString,
 }
+
+export type RemoveTableIds<DbTable> = Omit<DbTable, `${string}_table_id` | 'id'>
