@@ -254,7 +254,8 @@ export class ScrapeModel extends IDatabased {
 
             // Case 2: on same day scraping get highest price
             if (datesAreOnSameDay(scrapeDateData.last_scrape_date, currentTimestamp)) {
-                const updateSameDayRentPriceTable = await sql`
+                // const updateSameDayRentPriceTable = 
+                await sql`
                 UPDATE rent_price_table
                 SET
                     aud_per_bed = GREATEST(${rpt.aud_per_bed}::integer, aud_per_bed),
@@ -267,7 +268,8 @@ export class ScrapeModel extends IDatabased {
 
             // Case 3: price is same as previous scrape
             if (scrapeDateData.weekly_rent_aud === rpt.weekly_rent_aud) {
-                const updateSamePriceRentPriceTable = await sql`
+                // const updateSamePriceRentPriceTable =
+                await sql`
                 UPDATE rent_price_table
                 SET last_scrape_date = ${currentTimestamp}::date
                 WHERE id = ${scrapeDateData.id}
@@ -341,7 +343,8 @@ export class ScrapeModel extends IDatabased {
 
             // Case 2: on same day scraping get highest price
             if (datesAreOnSameDay(scrapeDateData.last_scrape_date, currentTimestamp)) {
-                const updateSameDaySalePriceTable = await sql`
+                // const updateSameDaySalePriceTable = 
+                await sql`
                 UPDATE sale_price_table
                 SET
                     aud_per_bed = GREATEST(${rpt.aud_per_bed}::integer, aud_per_bed),
@@ -354,7 +357,8 @@ export class ScrapeModel extends IDatabased {
 
             // Case 3: price is same as previous scrape
             if (scrapeDateData.higher_price_aud === rpt.higher_price_aud) {
-                const updateSamePriceSalePriceTable = await sql`
+                // const updateSamePriceSalePriceTable = 
+                await sql`
                 UPDATE sale_price_table
                 SET last_scrape_date = ${currentTimestamp}::date
                 WHERE id = ${scrapeDateData.id}
