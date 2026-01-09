@@ -12,10 +12,14 @@
     },
     "devDependencies": {
         "@pgtyped/cli": "^2.4.3",
+        "@ts-safeql/eslint-plugin": "^4.1.0",
         "@types/async-retry": "^1.4.9",
         "@types/pg": "8.15.5",
         "chromium-bidi": "^8.0.0",
-        "esbuild": "^0.27.0"
+        "esbuild": "^0.27.0",
+        "eslint": "^9.39.2",
+        "libpg-query": "^17.7.3",
+        "typescript-eslint": "^8.52.0"
     },
     "dependencies": {
         "@observability/lib-opentelemetry": "workspace:*",
