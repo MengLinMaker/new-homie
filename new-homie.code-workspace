@@ -1,10 +1,10 @@
 {
-  "folders": [
-    {
-      "path": "./"
-    },
-    {
-      "path": "./apps/service-scrape"
-    }
-  ]
+    "folders": [
+        {
+            "path": "./"
+        },
+        {
+            "path": "./apps/service-scrape"
+        }
+    ]
 }
