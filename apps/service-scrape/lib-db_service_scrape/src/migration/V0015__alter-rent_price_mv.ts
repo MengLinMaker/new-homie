@@ -27,7 +27,6 @@ export async function up(db: Kysely<DB>) {
     LEFT JOIN home_table ON home_table_id = home_table.id
     LEFT JOIN home_feature_table ON home_table.home_feature_table_id = home_feature_table.id`
     await db.schema.createView('latest_rent_mv').materialized().as(latest_rent_mv).execute()
-    await db.schema.dropView('latest_rent_view')
 }
 
 export async function down(db: Kysely<DB>) {
