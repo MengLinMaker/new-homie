@@ -12,5 +12,8 @@
         }
     ],
     "srcDir": "./src/",
-    "dbUrl": "postgres://user:password@localhost:54320/db"
+    "dbUrl": "postgres://user:password@localhost:54320/db",
+    "typesOverrides": {
+        "geometry": "string"
+    }
 }
