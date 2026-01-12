@@ -6,4 +6,4 @@ export async function up(db: Kysely<DB>) {
     await db.schema.dropView('latest_rent_view').execute()
 }
 
-export async function down(db: Kysely<DB>) {}
+export async function down(_db: Kysely<DB>) {}
