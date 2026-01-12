@@ -13,7 +13,6 @@ export class ScrapeModel extends IDatabased {
             locality_table: RemoveTableIds<SchemaWrite.LocalityTable>
         }
     }) {
-        // const { suburbData } = args
         try {
             const lt = args.suburbData.locality_table
             const upsertLocality = await sql<{ id: number }>`
@@ -238,8 +237,8 @@ export class ScrapeModel extends IDatabased {
                 home_table_id
             )
             VALUES (
-                ${rpt.aud_per_bed}::integer,
-                ${rpt.aud_per_land_m2}::integer,
+                ${rpt.aud_per_bed}::real,
+                ${rpt.aud_per_land_m2}::real,
                 ${currentTimestamp},
                 ${currentTimestamp},
                 ${rpt.weekly_rent_aud}::integer,
@@ -258,8 +257,8 @@ export class ScrapeModel extends IDatabased {
                 await sql`
                 UPDATE rent_price_table
                 SET
-                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::integer, aud_per_bed),
-                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::integer, aud_per_land_m2),
+                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::real, aud_per_bed),
+                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::real, aud_per_land_m2),
                     weekly_rent_aud = GREATEST(${rpt.weekly_rent_aud}::integer, weekly_rent_aud)
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
@@ -327,8 +326,8 @@ export class ScrapeModel extends IDatabased {
                 home_table_id
             )
             VALUES (
-                ${rpt.aud_per_bed}::integer,
-                ${rpt.aud_per_land_m2}::integer,
+                ${rpt.aud_per_bed}::real,
+                ${rpt.aud_per_land_m2}::real,
                 ${currentTimestamp},
                 ${currentTimestamp},
                 ${rpt.higher_price_aud}::integer,
@@ -347,8 +346,8 @@ export class ScrapeModel extends IDatabased {
                 await sql`
                 UPDATE sale_price_table
                 SET
-                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::integer, aud_per_bed),
-                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::integer, aud_per_land_m2),
+                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::real, aud_per_bed),
+                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::real, aud_per_land_m2),
                     higher_price_aud = GREATEST(${rpt.higher_price_aud}::integer, higher_price_aud)
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
