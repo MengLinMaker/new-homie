@@ -8,6 +8,7 @@
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "test:dev": "vitest --coverage",
+        "test:sql": "postgres-language-server check --changed",
         "watch:gen": "npx pgtyped -w --config node_modules/@service-scrape/lib-db_service_scrape/src/dev/pgtyped.json"
     },
     "devDependencies": {
