@@ -27,19 +27,19 @@ describe(testSuiteName, async () => {
     }
     const localityPage = { ...locality, page: 1 }
 
-    describe.sequential('tryExtractSuburbPage', async () => {
+    describe.sequential('tryExtractLocalityPage', async () => {
         // Mock individually to prevent data race
         const mockBrowserService = new MockBrowserService(LOGGER)
         const scrapeController = new ScrapeController(LOGGER, db, mockBrowserService)
         mockBrowserService.mockHTML(parseTextFile(`${resourcePath}/domain.suburb.html`))
 
         it.sequential('should parse successfully', async () => {
-            const output = await scrapeController.tryExtractSuburbPage(locality)
+            const output = await scrapeController.tryExtractLocalityPage(locality)
             expect(output).not.toBeNull()
         })
 
         it.sequential('should merge duplicate data', async () => {
-            const output = await scrapeController.tryExtractSuburbPage(locality)
+            const output = await scrapeController.tryExtractLocalityPage(locality)
             expect(output).not.toBeNull()
             const ids = await dbCountRow(db, 'locality_table')
             expect(ids).toBe(1)

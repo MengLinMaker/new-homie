@@ -27,7 +27,7 @@ describe(testSuiteName, async () => {
 
     const scrapeModel = new ScrapeModel(LOGGER, db)
 
-    describe.sequential('tryUpdateSuburb', () => {
+    describe.sequential('tryUpdateLocality', () => {
         const boundary_coordinates = createPostgisPolygonString([
             [0, 0],
             [1, 0],
@@ -44,10 +44,10 @@ describe(testSuiteName, async () => {
         const suburbData = { locality_table }
 
         it.sequential('should not insert same data', async () => {
-            await scrapeModel.tryUpdateSuburb({ suburbData })
+            await scrapeModel.tryUpdateLocality({ suburbData })
             const oldLength = await dbCountRow(db, 'locality_table')
 
-            await scrapeModel.tryUpdateSuburb({ suburbData })
+            await scrapeModel.tryUpdateLocality({ suburbData })
             const newLength = await dbCountRow(db, 'locality_table')
 
             expect(oldLength).toBe(newLength)
@@ -57,12 +57,12 @@ describe(testSuiteName, async () => {
             const length_1 = await dbCountRow(db, 'locality_table')
 
             suburbData.locality_table.postcode = '3001'
-            await scrapeModel.tryUpdateSuburb({ suburbData })
+            await scrapeModel.tryUpdateLocality({ suburbData })
             const length_2 = await dbCountRow(db, 'locality_table')
             expect(length_1 + 1).toBe(length_2)
 
             suburbData.locality_table.suburb_name = 'Melbourne North'
-            await scrapeModel.tryUpdateSuburb({ suburbData })
+            await scrapeModel.tryUpdateLocality({ suburbData })
             const length_3 = await dbCountRow(db, 'locality_table')
             expect(length_2 + 1).toBe(length_3)
         })

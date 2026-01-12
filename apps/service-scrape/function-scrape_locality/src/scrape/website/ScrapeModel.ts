@@ -8,7 +8,7 @@ const datesAreOnSameDay = (first: Date, second: Date) =>
     first.getDate() === second.getDate()
 
 export class ScrapeModel extends IDatabased {
-    async tryUpdateSuburb(args: {
+    async tryUpdateLocality(args: {
         suburbData: {
             locality_table: RemoveTableIds<SchemaWrite.LocalityTable>
         }
@@ -41,7 +41,7 @@ export class ScrapeModel extends IDatabased {
             RETURNING id;`.execute(this.DB)
             return upsertLocality.rows[0]
         } catch (e) {
-            this.logExceptionArgs('error', this.tryUpdateSuburb, args, e)
+            this.logExceptionArgs('error', this.tryUpdateLocality, args, e)
             return null
         }
     }

@@ -29,9 +29,9 @@ export const handler = async (args: Locality) => {
     }
 
     // Locality data
-    const localityId = await scrapeController.tryExtractSuburbPage(args)
+    const localityId = await scrapeController.tryExtractLocalityPage(args)
     if (localityId === null) {
-        console.error('FAIL scrapeController.tryExtractSuburbPage')
+        console.error('FAIL scrapeController.tryExtractLocalityPage')
         return {
             status: StatusCodes.INTERNAL_SERVER_ERROR,
             error: functionHandlerLogger.recordException(
@@ -39,7 +39,7 @@ export const handler = async (args: Locality) => {
             ),
         }
     }
-    console.info('SUCCESS tryExtractSuburbPage')
+    console.info('SUCCESS tryExtractLocalityPage')
     await scrapeController.tryExtractSchools({ ...args, localityId })
     console.info('SUCCESS scrapeController.tryExtractSchools')
 

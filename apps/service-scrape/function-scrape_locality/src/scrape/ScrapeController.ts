@@ -50,7 +50,7 @@ export class ScrapeController extends IDatabased {
      * Scrape suburb and update database
      * @returns localityId from database
      */
-    async tryExtractSuburbPage(args: Locality) {
+    async tryExtractLocalityPage(args: Locality) {
         try {
             const url = new URL(`https://www.domain.com.au/suburb-profile/${localityString(args)}`)
             const html = await this.browserService.getHTML(url.toString())
@@ -62,11 +62,11 @@ export class ScrapeController extends IDatabased {
             const suburbData = this.domainSuburbService.tryTransformProfile({ rawSuburbData })
             if (!suburbData) return null
 
-            const returnedData = await this.scrapeModel.tryUpdateSuburb({ suburbData })
+            const returnedData = await this.scrapeModel.tryUpdateLocality({ suburbData })
             if (!returnedData) return null
             return returnedData.id
         } catch (e) {
-            this.logExceptionArgs('error', this.tryExtractSuburbPage, args, e)
+            this.logExceptionArgs('error', this.tryExtractLocalityPage, args, e)
             return null
         }
     }
