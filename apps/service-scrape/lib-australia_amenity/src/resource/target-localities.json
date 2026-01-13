@@ -150,11 +150,6 @@
         "postcode": "4035"
     },
     {
-        "suburb_name": "Albany",
-        "state_abbreviation": "WA",
-        "postcode": "6331"
-    },
-    {
         "suburb_name": "Alberton",
         "state_abbreviation": "VIC",
         "postcode": "3971"
@@ -191,11 +186,6 @@
     },
     {
         "suburb_name": "Aldinga",
-        "state_abbreviation": "SA",
-        "postcode": "5173"
-    },
-    {
-        "suburb_name": "Aldinga Beach",
         "state_abbreviation": "SA",
         "postcode": "5173"
     },
@@ -435,11 +425,6 @@
         "postcode": "5353"
     },
     {
-        "suburb_name": "Angle Park",
-        "state_abbreviation": "SA",
-        "postcode": "5010"
-    },
-    {
         "suburb_name": "Anglesea",
         "state_abbreviation": "VIC",
         "postcode": "3230"
@@ -638,11 +623,6 @@
         "suburb_name": "Ascot Vale",
         "state_abbreviation": "VIC",
         "postcode": "3032"
-    },
-    {
-        "suburb_name": "Ashbourne",
-        "state_abbreviation": "SA",
-        "postcode": "5157"
     },
     {
         "suburb_name": "Ashburton",
@@ -905,19 +885,9 @@
         "postcode": "4361"
     },
     {
-        "suburb_name": "Baddaginnie",
-        "state_abbreviation": "VIC",
-        "postcode": "3670"
-    },
-    {
         "suburb_name": "Badgingarra",
         "state_abbreviation": "WA",
         "postcode": "6521"
-    },
-    {
-        "suburb_name": "Badu Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Baffle Creek",
@@ -958,11 +928,6 @@
         "suburb_name": "Bakers Hill",
         "state_abbreviation": "WA",
         "postcode": "6562"
-    },
-    {
-        "suburb_name": "Bakery Hill",
-        "state_abbreviation": "VIC",
-        "postcode": "3350"
     },
     {
         "suburb_name": "Bakewell",
@@ -1220,11 +1185,6 @@
         "postcode": "4551"
     },
     {
-        "suburb_name": "Barjarg",
-        "state_abbreviation": "VIC",
-        "postcode": "3723"
-    },
-    {
         "suburb_name": "Barmedman",
         "state_abbreviation": "NSW",
         "postcode": "2668"
@@ -1243,11 +1203,6 @@
         "suburb_name": "Barnsley",
         "state_abbreviation": "NSW",
         "postcode": "2278"
-    },
-    {
-        "suburb_name": "Barongarook",
-        "state_abbreviation": "VIC",
-        "postcode": "3249"
     },
     {
         "suburb_name": "Barooga",
@@ -1338,11 +1293,6 @@
         "suburb_name": "Bateman",
         "state_abbreviation": "WA",
         "postcode": "6150"
-    },
-    {
-        "suburb_name": "Batesford",
-        "state_abbreviation": "VIC",
-        "postcode": "3213"
     },
     {
         "suburb_name": "Bathurst",
@@ -1700,11 +1650,6 @@
         "postcode": "3215"
     },
     {
-        "suburb_name": "Bells Creek",
-        "state_abbreviation": "QLD",
-        "postcode": "4551"
-    },
-    {
         "suburb_name": "Belltrees",
         "state_abbreviation": "NSW",
         "postcode": "2337"
@@ -1938,11 +1883,6 @@
         "suburb_name": "Beveridge",
         "state_abbreviation": "VIC",
         "postcode": "3753"
-    },
-    {
-        "suburb_name": "Beverley",
-        "state_abbreviation": "SA",
-        "postcode": "5009"
     },
     {
         "suburb_name": "Beverley",
@@ -2211,11 +2151,6 @@
     },
     {
         "suburb_name": "Blackwood",
-        "state_abbreviation": "VIC",
-        "postcode": "3458"
-    },
-    {
-        "suburb_name": "Blackwood",
         "state_abbreviation": "SA",
         "postcode": "5051"
     },
@@ -2383,16 +2318,6 @@
         "suburb_name": "Bogong",
         "state_abbreviation": "VIC",
         "postcode": "3699"
-    },
-    {
-        "suburb_name": "Boho South",
-        "state_abbreviation": "VIC",
-        "postcode": "3669"
-    },
-    {
-        "suburb_name": "Boigu Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Boisdale",
@@ -2701,11 +2626,6 @@
     },
     {
         "suburb_name": "Box Hill",
-        "state_abbreviation": "NSW",
-        "postcode": "2765"
-    },
-    {
-        "suburb_name": "Box Hill",
         "state_abbreviation": "VIC",
         "postcode": "3128"
     },
@@ -2943,11 +2863,6 @@
         "suburb_name": "Brinsmead",
         "state_abbreviation": "QLD",
         "postcode": "4870"
-    },
-    {
-        "suburb_name": "Brisbane City",
-        "state_abbreviation": "QLD",
-        "postcode": "4000"
     },
     {
         "suburb_name": "Broadbeach",
@@ -3195,11 +3110,6 @@
         "postcode": "3105"
     },
     {
-        "suburb_name": "Bullengarook",
-        "state_abbreviation": "VIC",
-        "postcode": "3437"
-    },
-    {
         "suburb_name": "Bulli",
         "state_abbreviation": "NSW",
         "postcode": "2516"
@@ -3368,11 +3278,6 @@
         "suburb_name": "Burnie",
         "state_abbreviation": "TAS",
         "postcode": "7320"
-    },
-    {
-        "suburb_name": "Burnley",
-        "state_abbreviation": "VIC",
-        "postcode": "3121"
     },
     {
         "suburb_name": "Burns Beach",
@@ -3940,11 +3845,6 @@
         "postcode": "3239"
     },
     {
-        "suburb_name": "Carlsruhe",
-        "state_abbreviation": "VIC",
-        "postcode": "3442"
-    },
-    {
         "suburb_name": "Carlton",
         "state_abbreviation": "NSW",
         "postcode": "2218"
@@ -4075,11 +3975,6 @@
         "postcode": "2069"
     },
     {
-        "suburb_name": "Castlecrag",
-        "state_abbreviation": "NSW",
-        "postcode": "2068"
-    },
-    {
         "suburb_name": "Castle Hill",
         "state_abbreviation": "NSW",
         "postcode": "2154"
@@ -4118,11 +4013,6 @@
         "suburb_name": "Caulfield South",
         "state_abbreviation": "VIC",
         "postcode": "3162"
-    },
-    {
-        "suburb_name": "Cavan",
-        "state_abbreviation": "SA",
-        "postcode": "5094"
     },
     {
         "suburb_name": "Cavendish",
@@ -4175,11 +4065,6 @@
         "postcode": "4350"
     },
     {
-        "suburb_name": "Centennial Park",
-        "state_abbreviation": "WA",
-        "postcode": "6330"
-    },
-    {
         "suburb_name": "Central Macdonald",
         "state_abbreviation": "NSW",
         "postcode": "2775"
@@ -4218,11 +4103,6 @@
         "suburb_name": "Chadstone",
         "state_abbreviation": "VIC",
         "postcode": "3148"
-    },
-    {
-        "suburb_name": "Chambers Flat",
-        "state_abbreviation": "QLD",
-        "postcode": "4133"
     },
     {
         "suburb_name": "Champion Lakes",
@@ -4358,11 +4238,6 @@
         "suburb_name": "Chigwell",
         "state_abbreviation": "TAS",
         "postcode": "7011"
-    },
-    {
-        "suburb_name": "Childers",
-        "state_abbreviation": "VIC",
-        "postcode": "3824"
     },
     {
         "suburb_name": "Childers",
@@ -4640,11 +4515,6 @@
         "postcode": "4605"
     },
     {
-        "suburb_name": "Cluden",
-        "state_abbreviation": "QLD",
-        "postcode": "4811"
-    },
-    {
         "suburb_name": "Clunes",
         "state_abbreviation": "NSW",
         "postcode": "2480"
@@ -4735,11 +4605,6 @@
         "postcode": "6164"
     },
     {
-        "suburb_name": "Coen",
-        "state_abbreviation": "QLD",
-        "postcode": "4892"
-    },
-    {
         "suburb_name": "Coffee Camp",
         "state_abbreviation": "NSW",
         "postcode": "2480"
@@ -4818,11 +4683,6 @@
         "suburb_name": "Collingwood",
         "state_abbreviation": "VIC",
         "postcode": "3066"
-    },
-    {
-        "suburb_name": "Collingwood Heights",
-        "state_abbreviation": "WA",
-        "postcode": "6330"
     },
     {
         "suburb_name": "Collingwood Park",
@@ -4985,11 +4845,6 @@
         "postcode": "6166"
     },
     {
-        "suburb_name": "Cooks Hill",
-        "state_abbreviation": "NSW",
-        "postcode": "2300"
-    },
-    {
         "suburb_name": "Cooktown",
         "state_abbreviation": "QLD",
         "postcode": "4895"
@@ -5105,11 +4960,6 @@
         "postcode": "2479"
     },
     {
-        "suburb_name": "Coorabie",
-        "state_abbreviation": "SA",
-        "postcode": "5690"
-    },
-    {
         "suburb_name": "Cooran",
         "state_abbreviation": "QLD",
         "postcode": "4569"
@@ -5173,11 +5023,6 @@
         "suburb_name": "Coraki",
         "state_abbreviation": "NSW",
         "postcode": "2471"
-    },
-    {
-        "suburb_name": "Coral Bay",
-        "state_abbreviation": "WA",
-        "postcode": "6701"
     },
     {
         "suburb_name": "Coramba",
@@ -5368,11 +5213,6 @@
         "suburb_name": "Crawford",
         "state_abbreviation": "QLD",
         "postcode": "4610"
-    },
-    {
-        "suburb_name": "Creek Junction",
-        "state_abbreviation": "VIC",
-        "postcode": "3669"
     },
     {
         "suburb_name": "Cremorne",
@@ -5805,11 +5645,6 @@
         "postcode": "3304"
     },
     {
-        "suburb_name": "Dauan Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
-    },
-    {
         "suburb_name": "Davidson",
         "state_abbreviation": "NSW",
         "postcode": "2085"
@@ -6100,11 +5935,6 @@
         "postcode": "7173"
     },
     {
-        "suburb_name": "Dolls Point",
-        "state_abbreviation": "NSW",
-        "postcode": "2219"
-    },
-    {
         "suburb_name": "Don",
         "state_abbreviation": "TAS",
         "postcode": "7310"
@@ -6153,11 +5983,6 @@
         "suburb_name": "Dookie",
         "state_abbreviation": "VIC",
         "postcode": "3646"
-    },
-    {
-        "suburb_name": "Dookie College",
-        "state_abbreviation": "VIC",
-        "postcode": "3647"
     },
     {
         "suburb_name": "Doomadgee",
@@ -6266,11 +6091,6 @@
     },
     {
         "suburb_name": "Drouin",
-        "state_abbreviation": "VIC",
-        "postcode": "3818"
-    },
-    {
-        "suburb_name": "Drouin East",
         "state_abbreviation": "VIC",
         "postcode": "3818"
     },
@@ -6475,11 +6295,6 @@
         "postcode": "6213"
     },
     {
-        "suburb_name": "Dynnyrne",
-        "state_abbreviation": "TAS",
-        "postcode": "7005"
-    },
-    {
         "suburb_name": "Dysart",
         "state_abbreviation": "QLD",
         "postcode": "4745"
@@ -6635,11 +6450,6 @@
         "postcode": "6101"
     },
     {
-        "suburb_name": "East Warburton",
-        "state_abbreviation": "VIC",
-        "postcode": "3799"
-    },
-    {
         "suburb_name": "Eastwood",
         "state_abbreviation": "NSW",
         "postcode": "2122"
@@ -6773,11 +6583,6 @@
         "suburb_name": "Eglinton",
         "state_abbreviation": "NSW",
         "postcode": "2795"
-    },
-    {
-        "suburb_name": "Eglinton",
-        "state_abbreviation": "WA",
-        "postcode": "6034"
     },
     {
         "suburb_name": "Eidsvold",
@@ -7050,11 +6855,6 @@
         "postcode": "4051"
     },
     {
-        "suburb_name": "Eppalock",
-        "state_abbreviation": "VIC",
-        "postcode": "3551"
-    },
-    {
         "suburb_name": "Epping",
         "state_abbreviation": "NSW",
         "postcode": "2121"
@@ -7098,11 +6898,6 @@
         "suburb_name": "Erskineville",
         "state_abbreviation": "NSW",
         "postcode": "2043"
-    },
-    {
-        "suburb_name": "Erub Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Eschol Park",
@@ -7253,11 +7048,6 @@
         "suburb_name": "Everton",
         "state_abbreviation": "VIC",
         "postcode": "3678"
-    },
-    {
-        "suburb_name": "Everton Hills",
-        "state_abbreviation": "QLD",
-        "postcode": "4053"
     },
     {
         "suburb_name": "Everton Park",
@@ -7455,11 +7245,6 @@
         "postcode": "5023"
     },
     {
-        "suburb_name": "Fingal",
-        "state_abbreviation": "TAS",
-        "postcode": "7214"
-    },
-    {
         "suburb_name": "Fingal Head",
         "state_abbreviation": "NSW",
         "postcode": "2487"
@@ -7513,11 +7298,6 @@
         "suburb_name": "Flagstaff Hill",
         "state_abbreviation": "SA",
         "postcode": "5159"
-    },
-    {
-        "suburb_name": "Flagstone",
-        "state_abbreviation": "QLD",
-        "postcode": "4280"
     },
     {
         "suburb_name": "Flagstone Creek",
@@ -7845,11 +7625,6 @@
         "postcode": "3814"
     },
     {
-        "suburb_name": "Garfield North",
-        "state_abbreviation": "VIC",
-        "postcode": "3814"
-    },
-    {
         "suburb_name": "Gargett",
         "state_abbreviation": "QLD",
         "postcode": "4741"
@@ -7893,11 +7668,6 @@
         "suburb_name": "Gayndah",
         "state_abbreviation": "QLD",
         "postcode": "4625"
-    },
-    {
-        "suburb_name": "Gaythorne",
-        "state_abbreviation": "QLD",
-        "postcode": "4051"
     },
     {
         "suburb_name": "Geebung",
@@ -8195,11 +7965,6 @@
         "postcode": "4285"
     },
     {
-        "suburb_name": "Glen Eden",
-        "state_abbreviation": "QLD",
-        "postcode": "4680"
-    },
-    {
         "suburb_name": "Glenelg",
         "state_abbreviation": "SA",
         "postcode": "5045"
@@ -8228,11 +7993,6 @@
         "suburb_name": "Glenfield",
         "state_abbreviation": "WA",
         "postcode": "6532"
-    },
-    {
-        "suburb_name": "Glen Forbes",
-        "state_abbreviation": "VIC",
-        "postcode": "3990"
     },
     {
         "suburb_name": "Glen Forrest",
@@ -8856,11 +8616,6 @@
     },
     {
         "suburb_name": "Guildford",
-        "state_abbreviation": "VIC",
-        "postcode": "3451"
-    },
-    {
-        "suburb_name": "Guildford",
         "state_abbreviation": "WA",
         "postcode": "6055"
     },
@@ -9073,11 +8828,6 @@
         "suburb_name": "Hallett Cove",
         "state_abbreviation": "SA",
         "postcode": "5158"
-    },
-    {
-        "suburb_name": "Hallora",
-        "state_abbreviation": "VIC",
-        "postcode": "3818"
     },
     {
         "suburb_name": "Halls Creek",
@@ -9300,11 +9050,6 @@
         "postcode": "4341"
     },
     {
-        "suburb_name": "Haven",
-        "state_abbreviation": "VIC",
-        "postcode": "3401"
-    },
-    {
         "suburb_name": "Havenview",
         "state_abbreviation": "TAS",
         "postcode": "7320"
@@ -9353,11 +9098,6 @@
         "suburb_name": "Hazelbrook",
         "state_abbreviation": "NSW",
         "postcode": "2779"
-    },
-    {
-        "suburb_name": "Hazelmere",
-        "state_abbreviation": "WA",
-        "postcode": "6055"
     },
     {
         "suburb_name": "Hazelwood North",
@@ -9805,11 +9545,6 @@
         "postcode": "2643"
     },
     {
-        "suburb_name": "Howqua",
-        "state_abbreviation": "VIC",
-        "postcode": "3723"
-    },
-    {
         "suburb_name": "Howrah",
         "state_abbreviation": "TAS",
         "postcode": "7018"
@@ -9910,11 +9645,6 @@
         "postcode": "5061"
     },
     {
-        "suburb_name": "Iama Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
-    },
-    {
         "suburb_name": "Idalia",
         "state_abbreviation": "QLD",
         "postcode": "4811"
@@ -10005,11 +9735,6 @@
         "postcode": "6052"
     },
     {
-        "suburb_name": "Injinoo",
-        "state_abbreviation": "QLD",
-        "postcode": "4876"
-    },
-    {
         "suburb_name": "Injune",
         "state_abbreviation": "QLD",
         "postcode": "4454"
@@ -10053,11 +9778,6 @@
         "suburb_name": "Invermay",
         "state_abbreviation": "TAS",
         "postcode": "7248"
-    },
-    {
-        "suburb_name": "Invermay Park",
-        "state_abbreviation": "VIC",
-        "postcode": "3350"
     },
     {
         "suburb_name": "Ipswich",
@@ -10135,19 +9855,9 @@
         "postcode": "3723"
     },
     {
-        "suburb_name": "Jandakot",
-        "state_abbreviation": "WA",
-        "postcode": "6164"
-    },
-    {
         "suburb_name": "Jandowae",
         "state_abbreviation": "QLD",
         "postcode": "4410"
-    },
-    {
-        "suburb_name": "Jan Juc",
-        "state_abbreviation": "VIC",
-        "postcode": "3228"
     },
     {
         "suburb_name": "Jannali",
@@ -10320,11 +10030,6 @@
         "postcode": "2663"
     },
     {
-        "suburb_name": "Junortoun",
-        "state_abbreviation": "VIC",
-        "postcode": "3551"
-    },
-    {
         "suburb_name": "Jurien Bay",
         "state_abbreviation": "WA",
         "postcode": "6516"
@@ -10423,11 +10128,6 @@
         "suburb_name": "Kallista",
         "state_abbreviation": "VIC",
         "postcode": "3791"
-    },
-    {
-        "suburb_name": "Kaltukatjara",
-        "state_abbreviation": "NT",
-        "postcode": "0872"
     },
     {
         "suburb_name": "Kalumburu",
@@ -10578,11 +10278,6 @@
         "suburb_name": "Kariong",
         "state_abbreviation": "NSW",
         "postcode": "2250"
-    },
-    {
-        "suburb_name": "Karnup",
-        "state_abbreviation": "WA",
-        "postcode": "6176"
     },
     {
         "suburb_name": "Karoonda",
@@ -10890,11 +10585,6 @@
         "postcode": "3101"
     },
     {
-        "suburb_name": "Kewarra Beach",
-        "state_abbreviation": "QLD",
-        "postcode": "4879"
-    },
-    {
         "suburb_name": "Kewdale",
         "state_abbreviation": "WA",
         "postcode": "6105"
@@ -11050,11 +10740,6 @@
         "postcode": "3757"
     },
     {
-        "suburb_name": "King Leopold Ranges",
-        "state_abbreviation": "WA",
-        "postcode": "6728"
-    },
-    {
         "suburb_name": "Kingsbury",
         "state_abbreviation": "VIC",
         "postcode": "3083"
@@ -11203,11 +10888,6 @@
         "suburb_name": "Kitchener",
         "state_abbreviation": "NSW",
         "postcode": "2325"
-    },
-    {
-        "suburb_name": "Kiwirrkurra",
-        "state_abbreviation": "WA",
-        "postcode": "0872"
     },
     {
         "suburb_name": "Klemzig",
@@ -11438,11 +11118,6 @@
         "suburb_name": "Kurri Kurri",
         "state_abbreviation": "NSW",
         "postcode": "2327"
-    },
-    {
-        "suburb_name": "Kurunjang",
-        "state_abbreviation": "VIC",
-        "postcode": "3337"
     },
     {
         "suburb_name": "Kyabram",
@@ -11690,11 +11365,6 @@
         "postcode": "6147"
     },
     {
-        "suburb_name": "Langhorne Creek",
-        "state_abbreviation": "SA",
-        "postcode": "5255"
-    },
-    {
         "suburb_name": "Lang Lang",
         "state_abbreviation": "VIC",
         "postcode": "3984"
@@ -11875,11 +11545,6 @@
         "postcode": "2470"
     },
     {
-        "suburb_name": "Legana",
-        "state_abbreviation": "TAS",
-        "postcode": "7277"
-    },
-    {
         "suburb_name": "Leichhardt",
         "state_abbreviation": "NSW",
         "postcode": "2040"
@@ -12018,11 +11683,6 @@
         "suburb_name": "Lilydale",
         "state_abbreviation": "TAS",
         "postcode": "7268"
-    },
-    {
-        "suburb_name": "Lilyfield",
-        "state_abbreviation": "NSW",
-        "postcode": "2040"
     },
     {
         "suburb_name": "Lindenow",
@@ -12345,11 +12005,6 @@
         "postcode": "5272"
     },
     {
-        "suburb_name": "Lucknow",
-        "state_abbreviation": "VIC",
-        "postcode": "3875"
-    },
-    {
         "suburb_name": "Luddenham",
         "state_abbreviation": "NSW",
         "postcode": "2745"
@@ -12418,11 +12073,6 @@
         "suburb_name": "Lysterfield",
         "state_abbreviation": "VIC",
         "postcode": "3156"
-    },
-    {
-        "suburb_name": "Mabuiag Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Macarthur",
@@ -12570,11 +12220,6 @@
         "postcode": "3551"
     },
     {
-        "suburb_name": "Maidstone",
-        "state_abbreviation": "VIC",
-        "postcode": "3012"
-    },
-    {
         "suburb_name": "Maimuru",
         "state_abbreviation": "NSW",
         "postcode": "2594"
@@ -12593,11 +12238,6 @@
         "suburb_name": "Malabar",
         "state_abbreviation": "NSW",
         "postcode": "2036"
-    },
-    {
-        "suburb_name": "Malaga",
-        "state_abbreviation": "WA",
-        "postcode": "6090"
     },
     {
         "suburb_name": "Malak",
@@ -12736,11 +12376,6 @@
     },
     {
         "suburb_name": "Manoora",
-        "state_abbreviation": "QLD",
-        "postcode": "4870"
-    },
-    {
-        "suburb_name": "Manoora",
         "state_abbreviation": "SA",
         "postcode": "5414"
     },
@@ -12778,11 +12413,6 @@
         "suburb_name": "Mapleton",
         "state_abbreviation": "QLD",
         "postcode": "4560"
-    },
-    {
-        "suburb_name": "Mapoon",
-        "state_abbreviation": "QLD",
-        "postcode": "4874"
     },
     {
         "suburb_name": "Marangaroo",
@@ -13015,11 +12645,6 @@
         "postcode": "2020"
     },
     {
-        "suburb_name": "Masig Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
-    },
-    {
         "suburb_name": "Mataranka",
         "state_abbreviation": "NT",
         "postcode": "0852"
@@ -13088,11 +12713,6 @@
         "suburb_name": "Mcilwraith",
         "state_abbreviation": "QLD",
         "postcode": "4671"
-    },
-    {
-        "suburb_name": "Mckenzie Creek",
-        "state_abbreviation": "VIC",
-        "postcode": "3401"
     },
     {
         "suburb_name": "Mckinnon",
@@ -13320,11 +12940,6 @@
         "postcode": "3310"
     },
     {
-        "suburb_name": "Mer Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
-    },
-    {
         "suburb_name": "Mermaid Waters",
         "state_abbreviation": "QLD",
         "postcode": "4218"
@@ -13373,11 +12988,6 @@
         "suburb_name": "Metford",
         "state_abbreviation": "NSW",
         "postcode": "2323"
-    },
-    {
-        "suburb_name": "Metricup",
-        "state_abbreviation": "WA",
-        "postcode": "6280"
     },
     {
         "suburb_name": "Metung",
@@ -13463,11 +13073,6 @@
         "suburb_name": "Midvale",
         "state_abbreviation": "WA",
         "postcode": "6056"
-    },
-    {
-        "suburb_name": "Milang",
-        "state_abbreviation": "SA",
-        "postcode": "5256"
     },
     {
         "suburb_name": "Milawa",
@@ -13563,11 +13168,6 @@
         "suburb_name": "Mill Park",
         "state_abbreviation": "VIC",
         "postcode": "3082"
-    },
-    {
-        "suburb_name": "Millstream",
-        "state_abbreviation": "WA",
-        "postcode": "6716"
     },
     {
         "suburb_name": "Millthorpe",
@@ -13733,11 +13333,6 @@
         "suburb_name": "Mitta Mitta",
         "state_abbreviation": "VIC",
         "postcode": "3701"
-    },
-    {
-        "suburb_name": "Moa Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Moama",
@@ -13943,11 +13538,6 @@
         "suburb_name": "Moorabbin",
         "state_abbreviation": "VIC",
         "postcode": "3189"
-    },
-    {
-        "suburb_name": "Moorabool",
-        "state_abbreviation": "VIC",
-        "postcode": "3213"
     },
     {
         "suburb_name": "Moorak",
@@ -14178,11 +13768,6 @@
         "suburb_name": "Mount Burr",
         "state_abbreviation": "SA",
         "postcode": "5279"
-    },
-    {
-        "suburb_name": "Mount Chalmers",
-        "state_abbreviation": "QLD",
-        "postcode": "4702"
     },
     {
         "suburb_name": "Mount Claremont",
@@ -14443,11 +14028,6 @@
         "suburb_name": "Mount Riverview",
         "state_abbreviation": "NSW",
         "postcode": "2774"
-    },
-    {
-        "suburb_name": "Mount Rowan",
-        "state_abbreviation": "VIC",
-        "postcode": "3352"
     },
     {
         "suburb_name": "Mount Samson",
@@ -15100,11 +14680,6 @@
         "postcode": "3831"
     },
     {
-        "suburb_name": "Neilborough",
-        "state_abbreviation": "VIC",
-        "postcode": "3570"
-    },
-    {
         "suburb_name": "Nelly Bay",
         "state_abbreviation": "QLD",
         "postcode": "4819"
@@ -15158,11 +14733,6 @@
         "suburb_name": "Newcastle Waters",
         "state_abbreviation": "NT",
         "postcode": "0862"
-    },
-    {
-        "suburb_name": "Newcastle West",
-        "state_abbreviation": "NSW",
-        "postcode": "2302"
     },
     {
         "suburb_name": "Newcomb",
@@ -15830,11 +15400,6 @@
         "postcode": "5355"
     },
     {
-        "suburb_name": "Nutfield",
-        "state_abbreviation": "VIC",
-        "postcode": "3099"
-    },
-    {
         "suburb_name": "Nyabing",
         "state_abbreviation": "WA",
         "postcode": "6341"
@@ -16380,11 +15945,6 @@
         "postcode": "4702"
     },
     {
-        "suburb_name": "Parkinson",
-        "state_abbreviation": "QLD",
-        "postcode": "4115"
-    },
-    {
         "suburb_name": "Park Orchards",
         "state_abbreviation": "VIC",
         "postcode": "3114"
@@ -16418,11 +15978,6 @@
         "suburb_name": "Parmelia",
         "state_abbreviation": "WA",
         "postcode": "6167"
-    },
-    {
-        "suburb_name": "Parndana",
-        "state_abbreviation": "SA",
-        "postcode": "5220"
     },
     {
         "suburb_name": "Parramatta",
@@ -16550,11 +16105,6 @@
         "postcode": "2120"
     },
     {
-        "suburb_name": "Penneshaw",
-        "state_abbreviation": "SA",
-        "postcode": "5222"
-    },
-    {
         "suburb_name": "Pennington",
         "state_abbreviation": "SA",
         "postcode": "5013"
@@ -16633,11 +16183,6 @@
         "suburb_name": "Peterborough",
         "state_abbreviation": "SA",
         "postcode": "5422"
-    },
-    {
-        "suburb_name": "Petermann",
-        "state_abbreviation": "NT",
-        "postcode": "0872"
     },
     {
         "suburb_name": "Petersham",
@@ -16845,11 +16390,6 @@
         "postcode": "4892"
     },
     {
-        "suburb_name": "Port Adelaide",
-        "state_abbreviation": "SA",
-        "postcode": "5015"
-    },
-    {
         "suburb_name": "Portarlington",
         "state_abbreviation": "VIC",
         "postcode": "3223"
@@ -16963,11 +16503,6 @@
         "suburb_name": "Port Wakefield",
         "state_abbreviation": "SA",
         "postcode": "5550"
-    },
-    {
-        "suburb_name": "Poruma Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Potts Point",
@@ -17585,11 +17120,6 @@
         "postcode": "3818"
     },
     {
-        "suburb_name": "Rippleside",
-        "state_abbreviation": "VIC",
-        "postcode": "3215"
-    },
-    {
         "suburb_name": "Risdon Vale",
         "state_abbreviation": "TAS",
         "postcode": "7016"
@@ -17905,16 +17435,6 @@
         "postcode": "0873"
     },
     {
-        "suburb_name": "Ross Creek",
-        "state_abbreviation": "VIC",
-        "postcode": "3351"
-    },
-    {
-        "suburb_name": "Rosslea",
-        "state_abbreviation": "QLD",
-        "postcode": "4812"
-    },
-    {
         "suburb_name": "Rossmore",
         "state_abbreviation": "NSW",
         "postcode": "2557"
@@ -17938,11 +17458,6 @@
         "suburb_name": "Rothwell",
         "state_abbreviation": "QLD",
         "postcode": "4022"
-    },
-    {
-        "suburb_name": "Rottnest Island",
-        "state_abbreviation": "WA",
-        "postcode": "6161"
     },
     {
         "suburb_name": "Rouse Hill",
@@ -18088,11 +17603,6 @@
         "suburb_name": "Safety Bay",
         "state_abbreviation": "WA",
         "postcode": "6169"
-    },
-    {
-        "suburb_name": "Saibai Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Salamander Bay",
@@ -18270,11 +17780,6 @@
         "postcode": "6019"
     },
     {
-        "suburb_name": "Scarsdale",
-        "state_abbreviation": "VIC",
-        "postcode": "3351"
-    },
-    {
         "suburb_name": "Schofields",
         "state_abbreviation": "NSW",
         "postcode": "2762"
@@ -18288,11 +17793,6 @@
         "suburb_name": "Scoresby",
         "state_abbreviation": "VIC",
         "postcode": "3179"
-    },
-    {
-        "suburb_name": "Scotsburn",
-        "state_abbreviation": "VIC",
-        "postcode": "3352"
     },
     {
         "suburb_name": "Scott Creek",
@@ -18403,11 +17903,6 @@
         "suburb_name": "Secret Harbour",
         "state_abbreviation": "WA",
         "postcode": "6173"
-    },
-    {
-        "suburb_name": "Seddon",
-        "state_abbreviation": "VIC",
-        "postcode": "3011"
     },
     {
         "suburb_name": "Sefton",
@@ -18680,11 +18175,6 @@
         "postcode": "3351"
     },
     {
-        "suburb_name": "Snake Valley",
-        "state_abbreviation": "VIC",
-        "postcode": "3351"
-    },
-    {
         "suburb_name": "Snowtown",
         "state_abbreviation": "SA",
         "postcode": "5520"
@@ -18845,11 +18335,6 @@
         "postcode": "4859"
     },
     {
-        "suburb_name": "South Kalgoorlie",
-        "state_abbreviation": "WA",
-        "postcode": "6430"
-    },
-    {
         "suburb_name": "South Kempsey",
         "state_abbreviation": "NSW",
         "postcode": "2440"
@@ -18883,11 +18368,6 @@
         "suburb_name": "South Melbourne",
         "state_abbreviation": "VIC",
         "postcode": "3205"
-    },
-    {
-        "suburb_name": "South Mission Beach",
-        "state_abbreviation": "QLD",
-        "postcode": "4852"
     },
     {
         "suburb_name": "South Morang",
@@ -19045,11 +18525,6 @@
         "postcode": "4000"
     },
     {
-        "suburb_name": "Spring Hill",
-        "state_abbreviation": "QLD",
-        "postcode": "4004"
-    },
-    {
         "suburb_name": "Springhurst",
         "state_abbreviation": "VIC",
         "postcode": "3682"
@@ -19143,11 +18618,6 @@
         "suburb_name": "Stanhope Gardens",
         "state_abbreviation": "NSW",
         "postcode": "2768"
-    },
-    {
-        "suburb_name": "Stanley",
-        "state_abbreviation": "VIC",
-        "postcode": "3747"
     },
     {
         "suburb_name": "Stanley",
@@ -19360,11 +18830,6 @@
         "postcode": "6530"
     },
     {
-        "suburb_name": "Strathbogie",
-        "state_abbreviation": "VIC",
-        "postcode": "3666"
-    },
-    {
         "suburb_name": "Stratheden",
         "state_abbreviation": "NSW",
         "postcode": "2470"
@@ -19398,11 +18863,6 @@
         "suburb_name": "Strathmore",
         "state_abbreviation": "VIC",
         "postcode": "3041"
-    },
-    {
-        "suburb_name": "Strathnairn",
-        "state_abbreviation": "ACT",
-        "postcode": "2615"
     },
     {
         "suburb_name": "Strathpine",
@@ -19575,11 +19035,6 @@
         "postcode": "3585"
     },
     {
-        "suburb_name": "Swanpool",
-        "state_abbreviation": "VIC",
-        "postcode": "3673"
-    },
-    {
         "suburb_name": "Swan Reach",
         "state_abbreviation": "VIC",
         "postcode": "3903"
@@ -19618,16 +19073,6 @@
         "suburb_name": "Sydney",
         "state_abbreviation": "NSW",
         "postcode": "2000"
-    },
-    {
-        "suburb_name": "Sydney",
-        "state_abbreviation": "NSW",
-        "postcode": "2001"
-    },
-    {
-        "suburb_name": "Sydney Olympic Park",
-        "state_abbreviation": "NSW",
-        "postcode": "2127"
     },
     {
         "suburb_name": "Sylvania",
@@ -19793,11 +19238,6 @@
         "suburb_name": "Tanunda",
         "state_abbreviation": "SA",
         "postcode": "5352"
-    },
-    {
-        "suburb_name": "Tanybryn",
-        "state_abbreviation": "VIC",
-        "postcode": "3249"
     },
     {
         "suburb_name": "Taperoo",
@@ -20410,16 +19850,6 @@
         "postcode": "4882"
     },
     {
-        "suburb_name": "Tolmans Hill",
-        "state_abbreviation": "TAS",
-        "postcode": "7007"
-    },
-    {
-        "suburb_name": "Tolmie",
-        "state_abbreviation": "VIC",
-        "postcode": "3723"
-    },
-    {
         "suburb_name": "Tomerong",
         "state_abbreviation": "NSW",
         "postcode": "2540"
@@ -20568,11 +19998,6 @@
         "suburb_name": "Tottenham",
         "state_abbreviation": "NSW",
         "postcode": "2873"
-    },
-    {
-        "suburb_name": "Tottenham",
-        "state_abbreviation": "VIC",
-        "postcode": "3012"
     },
     {
         "suburb_name": "Toukley",
@@ -20860,11 +20285,6 @@
         "postcode": "3813"
     },
     {
-        "suburb_name": "Ugar Island",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
-    },
-    {
         "suburb_name": "Uki",
         "state_abbreviation": "NSW",
         "postcode": "2484"
@@ -21078,11 +20498,6 @@
         "suburb_name": "Valkyrie",
         "state_abbreviation": "QLD",
         "postcode": "4742"
-    },
-    {
-        "suburb_name": "Valley Heights",
-        "state_abbreviation": "NSW",
-        "postcode": "2777"
     },
     {
         "suburb_name": "Varroville",
@@ -21460,11 +20875,6 @@
         "postcode": "4871"
     },
     {
-        "suburb_name": "Wangara",
-        "state_abbreviation": "WA",
-        "postcode": "6065"
-    },
-    {
         "suburb_name": "Wangaratta",
         "state_abbreviation": "VIC",
         "postcode": "3677"
@@ -21530,11 +20940,6 @@
         "postcode": "3799"
     },
     {
-        "suburb_name": "Warburton",
-        "state_abbreviation": "WA",
-        "postcode": "6431"
-    },
-    {
         "suburb_name": "Wardell",
         "state_abbreviation": "NSW",
         "postcode": "2477"
@@ -21578,11 +20983,6 @@
         "suburb_name": "Warra",
         "state_abbreviation": "QLD",
         "postcode": "4411"
-    },
-    {
-        "suburb_name": "Warraber Islet",
-        "state_abbreviation": "QLD",
-        "postcode": "4875"
     },
     {
         "suburb_name": "Warracknabeal",
@@ -21760,11 +21160,6 @@
         "postcode": "2446"
     },
     {
-        "suburb_name": "Waurn Ponds",
-        "state_abbreviation": "VIC",
-        "postcode": "3216"
-    },
-    {
         "suburb_name": "Wavell Heights",
         "state_abbreviation": "QLD",
         "postcode": "4012"
@@ -21901,11 +21296,6 @@
     },
     {
         "suburb_name": "Werribee",
-        "state_abbreviation": "VIC",
-        "postcode": "3030"
-    },
-    {
-        "suburb_name": "Werribee South",
         "state_abbreviation": "VIC",
         "postcode": "3030"
     },
@@ -22080,11 +21470,6 @@
         "postcode": "2125"
     },
     {
-        "suburb_name": "West Perth",
-        "state_abbreviation": "WA",
-        "postcode": "6005"
-    },
-    {
         "suburb_name": "West Pymble",
         "state_abbreviation": "NSW",
         "postcode": "2073"
@@ -22213,11 +21598,6 @@
         "suburb_name": "Whitfield",
         "state_abbreviation": "QLD",
         "postcode": "4870"
-    },
-    {
-        "suburb_name": "Whitlam",
-        "state_abbreviation": "ACT",
-        "postcode": "2611"
     },
     {
         "suburb_name": "Whitsundays",
@@ -22530,16 +21910,6 @@
         "postcode": "4352"
     },
     {
-        "suburb_name": "Withers",
-        "state_abbreviation": "WA",
-        "postcode": "6230"
-    },
-    {
-        "suburb_name": "Wivenhoe",
-        "state_abbreviation": "TAS",
-        "postcode": "7320"
-    },
-    {
         "suburb_name": "Wodonga",
         "state_abbreviation": "VIC",
         "postcode": "3690"
@@ -22553,11 +21923,6 @@
         "suburb_name": "Wollert",
         "state_abbreviation": "VIC",
         "postcode": "3750"
-    },
-    {
-        "suburb_name": "Wollombi",
-        "state_abbreviation": "NSW",
-        "postcode": "2325"
     },
     {
         "suburb_name": "Wollomombi",
@@ -22695,11 +22060,6 @@
         "postcode": "5072"
     },
     {
-        "suburb_name": "Woodglen",
-        "state_abbreviation": "VIC",
-        "postcode": "3875"
-    },
-    {
         "suburb_name": "Woodhill",
         "state_abbreviation": "QLD",
         "postcode": "4285"
@@ -22800,11 +22160,6 @@
         "postcode": "2025"
     },
     {
-        "suburb_name": "Woollamia",
-        "state_abbreviation": "NSW",
-        "postcode": "2540"
-    },
-    {
         "suburb_name": "Woolloomooloo",
         "state_abbreviation": "NSW",
         "postcode": "2011"
@@ -22813,11 +22168,6 @@
         "suburb_name": "Woolloongabba",
         "state_abbreviation": "QLD",
         "postcode": "4102"
-    },
-    {
-        "suburb_name": "Woolmer",
-        "state_abbreviation": "QLD",
-        "postcode": "4352"
     },
     {
         "suburb_name": "Woolomin",
@@ -22933,11 +22283,6 @@
         "suburb_name": "Woy Woy",
         "state_abbreviation": "NSW",
         "postcode": "2256"
-    },
-    {
-        "suburb_name": "Wright",
-        "state_abbreviation": "ACT",
-        "postcode": "2611"
     },
     {
         "suburb_name": "Wudinna",
@@ -23065,11 +22410,6 @@
         "postcode": "4352"
     },
     {
-        "suburb_name": "Wy Yung",
-        "state_abbreviation": "VIC",
-        "postcode": "3875"
-    },
-    {
         "suburb_name": "Yackandandah",
         "state_abbreviation": "VIC",
         "postcode": "3749"
@@ -23168,11 +22508,6 @@
         "suburb_name": "Yankalilla",
         "state_abbreviation": "SA",
         "postcode": "5203"
-    },
-    {
-        "suburb_name": "Yapeen",
-        "state_abbreviation": "VIC",
-        "postcode": "3451"
     },
     {
         "suburb_name": "Yarloop",
@@ -23418,16 +22753,6 @@
         "suburb_name": "Yungaburra",
         "state_abbreviation": "QLD",
         "postcode": "4884"
-    },
-    {
-        "suburb_name": "Yunta",
-        "state_abbreviation": "SA",
-        "postcode": "5440"
-    },
-    {
-        "suburb_name": "Yuulong",
-        "state_abbreviation": "VIC",
-        "postcode": "3237"
     },
     {
         "suburb_name": "Zeehan",
