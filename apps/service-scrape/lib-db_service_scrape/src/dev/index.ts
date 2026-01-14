@@ -1,2 +1,3 @@
+import { safeqlConfig } from './safeqlConfig'
 import { setupTestPostgisDb } from './setupTestPostgisDb'
-export { setupTestPostgisDb }
+export { setupTestPostgisDb, safeqlConfig }

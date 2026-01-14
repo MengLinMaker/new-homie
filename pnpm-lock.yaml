@@ -17,6 +17,9 @@ importers:
       '@pulumi/pulumi':
         specifier: ^3.212.0
         version: 3.212.0(typescript@5.9.2)
+      '@ts-safeql/eslint-plugin':
+        specifier: ^4.1.0
+        version: 4.1.0(@typescript-eslint/utils@8.52.0(eslint@9.39.2(jiti@2.5.1))(typescript@5.9.2))(libpg-query@17.7.3)
       '@types/node':
         specifier: '*'
         version: 24.2.0
@@ -26,9 +29,15 @@ importers:
       esbuild:
         specifier: ^0.25.9
         version: 0.25.9
+      eslint:
+        specifier: ^9.39.2
+        version: 9.39.2(jiti@2.5.1)
       knip:
         specifier: 5.63.1
         version: 5.63.1(@types/node@24.2.0)(typescript@5.9.2)
+      libpg-query:
+        specifier: ^17.7.3
+        version: 17.7.3
       nx:
         specifier: 21.5.2
         version: 21.5.2(@swc/core@1.11.4(@swc/helpers@0.5.15))
@@ -44,6 +53,9 @@ importers:
       typescript:
         specifier: ~5.9.2
         version: 5.9.2
+      typescript-eslint:
+        specifier: ^8.52.0
+        version: 8.52.0(eslint@9.39.2(jiti@2.5.1))(typescript@5.9.2)
       vite:
         specifier: ^7.1.10
         version: 7.1.10(@types/node@24.2.0)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
@@ -297,9 +309,6 @@ importers:
       '@pgtyped/cli':
         specifier: ^2.4.3
         version: 2.4.3(typescript@5.9.2)
-      '@ts-safeql/eslint-plugin':
-        specifier: ^4.1.0
-        version: 4.1.0(@typescript-eslint/utils@8.52.0(eslint@9.39.2(jiti@2.5.1))(typescript@5.9.2))(libpg-query@17.7.3)
       '@types/async-retry':
         specifier: ^1.4.9
         version: 1.4.9
@@ -312,15 +321,6 @@ importers:
       esbuild:
         specifier: ^0.27.0
         version: 0.27.0
-      eslint:
-        specifier: ^9.39.2
-        version: 9.39.2(jiti@2.5.1)
-      libpg-query:
-        specifier: ^17.7.3
-        version: 17.7.3
-      typescript-eslint:
-        specifier: ^8.52.0
-        version: 8.52.0(eslint@9.39.2(jiti@2.5.1))(typescript@5.9.2)
 
   apps/service-scrape/function-scrape_locality_trigger:
     dependencies:

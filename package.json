@@ -29,8 +29,12 @@
         "sst": "3.17.25",
         "syncpack": "14.0.0-alpha.19",
         "typescript": "~5.9.2",
+        "typescript-eslint": "^8.52.0",
         "vite": "^7.1.10",
-        "vitest": "3.2.4"
+        "vitest": "3.2.4",
+        "@ts-safeql/eslint-plugin": "^4.1.0",
+        "eslint": "^9.39.2",
+        "libpg-query": "^17.7.3"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm format && pnpm lint"

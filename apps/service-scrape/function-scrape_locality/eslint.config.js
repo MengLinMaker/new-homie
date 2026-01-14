@@ -1,4 +1,4 @@
-import safeql from '@ts-safeql/eslint-plugin/config'
+import { safeqlConfig } from '@service-scrape/lib-db_service_scrape/dev'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
@@ -11,8 +11,5 @@ export default tseslint.config(
             },
         },
     },
-    safeql.configs.connections({
-        databaseUrl: 'postgres://user:password@localhost:54320/db',
-        targets: [{ tag: 'sql' }],
-    }),
+    safeqlConfig,
 )
