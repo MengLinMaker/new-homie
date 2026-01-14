@@ -12,8 +12,8 @@ importers:
         specifier: 2.2.3
         version: 2.2.3
       '@postgres-language-server/cli':
-        specifier: ^0.18.0
-        version: 0.18.0
+        specifier: ^0.19.0
+        version: 0.19.0
       '@pulumi/pulumi':
         specifier: ^3.212.0
         version: 3.212.0(typescript@5.9.2)
@@ -2953,50 +2953,50 @@ packages:
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@postgres-language-server/cli-aarch64-apple-darwin@0.18.0':
-    resolution: {integrity: sha512-2OaYqXmdtOHc/aJMV8Q6BL6bzxbNLhQYtwlS8W/nQ7BejYKgGRalG12m6TMdRshuwR5arCme071yWCLVikckyg==}
+  '@postgres-language-server/cli-aarch64-apple-darwin@0.19.0':
+    resolution: {integrity: sha512-gFsfB3eOeuqQCHMhxL4AlCju+/PULpuZsrXuNP7m27YSAq4NK8iDeDMi/ZT/6PtHaRpZRWX9SRPlEUhyJIIXOA==}
     engines: {node: '>=20'}
     cpu: [arm64]
     os: [darwin]
 
-  '@postgres-language-server/cli-aarch64-linux-gnu@0.18.0':
-    resolution: {integrity: sha512-He2nVBPU5wIp4sYYwfjJG7TG13cJOrCqSYHtsGO4z+3UbKbbU9/U9SXc5bQabKJ2B8wEziFa7urfzYc4ehqIlQ==}
+  '@postgres-language-server/cli-aarch64-linux-gnu@0.19.0':
+    resolution: {integrity: sha512-RmKH7aT5VGLlhfSWYehu1k/9VCXLgrmLIhPiDgu04oI08kFY35Inxp6wESIxLzh4nrFiv45AhEKISdwtqfZz+A==}
     engines: {node: '>=20'}
     cpu: [arm64]
     os: [linux]
 
-  '@postgres-language-server/cli-aarch64-windows-msvc@0.18.0':
-    resolution: {integrity: sha512-a8MTTkY88SVc07C9V8Tz79SqTiJd5nxCwucQNhpWauMvAeTi5WrTycOtI1ISmN5BDQl9PemeJxkKc2TH2ox38g==}
+  '@postgres-language-server/cli-aarch64-windows-msvc@0.19.0':
+    resolution: {integrity: sha512-WjOtea0L6MJyBqfHlhl5IMlHMHUS3aCKUnZuEIqciqUlQnVcmjbbqI16sNUDxV7sF7d7Zcr5TTgT0aG9mJT5dQ==}
     engines: {node: '>=20'}
     cpu: [arm64]
     os: [win32]
 
-  '@postgres-language-server/cli-x86_64-apple-darwin@0.18.0':
-    resolution: {integrity: sha512-Pk+Nqvp7K3eEGLtW9hGGTjDUaG278ZaXybHg9SmThhZE3WUFfe5/KYxiA64d9P1Rs5X4Xy3gjpVanxR2ZDB6MA==}
+  '@postgres-language-server/cli-x86_64-apple-darwin@0.19.0':
+    resolution: {integrity: sha512-FkxrIppEg5aS9CeclIOry6nlC9X4OnycHVRlLnCL3sPub7A1o4okDnp0sYyIlMhKa1hfmOtKe2f3iGBFDIpuCw==}
     engines: {node: '>=20'}
     cpu: [x64]
     os: [darwin]
 
-  '@postgres-language-server/cli-x86_64-linux-gnu@0.18.0':
-    resolution: {integrity: sha512-1OZb0q9z7HIG9iw5qfVltI2SfZXmNq+y0Cr5UkUz8m5WyKPI+YX4+kWFJmntFwPJ0phnZBpgdtoo/uiMHdsdLg==}
+  '@postgres-language-server/cli-x86_64-linux-gnu@0.19.0':
+    resolution: {integrity: sha512-QbuV/CaPdXK0YJiDIu/oxz2wtW5FeVsn3jQIugDPPVo5XUUIL744FVJlVmMz1uuNGahPGUzgGh+18vWNfPGNBQ==}
     engines: {node: '>=20'}
     cpu: [x64]
     os: [linux]
 
-  '@postgres-language-server/cli-x86_64-linux-musl@0.18.0':
-    resolution: {integrity: sha512-eXnIoxlRDEc3KBPONgFfzhxBadDtUk797ytpQ4BrcYQfxTUNNqwQHm1w3riuUqNskNL+c3rfn1pSGHKL+BtVIg==}
+  '@postgres-language-server/cli-x86_64-linux-musl@0.19.0':
+    resolution: {integrity: sha512-4YDvP2UnjD8LwTDorjz3cpaef1677v6t1WRjaD7xu54doB/ouUq6xvBwrp0uqwW0UXabLmPXUbm6AKewR4IVIQ==}
     engines: {node: '>=20'}
     cpu: [x64]
     os: [linux]
 
-  '@postgres-language-server/cli-x86_64-windows-msvc@0.18.0':
-    resolution: {integrity: sha512-lw6rQLh4d3aHnJ2AeJuMi0RSnyWlPORk9KZIpFRhWwE0utevRpnEvHSmwIOajMMwBU4sH9iRLu6FxYAY6Kkbqw==}
+  '@postgres-language-server/cli-x86_64-windows-msvc@0.19.0':
+    resolution: {integrity: sha512-KUtN9/ZIosfgQ1HTnRcGFXMbbEi50W69zupFEDe4fJRoHLO9oPxxYl8yHeBYGHqCBIeNIAHKYqRtKB0GsithJw==}
     engines: {node: '>=20'}
     cpu: [x64]
     os: [win32]
 
-  '@postgres-language-server/cli@0.18.0':
-    resolution: {integrity: sha512-EGbyFnhgCY88lFrytxf0Wl3pE7SGyutsk7ChbrkkjCjsdoZeSvxJ6XPFJtr8WGn9zcySoU+p0T4sBaujY+AIhg==}
+  '@postgres-language-server/cli@0.19.0':
+    resolution: {integrity: sha512-WsjNBB46XNelW6CgKjs9biBWKVYotUSaqb9JSUfp9O9pjtoNSVhlvdpdDM2CUdFBxYcxWSRB4bggCICG4XmIWA==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -12938,36 +12938,36 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@postgres-language-server/cli-aarch64-apple-darwin@0.18.0':
+  '@postgres-language-server/cli-aarch64-apple-darwin@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-aarch64-linux-gnu@0.18.0':
+  '@postgres-language-server/cli-aarch64-linux-gnu@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-aarch64-windows-msvc@0.18.0':
+  '@postgres-language-server/cli-aarch64-windows-msvc@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-x86_64-apple-darwin@0.18.0':
+  '@postgres-language-server/cli-x86_64-apple-darwin@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-x86_64-linux-gnu@0.18.0':
+  '@postgres-language-server/cli-x86_64-linux-gnu@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-x86_64-linux-musl@0.18.0':
+  '@postgres-language-server/cli-x86_64-linux-musl@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli-x86_64-windows-msvc@0.18.0':
+  '@postgres-language-server/cli-x86_64-windows-msvc@0.19.0':
     optional: true
 
-  '@postgres-language-server/cli@0.18.0':
+  '@postgres-language-server/cli@0.19.0':
     optionalDependencies:
-      '@postgres-language-server/cli-aarch64-apple-darwin': 0.18.0
-      '@postgres-language-server/cli-aarch64-linux-gnu': 0.18.0
-      '@postgres-language-server/cli-aarch64-windows-msvc': 0.18.0
-      '@postgres-language-server/cli-x86_64-apple-darwin': 0.18.0
-      '@postgres-language-server/cli-x86_64-linux-gnu': 0.18.0
-      '@postgres-language-server/cli-x86_64-linux-musl': 0.18.0
-      '@postgres-language-server/cli-x86_64-windows-msvc': 0.18.0
+      '@postgres-language-server/cli-aarch64-apple-darwin': 0.19.0
+      '@postgres-language-server/cli-aarch64-linux-gnu': 0.19.0
+      '@postgres-language-server/cli-aarch64-windows-msvc': 0.19.0
+      '@postgres-language-server/cli-x86_64-apple-darwin': 0.19.0
+      '@postgres-language-server/cli-x86_64-linux-gnu': 0.19.0
+      '@postgres-language-server/cli-x86_64-linux-musl': 0.19.0
+      '@postgres-language-server/cli-x86_64-windows-msvc': 0.19.0
 
   '@protobufjs/aspromise@1.1.2': {}
 
