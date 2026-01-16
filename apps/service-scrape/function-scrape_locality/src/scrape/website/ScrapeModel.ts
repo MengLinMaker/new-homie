@@ -108,7 +108,7 @@ export class ScrapeModel extends IDatabased {
                 ${upsertSchoolFeature.rows[0]!.id},
                 ${args.localityId},
                 ${st.name},
-                ${st.url!},
+                ${st.url},
                 ${st.acara_id},
                 ${st.gps}
             )
@@ -183,9 +183,9 @@ export class ScrapeModel extends IDatabased {
         VALUES (
             ${args.localityId},
             ${ht.gps},
-            ${ht.auction_time as Date | null},
+            ${ht.auction_time},
             ${upsertHomeFeature.rows[0]!.id},
-            ${ht.inspection_time as Date | null},
+            ${ht.inspection_time},
             ${ht.land_m2},
             ${ht.street_address}
         )
