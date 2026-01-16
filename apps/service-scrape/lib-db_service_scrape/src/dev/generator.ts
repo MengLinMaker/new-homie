@@ -24,6 +24,7 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
             outputPath: path.join(import.meta.dirname, '../schema'),
             resolveViews: true,
             preDeleteOutputFolder: true,
+            enumStyle: 'type',
             preRenderHooks: [
                 kanelZod.makeGenerateZodSchemas({
                     getZodSchemaMetadata: kanelZod.defaultGetZodSchemaMetadata,

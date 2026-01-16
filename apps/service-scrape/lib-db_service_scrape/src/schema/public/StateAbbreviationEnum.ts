@@ -4,18 +4,9 @@
 import { z } from 'zod'
 
 /** Represents the enum public.state_abbreviation_enum */
-enum StateAbbreviationEnum {
-    ACT = 'ACT',
-    NSW = 'NSW',
-    NT = 'NT',
-    QLD = 'QLD',
-    SA = 'SA',
-    TAS = 'TAS',
-    VIC = 'VIC',
-    WA = 'WA',
-}
+type StateAbbreviationEnum = 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
 
 export default StateAbbreviationEnum
 
 /** Zod schema for state_abbreviation_enum */
-export const stateAbbreviationEnum = z.enum(StateAbbreviationEnum)
+export const stateAbbreviationEnum = z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'])

@@ -4,30 +4,50 @@
 import { z } from 'zod'
 
 /** Represents the enum public.home_type_enum */
-enum HomeTypeEnum {
-    Apartment = 'Apartment',
-    ApartmentUnitFlat = 'ApartmentUnitFlat',
-    BlockOfUnits = 'BlockOfUnits',
-    DevelopmentSite = 'DevelopmentSite',
-    Duplex = 'Duplex',
-    FreeStanding = 'FreeStanding',
-    House = 'House',
-    Land = 'Land',
-    NewApartments = 'NewApartments',
-    NewHomeDesigns = 'NewHomeDesigns',
-    NewHouseLand = 'NewHouseLand',
-    NewLand = 'NewLand',
-    PentHouse = 'PentHouse',
-    Retirement = 'Retirement',
-    SemiDetached = 'SemiDetached',
-    Studio = 'Studio',
-    Terrace = 'Terrace',
-    Townhouse = 'Townhouse',
-    VacantLand = 'VacantLand',
-    Villa = 'Villa',
-}
+type HomeTypeEnum =
+    | 'Apartment'
+    | 'ApartmentUnitFlat'
+    | 'BlockOfUnits'
+    | 'DevelopmentSite'
+    | 'Duplex'
+    | 'FreeStanding'
+    | 'House'
+    | 'Land'
+    | 'NewApartments'
+    | 'NewHomeDesigns'
+    | 'NewHouseLand'
+    | 'NewLand'
+    | 'PentHouse'
+    | 'Retirement'
+    | 'SemiDetached'
+    | 'Studio'
+    | 'Terrace'
+    | 'Townhouse'
+    | 'VacantLand'
+    | 'Villa'
 
 export default HomeTypeEnum
 
 /** Zod schema for home_type_enum */
-export const homeTypeEnum = z.enum(HomeTypeEnum)
+export const homeTypeEnum = z.enum([
+    'Apartment',
+    'ApartmentUnitFlat',
+    'BlockOfUnits',
+    'DevelopmentSite',
+    'Duplex',
+    'FreeStanding',
+    'House',
+    'Land',
+    'NewApartments',
+    'NewHomeDesigns',
+    'NewHouseLand',
+    'NewLand',
+    'PentHouse',
+    'Retirement',
+    'SemiDetached',
+    'Studio',
+    'Terrace',
+    'Townhouse',
+    'VacantLand',
+    'Villa',
+])
