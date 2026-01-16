@@ -6,7 +6,7 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "build": "node src/mergeOpenapi.ts && openapi-typescript --array-length true --properties-required-by-default true src/openapi.json -o src/schema.d.ts && biome format --write"
+        "build": "tsx src/mergeOpenapi.ts && openapi-typescript --array-length true --properties-required-by-default true src/openapi.json -o src/schema.d.ts && biome format --write"
     },
     "dependencies": {
         "@service-scrape/function-query_freemium": "workspace:*"

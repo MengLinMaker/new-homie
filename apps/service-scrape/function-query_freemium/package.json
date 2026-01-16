@@ -6,7 +6,7 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "build": "node api/openapi.ts && biome format --write",
+        "build": "tsx api/openapi.ts && biome format --write",
         "test:type": "tsc",
         "test:lint": "biome lint && eslint"
     },
