@@ -18,6 +18,9 @@
                 "noExplicitAny": "warn",
                 "noUnknownAtRules": "off",
                 "noTsIgnore": "off"
+            },
+            "style": {
+                "noNonNullAssertion": "info"
             }
         }
     },
