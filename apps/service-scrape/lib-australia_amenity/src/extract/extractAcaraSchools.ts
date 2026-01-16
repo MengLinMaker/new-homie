@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs'
 import { localitySchema } from '../index.ts'
 import { readBrotliJson } from '../util.ts'
 import z from 'zod'
-import { stateAbbreviationEnumSchema } from '@service-scrape/lib-db_service_scrape/zod'
+import { stateAbbreviationEnum } from '@service-scrape/lib-db_service_scrape/schema'
 
 /**
  * Separate script to parse schools data - https://asl.acara.edu.au/School-Search
@@ -23,7 +23,7 @@ export const extractAcaraSchools = () => {
                 .array(
                     z.object({
                         City: z.string(),
-                        StateProvince: stateAbbreviationEnumSchema,
+                        StateProvince: stateAbbreviationEnum,
                         PostalCode: z.string().length(4),
                         GridLocation: z.object({
                             Latitude: z.number(),

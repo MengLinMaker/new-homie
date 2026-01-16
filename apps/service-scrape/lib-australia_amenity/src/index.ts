@@ -4,15 +4,15 @@ import _targetLocalities from './resource/target-localities.json' with { type: '
 import type { RemoveTableIds, SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import z from 'zod'
 import { toUpperCaseWords } from './util.ts'
-import { stateAbbreviationEnumSchema } from '@service-scrape/lib-db_service_scrape/zod'
+import { stateAbbreviationEnum } from '@service-scrape/lib-db_service_scrape/schema'
 
 export const localitySchema = z.object({
     suburb_name: z.string().transform(toUpperCaseWords),
-    state_abbreviation: stateAbbreviationEnumSchema,
+    state_abbreviation: stateAbbreviationEnum,
     postcode: z.string().length(4).regex(/^\d+$/),
 })
 
-export interface Locality extends z.output<typeof localitySchema> {}
+export interface Locality extends z.output<typeof localitySchema> { }
 
 export const australiaLocalities = _australiaLocalities as Locality[]
 export const targetLocalities = _targetLocalities as Locality[]
