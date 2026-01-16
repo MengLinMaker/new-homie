@@ -11,14 +11,14 @@ export const router = {
     findLatestSale: os
         .input(localitySchema.partial())
         .route({ method: 'GET', path: `/latestSale` })
-        .output(z.array(latestSaleMv))
+        .output(z.array(latestSaleMv.required()))
         .handler(async ({ input }) => {
-            const result = await sql<z.infer<typeof latestSaleMv>>`
-                SELECT * from latest_sale_mv
+            const result = await sql<Required<z.infer<typeof latestSaleMv>>>`
+                SELECT latest_sale_mv.* from latest_sale_mv
                 LEFT JOIN locality_table ON locality_table_id = locality_table.id
-                WHERE (${input.suburb_name} IS NULL OR suburb_name = ${input.suburb_name})
-                AND (${input.state_abbreviation} IS NULL OR state_abbreviation = ${input.state_abbreviation})
-                AND (${input.postcode} IS NULL OR postcode = ${input.postcode})
+                WHERE (${input.suburb_name === undefined} IS TRUE OR suburb_name = ${input.suburb_name!})
+                AND (${input.state_abbreviation === undefined} IS TRUE OR state_abbreviation = ${input.state_abbreviation!})
+                AND (${input.postcode === undefined} IS TRUE OR postcode = ${input.postcode!})
                 ;`.execute(DB)
             return result.rows
 
@@ -34,14 +34,14 @@ export const router = {
     findLatestRent: os
         .input(localitySchema.partial())
         .route({ method: 'GET', path: `/latestRent` })
-        .output(z.array(latestRentMv))
+        .output(z.array(latestRentMv.required()))
         .handler(async ({ input }) => {
-            const result = await sql<z.infer<typeof latestSaleMv>>`
-                SELECT * from latest_rent_mv
+            const result = await sql<Required<z.infer<typeof latestRentMv>>>`
+                SELECT latest_rent_mv.* from latest_rent_mv
                 LEFT JOIN locality_table ON locality_table_id = locality_table.id
-                WHERE (${input.suburb_name} IS NULL OR suburb_name = ${input.suburb_name})
-                AND (${input.state_abbreviation} IS NULL OR state_abbreviation = ${input.state_abbreviation})
-                AND (${input.postcode} IS NULL OR postcode = ${input.postcode})
+                WHERE (${input.suburb_name === undefined} IS TRUE OR suburb_name = ${input.suburb_name!})
+                AND (${input.state_abbreviation === undefined} IS TRUE OR state_abbreviation = ${input.state_abbreviation!})
+                AND (${input.postcode === undefined} IS TRUE OR postcode = ${input.postcode!})
                 ;`.execute(DB)
             return result.rows
 
