@@ -45,11 +45,11 @@ export interface HomeFeatureTable {
 }
 
 export interface HomeTable {
-    auction_time: Timestamp | null
-    gps: string | null
+    auction_time: Timestamp
+    gps: string
     home_feature_table_id: number
     id: Generated<number>
-    inspection_time: Timestamp | null
+    inspection_time: Timestamp
     land_m2: number
     locality_table_id: number
     street_address: string
@@ -99,7 +99,7 @@ export interface SchoolTable {
     locality_table_id: number
     name: string
     school_feature_table_id: number
-    url: string | null
+    url: string
 }
 
 export interface DB {
