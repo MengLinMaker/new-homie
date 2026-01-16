@@ -134,7 +134,7 @@ describe(testSuiteName, async () => {
                 street_address: '1 Smith street',
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
-                inspection_time: null,
+                inspection_time: new Date(0),
                 auction_time: new Date(0),
             },
             rent_price_table: {
@@ -226,7 +226,7 @@ describe(testSuiteName, async () => {
                 street_address: '1 Smith street',
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
-                inspection_time: null,
+                inspection_time: new Date(0),
                 auction_time: new Date(0),
             },
             sale_price_table: {

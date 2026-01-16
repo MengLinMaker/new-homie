@@ -11,8 +11,8 @@
             "street_address": "3, 5 & 8/36-38 Power Street",
             "gps": "POINT(145.2252 -37.98964)",
             "land_m2": 0,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -27,8 +27,8 @@
             "street_address": "1 & 6/36-38 Power Street",
             "gps": "POINT(145.2252 -37.98964)",
             "land_m2": 0,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -43,8 +43,8 @@
             "street_address": "4 Glenys Court",
             "gps": "POINT(145.21036 -37.997932)",
             "land_m2": 537,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -59,8 +59,8 @@
             "street_address": "98 Keneally Street",
             "gps": "POINT(145.20573 -37.992256)",
             "land_m2": 0,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -76,7 +76,7 @@
             "gps": "POINT(145.2246 -37.975513)",
             "land_m2": 356,
             "inspection_time": "2025-02-01T12:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -92,7 +92,7 @@
             "gps": "POINT(145.20435 -37.990078)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T13:20:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -107,8 +107,8 @@
             "street_address": "1/67 Hammond Road",
             "gps": "POINT(145.20929 -37.997467)",
             "land_m2": 0,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -124,7 +124,7 @@
             "gps": "POINT(145.22481 -37.98289)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T10:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -140,7 +140,7 @@
             "gps": "POINT(145.20639 -37.979576)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T13:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -156,7 +156,7 @@
             "gps": "POINT(145.20195 -37.983047)",
             "land_m2": 0,
             "inspection_time": "2025-02-08T12:40:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -172,7 +172,7 @@
             "gps": "POINT(145.20924 -37.99849)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T13:40:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -204,7 +204,7 @@
             "gps": "POINT(145.21962 -37.984055)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T12:50:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -220,7 +220,7 @@
             "gps": "POINT(145.20573 -37.99162)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T10:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -236,7 +236,7 @@
             "gps": "POINT(145.22523 -37.993183)",
             "land_m2": 220,
             "inspection_time": "2025-02-01T11:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -268,7 +268,7 @@
             "gps": "POINT(145.2041 -37.980503)",
             "land_m2": 213,
             "inspection_time": "2025-02-01T12:30:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -284,7 +284,7 @@
             "gps": "POINT(145.19737 -37.978634)",
             "land_m2": 682,
             "inspection_time": "2025-02-01T10:30:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -315,8 +315,8 @@
             "street_address": "6/80 Cheltenham Road",
             "gps": "POINT(145.20407 -37.989986)",
             "land_m2": 0,
-            "inspection_time": null,
-            "auction_time": null
+            "inspection_time": "1970-01-01T00:00:00.000Z",
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -332,7 +332,7 @@
             "gps": "POINT(145.20837 -37.974426)",
             "land_m2": 0,
             "inspection_time": "2025-02-01T13:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     },
     {
@@ -348,7 +348,7 @@
             "gps": "POINT(145.20299 -37.99115)",
             "land_m2": 338,
             "inspection_time": "2025-02-01T13:00:00Z",
-            "auction_time": null
+            "auction_time": "1970-01-01T00:00:00.000Z"
         }
     }
 ]

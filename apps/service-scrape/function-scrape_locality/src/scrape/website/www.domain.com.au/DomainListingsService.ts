@@ -148,7 +148,9 @@ export class DomainListingsService extends ILoggable {
                 reportInput: true,
             })
         } else {
-            return null
+            return z.iso.datetime().parse(new Date(0).toISOString(), {
+                reportInput: true,
+            })
         }
     }
 
