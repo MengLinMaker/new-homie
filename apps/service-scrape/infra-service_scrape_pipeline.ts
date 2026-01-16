@@ -63,7 +63,7 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         runtimePlatform: { cpuArchitecture: 'ARM64' },
         command: ['node', '/app/index.js'],
         resourceRequirements: [
-            { type: 'VCPU', value: '1' },
+            { type: 'VCPU', value: '0.5' },
             { type: 'MEMORY', value: '2048' },
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
