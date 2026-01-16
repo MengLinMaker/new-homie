@@ -1,3 +1,3 @@
-import { safeqlConfig } from './safeqlConfig'
-import { setupTestPostgisDb } from './setupTestPostgisDb'
+import { safeqlConfig } from './safeqlConfig.ts'
+import { setupTestPostgisDb } from './setupTestPostgisDb.ts'
 export { setupTestPostgisDb, safeqlConfig }
