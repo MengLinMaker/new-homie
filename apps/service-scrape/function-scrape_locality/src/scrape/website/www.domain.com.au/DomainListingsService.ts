@@ -35,8 +35,8 @@ const listingsSchema = z.object({
         price: z.string(),
         address: z.object({
             street: z.string(),
-            lat: z.number().nullish(),
-            lng: z.number().nullish(),
+            lat: z.number(),
+            lng: z.number(),
         }),
         features: z.object({
             beds: z.number().min(1),
