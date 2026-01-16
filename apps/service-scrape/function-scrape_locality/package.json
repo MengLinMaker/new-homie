@@ -6,6 +6,7 @@
         "build": "node esbuild.ts",
         "dev": "node esbuild.ts && docker compose up --build --force-recreate",
         "test:type": "tsc",
+        "test:lint": "biome lint && eslint",
         "test:unit": "vitest run --coverage",
         "test:dev": "vitest --coverage"
     },
