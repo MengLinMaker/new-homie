@@ -247,6 +247,9 @@ importers:
       '@orpc/server':
         specifier: ^1.11.3
         version: 1.11.3(@opentelemetry/api@1.9.0)(ws@8.18.3)
+      '@service-scrape/lib-australia_amenity':
+        specifier: workspace:*
+        version: link:../lib-australia_amenity
       '@service-scrape/lib-db_service_scrape':
         specifier: workspace:*
         version: link:../lib-db_service_scrape

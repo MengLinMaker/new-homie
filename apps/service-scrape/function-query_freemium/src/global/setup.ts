@@ -4,7 +4,6 @@ import {
     type SchemaRead,
 } from '@service-scrape/lib-db_service_scrape'
 import { OpenTelemetry, otelException } from '@observability/lib-opentelemetry'
-import type { Kysely } from 'kysely'
 
 const SERVICE_NAME = 'function-query_premium'
 
@@ -24,8 +23,6 @@ const logLambdaException = (msg: string, args?: object) => {
         msg,
     )
 }
-export const DB = getKyselyPostgresDb<SchemaRead.DB>(DB_SERVICE_SCRAPE) as Pick<
-    Kysely<SchemaRead.DB>,
-    'selectFrom'
->
-if (!DB) throw logLambdaException(`FATAL ${SERVICE_NAME} database connection`)
+const _DB = getKyselyPostgresDb<SchemaRead.DB>(DB_SERVICE_SCRAPE)
+if (!_DB) throw logLambdaException(`FATAL ${SERVICE_NAME} database connection`)
+export const DB = _DB
