@@ -53,10 +53,10 @@ describe('schema.ts', async () => {
             locality_table_id: insertIds.get('locality_table')!,
             home_feature_table_id: insertIds.get('home_feature_table')!,
             street_address: faker.location.streetAddress(),
-            gps: null,
+            gps: createPostgisPointString(0, 0),
             land_m2: faker.number.int({ min: 0, max: 10000 }),
             inspection_time: faker.date.anytime(),
-            auction_time: null,
+            auction_time: new Date(0),
         })
         await insertIntoTable('sale_price_table', {
             home_table_id: insertIds.get('home_table')!,
