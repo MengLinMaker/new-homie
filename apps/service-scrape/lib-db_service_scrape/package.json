@@ -5,7 +5,7 @@
         ".": "./src/index.ts",
         "./dev": "./src/dev/index.ts",
         "./zod": "./src/schema-read-zod.ts",
-        "./schema": "./src/schema-read-zod.ts"
+        "./schema": "./src/schema/index.ts"
     },
     "scripts": {
         "format": "biome format --write",

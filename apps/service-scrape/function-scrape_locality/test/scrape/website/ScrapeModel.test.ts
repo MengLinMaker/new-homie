@@ -6,9 +6,9 @@ import type { Insertable } from 'kysely'
 import {
     createPostgisPointString,
     createPostgisPolygonString,
-    type SchemaWrite,
 } from '@service-scrape/lib-db_service_scrape'
 import { afterEach, beforeEach } from 'node:test'
+import type { LocalityTableInitializer } from '@service-scrape/lib-db_service_scrape/schema'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
@@ -40,7 +40,7 @@ describe(testSuiteName, async () => {
             state_abbreviation: 'VIC',
             postcode: '3000',
             boundary_coordinates,
-        } satisfies Insertable<SchemaWrite.LocalityTable>
+        } satisfies Insertable<LocalityTableInitializer>
         const suburbData = { locality_table }
 
         it.sequential('should not insert same data', async () => {

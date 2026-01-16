@@ -1,5 +1,14 @@
 import { IDatabased } from '../../global/IDatabased'
-import type { RemoveTableIds, SchemaWrite } from '@service-scrape/lib-db_service_scrape'
+import type { RemoveTableIds } from '@service-scrape/lib-db_service_scrape'
+import type {
+    HomeFeatureTableInitializer,
+    HomeTableInitializer,
+    LocalityTableInitializer,
+    RentPriceTableInitializer,
+    SalePriceTableInitializer,
+    SchoolFeatureTableInitializer,
+    SchoolTableInitializer,
+} from '@service-scrape/lib-db_service_scrape/schema'
 import { sql } from 'kysely'
 
 const datesAreOnSameDay = (first: Date, second: Date) =>
@@ -10,7 +19,7 @@ const datesAreOnSameDay = (first: Date, second: Date) =>
 export class ScrapeModel extends IDatabased {
     async tryUpdateLocality(args: {
         suburbData: {
-            locality_table: RemoveTableIds<SchemaWrite.LocalityTable>
+            locality_table: RemoveTableIds<LocalityTableInitializer>
         }
     }) {
         try {
@@ -48,8 +57,8 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSchool(args: {
         schoolData: {
-            school_table: RemoveTableIds<SchemaWrite.SchoolTable>
-            school_feature_table: RemoveTableIds<SchemaWrite.SchoolFeatureTable>
+            school_table: RemoveTableIds<SchoolTableInitializer>
+            school_feature_table: RemoveTableIds<SchoolFeatureTableInitializer>
         }
         localityId: number
     }) {
@@ -123,8 +132,8 @@ export class ScrapeModel extends IDatabased {
 
     private async updateListing(args: {
         listingData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
         }
         localityId: number
     }) {
@@ -198,10 +207,10 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateRentListing(args: {
         rentData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
             rent_price_table: Omit<
-                RemoveTableIds<SchemaWrite.RentPriceTable>,
+                RemoveTableIds<RentPriceTableInitializer>,
                 `${string}_scrape_date`
             >
         }
@@ -287,10 +296,10 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSaleListing(args: {
         saleData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
             sale_price_table: Omit<
-                RemoveTableIds<SchemaWrite.SalePriceTable>,
+                RemoveTableIds<SalePriceTableInitializer>,
                 `${string}_scrape_date`
             >
         }
