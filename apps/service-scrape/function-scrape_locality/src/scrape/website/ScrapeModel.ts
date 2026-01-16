@@ -1,5 +1,14 @@
 import { IDatabased } from '../../global/IDatabased'
-import type { RemoveTableIds, SchemaWrite } from '@service-scrape/lib-db_service_scrape'
+import type { RemoveTableIds } from '@service-scrape/lib-db_service_scrape'
+import type {
+    HomeFeatureTableInitializer,
+    HomeTableInitializer,
+    LocalityTableInitializer,
+    RentPriceTableInitializer,
+    SalePriceTableInitializer,
+    SchoolFeatureTableInitializer,
+    SchoolTableInitializer,
+} from '@service-scrape/lib-db_service_scrape/schema'
 import { sql } from 'kysely'
 
 const datesAreOnSameDay = (first: Date, second: Date) =>
@@ -10,7 +19,7 @@ const datesAreOnSameDay = (first: Date, second: Date) =>
 export class ScrapeModel extends IDatabased {
     async tryUpdateLocality(args: {
         suburbData: {
-            locality_table: RemoveTableIds<SchemaWrite.LocalityTable>
+            locality_table: RemoveTableIds<LocalityTableInitializer>
         }
     }) {
         try {
@@ -48,8 +57,8 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSchool(args: {
         schoolData: {
-            school_table: RemoveTableIds<SchemaWrite.SchoolTable>
-            school_feature_table: RemoveTableIds<SchemaWrite.SchoolFeatureTable>
+            school_table: RemoveTableIds<SchoolTableInitializer>
+            school_feature_table: RemoveTableIds<SchoolFeatureTableInitializer>
         }
         localityId: number
     }) {
@@ -64,11 +73,11 @@ export class ScrapeModel extends IDatabased {
                 special_needs
             )
             VALUES (
-                ${sft.primary}::boolean,
-                ${sft.secondary}::boolean,
-                ${sft.government_sector}::boolean,
-                ${sft.independent}::boolean,
-                ${sft.special_needs}::boolean
+                ${sft.primary},
+                ${sft.secondary},
+                ${sft.government_sector},
+                ${sft.independent},
+                ${sft.special_needs}
             )
             ON CONFLICT (
                 "primary",
@@ -99,8 +108,8 @@ export class ScrapeModel extends IDatabased {
                 ${upsertSchoolFeature.rows[0]!.id},
                 ${args.localityId},
                 ${st.name},
-                ${st.url!},
-                ${st.acara_id}::integer,
+                ${st.url},
+                ${st.acara_id},
                 ${st.gps}
             )
             ON CONFLICT ( acara_id )
@@ -123,8 +132,8 @@ export class ScrapeModel extends IDatabased {
 
     private async updateListing(args: {
         listingData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
         }
         localityId: number
     }) {
@@ -138,11 +147,11 @@ export class ScrapeModel extends IDatabased {
             is_retirement
         )
         VALUES (
-            ${hft.bath_quantity}::integer,
-            ${hft.bed_quantity}::integer,
-            ${hft.car_quantity}::integer,
+            ${hft.bath_quantity},
+            ${hft.bed_quantity},
+            ${hft.car_quantity},
             ${hft.home_type}::home_type_enum,
-            ${hft.is_retirement}::boolean
+            ${hft.is_retirement}
         )
         ON CONFLICT (
             bath_quantity,
@@ -174,10 +183,10 @@ export class ScrapeModel extends IDatabased {
         VALUES (
             ${args.localityId},
             ${ht.gps},
-            ${ht.auction_time as Date | null},
+            ${ht.auction_time},
             ${upsertHomeFeature.rows[0]!.id},
-            ${ht.inspection_time as Date | null},
-            ${ht.land_m2}::integer,
+            ${ht.inspection_time},
+            ${ht.land_m2},
             ${ht.street_address}
         )
         ON CONFLICT (
@@ -198,10 +207,10 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateRentListing(args: {
         rentData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
             rent_price_table: Omit<
-                RemoveTableIds<SchemaWrite.RentPriceTable>,
+                RemoveTableIds<RentPriceTableInitializer>,
                 `${string}_scrape_date`
             >
         }
@@ -220,7 +229,7 @@ export class ScrapeModel extends IDatabased {
             }>`
             SELECT id, last_scrape_date, weekly_rent_aud
             FROM rent_price_table
-            WHERE home_table_id=${home_table.id}::integer
+            WHERE home_table_id=${home_table.id}
             ORDER BY last_scrape_date DESC
             LIMIT 1;`.execute(this.DB)
             const scrapeDateData = getLastRentScrapeData.rows[0]
@@ -237,11 +246,11 @@ export class ScrapeModel extends IDatabased {
                 home_table_id
             )
             VALUES (
-                ${rpt.aud_per_bed}::real,
-                ${rpt.aud_per_land_m2}::real,
+                ${rpt.aud_per_bed},
+                ${rpt.aud_per_land_m2},
                 ${currentTimestamp},
                 ${currentTimestamp},
-                ${rpt.weekly_rent_aud}::integer,
+                ${rpt.weekly_rent_aud},
                 ${home_table.id}
             );`
 
@@ -257,9 +266,9 @@ export class ScrapeModel extends IDatabased {
                 await sql`
                 UPDATE rent_price_table
                 SET
-                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::real, aud_per_bed),
-                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::real, aud_per_land_m2),
-                    weekly_rent_aud = GREATEST(${rpt.weekly_rent_aud}::integer, weekly_rent_aud)
+                    aud_per_bed = GREATEST(${rpt.aud_per_bed}, aud_per_bed),
+                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}, aud_per_land_m2),
+                    weekly_rent_aud = GREATEST(${rpt.weekly_rent_aud}, weekly_rent_aud)
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
                 return 2
@@ -270,7 +279,7 @@ export class ScrapeModel extends IDatabased {
                 // const updateSamePriceRentPriceTable =
                 await sql`
                 UPDATE rent_price_table
-                SET last_scrape_date = ${currentTimestamp}::date
+                SET last_scrape_date = ${currentTimestamp}
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
                 return 3
@@ -287,10 +296,10 @@ export class ScrapeModel extends IDatabased {
 
     async tryUpdateSaleListing(args: {
         saleData: {
-            home_feature_table: RemoveTableIds<SchemaWrite.HomeFeatureTable>
-            home_table: RemoveTableIds<SchemaWrite.HomeTable>
+            home_feature_table: RemoveTableIds<HomeFeatureTableInitializer>
+            home_table: RemoveTableIds<HomeTableInitializer>
             sale_price_table: Omit<
-                RemoveTableIds<SchemaWrite.SalePriceTable>,
+                RemoveTableIds<SalePriceTableInitializer>,
                 `${string}_scrape_date`
             >
         }
@@ -309,7 +318,7 @@ export class ScrapeModel extends IDatabased {
             }>`
             SELECT id, last_scrape_date, higher_price_aud
             FROM sale_price_table
-            WHERE home_table_id=${home_table.id}::integer
+            WHERE home_table_id=${home_table.id}
             ORDER BY last_scrape_date DESC
             LIMIT 1;`.execute(this.DB)
             const scrapeDateData = getLastSaleScrapeData.rows[0]
@@ -326,11 +335,11 @@ export class ScrapeModel extends IDatabased {
                 home_table_id
             )
             VALUES (
-                ${rpt.aud_per_bed}::real,
-                ${rpt.aud_per_land_m2}::real,
+                ${rpt.aud_per_bed},
+                ${rpt.aud_per_land_m2},
                 ${currentTimestamp},
                 ${currentTimestamp},
-                ${rpt.higher_price_aud}::integer,
+                ${rpt.higher_price_aud},
                 ${home_table.id}
             );`
 
@@ -346,9 +355,9 @@ export class ScrapeModel extends IDatabased {
                 await sql`
                 UPDATE sale_price_table
                 SET
-                    aud_per_bed = GREATEST(${rpt.aud_per_bed}::real, aud_per_bed),
-                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}::real, aud_per_land_m2),
-                    higher_price_aud = GREATEST(${rpt.higher_price_aud}::integer, higher_price_aud)
+                    aud_per_bed = GREATEST(${rpt.aud_per_bed}, aud_per_bed),
+                    aud_per_land_m2 = GREATEST(${rpt.aud_per_land_m2}, aud_per_land_m2),
+                    higher_price_aud = GREATEST(${rpt.higher_price_aud}, higher_price_aud)
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
                 return 2
@@ -359,7 +368,7 @@ export class ScrapeModel extends IDatabased {
                 // const updateSamePriceSalePriceTable =
                 await sql`
                 UPDATE sale_price_table
-                SET last_scrape_date = ${currentTimestamp}::date
+                SET last_scrape_date = ${currentTimestamp}
                 WHERE id = ${scrapeDateData.id}
                 ;`.execute(this.DB)
                 return 3

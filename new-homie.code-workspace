@@ -4,6 +4,12 @@
             "path": "./"
         },
         {
+            "path": "./apps/frontend"
+        },
+        {
+            "path": "./apps/observability"
+        },
+        {
             "path": "./apps/service-scrape"
         }
     ]

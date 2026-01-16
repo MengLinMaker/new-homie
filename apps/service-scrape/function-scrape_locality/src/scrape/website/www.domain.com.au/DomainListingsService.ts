@@ -1,33 +1,16 @@
 import { z } from 'zod'
 import {
     type RemoveTableIds,
-    type SchemaWrite,
     tryCreatePostgisPointString,
 } from '@service-scrape/lib-db_service_scrape'
+import {
+    type HomeFeatureTableInitializer,
+    type HomeTableInitializer,
+    homeTypeEnum,
+    type RentPriceTableInitializer,
+    type SalePriceTableInitializer,
+} from '@service-scrape/lib-db_service_scrape/schema'
 import { ILoggable } from '@observability/lib-opentelemetry'
-
-const HomeTypeEnum: SchemaWrite.HomeTypeEnum[] = [
-    'Apartment',
-    'ApartmentUnitFlat',
-    'BlockOfUnits',
-    'DevelopmentSite',
-    'Duplex',
-    'FreeStanding',
-    'House',
-    'Land',
-    'NewApartments',
-    'NewHomeDesigns',
-    'NewHouseLand',
-    'NewLand',
-    'PentHouse',
-    'Retirement',
-    'SemiDetached',
-    'Studio',
-    'Terrace',
-    'Townhouse',
-    'VacantLand',
-    'Villa',
-]
 
 const listingsSchema = z.object({
     listingModel: z.object({
@@ -35,14 +18,14 @@ const listingsSchema = z.object({
         price: z.string(),
         address: z.object({
             street: z.string(),
-            lat: z.number().nullish(),
-            lng: z.number().nullish(),
+            lat: z.number(),
+            lng: z.number(),
         }),
         features: z.object({
             beds: z.number().min(1),
             baths: z.number().catch(0),
             parking: z.number().catch(0),
-            propertyType: z.enum(HomeTypeEnum),
+            propertyType: homeTypeEnum,
             isRural: z.boolean(),
             landSize: z.number().catch(0),
             isRetirement: z.boolean(),
@@ -148,7 +131,9 @@ export class DomainListingsService extends ILoggable {
                 reportInput: true,
             })
         } else {
-            return null
+            return z.iso.datetime().parse(new Date(0).toISOString(), {
+                reportInput: true,
+            })
         }
     }
 
@@ -198,14 +183,14 @@ export class DomainListingsService extends ILoggable {
                     car_quantity: features.parking,
                     home_type: features.propertyType,
                     is_retirement: features.isRetirement,
-                } satisfies RemoveTableIds<SchemaWrite.HomeFeatureTable>,
+                } satisfies RemoveTableIds<HomeFeatureTableInitializer>,
                 home_table: {
                     street_address: address.street,
                     gps: tryCreatePostgisPointString(address.lng, address.lat),
                     land_m2: landSize,
                     inspection_time: this.parseDatetime(listingModel.inspection.openTime) as never,
                     auction_time: this.parseDatetime(listingModel.auction) as never,
-                } satisfies RemoveTableIds<SchemaWrite.HomeTable>,
+                } satisfies RemoveTableIds<HomeTableInitializer>,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformListing, args, e)
@@ -238,7 +223,7 @@ export class DomainListingsService extends ILoggable {
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
                 } satisfies Omit<
-                    RemoveTableIds<SchemaWrite.SalePriceTable>,
+                    RemoveTableIds<SalePriceTableInitializer>,
                     `${string}_scrape_date`
                 >,
             }
@@ -273,7 +258,7 @@ export class DomainListingsService extends ILoggable {
                     aud_per_bed: beds > 0 ? price / beds : 0,
                     aud_per_land_m2: land > 0 ? price / land : 0,
                 } satisfies Omit<
-                    RemoveTableIds<SchemaWrite.RentPriceTable>,
+                    RemoveTableIds<RentPriceTableInitializer>,
                     `${string}_scrape_date`
                 >,
             }

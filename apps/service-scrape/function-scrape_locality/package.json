@@ -6,21 +6,16 @@
         "build": "node esbuild.ts",
         "dev": "node esbuild.ts && docker compose up --build --force-recreate",
         "test:type": "tsc",
+        "test:lint": "biome lint && eslint",
         "test:unit": "vitest run --coverage",
-        "test:dev": "vitest --coverage",
-        "test:sql": "postgres-language-server check --changed",
-        "watch:gen": "npx pgtyped -w --config node_modules/@service-scrape/lib-db_service_scrape/src/dev/pgtyped.json"
+        "test:dev": "vitest --coverage"
     },
     "devDependencies": {
         "@pgtyped/cli": "^2.4.3",
-        "@ts-safeql/eslint-plugin": "^4.1.0",
         "@types/async-retry": "^1.4.9",
         "@types/pg": "8.15.5",
         "chromium-bidi": "^8.0.0",
-        "esbuild": "^0.27.0",
-        "eslint": "^9.39.2",
-        "libpg-query": "^17.7.3",
-        "typescript-eslint": "^8.52.0"
+        "esbuild": "^0.27.0"
     },
     "dependencies": {
         "@observability/lib-opentelemetry": "workspace:*",

@@ -6,14 +6,16 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "build": "node api/openapi.ts && biome format --write",
-        "test:type": "tsc"
+        "build": "tsx api/openapi.ts && biome format --write",
+        "test:type": "tsc",
+        "test:lint": "biome lint && eslint"
     },
     "dependencies": {
         "@observability/lib-opentelemetry": "workspace:*",
         "@orpc/openapi": "^1.11.3",
         "@orpc/server": "^1.11.3",
         "@service-scrape/lib-db_service_scrape": "workspace:*",
+        "@service-scrape/lib-australia_amenity": "workspace:*",
         "hono": "^4.9.12",
         "kysely": "0.28.4",
         "zod": "4.0.17"

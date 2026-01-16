@@ -51,9 +51,9 @@ export interface operations {
     findLatestSale: {
         parameters: {
             query?: {
-                postcode?: string
-                state_abbreviation?: 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
                 suburb_name?: string
+                state_abbreviation?: 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
+                postcode?: string
             }
             header?: never
             path?: never
@@ -68,60 +68,46 @@ export interface operations {
                 }
                 content: {
                     'application/json': {
-                        aud_per_bed: number
-                        aud_per_land_m2: number
-                        /** Format: date-time */
-                        first_scrape_date: string
-                        higher_price_aud: number
-                        home_table_id: number
-                        /** Format: date-time */
-                        last_scrape_date: string
+                        first_scrape_date: string | null
+                        last_scrape_date: string | null
+                        higher_price_aud: number | null
+                        aud_per_bed: number | null
+                        aud_per_land_m2: number | null
                         auction_time: string | null
-                        gps: string | null
-                        home_feature_table_id: number
+                        longitude: number | null
+                        latitude: number | null
                         inspection_time: string | null
-                        land_m2: number
-                        locality_table_id: number
-                        street_address: string
-                        bath_quantity: number
-                        bed_quantity: number
-                        car_quantity: number
-                        /** @enum {unknown} */
+                        land_m2: number | null
+                        locality_table_id: number | null
+                        street_address: string | null
+                        bed_quantity: number | null
+                        bath_quantity: number | null
+                        car_quantity: number | null
                         home_type:
-                            | 'Apartment'
-                            | 'ApartmentUnitFlat'
-                            | 'BlockOfUnits'
-                            | 'DevelopmentSite'
-                            | 'Duplex'
-                            | 'FreeStanding'
-                            | 'House'
-                            | 'Land'
-                            | 'NewApartments'
-                            | 'NewHomeDesigns'
-                            | 'NewHouseLand'
-                            | 'NewLand'
-                            | 'PentHouse'
-                            | 'Retirement'
-                            | 'SemiDetached'
-                            | 'Studio'
-                            | 'Terrace'
-                            | 'Townhouse'
-                            | 'VacantLand'
-                            | 'Villa'
-                        is_retirement: boolean
-                        boundary_coordinates: string
-                        postcode: string
-                        /** @enum {unknown} */
-                        state_abbreviation:
-                            | 'ACT'
-                            | 'NSW'
-                            | 'NT'
-                            | 'QLD'
-                            | 'SA'
-                            | 'TAS'
-                            | 'VIC'
-                            | 'WA'
-                        suburb_name: string
+                            | (
+                                  | 'Apartment'
+                                  | 'ApartmentUnitFlat'
+                                  | 'BlockOfUnits'
+                                  | 'DevelopmentSite'
+                                  | 'Duplex'
+                                  | 'FreeStanding'
+                                  | 'House'
+                                  | 'Land'
+                                  | 'NewApartments'
+                                  | 'NewHomeDesigns'
+                                  | 'NewHouseLand'
+                                  | 'NewLand'
+                                  | 'PentHouse'
+                                  | 'Retirement'
+                                  | 'SemiDetached'
+                                  | 'Studio'
+                                  | 'Terrace'
+                                  | 'Townhouse'
+                                  | 'VacantLand'
+                                  | 'Villa'
+                              )
+                            | null
+                        is_retirement: boolean | null
                     }[]
                 }
             }
@@ -130,9 +116,9 @@ export interface operations {
     findLatestRent: {
         parameters: {
             query?: {
-                postcode?: string
-                state_abbreviation?: 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
                 suburb_name?: string
+                state_abbreviation?: 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA'
+                postcode?: string
             }
             header?: never
             path?: never
@@ -147,60 +133,46 @@ export interface operations {
                 }
                 content: {
                     'application/json': {
-                        aud_per_bed: number
-                        aud_per_land_m2: number
-                        /** Format: date-time */
-                        first_scrape_date: string
-                        weekly_rent_aud: number
-                        home_table_id: number
-                        /** Format: date-time */
-                        last_scrape_date: string
+                        first_scrape_date: string | null
+                        last_scrape_date: string | null
+                        weekly_rent_aud: number | null
+                        aud_per_bed: number | null
+                        aud_per_land_m2: number | null
                         auction_time: string | null
-                        gps: string | null
-                        home_feature_table_id: number
+                        longitude: number | null
+                        latitude: number | null
                         inspection_time: string | null
-                        land_m2: number
-                        locality_table_id: number
-                        street_address: string
-                        bath_quantity: number
-                        bed_quantity: number
-                        car_quantity: number
-                        /** @enum {unknown} */
+                        land_m2: number | null
+                        locality_table_id: number | null
+                        street_address: string | null
+                        bed_quantity: number | null
+                        bath_quantity: number | null
+                        car_quantity: number | null
                         home_type:
-                            | 'Apartment'
-                            | 'ApartmentUnitFlat'
-                            | 'BlockOfUnits'
-                            | 'DevelopmentSite'
-                            | 'Duplex'
-                            | 'FreeStanding'
-                            | 'House'
-                            | 'Land'
-                            | 'NewApartments'
-                            | 'NewHomeDesigns'
-                            | 'NewHouseLand'
-                            | 'NewLand'
-                            | 'PentHouse'
-                            | 'Retirement'
-                            | 'SemiDetached'
-                            | 'Studio'
-                            | 'Terrace'
-                            | 'Townhouse'
-                            | 'VacantLand'
-                            | 'Villa'
-                        is_retirement: boolean
-                        boundary_coordinates: string
-                        postcode: string
-                        /** @enum {unknown} */
-                        state_abbreviation:
-                            | 'ACT'
-                            | 'NSW'
-                            | 'NT'
-                            | 'QLD'
-                            | 'SA'
-                            | 'TAS'
-                            | 'VIC'
-                            | 'WA'
-                        suburb_name: string
+                            | (
+                                  | 'Apartment'
+                                  | 'ApartmentUnitFlat'
+                                  | 'BlockOfUnits'
+                                  | 'DevelopmentSite'
+                                  | 'Duplex'
+                                  | 'FreeStanding'
+                                  | 'House'
+                                  | 'Land'
+                                  | 'NewApartments'
+                                  | 'NewHomeDesigns'
+                                  | 'NewHouseLand'
+                                  | 'NewLand'
+                                  | 'PentHouse'
+                                  | 'Retirement'
+                                  | 'SemiDetached'
+                                  | 'Studio'
+                                  | 'Terrace'
+                                  | 'Townhouse'
+                                  | 'VacantLand'
+                                  | 'Villa'
+                              )
+                            | null
+                        is_retirement: boolean | null
                     }[]
                 }
             }

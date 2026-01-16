@@ -6,9 +6,9 @@ import type { Insertable } from 'kysely'
 import {
     createPostgisPointString,
     createPostgisPolygonString,
-    type SchemaWrite,
 } from '@service-scrape/lib-db_service_scrape'
 import { afterEach, beforeEach } from 'node:test'
+import type { LocalityTableInitializer } from '@service-scrape/lib-db_service_scrape/schema'
 
 const testSuiteName = suiteNameFromFileName(import.meta.filename)
 
@@ -40,7 +40,7 @@ describe(testSuiteName, async () => {
             state_abbreviation: 'VIC',
             postcode: '3000',
             boundary_coordinates,
-        } satisfies Insertable<SchemaWrite.LocalityTable>
+        } satisfies Insertable<LocalityTableInitializer>
         const suburbData = { locality_table }
 
         it.sequential('should not insert same data', async () => {
@@ -134,7 +134,7 @@ describe(testSuiteName, async () => {
                 street_address: '1 Smith street',
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
-                inspection_time: null,
+                inspection_time: new Date(0),
                 auction_time: new Date(0),
             },
             rent_price_table: {
@@ -226,7 +226,7 @@ describe(testSuiteName, async () => {
                 street_address: '1 Smith street',
                 gps: createPostgisPointString(0, 0),
                 land_m2: 1,
-                inspection_time: null,
+                inspection_time: new Date(0),
                 auction_time: new Date(0),
             },
             sale_price_table: {

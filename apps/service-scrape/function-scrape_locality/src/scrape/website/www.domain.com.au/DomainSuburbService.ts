@@ -1,30 +1,22 @@
 import { localityArgs, urlArgs } from '../../global'
-import { createPostgisPolygonString, type SchemaWrite } from '@service-scrape/lib-db_service_scrape'
+import { createPostgisPolygonString } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
-import type { Updateable } from 'kysely'
 import { simplify, polygon } from '@turf/turf'
 import { ILoggable } from '@observability/lib-opentelemetry'
+import {
+    type LocalityTableInitializer,
+    stateAbbreviationEnum,
+} from '@service-scrape/lib-db_service_scrape/schema'
 
 const _boundaryGeoJsonSchema = z.object({
     type: z.literal('Polygon'),
     coordinates: z.array(z.array(z.array(z.number()).length(2))),
 })
 
-const StateAbbreviationEnum: SchemaWrite.StateAbbreviationEnum[] = [
-    'ACT',
-    'NSW',
-    'NT',
-    'QLD',
-    'SA',
-    'TAS',
-    'VIC',
-    'WA',
-]
-
 const _rawSuburbSchema = z.object({
     suburb: z.object({
         name: z.string(),
-        state: z.enum(StateAbbreviationEnum),
+        state: stateAbbreviationEnum,
         postcode: z.string(),
         // statistics: z.object({
         //     marriedPercentage: z.number(),
@@ -175,7 +167,7 @@ export class DomainSuburbService extends ILoggable {
                     suburb_name: args.rawSuburbData.suburb.name,
                     state_abbreviation: args.rawSuburbData.suburb.state,
                     boundary_coordinates: boundaryCoord,
-                } satisfies Updateable<SchemaWrite.LocalityTable>,
+                } satisfies LocalityTableInitializer,
             }
         } catch (e) {
             this.logExceptionArgs('error', this.tryTransformProfile, args, e)

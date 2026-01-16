@@ -17,12 +17,13 @@ export const Route = createFileRoute('/app/_pathlessLayout/')({
 
 export const $api = createClient(
     createFetchClient<paths>({
+        // @ts-ignore
         baseUrl: import.meta.env.VITE_API_URL ?? '',
     }),
 )
 
 function RouteComponent() {
-    const { data, error, isLoading } = $api.useQuery(
+    const { data, error } = $api.useQuery(
         'get',
         '/service-scrape/freemium/latestSale',
         {
@@ -55,7 +56,6 @@ function RouteComponent() {
                 </div>
             </header>
             <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                VITE_API_URL: "{import.meta.env.VITE_API_URL}"{isLoading && <div>Loading...</div>}
                 {error && <div>Error: {JSON.stringify(error)}</div>}
                 {data && (
                     <div>

@@ -37,7 +37,7 @@ export function AppSidebarContent({
                         <Collapsible
                             key={item.title}
                             asChild
-                            defaultOpen={item.isActive}
+                            defaultOpen={item.isActive!}
                             className="group/collapsible"
                         >
                             <SidebarMenuItem>
@@ -52,7 +52,7 @@ export function AppSidebarContent({
                                     <SidebarMenuSub className="border-none">
                                         <Collection
                                             key="AppSidebarContentDashboards-root"
-                                            items={item.items}
+                                            items={item.items!}
                                         >
                                             {(subItem) => (
                                                 <SidebarMenuSubItem key={subItem.title}>

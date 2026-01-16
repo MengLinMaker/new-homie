@@ -1,15 +1,15 @@
 {
     "openapi": "3.0.3",
-    "info": { "title": "function-query_freemium", "version": "40ef568" },
+    "info": { "title": "function-query_freemium", "version": "3b7ab40" },
     "paths": {
         "/service-scrape/freemium/latestSale": {
             "get": {
                 "operationId": "findLatestSale",
                 "parameters": [
                     {
-                        "name": "postcode",
+                        "name": "suburb_name",
                         "in": "query",
-                        "schema": { "type": "string", "minLength": 4, "maxLength": 4 },
+                        "schema": { "type": "string" },
                         "allowEmptyValue": true,
                         "allowReserved": true
                     },
@@ -23,9 +23,14 @@
                         "allowReserved": true
                     },
                     {
-                        "name": "suburb_name",
+                        "name": "postcode",
                         "in": "query",
-                        "schema": { "type": "string" },
+                        "schema": {
+                            "type": "string",
+                            "minLength": 4,
+                            "maxLength": 4,
+                            "pattern": "^\\d+$"
+                        },
                         "allowEmptyValue": true,
                         "allowReserved": true
                     }
@@ -40,19 +45,34 @@
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "aud_per_bed": { "type": "number" },
-                                            "aud_per_land_m2": { "type": "number" },
                                             "first_scrape_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "x-native-type": "date"
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "x-native-type": "date"
+                                                    },
+                                                    { "type": "null" }
+                                                ]
                                             },
-                                            "higher_price_aud": { "type": "number" },
-                                            "home_table_id": { "type": "number" },
                                             "last_scrape_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "x-native-type": "date"
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "x-native-type": "date"
+                                                    },
+                                                    { "type": "null" }
+                                                ]
+                                            },
+                                            "higher_price_aud": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "aud_per_bed": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "aud_per_land_m2": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
                                             },
                                             "auction_time": {
                                                 "anyOf": [
@@ -64,10 +84,12 @@
                                                     { "type": "null" }
                                                 ]
                                             },
-                                            "gps": {
-                                                "anyOf": [{ "type": "string" }, { "type": "null" }]
+                                            "longitude": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
                                             },
-                                            "home_feature_table_id": { "type": "number" },
+                                            "latitude": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
                                             "inspection_time": {
                                                 "anyOf": [
                                                     {
@@ -78,76 +100,75 @@
                                                     { "type": "null" }
                                                 ]
                                             },
-                                            "land_m2": { "type": "number" },
-                                            "locality_table_id": { "type": "number" },
-                                            "street_address": { "type": "string" },
-                                            "bath_quantity": { "type": "number" },
-                                            "bed_quantity": { "type": "number" },
-                                            "car_quantity": { "type": "number" },
+                                            "land_m2": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "locality_table_id": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "street_address": {
+                                                "anyOf": [{ "type": "string" }, { "type": "null" }]
+                                            },
+                                            "bed_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "bath_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "car_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
                                             "home_type": {
-                                                "enum": [
-                                                    "Apartment",
-                                                    "ApartmentUnitFlat",
-                                                    "BlockOfUnits",
-                                                    "DevelopmentSite",
-                                                    "Duplex",
-                                                    "FreeStanding",
-                                                    "House",
-                                                    "Land",
-                                                    "NewApartments",
-                                                    "NewHomeDesigns",
-                                                    "NewHouseLand",
-                                                    "NewLand",
-                                                    "PentHouse",
-                                                    "Retirement",
-                                                    "SemiDetached",
-                                                    "Studio",
-                                                    "Terrace",
-                                                    "Townhouse",
-                                                    "VacantLand",
-                                                    "Villa"
+                                                "anyOf": [
+                                                    {
+                                                        "enum": [
+                                                            "Apartment",
+                                                            "ApartmentUnitFlat",
+                                                            "BlockOfUnits",
+                                                            "DevelopmentSite",
+                                                            "Duplex",
+                                                            "FreeStanding",
+                                                            "House",
+                                                            "Land",
+                                                            "NewApartments",
+                                                            "NewHomeDesigns",
+                                                            "NewHouseLand",
+                                                            "NewLand",
+                                                            "PentHouse",
+                                                            "Retirement",
+                                                            "SemiDetached",
+                                                            "Studio",
+                                                            "Terrace",
+                                                            "Townhouse",
+                                                            "VacantLand",
+                                                            "Villa"
+                                                        ]
+                                                    },
+                                                    { "type": "null" }
                                                 ]
                                             },
-                                            "is_retirement": { "type": "boolean" },
-                                            "boundary_coordinates": { "type": "string" },
-                                            "postcode": { "type": "string" },
-                                            "state_abbreviation": {
-                                                "enum": [
-                                                    "ACT",
-                                                    "NSW",
-                                                    "NT",
-                                                    "QLD",
-                                                    "SA",
-                                                    "TAS",
-                                                    "VIC",
-                                                    "WA"
-                                                ]
-                                            },
-                                            "suburb_name": { "type": "string" }
+                                            "is_retirement": {
+                                                "anyOf": [{ "type": "boolean" }, { "type": "null" }]
+                                            }
                                         },
                                         "required": [
+                                            "first_scrape_date",
+                                            "last_scrape_date",
+                                            "higher_price_aud",
                                             "aud_per_bed",
                                             "aud_per_land_m2",
-                                            "first_scrape_date",
-                                            "higher_price_aud",
-                                            "home_table_id",
-                                            "last_scrape_date",
                                             "auction_time",
-                                            "gps",
-                                            "home_feature_table_id",
+                                            "longitude",
+                                            "latitude",
                                             "inspection_time",
                                             "land_m2",
                                             "locality_table_id",
                                             "street_address",
-                                            "bath_quantity",
                                             "bed_quantity",
+                                            "bath_quantity",
                                             "car_quantity",
                                             "home_type",
-                                            "is_retirement",
-                                            "boundary_coordinates",
-                                            "postcode",
-                                            "state_abbreviation",
-                                            "suburb_name"
+                                            "is_retirement"
                                         ]
                                     }
                                 }
@@ -162,9 +183,9 @@
                 "operationId": "findLatestRent",
                 "parameters": [
                     {
-                        "name": "postcode",
+                        "name": "suburb_name",
                         "in": "query",
-                        "schema": { "type": "string", "minLength": 4, "maxLength": 4 },
+                        "schema": { "type": "string" },
                         "allowEmptyValue": true,
                         "allowReserved": true
                     },
@@ -178,9 +199,14 @@
                         "allowReserved": true
                     },
                     {
-                        "name": "suburb_name",
+                        "name": "postcode",
                         "in": "query",
-                        "schema": { "type": "string" },
+                        "schema": {
+                            "type": "string",
+                            "minLength": 4,
+                            "maxLength": 4,
+                            "pattern": "^\\d+$"
+                        },
                         "allowEmptyValue": true,
                         "allowReserved": true
                     }
@@ -195,19 +221,34 @@
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "aud_per_bed": { "type": "number" },
-                                            "aud_per_land_m2": { "type": "number" },
                                             "first_scrape_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "x-native-type": "date"
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "x-native-type": "date"
+                                                    },
+                                                    { "type": "null" }
+                                                ]
                                             },
-                                            "weekly_rent_aud": { "type": "number" },
-                                            "home_table_id": { "type": "number" },
                                             "last_scrape_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "x-native-type": "date"
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "x-native-type": "date"
+                                                    },
+                                                    { "type": "null" }
+                                                ]
+                                            },
+                                            "weekly_rent_aud": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "aud_per_bed": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "aud_per_land_m2": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
                                             },
                                             "auction_time": {
                                                 "anyOf": [
@@ -219,10 +260,12 @@
                                                     { "type": "null" }
                                                 ]
                                             },
-                                            "gps": {
-                                                "anyOf": [{ "type": "string" }, { "type": "null" }]
+                                            "longitude": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
                                             },
-                                            "home_feature_table_id": { "type": "number" },
+                                            "latitude": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
                                             "inspection_time": {
                                                 "anyOf": [
                                                     {
@@ -233,76 +276,75 @@
                                                     { "type": "null" }
                                                 ]
                                             },
-                                            "land_m2": { "type": "number" },
-                                            "locality_table_id": { "type": "number" },
-                                            "street_address": { "type": "string" },
-                                            "bath_quantity": { "type": "number" },
-                                            "bed_quantity": { "type": "number" },
-                                            "car_quantity": { "type": "number" },
+                                            "land_m2": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "locality_table_id": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "street_address": {
+                                                "anyOf": [{ "type": "string" }, { "type": "null" }]
+                                            },
+                                            "bed_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "bath_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
+                                            "car_quantity": {
+                                                "anyOf": [{ "type": "number" }, { "type": "null" }]
+                                            },
                                             "home_type": {
-                                                "enum": [
-                                                    "Apartment",
-                                                    "ApartmentUnitFlat",
-                                                    "BlockOfUnits",
-                                                    "DevelopmentSite",
-                                                    "Duplex",
-                                                    "FreeStanding",
-                                                    "House",
-                                                    "Land",
-                                                    "NewApartments",
-                                                    "NewHomeDesigns",
-                                                    "NewHouseLand",
-                                                    "NewLand",
-                                                    "PentHouse",
-                                                    "Retirement",
-                                                    "SemiDetached",
-                                                    "Studio",
-                                                    "Terrace",
-                                                    "Townhouse",
-                                                    "VacantLand",
-                                                    "Villa"
+                                                "anyOf": [
+                                                    {
+                                                        "enum": [
+                                                            "Apartment",
+                                                            "ApartmentUnitFlat",
+                                                            "BlockOfUnits",
+                                                            "DevelopmentSite",
+                                                            "Duplex",
+                                                            "FreeStanding",
+                                                            "House",
+                                                            "Land",
+                                                            "NewApartments",
+                                                            "NewHomeDesigns",
+                                                            "NewHouseLand",
+                                                            "NewLand",
+                                                            "PentHouse",
+                                                            "Retirement",
+                                                            "SemiDetached",
+                                                            "Studio",
+                                                            "Terrace",
+                                                            "Townhouse",
+                                                            "VacantLand",
+                                                            "Villa"
+                                                        ]
+                                                    },
+                                                    { "type": "null" }
                                                 ]
                                             },
-                                            "is_retirement": { "type": "boolean" },
-                                            "boundary_coordinates": { "type": "string" },
-                                            "postcode": { "type": "string" },
-                                            "state_abbreviation": {
-                                                "enum": [
-                                                    "ACT",
-                                                    "NSW",
-                                                    "NT",
-                                                    "QLD",
-                                                    "SA",
-                                                    "TAS",
-                                                    "VIC",
-                                                    "WA"
-                                                ]
-                                            },
-                                            "suburb_name": { "type": "string" }
+                                            "is_retirement": {
+                                                "anyOf": [{ "type": "boolean" }, { "type": "null" }]
+                                            }
                                         },
                                         "required": [
+                                            "first_scrape_date",
+                                            "last_scrape_date",
+                                            "weekly_rent_aud",
                                             "aud_per_bed",
                                             "aud_per_land_m2",
-                                            "first_scrape_date",
-                                            "weekly_rent_aud",
-                                            "home_table_id",
-                                            "last_scrape_date",
                                             "auction_time",
-                                            "gps",
-                                            "home_feature_table_id",
+                                            "longitude",
+                                            "latitude",
                                             "inspection_time",
                                             "land_m2",
                                             "locality_table_id",
                                             "street_address",
-                                            "bath_quantity",
                                             "bed_quantity",
+                                            "bath_quantity",
                                             "car_quantity",
                                             "home_type",
-                                            "is_retirement",
-                                            "boundary_coordinates",
-                                            "postcode",
-                                            "state_abbreviation",
-                                            "suburb_name"
+                                            "is_retirement"
                                         ]
                                     }
                                 }
