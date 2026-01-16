@@ -59,4 +59,4 @@ export const latestSaleMv = z.object({
     car_quantity: z.number().nullable(),
     home_type: homeTypeEnum.nullable(),
     is_retirement: z.boolean().nullable(),
-}) as unknown as z.Schema<LatestSaleMv>
+})

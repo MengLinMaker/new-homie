@@ -56,7 +56,7 @@ export interface SalePriceTableMutator {
     aud_per_land_m2?: number
 }
 
-export const salePriceTableId = z.number() as unknown as z.Schema<SalePriceTableId>
+export const salePriceTableId = z.number().transform((value) => value as SalePriceTableId)
 
 export const salePriceTable = z.object({
     id: salePriceTableId,
@@ -66,7 +66,7 @@ export const salePriceTable = z.object({
     higher_price_aud: z.number(),
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
-}) as unknown as z.Schema<SalePriceTable>
+})
 
 export const salePriceTableInitializer = z.object({
     id: salePriceTableId.optional(),
@@ -76,7 +76,7 @@ export const salePriceTableInitializer = z.object({
     higher_price_aud: z.number(),
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
-}) as unknown as z.Schema<SalePriceTableInitializer>
+})
 
 export const salePriceTableMutator = z.object({
     id: salePriceTableId.optional(),
@@ -86,4 +86,4 @@ export const salePriceTableMutator = z.object({
     higher_price_aud: z.number().optional(),
     aud_per_bed: z.number().optional(),
     aud_per_land_m2: z.number().optional(),
-}) as unknown as z.Schema<SalePriceTableMutator>
+})

@@ -52,7 +52,7 @@ export interface HomeFeatureTableMutator {
     is_retirement?: boolean
 }
 
-export const homeFeatureTableId = z.number() as unknown as z.Schema<HomeFeatureTableId>
+export const homeFeatureTableId = z.number().transform((value) => value as HomeFeatureTableId)
 
 export const homeFeatureTable = z.object({
     id: homeFeatureTableId,
@@ -61,7 +61,7 @@ export const homeFeatureTable = z.object({
     car_quantity: z.number(),
     home_type: homeTypeEnum,
     is_retirement: z.boolean(),
-}) as unknown as z.Schema<HomeFeatureTable>
+})
 
 export const homeFeatureTableInitializer = z.object({
     id: homeFeatureTableId.optional(),
@@ -70,7 +70,7 @@ export const homeFeatureTableInitializer = z.object({
     car_quantity: z.number(),
     home_type: homeTypeEnum,
     is_retirement: z.boolean(),
-}) as unknown as z.Schema<HomeFeatureTableInitializer>
+})
 
 export const homeFeatureTableMutator = z.object({
     id: homeFeatureTableId.optional(),
@@ -79,4 +79,4 @@ export const homeFeatureTableMutator = z.object({
     car_quantity: z.number().optional(),
     home_type: homeTypeEnum.optional(),
     is_retirement: z.boolean().optional(),
-}) as unknown as z.Schema<HomeFeatureTableMutator>
+})

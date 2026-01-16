@@ -56,7 +56,7 @@ export interface RentPriceTableMutator {
     aud_per_land_m2?: number
 }
 
-export const rentPriceTableId = z.number() as unknown as z.Schema<RentPriceTableId>
+export const rentPriceTableId = z.number().transform((value) => value as RentPriceTableId)
 
 export const rentPriceTable = z.object({
     id: rentPriceTableId,
@@ -66,7 +66,7 @@ export const rentPriceTable = z.object({
     weekly_rent_aud: z.number(),
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
-}) as unknown as z.Schema<RentPriceTable>
+})
 
 export const rentPriceTableInitializer = z.object({
     id: rentPriceTableId.optional(),
@@ -76,7 +76,7 @@ export const rentPriceTableInitializer = z.object({
     weekly_rent_aud: z.number(),
     aud_per_bed: z.number(),
     aud_per_land_m2: z.number(),
-}) as unknown as z.Schema<RentPriceTableInitializer>
+})
 
 export const rentPriceTableMutator = z.object({
     id: rentPriceTableId.optional(),
@@ -86,4 +86,4 @@ export const rentPriceTableMutator = z.object({
     weekly_rent_aud: z.number().optional(),
     aud_per_bed: z.number().optional(),
     aud_per_land_m2: z.number().optional(),
-}) as unknown as z.Schema<RentPriceTableMutator>
+})

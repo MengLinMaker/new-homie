@@ -49,7 +49,7 @@ export interface LocalityTableMutator {
     boundary_coordinates?: string
 }
 
-export const localityTableId = z.number() as unknown as z.Schema<LocalityTableId>
+export const localityTableId = z.number().transform((value) => value as LocalityTableId)
 
 export const localityTable = z.object({
     id: localityTableId,
@@ -57,7 +57,7 @@ export const localityTable = z.object({
     postcode: z.string(),
     state_abbreviation: stateAbbreviationEnum,
     boundary_coordinates: z.string(),
-}) as unknown as z.Schema<LocalityTable>
+})
 
 export const localityTableInitializer = z.object({
     id: localityTableId.optional(),
@@ -65,7 +65,7 @@ export const localityTableInitializer = z.object({
     postcode: z.string(),
     state_abbreviation: stateAbbreviationEnum,
     boundary_coordinates: z.string(),
-}) as unknown as z.Schema<LocalityTableInitializer>
+})
 
 export const localityTableMutator = z.object({
     id: localityTableId.optional(),
@@ -73,4 +73,4 @@ export const localityTableMutator = z.object({
     postcode: z.string().optional(),
     state_abbreviation: stateAbbreviationEnum.optional(),
     boundary_coordinates: z.string().optional(),
-}) as unknown as z.Schema<LocalityTableMutator>
+})

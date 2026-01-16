@@ -47,7 +47,7 @@ export interface SchoolFeatureTableMutator {
     special_needs?: boolean
 }
 
-export const schoolFeatureTableId = z.number() as unknown as z.Schema<SchoolFeatureTableId>
+export const schoolFeatureTableId = z.number().transform((value) => value as SchoolFeatureTableId)
 
 export const schoolFeatureTable = z.object({
     id: schoolFeatureTableId,
@@ -56,7 +56,7 @@ export const schoolFeatureTable = z.object({
     government_sector: z.boolean(),
     independent: z.boolean(),
     special_needs: z.boolean(),
-}) as unknown as z.Schema<SchoolFeatureTable>
+})
 
 export const schoolFeatureTableInitializer = z.object({
     id: schoolFeatureTableId.optional(),
@@ -65,7 +65,7 @@ export const schoolFeatureTableInitializer = z.object({
     government_sector: z.boolean(),
     independent: z.boolean(),
     special_needs: z.boolean(),
-}) as unknown as z.Schema<SchoolFeatureTableInitializer>
+})
 
 export const schoolFeatureTableMutator = z.object({
     id: schoolFeatureTableId.optional(),
@@ -74,4 +74,4 @@ export const schoolFeatureTableMutator = z.object({
     government_sector: z.boolean().optional(),
     independent: z.boolean().optional(),
     special_needs: z.boolean().optional(),
-}) as unknown as z.Schema<SchoolFeatureTableMutator>
+})

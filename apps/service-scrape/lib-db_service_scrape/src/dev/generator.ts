@@ -29,7 +29,7 @@ export const kyselyPostgisGenerateSchema = async (connectionString: string) => {
                 kanelZod.makeGenerateZodSchemas({
                     getZodSchemaMetadata: kanelZod.defaultGetZodSchemaMetadata,
                     getZodIdentifierMetadata: kanelZod.defaultGetZodIdentifierMetadata,
-                    castToSchema: true,
+                    castToSchema: false,
                     zodTypeMap: {
                         ...kanelZod.defaultZodTypeMap,
                         'public.geometry': 'z.string()',

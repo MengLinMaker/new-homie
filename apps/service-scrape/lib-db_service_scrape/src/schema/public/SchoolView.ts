@@ -58,4 +58,4 @@ export const schoolView = z.object({
     state_abbreviation: stateAbbreviationEnum,
     postcode: z.string(),
     boundary_coordinates: z.string(),
-}) as unknown as z.Schema<SchoolView>
+})

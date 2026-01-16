@@ -65,7 +65,7 @@ export interface HomeTableMutator {
     auction_time?: Date
 }
 
-export const homeTableId = z.number() as unknown as z.Schema<HomeTableId>
+export const homeTableId = z.number().transform((value) => value as HomeTableId)
 
 export const homeTable = z.object({
     id: homeTableId,
@@ -76,7 +76,7 @@ export const homeTable = z.object({
     land_m2: z.number(),
     inspection_time: z.date(),
     auction_time: z.date(),
-}) as unknown as z.Schema<HomeTable>
+})
 
 export const homeTableInitializer = z.object({
     id: homeTableId.optional(),
@@ -87,7 +87,7 @@ export const homeTableInitializer = z.object({
     land_m2: z.number(),
     inspection_time: z.date(),
     auction_time: z.date(),
-}) as unknown as z.Schema<HomeTableInitializer>
+})
 
 export const homeTableMutator = z.object({
     id: homeTableId.optional(),
@@ -98,4 +98,4 @@ export const homeTableMutator = z.object({
     land_m2: z.number().optional(),
     inspection_time: z.date().optional(),
     auction_time: z.date().optional(),
-}) as unknown as z.Schema<HomeTableMutator>
+})

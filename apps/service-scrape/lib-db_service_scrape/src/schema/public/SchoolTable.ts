@@ -55,7 +55,7 @@ export interface SchoolTableMutator {
     gps?: string
 }
 
-export const schoolTableId = z.number() as unknown as z.Schema<SchoolTableId>
+export const schoolTableId = z.number().transform((value) => value as SchoolTableId)
 
 export const schoolTable = z.object({
     id: schoolTableId,
@@ -65,7 +65,7 @@ export const schoolTable = z.object({
     name: z.string(),
     url: z.string(),
     gps: z.string(),
-}) as unknown as z.Schema<SchoolTable>
+})
 
 export const schoolTableInitializer = z.object({
     id: schoolTableId.optional(),
@@ -75,7 +75,7 @@ export const schoolTableInitializer = z.object({
     name: z.string(),
     url: z.string(),
     gps: z.string(),
-}) as unknown as z.Schema<SchoolTableInitializer>
+})
 
 export const schoolTableMutator = z.object({
     id: schoolTableId.optional(),
@@ -85,4 +85,4 @@ export const schoolTableMutator = z.object({
     name: z.string().optional(),
     url: z.string().optional(),
     gps: z.string().optional(),
-}) as unknown as z.Schema<SchoolTableMutator>
+})
