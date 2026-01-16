@@ -119,7 +119,7 @@ export function AppSidebarContentDashboards(props: { name: string; draggable?: b
                 const targetIndex = targetNode.children ? targetNode.children.length : 0
                 const keyArray = Array.from(e.keys)
                 for (let i = 0; i < keyArray.length; i++) {
-                    tree.move(keyArray[i], e.target.key, targetIndex + i)
+                    tree.move(keyArray[i]!, e.target.key, targetIndex + i)
                 }
             }
         },
@@ -132,7 +132,7 @@ export function AppSidebarContentDashboards(props: { name: string; draggable?: b
                 <Tree
                     aria-label="Tree with hierarchical drag and drop"
                     items={tree.items}
-                    dragAndDropHooks={props.draggable ? dragAndDropHooks : undefined}
+                    dragAndDropHooks={props.draggable ? dragAndDropHooks : (undefined as never)}
                     selectionMode="none"
                 >
                     <Collection key="AppSidebarContentDashboards-root" items={tree.items}>
