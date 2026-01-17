@@ -8,6 +8,9 @@ import { RoleBatchEcs } from './infra-aws_batch_roles'
 
 const dirname = './apps/service-scrape'
 
+const scrape_vcpu = 1
+const scrape_concurrency = 8
+
 /**
  * Expands key value map for AWS format - https://docs.aws.amazon.com/batch/latest/APIReference/API_KeyValuePair.html
  * @param envMap key value map
@@ -41,7 +44,7 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
     computeResources: {
-        maxVcpus: 8,
+        maxVcpus: scrape_concurrency * scrape_vcpu,
         securityGroupIds: Vpc.securityGroups,
         subnets: Vpc.publicSubnets,
         type: 'FARGATE_SPOT',
@@ -63,8 +66,8 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         runtimePlatform: { cpuArchitecture: 'ARM64' },
         command: ['node', '/app/index.js'],
         resourceRequirements: [
-            { type: 'VCPU', value: '0.5' },
-            { type: 'MEMORY', value: '2048' },
+            { type: 'VCPU', value: scrape_vcpu },
+            { type: 'MEMORY', value: 2048 },
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
         environment: expandEnv({
@@ -116,6 +119,8 @@ const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     name: 'StepMapScrapeLocality',
     processor: StepScrapeLocality,
     items: '{% $states.input %}',
+    // Limit
+    maxConcurrency: scrape_concurrency * 2,
 })
 const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
     definition: StepMapScrapeLocality.next(StepScrapePostprocess),
