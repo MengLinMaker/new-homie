@@ -121,6 +121,7 @@ const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     items: '{% $states.input %}',
     // Limit
     maxConcurrency: scrape_concurrency * 2,
+    mode: 'standard',
 })
 const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
     definition: StepMapScrapeLocality.next(StepScrapePostprocess),
