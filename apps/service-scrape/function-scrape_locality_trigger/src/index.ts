@@ -28,9 +28,7 @@ const CHUNK_SIZE = 6
 export const handler = middy().handler(async (_event, _context) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
-    const filteredLocality = targetLocalities.filter((locality) => {
-        return locality.state_abbreviation === 'VIC'
-    })
+    const filteredLocality = targetLocalities
     const chunkedFilteredLocality = chunkArray(filteredLocality, CHUNK_SIZE)
 
     await sfnClient.send(
