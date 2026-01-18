@@ -73,7 +73,8 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
             DB_SERVICE_SCRAPE,
             ...OTEL_ENV,
             // Default testing inputs
-            LOCALITIES: '[{"suburb_name": "Test", "state_abbreviation": "VIC", "postcode": "0000"}]'
+            LOCALITIES:
+                '[{"suburb_name": "Test", "state_abbreviation": "VIC", "postcode": "0000"}]',
         }),
     }),
 })
