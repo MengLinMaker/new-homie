@@ -6,7 +6,10 @@ import path from 'node:path'
 import * as pulumi from '@pulumi/pulumi'
 import { RoleBatchEcs } from './infra-aws_batch_roles'
 
-const dirname = './apps/service-scrape'
+const DIRNAME = './apps/service-scrape'
+const SCRAPE_VCPU = 1
+const SCRAPE_CONCURRENCY = 8
+const SCRAPE_MB = 2048
 
 /**
  * Expands key value map for AWS format - https://docs.aws.amazon.com/batch/latest/APIReference/API_KeyValuePair.html
@@ -22,7 +25,7 @@ const expandEnv = (envMap: { [k: string]: string }) => {
  * 5. Postprocess - update materialised views
  */
 const FunctionScrapePostprocess = new sst.aws.Function('FunctionScrapePostprocess', {
-    handler: path.join(dirname, './function-scrape_postprocess/src/index.handler'),
+    handler: path.join(DIRNAME, './function-scrape_postprocess/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
     memory: '1024 MB',
@@ -41,7 +44,7 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
     computeResources: {
-        maxVcpus: 8,
+        maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
         securityGroupIds: Vpc.securityGroups,
         subnets: Vpc.publicSubnets,
         type: 'FARGATE_SPOT',
@@ -50,7 +53,7 @@ const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment'
 })
 const ImageScrapeLocality = createImage(
     'ImageScrapeLocality',
-    path.join(dirname, './function-scrape_locality'),
+    path.join(DIRNAME, './function-scrape_locality'),
 )
 const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
     type: 'container',
@@ -63,17 +66,21 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         runtimePlatform: { cpuArchitecture: 'ARM64' },
         command: ['node', '/app/index.js'],
         resourceRequirements: [
-            { type: 'VCPU', value: '1' },
-            { type: 'MEMORY', value: '2048' },
+            { type: 'VCPU', value: `${SCRAPE_VCPU}` },
+            { type: 'MEMORY', value: `${SCRAPE_MB}` },
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
         environment: expandEnv({
             DB_SERVICE_SCRAPE,
             ...OTEL_ENV,
             // Default testing inputs
-            suburb_name: 'Test',
-            state_abbreviation: 'VIC',
-            postcode: '0000',
+            LOCALITIES: JSON.stringify([
+                {
+                    suburb_name: 'Test',
+                    state_abbreviation: 'VIC',
+                    postcode: '0000',
+                },
+            ]),
         }),
     }),
 })
@@ -92,14 +99,12 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
     arguments: {
         // Follow JSONata syntax - https://www.youtube.com/watch?v=kVWxJoO_zc8&t=87s
         JobName:
-            "{% $replace($states.input.suburb_name, ' ', '-') & '-' & $states.input.state_abbreviation & '-' & $states.input.postcode %}",
+            "{% $replace($states.input[0].suburb_name, ' ', '-') & '-' & $states.input[0].state_abbreviation & '-' & $states.input[0].postcode %}",
         JobQueue: JobQueueScrapeLocality.arn,
         JobDefinition: JobDefinitionScrapeLocality.arn,
         ContainerOverrides: {
             Environment: expandEnv({
-                suburb_name: '{% $states.input.suburb_name %}',
-                state_abbreviation: '{% $states.input.state_abbreviation %}',
-                postcode: '{% $states.input.postcode %}',
+                LOCALITIES: '{% $string($states.input) %}',
             }),
         },
     },
@@ -116,6 +121,9 @@ const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     name: 'StepMapScrapeLocality',
     processor: StepScrapeLocality,
     items: '{% $states.input %}',
+    // Limit
+    maxConcurrency: SCRAPE_CONCURRENCY * 2,
+    mode: 'standard',
 })
 const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
     definition: StepMapScrapeLocality.next(StepScrapePostprocess),
@@ -125,7 +133,7 @@ const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScra
  * 2. Lambda function calculates which localities to scrape
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
-    handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
+    handler: path.join(DIRNAME, './function-scrape_locality_trigger/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
     memory: '1024 MB',
@@ -139,11 +147,11 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
 })
 
 /**
- * 1. Trigger scrape pipeline 1am WED and SAT AEST
+ * 1. Trigger scrape pipeline - at UTC 0:00 (AEST 10:00 / AEDT 11:00) - Tue and Fri
+ * UTC 0:00 maximises deadline - Javascript Date.now() is UTC
  */
 new sst.aws.Cron(`ScrapeLocalityTrigger`, {
-    // UTC 14:00 = AEST 12am / AEDT 1am next day
-    schedule: `cron(0 14 ? * TUE,FRI *)`,
+    schedule: `cron(0 0 ? * TUE,FRI *)`,
     function: FunctionScrapeLocalityTrigger.arn,
     enabled: $app.stage === 'production',
 })

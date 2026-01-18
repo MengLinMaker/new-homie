@@ -3,8 +3,8 @@
     "private": true,
     "scripts": {
         "format": "biome format --write",
-        "build": "node esbuild.ts",
-        "dev": "node esbuild.ts && docker compose up --build --force-recreate",
+        "build": "tsx esbuild.ts",
+        "dev": "tsx esbuild.ts && docker compose up --build --force-recreate",
         "test:type": "tsc",
         "test:lint": "biome lint && eslint",
         "test:unit": "vitest run --coverage",

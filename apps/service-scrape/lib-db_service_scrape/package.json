@@ -8,8 +8,8 @@
     },
     "scripts": {
         "format": "biome format --write",
-        "migrate": "node ./migrate.ts",
-        "generate": "node ./generate.ts && barrelsby -d src/schema && biome format --write",
+        "migrate": "tsx ./migrate.ts",
+        "generate": "tsx ./generate.ts && barrelsby -d src/schema && biome format --write",
         "test:type": "tsc",
         "test:unit": "vitest run --coverage",
         "test:dev": "vitest --coverage"

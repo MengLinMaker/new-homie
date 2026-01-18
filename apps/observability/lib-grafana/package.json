@@ -8,8 +8,8 @@
         "test:perf": "vitest bench",
         "test:dev": "vitest --coverage",
         "generate": "openapi-typescript --array-length true --properties-required-by-default true './src/api/openapi.json' -o './src/api/schema.d.ts' && biome format --write",
-        "grafana:export": "node ./src/export.ts && biome format --write",
-        "grafana:import": "node ./src/import.ts"
+        "grafana:export": "tsx ./src/export.ts && biome format --write",
+        "grafana:import": "tsx ./src/import.ts"
     },
     "type": "module",
     "devDependencies": {
