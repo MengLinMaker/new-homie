@@ -7,7 +7,9 @@ import * as pulumi from '@pulumi/pulumi'
 import { RoleBatchEcs } from './infra-aws_batch_roles'
 
 const DIRNAME = './apps/service-scrape'
+const SCRAPE_VCPU = 1
 const SCRAPE_CONCURRENCY = 8
+const SCRAPE_MB = 2048
 
 /**
  * Expands key value map for AWS format - https://docs.aws.amazon.com/batch/latest/APIReference/API_KeyValuePair.html
@@ -42,7 +44,7 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
     computeResources: {
-        maxVcpus: SCRAPE_CONCURRENCY,
+        maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
         securityGroupIds: Vpc.securityGroups,
         subnets: Vpc.publicSubnets,
         type: 'FARGATE_SPOT',
@@ -64,16 +66,21 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         runtimePlatform: { cpuArchitecture: 'ARM64' },
         command: ['node', '/app/index.js'],
         resourceRequirements: [
-            { type: 'VCPU', value: 1 },
-            { type: 'MEMORY', value: 2048 },
+            { type: 'VCPU', value: `${SCRAPE_VCPU}` },
+            { type: 'MEMORY', value: `${SCRAPE_MB}` },
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
         environment: expandEnv({
             DB_SERVICE_SCRAPE,
             ...OTEL_ENV,
             // Default testing inputs
-            LOCALITIES:
-                '[{"suburb_name": "Test", "state_abbreviation": "VIC", "postcode": "0000"}]',
+            LOCALITIES: JSON.stringify([
+                {
+                    suburb_name: 'Test',
+                    state_abbreviation: 'VIC',
+                    postcode: '0000',
+                },
+            ]),
         }),
     }),
 })
