@@ -3,16 +3,16 @@ services:
   function-scrape_locality:
     build:
       context: ./
-    env_file:
-      - ../../../.env
     environment:
-      suburb_name: Dandenong
-      state_abbreviation: VIC
-      postcode: 3175
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://host.docker.internal:4318
+      OTEL_EXPORTER_OTLP_HEADERS: ''
+      OTEL_LOG_LEVEL: info
+      DB_SERVICE_SCRAPE: postgres://user:password@host.docker.internal:54320/db
+      LOCALITIES: '[{"suburb_name": "Keysborough", "state_abbreviation": "VIC", "postcode": "3173"}, {"suburb_name": "Dandenong", "state_abbreviation": "VIC", "postcode": "3175"}]'
     deploy:
       resources:
         limits:
           # Smallest valid fargate instance
-          cpus: '1'
+          cpus: 1
           memory: 2048m
     restart: no

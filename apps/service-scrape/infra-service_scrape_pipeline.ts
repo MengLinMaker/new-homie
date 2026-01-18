@@ -74,9 +74,13 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
             DB_SERVICE_SCRAPE,
             ...OTEL_ENV,
             // Default testing inputs
-            suburb_name: 'Test',
-            state_abbreviation: 'VIC',
-            postcode: '0000',
+            LOCALITIES: JSON.stringify([
+                {
+                    suburb_name: 'Test',
+                    state_abbreviation: 'VIC',
+                    postcode: '0000',
+                },
+            ]),
         }),
     }),
 })
@@ -95,14 +99,12 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
     arguments: {
         // Follow JSONata syntax - https://www.youtube.com/watch?v=kVWxJoO_zc8&t=87s
         JobName:
-            "{% $replace($states.input.suburb_name, ' ', '-') & '-' & $states.input.state_abbreviation & '-' & $states.input.postcode %}",
+            "{% $replace($states.input[0].suburb_name, ' ', '-') & '-' & $states.input[0].state_abbreviation & '-' & $states.input[0].postcode %}",
         JobQueue: JobQueueScrapeLocality.arn,
         JobDefinition: JobDefinitionScrapeLocality.arn,
         ContainerOverrides: {
             Environment: expandEnv({
-                suburb_name: '{% $states.input.suburb_name %}',
-                state_abbreviation: '{% $states.input.state_abbreviation %}',
-                postcode: '{% $states.input.postcode %}',
+                LOCALITIES: '{% $states.input %}',
             }),
         },
     },
