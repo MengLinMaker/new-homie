@@ -6,10 +6,9 @@ import path from 'node:path'
 import * as pulumi from '@pulumi/pulumi'
 import { RoleBatchEcs } from './infra-aws_batch_roles'
 
-const dirname = './apps/service-scrape'
-
-const scrape_vcpu = 1
-const scrape_concurrency = 8
+const DIRNAME = './apps/service-scrape'
+const SCRAPE_VCPU = 1
+const SCRAPE_CONCURRENCY = 8
 
 /**
  * Expands key value map for AWS format - https://docs.aws.amazon.com/batch/latest/APIReference/API_KeyValuePair.html
@@ -25,7 +24,7 @@ const expandEnv = (envMap: { [k: string]: string }) => {
  * 5. Postprocess - update materialised views
  */
 const FunctionScrapePostprocess = new sst.aws.Function('FunctionScrapePostprocess', {
-    handler: path.join(dirname, './function-scrape_postprocess/src/index.handler'),
+    handler: path.join(DIRNAME, './function-scrape_postprocess/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
     memory: '1024 MB',
@@ -44,7 +43,7 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
     computeResources: {
-        maxVcpus: scrape_concurrency * scrape_vcpu,
+        maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
         securityGroupIds: Vpc.securityGroups,
         subnets: Vpc.publicSubnets,
         type: 'FARGATE_SPOT',
@@ -53,7 +52,7 @@ const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment'
 })
 const ImageScrapeLocality = createImage(
     'ImageScrapeLocality',
-    path.join(dirname, './function-scrape_locality'),
+    path.join(DIRNAME, './function-scrape_locality'),
 )
 const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
     type: 'container',
@@ -66,7 +65,7 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         runtimePlatform: { cpuArchitecture: 'ARM64' },
         command: ['node', '/app/index.js'],
         resourceRequirements: [
-            { type: 'VCPU', value: scrape_vcpu },
+            { type: 'VCPU', value: SCRAPE_VCPU },
             { type: 'MEMORY', value: 2048 },
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
@@ -122,7 +121,7 @@ const StepMapScrapeLocality = sst.aws.StepFunctions.map({
     processor: StepScrapeLocality,
     items: '{% $states.input %}',
     // Limit
-    maxConcurrency: scrape_concurrency * 2,
+    maxConcurrency: SCRAPE_CONCURRENCY * 2,
     mode: 'standard',
 })
 const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScrapePipeline', {
@@ -133,7 +132,7 @@ const StepFunctionsScrapePipeline = new sst.aws.StepFunctions('StepFunctionsScra
  * 2. Lambda function calculates which localities to scrape
  */
 const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocalityTrigger', {
-    handler: path.join(dirname, './function-scrape_locality_trigger/src/index.handler'),
+    handler: path.join(DIRNAME, './function-scrape_locality_trigger/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
     memory: '1024 MB',

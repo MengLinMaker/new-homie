@@ -5,10 +5,10 @@ import { basePath } from './function-query_freemium/src'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
 
-const dirname = './apps/service-scrape'
+const DIRNAME = './apps/service-scrape'
 
 const FunctionQueryFreemium = new sst.aws.Function('FunctionQueryFreemium', {
-    handler: path.join(dirname, './function-query_freemium/src/index.handler'),
+    handler: path.join(DIRNAME, './function-query_freemium/src/index.handler'),
     architecture: 'arm64',
     runtime: 'nodejs22.x',
     timeout: '3 seconds',
