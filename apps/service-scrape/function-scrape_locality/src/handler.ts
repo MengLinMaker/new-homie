@@ -5,7 +5,13 @@ import { browserService, LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 import type { Locality } from '@service-scrape/lib-australia_amenity'
 
+const concatLocality = (args: Locality) =>
+    `${args.suburb_name}-${args.state_abbreviation}-${args.postcode}`
+        .replaceAll(' ', '-')
+        .toLowerCase()
+
 export const handler = async (args: Locality) => {
+    console.info('SUCCESS Start scraping locality', '-', concatLocality(args))
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
     // For testing purposes
@@ -74,6 +80,6 @@ export const handler = async (args: Locality) => {
     }
 
     functionHandlerLogger.recordEnd()
-    console.info('SUCCESS scrapeController')
+    console.info('SUCCESS Finish scraping locality', '-', concatLocality(args))
     return { status: StatusCodes.OK }
 }
