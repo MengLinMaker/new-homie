@@ -8,6 +8,12 @@ export default defineConfig([
     tseslint.configs.recommended[0],
     {
         files: ['src/**/*.ts'],
+        languageOptions: {
+            parserOptions: {
+                projectService: true,
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
     },
     // @ts-ignore
     ...safeqlConfig,
