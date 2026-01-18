@@ -6125,11 +6125,6 @@
         "postcode": "2830"
     },
     {
-        "suburb_name": "Dubbo West",
-        "state_abbreviation": "NSW",
-        "postcode": "2830"
-    },
-    {
         "suburb_name": "Dudley",
         "state_abbreviation": "NSW",
         "postcode": "2290"
@@ -9910,11 +9905,6 @@
         "postcode": "2330"
     },
     {
-        "suburb_name": "Jervis Bay",
-        "state_abbreviation": "ACT",
-        "postcode": "2540"
-    },
-    {
         "suburb_name": "Jervois",
         "state_abbreviation": "SA",
         "postcode": "5259"
@@ -10493,11 +10483,6 @@
         "suburb_name": "Kennington",
         "state_abbreviation": "VIC",
         "postcode": "3550"
-    },
-    {
-        "suburb_name": "Kenny",
-        "state_abbreviation": "ACT",
-        "postcode": "2911"
     },
     {
         "suburb_name": "Kensington",
@@ -12115,16 +12100,6 @@
         "postcode": "4740"
     },
     {
-        "suburb_name": "Mackay",
-        "state_abbreviation": "QLD",
-        "postcode": "4741"
-    },
-    {
-        "suburb_name": "Mackay South",
-        "state_abbreviation": "QLD",
-        "postcode": "4740"
-    },
-    {
         "suburb_name": "Mackenzie",
         "state_abbreviation": "QLD",
         "postcode": "4156"
@@ -12168,11 +12143,6 @@
         "suburb_name": "Macquarie Park",
         "state_abbreviation": "NSW",
         "postcode": "2113"
-    },
-    {
-        "suburb_name": "Macquarie University",
-        "state_abbreviation": "NSW",
-        "postcode": "2109"
     },
     {
         "suburb_name": "Maddens Plains",
@@ -14505,11 +14475,6 @@
         "postcode": "5540"
     },
     {
-        "suburb_name": "Napranum",
-        "state_abbreviation": "QLD",
-        "postcode": "4874"
-    },
-    {
         "suburb_name": "Naracoorte",
         "state_abbreviation": "SA",
         "postcode": "5271"
@@ -14668,11 +14633,6 @@
         "suburb_name": "Nedlands",
         "state_abbreviation": "WA",
         "postcode": "6009"
-    },
-    {
-        "suburb_name": "Nedlands",
-        "state_abbreviation": "WA",
-        "postcode": "6909"
     },
     {
         "suburb_name": "Neerim South",
@@ -14883,11 +14843,6 @@
         "suburb_name": "Nhulunbuy",
         "state_abbreviation": "NT",
         "postcode": "0880"
-    },
-    {
-        "suburb_name": "Nhulunbuy",
-        "state_abbreviation": "NT",
-        "postcode": "0881"
     },
     {
         "suburb_name": "Niagara Park",
@@ -15170,11 +15125,6 @@
         "postcode": "7000"
     },
     {
-        "suburb_name": "North Hobart",
-        "state_abbreviation": "TAS",
-        "postcode": "7002"
-    },
-    {
         "suburb_name": "North Ipswich",
         "state_abbreviation": "QLD",
         "postcode": "4305"
@@ -15321,11 +15271,6 @@
     },
     {
         "suburb_name": "Nowra",
-        "state_abbreviation": "NSW",
-        "postcode": "2541"
-    },
-    {
-        "suburb_name": "Nowra East",
         "state_abbreviation": "NSW",
         "postcode": "2541"
     },
@@ -17225,11 +17170,6 @@
         "postcode": "2216"
     },
     {
-        "suburb_name": "Rockhampton",
-        "state_abbreviation": "QLD",
-        "postcode": "4700"
-    },
-    {
         "suburb_name": "Rockingham",
         "state_abbreviation": "WA",
         "postcode": "6168"
@@ -17488,11 +17428,6 @@
         "suburb_name": "Roxby Downs",
         "state_abbreviation": "SA",
         "postcode": "5725"
-    },
-    {
-        "suburb_name": "Royal Brisbane Hospital",
-        "state_abbreviation": "QLD",
-        "postcode": "4029"
     },
     {
         "suburb_name": "Royal Park",
@@ -20013,11 +19948,6 @@
         "suburb_name": "Townsend",
         "state_abbreviation": "NSW",
         "postcode": "2463"
-    },
-    {
-        "suburb_name": "Townsville",
-        "state_abbreviation": "QLD",
-        "postcode": "4810"
     },
     {
         "suburb_name": "Townview",

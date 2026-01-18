@@ -23,6 +23,20 @@ const nonExistentLocalities = new Map<string, Locality>()
         { suburb_name: 'Macleod West', state_abbreviation: 'VIC', postcode: '3085' },
         { suburb_name: 'Wangaratta', state_abbreviation: 'VIC', postcode: '3676' },
         { suburb_name: 'Wodonga', state_abbreviation: 'VIC', postcode: '3689' },
+        { suburb_name: 'Townsville', state_abbreviation: 'QLD', postcode: '4810' },
+        { suburb_name: 'Royal Brisbane Hospital', state_abbreviation: 'QLD', postcode: '4029' },
+        { suburb_name: 'Rockhampton', state_abbreviation: 'QLD', postcode: '4700' },
+        { suburb_name: 'Nowra East', state_abbreviation: 'NSW', postcode: '2541' },
+        { suburb_name: 'North Hobart', state_abbreviation: 'TAS', postcode: '7002' },
+        { suburb_name: 'Nhulunbuy', state_abbreviation: 'NT', postcode: '0881' },
+        { suburb_name: 'Nedlands', state_abbreviation: 'WA', postcode: '6909' },
+        { suburb_name: 'Napranum', state_abbreviation: 'QLD', postcode: '4874' },
+        { suburb_name: 'Macquarie University', state_abbreviation: 'NSW', postcode: '2109' },
+        { suburb_name: 'Mackay South', state_abbreviation: 'QLD', postcode: '4740' },
+        { suburb_name: 'Mackay', state_abbreviation: 'QLD', postcode: '4741' },
+        { suburb_name: 'Kenny', state_abbreviation: 'ACT', postcode: '2911' },
+        { suburb_name: 'Jervis Bay', state_abbreviation: 'ACT', postcode: '2540' },
+        { suburb_name: 'Dubbo West', state_abbreviation: 'NSW', postcode: '2830' },
     ]
     localities.map((e) => setMap(nonExistentLocalities, e))
 }
