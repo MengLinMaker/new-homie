@@ -104,7 +104,7 @@ const StepScrapeLocality = sst.aws.StepFunctions.task({
         JobDefinition: JobDefinitionScrapeLocality.arn,
         ContainerOverrides: {
             Environment: expandEnv({
-                LOCALITIES: '{% $states.input %}',
+                LOCALITIES: '{% States.JsonToString($states.input) %}',
             }),
         },
     },
