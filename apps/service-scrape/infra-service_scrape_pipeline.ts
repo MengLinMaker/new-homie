@@ -147,11 +147,11 @@ const FunctionScrapeLocalityTrigger = new sst.aws.Function('FunctionScrapeLocali
 })
 
 /**
- * 1. Trigger scrape pipeline 1am WED and SAT AEST
+ * 1. Trigger scrape pipeline - at UTC 0:00 (AEST 10:00 / AEDT 11:00) - Tue and Fri
+ * UTC 0:00 maximises deadline - Javascript Date.now() is UTC
  */
 new sst.aws.Cron(`ScrapeLocalityTrigger`, {
-    // UTC 14:00 = AEST 12am / AEDT 1am next day
-    schedule: `cron(0 14 ? * TUE,FRI *)`,
+    schedule: `cron(0 0 ? * TUE,FRI *)`,
     function: FunctionScrapeLocalityTrigger.arn,
     enabled: $app.stage === 'production',
 })
