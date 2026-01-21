@@ -31,12 +31,26 @@ export const handler = middy().handler(async (_event, _context) => {
     const filteredLocality = targetLocalities
     const chunkedFilteredLocality = chunkArray(filteredLocality, CHUNK_SIZE)
 
-    await sfnClient.send(
-        new StartExecutionCommand({
-            stateMachineArn: ENV.STEP_FUNCTION_ARN,
-            input: JSON.stringify(chunkedFilteredLocality),
-        }),
+    // Limit data chunk size to 256kb for step functions - https://aws.amazon.com/about-aws/whats-new/2020/09/aws-step-functions-increases-payload-size-to-256kb/
+    const wholeData = JSON.stringify(chunkedFilteredLocality)
+    const dataSize = new Blob([wholeData]).size
+    const requiredBatches = Math.ceil(dataSize / 200000)
+    const batchChunkLength = Math.ceil(chunkedFilteredLocality.length / requiredBatches)
+
+    console.info(`Trigger to scrape ${filteredLocality.length} localities - ${dataSize} bytes`)
+    console.info(
+        `Sending ${requiredBatches} batches - ${batchChunkLength} locality chunks of size ${CHUNK_SIZE}`,
     )
+
+    for (let i = 0; i < chunkedFilteredLocality.length; i += batchChunkLength) {
+        const batchData = chunkedFilteredLocality.slice(i, i + batchChunkLength)
+        await sfnClient.send(
+            new StartExecutionCommand({
+                stateMachineArn: ENV.STEP_FUNCTION_ARN,
+                input: JSON.stringify(batchData),
+            }),
+        )
+    }
 
     functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }
