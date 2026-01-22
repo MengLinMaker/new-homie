@@ -31,7 +31,10 @@ const FunctionScrapePostprocess = new sst.aws.Function('FunctionScrapePostproces
     memory: '1024 MB',
     timeout: '30 seconds',
     concurrency: { reserved: 1 },
-    environment: { ...OTEL_ENV },
+    environment: {
+        ...OTEL_ENV,
+        DB_SERVICE_SCRAPE,
+    },
 })
 const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
     name: 'StepScrapeLocalityPostprocess',
@@ -71,8 +74,8 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionSc
         ],
         networkConfiguration: { assignPublicIp: 'ENABLED' },
         environment: expandEnv({
-            DB_SERVICE_SCRAPE,
             ...OTEL_ENV,
+            DB_SERVICE_SCRAPE,
             // Default testing inputs
             LOCALITIES: JSON.stringify([
                 {

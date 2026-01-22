@@ -6,7 +6,6 @@ import type { SchemaWrite } from '@service-scrape/lib-db_service_scrape'
 import { OpenTelemetry } from '@observability/lib-opentelemetry'
 
 export const suiteNameFromFileName = (filePath: string) =>
-    // biome-ignore lint/style/noNonNullAssertion: <will exist>
     path.basename(filePath).split('.').shift()!
 
 export const parseJsonFile = (filePath: string) => JSON.parse(readFileSync(filePath).toString())

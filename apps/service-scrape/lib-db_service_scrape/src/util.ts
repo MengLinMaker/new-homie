@@ -30,9 +30,7 @@ export const createPostgisPolygonString = (polygonCoord: number[][] | undefined 
 
         const len = validCoord.length
         if (
-            // biome-ignore lint/style/noNonNullAssertion: <already validated>
             validCoord[0]![0] !== validCoord[len - 1]![0] &&
-            // biome-ignore lint/style/noNonNullAssertion: <already validated>
             validCoord[0]![1] !== validCoord[len - 1]![1]
         )
             return null

@@ -94,7 +94,6 @@ export function AppSidebarContentDashboards(props: { name: string; draggable?: b
     const { dragAndDropHooks } = useDragAndDrop({
         getItems(keys) {
             return [...keys].map((key) => ({
-                // biome-ignore lint/style/noNonNullAssertion: <expected to exist>
                 'text/plain': tree.getItem(key)!.value.name,
             }))
         },

@@ -14,13 +14,11 @@ const exportFolders = async () => {
         params: { query: { type: 'dash-folder' } },
     })
 
-    // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
     for (const { uid } of folders.data!) {
         const folder = await client.GET('/folders/{folder_uid}', {
             params: { path: { folder_uid: uid } },
         })
 
-        // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
         const newFolder = folder.data!
         const parentUid = newFolder.parentUid ?? ''
 
@@ -50,12 +48,10 @@ const exportDashboards = async (folderUidToPath: FolderUidToPath) => {
         params: { query: { type: 'dash-db' } },
     })
 
-    // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
     for (const { title, uid } of dashboardSummaries.data!) {
         const dashboardResult = await client.GET('/dashboards/uid/{uid}', {
             params: { path: { uid } },
         })
-        // biome-ignore lint/style/noNonNullAssertion: <request should not fail>
         const { meta, dashboard } = dashboardResult.data!
 
         // Provisioned dashboards cannot be modified through API

@@ -11,16 +11,14 @@
         "rules": {
             "recommended": true,
             "complexity": {
-                "useLiteralKeys": "off",
-                "noArguments": "warn"
+                "useLiteralKeys": "off"
             },
             "suspicious": {
-                "noExplicitAny": "warn",
                 "noUnknownAtRules": "off",
                 "noTsIgnore": "off"
             },
             "style": {
-                "noNonNullAssertion": "info"
+                "noNonNullAssertion": "off"
             }
         }
     },
