@@ -90,9 +90,7 @@ export class DomainSuburbService extends ILoggable {
                 reportInput: true,
             })
             const __APOLLO_STATE__ = validNextjson.props.pageProps.__APOLLO_STATE__
-            // biome-ignore lint/style/noNonNullAssertion: <let it fail>
             const suburbKey = Object.keys(__APOLLO_STATE__).filter((x) => /^Suburb:/.test(x))[0]!
-            // biome-ignore lint/style/noNonNullAssertion: <let it fail>
             const locationProfileKey = Object.keys(__APOLLO_STATE__).filter((x) =>
                 /^LocationProfile:/.test(x),
             )[0]!
