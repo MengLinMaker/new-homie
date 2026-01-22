@@ -5,9 +5,6 @@
         "format": "biome format --write",
         "test:type": "tsc"
     },
-    "devDependencies": {
-        "@testcontainers/localstack": "^11.5.1"
-    },
     "dependencies": {
         "@aws-sdk/client-sfn": "^3.958.0",
         "@middy/core": "^6.4.4",

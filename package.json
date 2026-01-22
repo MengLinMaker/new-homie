@@ -9,14 +9,13 @@
         "format": "biome format --write",
         "graph": "pnpm nx graph",
         "knip": "knip",
-        "lint": "biome lint --write",
+        "lint": "biome lint --write && jscpd",
         "postinstall": "simple-git-hooks",
         "preinstall": "npx only-allow pnpm",
         "test": "nx run-many -t test:type test:unit"
     },
     "devDependencies": {
         "@biomejs/biome": "2.2.3",
-        "@postgres-language-server/cli": "^0.19.0",
         "@pulumi/pulumi": "^3.212.0",
         "@ts-safeql/eslint-plugin": "^4.1.0",
         "@types/node": "*",

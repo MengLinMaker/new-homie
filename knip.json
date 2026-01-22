@@ -1,6 +1,6 @@
 {
     "$schema": "https://unpkg.com/knip@5/schema.json",
-    "ignoreBinaries": ["only-allow", "sam"],
+    "ignoreBinaries": ["only-allow"],
     "ignore": [
         ".github/**/*",
         "**/src/migration/*.ts",
@@ -8,11 +8,5 @@
         "**/src/app.ts",
         "**/migrate.ts"
     ],
-    "ignoreDependencies": [
-        "tailwindcss",
-        "pino-pretty",
-        "chromium-bidi",
-        "esbuild",
-        "@.+/function-.+"
-    ]
+    "ignoreDependencies": ["tailwindcss", "pino-pretty", "chromium-bidi", "esbuild"]
 }
