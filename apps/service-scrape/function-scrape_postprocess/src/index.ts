@@ -11,6 +11,7 @@ export const handler = middy().handler(async (_event, _context) => {
 
     await postprocessController.refreshLatestSaleMV()
     await postprocessController.refreshLatestRentMV()
+    await postprocessController.vacuumAnalyse()
 
     functionHandlerLogger.recordEnd()
     return { status: StatusCodes.OK }

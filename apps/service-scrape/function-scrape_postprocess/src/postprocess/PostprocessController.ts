@@ -21,4 +21,14 @@ export class PostprocessController extends IDatabased {
             return false
         }
     }
+
+    async vacuumAnalyse() {
+        try {
+            await sql`VACUUM ANALYSE`.execute(this.DB)
+            return true
+        } catch (e) {
+            this.logExceptionArgs('error', this.vacuumAnalyse, null, e)
+            return false
+        }
+    }
 }
