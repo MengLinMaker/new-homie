@@ -7,8 +7,6 @@
         "docker:down": "docker compose down -v",
         "docker:up": "docker compose up --build -d",
         "format": "biome format --write",
-        "git:b": "git checkout -b",
-        "git:m": "git checkout main && git pull",
         "graph": "pnpm nx graph",
         "knip": "knip",
         "lint": "biome lint --write",
