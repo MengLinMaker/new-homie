@@ -61,7 +61,7 @@ export const handler = async (args: Locality) => {
 
     functionHandlerLogger.recordEnd()
     console.info(
-        `${new Date().toISOString()} SUCCESS Finish scraping locality - ${concatLocality(args)} - ${Math.ceil(0.001 * performance.now() - now)} sec\n`,
+        `${new Date().toISOString()} SUCCESS Finish scraping locality - ${concatLocality(args)} - ${Math.ceil(0.001 * (performance.now() - now))} sec\n`,
     )
     return { status: StatusCodes.OK }
 }
