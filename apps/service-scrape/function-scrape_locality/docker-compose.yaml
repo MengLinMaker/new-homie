@@ -8,7 +8,7 @@ services:
       OTEL_EXPORTER_OTLP_HEADERS: ''
       OTEL_LOG_LEVEL: info
       DB_SERVICE_SCRAPE: postgres://user:password@host.docker.internal:54320/db
-      LOCALITIES: '[{"suburb_name": "Keysborough", "state_abbreviation": "VIC", "postcode": "3173"}, {"suburb_name": "Dandenong", "state_abbreviation": "VIC", "postcode": "3175"}]'
+      LOCALITIES: '[{"suburb_name": "Keysborough", "state_abbreviation": "VIC", "postcode": "3173"}, {"suburb_name": "Dandenong", "state_abbreviation": "VIC", "postcode": "3175"}, {"suburb_name": "Noble Park", "state_abbreviation": "VIC", "postcode": "3174"}]'
     deploy:
       resources:
         limits:
