@@ -30,11 +30,6 @@ export class BrowserService extends ILoggable {
                 BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
             if (!BrowserService.browserContext)
                 BrowserService.browserContext = await BrowserService.browser.newContext()
-
-            BrowserService.browserContext.on('close', () => {
-                BrowserService.browserContext = undefined as never
-                this.launchSingleBrowser()
-            })
             return true
         } catch (e) {
             this.logException('fatal', this.launchSingleBrowser, e)
@@ -43,15 +38,20 @@ export class BrowserService extends ILoggable {
     }
 
     async getHTML(url: string) {
-        await this.launchSingleBrowser()
         try {
+            await this.launchSingleBrowser()
+            const now = performance.now()
             const page = await BrowserService.browserContext.newPage()
             await asyncRetry(
-                async () => await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 }),
+                async () => {
+                    await this.launchSingleBrowser()
+                    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
+                },
                 { retries: 3 },
             )
             const html = await page.content()
             await page.close()
+            console.info('Scrape ms:', Math.ceil(performance.now() - now))
             return html
         } catch (e) {
             this.logExceptionArgs('warn', this.getHTML, url, e)
