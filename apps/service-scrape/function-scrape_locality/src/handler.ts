@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes'
 
 // Setup persistent resources
-import { browserService, LOGGER, scrapeController } from './global/setup'
+import { LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 import type { Locality } from '@service-scrape/lib-australia_amenity'
 
@@ -11,11 +11,10 @@ const concatLocality = (args: Locality) =>
         .toLowerCase()
 
 export const handler = async (args: Locality) => {
+    const now = performance.now()
+
     console.info(
-        new Date().toISOString(),
-        'SUCCESS Start scraping locality',
-        '-',
-        concatLocality(args),
+        `${new Date().toISOString()} SUCCESS Start scraping locality - ${concatLocality(args)}`,
     )
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
@@ -26,20 +25,6 @@ export const handler = async (args: Locality) => {
         console.info(new Date().toISOString(), 'ACCEPTED test succeeded')
         functionHandlerLogger.recordEnd()
         return { status: StatusCodes.ACCEPTED }
-    }
-
-    // Launch browser
-    const browserLaunched = await browserService.launchSingleBrowser()
-    if (browserLaunched)
-        console.info(new Date().toISOString(), 'SUCCESS browserService.launchSingleBrowser')
-    else {
-        console.error(new Date().toISOString(), 'FAIL browserService.launchSingleBrowser')
-        return {
-            status: StatusCodes.INTERNAL_SERVER_ERROR,
-            error: functionHandlerLogger.recordException(
-                new Error(`Couldn't browserService.launchSingleBrowser: ${JSON.stringify(args)}`),
-            ),
-        }
     }
 
     // Locality data
@@ -76,10 +61,7 @@ export const handler = async (args: Locality) => {
 
     functionHandlerLogger.recordEnd()
     console.info(
-        new Date().toISOString(),
-        'SUCCESS Finish scraping locality',
-        '-',
-        concatLocality(args),
+        `${new Date().toISOString()} SUCCESS Finish scraping locality - ${concatLocality(args)} - ${Math.ceil(0.001 * performance.now() - now)} sec\n`,
     )
     return { status: StatusCodes.OK }
 }
