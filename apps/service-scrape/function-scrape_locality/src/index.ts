@@ -2,6 +2,7 @@ import { localitySchema } from '@service-scrape/lib-australia_amenity'
 import { parseEnvSchema } from '@observability/lib-opentelemetry'
 import { handler } from './handler'
 import z from 'zod'
+import { browserService } from './global/setup'
 
 const ENV = await parseEnvSchema(
     z.object({
@@ -14,3 +15,5 @@ const localitiesSchema = z.array(localitySchema)
 const localities = localitiesSchema.parse(jsonLocalities, { reportInput: true })
 
 for (const locality of localities) await handler(locality)
+
+await browserService.close()

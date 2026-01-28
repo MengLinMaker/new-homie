@@ -14,6 +14,8 @@ export const handler = async (args: Locality) => {
     console.info('SUCCESS Start scraping locality', '-', concatLocality(args))
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
+    if (args.postcode == null || args.state_abbreviation == null || args.suburb_name == null) return
+
     // For testing purposes
     if (args.postcode === '0000') {
         console.info('ACCEPTED test succeeded')
@@ -65,19 +67,6 @@ export const handler = async (args: Locality) => {
         console.info('SUCCESS page', page)
     }
     console.info('SUCCESS scrapeController.tryExtractRentsPage')
-
-    // Close browser to prevent ProtocolError - https://github.com/puppeteer/puppeteer/issues/6776
-    const browserClosed = await browserService.close()
-    if (browserClosed) console.info('SUCCESS browserService.close')
-    else {
-        console.error('FAIL browserService.close')
-        return {
-            status: StatusCodes.INTERNAL_SERVER_ERROR,
-            error: functionHandlerLogger.recordException(
-                new Error(`Couldn't browserService.close: ${JSON.stringify(args)}`),
-            ),
-        }
-    }
 
     functionHandlerLogger.recordEnd()
     console.info('SUCCESS Finish scraping locality', '-', concatLocality(args))
