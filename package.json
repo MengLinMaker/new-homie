@@ -5,7 +5,7 @@
         "build": "nx run-many -t build",
         "bump": "exec syncpack update && exec syncpack fix && pnpm i",
         "docker:down": "docker compose down -v",
-        "docker:up": "docker compose up --build -d",
+        "docker:up": "docker compose up --build -d && pnpm -r migrate",
         "format": "biome format --write",
         "graph": "pnpm nx graph",
         "knip": "knip",
