@@ -11,7 +11,12 @@ const concatLocality = (args: Locality) =>
         .toLowerCase()
 
 export const handler = async (args: Locality) => {
-    console.info(new Date().toISOString(), 'SUCCESS Start scraping locality', '-', concatLocality(args))
+    console.info(
+        new Date().toISOString(),
+        'SUCCESS Start scraping locality',
+        '-',
+        concatLocality(args),
+    )
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
     if (args.postcode == null || args.state_abbreviation == null || args.suburb_name == null) return
@@ -25,7 +30,8 @@ export const handler = async (args: Locality) => {
 
     // Launch browser
     const browserLaunched = await browserService.launchSingleBrowser()
-    if (browserLaunched) console.info(new Date().toISOString(), 'SUCCESS browserService.launchSingleBrowser')
+    if (browserLaunched)
+        console.info(new Date().toISOString(), 'SUCCESS browserService.launchSingleBrowser')
     else {
         console.error(new Date().toISOString(), 'FAIL browserService.launchSingleBrowser')
         return {
@@ -69,6 +75,11 @@ export const handler = async (args: Locality) => {
     console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractRentsPage')
 
     functionHandlerLogger.recordEnd()
-    console.info(new Date().toISOString(), 'SUCCESS Finish scraping locality', '-', concatLocality(args))
+    console.info(
+        new Date().toISOString(),
+        'SUCCESS Finish scraping locality',
+        '-',
+        concatLocality(args),
+    )
     return { status: StatusCodes.OK }
 }
