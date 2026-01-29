@@ -3,8 +3,9 @@
 import { createImage, OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
-import * as pulumi from '@pulumi/pulumi'
+import pulumi from '@pulumi/pulumi'
 import { RoleBatchEcs } from './infra-aws_batch_roles'
+import { SecurityGroup, Subnets } from './infra-service_scrape_vpc'
 
 const DIRNAME = './apps/service-scrape'
 const SCRAPE_VCPU = 1
@@ -44,12 +45,11 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 /**
  * 4. AWS Batch for fault tolerant scraping on cheap fargate spot instances
  */
-const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
-const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
+const ComputeEnvironment = new aws.batch.ComputeEnvironment('ServiceScrapeComputeEnvironment', {
     computeResources: {
         maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
-        securityGroupIds: Vpc.securityGroups,
-        subnets: Vpc.publicSubnets,
+        securityGroupIds: [SecurityGroup.id],
+        subnets: Subnets,
         type: 'FARGATE_SPOT',
     },
     type: 'MANAGED',
@@ -58,36 +58,39 @@ const ImageScrapeLocality = createImage(
     'ImageScrapeLocality',
     path.join(DIRNAME, './function-scrape_locality'),
 )
-const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
-    type: 'container',
-    platformCapabilities: ['FARGATE'],
-    timeout: { attemptDurationSeconds: 60 * 30 },
-    retryStrategy: { attempts: 3 },
-    containerProperties: pulumi.jsonStringify({
-        executionRoleArn: RoleBatchEcs.arn,
-        image: ImageScrapeLocality.imageUri,
-        runtimePlatform: { cpuArchitecture: 'ARM64' },
-        command: ['node', '/app/index.js'],
-        resourceRequirements: [
-            { type: 'VCPU', value: `${SCRAPE_VCPU}` },
-            { type: 'MEMORY', value: `${SCRAPE_MB}` },
-        ],
-        networkConfiguration: { assignPublicIp: 'ENABLED' },
-        environment: expandEnv({
-            ...OTEL_ENV,
-            DB_SERVICE_SCRAPE,
-            // Default testing inputs
-            LOCALITIES: JSON.stringify([
-                {
-                    suburb_name: 'Test',
-                    state_abbreviation: 'VIC',
-                    postcode: '0000',
-                },
-            ]),
+const JobDefinitionScrapeLocality = new aws.batch.JobDefinition(
+    'ServiceScrapeJobDefinitionScrapeLocality',
+    {
+        type: 'container',
+        platformCapabilities: ['FARGATE'],
+        timeout: { attemptDurationSeconds: 60 * 60 },
+        retryStrategy: { attempts: 3 },
+        containerProperties: pulumi.jsonStringify({
+            executionRoleArn: RoleBatchEcs.arn,
+            image: ImageScrapeLocality.imageUri,
+            runtimePlatform: { cpuArchitecture: 'ARM64' },
+            command: ['node', '/app/index.js'],
+            resourceRequirements: [
+                { type: 'VCPU', value: `${SCRAPE_VCPU}` },
+                { type: 'MEMORY', value: `${SCRAPE_MB}` },
+            ],
+            networkConfiguration: { assignPublicIp: 'ENABLED' },
+            environment: expandEnv({
+                ...OTEL_ENV,
+                DB_SERVICE_SCRAPE,
+                // Default testing inputs
+                LOCALITIES: JSON.stringify([
+                    {
+                        suburb_name: 'Test',
+                        state_abbreviation: 'VIC',
+                        postcode: '0000',
+                    },
+                ]),
+            }),
         }),
-    }),
-})
-const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', {
+    },
+)
+const JobQueueScrapeLocality = new aws.batch.JobQueue('ServiceScrapeJobQueueScrapeLocality', {
     state: 'ENABLED',
     priority: 1,
     computeEnvironmentOrders: [{ computeEnvironment: ComputeEnvironment.arn, order: 1 }],
