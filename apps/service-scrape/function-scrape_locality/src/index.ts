@@ -6,13 +6,12 @@ import { localitySchema } from '@service-scrape/lib-australia_amenity'
 import { parseEnvSchema } from '@observability/lib-opentelemetry'
 import { browserService } from './global/setup'
 import { handler } from './handler'
-import { execSync } from 'node:child_process'
 import { exit } from 'node:process'
 
 const ENV = await parseEnvSchema(
     z.object({
         LOCALITIES: z.string(),
-        MANAGED_BY_AWS: z.string().optional(),
+        AWS_BATCH_JOB_ID: z.string().optional(),
     }),
 )
 
@@ -27,13 +26,9 @@ for (const loc of localities) {
 const nodeDurationSec = Math.ceil(0.001 * (performance.now() - now))
 console.info(new Date().toISOString(), 'END scrape node - duration sec:', nodeDurationSec)
 
-if (ENV.MANAGED_BY_AWS !== undefined) {
-    execSync('pkill -9 playwright')
-    execSync('pkill -9 chromium')
-    execSync('pkill node')
-    exit(0)
-}
+if (ENV.AWS_BATCH_JOB_ID !== undefined) exit(0)
 
 try {
+    console.log('Closing browser')
     await browserService.close()
 } catch {}
