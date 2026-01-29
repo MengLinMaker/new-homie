@@ -72,16 +72,7 @@ export const SecurityGroup = new aws.ec2.SecurityGroup('ServiceScrapeSecurityGro
         {
             fromPort: 0,
             toPort: 0,
-            protocol: 'tcp',
-            cidrBlocks: ['0.0.0.0/0'],
-            ipv6CidrBlocks: ['::/0'],
-        },
-    ],
-    egress: [
-        {
-            fromPort: 0,
-            toPort: 0,
-            protocol: 'tcp',
+            protocol: '-1',
             cidrBlocks: ['0.0.0.0/0'],
             ipv6CidrBlocks: ['::/0'],
         },
