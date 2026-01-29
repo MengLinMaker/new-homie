@@ -36,4 +36,4 @@ if (ENV.MANAGED_BY_AWS !== undefined) {
 
 try {
     await browserService.close()
-} catch { }
+} catch {}
