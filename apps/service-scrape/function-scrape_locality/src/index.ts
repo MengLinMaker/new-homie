@@ -7,6 +7,7 @@ import { localitySchema } from '@service-scrape/lib-australia_amenity'
 import { parseEnvSchema } from '@observability/lib-opentelemetry'
 import { browserService } from './global/setup'
 import { handler } from './handler'
+import { exit } from 'node:process'
 
 const ENV = await parseEnvSchema(
     z.object({
@@ -28,3 +29,6 @@ if (!ENV.NODE_OPTIONS) await browserService.close()
 
 const nodeDurationSec = Math.ceil(0.001 * (performance.now() - now))
 console.info(new Date().toISOString(), 'END scrape node - duration sec:', nodeDurationSec)
+
+// Explicitly exit process ASAP
+exit(0)

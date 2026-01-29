@@ -3,7 +3,7 @@
 import { createImage, OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
-import * as pulumi from '@pulumi/pulumi'
+import pulumi from "@pulumi/pulumi"
 import { RoleBatchEcs } from './infra-aws_batch_roles'
 
 const DIRNAME = './apps/service-scrape'
@@ -44,12 +44,68 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 /**
  * 4. AWS Batch for fault tolerant scraping on cheap fargate spot instances
  */
-const Vpc = new sst.aws.Vpc('Vpc', { az: 3 })
-const ComputeEnvironment = new aws.batch.ComputeEnvironment('ComputeEnvironment', {
+const Vpc = new aws.ec2.Vpc('ServiceScrapeVpc', {
+    cidrBlock: '10.0.0.0/16',
+    // Use IPv6 since public IPv4 isn't free
+    assignGeneratedIpv6CidrBlock: true,
+    enableDnsSupport: true,
+    enableDnsHostnames: true,
+})
+const Subnet = new aws.ec2.Subnet('ServiceScrapeSubnet', {
+    vpcId: Vpc.id,
+    enableResourceNameDnsAaaaRecordOnLaunch: true,
+    assignIpv6AddressOnCreation: true,
+    ipv6CidrBlock: Vpc.ipv6CidrBlock.apply((ipv6) => ipv6.replace('2300::/56', '2303::/64')),
+    cidrBlock: '10.0.2.0/24',
+    mapPublicIpOnLaunch: true,
+})
+const InternetGateway = new aws.ec2.InternetGateway('ServiceScrapeInternetGateway', {
+    vpcId: Vpc.id,
+})
+const RouteTable = new aws.ec2.RouteTable('ServiceScrapeRouteTable', {
+    vpcId: Vpc.id,
+    routes: [
+        {
+            ipv6CidrBlock: Vpc.ipv6CidrBlock,
+            gatewayId: InternetGateway.id,
+        },
+        {
+            cidrBlock: Vpc.cidrBlock,
+            gatewayId: InternetGateway.id,
+        },
+    ],
+})
+new aws.ec2.RouteTableAssociation('ServiceScrapeRouteTableAssociation', {
+    subnetId: Subnet.id,
+    routeTableId: RouteTable.id,
+})
+const SecurityGroup = new aws.ec2.SecurityGroup('ServiceScrapeSecurityGroup', {
+    vpcId: Vpc.id,
+    description: 'Allow HTTPS for VPC endpoints over IPv4/IPv6',
+    ingress: [
+        {
+            fromPort: 0,
+            toPort: 0,
+            protocol: '-1',
+            cidrBlocks: ['0.0.0.0/0'],
+            ipv6CidrBlocks: ['::/0'],
+        },
+    ],
+    egress: [
+        {
+            fromPort: 0,
+            toPort: 0,
+            protocol: '-1',
+            cidrBlocks: ['0.0.0.0/0'],
+            ipv6CidrBlocks: ['::/0'],
+        },
+    ],
+})
+const ComputeEnvironment = new aws.batch.ComputeEnvironment('ServiceScrapeComputeEnvironment', {
     computeResources: {
         maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
-        securityGroupIds: Vpc.securityGroups,
-        subnets: Vpc.publicSubnets,
+        securityGroupIds: [SecurityGroup.id],
+        subnets: [Subnet.id],
         type: 'FARGATE_SPOT',
     },
     type: 'MANAGED',
@@ -58,36 +114,39 @@ const ImageScrapeLocality = createImage(
     'ImageScrapeLocality',
     path.join(DIRNAME, './function-scrape_locality'),
 )
-const JobDefinitionScrapeLocality = new aws.batch.JobDefinition('JobDefinitionScrapeLocality', {
-    type: 'container',
-    platformCapabilities: ['FARGATE'],
-    timeout: { attemptDurationSeconds: 60 * 30 },
-    retryStrategy: { attempts: 3 },
-    containerProperties: pulumi.jsonStringify({
-        executionRoleArn: RoleBatchEcs.arn,
-        image: ImageScrapeLocality.imageUri,
-        runtimePlatform: { cpuArchitecture: 'ARM64' },
-        command: ['node', '/app/index.js'],
-        resourceRequirements: [
-            { type: 'VCPU', value: `${SCRAPE_VCPU}` },
-            { type: 'MEMORY', value: `${SCRAPE_MB}` },
-        ],
-        networkConfiguration: { assignPublicIp: 'ENABLED' },
-        environment: expandEnv({
-            ...OTEL_ENV,
-            DB_SERVICE_SCRAPE,
-            // Default testing inputs
-            LOCALITIES: JSON.stringify([
-                {
-                    suburb_name: 'Test',
-                    state_abbreviation: 'VIC',
-                    postcode: '0000',
-                },
-            ]),
+const JobDefinitionScrapeLocality = new aws.batch.JobDefinition(
+    'ServiceScrapeJobDefinitionScrapeLocality',
+    {
+        type: 'container',
+        platformCapabilities: ['FARGATE'],
+        timeout: { attemptDurationSeconds: 60 * 30 },
+        retryStrategy: { attempts: 3 },
+        containerProperties: pulumi.jsonStringify({
+            executionRoleArn: RoleBatchEcs.arn,
+            image: ImageScrapeLocality.imageUri,
+            runtimePlatform: { cpuArchitecture: 'ARM64' },
+            command: ['node', '/app/index.js'],
+            resourceRequirements: [
+                { type: 'VCPU', value: `${SCRAPE_VCPU}` },
+                { type: 'MEMORY', value: `${SCRAPE_MB}` },
+            ],
+            networkConfiguration: { assignPublicIp: 'ENABLED' },
+            environment: expandEnv({
+                ...OTEL_ENV,
+                DB_SERVICE_SCRAPE,
+                // Default testing inputs
+                LOCALITIES: JSON.stringify([
+                    {
+                        suburb_name: 'Test',
+                        state_abbreviation: 'VIC',
+                        postcode: '0000',
+                    },
+                ]),
+            }),
         }),
-    }),
-})
-const JobQueueScrapeLocality = new aws.batch.JobQueue('JobQueueScrapeLocality', {
+    },
+)
+const JobQueueScrapeLocality = new aws.batch.JobQueue('ServiceScrapeJobQueueScrapeLocality', {
     state: 'ENABLED',
     priority: 1,
     computeEnvironmentOrders: [{ computeEnvironment: ComputeEnvironment.arn, order: 1 }],
