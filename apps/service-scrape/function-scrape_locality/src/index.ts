@@ -34,4 +34,3 @@ if (ENV.MANAGED_BY_AWS !== undefined) {
 }
 
 await browserService.close()
-
