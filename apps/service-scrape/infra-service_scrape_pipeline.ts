@@ -3,8 +3,9 @@
 import { createImage, OTEL_ENV } from '../infra-common'
 import { DB_SERVICE_SCRAPE } from './lib-db_service_scrape/src/index'
 import path from 'node:path'
-import pulumi from "@pulumi/pulumi"
+import pulumi from '@pulumi/pulumi'
 import { RoleBatchEcs } from './infra-aws_batch_roles'
+import { SecurityGroup, Subnets } from './infra-service_scrape_vpc'
 
 const DIRNAME = './apps/service-scrape'
 const SCRAPE_VCPU = 1
@@ -44,68 +45,11 @@ const StepScrapePostprocess = sst.aws.StepFunctions.lambdaInvoke({
 /**
  * 4. AWS Batch for fault tolerant scraping on cheap fargate spot instances
  */
-const Vpc = new aws.ec2.Vpc('ServiceScrapeVpc', {
-    cidrBlock: '10.0.0.0/16',
-    // Use IPv6 since public IPv4 isn't free
-    assignGeneratedIpv6CidrBlock: true,
-    enableDnsSupport: true,
-    enableDnsHostnames: true,
-})
-const Subnet = new aws.ec2.Subnet('ServiceScrapeSubnet', {
-    vpcId: Vpc.id,
-    enableResourceNameDnsAaaaRecordOnLaunch: true,
-    assignIpv6AddressOnCreation: true,
-    ipv6CidrBlock: Vpc.ipv6CidrBlock.apply((ipv6) => ipv6.replace('2300::/56', '2303::/64')),
-    cidrBlock: '10.0.2.0/24',
-    mapPublicIpOnLaunch: true,
-})
-const InternetGateway = new aws.ec2.InternetGateway('ServiceScrapeInternetGateway', {
-    vpcId: Vpc.id,
-})
-const RouteTable = new aws.ec2.RouteTable('ServiceScrapeRouteTable', {
-    vpcId: Vpc.id,
-    routes: [
-        {
-            ipv6CidrBlock: Vpc.ipv6CidrBlock,
-            gatewayId: InternetGateway.id,
-        },
-        {
-            cidrBlock: Vpc.cidrBlock,
-            gatewayId: InternetGateway.id,
-        },
-    ],
-})
-new aws.ec2.RouteTableAssociation('ServiceScrapeRouteTableAssociation', {
-    subnetId: Subnet.id,
-    routeTableId: RouteTable.id,
-})
-const SecurityGroup = new aws.ec2.SecurityGroup('ServiceScrapeSecurityGroup', {
-    vpcId: Vpc.id,
-    description: 'Allow HTTPS for VPC endpoints over IPv4/IPv6',
-    ingress: [
-        {
-            fromPort: 0,
-            toPort: 0,
-            protocol: '-1',
-            cidrBlocks: ['0.0.0.0/0'],
-            ipv6CidrBlocks: ['::/0'],
-        },
-    ],
-    egress: [
-        {
-            fromPort: 0,
-            toPort: 0,
-            protocol: '-1',
-            cidrBlocks: ['0.0.0.0/0'],
-            ipv6CidrBlocks: ['::/0'],
-        },
-    ],
-})
 const ComputeEnvironment = new aws.batch.ComputeEnvironment('ServiceScrapeComputeEnvironment', {
     computeResources: {
         maxVcpus: SCRAPE_CONCURRENCY * SCRAPE_VCPU,
         securityGroupIds: [SecurityGroup.id],
-        subnets: [Subnet.id],
+        subnets: Subnets,
         type: 'FARGATE_SPOT',
     },
     type: 'MANAGED',
@@ -119,7 +63,7 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition(
     {
         type: 'container',
         platformCapabilities: ['FARGATE'],
-        timeout: { attemptDurationSeconds: 60 * 30 },
+        timeout: { attemptDurationSeconds: 60 * 60 },
         retryStrategy: { attempts: 3 },
         containerProperties: pulumi.jsonStringify({
             executionRoleArn: RoleBatchEcs.arn,
