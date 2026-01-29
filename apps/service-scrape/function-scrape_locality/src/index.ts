@@ -24,7 +24,7 @@ for (const loc of localities) {
 
 try {
     await browserService.close()
-} catch { }
+} catch {}
 
 const nodeDurationSec = Math.ceil(0.001 * (performance.now() - now))
 console.info(new Date().toISOString(), 'END scrape node - duration sec:', nodeDurationSec)

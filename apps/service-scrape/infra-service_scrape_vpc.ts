@@ -70,9 +70,9 @@ export const SecurityGroup = new aws.ec2.SecurityGroup('ServiceScrapeSecurityGro
     description: 'Allow HTTPS for VPC endpoints over IPv4/IPv6',
     ingress: [
         {
-            fromPort: 0,
-            toPort: 0,
-            protocol: '-1',
+            fromPort: 443,
+            toPort: 443,
+            protocol: 'tcp',
             cidrBlocks: ['0.0.0.0/0'],
             ipv6CidrBlocks: ['::/0'],
         },
