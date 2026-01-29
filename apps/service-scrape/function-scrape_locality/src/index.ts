@@ -6,7 +6,6 @@ import { localitySchema } from '@service-scrape/lib-australia_amenity'
 import { parseEnvSchema } from '@observability/lib-opentelemetry'
 import { browserService } from './global/setup'
 import { handler } from './handler'
-import { exit, kill } from 'node:process'
 
 const ENV = await parseEnvSchema(
     z.object({
@@ -23,13 +22,9 @@ for (const loc of localities) {
     await handler(loc)
 }
 
+try {
+    await browserService.close()
+} catch { }
+
 const nodeDurationSec = Math.ceil(0.001 * (performance.now() - now))
 console.info(new Date().toISOString(), 'END scrape node - duration sec:', nodeDurationSec)
-
-await browserService.close()
-
-// Exit as ASAP in AWS
-if (ENV.MANAGED_BY_AWS !== undefined) {
-    kill(1, 'SIGTERM')
-    exit(0)
-}
