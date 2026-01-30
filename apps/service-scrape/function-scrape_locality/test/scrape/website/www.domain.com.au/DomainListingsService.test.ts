@@ -36,6 +36,8 @@ describe(testSuiteName, () => {
                 'Move in Early 2025 - walk to station',
                 'Off The Plan 2 Study Ready In 2026',
                 'Ready In 2026 | 300m From Blacktown Train Station',
+                'JUST LISTED! | 224SQM!',
+                'JUST LISTED I 575m2 Block!'
             ]
             for (const input of inputs)
                 expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
