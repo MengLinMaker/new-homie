@@ -75,8 +75,6 @@ export class DomainListingsService extends ILoggable {
         if (priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
         // Contains a date
         if (priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
-        // Exclude not many numeric characters
-        if (priceString.matchAll(/\d/g).toArray().length / priceString.length < 1 / 10) return true
         return false
     }
 

@@ -35,7 +35,6 @@ describe(testSuiteName, () => {
                 'Brand New Ready To Move In ! ??0422973729 To View!',
                 'Move in Early 2025 - walk to station',
                 'Off The Plan 2 Study Ready In 2026',
-                'Ready In 2026 | 300m From Blacktown Train Station',
                 'JUST LISTED! | 224SQM!',
                 'JUST LISTED I 575m2 Block!',
                 'Sale by End Date 4/2/2026 (unless sold prior)',
