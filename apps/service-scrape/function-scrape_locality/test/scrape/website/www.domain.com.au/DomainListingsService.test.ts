@@ -31,6 +31,8 @@ describe(testSuiteName, () => {
                 '$33 Per Week',
                 '$60.00 - $90.00 + GST/week',
                 'Over 55s paradise',
+                'Speak to Agent on 0469753390',
+                'Brand New Ready To Move In ! ??0422973729 To View!',
             ]
             for (const input of inputs)
                 expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
