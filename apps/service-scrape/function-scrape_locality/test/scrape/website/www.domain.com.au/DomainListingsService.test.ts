@@ -30,6 +30,7 @@ describe(testSuiteName, () => {
                 '$25 per week',
                 '$33 Per Week',
                 '$60.00 - $90.00 + GST/week',
+                'Over 55s paradise',
             ]
             for (const input of inputs)
                 expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
@@ -115,6 +116,8 @@ describe(testSuiteName, () => {
                 '$315 per week',
                 '315/week',
                 '315p/w',
+                '$315weekly',
+                '$315per week',
             ]
             for (const input of inputs)
                 expect(domainListingsService.highestRentPriceFromString(input)).toBe(expected)

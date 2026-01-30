@@ -116,7 +116,7 @@ export class DomainListingsService extends ILoggable {
             .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
             .replaceAll(',', '') // Remove commas from numbers
             .toLowerCase()
-            .matchAll(/\b\d{3,4}(pw|p\/w)?\b/g) // Integer totalling 3-4 digits
+            .matchAll(/\b\d{3,4}(pw|p\/w|weekly|per)?\b/g) // Integer totalling 3-4 digits
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))
