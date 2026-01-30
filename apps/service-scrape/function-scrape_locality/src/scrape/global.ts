@@ -1,19 +1,17 @@
-import z from 'zod'
+import type { Locality } from '@service-scrape/lib-australia_amenity'
 
-export const localitySchema = z.object({
-    suburb_name: z.string(),
-    state_abbreviation: z.enum(['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']),
-    postcode: z.string().length(4).regex(/^\d+$/),
-})
-
-export interface Locality extends z.output<typeof localitySchema> {}
-
-export const localityArgs = {
-    suburb_name: process.env['suburb_name'],
-    state_abbreviation: process.env['state_abbreviation'],
-    postcode: process.env['postcode'],
-}
-export const urlArgs =
-    `https://www.domain.com.au/suburb-profile/${localityArgs.suburb_name}-${localityArgs.state_abbreviation}-${localityArgs.postcode}`
+export const localityString = (locality: Locality) =>
+    `${locality.suburb_name}-${locality.state_abbreviation}-${locality.postcode}`
         .replaceAll(' ', '-')
         .toLowerCase()
+
+export const CURRENT_LOCALITY = {
+    locality: {
+        suburb_name: '',
+        state_abbreviation: '',
+        postcode: '',
+    },
+    localityUrl: '',
+    saleUrl: '',
+    rentUrl: '',
+}

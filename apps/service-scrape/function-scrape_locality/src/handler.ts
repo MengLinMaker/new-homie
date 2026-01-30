@@ -4,14 +4,16 @@ import { StatusCodes } from 'http-status-codes'
 import { LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 import type { Locality } from '@service-scrape/lib-australia_amenity'
-
-const concatLocality = (args: Locality) =>
-    `${args.suburb_name}-${args.state_abbreviation}-${args.postcode}`
-        .replaceAll(' ', '-')
-        .toLowerCase()
+import { CURRENT_LOCALITY, localityString } from './scrape/global'
 
 export const handler = async (args: Locality) => {
-    const locString = concatLocality(args)
+    // Set global variables for debug logging
+    const locString = localityString(args)
+    CURRENT_LOCALITY.locality = args
+    CURRENT_LOCALITY.localityUrl = `https://www.domain.com.au/suburb-profile/${locString}`
+    CURRENT_LOCALITY.saleUrl = `https://www.domain.com.au/sale/${locString}`
+    CURRENT_LOCALITY.rentUrl = `https://www.domain.com.au/rent/${locString}`
+
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
     console.info(`${new Date().toISOString()} START scraping - ${locString}`)
 
