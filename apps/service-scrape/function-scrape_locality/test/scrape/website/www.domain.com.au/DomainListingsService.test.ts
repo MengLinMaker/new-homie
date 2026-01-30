@@ -33,6 +33,9 @@ describe(testSuiteName, () => {
                 'Over 55s paradise',
                 'Speak to Agent on 0469753390',
                 'Brand New Ready To Move In ! ??0422973729 To View!',
+                'Move in Early 2025 - walk to station',
+                'Off The Plan 2 Study Ready In 2026',
+                'Ready In 2026 | 300m From Blacktown Train Station',
             ]
             for (const input of inputs)
                 expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
