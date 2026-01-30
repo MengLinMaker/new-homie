@@ -23,7 +23,7 @@ const chunkArray = <T>(original: T[], chunkSize: number) => {
 }
 
 const sfnClient = new SFNClient()
-const CHUNK_SIZE = 24
+const CHUNK_SIZE = 50
 
 export const handler = middy().handler(async (_event, _context) => {
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
