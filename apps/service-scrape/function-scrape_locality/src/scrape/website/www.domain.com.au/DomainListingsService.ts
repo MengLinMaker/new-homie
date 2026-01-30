@@ -58,7 +58,7 @@ const nextDataJsonSchema = z.object({
 export class DomainListingsService extends ILoggable {
     expectedNoMatchingPrice(priceString: string) {
         // Remove years 2020 to 2099
-        priceString = priceString.replaceAll(/[ /]20[2-9]\d(?!\d)/g, '')
+        priceString = priceString.replaceAll(/[ -/]20[2-9]\d(?!\d)/g, '')
         // Remove areas sqm and m2
         priceString = priceString.replaceAll(/\d{3,4} ?(sqm|m2)/gi, '')
 
