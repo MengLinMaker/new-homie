@@ -23,9 +23,11 @@ export class FunctionHandlerLogger extends ILoggable {
     }
 
     public recordEnd() {
+        const faasMs = performance.now() - this.timestamp
         this.LOGGER('info', {
             [ATTR_FAAS_TIME]: this.invocationTime,
-            'faas.duration': performance.now() - this.timestamp,
+            'faas.duration': faasMs,
         })
+        return faasMs
     }
 }
