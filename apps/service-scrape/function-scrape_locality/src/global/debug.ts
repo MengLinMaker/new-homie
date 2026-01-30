@@ -5,6 +5,9 @@ export const localityString = (locality: Locality) =>
         .replaceAll(' ', '-')
         .toLowerCase()
 
+/**
+ * For debug loggin purposes
+ */
 export const CURRENT_LOCALITY = {
     locality: {
         suburb_name: '',

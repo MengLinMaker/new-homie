@@ -1,6 +1,6 @@
 import { ILoggable } from '@observability/lib-opentelemetry'
 import { load } from 'cheerio'
-import { CURRENT_LOCALITY } from '../global'
+import { CURRENT_LOCALITY } from '../../global/debug'
 
 class ScrapeUtilServiceError extends Error {}
 

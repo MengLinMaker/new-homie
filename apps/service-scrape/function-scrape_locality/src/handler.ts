@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import { LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 import type { Locality } from '@service-scrape/lib-australia_amenity'
-import { CURRENT_LOCALITY, localityString } from './scrape/global'
+import { CURRENT_LOCALITY, localityString } from './global/debug'
 
 export const handler = async (args: Locality) => {
     // Set global variables for debug logging

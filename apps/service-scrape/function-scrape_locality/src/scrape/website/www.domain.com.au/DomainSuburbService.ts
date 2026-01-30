@@ -1,4 +1,4 @@
-import { CURRENT_LOCALITY } from '../../global'
+import { CURRENT_LOCALITY } from '../../../global/debug'
 import { createPostgisPolygonString } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import { simplify, polygon } from '@turf/turf'
