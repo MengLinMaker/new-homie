@@ -64,7 +64,7 @@ const JobDefinitionScrapeLocality = new aws.batch.JobDefinition(
         type: 'container',
         platformCapabilities: ['FARGATE'],
         timeout: { attemptDurationSeconds: 60 * 60 },
-        retryStrategy: { attempts: 2 },
+        retryStrategy: { attempts: 3 },
         deregisterOnNewRevision: false, // Do not break running pipeline
         containerProperties: pulumi.jsonStringify({
             executionRoleArn: RoleBatchEcs.arn,
