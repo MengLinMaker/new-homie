@@ -24,7 +24,7 @@ for (const loc of localities) {
 }
 
 const nodeDurationSec = Math.ceil(0.001 * (performance.now() - now))
-console.info(new Date().toISOString(), 'END scrape node - duration sec:', nodeDurationSec)
+console.info(`${new Date().toISOString()} END scrape node - ${nodeDurationSec} sec`)
 
 if (ENV.AWS_BATCH_JOB_ID !== undefined) exit(0)
 
