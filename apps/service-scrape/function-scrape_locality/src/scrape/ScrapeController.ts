@@ -8,7 +8,7 @@ import { DomainSuburbService } from './website/www.domain.com.au/DomainSuburbSer
 import { ScrapeModel } from './website/ScrapeModel'
 import { AracaSchoolsService } from './website/asl.acara.edu.au/AracaSchoolsService'
 import type { Logger } from '@observability/lib-opentelemetry'
-import type { Locality } from './global'
+import type { Locality } from '@service-scrape/lib-australia_amenity'
 
 interface LocalityWithId extends Locality {
     localityId: number
