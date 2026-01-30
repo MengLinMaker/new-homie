@@ -59,6 +59,9 @@ export class DomainListingsService extends ILoggable {
     expectedNoMatchingPrice(priceString: string) {
         // No number to extract
         if (!priceString.match(/\d/i)) return true
+        // Exclude if all numbers are under length 3
+        const digitLengths = [...priceString.matchAll(/\d+/g)].map((m) => m[0].length)
+        if (Math.max(...digitLengths) < 3) return true
         // Requires agent contact
         if (priceString.match(/(auction|call|contact|offer|expression)/i)) return true
         // Contains a time
