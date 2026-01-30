@@ -4,24 +4,22 @@ import { StatusCodes } from 'http-status-codes'
 import { LOGGER, scrapeController } from './global/setup'
 import { FunctionHandlerLogger } from '@observability/lib-opentelemetry'
 import type { Locality } from '@service-scrape/lib-australia_amenity'
-
-const concatLocality = (args: Locality) =>
-    `${args.suburb_name}-${args.state_abbreviation}-${args.postcode}`
-        .replaceAll(' ', '-')
-        .toLowerCase()
+import { CURRENT_LOCALITY, localityString } from './global/debug'
 
 export const handler = async (args: Locality) => {
-    const now = performance.now()
+    // Set global variables for debug logging
+    const locString = localityString(args)
+    CURRENT_LOCALITY.locality = args
+    CURRENT_LOCALITY.localityUrl = `https://www.domain.com.au/suburb-profile/${locString}`
+    CURRENT_LOCALITY.saleUrl = `https://www.domain.com.au/sale/${locString}`
+    CURRENT_LOCALITY.rentUrl = `https://www.domain.com.au/rent/${locString}`
 
-    console.info(
-        `${new Date().toISOString()} SUCCESS Start scraping locality - ${concatLocality(args)}`,
-    )
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
-
-    if (!args.postcode || !args.state_abbreviation || !args.suburb_name)
-        return { status: StatusCodes.ACCEPTED }
+    console.info(`${new Date().toISOString()} START scraping - ${locString}`)
 
     // For testing purposes
+    if (!args.postcode || !args.state_abbreviation || !args.suburb_name)
+        return { status: StatusCodes.ACCEPTED }
     if (args.postcode === '0000') {
         console.info(new Date().toISOString(), 'ACCEPTED test succeeded')
         functionHandlerLogger.recordEnd()
@@ -39,30 +37,27 @@ export const handler = async (args: Locality) => {
             ),
         }
     }
-    console.info(new Date().toISOString(), 'SUCCESS tryExtractLocalityPage')
     await scrapeController.tryExtractSchools({ ...args, localityId })
-    console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractSchools')
+    console.info(new Date().toISOString(), 'SUCCESS tryExtractLocalityPage')
 
     // Sale listing data
     for (let page = 1; ; page++) {
         const salesInfo = await scrapeController.tryExtractSalesPage({ ...args, page, localityId })
-        if (!salesInfo || salesInfo.isLastPage) break
-        console.info(new Date().toISOString(), 'SUCCESS page', page)
+        if (!salesInfo) break
+        console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractSalesPage', page)
+        if (salesInfo.isLastPage) break
     }
-    console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractSalesPage')
 
     // Rent listing data
     for (let page = 1; ; page++) {
         const rentsInfo = await scrapeController.tryExtractRentsPage({ ...args, page, localityId })
         if (!rentsInfo) break
-        if (!rentsInfo || rentsInfo.isLastPage) break
-        console.info(new Date().toISOString(), 'SUCCESS page', page)
+        console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractRentsPage', page)
+        if (rentsInfo.isLastPage) break
     }
-    console.info(new Date().toISOString(), 'SUCCESS scrapeController.tryExtractRentsPage')
 
-    functionHandlerLogger.recordEnd()
-    console.info(
-        `${new Date().toISOString()} SUCCESS Finish scraping locality - ${concatLocality(args)} - ${Math.ceil(0.001 * (performance.now() - now))} sec\n`,
-    )
+    const faasMs = functionHandlerLogger.recordEnd()
+    const faasSec = Math.ceil(0.001 * faasMs)
+    console.info(`${new Date().toISOString()} END scraping - ${locString} - ${faasSec} sec\n`)
     return { status: StatusCodes.OK }
 }

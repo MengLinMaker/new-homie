@@ -57,16 +57,24 @@ const nextDataJsonSchema = z.object({
 
 export class DomainListingsService extends ILoggable {
     expectedNoMatchingPrice(priceString: string) {
+        // Remove years 2020 to 2099
+        priceString = priceString.replaceAll(/[ -/]20[2-9]\d(?!\d)/g, '')
+        // Remove areas sqm and m2
+        priceString = priceString.replaceAll(/\d{3,4} ?(sqm|m2)/gi, '')
+
         // No number to extract
         if (!priceString.match(/\d/i)) return true
+        const digitLengths = [...priceString.matchAll(/\d+/g)].map((m) => m[0].length)
+        // Exclude if all numbers are under length 3
+        if (Math.max(...digitLengths) < 3) return true
+        // Exclude if all numbers are over length 7
+        if (Math.min(...digitLengths) > 7) return true
         // Requires agent contact
         if (priceString.match(/(auction|call|contact|offer|expression)/i)) return true
         // Contains a time
         if (priceString.match(/\d{1,2}(:\d{1,2})?(pm|am)/i)) return true
         // Contains a date
         if (priceString.match(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/i)) return true
-        // Exclude not many numeric characters
-        if (priceString.matchAll(/\d/g).toArray().length / priceString.length < 1 / 10) return true
         return false
     }
 
@@ -113,7 +121,7 @@ export class DomainListingsService extends ILoggable {
             .replaceAll(/\b\d{2}\b(\/|-)\b\d{2}\b(\/|-)\b\d{2,4}\b/g, '') // Replace dates
             .replaceAll(',', '') // Remove commas from numbers
             .toLowerCase()
-            .matchAll(/\b\d{3,4}(pw|p\/w)?\b/g) // Integer totalling 3-4 digits
+            .matchAll(/\b\d{3,4}(pw|p\/w|weekly|per)?\b/g) // Integer totalling 3-4 digits
             .toArray()
         if (prices.length === 0) return null
         const priceList = prices.map((match) => Number.parseFloat(match.toString()))

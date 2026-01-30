@@ -1,4 +1,4 @@
-import { localityArgs, urlArgs } from '../../global'
+import { CURRENT_LOCALITY } from '../../../global/debug'
 import { createPostgisPolygonString } from '@service-scrape/lib-db_service_scrape'
 import { z } from 'zod'
 import { simplify, polygon } from '@turf/turf'
@@ -119,13 +119,11 @@ export class DomainSuburbService extends ILoggable {
             // Debug common /404 page error with locality args
             const pageIs404 = nextData404JsonSchema.safeParse(args.nextDataJson, {
                 reportInput: true,
-            }).success
-            if (pageIs404) {
-                const pageIs404Args = { urlArgs, localityArgs } as never
-                this.logExceptionArgs('error', this.tryExtractProfile, pageIs404Args, e)
+            })
+            if (pageIs404.success) {
+                this.logExceptionArgs('error', this.tryExtractProfile, CURRENT_LOCALITY as never, e)
                 return null
             }
-
             this.logExceptionArgs('error', this.tryExtractProfile, args, e)
             return null
         }

@@ -26,6 +26,18 @@ describe(testSuiteName, () => {
                 '11:30am',
                 '30/09/2025',
                 '30-09-2025',
+                '$20',
+                '$25 per week',
+                '$33 Per Week',
+                '$60.00 - $90.00 + GST/week',
+                'Over 55s paradise',
+                'Speak to Agent on 0469753390',
+                'Brand New Ready To Move In ! ??0422973729 To View!',
+                'Move in Early 2025 - walk to station',
+                'Off The Plan 2 Study Ready In 2026',
+                'JUST LISTED! | 224SQM!',
+                'JUST LISTED I 575m2 Block!',
+                'Sale by End Date 4/2/2026 (unless sold prior)',
             ]
             for (const input of inputs)
                 expect(domainListingsService.expectedNoMatchingPrice(input)).toBe(true)
@@ -111,6 +123,8 @@ describe(testSuiteName, () => {
                 '$315 per week',
                 '315/week',
                 '315p/w',
+                '$315weekly',
+                '$315per week',
             ]
             for (const input of inputs)
                 expect(domainListingsService.highestRentPriceFromString(input)).toBe(expected)
@@ -131,6 +145,10 @@ describe(testSuiteName, () => {
                 '30-09-2025',
                 '040 4404 0404',
                 '04044040404',
+                '$20',
+                '$25 per week',
+                '$33 Per Week',
+                '$60.00 - $90.00 + GST/week',
             ]
             for (const input of inputs)
                 expect(domainListingsService.highestRentPriceFromString(input)).toBeNull()

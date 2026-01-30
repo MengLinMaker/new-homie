@@ -1,6 +1,5 @@
-import { australiaSchools } from '@service-scrape/lib-australia_amenity'
+import { australiaSchools, type Locality } from '@service-scrape/lib-australia_amenity'
 import { ILoggable } from '@observability/lib-opentelemetry'
-import type { Locality } from '../../global'
 
 export class AracaSchoolsService extends ILoggable {
     /**
