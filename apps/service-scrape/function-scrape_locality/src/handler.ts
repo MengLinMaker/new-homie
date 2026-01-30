@@ -18,7 +18,7 @@ export const handler = async (args: Locality) => {
     )
     const functionHandlerLogger = new FunctionHandlerLogger(LOGGER)
 
-    if (args.postcode == null || args.state_abbreviation == null || args.suburb_name == null)
+    if (!args.postcode || !args.state_abbreviation || !args.suburb_name)
         return { status: StatusCodes.ACCEPTED }
 
     // For testing purposes
