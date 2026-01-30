@@ -9,7 +9,7 @@ import { SecurityGroup, Subnets } from './infra-service_scrape_vpc'
 
 const DIRNAME = './apps/service-scrape'
 const SCRAPE_VCPU = 1
-const SCRAPE_CONCURRENCY = 8
+const SCRAPE_CONCURRENCY = 4
 const SCRAPE_MB = 2048
 
 /**
