@@ -1,5 +1,6 @@
 const Vpc = new aws.ec2.Vpc('ServiceScrapeVpc', {
     cidrBlock: '10.0.0.0/16',
+    enableDnsSupport: true,
     enableDnsHostnames: true,
 })
 
@@ -48,21 +49,22 @@ new aws.ec2.RouteTableAssociation('ServiceScrapeRouteTableAssociation2c', {
 })
 
 /**
- * 443 Allow HTTPS webscraping and access AWS ECR public endpoints
- * 4317 Allow OpenTelemetry OTLP grpc
- * 4318 Allow OpenTelemetry OTLP protobuf
- * 5432 Allow Postgres
- * 6543 Allow Postgres pooler
+ * Security group for webscraper
+ * - 443 Allow HTTPS webscraping and access AWS ECR public endpoints
+ * - 4317 Allow OpenTelemetry OTLP grpc
+ * - 4318 Allow OpenTelemetry OTLP protobuf
+ * - 5432 Allow Postgres
+ * - 6543 Allow Postgres pooler
  */
 export const SecurityGroup = new aws.ec2.SecurityGroup('ServiceScrapeSecurityGroup', {
     vpcId: Vpc.id,
-    ingress: [443, 4318, 6543].map((port) => ({
+    ingress: [443, 4317, 4318, 5432, 6543].map((port) => ({
         fromPort: port,
         toPort: port,
         protocol: 'tcp',
         cidrBlocks: ['0.0.0.0/0'],
     })),
-    egress: [443, 4318, 6543].map((port) => ({
+    egress: [443, 4317, 4318, 5432, 6543].map((port) => ({
         fromPort: port,
         toPort: port,
         protocol: 'tcp',
