@@ -8,13 +8,14 @@ import asyncRetry from 'async-retry'
  * Create a page for each request, then close
  */
 export class BrowserService extends ILoggable {
-    private static browser: Browser
-    private static browserContext: BrowserContext
+    private browser: Browser = undefined as never
+    private browserContext: BrowserContext = undefined as never
 
     async close() {
         try {
-            await BrowserService.browser.close()
-            BrowserService.browser = undefined as never
+            await this.browser.close()
+            this.browser = undefined as never
+            this.browserContext = undefined as never
             return true
         } catch (e) {
             this.logException('fatal', this.close, e)
@@ -22,35 +23,37 @@ export class BrowserService extends ILoggable {
         }
     }
 
-    async launchSingleBrowser() {
-        try {
-            if (!BrowserService.browser)
-                BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
-            if (!BrowserService.browser.isConnected())
-                BrowserService.browser = await chromium.launch({ args: chromiumSetting.args })
-            if (!BrowserService.browserContext)
-                BrowserService.browserContext = await BrowserService.browser.newContext()
-            return true
-        } catch (e) {
-            this.logException('fatal', this.launchSingleBrowser, e)
-            return false
-        }
+    private async singleBrowserContextPage() {
+        // Ensure single browser exists in working condition
+        if (!this.browser) this.browser = await chromium.launch({ args: chromiumSetting.args })
+        if (!this.browser.isConnected())
+            this.browser = await chromium.launch({ args: chromiumSetting.args })
+
+        // Ensure single context exists
+        const firstContext = this.browser.contexts()[0]
+        if (firstContext) this.browserContext = firstContext
+        else this.browserContext = await this.browser.newContext()
+
+        // Ensure single page exists
+        const firstPage = this.browserContext.pages()[0]
+        if (firstPage) return firstPage
+        return await this.browserContext.newPage()
     }
 
     async getHTML(url: string) {
         try {
-            await this.launchSingleBrowser()
             const now = performance.now()
-            const page = await BrowserService.browserContext.newPage()
-            await asyncRetry(
+
+            // Retry all flaky Playwright APIs
+            const html = await asyncRetry(
                 async () => {
-                    await this.launchSingleBrowser()
+                    const page = await this.singleBrowserContextPage()
                     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 })
+                    return await page.content()
                 },
                 { retries: 3 },
             )
-            const html = await page.content()
-            await page.close()
+
             console.info('Scrape ms:', Math.ceil(performance.now() - now))
             return html
         } catch (e) {
